@@ -3,8 +3,8 @@ import Navigation from './Navigation';
 import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
 import Generator from '../pages/Generator';
-import Calculator from '../pages/Calculator';
-import TestIntegration from '../pages/TestIntegration';
+// import Calculator from '../pages/Calculator';
+// import TestIntegration from '../pages/TestIntegration';
 import DemoShowcase from './Demo/DemoShowcase';
 
 const MainApp = () => {
@@ -19,8 +19,8 @@ const MainApp = () => {
           <Route path='/' element={<Home />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/generator' element={<Generator />} />
-          <Route path='/calculator' element={<Calculator />} />
-          <Route path='/test' element={<TestIntegration />} />
+          {/* <Route path='/calculator' element={<Calculator />} /> */}
+          {/* <Route path='/test' element={<TestIntegration />} /> */}
           <Route path='/demo' element={<DemoShowcase />} />
         </Routes>
       </div>

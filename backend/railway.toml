@@ -1,0 +1,17 @@
+[build]
+nixpacksVersion = "1.21.0"
+
+[build.env]
+NIXPACKS_NODE_VERSION = "22.12.0"
+
+[build.installCommand]
+value = "npm install --no-audit --no-fund --legacy-peer-deps"
+
+[start]
+cmd = "npm start"
+
+[deploy.healthcheckPath]
+value = "/api/health"
+
+[deploy.restartPolicyType]
+value = "ON_FAILURE"

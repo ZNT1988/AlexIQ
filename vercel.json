@@ -22,7 +22,7 @@
   ],
   "env": {
     "VITE_API_URL": "https://api.alexiq.site",
-    "VITE_FRONTEND_URL": "https://alexiq.site",
+    "VITE_FRONTEND_URL": "https://www.alexiq.site",
     "VITE_NODE_ENV": "production"
   },
   "headers": [
@@ -31,7 +31,7 @@
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://alexiq.site"
+          "value": "https://www.alexiq.site"
         }
       ]
     }

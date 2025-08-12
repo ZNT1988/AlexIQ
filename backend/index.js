@@ -48,7 +48,7 @@ import alexMasterSystem from './alex-core/AlexMasterSystem.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8080;
 
 // Security middleware
 app.use(helmet());
@@ -64,7 +64,7 @@ app.use(limiter);
 // CORS configuration
 app.use(cors({
   origin: process.env.NODE_ENV === STR_PRODUCTION
-    ? ['https://hustlefinder.ia']
+    ? process.env.CORS_ORIGIN?.split(',') || ['https://alexiq.site', 'https://www.alexiq.site']
     : ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5176', 'http://localhost:5177', 'http://localhost:3000'],
   credentials: true
 }));
@@ -246,7 +246,7 @@ async function startServer() {
     await alexMasterSystem.initialize();
     logger.info('✅ Alex Master System ready - AI Brain operational');
 
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       logger.info(`🚀 Server running on port ${PORT}`);
       logger.info(`Health check: http://localhost:${PORT}/health`);
       logger.info(`Authentication: ${isUsingMockAuth() ? 'MOCK (dev)' : 'CLERK (prod)'}`);
