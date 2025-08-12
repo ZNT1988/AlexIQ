@@ -1,0 +1,279 @@
+# Prometheus Alert Rules for HustleFinderIA
+groups:
+  # Application Performance Alerts
+  - name: hustlefinder-performance
+    rules:
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="hustlefinder-backend"}[5m])) > 1
+        for: 2m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "High response time on {{ $labels.instance }}"
+          description: "95th percentile response time is {{ $value }}s for {{ $labels.instance }}"
+
+      - alert: CriticalResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="hustlefinder-backend"}[5m])) > 3
+        for: 1m
+        labels:
+          severity: critical
+          service: backend
+        annotations:
+          summary: "Critical response time on {{ $labels.instance }}"
+          description: "95th percentile response time is {{ $value }}s for {{ $labels.instance }}"
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{job="hustlefinder-backend",status=~"5.."}[5m]) / rate(http_requests_total{job="hustlefinder-backend"}[5m]) > 0.05
+        for: 2m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "High error rate on {{ $labels.instance }}"
+          description: "Error rate is {{ $value | humanizePercentage }} for {{ $labels.instance }}"
+
+      - alert: CriticalErrorRate
+        expr: rate(http_requests_total{job="hustlefinder-backend",status=~"5.."}[5m]) / rate(http_requests_total{job="hustlefinder-backend"}[5m]) > 0.10
+        for: 1m
+        labels:
+          severity: critical
+          service: backend
+        annotations:
+          summary: "Critical error rate on {{ $labels.instance }}"
+          description: "Error rate is {{ $value | humanizePercentage }} for {{ $labels.instance }}"
+
+      - alert: LowThroughput
+        expr: rate(http_requests_total{job="hustlefinder-backend"}[5m]) < 1
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "Low request throughput on {{ $labels.instance }}"
+          description: "Request rate is {{ $value }} requests/second for {{ $labels.instance }}"
+
+  # Infrastructure Alerts
+  - name: hustlefinder-infrastructure
+    rules:
+      - alert: InstanceDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instance {{ $labels.instance }} is down"
+          description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minute"
+
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage on {{ $labels.instance }}"
+          description: "CPU usage is {{ $value }}% on {{ $labels.instance }}"
+
+      - alert: CriticalCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 95
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical CPU usage on {{ $labels.instance }}"
+          description: "CPU usage is {{ $value }}% on {{ $labels.instance }}"
+
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage on {{ $labels.instance }}"
+          description: "Memory usage is {{ $value }}% on {{ $labels.instance }}"
+
+      - alert: CriticalMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 95
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical memory usage on {{ $labels.instance }}"
+          description: "Memory usage is {{ $value }}% on {{ $labels.instance }}"
+
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 20
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Low disk space on {{ $labels.instance }}"
+          description: "Disk space is {{ $value }}% available on {{ $labels.instance }}"
+
+      - alert: CriticalDiskSpace
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 10
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Critical disk space on {{ $labels.instance }}"
+          description: "Disk space is {{ $value }}% available on {{ $labels.instance }}"
+
+  # Database Alerts
+  - name: hustlefinder-database
+    rules:
+      - alert: PostgreSQLDown
+        expr: pg_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: database
+        annotations:
+          summary: "PostgreSQL is down"
+          description: "PostgreSQL database is not responding"
+
+      - alert: HighDatabaseConnections
+        expr: pg_stat_activity_count / pg_settings_max_connections * 100 > 80
+        for: 2m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "High database connections"
+          description: "Database connections are at {{ $value }}% of maximum"
+
+      - alert: SlowDatabaseQueries
+        expr: rate(pg_stat_activity_max_tx_duration[5m]) > 30
+        for: 2m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Slow database queries detected"
+          description: "Average query duration is {{ $value }}s"
+
+      - alert: DatabaseDeadlocks
+        expr: rate(pg_stat_database_deadlocks[5m]) > 0
+        for: 1m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Database deadlocks detected"
+          description: "{{ $value }} deadlocks per second detected"
+
+      - alert: RedisDown
+        expr: redis_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: cache
+        annotations:
+          summary: "Redis is down"
+          description: "Redis cache is not responding"
+
+      - alert: HighRedisMemoryUsage
+        expr: redis_memory_used_bytes / redis_memory_max_bytes * 100 > 85
+        for: 2m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "High Redis memory usage"
+          description: "Redis memory usage is {{ $value }}%"
+
+  # Security Alerts
+  - name: hustlefinder-security
+    rules:
+      - alert: HighLoginFailures
+        expr: rate(http_requests_total{job="hustlefinder-backend",endpoint="/api/auth/login",status="401"}[5m]) > 5
+        for: 1m
+        labels:
+          severity: warning
+          service: security
+        annotations:
+          summary: "High login failure rate"
+          description: "Login failure rate is {{ $value }} per second"
+
+      - alert: DDoSAttack
+        expr: rate(http_requests_total{job="hustlefinder-backend"}[1m]) > 100
+        for: 30s
+        labels:
+          severity: critical
+          service: security
+        annotations:
+          summary: "Possible DDoS attack"
+          description: "Request rate is {{ $value }} per second, possible DDoS attack"
+
+      - alert: SuspiciousActivity
+        expr: rate(http_requests_total{job="hustlefinder-backend",status=~"4.."}[5m]) > 10
+        for: 2m
+        labels:
+          severity: warning
+          service: security
+        annotations:
+          summary: "High 4xx error rate"
+          description: "4xx error rate is {{ $value }} per second, possible scanning or attacks"
+
+  # Business Logic Alerts
+  - name: hustlefinder-business
+    rules:
+      - alert: LowIdeaGeneration
+        expr: rate(hustlefinder_ideas_generated_total[15m]) < 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: ai
+        annotations:
+          summary: "Low idea generation rate"
+          description: "Idea generation rate is {{ $value }} per second"
+
+      - alert: AIServiceFailure
+        expr: rate(hustlefinder_ai_requests_failed_total[5m]) / rate(hustlefinder_ai_requests_total[5m]) > 0.10
+        for: 2m
+        labels:
+          severity: warning
+          service: ai
+        annotations:
+          summary: "High AI service failure rate"
+          description: "AI service failure rate is {{ $value | humanizePercentage }}"
+
+      - alert: LowUserActivity
+        expr: rate(hustlefinder_user_actions_total[1h]) < 1
+        for: 10m
+        labels:
+          severity: info
+          service: business
+        annotations:
+          summary: "Low user activity"
+          description: "User activity rate is {{ $value }} per second"
+
+  # External Dependencies
+  - name: hustlefinder-external
+    rules:
+      - alert: WebsiteDown
+        expr: probe_success{job="blackbox"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Website {{ $labels.instance }} is down"
+          description: "Website {{ $labels.instance }} has been down for more than 2 minutes"
+
+      - alert: SSLCertificateExpiry
+        expr: probe_ssl_earliest_cert_expiry - time() < 86400 * 7
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "SSL certificate expiring soon"
+          description: "SSL certificate for {{ $labels.instance }} expires in {{ $value | humanizeDuration }}"
+
+      - alert: SSLCertificateCritical
+        expr: probe_ssl_earliest_cert_expiry - time() < 86400 * 2
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "SSL certificate expiring very soon"
+          description: "SSL certificate for {{ $labels.instance }} expires in {{ $value | humanizeDuration }}"

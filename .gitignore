@@ -1,0 +1,196 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.pnpm-store/
+
+# Builds
+dist/
+build/
+.next/
+.out/
+.cache/
+coverage/
+
+# Env & local
+.env*
+.DS_Store
+*.local
+
+# =============================================================================
+# 📊 LOGS & MONITORING
+# =============================================================================
+logs/
+backend/logs/
+frontend/logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+
+# =============================================================================
+# 🔐 ENVIRONMENT & SECRETS
+# =============================================================================
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.test
+*.pem
+*.key
+*.cert
+secrets.json
+config/secrets/
+
+# =============================================================================
+# ⚡ CACHE & TEMPORARY FILES
+# =============================================================================
+.cache/
+.temp/
+.tmp/
+*.tmp
+*.temp
+.eslintcache
+.stylelintcache
+.sass-cache/
+.parcel-cache/
+
+# =============================================================================
+# 🛠️ IDE & EDITORS
+# =============================================================================
+.vscode/
+.vscode-test/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# =============================================================================
+# 💻 OPERATING SYSTEMS
+# =============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# =============================================================================
+# 🧪 TESTING & COVERAGE
+# =============================================================================
+coverage/
+.nyc_output/
+.coverage/
+*.lcov
+junit.xml
+test-results/
+playwright-report/
+e2e-results/
+
+# =============================================================================
+# 🔍 CODE QUALITY & ANALYSIS
+# =============================================================================
+.scannerwork/
+.sonar/
+sonar-project.properties.local
+.codeclimate.yml
+
+# =============================================================================
+# 🧠 ALEX AI - Données & Configurations Sensibles
+# =============================================================================
+backend/db/*.db
+backend/db/*.sqlite*
+backend/data/*.db
+backend/data/*.sqlite*
+data/alex_*.db
+data/licorne_*.sqlite
+memory_*.json
+learning_*.json
+
+# Alex AI backups & emergency files
+*.backup
+*_BACKUP_*
+emergency-*.cjs
+phase*.cjs
+restore-*.cjs
+rollback-*.js
+alex-emergency-*.json
+
+# Alex AI models & training data
+models/
+training_data/
+embeddings/
+vectors/
+*.bin
+*.gguf
+*.onnx
+
+# Alex AI logs spécifiques
+alex-*.log
+licorne-*.log
+consciousness-*.log
+memory-*.log
+
+# =============================================================================
+# 🚀 DEPLOYMENT & PRODUCTION
+# =============================================================================
+.vercel
+.netlify/
+.firebase/
+.serverless/
+docker-compose.override.yml
+Dockerfile.local
+
+# =============================================================================
+# 📱 MOBILE & NATIVE
+# =============================================================================
+*.ipa
+*.apk
+*.aab
+.expo/
+.expo-shared/
+
+# =============================================================================
+# 🔧 MISCELLANEOUS
+# =============================================================================
+*.pid
+*.seed
+*.pid.lock
+.lock-wscript
+.wafpickle-*
+.node_repl_history
+.npm
+.yarn-integrity
+.pnp
+.pnp.js
+
+# Audit & security files
+audit-security.js
+analyze-audit-results.js
+audit-results.json
+AUDIT-SECURITY-REPORT.md
+
+
+# 🧹 CLEANUP PROTECTION - Générées automatiquement
+
+# Fichiers .env réels (seul .env.example autorisé)
+backend/.env
+frontend/.env
+.env.staging
+
+# Scripts suspects et fichiers temporaires
+scripts/rollback-*.js
+*.backup.*
+cleanup-*.js
+cleanup-results.json
+
+# Logs et fichiers temporaires système
+*.lock
