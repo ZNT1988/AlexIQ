@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset de base (facultatif, tu peux l'enrichir plus tard) */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Curseur clignotant pour effet d’écriture IA */
+.blinking-cursor {
+  font-weight: bold;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from,
+  to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Boutons simples */
+button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Input styling */
+input[type='text'] {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+/* --- ⚙️ IA Side Panel --- */
+.toggle-panel-btn {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 999;
+  padding: 10px 14px;
+  border-radius: 50%;
+  font-size: 18px;
+  background: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.side-panel {
+  position: fixed;
+  left: 20px;
+  bottom: 80px;
+  width: 220px;
+  background: #fdfdfd;
+  border: 1px solid #ccc;
+  padding: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  z-index: 998;
+}
+
+.side-panel h3 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.panel-section {
+  margin-bottom: 12px;
+}
+
+.panel-section label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.side-panel select,
+.side-panel button {
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+}

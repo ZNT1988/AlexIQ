@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Bash(git add:*)",
+      "Bash(grep:*)",
+      "Bash(npm run sonar-scan:*)",
+      "Bash(npm run:*)",
+      "Bash(sonar-scanner:*)",
+      "Bash(curl:*)",
+      "Bash(find:*)",
+      "Bash(mv:*)",
+      "Bash(npx @biomejs/biome check:*)",
+      "Bash(npx eslint:*)",
+      "Bash(npx prettier:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(rm:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(sed:*)"
+    ],
+    "deny": []
+  }
+}

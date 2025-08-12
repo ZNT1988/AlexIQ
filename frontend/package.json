@@ -1,0 +1,45 @@
+{
+  "name": "hustle-finder-frontend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Frontend Hustle Finder V1",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "lint": "eslint src --ext .js,.jsx",
+    "lint:fix": "eslint src --ext .js,.jsx --fix"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@tailwindcss/postcss": "^4.1.11",
+    "autoprefixer": "^10.4.21",
+    "framer-motion": "^12.23.6",
+    "lucide-react": "^0.525.0",
+    "node-fetch": "^3.3.2",
+    "postcss": "^8.5.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.6.2",
+    "react-speech-recognition": "^4.0.1",
+    "react-textarea-autosize": "^8.5.9",
+    "tailwindcss": "^4.1.11",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.32.0",
+    "@vitejs/plugin-react": "^4.5.2",
+    "eslint": "^9.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-sonarjs": "^3.0.4",
+    "vite": "^7.0.5",
+    "vitest": "^3.2.4"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-win32-x64-msvc": "^4.45.1"
+  }
+}

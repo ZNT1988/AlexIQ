@@ -1,0 +1,26 @@
+name: "CodeQL Config"
+
+# CodeQL Configuration pour AlexAI
+paths-ignore:
+  - node_modules/**
+  - dist/**
+  - build/**
+  - coverage/**
+  - "**/*.test.js"
+  - "**/*.spec.js"
+
+paths:
+  - backend/**
+  - frontend/src/**
+
+queries:
+  - uses: security-and-quality
+  - uses: security-extended
+
+# Requêtes personnalisées pour ton code
+query-filters:
+  - exclude:
+      id: js/unused-local-variable
+  - include:
+      kind: problem
+      problem.severity: error
