@@ -24,7 +24,7 @@ jobs:
             
       - name: Install Backend
         working-directory: backend
-        run: npm install --no-audit --no-fund --legacy-peer-deps
+        run: npm ci --no-audit --no-fund
         
       - name: Build Backend
         working-directory: backend
@@ -32,7 +32,7 @@ jobs:
         
       - name: Install Frontend
         working-directory: frontend
-        run: npm install --no-audit --no-fund --legacy-peer-deps
+        run: npm ci --no-audit --no-fund
         
       - name: Build Frontend
         working-directory: frontend
