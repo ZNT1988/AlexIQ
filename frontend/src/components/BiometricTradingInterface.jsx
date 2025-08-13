@@ -385,10 +385,10 @@ const BiometricTradingInterface = ({ alex, temporalCore, onBioDataChange }) => {
                   <Wifi className="w-4 h-4" />
                   <span>{interfaceState.isConnected ? 'Connected' : 'Disconnected'}</span>
                 </span>
-                <span className=STR_TEXT_GRAY_400>
+                <span className="TEXT_GRAY_400>
                   Sync: {(interfaceState.syncQuality * 100).toFixed(1)}%
                 </span>
-                <span className=STR_TEXT_GRAY_400>
+                <span className="TEXT_GRAY_400>
                   Latency: {interfaceState.latency}ms
                 </span>
               </div>
@@ -454,8 +454,8 @@ const BiometricTradingInterface = ({ alex, temporalCore, onBioDataChange }) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
           >
-            <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-              <h3 className=STR_TEXT_LG_FONT_BOLD_TEXT_WHITE_F>
+            <div className="flex items-center"_JUSTIFY_BETW>
+              <h3 className="TEXT_LG_FONT_BOLD_TEXT_WHITE_F>
                 <Heart className="w-5 h-5 text-red-400 mr-2" />
                 Cardiovasculaire
               </h3>
@@ -471,7 +471,7 @@ const BiometricTradingInterface = ({ alex, temporalCore, onBioDataChange }) => {
             <div className="space-y-4">
               <div>
                 <div className="flex justify-between text-sm mb-2">
-                  <span className=STR_TEXT_GRAY_400>Rythme cardiaque</span>
+                  <span className="TEXT_GRAY_400>Rythme cardiaque</span>
                   <span className="text-white font-medium">{Math.round(bioData.heartRate.current)} BPM</span>
                 </div>
                 <BiometricChart
@@ -505,8 +505,8 @@ const BiometricTradingInterface = ({ alex, temporalCore, onBioDataChange }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-              <h3 className=STR_TEXT_LG_FONT_BOLD_TEXT_WHITE_F>
+            <div className="flex items-center"_JUSTIFY_BETW>
+              <h3 className="TEXT_LG_FONT_BOLD_TEXT_WHITE_F>
                 <Brain className="w-5 h-5 text-purple-400 mr-2" />
                 Activité Cérébrale
               </h3>
@@ -549,8 +549,8 @@ const BiometricTradingInterface = ({ alex, temporalCore, onBioDataChange }) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-              <h3 className=STR_TEXT_LG_FONT_BOLD_TEXT_WHITE_F>
+            <div className="flex items-center"_JUSTIFY_BETW>
+              <h3 className="TEXT_LG_FONT_BOLD_TEXT_WHITE_F>
                 <Eye className="w-5 h-5 text-blue-400 mr-2" />
                 État Mental
               </h3>
@@ -590,11 +590,11 @@ const BiometricTradingInterface = ({ alex, temporalCore, onBioDataChange }) => {
 
             <div className="space-y-2">
               <div className="text-sm">
-                <span className=STR_TEXT_GRAY_400>État primaire: </span>
+                <span className="TEXT_GRAY_400>État primaire: </span>
                 <span className="text-white font-medium capitalize">{bioData.emotions.primary}</span>
               </div>
               <div className="text-sm">
-                <span className=STR_TEXT_GRAY_400>Engagement: </span>
+                <span className="TEXT_GRAY_400>Engagement: </span>
                 <span className="text-green-400 font-medium">{(bioData.emotions.engagement * 100).toFixed(0)}%</span>
               </div>
             </div>
@@ -679,7 +679,7 @@ const BiometricTradingInterface = ({ alex, temporalCore, onBioDataChange }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
-          <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+          <div className="flex items-center"_JUSTIFY_BETW>
             <h3 className="text-xl font-bold text-white flex items-center">
               <Brain className="w-6 h-6 text-purple-400 mr-2" />
               Recommandations Alex
@@ -692,21 +692,21 @@ const BiometricTradingInterface = ({ alex, temporalCore, onBioDataChange }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-black/30 rounded-lg p-4">
               <h4 className="font-medium text-green-400 mb-2">État Optimal Détecté</h4>
-              <p className=STR_TEXT_SM_TEXT_GRAY_300>
+              <p className="text-sm"_TEXT_GRAY_300>
                 Votre focus et attention sont excellents. C'est le moment idéal pour les analyses complexes
               </p>
             </div>
 
             <div className="bg-black/30 rounded-lg p-4">
               <h4 className="font-medium text-blue-400 mb-2">Ajustement Stratégie</h4>
-              <p className=STR_TEXT_SM_TEXT_GRAY_300>
+              <p className="text-sm"_TEXT_GRAY_300>
                 Votre tolérance au risque est élevée. Je recommande d'augmenter légèrement la taille des positions
               </p>
             </div>
 
             <div className="bg-black/30 rounded-lg p-4">
               <h4 className="font-medium text-purple-400 mb-2">Prévention Fatigue</h4>
-              <p className=STR_TEXT_SM_TEXT_GRAY_300>
+              <p className="text-sm"_TEXT_GRAY_300>
                 Une pause active dans 45 minutes préviendra la fatigue cognitive et maintiendra votre performance
               </p>
             </div>

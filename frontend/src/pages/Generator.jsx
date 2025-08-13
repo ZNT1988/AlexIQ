@@ -60,7 +60,7 @@ const Generator = () => {
 
             <div className="space-y-4">
               <div>
-                <label className=STR_BLOCK_TEXT_SM_FONT_MEDIUM_TEXT>
+                <label className="block text-sm font-medium text-gray-700">
                   Prompt d'entrée
                 </label>
                 <textarea
@@ -73,7 +73,7 @@ const Generator = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className=STR_BLOCK_TEXT_SM_FONT_MEDIUM_TEXT>
+                  <label className="block text-sm font-medium text-gray-700">
                     Créativité
                   </label>
                   <select className="w-full p-2 border border-gray-300 rounded-lg">
@@ -84,7 +84,7 @@ const Generator = () => {
                   </select>
                 </div>
                 <div>
-                  <label className=STR_BLOCK_TEXT_SM_FONT_MEDIUM_TEXT>
+                  <label className="block text-sm font-medium text-gray-700">
                     Longueur
                   </label>
                   <select className="w-full p-2 border border-gray-300 rounded-lg">
@@ -121,17 +121,17 @@ const Generator = () => {
               Paramètres avancés
             </h3>
             <div className="space-y-3">
-              <label className=STR_FLEX_ITEMS_CENTER>
-                <input type=STR_CHECKBOX className=STR_MR_2 />
-                <span className=STR_TEXT_SM>Mode créatif avancé</span>
+              <label className="flex items-center">
+                <input type="checkbox" className="mr-2" />
+                <span className="text-sm">Mode créatif avancé</span>
               </label>
-              <label className=STR_FLEX_ITEMS_CENTER>
-                <input type=STR_CHECKBOX className=STR_MR_2 defaultChecked />
-                <span className=STR_TEXT_SM>Optimisation sémantique</span>
+              <label className="flex items-center">
+                <input type="checkbox" className="mr-2" defaultChecked />
+                <span className="text-sm">Optimisation sémantique</span>
               </label>
-              <label className=STR_FLEX_ITEMS_CENTER>
-                <input type=STR_CHECKBOX className=STR_MR_2 />
-                <span className=STR_TEXT_SM>Analyse contextuelle</span>
+              <label className="flex items-center">
+                <input type="checkbox" className="mr-2" />
+                <span className="text-sm">Analyse contextuelle</span>
               </label>
             </div>
           </div>
@@ -199,20 +199,20 @@ const Generator = () => {
             </h3>
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <span className=STR_TEXT_PURPLE_600>Tokens utilisés:</span>
-                <span className=STR_ML_2_FONT_SEMIBOLD>--</span>
+                <span className="text-purple-600">Tokens utilisés:</span>
+                <span className="ml-2 font-semibold">--</span>
               </div>
               <div>
-                <span className=STR_TEXT_PURPLE_600>Temps de traitement:</span>
-                <span className=STR_ML_2_FONT_SEMIBOLD>--</span>
+                <span className="text-purple-600">Temps de traitement:</span>
+                <span className="ml-2 font-semibold">--</span>
               </div>
               <div>
-                <span className=STR_TEXT_PURPLE_600>Qualité:</span>
-                <span className=STR_ML_2_FONT_SEMIBOLD>--</span>
+                <span className="text-purple-600">Qualité:</span>
+                <span className="ml-2 font-semibold">--</span>
               </div>
               <div>
-                <span className=STR_TEXT_PURPLE_600>Originalité:</span>
-                <span className=STR_ML_2_FONT_SEMIBOLD>--</span>
+                <span className="text-purple-600">Originalité:</span>
+                <span className="ml-2 font-semibold">--</span>
               </div>
             </div>
           </div>

@@ -345,7 +345,7 @@ const ContextAwareSuggestions = ({
 
       {/* Header avec filtres */}
       <div className="flex items-center justify-between">
-        <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+        <div className="flex items-center"_SPACE_X_2>
           <Brain className="w-5 h-5 text-purple-500" />
           <h3 className="text-lg font-semibold text-gray-900">Suggestions intelligentes</h3>
           <span className="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full">
@@ -353,7 +353,7 @@ const ContextAwareSuggestions = ({
           </span>
         </div>
 
-        <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+        <div className="flex items-center"_SPACE_X_2>
           <button
             onClick={() => setShowAdvanced(!showAdvanced)}
             className="text-sm text-gray-600 hover:text-gray-900 flex items-center space-x-1"
@@ -422,7 +422,7 @@ const ContextAwareSuggestions = ({
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between mb-2">
                         <h4 className="font-semibold text-gray-900">{suggestion.title}</h4>
-                        <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+                        <div className="flex items-center"_SPACE_X_2>
                           {suggestion.priority === STR_HIGH && (
                             <Star className="w-4 h-4 text-yellow-500" />
                           )}
@@ -435,7 +435,7 @@ const ContextAwareSuggestions = ({
                       <p className="text-gray-600 text-sm mb-3">{suggestion.description}</p>
 
                       <div className="flex items-center justify-between">
-                        <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+                        <div className="flex items-center"_SPACE_X_2>
                           <span className={'text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full capitalize'}>
                             {suggestion.category}
                           </span>
@@ -498,19 +498,19 @@ const ContextAwareSuggestions = ({
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
               <div className="text-2xl font-bold text-blue-600">{suggestions.length}</div>
-              <div className=STR_TEXT_SM_TEXT_GRAY_600>Générées</div>
+              <div className="text-sm"_TEXT_GRAY_600>Générées</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-green-600">
                 {suggestions.filter(s => s.priority === STR_HIGH).length}
               </div>
-              <div className=STR_TEXT_SM_TEXT_GRAY_600>Priorité haute</div>
+              <div className="text-sm"_TEXT_GRAY_600>Priorité haute</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-purple-600">
                 {Math.round(suggestions.reduce((acc, s) => acc + s.confidence, 0) / suggestions.length * 100)}%
               </div>
-              <div className=STR_TEXT_SM_TEXT_GRAY_600>Confiance moyenne</div>
+              <div className="text-sm"_TEXT_GRAY_600>Confiance moyenne</div>
             </div>
           </div>
         </motion.div>

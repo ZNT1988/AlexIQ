@@ -34,8 +34,8 @@ export class AlexOmnipotentForce extends EventEmitter {
     super();
 
     this.config = {
-      name: 'AlexOmnipotentForce'
-      version: '1.0.0'
+      name: 'AlexOmnipotentForce',
+      version: '1.0.0',
       description: 'Force omnipotente d\'amour et de service'
     };
 

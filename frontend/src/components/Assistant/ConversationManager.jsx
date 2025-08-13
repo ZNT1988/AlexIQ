@@ -409,7 +409,7 @@ const ConversationManager = ({
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+        <div className="flex items-center"_SPACE_X_2>
           <RefreshCw className="w-5 h-5 animate-spin text-blue-500" />
           <span className="text-gray-600">Chargement des conversations...</span>
         </div>
@@ -431,7 +431,7 @@ const ConversationManager = ({
             </span>
           </h2>
 
-          <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+          <div className="flex items-center"_SPACE_X_2>
             <button
               onClick={() => onNewConversation && onNewConversation()}
               className="flex items-center space-x-2 bg-blue-600 text-white px-3 py-2 rounded-lg hover:bg-blue-700 transition-colors"
@@ -465,7 +465,7 @@ const ConversationManager = ({
         </div>
 
         {/* Filtres et tri */}
-        <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+        <div className="flex items-center"_JUSTIFY_BETW>
           <div className="flex flex-wrap gap-2">
             {filters.map(filter => {
               const Icon = filter.icon;
@@ -515,12 +515,12 @@ const ConversationManager = ({
             exit={{ height: 0, opacity: 0 }}
             className="bg-yellow-50 border-b border-yellow-200 p-3"
           >
-            <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+            <div className="flex items-center"_JUSTIFY_BETW>
               <span className="text-sm text-yellow-800">
                 {selectedConversations.size} conversation(s) sélectionnée(s)
               </span>
 
-              <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+              <div className="flex items-center"_SPACE_X_2>
                 <button
                   onClick={() => exportConversations()}
                   className="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
@@ -614,7 +614,7 @@ const ConversationManager = ({
                       </p>
 
                       {/* Métadonnées */}
-                      <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+                      <div className="flex items-center"_JUSTIFY_BETW>
                         <div className="flex items-center space-x-2 text-xs text-gray-500">
                           <span>{conversation.messages?
       .length || 0} messages</span>

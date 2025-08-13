@@ -257,7 +257,7 @@ class ExternalDataSources {
     const systemPrompt = this.buildSystemPrompt(analysis);
     const messages = this.buildContextualMessages(query, context, systemPrompt);
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch(process.env.API_BASE_OPENAI || 'https://api.openai.com/v1/chat/completions', {
       method: STR_POST
       headers: {
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
@@ -308,7 +308,7 @@ class ExternalDataSources {
     const systemPrompt = this.buildSystemPrompt(analysis);
     const messages = this.buildAnthropicMessages(query, context);
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch(process.env.API_BASE_ANTHROPIC || 'https://api.anthropic.com/v1/messages', {
       method: STR_POST
       headers: {
         'x-api-key': process.env.ANTHROPIC_API_KEY

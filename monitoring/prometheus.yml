@@ -3,15 +3,15 @@ global:
   scrape_interval: 15s
   evaluation_interval: 15s
   external_labels:
-    cluster: 'hustlefinder-production'
-    replica: 'prometheus-1'
+    cluster: "hustlefinder-production"
+    replica: "prometheus-1"
 
 # Alertmanager configuration
 alerting:
   alertmanagers:
     - static_configs:
         - targets:
-          - alertmanager:9093
+            - alertmanager:9093
 
 # Load rules and evaluate them
 rule_files:
@@ -21,62 +21,62 @@ rule_files:
 # Scrape configurations
 scrape_configs:
   # Prometheus itself
-  - job_name: 'prometheus'
+  - job_name: "prometheus"
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ["localhost:9090"]
 
   # Node Exporter for system metrics
-  - job_name: 'node-exporter'
+  - job_name: "node-exporter"
     static_configs:
-      - targets: ['node-exporter:9100']
+      - targets: ["node-exporter:9100"]
     scrape_interval: 30s
 
   # HustleFinderIA Backend
-  - job_name: 'hustlefinder-backend'
+  - job_name: "hustlefinder-backend"
     static_configs:
-      - targets: ['backend:5000']
-    metrics_path: '/metrics'
+      - targets: ["backend:5000"]
+    metrics_path: "/metrics"
     scrape_interval: 10s
     scrape_timeout: 5s
     honor_labels: true
     params:
-      format: ['prometheus']
+      format: ["prometheus"]
 
   # HustleFinderIA Frontend (Nginx metrics)
-  - job_name: 'hustlefinder-frontend'
+  - job_name: "hustlefinder-frontend"
     static_configs:
-      - targets: ['frontend:80']
-    metrics_path: '/nginx_status'
+      - targets: ["frontend:80"]
+    metrics_path: "/nginx_status"
     scrape_interval: 30s
 
   # PostgreSQL Database
-  - job_name: 'postgresql'
+  - job_name: "postgresql"
     static_configs:
-      - targets: ['postgres-exporter:9187']
+      - targets: ["postgres-exporter:9187"]
     scrape_interval: 30s
 
   # Redis Cache
-  - job_name: 'redis'
+  - job_name: "redis"
     static_configs:
-      - targets: ['redis-exporter:9121']
+      - targets: ["redis-exporter:9121"]
     scrape_interval: 30s
 
   # Docker containers
-  - job_name: 'docker'
+  - job_name: "docker"
     static_configs:
-      - targets: ['cadvisor:8080']
+      - targets: ["cadvisor:8080"]
     scrape_interval: 30s
 
   # Blackbox monitoring (external endpoints)
-  - job_name: 'blackbox'
+  - job_name: "blackbox"
     metrics_path: /probe
     params:
       module: [http_2xx]
     static_configs:
       - targets:
-        - https://hustlefinder.ia
-        - https://api.hustlefinder.ia/health
-        - https://hustlefinder.ia/health
+          - https://hustlefinder.ia
+          - https://api.hustlefinder.ia/health
+          - https://hustlefinder.ia/health
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -86,14 +86,14 @@ scrape_configs:
         replacement: blackbox-exporter:9115
 
   # SSL certificate monitoring
-  - job_name: 'ssl-certs'
+  - job_name: "ssl-certs"
     metrics_path: /probe
     params:
       module: [ssl_expiry]
     static_configs:
       - targets:
-        - hustlefinder.ia:443
-        - api.hustlefinder.ia:443
+          - hustlefinder.ia:443
+          - api.hustlefinder.ia:443
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
@@ -103,23 +103,23 @@ scrape_configs:
         replacement: blackbox-exporter:9115
 
   # Elasticsearch
-  - job_name: 'elasticsearch'
+  - job_name: "elasticsearch"
     static_configs:
-      - targets: ['elasticsearch-exporter:9114']
+      - targets: ["elasticsearch-exporter:9114"]
     scrape_interval: 30s
 
   # Grafana
-  - job_name: 'grafana'
+  - job_name: "grafana"
     static_configs:
-      - targets: ['grafana:3000']
-    metrics_path: '/metrics'
+      - targets: ["grafana:3000"]
+    metrics_path: "/metrics"
     scrape_interval: 30s
 
   # Custom application metrics
-  - job_name: 'hustlefinder-custom-metrics'
+  - job_name: "hustlefinder-custom-metrics"
     static_configs:
-      - targets: ['backend:5000']
-    metrics_path: '/api/metrics/custom'
+      - targets: ["backend:5000"]
+    metrics_path: "/api/metrics/custom"
     scrape_interval: 15s
     honor_labels: true
 
@@ -131,7 +131,7 @@ remote_write:
       password_file: "/etc/prometheus/remote_write_password"
     write_relabel_configs:
       - source_labels: [__name__]
-        regex: 'hustlefinder_.*'
+        regex: "hustlefinder_.*"
         action: keep
 
 # Storage configuration

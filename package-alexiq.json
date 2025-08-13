@@ -1,0 +1,46 @@
+{
+  "name": "alexiq",
+  "version": "1.0.0",
+  "description": "AlexIQ - Business AI Assistant Platform",
+  "main": "start-alex.js",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "start": "npm run start:backend",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "build": "npm run build:frontend",
+    "build:frontend": "cd frontend && npm run build",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "clean": "rm -rf node_modules backend/node_modules frontend/node_modules",
+    "deploy:railway": "npm run build && railway up",
+    "deploy:vercel": "cd frontend && vercel --prod",
+    "health": "curl -s http://localhost:8080/api/health || echo 'Backend not accessible'"
+  },
+  "keywords": [
+    "ai", 
+    "business",
+    "assistant",
+    "react",
+    "express",
+    "nodejs"
+  ],
+  "author": "AlexIQ Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "eslint": "^9.32.0"
+  }
+}

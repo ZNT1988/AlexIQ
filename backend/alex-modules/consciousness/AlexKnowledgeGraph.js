@@ -1,12 +1,8 @@
 import crypto from "crypto";
-import OpenAI from "openai";
-import Anthropic from "@anthropic-ai/sdk";
 import logger from "../../config/logger.js";
 import { EventEmitter } from "events";
-
-// Cloud-based authentic AI generation - NO STATIC TEMPLATES
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+import aiClient from "../../core/providers/AIClient.js";
+import { ALEX_CORE_PROMPTS } from "../../prompts/alex-prompts.js";
 
 /**
  * Alex Knowledge Graph - Phase 2 Batch 3
@@ -72,27 +68,23 @@ class AlexKnowledgeGraph extends EventEmitter {
   }
 
   async generateCloudBasedNodes() {
-    // Génération authentique via OpenAI - NO STATIC TEMPLATES
-    const response = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: [
-        {
-          role: "system",
-          content:
-            "Generate dynamic knowledge graph nodes with authentic domain understanding. Return JSON array of nodes with unique insights.",
-        },
-        {
-          role: "user",
-          content:
-            "Create foundational knowledge nodes for entrepreneurship, technology, creativity, and strategy domains. Focus on emerging concepts and innovative connections.",
-        },
-      ],
+    // Génération authentique via client AI centralisé - NO STATIC TEMPLATES
+    const prompt = `Generate dynamic knowledge graph nodes with authentic domain understanding. Return JSON array of nodes with unique insights.
+
+Create foundational knowledge nodes for entrepreneurship, technology, creativity, and strategy domains. Focus on emerging concepts and innovative connections.
+
+Return format: JSON array of objects with {id, type, properties, domain}`;
+
+    const response = await aiClient.query(prompt, {
+      provider: 'openai',
+      model: 'gpt-4',
       temperature: 0.8,
+      maxTokens: 2000
     });
 
     let concepts;
     try {
-      concepts = JSON.parse(response.choices[0].message.content);
+      concepts = JSON.parse(response.content);
     } catch {
       // Fallback avec génération minimale si parsing échoue
       concepts = await this.generateMinimalNodes();
@@ -104,25 +96,25 @@ class AlexKnowledgeGraph extends EventEmitter {
   }
 
   async establishDynamicRelations() {
-    // Génération de relations via Anthropic Claude - Élimination template statique
+    // Génération de relations via client AI centralisé - Élimination template statique
     const nodeIds = Array.from(this.nodes.keys());
 
-    const response = await anthropic.messages.create({
-      model: "claude-3-sonnet-20240229",
-      max_tokens: 2000,
-      messages: [
-        {
-          role: "user",
-          content: `Create dynamic relationships between these knowledge nodes: ${nodeIds.join(", ")}. 
-        Generate authentic connections with strength values based on real domain expertise. 
-        Return JSON array of relations with from, to, type, and strength properties.`,
-        },
-      ],
+    const prompt = `Create dynamic relationships between these knowledge nodes: ${nodeIds.join(", ")}. 
+
+Generate authentic connections with strength values based on real domain expertise. 
+Return JSON array of relations with from, to, type, and strength properties.
+
+Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "strength": 0.0-1.0}]`;
+
+    const response = await aiClient.query(prompt, {
+      provider: 'anthropic',
+      model: 'claude-3-sonnet-20240229',
+      maxTokens: 2000
     });
 
     let relations;
     try {
-      relations = JSON.parse(response.content[0].text);
+      relations = JSON.parse(response.content);
     } catch {
       relations = await this.generateMinimalRelations(nodeIds);
     }
@@ -202,13 +194,13 @@ class AlexKnowledgeGraph extends EventEmitter {
   }
 
   async generateEmbedding(nodeData) {
-    // Génération d'embedding via cloud AI - PLUS de simulation
+    // Génération d'embedding via client AI centralisé - PLUS de simulation
     try {
-      const response = await openai.embeddings.create({
-        model: "text-embedding-ada-002",
-        input: `${nodeData.id} ${nodeData.type} ${JSON.stringify(nodeData.properties)}`,
+      const text = `${nodeData.id} ${nodeData.type} ${JSON.stringify(nodeData.properties)}`;
+      const response = await aiClient.generateEmbeddings(text, {
+        model: "text-embedding-ada-002"
       });
-      return response.data[0].embedding;
+      return response.embeddings;
     } catch {
       // Fallback sécurisé si API indisponible
       return this.generateSecureRandomEmbedding();

@@ -5,9 +5,9 @@ const STR_DEVELOPMENT = 'development';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const logger = {
-  info: (...args) => process.env.NODE_ENV === STR_DEVELOPMENT && console.log('[INFO]', ...args)
-  warn: (...args) => process.env.NODE_ENV === STR_DEVELOPMENT && console.warn('[WARN]', ...args)
-  error: (...args) => console.error('[ERROR]', ...args)
+  info: (...args) => process.env.NODE_ENV === STR_DEVELOPMENT && console.log('[INFO]', ...args),
+  warn: (...args) => process.env.NODE_ENV === STR_DEVELOPMENT && console.warn('[WARN]', ...args),
+  error: (...args) => console.error('[ERROR]', ...args),
   debug: (...args) => process.env.NODE_ENV === STR_DEVELOPMENT && console.debug('[DEBUG]', ...args)
 };
 
@@ -24,9 +24,9 @@ import { Send, Bot, User, Loader2 } from 'lucide-react';
 const RealAlexInterface = () => {
   const [messages, setMessages] = useState([
     {
-      id: 1
-      role: STR_ASSISTANT
-      content: 'Bonjour ! Je suis Alex Ultimate, une IA avancée prête à vous aider. Posez-moi n\'importe quelle question !'
+      id: 1,
+      role: STR_ASSISTANT,
+      content: 'Bonjour ! Je suis Alex Ultimate, une IA avancée prête à vous aider. Posez-moi n\'importe quelle question !',
       timestamp: new Date()
     }
   ]);
@@ -53,9 +53,9 @@ const RealAlexInterface = () => {
     if (!input.trim() || isLoading) return;
 
     const userMessage = {
-      id: Date.now()
-      role: 'user'
-      content: input.trim()
+      id: Date.now(),
+      role: 'user',
+      content: input.trim(),
       timestamp: new Date()
     };
 
@@ -65,13 +65,13 @@ const RealAlexInterface = () => {
 
     try {
       // APPEL API RÉEL vers le backend
-      const response = await fetch('/api/alex/real-chat', {
-        method: 'POST'
+      const response = await fetch('http://localhost:3002/api/alex/chat', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
         body: JSON.stringify({
-          message: userMessage.content
+          message: userMessage.content,
           conversation: messages.slice(-10), // Context des 10 derniers messages
           timestamp: Date.now()
         })
@@ -80,19 +80,24 @@ const RealAlexInterface = () => {
       const data = await response.json();
 
       const assistantMessage = {
-        id: Date.now() + 1
-        role: STR_ASSISTANT
-        content: data.response || 'Désolé, j\'ai rencontré un problème technique.'
-        timestamp: new Date()
-        metadata: data.metadata || {}
+        id: Date.now() + 1,
+        role: STR_ASSISTANT,
+        content: data.alex?.message || 'Désolé, j\'ai rencontré un problème technique.',
+        timestamp: new Date(),
+        metadata: data.metrics || {}
       };
 
       setMessages(prev => [...prev, assistantMessage]);
 
     } catch (error) {
-      // Logger fallback - ignore error
-    };
-
+      logger.error('Erreur API:', error);
+      const errorMessage = {
+        id: Date.now() + 1,
+        role: STR_ASSISTANT,
+        content: 'Désolé, impossible de me connecter au serveur. Veuillez réessayer.',
+        timestamp: new Date(),
+        metadata: { error: true }
+      };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
@@ -181,6 +186,31 @@ const RealAlexInterface = () => {
       <div className="input-container">
         <div className="input-wrapper">
           <textarea
+            ref={textareaRef}
+            className="message-input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyPress={handleKeyPress}
+            disabled={isLoading}
+            placeholder="Tapez votre message..."
+            rows={1}
+          />
+          <button
+            className="send-button"
+            onClick={sendMessage}
+            disabled={!input.trim() || isLoading}
+          >
+            <Send size={20} />
+          </button>
+        </div>
+        <div className="input-footer">
+          Alex Ultimate peut faire des erreurs. Vérifiez les informations importantes.
+        </div>
+      </div>
+
+      <style jsx>{`
+        .real-alex-interface {
+          display: flex;
           flex-direction: column;
           height: 100vh;
           max-height: 100vh;

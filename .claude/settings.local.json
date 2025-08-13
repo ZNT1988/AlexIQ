@@ -18,7 +18,11 @@
       "Bash(git push:*)",
       "Bash(rm:*)",
       "WebFetch(domain:github.com)",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "Bash(npm install:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm test:*)",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   }

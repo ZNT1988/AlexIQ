@@ -322,7 +322,7 @@ const MessageRenderer = ({
                 className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
                 title="Copier"
               >
-                <Copy className=STR_W_4_H_4_TEXT_GRAY_500 />
+                <Copy className="W_4_H_4_TEXT_GRAY_500 />
               </button>
 
               {isBot && (
@@ -333,9 +333,9 @@ const MessageRenderer = ({
                     title="Lire à voix haute"
                   >
                     {isReading ? (
-                      <VolumeX className=STR_W_4_H_4_TEXT_GRAY_500 />
+                      <VolumeX className="W_4_H_4_TEXT_GRAY_500 />
                     ) : (
-                      <Volume2 className=STR_W_4_H_4_TEXT_GRAY_500 />
+                      <Volume2 className="W_4_H_4_TEXT_GRAY_500 />
                     )}
                   </button>
 
@@ -344,7 +344,7 @@ const MessageRenderer = ({
                     className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
                     title="Régénérer"
                   >
-                    <RotateCcw className=STR_W_4_H_4_TEXT_GRAY_500 />
+                    <RotateCcw className="W_4_H_4_TEXT_GRAY_500 />
                   </button>
                 </>
               )}
@@ -354,7 +354,7 @@ const MessageRenderer = ({
                 className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
                 title="J'aime"
               >
-                <ThumbsUp className=STR_W_4_H_4_TEXT_GRAY_500 />
+                <ThumbsUp className="W_4_H_4_TEXT_GRAY_500 />
               </button>
 
               <button
@@ -362,7 +362,7 @@ const MessageRenderer = ({
                 className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
                 title="Je n'aime pas"
               >
-                <ThumbsDown className=STR_W_4_H_4_TEXT_GRAY_500 />
+                <ThumbsDown className="W_4_H_4_TEXT_GRAY_500 />
               </button>
 
               <div className="relative" ref={menuRef}>
@@ -371,7 +371,7 @@ const MessageRenderer = ({
                   className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
                   title="Plus d'actions"
                 >
-                  <MoreHorizontal className=STR_W_4_H_4_TEXT_GRAY_500 />
+                  <MoreHorizontal className="W_4_H_4_TEXT_GRAY_500 />
                 </button>
 
                 <AnimatePresence>
@@ -386,7 +386,7 @@ const MessageRenderer = ({
                         onClick={() => { exportMessage(); setShowMenu(false); }}
                         className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2"
                       >
-                        <Download className=STR_W_4_H_4 />
+                        <Download className="W_4_H_4 />
                         <span>Exporter</span>
                       </button>
 
@@ -394,7 +394,7 @@ const MessageRenderer = ({
                         onClick={() => { /* Share logic */; setShowMenu(false); }}
                         className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2"
                       >
-                        <Share className=STR_W_4_H_4 />
+                        <Share className="W_4_H_4 />
                         <span>Partager</span>
                       </button>
 
@@ -403,7 +403,7 @@ const MessageRenderer = ({
                           onClick={() => { onEdit && onEdit(message); setShowMenu(false); }}
                           className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2"
                         >
-                          <Edit3 className=STR_W_4_H_4 />
+                          <Edit3 className="W_4_H_4 />
                           <span>Modifier</span>
                         </button>
                       )}
@@ -414,7 +414,7 @@ const MessageRenderer = ({
                         onClick={() => { /* Mark as important */; setShowMenu(false); }}
                         className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2"
                       >
-                        <Star className=STR_W_4_H_4 />
+                        <Star className="W_4_H_4 />
                         <span>Marquer important</span>
                       </button>
 
@@ -422,7 +422,7 @@ const MessageRenderer = ({
                         onClick={() => { /* Add to favorites */; setShowMenu(false); }}
                         className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 flex items-center space-x-2"
                       >
-                        <Bookmark className=STR_W_4_H_4 />
+                        <Bookmark className="W_4_H_4 />
                         <span>Ajouter aux favoris</span>
                       </button>
                     </motion.div>

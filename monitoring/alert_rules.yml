@@ -277,3 +277,115 @@ groups:
         annotations:
           summary: "SSL certificate expiring very soon"
           description: "SSL certificate for {{ $labels.instance }} expires in {{ $value | humanizeDuration }}"
+
+  # 🚀 ENTERPRISE AI ALERTS - Advanced monitoring
+  - name: hustlefinder-ai-enterprise
+    rules:
+      # AI Performance Alerts
+      - alert: HighAILatency
+        expr: histogram_quantile(0.95, rate(ai_query_duration_ms_bucket[5m])) > 5000
+        for: 2m
+        labels:
+          severity: warning
+          component: ai-engine
+        annotations:
+          summary: "High AI query latency detected"
+          description: "P95 AI query latency is {{ $value }}ms, above 5000ms threshold"
+          
+      - alert: AIErrorRateHigh
+        expr: rate(ai_query_errors_total[5m]) / rate(ai_queries_total[5m]) > 0.05
+        for: 1m
+        labels:
+          severity: critical
+          component: ai-engine
+        annotations:
+          summary: "High AI error rate"
+          description: "AI error rate is {{ $value | humanizePercentage }}, above 5% threshold"
+
+      # Provider Health Alerts  
+      - alert: ProviderDown
+        expr: ai_provider_health_score < 0.3
+        for: 1m
+        labels:
+          severity: critical
+          component: ai-providers
+        annotations:
+          summary: "AI provider {{ $labels.provider }} health degraded"
+          description: "Provider {{ $labels.provider }} health score is {{ $value }}, below 0.3 threshold"
+          
+      - alert: AllProvidersUnhealthy
+        expr: max(ai_provider_health_score) < 0.5
+        for: 30s
+        labels:
+          severity: critical
+          component: ai-providers
+        annotations:
+          summary: "All AI providers unhealthy"
+          description: "All AI providers have health scores below 0.5"
+
+      # Cache Performance Alerts
+      - alert: LowCacheHitRate
+        expr: ai_cache_hit_rate < 0.5
+        for: 5m
+        labels:
+          severity: warning
+          component: caching
+        annotations:
+          summary: "Low cache hit rate for {{ $labels.type }}"
+          description: "Cache hit rate for {{ $labels.type }} is {{ $value | humanizePercentage }}, below 50%"
+
+      # Vector Database Alerts
+      - alert: VectorDBHighLatency
+        expr: histogram_quantile(0.95, rate(vector_query_ms_bucket[5m])) > 1000
+        for: 5m
+        labels:
+          severity: warning
+          component: database
+        annotations:
+          summary: "High vector database latency"
+          description: "Vector query P95 latency is {{ $value }}ms, above 1000ms"
+
+      # Streaming Alerts
+      - alert: StreamingConnectionsHigh
+        expr: streaming_active_connections > 100
+        for: 2m
+        labels:
+          severity: warning
+          component: streaming
+        annotations:
+          summary: "High number of streaming connections"
+          description: "{{ $value }} active streaming connections, monitor for capacity"
+
+      # Cost Management Alerts
+      - alert: HighAICosts
+        expr: increase(ai_cost_usd_total[1h]) > 10
+        for: 0s
+        labels:
+          severity: warning
+          component: cost-management
+        annotations:
+          summary: "High AI costs detected"
+          description: "AI costs increased by ${{ $value }} in the last hour"
+
+  # Business Intelligence Alerts
+  - name: hustlefinder-business-intelligence
+    rules:
+      - alert: LowBusinessSuccess
+        expr: hustlefinder_success_rate < 0.8
+        for: 5m
+        labels:
+          severity: warning
+          component: business
+        annotations:
+          summary: "Low business success rate"
+          description: "Business success rate is {{ $value | humanizePercentage }}, below 80%"
+          
+      - alert: UserSatisfactionLow
+        expr: hustlefinder_user_satisfaction < 3.5
+        for: 10m
+        labels:
+          severity: warning
+          component: business
+        annotations:
+          summary: "Low user satisfaction"
+          description: "User satisfaction score is {{ $value }}, below 3.5/5.0"

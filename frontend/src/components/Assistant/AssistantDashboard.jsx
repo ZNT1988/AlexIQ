@@ -453,7 +453,7 @@ const AssistantDashboard = () => {
                           </div>
                           <div>
                             <p className="font-medium">{meeting.title}</p>
-                            <p className=STR_TEXT_SM_TEXT_GRAY_400>
+                            <p className="text-sm"_TEXT_GRAY_400>
                               {meeting.time} • {meeting.duration}min • {meeting.participants.length} participants
                             </p>
                           </div>
@@ -482,7 +482,7 @@ const AssistantDashboard = () => {
                           </div>
                           <div>
                             <p className="font-medium">{task.title}</p>
-                            <p className=STR_TEXT_SM_TEXT_GRAY_400>Échéance: {task.deadline}</p>
+                            <p className="text-sm"_TEXT_GRAY_400>Échéance: {task.deadline}</p>
                           </div>
                         </div>
                         <CheckCircle className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer" />
@@ -515,19 +515,19 @@ const AssistantDashboard = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                   <div className="text-center p-3 bg-white/5 rounded-lg">
                     <div className="text-2xl font-bold text-red-400">{emailSummary.unread}</div>
-                    <div className=STR_TEXT_SM_TEXT_GRAY_400>Non lus</div>
+                    <div className="text-sm"_TEXT_GRAY_400>Non lus</div>
                   </div>
                   <div className="text-center p-3 bg-white/5 rounded-lg">
                     <div className="text-2xl font-bold text-yellow-400">{emailSummary.priority}</div>
-                    <div className=STR_TEXT_SM_TEXT_GRAY_400>Prioritaires</div>
+                    <div className="text-sm"_TEXT_GRAY_400>Prioritaires</div>
                   </div>
                   <div className="text-center p-3 bg-white/5 rounded-lg">
                     <div className="text-2xl font-bold text-blue-400">{emailSummary.awaiting_response}</div>
-                    <div className=STR_TEXT_SM_TEXT_GRAY_400>En attente</div>
+                    <div className="text-sm"_TEXT_GRAY_400>En attente</div>
                   </div>
                   <div className="text-center p-3 bg-white/5 rounded-lg">
                     <div className="text-2xl font-bold text-green-400">{emailSummary.scheduled}</div>
-                    <div className=STR_TEXT_SM_TEXT_GRAY_400>Programmés</div>
+                    <div className="text-sm"_TEXT_GRAY_400>Programmés</div>
                   </div>
                 </div>
               </motion.div>

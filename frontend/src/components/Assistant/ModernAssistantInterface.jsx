@@ -230,7 +230,7 @@ const ModernAssistantInterface = () => {
                 </div>
                 <div>
                   <h1 className="font-semibold text-gray-900">HustleFinderIA</h1>
-                  <p className=STR_TEXT_XS_TEXT_GRAY_500>Assistant IA Personnel</p>
+                  <p className="TEXT_XS_TEXT_GRAY_500>Assistant IA Personnel</p>
                 </div>
               </div>
             </div>
@@ -253,7 +253,7 @@ const ModernAssistantInterface = () => {
                     }`}
                   >
                     <div className="text-sm text-gray-700 truncate">{conv}</div>
-                    <div className=STR_TEXT_XS_TEXT_GRAY_500>Il y a {index + 1}h</div>
+                    <div className="TEXT_XS_TEXT_GRAY_500>Il y a {index + 1}h</div>
                   </button>
                 ))}
               </div>
@@ -278,7 +278,7 @@ const ModernAssistantInterface = () => {
             <div className="flex items-center space-x-3">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className=STR_P_2_HOVER_BG_GRAY_100_ROUNDED_
+                className="P_2_HOVER_BG_GRAY_100_ROUNDED_
               >
                 <MoreHorizontal className="w-5 h-5 text-gray-600" />
               </button>
@@ -397,7 +397,7 @@ const ModernAssistantInterface = () => {
                                 {/* Intent et capacités */}
                                 {message.intent && (
                                   <div className="flex items-center space-x-2 mt-3 pt-3 border-t border-gray-200">
-                                    <span className=STR_TEXT_XS_TEXT_GRAY_500>Intention détectée:</span>
+                                    <span className="TEXT_XS_TEXT_GRAY_500>Intention détectée:</span>
                                     <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
                                       {message.intent}
                                     </span>
@@ -411,23 +411,23 @@ const ModernAssistantInterface = () => {
                           <div className="flex items-center space-x-2 pl-9">
                             <button
                               onClick={() => copyToClipboard(message.content)}
-                              className=STR_P_2_HOVER_BG_GRAY_100_ROUNDED_
+                              className="P_2_HOVER_BG_GRAY_100_ROUNDED_
                               title="Copier"
                             >
-                              <Copy className=STR_W_4_H_4_TEXT_GRAY_500 />
+                              <Copy className="W_4_H_4_TEXT_GRAY_500 />
                             </button>
                             <button
                               onClick={() => regenerateResponse(message.id)}
-                              className=STR_P_2_HOVER_BG_GRAY_100_ROUNDED_
+                              className="P_2_HOVER_BG_GRAY_100_ROUNDED_
                               title="Régénérer"
                             >
-                              <RotateCcw className=STR_W_4_H_4_TEXT_GRAY_500 />
+                              <RotateCcw className="W_4_H_4_TEXT_GRAY_500 />
                             </button>
-                            <button className=STR_P_2_HOVER_BG_GRAY_100_ROUNDED_ title="Bon">
-                              <ThumbsUp className=STR_W_4_H_4_TEXT_GRAY_500 />
+                            <button className="P_2_HOVER_BG_GRAY_100_ROUNDED_ title="Bon">
+                              <ThumbsUp className="W_4_H_4_TEXT_GRAY_500 />
                             </button>
-                            <button className=STR_P_2_HOVER_BG_GRAY_100_ROUNDED_ title="Mauvais">
-                              <ThumbsDown className=STR_W_4_H_4_TEXT_GRAY_500 />
+                            <button className="P_2_HOVER_BG_GRAY_100_ROUNDED_ title="Mauvais">
+                              <ThumbsDown className="W_4_H_4_TEXT_GRAY_500 />
                             </button>
                           </div>
 
@@ -477,7 +477,7 @@ const ModernAssistantInterface = () => {
                       <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
                         <Brain className="w-3 h-3 text-white" />
                       </div>
-                      <div className=STR_FLEX_SPACE_X_1>
+                      <div className="FLEX_SPACE_X_1>
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
                         <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
@@ -500,7 +500,7 @@ const ModernAssistantInterface = () => {
               <div className="flex items-end space-x-3 bg-gray-50 rounded-2xl p-3">
 
                 {/* Boutons d'attachement */}
-                <div className=STR_FLEX_SPACE_X_1>
+                <div className="FLEX_SPACE_X_1>
                   <button className="p-2 hover:bg-gray-200 rounded-lg transition-colors">
                     <Paperclip className="w-5 h-5 text-gray-500" />
                   </button>
@@ -534,7 +534,7 @@ const ModernAssistantInterface = () => {
                 </div>
 
                 {/* Boutons d'action */}
-                <div className=STR_FLEX_SPACE_X_1>
+                <div className="FLEX_SPACE_X_1>
                   <button
                     onClick={toggleVoiceRecognition}
                     className={`p-2 rounded-lg transition-colors ${
@@ -543,7 +543,7 @@ const ModernAssistantInterface = () => {
                         : 'hover:bg-gray-200 text-gray-500'
                     }`}
                   >
-                    {isListening ? <MicOff className=STR_W_5_H_5 /> : <Mic className=STR_W_5_H_5 />}
+                    {isListening ? <MicOff className="W_5_H_5 /> : <Mic className="W_5_H_5 />}
                   </button>
 
                   <button
@@ -555,7 +555,7 @@ const ModernAssistantInterface = () => {
                         : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                     }`}
                   >
-                    <Send className=STR_W_5_H_5 />
+                    <Send className="W_5_H_5 />
                   </button>
                 </div>
               </div>

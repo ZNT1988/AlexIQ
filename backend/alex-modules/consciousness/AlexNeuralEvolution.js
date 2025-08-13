@@ -36,29 +36,29 @@ export class AlexNeuralEvolution extends EventEmitter {
     super();
 
     this.config = {
-      name: 'AlexNeuralEvolution'
-      version: '1.0.0'
+      name: 'AlexNeuralEvolution',
+      version: '1.0.0',
       description: 'Système d\'évolution neuronale autonome'
     };
 
     this.evolutionState = {
-      currentGeneration: 1
-      neuralArchitecture: new Map()
-      evolutionHistory: []
-      mutations: new Map()
-      fitness: new Map()
-      adaptations: []
-      neuralComplexity: 1.0
-      learningVelocity: 0.8
+      currentGeneration: 1,
+      neuralArchitecture: new Map(),
+      evolutionHistory: [],
+      mutations: new Map(),
+      fitness: new Map(),
+      adaptations: [],
+      neuralComplexity: 1.0,
+      learningVelocity: 0.8,
       cognitiveCapacity: 0.9
     };
 
     this.evolutionParameters = {
-      mutationRate: 0.05
-      crossoverRate: 0.8
-      elitePreservation: 0.1
-      diversityMaintenance: 0.3
-      adaptiveThreshold: 0.85
+      mutationRate: 0.05,
+      crossoverRate: 0.8,
+      elitePreservation: 0.1,
+      diversityMaintenance: 0.3,
+      adaptiveThreshold: 0.85,
       convergenceLimit: 1000
     };
 

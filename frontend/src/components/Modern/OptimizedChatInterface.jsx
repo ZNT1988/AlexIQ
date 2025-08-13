@@ -164,7 +164,7 @@ const ChatInput = memo(({ onSendMessage, disabled }) => {
           } ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
           title={voice.isListening ? 'Arrêter l\\'enregistrement' : 'Commencer l\\'enregistrement vocal'}
         >
-          {voice.isListening ? <MicOff className=STR_W_5_H_5 /> : <Mic className=STR_W_5_H_5 />}
+          {voice.isListening ? <MicOff className="W_5_H_5 /> : <Mic className="W_5_H_5 />}
         </button>
       )}
 
@@ -178,7 +178,7 @@ const ChatInput = memo(({ onSendMessage, disabled }) => {
         }`}
         title="Envoyer le message"
       >
-        <Send className=STR_W_5_H_5 />
+        <Send className="W_5_H_5 />
       </button>
     </form>
   );
@@ -306,9 +306,9 @@ const OptimizedChatInterface = memo(() => {
           {status === 'processing' && (
             <div className="flex items-center space-x-2 text-gray-500 ml-4">
               <div className="flex space-x-1">
-                <div className=STR_W_2_H_2_BG_BLUE_500_ROUNDED_FU></div>
-                <div className=STR_W_2_H_2_BG_BLUE_500_ROUNDED_FU style={{ animationDelay: '0.1s' }}></div>
-                <div className=STR_W_2_H_2_BG_BLUE_500_ROUNDED_FU style={{ animationDelay: '0.2s' }}></div>
+                <div className="W_2_H_2_BG_BLUE_500_ROUNDED_FU></div>
+                <div className="W_2_H_2_BG_BLUE_500_ROUNDED_FU style={{ animationDelay: '0.1s' }}></div>
+                <div className="W_2_H_2_BG_BLUE_500_ROUNDED_FU style={{ animationDelay: '0.2s' }}></div>
               </div>
               <span className="text-sm">Alex réfléchit...</span>
             </div>

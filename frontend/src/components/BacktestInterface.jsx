@@ -223,7 +223,7 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
               whileHover={!isBacktesting ? { scale: 1.05 } : {}}
               whileTap={!isBacktesting ? { scale: 0.95 } : {}}
             >
-              {isBacktesting ? <Clock className="w-5 h-5 animate-spin" /> : <Play className=STR_W_5_H_5 />}
+              {isBacktesting ? <Clock className="w-5 h-5 animate-spin" /> : <Play className="W_5_H_5 />}
               <span>{isBacktesting ? 'Running...' : 'Start Backtest'}</span>
             </motion.button>
           </div>
@@ -260,17 +260,17 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
                   <p className="text-sm text-gray-400 mb-3">{strategy.description}</p>
 
                   <div className="grid grid-cols-3 gap-2 text-xs">
-                    <div className=STR_TEXT_CENTER>
-                      <div className=STR_TEXT_GREEN_400_FONT_MEDIUM>{strategy.winRate}%</div>
-                      <div className=STR_TEXT_GRAY_500>Win Rate</div>
+                    <div className="TEXT_CENTER>
+                      <div className="TEXT_GREEN_400_FONT_MEDIUM>{strategy.winRate}%</div>
+                      <div className="TEXT_GRAY_500>Win Rate</div>
                     </div>
-                    <div className=STR_TEXT_CENTER>
+                    <div className="TEXT_CENTER>
                       <div className="text-blue-400 font-medium">{strategy.avgReturn}%</div>
-                      <div className=STR_TEXT_GRAY_500>Avg Return</div>
+                      <div className="TEXT_GRAY_500>Avg Return</div>
                     </div>
-                    <div className=STR_TEXT_CENTER>
-                      <div className=STR_TEXT_RED_400_FONT_MEDIUM>{strategy.maxDrawdown}%</div>
-                      <div className=STR_TEXT_GRAY_500>Max DD</div>
+                    <div className="TEXT_CENTER>
+                      <div className="TEXT_RED_400_FONT_MEDIUM>{strategy.maxDrawdown}%</div>
+                      <div className="TEXT_GRAY_500>Max DD</div>
                     </div>
                   </div>
                 </motion.div>
@@ -279,13 +279,13 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
           </div>
 
           {/* Configuration */}
-          <div className=STR_ALEX_CARD_P_6_ROUNDED_XL>
+          <div className="ALEX_CARD_P_6_ROUNDED_XL>
             <h3 className="text-xl font-bold text-white mb-6">Configuration</h3>
 
-            <div className=STR_SPACE_Y_4>
+            <div className="SPACE_Y_4>
               {/* Période */}
               <div>
-                <label className=STR_BLOCK_TEXT_SM_FONT_MEDIUM_TEXT>Period</label>
+                <label className="block text-sm font-medium text-gray-700">Period</label>
                 <select
                   value={backtestConfig.period}
                   onChange={(e) => setBacktestConfig(prev => ({ ...prev, period: e.target.value }))}
@@ -302,7 +302,7 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
 
               {/* Capital initial */}
               <div>
-                <label className=STR_BLOCK_TEXT_SM_FONT_MEDIUM_TEXT>Initial Capital</label>
+                <label className="block text-sm font-medium text-gray-700">Initial Capital</label>
                 <input
                   type=STR_NUMBER
                   value={backtestConfig.initialCapital}
@@ -314,7 +314,7 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
 
               {/* Commission */}
               <div>
-                <label className=STR_BLOCK_TEXT_SM_FONT_MEDIUM_TEXT>Commission (%)</label>
+                <label className="block text-sm font-medium text-gray-700">Commission (%)</label>
                 <input
                   type=STR_NUMBER
                   step="0.001"
@@ -327,7 +327,7 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
 
               {/* Max Risk */}
               <div>
-                <label className=STR_BLOCK_TEXT_SM_FONT_MEDIUM_TEXT>Max Risk per Trade (%)</label>
+                <label className="block text-sm font-medium text-gray-700">Max Risk per Trade (%)</label>
                 <input
                   type=STR_NUMBER
                   step="0.1"
@@ -350,9 +350,9 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+              <div className="flex items-center"_JUSTIFY_BETW>
                 <h3 className="text-lg font-bold text-white">Running Backtest...</h3>
-                <span className=STR_TEXT_SM_TEXT_GRAY_400>{backtestProgress.toFixed(1)}%</span>
+                <span className="text-sm"_TEXT_GRAY_400>{backtestProgress.toFixed(1)}%</span>
               </div>
 
               <div className="w-full bg-gray-700 rounded-full h-3 mb-4">
@@ -383,11 +383,11 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
               {/* Métriques principales */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <motion.div
-                  className=STR_ALEX_CARD_P_6_ROUNDED_XL
+                  className="ALEX_CARD_P_6_ROUNDED_XL
                   whileHover={{ scale: 1.02 }}
                 >
-                  <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                    <h3 className=STR_TEXT_GRAY_400_TEXT_SM_FONT_MED>Total Return</h3>
+                  <div className="flex items-center"_JUSTIFY_BETW>
+                    <h3 className="TEXT_GRAY_400_TEXT_SM_FONT_MED>Total Return</h3>
                     <TrendingUp className="w-5 h-5 text-green-400" />
                   </div>
                   <div className={`text-2xl font-bold ${
@@ -395,17 +395,17 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
                   }`}>
                     {backtestResults.metrics.totalReturn > 0 ? '+' : ''}{backtestResults.metrics.totalReturn.toFixed(2)}%
                   </div>
-                  <div className=STR_TEXT_SM_TEXT_GRAY_400>
+                  <div className="text-sm"_TEXT_GRAY_400>
                     ${(backtestResults.finalValue - backtestResults.initialCapital).toLocaleString()}
                   </div>
                 </motion.div>
 
                 <motion.div
-                  className=STR_ALEX_CARD_P_6_ROUNDED_XL
+                  className="ALEX_CARD_P_6_ROUNDED_XL
                   whileHover={{ scale: 1.02 }}
                 >
-                  <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                    <h3 className=STR_TEXT_GRAY_400_TEXT_SM_FONT_MED>Sharpe Ratio</h3>
+                  <div className="flex items-center"_JUSTIFY_BETW>
+                    <h3 className="TEXT_GRAY_400_TEXT_SM_FONT_MED>Sharpe Ratio</h3>
                     <Trophy className="w-5 h-5 text-yellow-400" />
                   </div>
                   <div className="text-2xl font-bold text-white">
@@ -421,11 +421,11 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
                 </motion.div>
 
                 <motion.div
-                  className=STR_ALEX_CARD_P_6_ROUNDED_XL
+                  className="ALEX_CARD_P_6_ROUNDED_XL
                   whileHover={{ scale: 1.02 }}
                 >
-                  <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                    <h3 className=STR_TEXT_GRAY_400_TEXT_SM_FONT_MED>Max Drawdown</h3>
+                  <div className="flex items-center"_JUSTIFY_BETW>
+                    <h3 className="TEXT_GRAY_400_TEXT_SM_FONT_MED>Max Drawdown</h3>
                     <AlertTriangle className="w-5 h-5 text-red-400" />
                   </div>
                   <div className="text-2xl font-bold text-red-400">
@@ -441,17 +441,17 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
                 </motion.div>
 
                 <motion.div
-                  className=STR_ALEX_CARD_P_6_ROUNDED_XL
+                  className="ALEX_CARD_P_6_ROUNDED_XL
                   whileHover={{ scale: 1.02 }}
                 >
-                  <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                    <h3 className=STR_TEXT_GRAY_400_TEXT_SM_FONT_MED>Win Rate</h3>
+                  <div className="flex items-center"_JUSTIFY_BETW>
+                    <h3 className="TEXT_GRAY_400_TEXT_SM_FONT_MED>Win Rate</h3>
                     <Target className="w-5 h-5 text-blue-400" />
                   </div>
                   <div className="text-2xl font-bold text-blue-400">
                     {backtestResults.metrics.winRate.toFixed(1)}%
                   </div>
-                  <div className=STR_TEXT_SM_TEXT_GRAY_400>
+                  <div className="text-sm"_TEXT_GRAY_400>
                     {backtestResults.trades.total} trades
                   </div>
                 </motion.div>
@@ -460,8 +460,8 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
               {/* Graphiques de performance */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Courbe d'equity */}
-                <div className=STR_ALEX_CARD_P_6_ROUNDED_XL>
-                  <h3 className=STR_TEXT_LG_FONT_BOLD_TEXT_WHITE_M>Equity Curve</h3>
+                <div className="ALEX_CARD_P_6_ROUNDED_XL>
+                  <h3 className="TEXT_LG_FONT_BOLD_TEXT_WHITE_M>Equity Curve</h3>
 
                   <div className="h-64 bg-gray-800 rounded-lg flex items-end p-4 relative overflow-hidden">
                     <motion.div
@@ -500,8 +500,8 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
                 </div>
 
                 {/* Drawdown chart */}
-                <div className=STR_ALEX_CARD_P_6_ROUNDED_XL>
-                  <h3 className=STR_TEXT_LG_FONT_BOLD_TEXT_WHITE_M>Drawdown Analysis</h3>
+                <div className="ALEX_CARD_P_6_ROUNDED_XL>
+                  <h3 className="TEXT_LG_FONT_BOLD_TEXT_WHITE_M>Drawdown Analysis</h3>
 
                   <div className="h-64 bg-gray-800 rounded-lg flex items-end p-4 relative overflow-hidden">
                     <motion.div
@@ -540,10 +540,10 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
               {/* Métriques détaillées */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Performance Metrics */}
-                <div className=STR_ALEX_CARD_P_6_ROUNDED_XL>
-                  <h3 className=STR_TEXT_LG_FONT_BOLD_TEXT_WHITE_M>Performance Metrics</h3>
+                <div className="ALEX_CARD_P_6_ROUNDED_XL>
+                  <h3 className="TEXT_LG_FONT_BOLD_TEXT_WHITE_M>Performance Metrics</h3>
 
-                  <div className=STR_SPACE_Y_4>
+                  <div className="SPACE_Y_4>
                     {[
                       { label: 'Annualized Return', value: `${backtestResults.metrics.annualizedReturn.toFixed(2)}%`, positive: backtestResults.metrics.annualizedReturn > 0 }
                       { label: 'Sortino Ratio', value: backtestResults.metrics.sortinqRatio.toFixed(2), positive: backtestResults.metrics.sortinqRatio > 1.5 }
@@ -551,8 +551,8 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
                       { label: 'Volatility', value: `${backtestResults.metrics.volatility.toFixed(2)}%`, positive: false }
                       { label: 'Profit Factor', value: backtestResults.metrics.profitFactor.toFixed(2), positive: backtestResults.metrics.profitFactor > 1.5 }
                     ].map((metric, index) => (
-                      <div key={index} className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                        <span className=STR_TEXT_GRAY_400>{metric.label}</span>
+                      <div key={index} className="flex items-center"_JUSTIFY_BETW>
+                        <span className="TEXT_GRAY_400>{metric.label}</span>
                         <span className={`font-medium ${
                           metric.positive ? STR_TEXT_GREEN_400 :
                           metric.positive === false ? 'text-gray-300' : STR_TEXT_RED_400
@@ -565,32 +565,32 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
                 </div>
 
                 {/* Trading Statistics */}
-                <div className=STR_ALEX_CARD_P_6_ROUNDED_XL>
-                  <h3 className=STR_TEXT_LG_FONT_BOLD_TEXT_WHITE_M>Trading Statistics</h3>
+                <div className="ALEX_CARD_P_6_ROUNDED_XL>
+                  <h3 className="TEXT_LG_FONT_BOLD_TEXT_WHITE_M>Trading Statistics</h3>
 
-                  <div className=STR_SPACE_Y_4>
-                    <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                      <span className=STR_TEXT_GRAY_400>Total Trades</span>
+                  <div className="SPACE_Y_4>
+                    <div className="flex items-center"_JUSTIFY_BETW>
+                      <span className="TEXT_GRAY_400>Total Trades</span>
                       <span className="text-white font-medium">{backtestResults.trades.total}</span>
                     </div>
-                    <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                      <span className=STR_TEXT_GRAY_400>Average Win</span>
-                      <span className=STR_TEXT_GREEN_400_FONT_MEDIUM>${backtestResults.trades.averageWin}</span>
+                    <div className="flex items-center"_JUSTIFY_BETW>
+                      <span className="TEXT_GRAY_400>Average Win</span>
+                      <span className="TEXT_GREEN_400_FONT_MEDIUM>${backtestResults.trades.averageWin}</span>
                     </div>
-                    <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                      <span className=STR_TEXT_GRAY_400>Average Loss</span>
-                      <span className=STR_TEXT_RED_400_FONT_MEDIUM>${backtestResults.trades.averageLoss}</span>
+                    <div className="flex items-center"_JUSTIFY_BETW>
+                      <span className="TEXT_GRAY_400>Average Loss</span>
+                      <span className="TEXT_RED_400_FONT_MEDIUM>${backtestResults.trades.averageLoss}</span>
                     </div>
-                    <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                      <span className=STR_TEXT_GRAY_400>Largest Win</span>
-                      <span className=STR_TEXT_GREEN_400_FONT_MEDIUM>${backtestResults.trades.largestWin}</span>
+                    <div className="flex items-center"_JUSTIFY_BETW>
+                      <span className="TEXT_GRAY_400>Largest Win</span>
+                      <span className="TEXT_GREEN_400_FONT_MEDIUM>${backtestResults.trades.largestWin}</span>
                     </div>
-                    <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                      <span className=STR_TEXT_GRAY_400>Largest Loss</span>
-                      <span className=STR_TEXT_RED_400_FONT_MEDIUM>${backtestResults.trades.largestLoss}</span>
+                    <div className="flex items-center"_JUSTIFY_BETW>
+                      <span className="TEXT_GRAY_400>Largest Loss</span>
+                      <span className="TEXT_RED_400_FONT_MEDIUM>${backtestResults.trades.largestLoss}</span>
                     </div>
-                    <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                      <span className=STR_TEXT_GRAY_400>Avg Hold Time</span>
+                    <div className="flex items-center"_JUSTIFY_BETW>
+                      <span className="TEXT_GRAY_400>Avg Hold Time</span>
                       <span className="text-gray-300 font-medium">{backtestResults.trades.averageHoldTime}</span>
                     </div>
                   </div>
@@ -605,7 +605,7 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Download className=STR_W_5_H_5 />
+                  <Download className="W_5_H_5 />
                   <span>Export Results</span>
                 </motion.button>
 
@@ -615,7 +615,7 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Share className=STR_W_5_H_5 />
+                  <Share className="W_5_H_5 />
                   <span>Share Backtest</span>
                 </motion.button>
 
@@ -626,7 +626,7 @@ const BacktestInterface = ({ alex, onBacktestComplete }) => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <RotateCcw className=STR_W_5_H_5 />
+                  <RotateCcw className="W_5_H_5 />
                   <span>New Backtest</span>
                 </motion.button>
               </div>

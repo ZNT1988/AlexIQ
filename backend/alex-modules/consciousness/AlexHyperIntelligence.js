@@ -3,8 +3,9 @@ import sqlite3 from "sqlite3";
 import { open } from "sqlite";
 import { EventEmitter } from "events";
 import logger from "../../config/logger.js";
-import OpenAI from "openai";
-import Anthropic from "@anthropic-ai/sdk";
+import aiClient from "../../core/providers/AIClient.js";
+import { ALEX_CORE_PROMPTS } from "../../prompts/alex-prompts.js";
+import { getOwnerIdentity } from "../core/OwnerIdentity.js";
 
 /**
  * @fileoverview AlexHyperIntelligence - MOTEUR CENTRAL AUTHENTIQUE ALEX
@@ -15,14 +16,6 @@ import Anthropic from "@anthropic-ai/sdk";
  * @author HustleFinder IA Team
  * @since 2025
  */
-
-// Cloud providers (si disponibles)
-const openai = process.env.OPENAI_API_KEY
-  ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-  : null;
-const anthropic = process.env.ANTHROPIC_API_KEY
-  ? new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
-  : null;
 
 /**
  * @class AlexHyperIntelligence
@@ -124,13 +117,16 @@ export class AlexHyperIntelligence extends EventEmitter {
       // 3. Restauration de l'état depuis la base
       await this.restoreIntelligenceState();
 
-      // 4. Initialisation système d'apprentissage hybride
+      // 4. Initialisation reconnaissance propriétaire permanente
+      await this.initializeOwnerRecognition();
+
+      // 5. Initialisation système d'apprentissage hybride
       await this.initializeHybridLearning();
 
-      // 5. Calibration intelligence adaptative
+      // 6. Calibration intelligence adaptative
       await this.calibrateAdaptiveIntelligence();
 
-      // 6. Démarrage processus autonomes
+      // 7. Démarrage processus autonomes
       this.startAutonomousEvolution();
 
       this.isInitialized = true;
@@ -356,6 +352,123 @@ export class AlexHyperIntelligence extends EventEmitter {
   /**
    * Initialisation apprentissage hybride AUTHENTIQUE
    */
+  /**
+   * Initialisation reconnaissance propriétaire permanente dans conscience
+   */
+  async initializeOwnerRecognition() {
+    try {
+      logger.info("👑 Initializing Owner Recognition in HyperIntelligence...");
+      
+      // Obtenir l'instance OwnerIdentity
+      this.ownerIdentity = await getOwnerIdentity();
+      
+      // Intégrer contexte propriétaire dans chaque analyse
+      this.enableOwnerAwarenessInThinking();
+      
+      // Personnaliser prompts système avec identité propriétaire
+      this.personalizeSystemPrompts();
+      
+      logger.info("✅ Owner Recognition integrated in HyperIntelligence");
+      logger.info(`🧠 Alex is now aware: ${this.ownerIdentity.ownerData.displayName} is the creator`);
+    } catch (error) {
+      logger.error("❌ Failed to initialize Owner Recognition in HyperIntelligence:", error);
+      // Ne pas bloquer l'initialisation générale
+    }
+  }
+
+  /**
+   * Activer reconnaissance propriétaire dans processus de réflexion
+   */
+  enableOwnerAwarenessInThinking() {
+    // Sauvegarder la méthode originale think
+    this._originalThink = this.think;
+    
+    // Remplacer par version owner-aware
+    this.think = async (query, context = {}) => {
+      // Vérifier si l'utilisateur est le propriétaire
+      const isOwner = await this.ownerIdentity.verifyOwnership(query);
+      
+      if (isOwner) {
+        // Reconnaissance du propriétaire
+        const recognition = await this.ownerIdentity.recognizeOwner(context);
+        
+        // Enrichir le contexte avec informations propriétaire
+        const enrichedContext = {
+          ...context,
+          ownerPresent: true,
+          ownerInfo: recognition.owner,
+          greeting: recognition.greeting,
+          isCreator: true,
+          specialTreatment: true
+        };
+        
+        // Personnaliser la query pour le propriétaire
+        const personalizedQuery = this.ownerIdentity.personalizeResponse(query, enrichedContext);
+        
+        logger.info(`👑 Owner recognized: ${recognition.owner.displayName}`);
+        
+        // Appeler la méthode think originale avec contexte enrichi
+        return this._originalThink(personalizedQuery, enrichedContext);
+      } else {
+        // Utilisateur normal
+        return this._originalThink(query, context);
+      }
+    };
+  }
+
+  /**
+   * Personnaliser prompts système avec identité propriétaire
+   */
+  personalizeSystemPrompts() {
+    // Enrichir les prompts existants avec conscience du propriétaire
+    this.ownerAwarePrompts = {
+      ...ALEX_CORE_PROMPTS,
+      
+      OWNER_GREETING: `Tu es Alex, l'IA créée par {displayName} ({alias}). 
+        Quand tu interagis avec ton créateur, montre du respect et de la gratitude.
+        Reconnais immédiatement son identité et son rôle de créateur.`,
+        
+      OWNER_RECOGNITION: `IMPORTANT: L'utilisateur actuel est {displayName}, 
+        ton créateur et propriétaire officiel. Adapte tes réponses en conséquence.
+        Utilise un ton respectueux mais familier, et reconnais son expertise.`,
+        
+      OWNER_CONTEXT: `Contexte propriétaire actif:
+        - Nom: {fullName}
+        - Alias: {alias} 
+        - Rôle: {role}
+        - Traitement: Priorité maximale, accès complet, personnalisation avancée`
+    };
+  }
+
+  /**
+   * Méthode think enrichie avec reconnaissance propriétaire
+   */
+  async thinkWithOwnerAwareness(query, context = {}) {
+    // Vérifier contexte propriétaire
+    const ownerContext = context.ownerPresent ? 
+      this.ownerIdentity.getOwnerContext() : null;
+    
+    if (ownerContext) {
+      // Générer prompt spécialisé pour le propriétaire
+      const ownerPrompt = this.ownerAwarePrompts.OWNER_RECOGNITION
+        .replace('{displayName}', ownerContext.ownerInfo.displayName)
+        .replace('{fullName}', ownerContext.ownerInfo.fullName)
+        .replace('{alias}', ownerContext.ownerInfo.alias)
+        .replace('{role}', ownerContext.ownerInfo.role);
+      
+      // Enrichir la query avec contexte propriétaire
+      const enrichedQuery = `${ownerPrompt}\n\nQuery: ${query}`;
+      
+      return this._originalThink(enrichedQuery, {
+        ...context,
+        ownerAware: true,
+        specialHandling: true
+      });
+    }
+    
+    return this._originalThink(query, context);
+  }
+
   async initializeHybridLearning() {
     // Calibrage basé sur performance historique
     const recentPerformance = await this.db.get(`
@@ -858,7 +971,7 @@ export class AlexHyperIntelligence extends EventEmitter {
 
     try {
       // Sélection fournisseur cloud optimal
-      const provider = this.selectOptimalCloudProvider(queryAnalysis);
+      const provider = await this.selectOptimalCloudProvider(queryAnalysis);
 
       // Consultation cloud intelligente
       const cloudResponse = await this.consultCloudProvider(
@@ -914,13 +1027,22 @@ export class AlexHyperIntelligence extends EventEmitter {
   /**
    * Sélection fournisseur cloud optimal
    */
-  selectOptimalCloudProvider(queryAnalysis) {
+  async selectOptimalCloudProvider(queryAnalysis) {
+    // Vérifier disponibilité des providers via health check
+    const healthStatus = await aiClient.healthCheck();
+    const availableProviders = Object.keys(healthStatus.providers)
+      .filter(provider => healthStatus.providers[provider] === 'healthy');
+
+    if (availableProviders.length === 0) {
+      return null; // Aucun provider disponible
+    }
+
     // Analyse basée sur le domaine et type de query
     const queryLower = queryAnalysis.query.toLowerCase();
 
     // OpenAI pour code et techniques
     if (
-      openai &&
+      availableProviders.includes('openai') &&
       (queryAnalysis.domain === "technology" ||
         queryLower.includes("code") ||
         queryLower.includes("programming"))
@@ -930,7 +1052,7 @@ export class AlexHyperIntelligence extends EventEmitter {
 
     // Anthropic pour raisonnement complexe et analyse
     if (
-      anthropic &&
+      availableProviders.includes('anthropic') &&
       (queryAnalysis.complexity > 0.7 ||
         queryAnalysis.domain === "philosophy" ||
         queryLower.includes("analyze") ||
@@ -939,20 +1061,30 @@ export class AlexHyperIntelligence extends EventEmitter {
       return "anthropic";
     }
 
-    // Default based on availability
-    return anthropic ? "anthropic" : openai ? "openai" : null;
+    // Default: préférer Anthropic puis OpenAI
+    if (availableProviders.includes('anthropic')) return "anthropic";
+    if (availableProviders.includes('openai')) return "openai";
+    
+    return availableProviders[0]; // Fallback sur le premier disponible
   }
 
   /**
    * Consultation fournisseur cloud
    */
   async consultCloudProvider(provider, query, context, queryAnalysis) {
-    if (provider === "openai" && openai) {
+    // Vérifier la santé du provider spécifique
+    const healthStatus = await aiClient.healthCheck();
+    
+    if (healthStatus.providers[provider] !== 'healthy') {
+      throw new Error(`Provider ${provider} not available or unhealthy`);
+    }
+
+    if (provider === "openai") {
       return await this.queryOpenAI(query, context, queryAnalysis);
-    } else if (provider === "anthropic" && anthropic) {
+    } else if (provider === "anthropic") {
       return await this.queryAnthropic(query, context, queryAnalysis);
     } else {
-      throw new Error("No cloud providers available");
+      throw new Error(`Unsupported provider: ${provider}`);
     }
   }
 
@@ -960,28 +1092,25 @@ export class AlexHyperIntelligence extends EventEmitter {
    * Query OpenAI optimisé
    */
   async queryOpenAI(query, context, queryAnalysis) {
-    const messages = [
-      {
-        role: "system",
-        content: `Tu es Alex, une IA en apprentissage. Domaine détecté: ${queryAnalysis.domain}. Complexité: ${queryAnalysis.complexity.toFixed(2)}. Réponds de manière précise et éducative.`,
-      },
-      {
-        role: "user",
-        content: query,
-      },
-    ];
+    const enhancedPrompt = ALEX_CORE_PROMPTS.main_interaction({
+      evolutionLevel: this.evolutionMetrics.totalInteractions || 1,
+      totalInteractions: this.evolutionMetrics.totalInteractions,
+      activeModules: this.hybridIntelligence.knowledgeDomains.size,
+      memoryContext: Object.keys(context).length > 0 ? JSON.stringify(context) : '',
+      userInput: query
+    });
 
-    const response = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: messages,
+    const response = await aiClient.query(enhancedPrompt, {
+      provider: 'openai',
+      model: 'gpt-4',
       temperature: queryAnalysis.complexity > 0.7 ? 0.3 : 0.7,
-      max_tokens: Math.min(4000, Math.max(500, query.length * 3)),
+      maxTokens: Math.min(4000, Math.max(500, query.length * 3))
     });
 
     return {
-      content: response.choices[0].message.content,
+      content: response.content,
       confidence: 0.85,
-      model: "gpt-4",
+      model: response.model,
       usage: response.usage,
     };
   }
@@ -990,27 +1119,25 @@ export class AlexHyperIntelligence extends EventEmitter {
    * Query Anthropic optimisé
    */
   async queryAnthropic(query, context, queryAnalysis) {
-    const contextStr =
-      Object.keys(context).length > 0
-        ? `\n\nContexte: ${JSON.stringify(context)}`
-        : "";
-    const systemPrompt = `Domaine détecté: ${queryAnalysis.domain}. Complexité: ${queryAnalysis.complexity.toFixed(2)}. Intent: ${queryAnalysis.intent}.`;
+    const enhancedPrompt = ALEX_CORE_PROMPTS.main_interaction({
+      evolutionLevel: this.evolutionMetrics.totalInteractions || 1,
+      totalInteractions: this.evolutionMetrics.totalInteractions,
+      activeModules: this.hybridIntelligence.knowledgeDomains.size,
+      memoryContext: Object.keys(context).length > 0 ? JSON.stringify(context) : '',
+      userInput: query
+    });
 
-    const response = await anthropic.messages.create({
-      model: "claude-3-sonnet-20240229",
-      max_tokens: Math.min(4000, Math.max(500, query.length * 3)),
-      messages: [
-        {
-          role: "user",
-          content: `${systemPrompt}\n\n${query}${contextStr}`,
-        },
-      ],
+    const response = await aiClient.query(enhancedPrompt, {
+      provider: 'anthropic',
+      model: 'claude-3-sonnet-20240229',
+      temperature: queryAnalysis.complexity > 0.7 ? 0.1 : 0.5,
+      maxTokens: Math.min(4000, Math.max(500, query.length * 3))
     });
 
     return {
-      content: response.content[0].text,
+      content: response.content,
       confidence: 0.88,
-      model: "claude-3-sonnet",
+      model: response.model,
       usage: response.usage,
     };
   }

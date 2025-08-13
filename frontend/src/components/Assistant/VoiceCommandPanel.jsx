@@ -335,7 +335,7 @@ const VoiceCommandPanel = ({ onCommand, onToggleListening, isListening, isProces
             animate={{ opacity: 1, y: 0 }}
             className="bg-gray-700/50 rounded-lg p-3 mb-4"
           >
-            <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+            <div className="flex items-center"_SPACE_X_2>
               <MessageSquare className="w-4 h-4 text-blue-400" />
               <span className="text-sm text-gray-300">Dernière commande :</span>
             </div>
@@ -346,20 +346,20 @@ const VoiceCommandPanel = ({ onCommand, onToggleListening, isListening, isProces
         {/* Statut vocal */}
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center space-x-4">
-            <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+            <div className="flex items-center"_SPACE_X_2>
               <div className={`w-2 h-2 rounded-full ${isVoiceEnabled ? 'bg-green-400' : 'bg-red-400'}`} />
-              <span className=STR_TEXT_GRAY_400>
+              <span className="TEXT_GRAY_400>
                 {isVoiceEnabled ? 'Reconnaissance active' : 'Reconnaissance désactivée'}
               </span>
             </div>
 
-            <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+            <div className="flex items-center"_SPACE_X_2>
               <Headphones className="w-4 h-4 text-gray-400" />
-              <span className=STR_TEXT_GRAY_400>Langue: {voiceSettings.language}</span>
+              <span className="TEXT_GRAY_400>Langue: {voiceSettings.language}</span>
             </div>
           </div>
 
-          <div className=STR_TEXT_GRAY_400>
+          <div className="TEXT_GRAY_400>
             {commandHistory.length} commandes exécutées
           </div>
         </div>
@@ -450,31 +450,31 @@ const VoiceCommandPanel = ({ onCommand, onToggleListening, isListening, isProces
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
           <div className="space-y-2">
-            <div className=STR_FLEX_ITEMS_START_SPACE_X_2>
+            <div className="FLEX_ITEMS_START_SPACE_X_2>
               <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
               <span>Parlez clairement et à un rythme normal</span>
             </div>
-            <div className=STR_FLEX_ITEMS_START_SPACE_X_2>
+            <div className="FLEX_ITEMS_START_SPACE_X_2>
               <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
               <span>Utilisez des phrases complètes et précises</span>
             </div>
-            <div className=STR_FLEX_ITEMS_START_SPACE_X_2>
+            <div className="FLEX_ITEMS_START_SPACE_X_2>
               <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
               <span>Évitez les bruits de fond</span>
             </div>
           </div>
 
           <div className="space-y-2">
-            <div className=STR_FLEX_ITEMS_START_SPACE_X_2>
-              <Target className=STR_W_4_H_4_TEXT_BLUE_500_MT_0_5_F />
+            <div className="FLEX_ITEMS_START_SPACE_X_2>
+              <Target className="W_4_H_4_TEXT_BLUE_500_MT_0_5_F />
               <span>Commencez par "Programme", "Trouve", "Montre"</span>
             </div>
-            <div className=STR_FLEX_ITEMS_START_SPACE_X_2>
-              <Target className=STR_W_4_H_4_TEXT_BLUE_500_MT_0_5_F />
+            <div className="FLEX_ITEMS_START_SPACE_X_2>
+              <Target className="W_4_H_4_TEXT_BLUE_500_MT_0_5_F />
               <span>Soyez spécifique avec les dates et heures</span>
             </div>
-            <div className=STR_FLEX_ITEMS_START_SPACE_X_2>
-              <Target className=STR_W_4_H_4_TEXT_BLUE_500_MT_0_5_F />
+            <div className="FLEX_ITEMS_START_SPACE_X_2>
+              <Target className="W_4_H_4_TEXT_BLUE_500_MT_0_5_F />
               <span>Utilisez les raccourcis prédéfinis</span>
             </div>
           </div>

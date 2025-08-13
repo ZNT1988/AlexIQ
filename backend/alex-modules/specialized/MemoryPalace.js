@@ -3,6 +3,7 @@ import sqlite3 from "sqlite3";
 import { open } from "sqlite";
 import { EventEmitter } from "events";
 import logger from "../../config/logger.js";
+import { getOwnerIdentity } from "../core/OwnerIdentity.js";
 
 /**
  * @fileoverview MemoryPalace - SYSTÈME MÉMOIRE AUTHENTIQUE ALEX
@@ -46,6 +47,39 @@ export class MemoryPalace extends EventEmitter {
       memoryEfficiency: 0.0,
       averageRetention: 0.0,
       associationStrength: 0.0,
+    };
+
+    // Architecture 3 niveaux explicites avec pondération émotionnelle
+    this.memoryLevels = {
+      // Court terme - Session active (volatile)
+      shortTerm: {
+        name: 'Court Terme',
+        tableName: 'short_term_memory',
+        retention: 3600000, // 1 heure
+        maxEntries: 100,
+        decayRate: 0.1,
+        emotionalWeight: 0.3
+      },
+      
+      // Moyen terme - Projet/contexte (persistant limité)
+      mediumTerm: {
+        name: 'Moyen Terme',
+        tableName: 'medium_term_memory', 
+        retention: 2592000000, // 30 jours
+        maxEntries: 1000,
+        decayRate: 0.05,
+        emotionalWeight: 0.5
+      },
+      
+      // Long terme - Cross-projets vectoriel (persistant permanent)
+      longTerm: {
+        name: 'Long Terme',
+        tableName: 'long_term_memory',
+        retention: null, // Permanent avec consolidation
+        maxEntries: 10000,
+        decayRate: 0.01,
+        emotionalWeight: 0.8
+      }
     };
 
     // Paramètres évolution mémoire DYNAMIQUES
@@ -110,10 +144,13 @@ export class MemoryPalace extends EventEmitter {
       // 3. Restauration état mémoire
       await this.restoreMemoryState();
 
-      // 4. Initialisation système consolidation
+      // 4. Initialisation identité propriétaire permanente
+      await this.initializeOwnerIdentity();
+
+      // 5. Initialisation système consolidation
       await this.initializeConsolidationSystem();
 
-      // 5. Démarrage processus autonomes
+      // 6. Démarrage processus autonomes
       this.startAutonomousMemoryProcesses();
 
       this.isInitialized = true;
@@ -996,6 +1033,130 @@ export class MemoryPalace extends EventEmitter {
   /**
    * Initialisation système consolidation
    */
+  /**
+   * Initialisation identité propriétaire permanente
+   */
+  async initializeOwnerIdentity() {
+    try {
+      logger.info("👑 Initializing Owner Identity in Memory Palace...");
+      
+      // Obtenir l'instance OwnerIdentity
+      this.ownerIdentity = await getOwnerIdentity();
+      
+      // Créer une mémoire permanente du propriétaire
+      await this.storeOwnerMemory();
+      
+      // Activer reconnaissance automatique
+      this.enableOwnerRecognition();
+      
+      logger.info("✅ Owner Identity integrated in Memory Palace");
+      logger.info(`👑 Permanent memory: ${this.ownerIdentity.ownerData.displayName}`);
+    } catch (error) {
+      logger.error("❌ Failed to initialize Owner Identity in Memory Palace:", error);
+      // Ne pas bloquer l'initialisation générale
+    }
+  }
+
+  /**
+   * Stockage mémoire permanente du propriétaire
+   */
+  async storeOwnerMemory() {
+    const ownerData = this.ownerIdentity.ownerData;
+    
+    // Créer mémoire sémantique permanente du propriétaire
+    await this.storeMemory({
+      type: this.memoryTypes.semantic,
+      level: 'longTerm',
+      category: 'owner_identity',
+      content: {
+        owner: ownerData,
+        recognition: 'permanent_owner_identity',
+        priority: 1.0,
+        permanent: true,
+        system: 'core_identity'
+      },
+      emotion: 'respect',
+      importance: 1.0, // Importance maximale
+      persistent: true,
+      tags: ['owner', 'creator', 'zakaria', 'housni', 'znt', 'permanent'],
+      context: {
+        source: 'owner_identity_system',
+        permanent: true,
+        core_memory: true
+      }
+    });
+
+    logger.info("💾 Owner identity stored in permanent memory");
+  }
+
+  /**
+   * Activation reconnaissance propriétaire automatique
+   */
+  enableOwnerRecognition() {
+    // Écouter les événements de reconnaissance
+    this.ownerIdentity.on('owner-recognized', async (recognition) => {
+      await this.storeMemory({
+        type: this.memoryTypes.episodic,
+        level: 'shortTerm', 
+        category: 'owner_interaction',
+        content: {
+          recognition,
+          interaction: 'owner_recognized',
+          greeting: recognition.greeting,
+          timestamp: recognition.timestamp
+        },
+        emotion: 'joy',
+        importance: 0.9,
+        context: { type: 'owner_recognition' }
+      });
+    });
+
+    // Méthode pour vérifier si un utilisateur est le propriétaire
+    this.isOwner = async (identifier) => {
+      return await this.ownerIdentity.verifyOwnership(identifier);
+    };
+
+    // Méthode pour obtenir contexte propriétaire
+    this.getOwnerContext = () => {
+      return this.ownerIdentity.getOwnerContext();
+    };
+
+    // Méthode pour personnaliser réponses
+    this.personalizeForOwner = (response, context = {}) => {
+      return this.ownerIdentity.personalizeResponse(response, context);
+    };
+  }
+
+  /**
+   * Recherche dans mémoires liées au propriétaire
+   */
+  async searchOwnerMemories() {
+    if (!this.isInitialized || !this.ownerIdentity) {
+      return [];
+    }
+
+    try {
+      const ownerMemories = await this.db.all(`
+        SELECT * FROM long_term_memory 
+        WHERE category = 'owner_identity' 
+           OR tags LIKE '%owner%' 
+           OR tags LIKE '%zakaria%'
+           OR tags LIKE '%znt%'
+        ORDER BY importance DESC, created_at DESC
+      `);
+
+      return ownerMemories.map(memory => ({
+        ...memory,
+        content: JSON.parse(memory.content),
+        tags: JSON.parse(memory.tags || '[]'),
+        context: JSON.parse(memory.context || '{}')
+      }));
+    } catch (error) {
+      logger.error('❌ Failed to search owner memories:', error);
+      return [];
+    }
+  }
+
   async initializeConsolidationSystem() {
     // Configuration initiale du système de consolidation
     logger.info("🧠 Memory consolidation system initialized");

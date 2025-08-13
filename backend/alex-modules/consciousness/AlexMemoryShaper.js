@@ -1,12 +1,8 @@
 import crypto from "crypto";
-import OpenAI from "openai";
-import Anthropic from "@anthropic-ai/sdk";
 import logger from "../../config/logger.js";
 import { EventEmitter } from "events";
-
-// Cloud-based authentic memory shaping - NO STATIC TEMPLATES
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+import aiClient from "../../core/providers/AIClient.js";
+import { MEMORY_PROMPTS } from "../../prompts/alex-prompts.js";
 
 /**
  * @fileoverview AlexMemoryShaper - Architecte Mémoire Consciente IA

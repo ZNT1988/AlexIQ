@@ -313,7 +313,7 @@ const AlexTradingDashboard = ({ alex
                     'bg-yellow-500/20 text-yellow-300'}`}>
                   🧠 {tradingData.alexState.emotion}
                 </span>
-                <span className=STR_TEXT_GRAY_400>
+                <span className="TEXT_GRAY_400>
                   💭 {tradingData.alexState.lastThought}
                 </span>
               </div>
@@ -333,7 +333,7 @@ const AlexTradingDashboard = ({ alex
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {isTrading ? <Pause className=STR_W_5_H_5 /> : <Play className=STR_W_5_H_5 />}
+              {isTrading ? <Pause className="W_5_H_5 /> : <Play className="W_5_H_5 />}
               <span>{isTrading ? 'Stop Trading' : 'Start Trading'}</span>
             </motion.button>
 
@@ -342,7 +342,7 @@ const AlexTradingDashboard = ({ alex
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Settings className=STR_W_5_H_5 />
+              <Settings className="W_5_H_5 />
             </motion.button>
           </div>
         </motion.div>
@@ -354,14 +354,14 @@ const AlexTradingDashboard = ({ alex
         >
           {/* Valeur du portefeuille */}
           <motion.div
-            className=STR_ALEX_CARD_P_6_ROUNDED_XL
+            className="ALEX_CARD_P_6_ROUNDED_XL
             whileHover={{ scale: 1.02 }}
           >
-            <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-              <h3 className=STR_TEXT_GRAY_400_TEXT_SM_FONT_MED>Portfolio Value</h3>
+            <div className="flex items-center"_JUSTIFY_BETW>
+              <h3 className="TEXT_GRAY_400_TEXT_SM_FONT_MED>Portfolio Value</h3>
               <DollarSign className="w-5 h-5 text-green-400" />
             </div>
-            <div className=STR_TEXT_2XL_FONT_BOLD_TEXT_WHITE_>
+            <div className="TEXT_2XL_FONT_BOLD_TEXT_WHITE_>
               ${tradingData.portfolio.totalValue.toLocaleString()}
             </div>
             <div className={`flex items-center text-sm ${
@@ -378,31 +378,31 @@ const AlexTradingDashboard = ({ alex
 
           {/* Win Rate */}
           <motion.div
-            className=STR_ALEX_CARD_P_6_ROUNDED_XL
+            className="ALEX_CARD_P_6_ROUNDED_XL
             whileHover={{ scale: 1.02 }}
           >
-            <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-              <h3 className=STR_TEXT_GRAY_400_TEXT_SM_FONT_MED>Win Rate</h3>
+            <div className="flex items-center"_JUSTIFY_BETW>
+              <h3 className="TEXT_GRAY_400_TEXT_SM_FONT_MED>Win Rate</h3>
               <Target className="w-5 h-5 text-blue-400" />
             </div>
-            <div className=STR_TEXT_2XL_FONT_BOLD_TEXT_WHITE_>
+            <div className="TEXT_2XL_FONT_BOLD_TEXT_WHITE_>
               {tradingData.portfolio.winRate}%
             </div>
-            <div className=STR_TEXT_SM_TEXT_GRAY_400>
+            <div className="text-sm"_TEXT_GRAY_400>
               Positions: {tradingData.portfolio.positions}
             </div>
           </motion.div>
 
           {/* Sharpe Ratio */}
           <motion.div
-            className=STR_ALEX_CARD_P_6_ROUNDED_XL
+            className="ALEX_CARD_P_6_ROUNDED_XL
             whileHover={{ scale: 1.02 }}
           >
-            <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-              <h3 className=STR_TEXT_GRAY_400_TEXT_SM_FONT_MED>Sharpe Ratio</h3>
+            <div className="flex items-center"_JUSTIFY_BETW>
+              <h3 className="TEXT_GRAY_400_TEXT_SM_FONT_MED>Sharpe Ratio</h3>
               <Trophy className="w-5 h-5 text-yellow-400" />
             </div>
-            <div className=STR_TEXT_2XL_FONT_BOLD_TEXT_WHITE_>
+            <div className="TEXT_2XL_FONT_BOLD_TEXT_WHITE_>
               {tradingData.portfolio.sharpeRatio}
             </div>
             <div className="text-sm text-green-400">Excellent</div>
@@ -410,17 +410,17 @@ const AlexTradingDashboard = ({ alex
 
           {/* Alex Confidence */}
           <motion.div
-            className=STR_ALEX_CARD_P_6_ROUNDED_XL
+            className="ALEX_CARD_P_6_ROUNDED_XL
             whileHover={{ scale: 1.02 }}
           >
-            <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-              <h3 className=STR_TEXT_GRAY_400_TEXT_SM_FONT_MED>Alex Confidence</h3>
+            <div className="flex items-center"_JUSTIFY_BETW>
+              <h3 className="TEXT_GRAY_400_TEXT_SM_FONT_MED>Alex Confidence</h3>
               <Zap className="w-5 h-5 text-purple-400" />
             </div>
-            <div className=STR_TEXT_2XL_FONT_BOLD_TEXT_WHITE_>
+            <div className="TEXT_2XL_FONT_BOLD_TEXT_WHITE_>
               {Math.round(tradingData.alexState.confidence * 100)}%
             </div>
-            <div className=STR_W_FULL_BG_GRAY_700_ROUNDED_FUL>
+            <div className="W_FULL_BG_GRAY_700_ROUNDED_FUL>
               <motion.div
                 className="bg-purple-500 h-2 rounded-full"
                 animate={{ width: `${tradingData.alexState.confidence * 100}%` }}
@@ -437,8 +437,8 @@ const AlexTradingDashboard = ({ alex
             className="lg:col-span-2 alex-card p-6 rounded-xl"
             variants={cardVariants}
           >
-            <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-              <h3 className=STR_TEXT_XL_FONT_BOLD_TEXT_WHITE>Market Analysis</h3>
+            <div className="flex items-center"_JUSTIFY_BETW>
+              <h3 className="TEXT_XL_FONT_BOLD_TEXT_WHITE>Market Analysis</h3>
               <div className="flex items-center space-x-2">
                 {['1M', '5M', '15M', '1H', '4H', '1D'].map((tf) => (
                   <button
@@ -506,13 +506,13 @@ const AlexTradingDashboard = ({ alex
             variants={cardVariants}
           >
             {/* Signaux de trading */}
-            <div className=STR_ALEX_CARD_P_6_ROUNDED_XL>
-              <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+            <div className="ALEX_CARD_P_6_ROUNDED_XL>
+              <div className="flex items-center"_JUSTIFY_BETW>
                 <h3 className="text-lg font-bold text-white">Trading Signals</h3>
                 <Bell className="w-5 h-5 text-yellow-400" />
               </div>
 
-              <div className=STR_SPACE_Y_3>
+              <div className="SPACE_Y_3>
                 {tradingData.signals.map((signal, index) => (
                   <motion.div
                     key={index}
@@ -521,8 +521,8 @@ const AlexTradingDashboard = ({ alex
        1.02 }}
                   >
                     <div>
-                      <div className=STR_FONT_MEDIUM_TEXT_WHITE>{signal.symbol}</div>
-                      <div className=STR_TEXT_SM_TEXT_GRAY_400>{signal.pattern}</div>
+                      <div className="FONT_MEDIUM_TEXT_WHITE>{signal.symbol}</div>
+                      <div className="text-sm"_TEXT_GRAY_400>{signal.pattern}</div>
                     </div>
                     <div className="text-right">
                       <div className={`text-sm font-medium ${
@@ -541,8 +541,8 @@ const AlexTradingDashboard = ({ alex
             </div>
 
             {/* État émotionnel d'Alex */}
-            <div className=STR_ALEX_CARD_P_6_ROUNDED_XL>
-              <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+            <div className="ALEX_CARD_P_6_ROUNDED_XL>
+              <div className="flex items-center"_JUSTIFY_BETW>
                 <h3 className="text-lg font-bold text-white">Alex Emotional State</h3>
                 <Heart className="w-5 h-5 text-red-400" />
               </div>
@@ -551,10 +551,10 @@ const AlexTradingDashboard = ({ alex
                 {/* Conscience */}
                 <div>
                   <div className="flex justify-between text-sm mb-2">
-                    <span className=STR_TEXT_GRAY_400>Consciousness</span>
+                    <span className="TEXT_GRAY_400>Consciousness</span>
                     <span className="text-white">{Math.round(tradingData.alexState.consciousness * 100)}%</span>
                   </div>
-                  <div className=STR_W_FULL_BG_GRAY_700_ROUNDED_FUL>
+                  <div className="W_FULL_BG_GRAY_700_ROUNDED_FUL>
                     <motion.div
                       className="bg-purple-500 h-2 rounded-full"
                       animate={{ width: `${tradingData.alexState.consciousness * 100}%` }}
@@ -565,10 +565,10 @@ const AlexTradingDashboard = ({ alex
                 {/* Confiance */}
                 <div>
                   <div className="flex justify-between text-sm mb-2">
-                    <span className=STR_TEXT_GRAY_400>Confidence</span>
+                    <span className="TEXT_GRAY_400>Confidence</span>
                     <span className="text-white">{Math.round(tradingData.alexState.confidence * 100)}%</span>
                   </div>
-                  <div className=STR_W_FULL_BG_GRAY_700_ROUNDED_FUL>
+                  <div className="W_FULL_BG_GRAY_700_ROUNDED_FUL>
                     <motion.div
                       className="bg-blue-500 h-2 rounded-full"
                       animate={{ width: `${tradingData.alexState.confidence * 100}%` }}
@@ -577,8 +577,8 @@ const AlexTradingDashboard = ({ alex
                 </div>
 
                 {/* Humeur de trading */}
-                <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                  <span className=STR_TEXT_GRAY_400_TEXT_SM>Trading Mood</span>
+                <div className="flex items-center"_JUSTIFY_BETW>
+                  <span className="TEXT_GRAY_400_TEXT_SM>Trading Mood</span>
                   <span className={`px-2 py-1 rounded-full text-xs font-medium
                     ${tradingData.alexState.tradingMood === 'optimistic' ? 'bg-green-500/20 text-green-300' :
                       tradingData.alexState.tradingMood === 'cautious' ? 'bg-yellow-500/20 text-yellow-300' :
@@ -595,15 +595,15 @@ const AlexTradingDashboard = ({ alex
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Watchlist */}
           <motion.div
-            className=STR_ALEX_CARD_P_6_ROUNDED_XL
+            className="ALEX_CARD_P_6_ROUNDED_XL
             variants={cardVariants}
           >
-            <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-              <h3 className=STR_TEXT_XL_FONT_BOLD_TEXT_WHITE>Watchlist</h3>
+            <div className="flex items-center"_JUSTIFY_BETW>
+              <h3 className="TEXT_XL_FONT_BOLD_TEXT_WHITE>Watchlist</h3>
               <Activity className="w-5 h-5 text-green-400" />
             </div>
 
-            <div className=STR_SPACE_Y_3>
+            <div className="SPACE_Y_3>
               {Object.entries(tradingData.marketData).map(([symbol, data]) => (
                 <motion.div
                   key={symbol}
@@ -618,13 +618,13 @@ const AlexTradingDashboard = ({ alex
                       {symbol.substring(0, 2)}
                     </div>
                     <div>
-                      <div className=STR_FONT_MEDIUM_TEXT_WHITE>{symbol}</div>
-                      <div className=STR_TEXT_SM_TEXT_GRAY_400>Vol: {data.volume}x</div>
+                      <div className="FONT_MEDIUM_TEXT_WHITE>{symbol}</div>
+                      <div className="text-sm"_TEXT_GRAY_400>Vol: {data.volume}x</div>
                     </div>
                   </div>
 
                   <div className="text-right">
-                    <div className=STR_FONT_MEDIUM_TEXT_WHITE>${data.price.toFixed(2)}</div>
+                    <div className="FONT_MEDIUM_TEXT_WHITE>${data.price.toFixed(2)}</div>
                     <div className={`text-sm ${data.change > 0 ? STR_TEXT_GREEN_400 : STR_TEXT_RED_400}`}>
                       {data.change > 0 ? '+' : ''}{data.changePercent.toFixed(2)}%
                     </div>
@@ -636,11 +636,11 @@ const AlexTradingDashboard = ({ alex
 
           {/* Actions rapides et statut */}
           <motion.div
-            className=STR_ALEX_CARD_P_6_ROUNDED_XL
+            className="ALEX_CARD_P_6_ROUNDED_XL
             variants={cardVariants}
           >
-            <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-              <h3 className=STR_TEXT_XL_FONT_BOLD_TEXT_WHITE>Quick Actions</h3>
+            <div className="flex items-center"_JUSTIFY_BETW>
+              <h3 className="TEXT_XL_FONT_BOLD_TEXT_WHITE>Quick Actions</h3>
               <Flame className="w-5 h-5 text-orange-400" />
             </div>
 
@@ -652,7 +652,7 @@ const AlexTradingDashboard = ({ alex
                 whileTap={{ scale: 0.95 }}
               >
                 <BarChart3 className="w-6 h-6 text-green-400 mx-auto mb-2" />
-                <div className=STR_TEXT_SM_FONT_MEDIUM_TEXT_WHITE>Backtest</div>
+                <div className="text-sm"_FONT_MEDIUM_TEXT_WHITE>Backtest</div>
               </motion.button>
 
               <motion.button
@@ -662,7 +662,7 @@ const AlexTradingDashboard = ({ alex
                 whileTap={{ scale: 0.95 }}
               >
                 <PieChart className="w-6 h-6 text-blue-400 mx-auto mb-2" />
-                <div className=STR_TEXT_SM_FONT_MEDIUM_TEXT_WHITE>Portfolio</div>
+                <div className="text-sm"_FONT_MEDIUM_TEXT_WHITE>Portfolio</div>
               </motion.button>
 
               <motion.button
@@ -673,7 +673,7 @@ const AlexTradingDashboard = ({ alex
                 onClick={() => handleAlexSpeak("Analyse du marché en cours...")}
               >
                 <Volume2 className="w-6 h-6 text-purple-400 mx-auto mb-2" />
-                <div className=STR_TEXT_SM_FONT_MEDIUM_TEXT_WHITE>Ask Alex</div>
+                <div className="text-sm"_FONT_MEDIUM_TEXT_WHITE>Ask Alex</div>
               </motion.button>
 
               <motion.button
@@ -683,27 +683,27 @@ const AlexTradingDashboard = ({ alex
                 whileTap={{ scale: 0.95 }}
               >
                 <Star className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
-                <div className=STR_TEXT_SM_FONT_MEDIUM_TEXT_WHITE>Challenges</div>
+                <div className="text-sm"_FONT_MEDIUM_TEXT_WHITE>Challenges</div>
               </motion.button>
             </div>
 
             {/* Status indicators */}
-            <div className=STR_SPACE_Y_3>
-              <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                <span className=STR_TEXT_GRAY_400_TEXT_SM>System Status</span>
+            <div className="SPACE_Y_3>
+              <div className="flex items-center"_JUSTIFY_BETW>
+                <span className="TEXT_GRAY_400_TEXT_SM>System Status</span>
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                   <span className="text-green-400 text-sm">Online</span>
                 </div>
               </div>
 
-              <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                <span className=STR_TEXT_GRAY_400_TEXT_SM>Market Hours</span>
+              <div className="flex items-center"_JUSTIFY_BETW>
+                <span className="TEXT_GRAY_400_TEXT_SM>Market Hours</span>
                 <span className="text-green-400 text-sm">Open</span>
               </div>
 
-              <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
-                <span className=STR_TEXT_GRAY_400_TEXT_SM>Last Update</span>
+              <div className="flex items-center"_JUSTIFY_BETW>
+                <span className="TEXT_GRAY_400_TEXT_SM>Last Update</span>
                 <span className="text-gray-300 text-sm">2s ago</span>
               </div>
             </div>
@@ -726,10 +726,10 @@ const AlexTradingDashboard = ({ alex
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ duration: 1, repeat: Infinity }}
                 >
-                  <Volume2 className=STR_W_5_H_5 />
+                  <Volume2 className="W_5_H_5 />
                 </motion.div>
                 <div>
-                  <div className=STR_TEXT_SM_FONT_MEDIUM_TEXT_WHITE>Alex is speaking...</div>
+                  <div className="text-sm"_FONT_MEDIUM_TEXT_WHITE>Alex is speaking...</div>
                   <div className="text-xs text-gray-400">Trading analysis in progress</div>
                 </div>
               </div>

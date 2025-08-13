@@ -388,7 +388,7 @@ const AlexInputArea = ({
                 }`}
                 title={listening ? "Arrêter l'écoute" : "Commencer l'écoute"}
               >
-                {listening ? <MicOff className=STR_W_5_H_5 /> : <Mic className=STR_W_5_H_5 />}
+                {listening ? <MicOff className="W_5_H_5 /> : <Mic className="W_5_H_5 />}
               </motion.button>
             )}
 
@@ -405,7 +405,7 @@ const AlexInputArea = ({
               {isTyping ? (
                 <Loader className="w-5 h-5 animate-spin" />
               ) : (
-                <Send className=STR_W_5_H_5 />
+                <Send className="W_5_H_5 />
               )}
             </motion.button>
           </div>

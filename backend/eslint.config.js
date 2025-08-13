@@ -36,7 +36,7 @@ export default [
         TextEncoder: STR_READONLY,
         TextDecoder: STR_READONLY,
         btoa: STR_READONLY,
-        atob: STR_READONLY
+        atob: STR_READONLY,
         crypto: STR_READONLY,
         BigInt: STR_READONLY,
         BigInt64Array: STR_READONLY,
@@ -56,7 +56,7 @@ export default [
         fetch: STR_READONLY,
         Request: STR_READONLY,
         Response: STR_READONLY,
-        Headers: STR_READONLY
+        Headers: STR_READONLY,
         FormData: STR_READONLY,
         ReadableStream: STR_READONLY,
         WritableStream: STR_READONLY,

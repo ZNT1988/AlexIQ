@@ -31,7 +31,7 @@ const AISystemInterface = () => {
       id: STR_DREAM_COMPILER
       name: 'Dream Compiler'
       description: 'Transforme vos rêves en projets concrets'
-      icon: <Sparkles className=STR_W_6_H_6 />
+      icon: <Sparkles className="W_6_H_6 />
       color: 'from-purple-500 to-pink-500'
       endpoint: '/api/ai-system/dream/compile'
       fields: [
@@ -42,7 +42,7 @@ const AISystemInterface = () => {
       id: STR_SOUL_PRINT
       name: 'Soul Print Generator'
       description: 'Génère votre empreinte d\'âme digitale unique'
-      icon: <Heart className=STR_W_6_H_6 />
+      icon: <Heart className="W_6_H_6 />
       color: 'from-rose-500 to-orange-500'
       endpoint: '/api/ai-system/soul/print'
       fields: [
@@ -53,7 +53,7 @@ const AISystemInterface = () => {
       id: STR_ALCHEMY_ENGINE
       name: 'Alchemy Engine'
       description: 'Fusionne passions, compétences et défis'
-      icon: <Atom className=STR_W_6_H_6 />
+      icon: <Atom className="W_6_H_6 />
       color: 'from-amber-500 to-red-500'
       endpoint: '/api/ai-system/alchemy/transform'
       fields: [
@@ -66,7 +66,7 @@ const AISystemInterface = () => {
       id: 'hyper_loop'
       name: 'HyperLoop Mode'
       description: 'Mode productivité extrême 48h'
-      icon: <Zap className=STR_W_6_H_6 />
+      icon: <Zap className="W_6_H_6 />
       color: 'from-blue-500 to-cyan-500'
       endpoint: '/api/ai-system/hyperloop/launch'
       fields: [
@@ -78,7 +78,7 @@ const AISystemInterface = () => {
       id: 'dark_side'
       name: 'Dark Side Decoder'
       description: 'Révèle vos blocages inconscients'
-      icon: <Shield className=STR_W_6_H_6 />
+      icon: <Shield className="W_6_H_6 />
       color: 'from-gray-600 to-purple-600'
       endpoint: '/api/ai-system/darkside/decode'
       fields: [
@@ -89,7 +89,7 @@ const AISystemInterface = () => {
       id: 'bio_sync'
       name: 'Bio Sync'
       description: 'Synchronisation avec vos rythmes biologiques'
-      icon: <Waves className=STR_W_6_H_6 />
+      icon: <Waves className="W_6_H_6 />
       color: 'from-green-500 to-teal-500'
       endpoint: '/api/ai-system/bio/sync'
       fields: [
@@ -101,7 +101,7 @@ const AISystemInterface = () => {
       id: 'whispers'
       name: 'Spiritual Whispers'
       description: 'Guidance spirituelle subtile'
-      icon: <Eye className=STR_W_6_H_6 />
+      icon: <Eye className="W_6_H_6 />
       color: 'from-indigo-500 to-purple-500'
       endpoint: '/api/ai-system/whispers/activate'
       fields: [
@@ -113,7 +113,7 @@ const AISystemInterface = () => {
       id: 'collective_mind'
       name: 'Collective Mind'
       description: 'Intelligence collective et collaboration'
-      icon: <Users className=STR_W_6_H_6 />
+      icon: <Users className="W_6_H_6 />
       color: 'from-blue-500 to-indigo-500'
       endpoint: '/api/ai-system/collective/contribute'
       fields: [
@@ -126,7 +126,7 @@ const AISystemInterface = () => {
       id: 'shadow_clone'
       name: 'Shadow Clone'
       description: 'Clone numérique autonome'
-      icon: <Bot className=STR_W_6_H_6 />
+      icon: <Bot className="W_6_H_6 />
       color: 'from-gray-500 to-blue-500'
       endpoint: '/api/ai-system/clone/create'
       fields: [
@@ -138,7 +138,7 @@ const AISystemInterface = () => {
       id: 'general_ai'
       name: 'IA Générale'
       description: 'Assistant IA complet et intelligent'
-      icon: <Brain className=STR_W_6_H_6 />
+      icon: <Brain className="W_6_H_6 />
       color: 'from-violet-500 to-purple-500'
       endpoint: '/api/ai-system/process'
       fields: [
@@ -366,7 +366,7 @@ const AISystemInterface = () => {
                 {field.type === STR_CHECKBOX && (
                   <label className="flex items-center space-x-2">
                     <input
-                      type=STR_CHECKBOX
+                      type="checkbox"
                       className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                       checked={formData[field.name] !== undefined ? formData[field.name] : field.default}
                       onChange={(e) => handleChange(field.name, e.target.checked)}
@@ -380,7 +380,7 @@ const AISystemInterface = () => {
                     {field.options.map(option => (
                       <label key={option} className="flex items-center space-x-2">
                         <input
-                          type=STR_CHECKBOX
+                          type="checkbox"
                           className="w-4 h-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                           checked={(formData[field.name] || field.default || []).includes(option)}
                           onChange={(e) => {

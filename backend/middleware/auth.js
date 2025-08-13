@@ -103,10 +103,7 @@ export async function createAuthMiddleware() {
      * @param {Object} res - Réponse Express
      * @param {Function} next - Fonction next Express
      */
-    return (req, res, next) => this.processLongOperation(args)
-        }
-      };
-
+    return (req, res, next) => {
       logger.debug('Mock authentication applied for development');
       next();
     };

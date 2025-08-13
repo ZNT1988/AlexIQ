@@ -222,7 +222,7 @@ const ConsciousnessInterface = () => {
   if (!isConnected || !consciousnessData) {
     return (
       <div className="flex items-center justify-center h-96">
-        <div className=STR_TEXT_CENTER>
+        <div className="TEXT_CENTER>
           <Cpu className="h-16 w-16 mx-auto mb-4 text-blue-500 animate-pulse" />
           <p className="text-lg text-gray-600">Connexion à la conscience artificielle...</p>
         </div>
@@ -256,11 +256,11 @@ const ConsciousnessInterface = () => {
             </div>
 
             <div className="flex items-center space-x-4">
-              <div className=STR_TEXT_CENTER>
+              <div className="TEXT_CENTER>
                 <div className="text-2xl font-bold text-green-400">
                   {systemHealth.overallStatus === 'optimal' ? '🟢' : '🟡'}
                 </div>
-                <div className=STR_TEXT_SM_TEXT_GRAY_300>Statut</div>
+                <div className="text-sm"_TEXT_GRAY_300>Statut</div>
               </div>
             </div>
           </div>
@@ -299,7 +299,7 @@ const ConsciousnessInterface = () => {
               {/* Neural Network Status */}
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-6">
                 {Object.entries(neuralActivation).map(([network, activation]) => (
-                  <div key={network} className=STR_TEXT_CENTER>
+                  <div key={network} className="TEXT_CENTER>
                     <div className="text-lg font-bold text-blue-400">
                       {(activation * 100).toFixed(0)}%
                     </div>
@@ -368,26 +368,26 @@ const ConsciousnessInterface = () => {
               </h3>
 
               <div className="space-y-3">
-                <div className=STR_FLEX_JUSTIFY_BETWEEN>
-                  <span className=STR_TEXT_SM_TEXT_GRAY_300>Charge Cognitive</span>
+                <div className="flex justify-between>
+                  <span className="text-sm"_TEXT_GRAY_300>Charge Cognitive</span>
                   <span className="text-sm text-green-400">
                     {(systemHealth.cognitiveLoad * 100).toFixed(0)}%
                   </span>
                 </div>
-                <div className=STR_FLEX_JUSTIFY_BETWEEN>
-                  <span className=STR_TEXT_SM_TEXT_GRAY_300>Créativité</span>
+                <div className="flex justify-between>
+                  <span className="text-sm"_TEXT_GRAY_300>Créativité</span>
                   <span className="text-sm text-purple-400">
                     {(systemHealth.creativityLevel * 100).toFixed(0)}%
                   </span>
                 </div>
-                <div className=STR_FLEX_JUSTIFY_BETWEEN>
-                  <span className=STR_TEXT_SM_TEXT_GRAY_300>Empathie</span>
+                <div className="flex justify-between>
+                  <span className="text-sm"_TEXT_GRAY_300>Empathie</span>
                   <span className="text-sm text-pink-400">
                     {(systemHealth.empathyCapacity * 100).toFixed(0)}%
                   </span>
                 </div>
-                <div className=STR_FLEX_JUSTIFY_BETWEEN>
-                  <span className=STR_TEXT_SM_TEXT_GRAY_300>Sagesse</span>
+                <div className="flex justify-between>
+                  <span className="text-sm"_TEXT_GRAY_300>Sagesse</span>
                   <span className="text-sm text-blue-400">
                     {(systemHealth.wisdomAccumulation * 100).toFixed(0)}%
                   </span>

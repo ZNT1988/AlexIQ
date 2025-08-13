@@ -297,7 +297,7 @@ export class CloudLearningInterface extends EventEmitter {
       {
         id: "openai-gpt4",
         name: "OpenAI GPT-4",
-        api_endpoint: "https://api.openai.com/v1/chat/completions",
+        api_endpoint: process.env.API_BASE_OPENAI || "https://api.openai.com/v1/chat/completions",
         reliability_score: 0.85,
         cost_per_query: 0.03,
         specialization_domains: JSON.stringify(["general", "code", "analysis"]),
@@ -305,7 +305,7 @@ export class CloudLearningInterface extends EventEmitter {
       {
         id: "anthropic-claude",
         name: "Anthropic Claude",
-        api_endpoint: "https://api.anthropic.com/v1/messages",
+        api_endpoint: process.env.API_BASE_ANTHROPIC || "https://api.anthropic.com/v1/messages",
         reliability_score: 0.8,
         cost_per_query: 0.025,
         specialization_domains: JSON.stringify([

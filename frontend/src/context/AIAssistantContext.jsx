@@ -1,12 +1,14 @@
 import React, { createContext, useContext, useState } from 'react';
-import ReflectiveThinkingSystem from '../IA/AlexReflectiveThinking.js';
 
-// Constantes pour chaînes dupliquées (optimisation SonarJS)
+// Constantes pour chaînes dupliquées
 const STR_POST = 'POST';
+const STR_JSON_CONTENT = 'application/json';
+const STR_DEVELOPMENT = 'development';
+
 const logger = {
-  info: (...args) => process.env.NODE_ENV === STR_DEVELOPMENT && console.log('[INFO]', ...args)
-  warn: (...args) => process.env.NODE_ENV === STR_DEVELOPMENT && console.warn('[WARN]', ...args)
-  error: (...args) => console.error('[ERROR]', ...args)
+  info: (...args) => process.env.NODE_ENV === STR_DEVELOPMENT && console.log('[INFO]', ...args),
+  warn: (...args) => process.env.NODE_ENV === STR_DEVELOPMENT && console.warn('[WARN]', ...args),
+  error: (...args) => console.error('[ERROR]', ...args),
   debug: (...args) => process.env.NODE_ENV === STR_DEVELOPMENT && console.debug('[DEBUG]', ...args)
 };
 
@@ -30,11 +32,11 @@ export const AIAssistantProvider = ({ children }) => {
   const [chatHistory, setChatHistory] = useState([]);
   const [reflectiveMode, setReflectiveMode] = useState(true);
   const [preferences, setPreferences] = useState({
-    voice: true
-    autoActivate: false
-    theme: 'dark'
-    language: 'fr'
-    reflectiveThinking: true
+    voice: true,
+    autoActivate: false,
+    theme: 'dark',
+    language: 'fr',
+    reflectiveThinking: true,
     responseDepth: 'contextual'
   });
 
@@ -65,7 +67,7 @@ export const AIAssistantProvider = ({ children }) => {
       if (reflectiveMode && preferences.reflectiveThinking) {
         const context = {
           history: updatedHistory.slice(-5), // Derniers 5 échanges
-          userProfile: preferences
+          userProfile: preferences,
           previousProjects: []
         };
 
@@ -73,24 +75,24 @@ export const AIAssistantProvider = ({ children }) => {
 
         // Préparer le contexte enrichi pour l'API
         const enrichedContext = {
-          ...context
-          reflection: reflectiveResult.reflection
-          consciousness: reflectiveResult.consciousness
-          depth: reflectiveResult.depth
+          ...context,
+          reflection: reflectiveResult.reflection,
+          consciousness: reflectiveResult.consciousness,
+          depth: reflectiveResult.depth,
           contextualConnections: reflectiveResult.contextualConnections
         };
 
         // Call backend API avec contexte enrichi
         const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8081';
         const response = await fetch(`${apiUrl}/api/ai/chat`, {
-          method: STR_POST
+          method: STR_POST,
           headers: {
             'Content-Type': STR_JSON_CONTENT
-          }
+          },
           body: JSON.stringify({
-            message: input
-            type: 'reflective_chat'
-            context: enrichedContext
+            message: input,
+            type: 'reflective_chat',
+            context: enrichedContext,
             reflectiveInsights: reflectiveResult
           })
         });
@@ -113,13 +115,13 @@ export const AIAssistantProvider = ({ children }) => {
         // Mode standard
         const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8081';
         const response = await fetch(`${apiUrl}/api/ai/chat`, {
-          method: STR_POST
+          method: STR_POST,
           headers: {
             'Content-Type': STR_JSON_CONTENT
-          }
+          },
           body: JSON.stringify({
-            message: input
-            type: 'chat'
+            message: input,
+            type: 'chat',
             context: { history: updatedHistory.slice(-3) }
           })
         });
@@ -134,22 +136,22 @@ export const AIAssistantProvider = ({ children }) => {
 
       // Ajouter la réponse à l'historique
       const responseEntry = {
-        input: finalResponse
-        timestamp: new Date().toISOString()
+        input: finalResponse,
+        timestamp: new Date().toISOString(),
         type: 'assistant'
       };
       setChatHistory(prev => [...prev, responseEntry]);
       setResponse(finalResponse);
 
     } catch (error) {
-      // Logger fallback - ignore error
-    }`;
+      logger.error('AI Processing Error:', error);
+      const errorMessage = `Erreur lors du traitement IA: ${error.message}`;
       setResponse(errorMessage);
 
       // Ajouter l'erreur à l'historique
       const errorEntry = {
-        input: errorMessage
-        timestamp: new Date().toISOString()
+        input: errorMessage,
+        timestamp: new Date().toISOString(),
         type: 'error'
       };
       setChatHistory(prev => [...prev, errorEntry]);
@@ -174,25 +176,25 @@ export const AIAssistantProvider = ({ children }) => {
   };
 
   const value = {
-    isActive
-      isOpen
-      isListening
-      transcript
-      response
-      loading
-      chatHistory
-      reflectiveMode
-      preferences
-      setPreferences
-      toggleAssistant
-      startListening
-      stopListening
-      processInput
-      clearMemory
-      setTranscript
-      setChatHistory
-      toggleReflectiveMode
-      getReflectionHistory
+    isActive,
+    isOpen,
+    isListening,
+    transcript,
+    response,
+    loading,
+    chatHistory,
+    reflectiveMode,
+    preferences,
+    setPreferences,
+    toggleAssistant,
+    startListening,
+    stopListening,
+    processInput,
+    clearMemory,
+    setTranscript,
+    setChatHistory,
+    toggleReflectiveMode,
+    getReflectionHistory
   };
 
   return (

@@ -179,16 +179,16 @@ const AlexModernChat = () => {
                         <div className="flex space-x-1">
                           <button
                             onClick={() => copyMessage(msg.content)}
-                            className=STR_P_1_HOVER_BG_GRAY_100_ROUNDED
+                            className="P_1_HOVER_BG_GRAY_100_ROUNDED
                             title="Copier"
                           >
-                            <Copy className=STR_W_3_H_3 />
+                            <Copy className="W_3_H_3 />
                           </button>
-                          <button className=STR_P_1_HOVER_BG_GRAY_100_ROUNDED title="J'aime">
-                            <ThumbsUp className=STR_W_3_H_3 />
+                          <button className="P_1_HOVER_BG_GRAY_100_ROUNDED title="J'aime">
+                            <ThumbsUp className="W_3_H_3 />
                           </button>
-                          <button className=STR_P_1_HOVER_BG_GRAY_100_ROUNDED title="Je n'aime pas">
-                            <ThumbsDown className=STR_W_3_H_3 />
+                          <button className="P_1_HOVER_BG_GRAY_100_ROUNDED title="Je n'aime pas">
+                            <ThumbsDown className="W_3_H_3 />
                           </button>
                         </div>
                       </div>

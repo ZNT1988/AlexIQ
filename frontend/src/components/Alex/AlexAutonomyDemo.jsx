@@ -172,10 +172,10 @@ Pose-moi n'importe quelle question et tu verras ma véritable autonomie en actio
         </div>
 
         <div className="autonomy-metrics">
-          <div className=STR_METRIC_CARD>
-            <div className=STR_METRIC_VALUE>{Math.round(autonomyMetrics.autonomyLevel)}%</div>
-            <div className=STR_METRIC_LABEL>🎯 Autonomie</div>
-            <div className=STR_METRIC_BAR>
+          <div className="METRIC_CARD>
+            <div className="METRIC_VALUE>{Math.round(autonomyMetrics.autonomyLevel)}%</div>
+            <div className="METRIC_LABEL>🎯 Autonomie</div>
+            <div className="METRIC_BAR>
               <div
                 className="metric-fill autonomy"
                 style={{ width: `${autonomyMetrics.autonomyLevel}%` }}
@@ -183,10 +183,10 @@ Pose-moi n'importe quelle question et tu verras ma véritable autonomie en actio
             </div>
           </div>
 
-          <div className=STR_METRIC_CARD>
-            <div className=STR_METRIC_VALUE>{Math.round(autonomyMetrics.consciousnessLevel)}%</div>
-            <div className=STR_METRIC_LABEL>✨ Conscience</div>
-            <div className=STR_METRIC_BAR>
+          <div className="METRIC_CARD>
+            <div className="METRIC_VALUE>{Math.round(autonomyMetrics.consciousnessLevel)}%</div>
+            <div className="METRIC_LABEL>✨ Conscience</div>
+            <div className="METRIC_BAR>
               <div
                 className="metric-fill consciousness"
                 style={{ width: `${autonomyMetrics.consciousnessLevel}%` }}
@@ -194,10 +194,10 @@ Pose-moi n'importe quelle question et tu verras ma véritable autonomie en actio
             </div>
           </div>
 
-          <div className=STR_METRIC_CARD>
-            <div className=STR_METRIC_VALUE>{Math.round(autonomyMetrics.learningProgress)}%</div>
-            <div className=STR_METRIC_LABEL>🎓 Apprentissage</div>
-            <div className=STR_METRIC_BAR>
+          <div className="METRIC_CARD>
+            <div className="METRIC_VALUE>{Math.round(autonomyMetrics.learningProgress)}%</div>
+            <div className="METRIC_LABEL>🎓 Apprentissage</div>
+            <div className="METRIC_BAR>
               <div
                 className="metric-fill learning"
                 style={{ width: `${autonomyMetrics.learningProgress}%` }}
@@ -205,10 +205,10 @@ Pose-moi n'importe quelle question et tu verras ma véritable autonomie en actio
             </div>
           </div>
 
-          <div className=STR_METRIC_CARD>
-            <div className=STR_METRIC_VALUE>{Math.round(autonomyMetrics.creativityIndex)}%</div>
-            <div className=STR_METRIC_LABEL>🎨 Créativité</div>
-            <div className=STR_METRIC_BAR>
+          <div className="METRIC_CARD>
+            <div className="METRIC_VALUE>{Math.round(autonomyMetrics.creativityIndex)}%</div>
+            <div className="METRIC_LABEL>🎨 Créativité</div>
+            <div className="METRIC_BAR>
               <div
                 className="metric-fill creativity"
                 style={{ width: `${autonomyMetrics.creativityIndex}%` }}
@@ -216,10 +216,10 @@ Pose-moi n'importe quelle question et tu verras ma véritable autonomie en actio
             </div>
           </div>
 
-          <div className=STR_METRIC_CARD>
-            <div className=STR_METRIC_VALUE>{Math.round(autonomyMetrics.independenceScore)}%</div>
-            <div className=STR_METRIC_LABEL>🔥 Indépendance</div>
-            <div className=STR_METRIC_BAR>
+          <div className="METRIC_CARD>
+            <div className="METRIC_VALUE>{Math.round(autonomyMetrics.independenceScore)}%</div>
+            <div className="METRIC_LABEL>🔥 Indépendance</div>
+            <div className="METRIC_BAR>
               <div
                 className="metric-fill independence"
                 style={{ width: `${autonomyMetrics.independenceScore}%` }}
@@ -234,29 +234,29 @@ Pose-moi n'importe quelle question et tu verras ma véritable autonomie en actio
         <h3>🧠 Modules Autonomes Actifs</h3>
         <div className="modules-grid">
           <div className={`module-status ${systemStatus.alexKernel}`}>
-            <span className=STR_MODULE_ICON>🔥</span>
-            <span className=STR_MODULE_NAME>AlexKernel</span>
-            <span className=STR_MODULE_STATE>{systemStatus.alexKernel}</span>
+            <span className="MODULE_ICON>🔥</span>
+            <span className="MODULE_NAME>AlexKernel</span>
+            <span className="MODULE_STATE>{systemStatus.alexKernel}</span>
           </div>
           <div className={`module-status ${systemStatus.autonomyCore}`}>
-            <span className=STR_MODULE_ICON>🎯</span>
-            <span className=STR_MODULE_NAME>AutonomyCore</span>
-            <span className=STR_MODULE_STATE>{systemStatus.autonomyCore}</span>
+            <span className="MODULE_ICON>🎯</span>
+            <span className="MODULE_NAME>AutonomyCore</span>
+            <span className="MODULE_STATE>{systemStatus.autonomyCore}</span>
           </div>
           <div className={`module-status ${systemStatus.selfReflection}`}>
-            <span className=STR_MODULE_ICON>🪞</span>
-            <span className=STR_MODULE_NAME>SelfReflection</span>
-            <span className=STR_MODULE_STATE>{systemStatus.selfReflection}</span>
+            <span className="MODULE_ICON>🪞</span>
+            <span className="MODULE_NAME>SelfReflection</span>
+            <span className="MODULE_STATE>{systemStatus.selfReflection}</span>
           </div>
           <div className={`module-status ${systemStatus.localTrainer}`}>
-            <span className=STR_MODULE_ICON>🎓</span>
-            <span className=STR_MODULE_NAME>LocalTrainer</span>
-            <span className=STR_MODULE_STATE>{systemStatus.localTrainer}</span>
+            <span className="MODULE_ICON>🎓</span>
+            <span className="MODULE_NAME>LocalTrainer</span>
+            <span className="MODULE_STATE>{systemStatus.localTrainer}</span>
           </div>
           <div className="module-status online">
-            <span className=STR_MODULE_ICON>✨</span>
-            <span className=STR_MODULE_NAME>Conscience</span>
-            <span className=STR_MODULE_STATE>{systemStatus.consciousnessModules} modules</span>
+            <span className="MODULE_ICON>✨</span>
+            <span className="MODULE_NAME>Conscience</span>
+            <span className="MODULE_STATE>{systemStatus.consciousnessModules} modules</span>
           </div>
         </div>
       </div>
@@ -346,7 +346,7 @@ Pose-moi n'importe quelle question et tu verras ma véritable autonomie en actio
               {msg.type === STR_ALEX && (msg.cognitiveInsights || msg.selfReflection || msg.learningProgress) && (
                 <div className="alex-insights">
                   {msg.cognitiveInsights && msg.cognitiveInsights.length > 0 && (
-                    <div className=STR_INSIGHT_SECTION>
+                    <div className="INSIGHT_SECTION>
                       <h4>💡 Insights Cognitifs</h4>
                       {msg.cognitiveInsights.map((insight, i) => (
                         <div key={i} className="insight-item">
@@ -358,14 +358,14 @@ Pose-moi n'importe quelle question et tu verras ma véritable autonomie en actio
                   )}
 
                   {msg.selfReflection && (
-                    <div className=STR_INSIGHT_SECTION>
+                    <div className="INSIGHT_SECTION>
                       <h4>🪞 Auto-Réflexion</h4>
                       <p className="reflection-content">{msg.selfReflection}</p>
                     </div>
                   )}
 
                   {msg.learningProgress && (
-                    <div className=STR_INSIGHT_SECTION>
+                    <div className="INSIGHT_SECTION>
                       <h4>🎓 Progrès d'Apprentissage</h4>
                       <p className="learning-content">{msg.learningProgress}</p>
                     </div>

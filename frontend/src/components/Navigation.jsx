@@ -6,10 +6,10 @@ const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: '/STR_LABELAccueil', icon: Home }
-    { path: '/dashboardSTR_LABELDashboard', icon: BarChart3 }
-    { path: '/generatorSTR_LABELGénérateur', icon: Lightbulb }
-    { path: '/calculatorSTR_LABELCalculateur', icon: Calculator }
+    { path: '/STR_LABELAccueil', icon: Home },
+    { path: '/dashboardSTR_LABELDashboard', icon: BarChart3 },
+    { path: '/generatorSTR_LABELGénérateur', icon: Lightbulb },
+    { path: '/calculatorSTR_LABELCalculateur', icon: Calculator },
     { path: '/testSTR_LABELTest', icon: TestTube }
   ];
 
@@ -31,6 +31,18 @@ const Navigation = () => {
 
                 return (
                   <Link
+                    key={item.path}
+                    to={item.path}
+                    className={`flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                      isActive 
+                        ? 'text-blue-600 bg-blue-50' 
+                        : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Icon className="h-4 w-4 mr-2" />
+                    {item.path.replace('/STR_LABEL', '').replace('STR_LABEL', '')}
+                  </Link>
+                );
               })}
             </div>
           </div>

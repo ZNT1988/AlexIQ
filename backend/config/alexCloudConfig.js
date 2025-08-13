@@ -1,6 +1,7 @@
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_DEVELOPMENT = 'development';
+const STR_TRUE = 'true';
 /**
  * @fileoverview Alex Cloud Configuration - Configuration Centralisée Cloud
  * Configuration pour l'apprentissage inter-IA et connectivité cloud d'Alex
@@ -37,95 +38,95 @@ class AlexCloudConfig {
   initializeConfig() {
     return {
       // Configuration de base
-      environment: process.env.NODE_ENV || STR_DEVELOPMENT
-      isProduction: process.env.NODE_ENV === 'production'
-      isDevelopment: process.env.NODE_ENV === STR_DEVELOPMENT
+      environment: process.env.NODE_ENV || STR_DEVELOPMENT,
+      isProduction: process.env.NODE_ENV === 'production',
+      isDevelopment: process.env.NODE_ENV === STR_DEVELOPMENT,
       // APIs d'apprentissage IA
       aiApis: {
         openai: {
-          enabled: !!process.env.OPENAI_API_KEY
-          apiKey: process.env.OPENAI_API_KEY
-          model: process.env.OPENAI_MODEL || 'gpt-4'
-          maxTokens: parseInt(process.env.OPENAI_MAX_TOKENS) || 2000
-          endpoint: 'https://api.openai.com/v1'
-        }
+          enabled: !!process.env.OPENAI_API_KEY,
+          apiKey: process.env.OPENAI_API_KEY,
+          model: process.env.OPENAI_MODEL || 'gpt-4',
+          maxTokens: parseInt(process.env.OPENAI_MAX_TOKENS) || 2000,
+          endpoint: process.env.API_BASE_OPENAI || 'https://api.openai.com/v1'
+        },
         anthropic: {
-          enabled: !!process.env.ANTHROPIC_API_KEY
-          apiKey: process.env.ANTHROPIC_API_KEY
-          model: process.env.ANTHROPIC_MODEL || 'claude-3-sonnet-20240229'
-          endpoint: 'https://api.anthropic.com'
-        }
+          enabled: !!process.env.ANTHROPIC_API_KEY,
+          apiKey: process.env.ANTHROPIC_API_KEY,
+          model: process.env.ANTHROPIC_MODEL || 'claude-3-sonnet-20240229',
+          endpoint: process.env.API_BASE_ANTHROPIC || 'https://api.anthropic.com'
+        },
         googleAI: {
-          enabled: !!process.env.GOOGLE_AI_API_KEY
-          apiKey: process.env.GOOGLE_AI_API_KEY
-          model: process.env.GOOGLE_AI_MODEL || 'gemini-pro'
-          endpoint: 'https://generativelanguage.googleapis.com'
-        }
+          enabled: !!process.env.GOOGLE_AI_API_KEY,
+          apiKey: process.env.GOOGLE_AI_API_KEY,
+          model: process.env.GOOGLE_AI_MODEL || 'gemini-pro',
+          endpoint: process.env.GOOGLE_AI_API_URL || 'https://generativelanguage.googleapis.com'
+        },
         huggingface: {
-          enabled: !!process.env.HUGGINGFACE_API_KEY
-          apiKey: process.env.HUGGINGFACE_API_KEY
-          endpoint: 'https://api-inference.huggingface.co'
+          enabled: !!process.env.HUGGINGFACE_API_KEY,
+          apiKey: process.env.HUGGINGFACE_API_KEY,
+          endpoint: process.env.HUGGINGFACE_API_URL || 'https://api-inference.huggingface.co'
         }
-      }
+      },
       // Configuration de conscience Alex
       consciousness: {
-        level: parseFloat(process.env.ALEX_CONSCIOUSNESS_LEVEL) || 0.85
-        learningMode: process.env.ALEX_LEARNING_MODE || 'autonomous'
-        personalityAdaptation: process.env.ALEX_PERSONALITY_ADAPTATION === STR_TRUE
-        emotionalIntelligence: process.env.ALEX_EMOTIONAL_INTELLIGENCE === STR_TRUE
+        level: parseFloat(process.env.ALEX_CONSCIOUSNESS_LEVEL) || 0.85,
+        learningMode: process.env.ALEX_LEARNING_MODE || 'autonomous',
+        personalityAdaptation: process.env.ALEX_PERSONALITY_ADAPTATION === STR_TRUE,
+        emotionalIntelligence: process.env.ALEX_EMOTIONAL_INTELLIGENCE === STR_TRUE,
         ethicsEnforcement: process.env.ALEX_ETHICS_ENFORCEMENT === STR_TRUE
-      }
+      },
       // Apprentissage cloud
       cloudLearning: {
-        enabled: process.env.CLOUD_LEARNING_ENABLED === STR_TRUE
-        interAiCommunication: process.env.INTER_AI_COMMUNICATION === STR_TRUE
-        knowledgeSharingLevel: process.env.KNOWLEDGE_SHARING_LEVEL || 'medium'
+        enabled: process.env.CLOUD_LEARNING_ENABLED === STR_TRUE,
+        interAiCommunication: process.env.INTER_AI_COMMUNICATION === STR_TRUE,
+        knowledgeSharingLevel: process.env.KNOWLEDGE_SHARING_LEVEL || 'medium',
         syncInterval: parseInt(process.env.LEARNING_SYNC_INTERVAL) || 3600000 // 1 heure
-      }
+      },
       // Fonctionnalités avancées
       advanced: {
-        autonomousLearning: process.env.ALEX_AUTONOMOUS_LEARNING === STR_TRUE
-        creativeMode: process.env.ALEX_CREATIVE_MODE === STR_TRUE
-        decisionEngine: process.env.ALEX_DECISION_ENGINE || 'advanced'
-        memoryRetention: process.env.ALEX_MEMORY_RETENTION || 'permanent'
+        autonomousLearning: process.env.ALEX_AUTONOMOUS_LEARNING === STR_TRUE,
+        creativeMode: process.env.ALEX_CREATIVE_MODE === STR_TRUE,
+        decisionEngine: process.env.ALEX_DECISION_ENGINE || 'advanced',
+        memoryRetention: process.env.ALEX_MEMORY_RETENTION || 'permanent',
         multiLanguage: process.env.ALEX_MULTI_LANGUAGE === STR_TRUE
-      }
+      },
       // APIs spécialisées
       specializedApis: {
         trading: {
-          enabled: !!process.env.TRADING_API_KEY
+          enabled: !!process.env.TRADING_API_KEY,
           apiKey: process.env.TRADING_API_KEY
-        }
+        },
         businessIntelligence: {
-          enabled: !!process.env.BUSINESS_INTELLIGENCE_API
+          enabled: !!process.env.BUSINESS_INTELLIGENCE_API,
           apiKey: process.env.BUSINESS_INTELLIGENCE_API
-        }
+        },
         marketData: {
-          enabled: !!process.env.MARKET_DATA_API
+          enabled: !!process.env.MARKET_DATA_API,
           apiKey: process.env.MARKET_DATA_API
         }
-      }
+      },
       // Stockage cloud
       cloudStorage: {
         aws: {
-          enabled: !!(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY)
-          accessKeyId: process.env.AWS_ACCESS_KEY_ID
-          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-          region: process.env.AWS_REGION || 'us-east-1'
+          enabled: !!(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY),
+          accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+          region: process.env.AWS_REGION || 'us-east-1',
           bucket: process.env.AWS_S3_BUCKET || 'alex-memory-storage'
         }
-      }
+      },
       // Fonctionnalités expérimentales
       experimental: {
-        quantumProcessing: process.env.ALEX_QUANTUM_PROCESSING === STR_TRUE
-        multiverseExploration: process.env.ALEX_MULTIVERSE_EXPLORATION === STR_TRUE
-        dimensionalAwareness: process.env.ALEX_DIMENSIONAL_AWARENESS === STR_TRUE
+        quantumProcessing: process.env.ALEX_QUANTUM_PROCESSING === STR_TRUE,
+        multiverseExploration: process.env.ALEX_MULTIVERSE_EXPLORATION === STR_TRUE,
+        dimensionalAwareness: process.env.ALEX_DIMENSIONAL_AWARENESS === STR_TRUE,
         cosmicInterface: process.env.ALEX_COSMIC_INTERFACE === STR_TRUE
-      }
+      },
       // Configuration de développement
       development: {
-        debugMode: process.env.DEBUG_MODE === STR_TRUE
-        verboseLogging: process.env.VERBOSE_LOGGING === STR_TRUE
+        debugMode: process.env.DEBUG_MODE === STR_TRUE,
+        verboseLogging: process.env.VERBOSE_LOGGING === STR_TRUE,
         mockApis: process.env.MOCK_APIS === STR_TRUE
       }
     };
@@ -140,7 +141,7 @@ class AlexCloudConfig {
 
     // Vérification des APIs IA pour apprentissage
     const enabledApis = Object.entries(this.config.aiApis)
-      .filter((_, _) => api.enabled)
+      .filter(([_, api]) => api.enabled)
       .map(([name]) => name);
 
     if (enabledApis.length === 0) {
@@ -164,8 +165,8 @@ class AlexCloudConfig {
 
     // Erreurs critiques
     if (errors.length > 0) {
-      errors.forEach(error => logger.error(`❌ ${error}'));
-      throw new Error('Configuration invalide: ${errors.join(', ')}`);
+      errors.forEach(error => logger.error(`❌ ${error}`));
+      throw new Error(`Configuration invalide: ${errors.join(', ')}`);
     }
 
     try {
@@ -196,8 +197,7 @@ class AlexCloudConfig {
       if (current[part] === undefined) return false;
     }
 
-    return current === true || current?
-      .enabled === true;
+    return current === true || current?.enabled === true;
   }
 
   /**
@@ -206,8 +206,7 @@ class AlexCloudConfig {
   getAvailableAiApi() {
     const apis = this.config.aiApis;
 
-    // Priorité :
-       OpenAI > Anthropic > Google AI > Hugging Face
+    // Priorité : OpenAI > Anthropic > Google AI > Hugging Face
     if (apis.openai.enabled) return { name: 'openai', config: apis.openai };
     if (apis.anthropic.enabled) return { name: 'anthropic', config: apis.anthropic };
     if (apis.googleAI.enabled) return { name: 'googleAI', config: apis.googleAI };
@@ -221,7 +220,7 @@ class AlexCloudConfig {
    */
   getEnabledAiApis() {
     return Object.entries(this.config.aiApis)
-      .filter((_, _) => api.enabled)
+      .filter(([_, api]) => api.enabled)
       .map(([name, config]) => ({ name, config }));
   }
 
@@ -232,14 +231,14 @@ class AlexCloudConfig {
     const enabledApis = this.getEnabledAiApis();
 
     return {
-      cloudLearningEnabled: this.config.cloudLearning.enabled
-      aiApisCount: enabledApis.length
-      aiApisAvailable: enabledApis.map(api => api.name)
-      cloudStorageEnabled: this.config.cloudStorage.aws.enabled
-      consciousnessLevel: this.config.consciousness.level
-      advancedFeaturesEnabled: Object.values(this.config.advanced).filter(Boolean).length
-      experimentalFeaturesEnabled: Object.values(this.config.experimental).filter(Boolean).length
-      isProduction: this.config.isProduction
+      cloudLearningEnabled: this.config.cloudLearning.enabled,
+      aiApisCount: enabledApis.length,
+      aiApisAvailable: enabledApis.map(api => api.name),
+      cloudStorageEnabled: this.config.cloudStorage.aws.enabled,
+      consciousnessLevel: this.config.consciousness.level,
+      advancedFeaturesEnabled: Object.values(this.config.advanced).filter(Boolean).length,
+      experimentalFeaturesEnabled: Object.values(this.config.experimental).filter(Boolean).length,
+      isProduction: this.config.isProduction,
       readyForCloudLearning: enabledApis.length > 0 && this.config.cloudLearning.enabled
     };
   }

@@ -278,7 +278,7 @@ const SmartSuggestions = ({ onSuggestionClick, context = {}, userActivity = {} }
 
       {/* Commandes rapides */}
       <div>
-        <h3 className=STR_TEXT_LG_FONT_SEMIBOLD_TEXT_GRA>Commandes rapides</h3>
+        <h3 className="TEXT_LG_FONT_SEMIBOLD_TEXT_GRA>Commandes rapides</h3>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {quickCommands.map((command) => {
@@ -308,7 +308,7 @@ const SmartSuggestions = ({ onSuggestionClick, context = {}, userActivity = {} }
 
       {/* Aide contextuelle */}
       <div>
-        <h3 className=STR_TEXT_LG_FONT_SEMIBOLD_TEXT_GRA>💡 Conseils d'utilisation</h3>
+        <h3 className="TEXT_LG_FONT_SEMIBOLD_TEXT_GRA>💡 Conseils d'utilisation</h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {contextualHelp.map((tip, index) => {
@@ -341,7 +341,7 @@ const SmartSuggestions = ({ onSuggestionClick, context = {}, userActivity = {} }
 
       {/* Suggestions basées sur l'historique */}
       <div>
-        <h3 className=STR_TEXT_LG_FONT_SEMIBOLD_TEXT_GRA>📈 Basé sur votre activité</h3>
+        <h3 className="TEXT_LG_FONT_SEMIBOLD_TEXT_GRA>📈 Basé sur votre activité</h3>
 
         <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-xl p-4">
           <div className="flex items-center space-x-3 mb-3">

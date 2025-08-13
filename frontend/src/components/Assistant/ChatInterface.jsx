@@ -67,7 +67,7 @@ const ChatInterface = () => {
       recognitionRef.current = new webkitSpeechRecognition();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = false;
-      recognitionRef.current.lang = STR_FR_FR;
+      recognitionRef.current.lang = "fr-FR";
 
       recognitionRef.current.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
@@ -289,7 +289,7 @@ const ChatInterface = () => {
           {conversations.length === 0 ?
       (
             <div className="p-4 text-center">
-              <p className=STR_TEXT_SM_TEXT_GRAY_500>Aucune conversation</p>
+              <p className="text-sm"_TEXT_GRAY_500>Aucune conversation</p>
               <p className="text-xs text-gray-400 mt-1">Commencez à discuter !</p>
             </div>
           )  :
@@ -312,7 +312,7 @@ const ChatInterface = () => {
                         {conv.preview}
                       </p>
                       <p className="text-xs text-gray-400 mt-1">
-                        {new Date(conv.timestamp).toLocaleDateString(STR_FR_FR)}
+                        {new Date(conv.timestamp).toLocaleDateString("fr-FR")}
                       </p>
                     </div>
                     <button className="opacity-0 group-hover:opacity-100 p-1 hover:bg-gray-100 rounded transition-opacity">
@@ -336,7 +336,7 @@ const ChatInterface = () => {
               <p className="text-xs text-gray-500">Plan Premium</p>
             </div>
             <button className="p-1.5 hover:bg-gray-100 rounded-lg transition-colors">
-              <Settings className=STR_W_4_H_4_TEXT_GRAY_500 />
+              <Settings className="W_4_H_4_TEXT_GRAY_500 />
             </button>
           </div>
         </div>
@@ -350,21 +350,21 @@ const ChatInterface = () => {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-lg font-semibold text-gray-900">HustleFinderIA</h1>
-              <p className=STR_TEXT_SM_TEXT_GRAY_500>Assistant IA Personnel - Toujours là pour vous aider</p>
+              <p className="text-sm"_TEXT_GRAY_500>Assistant IA Personnel - Toujours là pour vous aider</p>
             </div>
 
             {messages.length > 0 && (
-              <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+              <div className="flex items-center"_SPACE_X_2>
                 <button
                   onClick={exportConversation}
-                  className=STR_P_2_HOVER_BG_GRAY_100_ROUNDED_
+                  className="P_2_HOVER_BG_GRAY_100_ROUNDED_
                   title="Exporter la conversation"
                 >
                   <Download className="w-4 h-4 text-gray-600" />
                 </button>
                 <button
                   onClick={() => setMessages([])}
-                  className=STR_P_2_HOVER_BG_GRAY_100_ROUNDED_
+                  className="P_2_HOVER_BG_GRAY_100_ROUNDED_
                   title="Effacer la conversation"
                 >
                   <Trash2 className="w-4 h-4 text-gray-600" />
@@ -417,7 +417,7 @@ const ChatInterface = () => {
                   })}
                 </div>
 
-                <div className=STR_TEXT_SM_TEXT_GRAY_500>
+                <div className="text-sm"_TEXT_GRAY_500>
                   <p>💡 Astuce : Vous pouvez aussi utiliser la commande vocale ou taper directement votre question</p>
                 </div>
               </div>
@@ -484,22 +484,22 @@ const ChatInterface = () => {
                                 <div className="flex items-center space-x-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                   <button
                                     onClick={() => copyMessage(message.content)}
-                                    className=STR_P_2_HOVER_BG_GRAY_100_ROUNDED_
+                                    className="P_2_HOVER_BG_GRAY_100_ROUNDED_
                                     title="Copier"
                                   >
-                                    <Copy className=STR_W_4_H_4_TEXT_GRAY_500 />
+                                    <Copy className="W_4_H_4_TEXT_GRAY_500 />
                                   </button>
                                   <button
-                                    className=STR_P_2_HOVER_BG_GRAY_100_ROUNDED_
+                                    className="P_2_HOVER_BG_GRAY_100_ROUNDED_
                                     title="Régénérer"
                                   >
-                                    <Refresh className=STR_W_4_H_4_TEXT_GRAY_500 />
+                                    <Refresh className="W_4_H_4_TEXT_GRAY_500 />
                                   </button>
                                   <button
-                                    className=STR_P_2_HOVER_BG_GRAY_100_ROUNDED_
+                                    className="P_2_HOVER_BG_GRAY_100_ROUNDED_
                                     title="Partager"
                                   >
-                                    <Share className=STR_W_4_H_4_TEXT_GRAY_500 />
+                                    <Share className="W_4_H_4_TEXT_GRAY_500 />
                                   </button>
                                 </div>
 
@@ -528,7 +528,7 @@ const ChatInterface = () => {
                           <div className={`text-xs text-gray-400 mt-2 ${
                             message.type === STR_USER ? 'text-right pr-12' : 'text-left pl-12'
                           }`}>
-                            {message.timestamp.toLocaleTimeString(STR_FR_FR, {
+                            {message.timestamp.toLocaleTimeString("fr-FR", {
                               hour: '2-digit'
                               minute: '2-digit'
                             })}
@@ -550,7 +550,7 @@ const ChatInterface = () => {
                       <Bot className="w-4 h-4 text-white" />
                     </div>
                     <div className="bg-gray-50 rounded-2xl rounded-tl-md px-6 py-4">
-                      <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+                      <div className="flex items-center"_SPACE_X_2>
                         <div className="flex space-x-1">
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100" />
@@ -591,7 +591,7 @@ const ChatInterface = () => {
                 />
               </div>
 
-              <div className=STR_FLEX_ITEMS_CENTER_SPACE_X_2>
+              <div className="flex items-center"_SPACE_X_2>
                 <button
                   onClick={toggleVoiceRecognition}
                   className={`p-3 rounded-xl transition-colors ${
@@ -601,7 +601,7 @@ const ChatInterface = () => {
                   }`}
                   title={isListening ? 'Arrêter l\'écoute' : 'Commande vocale'}
                 >
-                  {isListening ? <MicOff className=STR_W_5_H_5 /> : <Mic className=STR_W_5_H_5 />}
+                  {isListening ? <MicOff className="W_5_H_5 /> : <Mic className="W_5_H_5 />}
                 </button>
 
                 <button
@@ -614,7 +614,7 @@ const ChatInterface = () => {
                   }`}
                   title="Envoyer le message"
                 >
-                  <Send className=STR_W_5_H_5 />
+                  <Send className="W_5_H_5 />
                 </button>
               </div>
             </div>

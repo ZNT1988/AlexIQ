@@ -1,6 +1,9 @@
 
-// Constantes pour chaînes dupliquées (optimisation SonarJS)
+// Constantes pour chaînes dupliquées
 const STR_PROFESSIONNEL = 'professionnel';
+const STR_ADAPTATIF = 'adaptatif';
+const STR_PANEL_SECTION = 'panel-section';
+const STR_ID_E = 'idées';
 /**
  * @fileoverview AISidePanel - Panneau de Configuration IA Révolutionnaire
  * Interface avancée pour personnaliser et contrôler l'expérience utilisateur ALEX
@@ -142,20 +145,20 @@ const AISidePanel = ({ preferences = {}, setPreferences = () => {}, clearMemory 
         <div className="side-panel">
           <h3>⚙️ IA - Paramètres</h3>
 
-          <div className=STR_PANEL_SECTION>
+          <div className={STR_PANEL_SECTION}>
             <label>Ton :</label>
             <select
               value={preferences.tone || STR_ADAPTATIF}
               onChange={e => updatePref('tone', e.target.value)}
             >
-              <option value=STR_ADAPTATIF>Adaptatif</option>
-              <option value=STR_PROFESSIONNEL>Professionnel</option>
+              <option value={STR_ADAPTATIF}>Adaptatif</option>
+              <option value={STR_PROFESSIONNEL}>Professionnel</option>
               <option value="détendu">Détendu</option>
               <option value="fun">Fun</option>
             </select>
           </div>
 
-          <div className=STR_PANEL_SECTION>
+          <div className={STR_PANEL_SECTION}>
             <label>Langue :</label>
             <select
               value={preferences.language || 'fr'}
@@ -168,19 +171,19 @@ const AISidePanel = ({ preferences = {}, setPreferences = () => {}, clearMemory 
             </select>
           </div>
 
-          <div className=STR_PANEL_SECTION>
+          <div className={STR_PANEL_SECTION}>
             <label>Focus par défaut :</label>
             <select
               value={preferences.defaultFocus || STR_ID_E}
               onChange={e => updatePref('defaultFocus', e.target.value)}
             >
-              <option value=STR_ID_E>Idées</option>
+              <option value={STR_ID_E}>Idées</option>
               <option value="astuce">Astuces</option>
               <option value="motivation">Motivation</option>
             </select>
           </div>
 
-          <div className=STR_PANEL_SECTION>
+          <div className={STR_PANEL_SECTION}>
             <button onClick={clearMemory}>Effacer la mémoire 🧠</button>
           </div>
         </div>

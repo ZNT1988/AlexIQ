@@ -76,7 +76,7 @@ const Dashboard = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+      <div className="flex items-center"_JUSTIFY_BETW>
         <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
         <div className="text-sm text-gray-500">
           Dernière mise à jour: {new Date().toLocaleTimeString()}
@@ -89,9 +89,9 @@ const Dashboard = () => {
           whileHover={{ scale: 1.02 }}
           transition={{ type: STR_SPRING, stiffness: 300 }}
         >
-          <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+          <div className="flex items-center"_JUSTIFY_BETW>
             <div>
-              <p className=STR_TEXT_SM_TEXT_GRAY_600>Analyses totales</p>
+              <p className="text-sm"_TEXT_GRAY_600>Analyses totales</p>
               <p className="text-2xl font-bold text-gray-800">1,234</p>
             </div>
             <BarChart3 className="w-8 h-8 text-blue-500" />
@@ -103,9 +103,9 @@ const Dashboard = () => {
           whileHover={{ scale: 1.02 }}
           transition={{ type: STR_SPRING, stiffness: 300 }}
         >
-          <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+          <div className="flex items-center"_JUSTIFY_BETW>
             <div>
-              <p className=STR_TEXT_SM_TEXT_GRAY_600>Performances</p>
+              <p className="text-sm"_TEXT_GRAY_600>Performances</p>
               <p className="text-2xl font-bold text-green-600">+12.5%</p>
             </div>
             <TrendingUp className="w-8 h-8 text-green-500" />
@@ -117,9 +117,9 @@ const Dashboard = () => {
           whileHover={{ scale: 1.02 }}
           transition={{ type: STR_SPRING, stiffness: 300 }}
         >
-          <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+          <div className="flex items-center"_JUSTIFY_BETW>
             <div>
-              <p className=STR_TEXT_SM_TEXT_GRAY_600>Précision IA</p>
+              <p className="text-sm"_TEXT_GRAY_600>Précision IA</p>
               <p className="text-2xl font-bold text-purple-600">94.2%</p>
             </div>
             <PieChart className="w-8 h-8 text-purple-500" />
@@ -131,9 +131,9 @@ const Dashboard = () => {
           whileHover={{ scale: 1.02 }}
           transition={{ type: STR_SPRING, stiffness: 300 }}
         >
-          <div className=STR_FLEX_ITEMS_CENTER_JUSTIFY_BETW>
+          <div className="flex items-center"_JUSTIFY_BETW>
             <div>
-              <p className=STR_TEXT_SM_TEXT_GRAY_600>Activité</p>
+              <p className="text-sm"_TEXT_GRAY_600>Activité</p>
               <p className="text-2xl font-bold text-orange-600">Active</p>
             </div>
             <Activity className="w-8 h-8 text-orange-500" />
@@ -151,9 +151,9 @@ const Dashboard = () => {
           <h2 className="text-xl font-semibold mb-4">Analyse récente</h2>
           <div className="space-y-3">
             {[
-              { title: "Vision computationnelle", status: STR_TERMIN, time: "Il y a 2 min" }
-              { title: "Traitement langage naturel", status: "En cours", time: "Il y a 5 min" }
-              { title: "Analyse sentiment", status: STR_TERMIN, time: "Il y a 10 min" }
+              { title: "Vision computationnelle", status: "Terminé", time: "Il y a 2 min" },
+              { title: "Traitement langage naturel", status: "En cours", time: "Il y a 5 min" },
+              { title: "Analyse sentiment", status: "Terminé", time: "Il y a 10 min" }
             ].map((item, index) => (
               <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded">
                 <div>

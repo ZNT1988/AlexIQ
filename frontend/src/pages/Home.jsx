@@ -54,8 +54,8 @@ const Home = () => {
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
           >
             <Eye className="w-12 h-12 text-blue-600 mb-4" />
-            <h3 className=STR_TEXT_XL_FONT_SEMIBOLD_MB_3>Vision Artificielle</h3>
-            <p className=STR_TEXT_GRAY_600>
+            <h3 className={STR_TEXT_XL_FONT_SEMIBOLD_MB_3}>Vision Artificielle</h3>
+            <p className={STR_TEXT_GRAY_600}>
               Système de cortex visuel avancé capable d'analyser, interpréter et comprendre
               les images avec une précision surhumaine
             </p>
@@ -69,8 +69,8 @@ const Home = () => {
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
           >
             <TrendingUp className="w-12 h-12 text-green-600 mb-4" />
-            <h3 className=STR_TEXT_XL_FONT_SEMIBOLD_MB_3>Trading Intelligent</h3>
-            <p className=STR_TEXT_GRAY_600>
+            <h3 className={STR_TEXT_XL_FONT_SEMIBOLD_MB_3}>Trading Intelligent</h3>
+            <p className={STR_TEXT_GRAY_600}>
               Algorithmes de trading automatisés utilisant l'analyse technique avancée
               et l'intelligence artificielle prédictive
             </p>
@@ -84,8 +84,8 @@ const Home = () => {
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
           >
             <Zap className="w-12 h-12 text-purple-600 mb-4" />
-            <h3 className=STR_TEXT_XL_FONT_SEMIBOLD_MB_3>Conscience IA</h3>
-            <p className=STR_TEXT_GRAY_600>
+            <h3 className={STR_TEXT_XL_FONT_SEMIBOLD_MB_3}>Conscience IA</h3>
+            <p className={STR_TEXT_GRAY_600}>
               Système de conscience artificielle capable d'apprentissage adaptatif
               et de prise de décision autonome
             </p>
@@ -101,34 +101,33 @@ const Home = () => {
         >
           <h2 className="text-3xl font-bold text-center mb-8">Performances du Système</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className=STR_TEXT_CENTER>
+            <div className={STR_TEXT_CENTER}>
               <div className="text-4xl font-bold text-blue-600 mb-2">94.2%</div>
-              <div className=STR_TEXT_GRAY_600>Précision IA</div>
+              <div className={STR_TEXT_GRAY_600}>Précision IA</div>
             </div>
-            <div className=STR_TEXT_CENTER>
+            <div className={STR_TEXT_CENTER}>
               <div className="text-4xl font-bold text-green-600 mb-2">+127%</div>
-              <div className=STR_TEXT_GRAY_600>ROI Trading</div>
+              <div className={STR_TEXT_GRAY_600}>ROI Trading</div>
             </div>
-            <div className=STR_TEXT_CENTER>
+            <div className={STR_TEXT_CENTER}>
               <div className="text-4xl font-bold text-purple-600 mb-2">50ms</div>
-              <div className=STR_TEXT_GRAY_600>Temps de réponse</div>
+              <div className={STR_TEXT_GRAY_600}>Temps de réponse</div>
             </div>
-            <div className=STR_TEXT_CENTER>
+            <div className={STR_TEXT_CENTER}>
               <div className="text-4xl font-bold text-orange-600 mb-2">24/7</div>
-              <div className=STR_TEXT_GRAY_600>Disponibilité</div>
+              <div className={STR_TEXT_GRAY_600}>Disponibilité</div>
             </div>
           </div>
         </motion.div>
 
         {/* CTA Section */}
         <motion.div
-          className=STR_TEXT_CENTER
+          className={STR_TEXT_CENTER}
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold mb-4">Prêt à découvrir l'IA du futur ?
-      </h2>
+          <h2 className="text-3xl font-bold mb-4">Prêt à découvrir l'IA du futur ?</h2>
           <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
             Explorez nos différents modules d'intelligence artificielle et découvrez
             comment ils peuvent transformer votre approche des données et des décisions
@@ -136,8 +135,7 @@ const Home = () => {
           <div className="space-x-4">
             <motion.div
               className="inline-block"
-              whileHover={{ scale :
-       1.05 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <Link

@@ -233,7 +233,7 @@ const MetaverseTradingInterface = ({ alex, quantumCore }) => {
           transition={{ duration: 2, repeat: Infinity }}
         >
           <div className="text-white font-medium">{quantum_state}</div>
-          <div className=STR_TEXT_GRAY_400>E: {(energy * 100).toFixed(0)}%</div>
+          <div className="TEXT_GRAY_400>E: {(energy * 100).toFixed(0)}%</div>
         </motion.div>
       </motion.div>
     );
@@ -531,8 +531,8 @@ const MetaverseTradingInterface = ({ alex, quantumCore }) => {
 
               {metaverseData.assets.has(selectedAsset) && (
                 <div className="space-y-3">
-                  <div className=STR_FLEX_JUSTIFY_BETWEEN>
-                    <span className=STR_TEXT_GRAY_400>Energy</span>
+                  <div className="flex justify-between>
+                    <span className="TEXT_GRAY_400>Energy</span>
                     <div className="flex items-center space-x-2">
                       <div className="w-20 h-2 bg-gray-700 rounded-full">
                         <motion.div
@@ -540,14 +540,14 @@ const MetaverseTradingInterface = ({ alex, quantumCore }) => {
                           animate={{ width: `${metaverseData.assets.get(selectedAsset).energy * 100}%` }}
                         />
                       </div>
-                      <span className=STR_TEXT_SM_TEXT_WHITE>
+                      <span className="text-sm"_TEXT_WHITE>
                         {(metaverseData.assets.get(selectedAsset).energy * 100).toFixed(0)}%
                       </span>
                     </div>
                   </div>
 
-                  <div className=STR_FLEX_JUSTIFY_BETWEEN>
-                    <span className=STR_TEXT_GRAY_400>Momentum</span>
+                  <div className="flex justify-between>
+                    <span className="TEXT_GRAY_400>Momentum</span>
                     <div className="flex items-center space-x-2">
                       <div className="w-20 h-2 bg-gray-700 rounded-full">
                         <motion.div
@@ -555,21 +555,21 @@ const MetaverseTradingInterface = ({ alex, quantumCore }) => {
                           animate={{ width: `${metaverseData.assets.get(selectedAsset).momentum * 100}%` }}
                         />
                       </div>
-                      <span className=STR_TEXT_SM_TEXT_WHITE>
+                      <span className="text-sm"_TEXT_WHITE>
                         {(metaverseData.assets.get(selectedAsset).momentum * 100).toFixed(0)}%
                       </span>
                     </div>
                   </div>
 
-                  <div className=STR_FLEX_JUSTIFY_BETWEEN>
-                    <span className=STR_TEXT_GRAY_400>Quantum State</span>
+                  <div className="flex justify-between>
+                    <span className="TEXT_GRAY_400>Quantum State</span>
                     <span className="text-purple-400 font-medium">
                       {metaverseData.assets.get(selectedAsset).quantum_state}
                     </span>
                   </div>
 
-                  <div className=STR_FLEX_JUSTIFY_BETWEEN>
-                    <span className=STR_TEXT_GRAY_400>Neural Links</span>
+                  <div className="flex justify-between>
+                    <span className="TEXT_GRAY_400>Neural Links</span>
                     <span className="text-blue-400 font-medium">
                       {metaverseData.assets.get(selectedAsset).neural_connections}
                     </span>
@@ -599,9 +599,9 @@ const MetaverseTradingInterface = ({ alex, quantumCore }) => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {mode === STR_NEURAL_NETWORK && <Cpu className=STR_W_4_H_4 />}
-              {mode === 'quantum_space' && <Atom className=STR_W_4_H_4 />}
-              {mode === 'trading_floor' && <Activity className=STR_W_4_H_4 />}
+              {mode === STR_NEURAL_NETWORK && <Cpu className="W_4_H_4 />}
+              {mode === 'quantum_space' && <Atom className="W_4_H_4 />}
+              {mode === 'trading_floor' && <Activity className="W_4_H_4 />}
             </motion.button>
           ))}
         </motion.div>
@@ -648,7 +648,7 @@ const MetaverseTradingInterface = ({ alex, quantumCore }) => {
                 <Brain className="w-4 h-4 text-green-400" />
                 <span className="text-xs text-green-400">Alex Quantum Thought</span>
               </div>
-              <p className=STR_TEXT_SM_TEXT_WHITE>{thought.text}</p>
+              <p className="text-sm"_TEXT_WHITE>{thought.text}</p>
             </motion.div>
           ))}
         </AnimatePresence>
