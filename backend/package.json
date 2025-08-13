@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Alex AI Backend - Consciousness Engine",
   "type": "module",
-  "main": "index.js",
+  "main": "index-minimal.js",
   "scripts": {
-    "start": "node scripts/pre-start-check.js && node index.js",
+    "start": "node index-minimal.js",
     "start:safe": "node scripts/pre-start-check.js && node index.js",
     "start:force": "node index.js",
     "start:cluster": "node scripts/pre-start-check.js && node server-cluster.js",
