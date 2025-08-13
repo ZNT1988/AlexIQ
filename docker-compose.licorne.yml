@@ -1,20 +1,29 @@
 # 🦄 ALEX LICORNE - Docker Compose Configuration
 # Version production-ready avec SQLite
 
-version: '3.8'
+version: "3.8"
 
 services:
-  alex-licorne:
+  backend:
     build:
-      context: .
-      dockerfile: Dockerfile.licorne
-    container_name: alex-licorne-system
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: alex-backend
     restart: unless-stopped
-    
-    # Ports
     ports:
       - "3001:3001"
     
+  frontend:
+    build:
+      context: ./frontend  
+      dockerfile: Dockerfile
+    container_name: alex-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
     # Variables d'environnement
     environment:
       - NODE_ENV=production
@@ -23,13 +32,13 @@ services:
       - DB_PATH=/app/data/hustlefinder.sqlite
       - LOG_LEVEL=info
       - DEBUG=false
-    
+
     # Volumes pour persistance SQLite
     volumes:
       - ./backend/db:/app/data
       - ./backend/logs:/app/logs
       - ./backend/db/backups:/app/backups
-    
+
     # Santé du conteneur
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3001/api/health"]
@@ -37,22 +46,22 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-    
+
     # Logs
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-    
+
     # Limites ressources
     deploy:
       resources:
         limits:
-          cpus: '2.0'
+          cpus: "2.0"
           memory: 1G
         reservations:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 256M
 
   # Service de monitoring (optionnel)
@@ -69,7 +78,7 @@ services:
     profiles:
       - monitoring
 
-  # Service de visualisation (optionnel)  
+  # Service de visualisation (optionnel)
   grafana:
     image: grafana/grafana:latest
     container_name: alex-licorne-grafana

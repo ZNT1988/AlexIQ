@@ -30,8 +30,8 @@ import logger from './config/logger.js';
 import { getAuthMiddleware, isUsingMockAuth } from './middleware/auth.js';
 
 // Import recovery systems
-// import systemRecovery from './utils/systemRecovery.js'; // Temporarily disabled
-// import enhancedHealthCheck from './utils/enhancedHealthCheck.js'; // Temporarily disabled
+import systemRecovery from './utils/systemRecovery.js';
+import enhancedHealthCheck from './utils/enhancedHealthCheck.js';
 
 // Import performance optimization systems
 import { getRedisCache } from './cache/RedisCache.js';
@@ -48,7 +48,7 @@ import alexMasterSystem from './alex-core/AlexMasterSystem.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3001;
 
 // Security middleware
 app.use(helmet());

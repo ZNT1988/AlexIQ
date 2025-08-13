@@ -7,8 +7,8 @@
  * @since 2025
  */
 
-const { EventEmitter } = require("events");
-const logger = require("../config/logger-simple");
+import { EventEmitter } from "events";
+import logger from "../config/logger.js";
 
 /**
  * @class UniversalModuleRegistry
@@ -1811,4 +1811,4 @@ class UniversalModuleRegistry extends EventEmitter {
   }
 }
 
-module.exports = UniversalModuleRegistry;
+export default UniversalModuleRegistry;

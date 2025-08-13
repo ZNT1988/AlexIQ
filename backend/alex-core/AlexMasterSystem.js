@@ -18,9 +18,9 @@ import logger from "../config/logger.js";
 // Import des systèmes fondamentaux
 import alexKernel from "./AlexKernel.js";
 import universalModuleRegistry from "./UniversalModuleRegistry.js";
-import alexCloudLearning from "./AlexCloudLearning.js";
+// import alexCloudLearning from "./AlexCloudLearning.js"; // Module manquant
 import alexCloudConfig from "../config/alexCloudConfig.js";
-import advancedOrchestrator from "./AdvancedModuleOrchestrator.js";
+// import advancedOrchestrator from "./AdvancedModuleOrchestrator.js"; // Module manquant
 
 /**
  * @class AlexMasterSystem
@@ -1058,7 +1058,7 @@ class AlexMasterSystem extends EventEmitter {
   /**
    * Détecte les nuances émotionnelles subtiles
    */
-   detectEmotionalSubtleties(message) {
+  detectEmotionalSubtleties(message) {
     const emotionalMarkers = {
       curiosity: /pourquoi|comment|qu'est-ce|intéressant|fascinant/i,
       concern: /inquiet|préoccupé|soucieux|anxieux|problème/i,

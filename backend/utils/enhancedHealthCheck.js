@@ -3,9 +3,11 @@ import crypto from 'crypto';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_ERROR = 'error';
-
-// Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_HEALTHY = 'healthy';
+const STR_MISSING = 'missing';
+const STR_DEGRADED = 'degraded';
+const STR_CRITICAL = 'critical';
+const STR_ENV = '.env';
 /**
  * Health Check Amélioré avec diagnostics détaillés
  * Fournit des informations complètes sur l'état du système
@@ -28,12 +30,12 @@ class EnhancedHealthCheck {
   async performFullCheck() {
     const checkStart = performance.now();
     const result = {
-      timestamp: new Date().toISOString()
-      status: STR_HEALTHY
-      uptime: this.getUptime()
-      checks: {}
-      performance: {}
-      recommendations: []
+      timestamp: new Date().toISOString(),
+      status: STR_HEALTHY,
+      uptime: this.getUptime(),
+      checks: {},
+      performance: {},
+      recommendations: [],
       autoFixApplied: []
     };
 
@@ -69,8 +71,8 @@ class EnhancedHealthCheck {
 
       // Enregistrer dans l'historique
       this.checkHistory.push({
-        timestamp: result.timestamp
-        status: result.status
+        timestamp: result.timestamp,
+        status: result.status,
         duration: result.checkDurationMs
       });
 
@@ -93,16 +95,16 @@ class EnhancedHealthCheck {
     const startMemory = process.memoryUsage();
 
     return {
-      status: STR_HEALTHY
-      nodeVersion: process.version
-      platform: process.platform
-      arch: process.arch
+      status: STR_HEALTHY,
+      nodeVersion: process.version,
+      platform: process.platform,
+      arch: process.arch,
       memory: {
-        used: Math.round(startMemory.heapUsed / 1024 / 1024)
-        total: Math.round(startMemory.heapTotal / 1024 / 1024)
+        used: Math.round(startMemory.heapUsed / 1024 / 1024),
+        total: Math.round(startMemory.heapTotal / 1024 / 1024),
         external: Math.round(startMemory.external / 1024 / 1024)
-      }
-      pid: process.pid
+      },
+      pid: process.pid,
       uptime: Math.round(process.uptime())
     };
   }
@@ -112,9 +114,9 @@ class EnhancedHealthCheck {
    */
   async checkCoreModules() {
     const modules = [
-      { name: 'HustleFinderCore', path: './core/HustleFinderCore.js' }
-      { name: 'NeuroCore', path: './core/NeuroCore.js' }
-      { name: 'AlexEvolutionCore', path: './core/AlexEvolutionCore.js' }
+      { name: 'HustleFinderCore', path: './core/HustleFinderCore.js' },
+      { name: 'NeuroCore', path: './core/NeuroCore.js' },
+      { name: 'AlexEvolutionCore', path: './core/AlexEvolutionCore.js' },
       { name: 'SoulPrintGenerator', path: './core/SoulPrintGenerator.js' }
     ];
 
@@ -127,7 +129,7 @@ class EnhancedHealthCheck {
 
         if (!fs.existsSync(modulePath)) {
           results[module.name] = {
-            status: STR_MISSING
+            status: STR_MISSING,
             error: 'Fichier non trouvé'
           };
           overallStatus = STR_CRITICAL;
@@ -138,23 +140,26 @@ class EnhancedHealthCheck {
         const imported = await import(`file://${modulePath}`);
 
         results[module.name] = {
-          status: STR_HEALTHY
-          hasDefault: !!imported.default
-          exports: Object.keys(imported).length
+          status: STR_HEALTHY,
+          hasDefault: !!imported.default,
+          exports: Object.keys(imported).length,
           size: fs.statSync(modulePath).size
         };
 
       } catch (error) {
-      // Logger fallback - ignore error
-    };
+        // Logger fallback - ignore error
+        results[module.name] = {
+          status: STR_ERROR,
+          error: error.message
+        };
         overallStatus = STR_DEGRADED;
       }
     }
 
     return {
-      status: overallStatus
-      modules: results
-      totalModules: modules.length
+      status: overallStatus,
+      modules: results,
+      totalModules: modules.length,
       healthyModules: Object.values(results).filter(r => r.status === STR_HEALTHY).length
     };
   }
@@ -169,15 +174,18 @@ class EnhancedHealthCheck {
       const dbExists = fs.existsSync(dbPath);
 
       return {
-        status: STR_HEALTHY
-        type: 'sqlite'
-        exists: dbExists
-        size: dbExists ? fs.statSync(dbPath).size : 0
+        status: STR_HEALTHY,
+        type: 'sqlite',
+        exists: dbExists,
+        size: dbExists ? fs.statSync(dbPath).size : 0,
         lastModified: dbExists ? fs.statSync(dbPath).mtime : null
       };
     } catch (error) {
       // Logger fallback - ignore error
-    };
+      return {
+        status: STR_ERROR,
+        error: error.message
+      };
     }
   }
 
@@ -199,13 +207,13 @@ class EnhancedHealthCheck {
     const memory = process.memoryUsage();
 
     return {
-      computeSpeed: Math.round(computeTime * 100) / 100
+      computeSpeed: Math.round(computeTime * 100) / 100,
       memoryUsage: {
-        heapUsed: Math.round(memory.heapUsed / 1024 / 1024)
-        heapTotal: Math.round(memory.heapTotal / 1024 / 1024)
+        heapUsed: Math.round(memory.heapUsed / 1024 / 1024),
+        heapTotal: Math.round(memory.heapTotal / 1024 / 1024),
         rss: Math.round(memory.rss / 1024 / 1024)
-      }
-      loadAverage: process.platform !== 'win32' ? require('os').loadAvg() : [0, 0, 0]
+      },
+      loadAverage: process.platform !== 'win32' ? require('os').loadavg() : [0, 0, 0]
     };
   }
 
@@ -214,8 +222,8 @@ class EnhancedHealthCheck {
    */
   async checkFileIntegrity() {
     const criticalFiles = [
-      'index.js'
-      'package.json'
+      'index.js',
+      'package.json',
       STR_ENV
     ];
 
@@ -226,8 +234,8 @@ class EnhancedHealthCheck {
       if (fs.existsSync(file)) {
         const stats = fs.statSync(file);
         results[file] = {
-          status: 'present'
-          size: stats.size
+          status: 'present',
+          size: stats.size,
           lastModified: stats.mtime
         };
       } else {
@@ -241,7 +249,7 @@ class EnhancedHealthCheck {
     }
 
     return {
-      status: overallStatus
+      status: overallStatus,
       files: results
     };
   }
@@ -267,9 +275,9 @@ class EnhancedHealthCheck {
     // Recommandations mémoire
     if (result.performance.memoryUsage.heapUsed > 100) {
       recommendations.push({
-        type: 'performance'
-        severity: 'medium'
-        message: 'Utilisation mémoire élevée, considérez un redémarrage'
+        type: 'performance',
+        severity: 'medium',
+        message: 'Utilisation mémoire élevée, considérez un redémarrage',
         action: 'restart_suggested'
       });
     }
@@ -277,9 +285,9 @@ class EnhancedHealthCheck {
     // Recommandations modules
     if (result.checks.coreModules.status !== STR_HEALTHY) {
       recommendations.push({
-        type: 'modules'
-        severity: 'high'
-        message: 'Problèmes détectés dans les modules core'
+        type: 'modules',
+        severity: 'high',
+        message: 'Problèmes détectés dans les modules core',
         action: 'check_modules'
       });
     }
@@ -287,9 +295,9 @@ class EnhancedHealthCheck {
     // Recommandations fichiers
     if (result.checks.fileIntegrity.status !== STR_HEALTHY) {
       recommendations.push({
-        type: 'files'
-        severity: 'medium'
-        message: 'Fichiers critiques manquants ou corrompus'
+        type: 'files',
+        severity: 'medium',
+        message: 'Fichiers critiques manquants ou corrompus',
         action: 'restore_files'
       });
     }
@@ -304,20 +312,18 @@ class EnhancedHealthCheck {
     const fixes = [];
 
     // Auto-fix: créer .env si manquant
-    if (result.checks.fileIntegrity.files[STR_ENV]?
-      .status === STR_MISSING) {
+    if (result.checks.fileIntegrity.files[STR_ENV]?.status === STR_MISSING) {
       try {
         const defaultEnv = 'PORT=8080\nNODE_ENV=development\n';
         fs.writeFileSync(STR_ENV, defaultEnv);
         fixes.push('Créé fichier .env par défaut');
       } catch (error) {
         try {
-      logger.error('Impossible de créer .env :
-      ', error);
-
-        } catch (error) {
-    // Logger fallback - ignore error
-  }}
+          logger.error('Impossible de créer .env :', error);
+        } catch (logError) {
+          // Logger fallback - ignore error
+        }
+      }
     }
 
     return fixes;
@@ -334,7 +340,7 @@ class EnhancedHealthCheck {
     const seconds = uptimeSeconds % 60;
 
     return {
-      ms: uptimeMs
+      ms: uptimeMs,
       formatted: `${hours}h ${minutes}m ${seconds}s`
     };
   }
