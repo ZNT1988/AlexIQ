@@ -112,6 +112,15 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Simple health check for Railway
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    system: 'AlexIQ'
+  });
+});
+
 // Enhanced health check with diagnostics
 app.get('/api/health/detailed', async (req, res) => {
   try {

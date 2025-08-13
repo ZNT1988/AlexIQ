@@ -10,6 +10,7 @@
     "start:force": "node index.js",
     "start:cluster": "node scripts/pre-start-check.js && node server-cluster.js",
     "start:production": "NODE_ENV=production node server-cluster.js",
+    "build": "echo 'Backend build completed successfully'",
     "build:prod": "echo 'Production build completed'",
     "dev": "node scripts/pre-start-check.js && nodemon index.js",
     "dev:force": "nodemon index.js",
