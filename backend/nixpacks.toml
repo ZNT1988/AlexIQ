@@ -1,8 +1,5 @@
 [variables]
 NODE_VERSION = "18.19.0"
 
-[phases.install]
-cmds = ["npm ci --legacy-peer-deps --quiet"]
-
 [start]
 cmd = "node index-ultra-minimal.js"
