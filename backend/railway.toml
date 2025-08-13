@@ -11,9 +11,4 @@ cmds = ["npm install --no-audit --no-fund --legacy-peer-deps --no-workspaces"]
 cmds = ["npm run build --if-present"]
 
 [start]
-cmd = "node index-railway.js"
-
-[deploy]
-healthcheckPath = "/api/health"
-healthcheckTimeout = 300
-restartPolicyType = "ON_FAILURE"
+cmd = "npm start"
