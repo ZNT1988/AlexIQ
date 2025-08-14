@@ -1,0 +1,9 @@
+[variables]
+NODE_VERSION = "18.19.0"
+NODE_ENV = "production"
+
+[phases.install]
+cmds = ["npm ci --omit=dev --quiet"]
+
+[start]
+cmd = "node index-ultra-minimal.js"
