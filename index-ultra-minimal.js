@@ -2,7 +2,7 @@ import { createServer } from 'http';
 
 const PORT = process.env.PORT || 3005;
 
-console.log('🚂 Railway deployment starting... [FORCE REDEPLOY]');
+console.log('🚂 Railway deployment starting... [VERCEL+RAILWAY SYNC]');
 console.log(`📍 Node version: ${process.version}`);
 console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
 console.log(`📡 Port: ${PORT}`);
