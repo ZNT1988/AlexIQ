@@ -52,12 +52,87 @@ const server = createServer((req, res) => {
   }
 
   if (url.pathname === '/api/ai/chat' && req.method === 'POST') {
-    res.writeHead(200);
-    res.end(JSON.stringify({
-      response: 'Hello from Alex Railway! Deployment successful.',
-      timestamp: new Date().toISOString(),
-      system: 'Railway Backend Operational'
-    }));
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', async () => {
+      try {
+        const { message, provider = 'anthropic' } = JSON.parse(body || '{}');
+        
+        if (!message) {
+          res.writeHead(400);
+          res.end(JSON.stringify({ error: 'Message required' }));
+          return;
+        }
+
+        // Anthropic Claude API
+        if (provider === 'anthropic') {
+          const response = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-api-key': process.env.ANTHROPIC_API_KEY,
+              'anthropic-version': '2023-06-01'
+            },
+            body: JSON.stringify({
+              model: 'claude-3-sonnet-20240229',
+              max_tokens: 1000,
+              messages: [{ role: 'user', content: message }]
+            })
+          });
+          
+          const data = await response.json();
+          
+          if (!response.ok || !data.content || !data.content[0]) {
+            throw new Error(data.error?.message || 'Invalid AI response');
+          }
+          
+          res.writeHead(200);
+          res.end(JSON.stringify({
+            response: data.content[0].text,
+            provider: 'claude-3-sonnet',
+            timestamp: new Date().toISOString()
+          }));
+        }
+        
+        // OpenAI GPT API  
+        else if (provider === 'openai') {
+          const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+            },
+            body: JSON.stringify({
+              model: 'gpt-4',
+              messages: [{ role: 'user', content: message }],
+              max_tokens: 1000
+            })
+          });
+          
+          const data = await response.json();
+          
+          if (!response.ok || !data.choices || !data.choices[0]) {
+            throw new Error(data.error?.message || 'Invalid OpenAI response');
+          }
+          
+          res.writeHead(200);
+          res.end(JSON.stringify({
+            response: data.choices[0].message.content,
+            provider: 'gpt-4',
+            timestamp: new Date().toISOString()
+          }));
+        }
+        
+      } catch (error) {
+        console.error('AI API Error:', error);
+        res.writeHead(500);
+        res.end(JSON.stringify({
+          error: 'AI service unavailable',
+          details: error.message,
+          timestamp: new Date().toISOString()
+        }));
+      }
+    });
     return;
   }
 
