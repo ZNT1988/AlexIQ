@@ -85,6 +85,8 @@ class EnhancedHealthCheck {
 
     } catch (error) {
       // Logger fallback - ignore error
+      logger.error('Error during full health check:', error);
+      throw error;
     }
   }
 
@@ -194,7 +196,6 @@ class EnhancedHealthCheck {
    */
   async checkPerformance() {
     const startTime = performance.now();
-
     // Test de calcul simple pour mesurer les performances
     let sum = 0;
     for (let i = 0; i < 100000; i++) {
@@ -203,8 +204,11 @@ class EnhancedHealthCheck {
 
     const endTime = performance.now();
     const computeTime = endTime - startTime;
-
+    
     const memory = process.memoryUsage();
+
+    // Returning sum to avoid compile error
+    sum = Math.round(sum * 100) / 100;
 
     return {
       computeSpeed: Math.round(computeTime * 100) / 100,
@@ -214,7 +218,7 @@ class EnhancedHealthCheck {
         rss: Math.round(memory.rss / 1024 / 1024)
       },
       loadAverage: process.platform !== 'win32' ? require('os').loadavg() : [0, 0, 0]
-    };
+    , sum : sum};
   }
 
   /**
@@ -318,11 +322,8 @@ class EnhancedHealthCheck {
         fs.writeFileSync(STR_ENV, defaultEnv);
         fixes.push('Créé fichier .env par défaut');
       } catch (error) {
-        try {
-          logger.error('Impossible de créer .env :', error);
-        } catch (logError) {
-          // Logger fallback - ignore error
-        }
+        logger.error('Impossible de créer .env :', error);
+        throw error;
       }
     }
 

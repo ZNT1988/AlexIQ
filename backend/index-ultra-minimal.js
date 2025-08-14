@@ -1,6 +1,6 @@
 import { createServer } from 'http';
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3003;
 
 const server = createServer((req, res) => {
   // CORS headers
