@@ -33,8 +33,8 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: process.env.NODE_ENV === 'production' 
-          ? 'https://api.alexiq.site' 
-          : 'http://localhost:3001',
+          ? 'https://alex-railway.railway.app' 
+          : 'http://localhost:3005',
         changeOrigin: true,
         secure: true,
         rewrite: path => path,
