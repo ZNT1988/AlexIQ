@@ -4,11 +4,15 @@ import crypto from 'crypto'
 import AlexHyperIntelligence from './alex-modules/consciousness/AlexHyperIntelligence.js'
 import MemoryPalace from './alex-modules/memory/MemoryPalace.js'
 import DecisionEngine from './alex-modules/decision/DecisionEngine.js'
+import VisualCortex from './alex-modules/vision/VisualCortex.js'
+import EmotionalIntelligence from './alex-modules/emotion/EmotionalIntelligence.js'
+import AlexInfiniteCreator from './alex-modules/creativity/AlexInfiniteCreator.js'
 
 const PORT = process.env.PORT || 3003
 
-// Initialisation des modules Palier 2
+// Initialisation des modules Palier 2 & 3
 let palier2Initialized = false
+let palier3Initialized = false
 
 async function initializePalier2() {
   try {
@@ -27,6 +31,30 @@ async function initializePalier2() {
   } catch (error) {
     console.error('❌ Failed to initialize Palier 2:', error)
     palier2Initialized = false
+  }
+}
+
+async function initializePalier3() {
+  try {
+    console.log('🚀 Initializing Palier 3 modules...')
+    
+    // Initialisation VisualCortex
+    await VisualCortex.initialize()
+    console.log('👁️ VisualCortex initialized')
+    
+    // Initialisation EmotionalIntelligence
+    await EmotionalIntelligence.initialize()
+    console.log('💝 EmotionalIntelligence initialized')
+    
+    // Initialisation AlexInfiniteCreator
+    await AlexInfiniteCreator.initialize()
+    console.log('🎨 AlexInfiniteCreator initialized')
+    
+    palier3Initialized = true
+    console.log('✅ Palier 3 - IA Augmentée ready!')
+  } catch (error) {
+    console.error('❌ Failed to initialize Palier 3:', error)
+    palier3Initialized = false
   }
 }
 
@@ -51,7 +79,7 @@ const server = createServer(async (req, res) => {
     res.end(JSON.stringify({
       status: 'healthy',
       timestamp: new Date().toISOString(),
-      system: 'Palier 2 - Mémoire & Décision',
+      system: 'Palier 3 - IA Augmentée',
       alex: {
         hyperIntelligence: {
           initialized: AlexHyperIntelligence?.isInitialized || false,
@@ -65,7 +93,20 @@ const server = createServer(async (req, res) => {
           initialized: DecisionEngine?.isInitialized || false,
           totalDecisions: DecisionEngine?.metrics?.totalDecisions || 0
         },
-        palier2Ready: palier2Initialized
+        visualCortex: {
+          initialized: VisualCortex?.isInitialized || false,
+          totalAnalyses: VisualCortex?.metrics?.totalAnalyses || 0
+        },
+        emotionalIntelligence: {
+          initialized: EmotionalIntelligence?.isInitialized || false,
+          totalAnalyses: EmotionalIntelligence?.metrics?.totalAnalyses || 0
+        },
+        infiniteCreator: {
+          initialized: AlexInfiniteCreator?.isInitialized || false,
+          totalCreations: AlexInfiniteCreator?.metrics?.totalCreations || 0
+        },
+        palier2Ready: palier2Initialized,
+        palier3Ready: palier3Initialized
       }
     }))
     return
@@ -85,16 +126,93 @@ const server = createServer(async (req, res) => {
           return
         }
 
-        // Traitement avec Palier 2 - Mémoire & Décision
+        // Traitement avec Palier 3 - IA Augmentée
         try {
           const sessionId = crypto.randomUUID()
           let response
 
-          if (palier2Initialized) {
+          if (palier3Initialized && palier2Initialized) {
             // 1. Récupération mémoires pertinentes
             const relevantMemories = await MemoryPalace.retrieveMemories(message, 3)
             
-            // 2. Prise de décision intelligente
+            // 2. Analyse émotionnelle du message
+            const emotionalAnalysis = await EmotionalIntelligence.analyzeEmotions(message, {
+              conversationStage: 'ongoing',
+              timeOfDay: new Date().getHours() < 12 ? 'morning' : 'evening',
+              userId: sessionId
+            })
+            
+            // 3. Prise de décision enrichie avec émotions
+            const decision = await DecisionEngine.makeDecision({
+              query: message,
+              relevantMemories,
+              emotionalContext: emotionalAnalysis,
+              intent: 'information_request',
+              conversationHistory: []
+            })
+
+            // 4. Génération créative si besoin
+            let creativeInsight = null
+            if (message.toLowerCase().includes('idée') || message.toLowerCase().includes('créatif') || 
+                message.toLowerCase().includes('innovation') || message.toLowerCase().includes('concept')) {
+              creativeInsight = await AlexInfiniteCreator.generateIdeas(message, {
+                domain: 'business',
+                quantity: 3,
+                creativity: 0.8
+              })
+            }
+
+            // 5. Traitement avec AlexHyperIntelligence enrichi
+            const context = {
+              memories: relevantMemories,
+              decision: decision,
+              emotions: emotionalAnalysis,
+              creativity: creativeInsight,
+              sessionId
+            }
+            
+            const result = await AlexHyperIntelligence.processQuery(message, context)
+            
+            // 6. Génération de réponse empathique
+            const empathicResponse = await EmotionalIntelligence.generateEmpathicResponse(
+              result.content, 
+              emotionalAnalysis, 
+              { sessionId }
+            )
+            
+            // 7. Stockage en mémoire avec contexte émotionnel
+            await MemoryPalace.storeMemory(
+              `Q: ${message} | R: ${empathicResponse.response}`, 
+              { 
+                sessionId, 
+                confidence: result.confidence,
+                emotion: emotionalAnalysis.primaryEmotion?.name,
+                empathy: empathicResponse.empathyScore
+              }
+            )
+
+            response = {
+              response: empathicResponse.response,
+              confidence: result.confidence,
+              domain: result.domain,
+              source: 'Alex_Palier3',
+              palier2: {
+                memoriesUsed: relevantMemories.length,
+                decisionConfidence: decision.confidence,
+                decisionType: decision.type
+              },
+              palier3: {
+                primaryEmotion: emotionalAnalysis.primaryEmotion?.name || 'neutral',
+                emotionalValence: emotionalAnalysis.overallValence || 0,
+                empathyScore: empathicResponse.empathyScore || 0.7,
+                hasCreativeInsight: !!creativeInsight,
+                responseStrategy: emotionalAnalysis.responseStrategy || 'neutral'
+              },
+              timestamp: new Date().toISOString()
+            }
+          } else if (palier2Initialized) {
+            // Fallback Palier 2
+            const relevantMemories = await MemoryPalace.retrieveMemories(message, 3)
             const decision = await DecisionEngine.makeDecision({
               query: message,
               relevantMemories,
@@ -102,7 +220,6 @@ const server = createServer(async (req, res) => {
               conversationHistory: []
             })
 
-            // 3. Traitement avec AlexHyperIntelligence enrichi
             const context = {
               memories: relevantMemories,
               decision: decision,
@@ -111,7 +228,6 @@ const server = createServer(async (req, res) => {
             
             const result = await AlexHyperIntelligence.processQuery(message, context)
             
-            // 4. Stockage en mémoire
             await MemoryPalace.storeMemory(
               `Q: ${message} | R: ${result.content}`, 
               { sessionId, confidence: result.confidence }
@@ -121,7 +237,7 @@ const server = createServer(async (req, res) => {
               response: result.content,
               confidence: result.confidence,
               domain: result.domain,
-              source: 'Alex_Palier2',
+              source: 'Alex_Palier2_Fallback',
               palier2: {
                 memoriesUsed: relevantMemories.length,
                 decisionConfidence: decision.confidence,
@@ -147,9 +263,9 @@ const server = createServer(async (req, res) => {
           // Fallback si erreur
           res.writeHead(200)
           res.end(JSON.stringify({ 
-            response: `Bonjour ! Je suis Alex avec Palier 2 - Mémoire & Décision. Vous avez dit: "${message}". Je traite votre demande avec mes capacités évoluées.`,
+            response: `Bonjour ! Je suis Alex avec Palier 3 - IA Augmentée (Vision, Émotions, Créativité). Vous avez dit: "${message}". Je traite votre demande avec mes capacités évoluées incluant l'analyse émotionnelle et la créativité.`,
             confidence: 0.6,
-            source: 'Alex_Palier2_Fallback',
+            source: 'Alex_Palier3_Fallback',
             timestamp: new Date().toISOString()
           }))
         }
@@ -167,9 +283,12 @@ const server = createServer(async (req, res) => {
 })
 
 server.listen(PORT, '0.0.0.0', async () => {
-  console.log(`🔥 Alex Palier 2 server on port ${PORT}`)
+  console.log(`🔥 Alex Palier 3 server on port ${PORT}`)
   console.log(`🧠 AlexHyperIntelligence: ${AlexHyperIntelligence ? 'Loaded' : 'Error'}`)
   
   // Initialisation Palier 2 en arrière-plan
   await initializePalier2()
+  
+  // Initialisation Palier 3 en arrière-plan
+  await initializePalier3()
 })
