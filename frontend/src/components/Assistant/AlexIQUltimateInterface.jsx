@@ -140,8 +140,13 @@ const AlexIQUltimateInterface = () => {
   };
 
   const handleSendMessage = async (text = inputText) => {
-    if (!text.trim()) return;
+    console.log('🎯 HandleSendMessage called with text:', text);
+    if (!text.trim()) {
+      console.log('❌ Empty text, returning early');
+      return;
+    }
 
+    console.log('🚀 Starting send message process...');
     setInputText('');
     setShowSuggestions(false);
     setIsThinking(true);
@@ -156,6 +161,7 @@ const AlexIQUltimateInterface = () => {
     ];
 
     for (let i = 0; i < thinkingSteps.length; i++) {
+      console.log('🧠 Thinking step:', thinkingSteps[i]);
       setThoughtProcess(thinkingSteps[i]);
       await new Promise(resolve => setTimeout(resolve, 300));
     }
@@ -163,8 +169,10 @@ const AlexIQUltimateInterface = () => {
     setIsThinking(false);
     setThoughtProcess('');
 
+    console.log('📞 Calling processInput with:', text);
     // Envoi à l'IA
     await processInput(text);
+    console.log('✅ ProcessInput completed');
   };
 
   const toggleVoiceRecognition = () => {
@@ -622,7 +630,11 @@ const AlexIQUltimateInterface = () => {
                   </button>
 
                   <button
-                    onClick={() => handleSendMessage()}
+                    onClick={() => {
+                      console.log('🔘 Send button clicked!');
+                      console.log('📝 Current inputText:', inputText);
+                      handleSendMessage();
+                    }}
                     disabled={!inputText.trim() || loading}
                     className={`p-3 rounded-2xl transition-all ${
                       inputText.trim() && !loading
