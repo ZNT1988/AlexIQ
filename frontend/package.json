@@ -1,6 +1,6 @@
 {
-  "name": "hustle-finder-frontend",
-  "version": "1.0.0",
+  "name": "alexiq-frontend",
+  "version": "2.0.0",
   "type": "module",
   "description": "Frontend Hustle Finder V1",
   "scripts": {
