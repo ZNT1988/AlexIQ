@@ -68,6 +68,8 @@ const server = createServer((req, res) => {
         if (provider === 'anthropic') {
           console.log('🔑 Anthropic key status:', process.env.ANTHROPIC_API_KEY ? `Present (${process.env.ANTHROPIC_API_KEY.substring(0, 10)}...)` : 'MISSING');
           console.log('🌍 All ENV vars:', Object.keys(process.env).filter(k => k.includes('API')));
+          console.log('🌍 ALL ENV vars containing KEY:', Object.keys(process.env).filter(k => k.includes('KEY')));
+          console.log('🌍 ALL ENV vars containing CLE:', Object.keys(process.env).filter(k => k.includes('CLE')));
           
           const apiKey = process.env.ANTHROPIC_API_KEY;
           if (!apiKey) {
