@@ -62,67 +62,19 @@ export const AIAssistantProvider = ({ children }) => {
       const updatedHistory = [...chatHistory, newHistoryEntry];
       setChatHistory(updatedHistory);
 
-      // Traitement réfléchi avec Alex
+      // Appel API simplifié (mode réfléchi désactivé temporairement)
       let finalResponse;
-      if (reflectiveMode && preferences.reflectiveThinking) {
-        const context = {
-          history: updatedHistory.slice(-5), // Derniers 5 échanges
-          userProfile: preferences,
-          previousProjects: []
-        };
-
-        const reflectiveResult = ReflectiveThinkingSystem.processReflectiveInput(input, context);
-
-        // Préparer le contexte enrichi pour l'API
-        const enrichedContext = {
-          ...context,
-          reflection: reflectiveResult.reflection,
-          consciousness: reflectiveResult.consciousness,
-          depth: reflectiveResult.depth,
-          contextualConnections: reflectiveResult.contextualConnections
-        };
-
-        // Call backend API avec contexte enrichi
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8081';
-        const response = await fetch(`${apiUrl}/api/ai/chat`, {
-          method: STR_POST,
-          headers: {
-            'Content-Type': STR_JSON_CONTENT
-          },
-          body: JSON.stringify({
-            message: input,
-            type: 'reflective_chat',
-            context: enrichedContext,
-            reflectiveInsights: reflectiveResult
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error(`API Error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        finalResponse = data.response || `Réflexion Alex: ${reflectiveResult.reflection.thought}`;
-
-        // Ajouter des insights réfléchis si l'API ne répond pas
-        if (!data.response) {
-          finalResponse += `\n\n💭 *Réflexion contextuelle*: ${reflectiveResult.reflection.thought}`;
-          if (reflectiveResult.contextualConnections.length > 0) {
-            finalResponse += `\n🔗 *Connexions*: ${reflectiveResult.contextualConnections.join(', ')}`;
-          }
-        }
-      } else {
+      {
         // Mode standard
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8081';
-        const response = await fetch(`${apiUrl}/api/ai/chat`, {
+        const apiUrl = import.meta.env.VITE_API_URL || '/api';
+        const response = await fetch(`${apiUrl}/ai/chat`, {
           method: STR_POST,
           headers: {
             'Content-Type': STR_JSON_CONTENT
           },
           body: JSON.stringify({
             message: input,
-            type: 'chat',
-            context: { history: updatedHistory.slice(-3) }
+            provider: 'anthropic'
           })
         });
 
@@ -164,7 +116,6 @@ export const AIAssistantProvider = ({ children }) => {
     setTranscript('');
     setResponse('');
     setChatHistory([]);
-    ReflectiveThinkingSystem.clearReflectionHistory();
   };
 
   const toggleReflectiveMode = () => {
@@ -172,7 +123,7 @@ export const AIAssistantProvider = ({ children }) => {
   };
 
   const getReflectionHistory = () => {
-    return ReflectiveThinkingSystem.getReflectionHistory();
+    return chatHistory.filter(entry => entry.type === 'assistant');
   };
 
   const value = {

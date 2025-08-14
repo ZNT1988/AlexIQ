@@ -8,39 +8,34 @@ function AlexChat() {
   return (
     <AIAssistantProvider>
       <div style={{
-        height: '100vh'
-      background: 'linear-gradient(135deg
-      #1a1a2e
-      #16213e)'
-      display: 'flex'
-      flexDirection: 'column'
+        height: '100vh',
+        background: 'linear-gradient(135deg, #1a1a2e, #16213e)',
+        display: 'flex',
+        flexDirection: 'column'
       }}>
         {/* Header */}
         <div style={{
-          padding: '20px'
-      background: 'rgba(0
-      0
-      0
-      0.3)'
-      borderBottom: '1px solid #333'
-      display: 'flex'
-      alignItems: 'center'
-      gap: '15px'
+          padding: '20px',
+          background: 'rgba(0, 0, 0, 0.3)',
+          borderBottom: '1px solid #333',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '15px'
         }}>
           <div style={{
-            width: '50px'
-            height: '50px'
-            borderRadius: '50%'
-            background: 'radial-gradient(circle, #00f5ff, #0078ff)'
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, #00f5ff, #0078ff)',
             animation: 'pulse 2s infinite'
           }}></div>
           <div>
             <h1 style={{
-              margin: 0
-              color: 'white'
-              fontSize: '24px'
-              background: 'linear-gradient(45deg, #00f5ff, #0078ff)'
-              WebkitBackgroundClip: 'text'
+              margin: 0,
+              color: 'white',
+              fontSize: '24px',
+              background: 'linear-gradient(45deg, #00f5ff, #0078ff)',
+              WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
             }}>
               Chat avec ALEX

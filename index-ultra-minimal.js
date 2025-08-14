@@ -66,11 +66,19 @@ const server = createServer((req, res) => {
 
         // Anthropic Claude API
         if (provider === 'anthropic') {
+          console.log('🔑 Anthropic key status:', process.env.ANTHROPIC_API_KEY ? `Present (${process.env.ANTHROPIC_API_KEY.substring(0, 10)}...)` : 'MISSING');
+          console.log('🌍 All ENV vars:', Object.keys(process.env).filter(k => k.includes('API')));
+          
+          const apiKey = process.env.ANTHROPIC_API_KEY;
+          if (!apiKey) {
+            throw new Error('ANTHROPIC_API_KEY not found in environment variables');
+          }
+          
           const response = await fetch('https://api.anthropic.com/v1/messages', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'x-api-key': process.env.ANTHROPIC_API_KEY,
+              'x-api-key': apiKey,
               'anthropic-version': '2023-06-01'
             },
             body: JSON.stringify({
