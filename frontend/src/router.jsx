@@ -1,21 +1,17 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
-import Generator from './pages/Generator';
 import AlexChat from './pages/AlexChat';
-import AISystemInterface from './components/AI/AISystemInterface';
-import AlexModernChatPage from './pages/AlexModernChat';
 
+/**
+ * Router simplifié - Focus sur AlexIQ Ultimate
+ */
 const AppRouter = () => {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/dashboard' element={<Dashboard />} />
-      <Route path='/generator' element={<Generator />} />
       <Route path='/AlexChat' element={<AlexChat />} />
-      <Route path='/ai-system' element={<AISystemInterface />} />
-      <Route path='/alex' element={<AlexModernChatPage />} />
-      <Route path='/chat' element={<AlexModernChatPage />} />
+      {/* Toutes les autres routes redirigent vers AlexChat */}
+      <Route path='*' element={<Navigate to="/AlexChat" replace />} />
     </Routes>
   );
 };
