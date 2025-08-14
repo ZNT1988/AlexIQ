@@ -1,0 +1,19 @@
+{
+  "name": "alex-ai-backend-palier1",
+  "version": "1.0.0",
+  "description": "Alex AI Backend Palier 1 - Base stable avec AlexHyperIntelligence",
+  "type": "module",
+  "main": "index-palier1.js",
+  "scripts": {
+    "start": "node index-palier1.js",
+    "dev": "node index-palier1.js",
+    "palier1": "node index-palier1.js"
+  },
+  "engines": {
+    "node": ">=18.19.0 <23.0.0"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.6",
+    "sqlite": "^5.1.1"
+  }
+}

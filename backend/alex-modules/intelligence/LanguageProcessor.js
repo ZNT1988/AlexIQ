@@ -1,13 +1,9 @@
-import logger from '../config/logger.js';
-
+import logger from '../../config/logger.js';
+import crypto from 'crypto';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_UNDEFINED = 'undefined';
-
-const crypto = require('crypto');
-
-// Constantes pour chaînes dupliquées (optimisation SonarJS)
-
+const STR_UNIVERSAL = 'universal';
 const STR_NEUTRAL = 'neutral';
 /**
  * LanguageProcessor.js - Module Linguistique Complet
@@ -22,148 +18,58 @@ class LanguageProcessor {
         this.config = {
             supportedLanguages: config.supportedLanguages || [
                 // Langues principales
-                'en'
-      'fr'
-      'es'
-      'de'
-      'it'
-      'pt'
-      'ru'
-      'zh'
-      'ja'
-      'ko'
-      'ar'
-      'hi'
-      // Langues européennes
-                'nl'
-      'sv'
-      'da'
-      'no'
-      'fi'
-      'pl'
-      'cs'
-      'sk'
-      'hu'
-      'ro'
-      'bg'
-      'hrSTR_sl'
-      'et'
-      'lv'
-      'lt'
-      'mt'
-      'ga'
-      'cy'
-      'eu'
-      'ca'
-      'gl'
-      'tr'
-      'el'
-      // Langues asiatiques
-                'th'
-      'vi'
-      'id'
-      'ms'
-      'tl'
-      'my'
-      'km'
-      'lo'
-      'si'
-      'ta'
-      'te'
-      'mlSTR_kn'
-      'gu'
-      'bn'
-      'as'
-      'or'
-      'pa'
-      'ur'
-      'ne'
-      'mr'
-      'sa'
-      'hi'
-      'bo'
-      // Langues africaines et autres
-                'sw'
-      'am'
-      'ha'
-      'yo'
-      'ig'
-      'zu'
-      'xh'
-      'af'
-      'he'
-      'fa'
-      'ku'
-      'azSTR_ka'
-      'hy'
-      'kk'
-      'ky'
-      'uz'
-      'tk'
-      'mn'
-      'is'
-      'fo'
-      'lb'
-      'rm'
-            ]
-      nlpCapabilities: config.nlpCapabilities || [
-                'tokenization'
-      'pos_tagging'
-      'ner'
-      'dependency_parsing'
-      'semantic_parsingSTR_sentiment_analysis'
-      'emotion_detection'
-      'intent_recognition'
-      'entity_extractionSTR_relation_extraction'
-      'coreference_resolution'
-      'discourse_analysisSTR_pragmatic_analysis'
-      'stylistic_analysis'
-      'readability_analysis'
-            ]
-      generationModes: config.generationModes || [
-                'creative'
-      'formal'
-      'casual'
-      'technical'
-      'poetic'
-      'narrativeSTR_argumentative'
-      'explanatory'
-      'conversational'
-      'academic'
-            ]
-      translationQuality: config.translationQuality || 'neural_premium'
-      contextWindowSize: config.contextWindowSize || 32768
-      semanticDepth: config.semanticDepth || 'deep'
-      culturalAdaptation: config.culturalAdaptation || true
-      realTimeProcessing: config.realTimeProcessing || true
-      learningMode: config.learningMode || 'continuous'
-      creativityLevel: config.creativityLevel || 0.8
-      formalitySpectrum: config.formalitySpectrum || ['very_informal'
-      'informal'
-      STR_NEUTRAL
-      'formal'
-      'very_formal']
-      ...config
+                'en', 'fr', 'es', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'ar', 'hi',
+                // Langues européennes
+                'nl', 'sv', 'da', 'no', 'fi', 'pl', 'cs', 'sk', 'hu', 'ro', 'bg', 'hr', 'sl',
+                'et', 'lv', 'lt', 'mt', 'ga', 'cy', 'eu', 'ca', 'gl', 'tr', 'el',
+                // Langues asiatiques
+                'th', 'vi', 'id', 'ms', 'tl', 'my', 'km', 'lo', 'si', 'ta', 'te', 'ml', 'kn',
+                'gu', 'bn', 'as', 'or', 'pa', 'ur', 'ne', 'mr', 'sa', 'bo',
+                // Langues africaines et autres
+                'sw', 'am', 'ha', 'yo', 'ig', 'zu', 'xh', 'af', 'he', 'fa', 'ku', 'az', 'ka',
+                'hy', 'kk', 'ky', 'uz', 'tk', 'mn', 'is', 'fo', 'lb', 'rm'
+            ],
+            nlpCapabilities: config.nlpCapabilities || [
+                'tokenization', 'pos_tagging', 'ner', 'dependency_parsing', 'semantic_parsing',
+                'sentiment_analysis', 'emotion_detection', 'intent_recognition', 'entity_extraction',
+                'relation_extraction', 'coreference_resolution', 'discourse_analysis', 'pragmatic_analysis',
+                'stylistic_analysis', 'readability_analysis'
+            ],
+            generationModes: config.generationModes || [
+                'creative', 'formal', 'casual', 'technical', 'poetic', 'narrative',
+                'argumentative', 'explanatory', 'conversational', 'academic'
+            ],
+            translationQuality: config.translationQuality || 'neural_premium',
+            contextWindowSize: config.contextWindowSize || 32768,
+            semanticDepth: config.semanticDepth || 'deep',
+            culturalAdaptation: config.culturalAdaptation || true,
+            realTimeProcessing: config.realTimeProcessing || true,
+            learningMode: config.learningMode || 'continuous',
+            creativityLevel: config.creativityLevel || 0.8,
+            formalitySpectrum: config.formalitySpectrum || [
+                'very_informal', 'informal', STR_NEUTRAL, 'formal', 'very_formal'
+            ],
+            ...config
         };
 
         // Architecture linguistique avancée
         this.languageEngines = {
             // Moteurs de base
-            tokenizer: new AdvancedTokenizer(this.config)
-      parser: new SemanticParser(this.config)
-      generator: new TextGenerator(this.config)
-      translator: new NeuralTranslator(this.config)
-      // Analyseurs spécialisés
-            sentimentAnalyzer: new SentimentAnalyzer(this.config)
-      emotionDetector: new EmotionDetector(this.config)
-      intentRecognizer: new IntentRecognizer(this.config)
-      entityExtractor: new EntityExtractor(this.config)
-      // Systèmes avancés
-            contextualizer: new ContextualUnderstanding(this.config)
-      pragmaticsEngine: new PragmaticsEngine(this.config)
-      discourseAnalyzer: new DiscourseAnalyzer(this.config)
-      styleAnalyzer: new StyleAnalyzer(this.config)
-      culturalAdapter: new CulturalAdapter(this.config)
+            tokenizer: new AdvancedTokenizer(this.config),
+            parser: new SemanticParser(this.config),
+            generator: new TextGenerator(this.config),
+            translator: new NeuralTranslator(this.config),
+            // Analyseurs spécialisés
+            sentimentAnalyzer: new SentimentAnalyzer(this.config),
+            emotionDetector: new EmotionDetector(this.config),
+            intentRecognizer: new IntentRecognizer(this.config),
+            entityExtractor: new EntityExtractor(this.config),
+            // Systèmes avancés
+            contextualizer: new ContextualUnderstanding(this.config),
+            pragmaticsEngine: new PragmaticsEngine(this.config),
+            discourseAnalyzer: new DiscourseAnalyzer(this.config),
+            styleAnalyzer: new StyleAnalyzer(this.config),
+            culturalAdapter: new CulturalAdapter(this.config)
         };
 
         // Modèles linguistiques par langue
@@ -171,10 +77,10 @@ class LanguageProcessor {
 
         // Bases de connaissances
         this.knowledgeBases = {
-            semantic: new SemanticKnowledgeBase(this.config)
-            cultural: new CulturalKnowledgeBase(this.config)
-            domain: new DomainKnowledgeBase(this.config)
-            style: new StyleKnowledgeBase(this.config)
+            semantic: new SemanticKnowledgeBase(this.config),
+            cultural: new CulturalKnowledgeBase(this.config),
+            domain: new DomainKnowledgeBase(this.config),
+            style: new StyleKnowledgeBase(this.config),
             pragmatic: new PragmaticKnowledgeBase(this.config)
         };
 
@@ -187,25 +93,25 @@ class LanguageProcessor {
         // État du processeur
         this.processorState = {
             activeLanguages: new Set(['en']), // Langue par défaut
-            currentContext: new Map()
-            conversationHistory: []
-            learningBuffer: []
-            performanceMetrics: new Map()
-            adaptationHistory: []
+            currentContext: new Map(),
+            conversationHistory: [],
+            learningBuffer: [],
+            performanceMetrics: new Map(),
+            adaptationHistory: [],
             processingQueue: []
         };
 
         // Métriques avancées
         this.metrics = {
-            textsProcessed: 0
-            languagesDetected: 0
-            translationsPerformed: 0
-            generationsCreated: 0
-            conversationTurns: 0
-            averageProcessingTime: 0
-            comprehensionAccuracy: 0
-            generationQuality: 0
-            culturalAdaptations: 0
+            textsProcessed: 0,
+            languagesDetected: 0,
+            translationsPerformed: 0,
+            generationsCreated: 0,
+            conversationTurns: 0,
+            averageProcessingTime: 0,
+            comprehensionAccuracy: 0,
+            generationQuality: 0,
+            culturalAdaptations: 0,
             creativityScore: 0
         };
 
@@ -254,33 +160,33 @@ class LanguageProcessor {
     async setupNLPEngines() {
         // Configuration du tokenizer avancé
         await this.languageEngines.tokenizer.configure({
-            subwordTokenization: true
-            languageAdaptive: true
-            contextualTokenization: true
+            subwordTokenization: true,
+            languageAdaptive: true,
+            contextualTokenization: true,
             multilingualSupport: true
         });
 
         // Configuration du parser sémantique
         await this.languageEngines.parser.configure({
-            dependencyParsing: true
-            semanticRoleParsing: true
-            discourseAnalysis: true
+            dependencyParsing: true,
+            semanticRoleParsing: true,
+            discourseAnalysis: true,
             pragmaticInference: true
         });
 
         // Configuration du générateur de texte
         await this.languageEngines.generator.configure({
-            creativityModes: this.config.generationModes
-            styleAdaptation: true
-            contextualCoherence: true
+            creativityModes: this.config.generationModes,
+            styleAdaptation: true,
+            contextualCoherence: true,
             factualConsistency: true
         });
 
         // Configuration du traducteur neuronal
         await this.languageEngines.translator.configure({
-            quality: this.config.translationQuality
-            culturalAdaptation: this.config.culturalAdaptation
-            domainSpecialization: true
+            quality: this.config.translationQuality,
+            culturalAdaptation: this.config.culturalAdaptation,
+            domainSpecialization: true,
             stylePreservation: true
         });
     }
@@ -317,14 +223,14 @@ class LanguageProcessor {
 
             // Tokenisation avancée
             const tokens = await this.languageEngines.tokenizer.tokenize(normalizedText, {
-                language: languageDetection.language
-                preserveCase: options.preserveCase
+                language: languageDetection.language,
+                preserveCase: options.preserveCase,
                 includePunctuation: true
             });
 
             // Analyse syntaxique et sémantique
             const syntacticAnalysis = await this.languageEngines.parser.parse(tokens, {
-                language: languageDetection.language
+                language: languageDetection.language,
                 depth: this.config.semanticDepth
             });
 
@@ -333,54 +239,54 @@ class LanguageProcessor {
 
             // Analyse des sentiments et émotions
             const sentimentAnalysis = await this.languageEngines.sentimentAnalyzer.analyze(
-                normalizedText
+                normalizedText,
                 syntacticAnalysis
             );
             const emotionAnalysis = await this.languageEngines.emotionDetector.detect(
-                normalizedText
+                normalizedText,
                 syntacticAnalysis
             );
 
             // Reconnaissance d'intention
             const intentAnalysis = await this.languageEngines.intentRecognizer.recognize(
-                normalizedText
-                syntacticAnalysis
+                normalizedText,
+                syntacticAnalysis,
                 entities
             );
 
             // Compréhension contextuelle
             const contextualUnderstanding = await this.comprehensionEngine.understand(
-                normalizedText
-                syntacticAnalysis
-                entities
-                sentimentAnalysis
+                normalizedText,
+                syntacticAnalysis,
+                entities,
+                sentimentAnalysis,
                 this.processorState.currentContext
             );
 
             // Analyse pragmatique
             const pragmaticAnalysis = await this.languageEngines.pragmaticsEngine.analyze(
-                normalizedText
-                contextualUnderstanding
+                normalizedText,
+                contextualUnderstanding,
                 this.processorState.conversationHistory
             );
 
             // Analyse stylistique
             const styleAnalysis = await this.languageEngines.styleAnalyzer.analyze(
-                normalizedText
+                normalizedText,
                 syntacticAnalysis
             );
 
             // Synthèse complète
             const comprehensiveAnalysis = await this.synthesizeAnalysis({
-                language: languageDetection
-                tokens
-                syntax: syntacticAnalysis
-                entities
-                sentiment: sentimentAnalysis
-                emotion: emotionAnalysis
-                intent: intentAnalysis
-                context: contextualUnderstanding
-                pragmatics: pragmaticAnalysis
+                language: languageDetection,
+                tokens,
+                syntax: syntacticAnalysis,
+                entities,
+                sentiment: sentimentAnalysis,
+                emotion: emotionAnalysis,
+                intent: intentAnalysis,
+                context: contextualUnderstanding,
+                pragmatics: pragmaticAnalysis,
                 style: styleAnalysis
             });
 
@@ -392,8 +298,8 @@ class LanguageProcessor {
 
             // Callbacks
             this.triggerCallbacks('textProcessed', {
-                original: text
-                analysis: comprehensiveAnalysis
+                original: text,
+                analysis: comprehensiveAnalysis,
                 processingTime
             });
 
@@ -414,53 +320,53 @@ class LanguageProcessor {
 
         try {
             // Analyse du prompt
-            const promptAnalysis = await this.processText(prompt
-      { preserveCase: true });
+            const promptAnalysis = await this.processText(prompt,
+                { preserveCase: true });
 
             // Détermination du style et du ton
-            const generationStyle = await this.determineGenerationStyle(promptAnalysis
-      options);
+            const generationStyle = await this.determineGenerationStyle(promptAnalysis,
+                options);
 
             // Configuration de la génération
             const generationConfig = await this.configureGeneration(
-                promptAnalysis
-      generationStyle
-      options
+                promptAnalysis,
+                generationStyle,
+                options
             );
 
             // Génération créative
             const generatedText = await this.languageEngines.generator.generate(
-                prompt
-      generationConfig
+                prompt,
+                generationConfig
             );
 
             // Post-traitement et raffinement
-            const refinedText = await this.refineGeneration(generatedText
-      generationConfig);
+            const refinedText = await this.refineGeneration(generatedText,
+                generationConfig);
 
             // Validation de cohérence
-            const coherenceValidation = await this.validateCoherence(refinedText
-      prompt);
+            const coherenceValidation = await this.validateCoherence(refinedText,
+                prompt);
 
             // Adaptation culturelle si nécessaire
             const culturallyAdapted = await this.applyCulturalAdaptation(
-                refinedText
-      generationConfig.targetCulture || STR_UNIVERSAL
+                refinedText,
+                generationConfig.targetCulture || STR_UNIVERSAL
             );
 
             const generationTime = performance.now() - startTime;
 
             const result = {
-                generatedText: culturallyAdapted
-      originalPrompt: prompt
-      style: generationStyle
-      coherence: coherenceValidation
-      metadata: {
-                    generationTime
-      wordsGenerated: culturallyAdapted.split(' ').length
-      language: generationConfig.language
-      creativity: generationConfig.creativity
-      formality: generationConfig.formality
+                generatedText: culturallyAdapted,
+                originalPrompt: prompt,
+                style: generationStyle,
+                coherence: coherenceValidation,
+                metadata: {
+                    generationTime,
+                    wordsGenerated: culturallyAdapted.split(' ').length,
+                    language: generationConfig.language,
+                    creativity: generationConfig.creativity,
+                    formality: generationConfig.formality
                 }
             };
 
@@ -488,10 +394,10 @@ class LanguageProcessor {
 
             if (sourceLanguage.language === targetLanguage) {
                 return {
-                    translatedText: text
-                    sourceLanguage: sourceLanguage.language
-                    targetLanguage
-                    confidence: 1.0
+                    translatedText: text,
+                    sourceLanguage: sourceLanguage.language,
+                    targetLanguage,
+                    confidence: 1.0,
                     note: 'No translation needed'
                 };
             }
@@ -501,21 +407,21 @@ class LanguageProcessor {
 
             // Préparation pour traduction
             const preparedForTranslation = await this.prepareForTranslation(
-                text
-                sourceAnalysis
-                sourceLanguage.language
+                text,
+                sourceAnalysis,
+                sourceLanguage.language,
                 targetLanguage
             );
 
             // Traduction neuronale
             const translationResult = await this.languageEngines.translator.translate(
-                preparedForTranslation
-                sourceLanguage.language
-                targetLanguage
+                preparedForTranslation,
+                sourceLanguage.language,
+                targetLanguage,
                 {
-                    preserveStyle: options.preserveStyle !== false
-                    adaptCulture: options.adaptCulture !== false
-                    domain: options.domain || 'general'
+                    preserveStyle: options.preserveStyle !== false,
+                    adaptCulture: options.adaptCulture !== false,
+                    domain: options.domain || 'general',
                     formality: options.formality || 'auto'
                 }
             );

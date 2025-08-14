@@ -22,8 +22,15 @@
       "Bash(npm install:*)",
       "Bash(mkdir:*)",
       "Bash(npm test:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(timeout:*)",
+      "Bash(pkill:*)",
+      "Bash(PORT=3004 timeout 15s node index-palier1.js)"
     ],
-    "deny": []
+    "deny": [],
+    "defaultMode": "acceptEdits",
+    "additionalDirectories": [
+      "C:\\c\\dev\\HustleFinderIA"
+    ]
   }
 }
