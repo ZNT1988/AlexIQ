@@ -1,8 +1,34 @@
 import { createServer } from 'http'
 import url from 'url'
+import crypto from 'crypto'
 import AlexHyperIntelligence from './alex-modules/consciousness/AlexHyperIntelligence.js'
+import MemoryPalace from './alex-modules/memory/MemoryPalace.js'
+import DecisionEngine from './alex-modules/decision/DecisionEngine.js'
 
 const PORT = process.env.PORT || 3003
+
+// Initialisation des modules Palier 2
+let palier2Initialized = false
+
+async function initializePalier2() {
+  try {
+    console.log('🚀 Initializing Palier 2 modules...')
+    
+    // Initialisation MemoryPalace
+    await MemoryPalace.initialize()
+    console.log('💾 MemoryPalace initialized')
+    
+    // Initialisation DecisionEngine  
+    await DecisionEngine.initialize()
+    console.log('⚡ DecisionEngine initialized')
+    
+    palier2Initialized = true
+    console.log('✅ Palier 2 - Mémoire & Décision ready!')
+  } catch (error) {
+    console.error('❌ Failed to initialize Palier 2:', error)
+    palier2Initialized = false
+  }
+}
 
 const server = createServer(async (req, res) => {
   // CORS headers
@@ -25,10 +51,21 @@ const server = createServer(async (req, res) => {
     res.end(JSON.stringify({
       status: 'healthy',
       timestamp: new Date().toISOString(),
-      system: 'Palier 1 - Alex HyperIntelligence',
+      system: 'Palier 2 - Mémoire & Décision',
       alex: {
-        initialized: AlexHyperIntelligence?.isInitialized || false,
-        version: AlexHyperIntelligence?.version || '4.0.0'
+        hyperIntelligence: {
+          initialized: AlexHyperIntelligence?.isInitialized || false,
+          version: AlexHyperIntelligence?.version || '4.0.0'
+        },
+        memoryPalace: {
+          initialized: MemoryPalace?.isInitialized || false,
+          totalMemories: MemoryPalace?.metrics?.totalMemories || 0
+        },
+        decisionEngine: {
+          initialized: DecisionEngine?.isInitialized || false,
+          totalDecisions: DecisionEngine?.metrics?.totalDecisions || 0
+        },
+        palier2Ready: palier2Initialized
       }
     }))
     return
@@ -48,24 +85,71 @@ const server = createServer(async (req, res) => {
           return
         }
 
-        // Alex HyperIntelligence (avec fallback)
+        // Traitement avec Palier 2 - Mémoire & Décision
         try {
-          const result = await AlexHyperIntelligence.processQuery(message, {})
+          const sessionId = crypto.randomUUID()
+          let response
+
+          if (palier2Initialized) {
+            // 1. Récupération mémoires pertinentes
+            const relevantMemories = await MemoryPalace.retrieveMemories(message, 3)
+            
+            // 2. Prise de décision intelligente
+            const decision = await DecisionEngine.makeDecision({
+              query: message,
+              relevantMemories,
+              intent: 'information_request',
+              conversationHistory: []
+            })
+
+            // 3. Traitement avec AlexHyperIntelligence enrichi
+            const context = {
+              memories: relevantMemories,
+              decision: decision,
+              sessionId
+            }
+            
+            const result = await AlexHyperIntelligence.processQuery(message, context)
+            
+            // 4. Stockage en mémoire
+            await MemoryPalace.storeMemory(
+              `Q: ${message} | R: ${result.content}`, 
+              { sessionId, confidence: result.confidence }
+            )
+
+            response = {
+              response: result.content,
+              confidence: result.confidence,
+              domain: result.domain,
+              source: 'Alex_Palier2',
+              palier2: {
+                memoriesUsed: relevantMemories.length,
+                decisionConfidence: decision.confidence,
+                decisionType: decision.type
+              },
+              timestamp: new Date().toISOString()
+            }
+          } else {
+            // Fallback Palier 1
+            const result = await AlexHyperIntelligence.processQuery(message, {})
+            response = {
+              response: result.content,
+              confidence: result.confidence,
+              domain: result.domain,
+              source: 'Alex_Palier1_Fallback',
+              timestamp: new Date().toISOString()
+            }
+          }
+
           res.writeHead(200)
-          res.end(JSON.stringify({ 
-            response: result.content,
-            confidence: result.confidence,
-            domain: result.domain,
-            source: 'AlexHyperIntelligence',
-            timestamp: new Date().toISOString()
-          }))
+          res.end(JSON.stringify(response))
         } catch (aiError) {
-          // Fallback si Alex pas encore prêt
+          // Fallback si erreur
           res.writeHead(200)
           res.end(JSON.stringify({ 
-            response: `Bonjour ! Je suis Alex, l'IA la plus avancée. Vous avez dit: "${message}". Je traite votre demande avec mon intelligence hybride en évolution.`,
-            confidence: 0.7,
-            source: 'Alex_Fallback',
+            response: `Bonjour ! Je suis Alex avec Palier 2 - Mémoire & Décision. Vous avez dit: "${message}". Je traite votre demande avec mes capacités évoluées.`,
+            confidence: 0.6,
+            source: 'Alex_Palier2_Fallback',
             timestamp: new Date().toISOString()
           }))
         }
@@ -82,7 +166,10 @@ const server = createServer(async (req, res) => {
   res.end(JSON.stringify({ error: 'Not found' }))
 })
 
-server.listen(PORT, '0.0.0.0', () => {
-  console.log(`🔥 Alex Palier 1 server on port ${PORT}`)
+server.listen(PORT, '0.0.0.0', async () => {
+  console.log(`🔥 Alex Palier 2 server on port ${PORT}`)
   console.log(`🧠 AlexHyperIntelligence: ${AlexHyperIntelligence ? 'Loaded' : 'Error'}`)
+  
+  // Initialisation Palier 2 en arrière-plan
+  await initializePalier2()
 })

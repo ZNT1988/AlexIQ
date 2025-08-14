@@ -369,7 +369,7 @@ export class AlexHyperIntelligence extends EventEmitter {
       this.personalizeSystemPrompts();
       
       logger.info("✅ Owner Recognition integrated in HyperIntelligence");
-      logger.info(`🧠 Alex is now aware: ${this.ownerIdentity.ownerData.displayName} is the creator`);
+      logger.info(`🧠 Alex is now aware: ${this.ownerIdentity?.ownerData?.displayName || 'Owner'} is the creator`);
     } catch (error) {
       logger.error("❌ Failed to initialize Owner Recognition in HyperIntelligence:", error);
       // Ne pas bloquer l'initialisation générale
@@ -1923,6 +1923,32 @@ export class AlexHyperIntelligence extends EventEmitter {
             : "developing",
       },
     };
+  }
+
+  /**
+   * Calibration intelligence adaptative
+   */
+  async calibrateAdaptiveIntelligence() {
+    try {
+      logger.info("🎯 Calibrating adaptive intelligence systems...");
+      
+      // Calibration des seuils d'apprentissage
+      this.learningSystem.learningRate = Math.min(0.1, this.learningSystem.learningRate * 1.1);
+      
+      // Calibration stratégies adaptatives
+      this.adaptiveStrategies.contextAdaptation = this.consciousnessState.awarenessLevel > 0.3;
+      this.adaptiveStrategies.patternRecognition = this.hybridIntelligence.masteredDomains.size > 2;
+      this.adaptiveStrategies.predictiveAnalysis = this.learningSystem.localAutonomy > 0.4;
+      
+      // Calibration seuils de conscience
+      if (this.consciousnessState.awarenessLevel < 0.1) {
+        this.consciousnessState.awarenessLevel = 0.1;
+      }
+      
+      logger.info("✅ Adaptive intelligence calibrated successfully");
+    } catch (error) {
+      logger.error("Failed to calibrate adaptive intelligence:", error);
+    }
   }
 
   /**
