@@ -13,35 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Use Node 22.12
+      - name: Use Node 22.16
         uses: actions/setup-node@v4
         with:
-          node-version: '22.12.x'
+          node-version: '22.16.x'
           cache: 'npm'
-          cache-dependency-path: |
-            backend/package-lock.json
-            frontend/package-lock.json
+          cache-dependency-path: package-lock.json
             
-      - name: Install Backend
-        working-directory: backend
-        run: npm install --no-audit --no-fund --legacy-peer-deps --no-workspaces
+      - name: Install Dependencies
+        run: npm install --no-audit --no-fund --legacy-peer-deps
         
-      - name: Build Backend
-        working-directory: backend
+      - name: Build Project
         run: npm run build --if-present
         
-      - name: Install Frontend
-        working-directory: frontend
-        run: npm install --no-audit --no-fund --legacy-peer-deps --no-workspaces
-        
-      - name: Build Frontend
-        working-directory: frontend
-        run: npm run build
-        
-      - name: Test Backend
-        working-directory: backend
-        run: npm test --if-present
-        
-      - name: Test Frontend  
-        working-directory: frontend
+      - name: Test Project
         run: npm test --if-present
