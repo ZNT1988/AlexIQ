@@ -33,7 +33,8 @@ export class MemoryPalace extends EventEmitter {
     this.version = "4.0.0";
 
     // Base de données SQLite OBLIGATOIRE - Palais mémoire
-    this.dbPath = config.dbPath || "./data/alex_memory_palace.db";
+    // Railway-compatible path: use /tmp for production, fallback to ./data for development
+    this.dbPath = config.dbPath || (process.env.RAILWAY_ENVIRONMENT ? '/tmp/alex_memory_palace.db' : './data/alex_memory_palace.db');
     this.db = null;
 
     // Système mémoire AUTHENTIQUE (pas de simulation)
