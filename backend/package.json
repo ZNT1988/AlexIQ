@@ -5,10 +5,29 @@
   "type": "module",
   "main": "index-ultra-minimal.js",
   "scripts": {
-    "start": "node index-ultra-minimal.js"
+    "start": "node index-ultra-minimal.js",
+    "dev": "node index-ultra-minimal.js",
+    "test": "echo \"Tests to be implemented\" && exit 0"
   },
   "engines": {
-    "node": ">=18.19.0 <19.0.0"
+    "node": ">=18.19.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "sqlite3": "^5.1.6",
+    "sqlite": "^5.1.1",
+    "winston": "^3.11.0",
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^7.1.5",
+    "compression": "^1.7.4",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "crypto-js": "^4.2.0",
+    "node-fetch": "^3.3.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
 }
