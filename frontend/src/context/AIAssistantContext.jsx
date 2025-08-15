@@ -59,7 +59,7 @@ export const AIAssistantProvider = ({ children }) => {
     setLoading(true);
     try {
       // Ajouter l'input à l'historique
-      const newHistoryEntry = { input, timestamp: new Date().toISOString(), type: 'user' };
+      const newHistoryEntry = { content: input, timestamp: new Date().toISOString(), type: 'user' };
       const updatedHistory = [...chatHistory, newHistoryEntry];
       setChatHistory(updatedHistory);
       console.log('📝 Added to history:', newHistoryEntry);
@@ -77,7 +77,7 @@ export const AIAssistantProvider = ({ children }) => {
         };
         console.log('📤 Request body:', requestBody);
         
-        const response = await fetch(`${apiUrl}/ai/chat`, {
+        const response = await fetch(`${apiUrl}/chat`, {
           method: STR_POST,
           headers: {
             'Content-Type': STR_JSON_CONTENT
@@ -99,7 +99,7 @@ export const AIAssistantProvider = ({ children }) => {
 
       // Ajouter la réponse à l'historique
       const responseEntry = {
-        input: finalResponse,
+        content: finalResponse,
         timestamp: new Date().toISOString(),
         type: 'assistant'
       };
@@ -113,7 +113,7 @@ export const AIAssistantProvider = ({ children }) => {
 
       // Ajouter l'erreur à l'historique
       const errorEntry = {
-        input: errorMessage,
+        content: errorMessage,
         timestamp: new Date().toISOString(),
         type: 'error'
       };
