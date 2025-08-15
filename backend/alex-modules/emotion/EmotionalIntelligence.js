@@ -640,7 +640,8 @@ export class EmotionalIntelligence extends EventEmitter {
 
   selectResponseTemplate(templates, analysis) {
     // Sélection intelligente selon l'intensité émotionnelle
-    const index = Math.floor(analysis.primaryEmotion.intensity * templates.length)
+    const intensity = analysis.primaryEmotion?.intensity || 0.5
+    const index = Math.floor(intensity * templates.length)
     return templates[Math.min(index, templates.length - 1)]
   }
 
@@ -704,7 +705,9 @@ export class EmotionalIntelligence extends EventEmitter {
   }
 
   analyzeEmotionalIntensity(classification) {
-    const intensity = classification.primary.intensity
+    // Protection contre les valeurs undefined
+    const primary = classification.primary || { intensity: 0.5, valence: 0.0 }
+    const intensity = primary.intensity || 0.5
     let level = 'low'
     
     if (intensity > 0.7) level = 'high'
@@ -713,20 +716,21 @@ export class EmotionalIntelligence extends EventEmitter {
     return {
       level,
       raw: intensity,
-      stressIndicators: intensity > 0.6 && classification.primary.valence < 0,
-      motivationIndicators: intensity > 0.6 && classification.primary.valence > 0
+      stressIndicators: intensity > 0.6 && (primary.valence || 0) < 0,
+      motivationIndicators: intensity > 0.6 && (primary.valence || 0) > 0
     }
   }
 
   analyzeEmotionalValence(classification) {
-    const primary = classification.primary
-    const secondary = classification.secondary
+    // Protection contre les valeurs undefined
+    const primary = classification.primary || { valence: 0.0, intensity: 0.5 }
+    const secondary = classification.secondary || []
     
-    let overall = primary.valence * primary.intensity
+    let overall = (primary.valence || 0) * (primary.intensity || 0.5)
     
     // Contribution des émotions secondaires
     for (const emotion of secondary) {
-      overall += emotion.valence * emotion.intensity * 0.3
+      overall += (emotion.valence || 0) * (emotion.intensity || 0) * 0.3
     }
     
     return {
