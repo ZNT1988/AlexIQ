@@ -17,9 +17,19 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
     "autoprefixer": "^10.4.21",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.23.6",
+    "fuse.js": "^7.1.0",
+    "localforage": "^1.10.0",
     "lucide-react": "^0.525.0",
     "node-fetch": "^3.3.2",
     "postcss": "^8.5.6",
@@ -28,8 +38,11 @@
     "react-router-dom": "^7.6.2",
     "react-speech-recognition": "^4.0.1",
     "react-textarea-autosize": "^8.5.9",
+    "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
-    "uuid": "^11.1.0"
+    "typescript": "^5.9.2",
+    "uuid": "^11.1.0",
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
