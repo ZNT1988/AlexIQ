@@ -1271,7 +1271,7 @@ export class AlexHyperIntelligence extends EventEmitter {
 
   generateExpertConnection(query, domainAutonomy) {
     // Connexion experte basée sur la maîtrise du domaine
-    return `Avec mes ${domainAutonomy.interactions} interactions dans ce domaine, je perçois que cette question touche aux aspects fondamentaux que j'ai explorés.`;
+    return `Avec mes ${domainAutonomy.total_interactions} interactions dans ce domaine, je perçois que cette question touche aux aspects fondamentaux que j'ai explorés.`;
   }
 
   generateAnalogicalConnection(query) {
@@ -1596,7 +1596,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         AVG(mastery_level) as avg_mastery,
         COUNT(*) as total_domains,
         SUM(CASE WHEN mastery_level >= ? THEN 1 ELSE 0 END) as mastered_domains,
-        SUM(interactions) as total_interactions
+        SUM(total_interactions) as total_interactions
       FROM alex_domain_mastery
     `, [this.learningSystem.masteryThreshold]);
 
@@ -1837,17 +1837,17 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
 
     if (currentMastery) {
       const newMasteryLevel = Math.min(1.0, currentMastery.mastery_level + learningGained);
-      const newInteractions = currentMastery.interactions + 1;
+      const newInteractions = currentMastery.total_interactions + 1;
       
       await this.db.run(`
         UPDATE alex_domain_mastery 
-        SET mastery_level = ?, interactions = ?, last_interaction = CURRENT_TIMESTAMP,
+        SET mastery_level = ?, total_interactions = ?, last_interaction = CURRENT_TIMESTAMP,
             is_mastered = CASE WHEN ? >= ? THEN 1 ELSE 0 END
         WHERE domain = ?
       `, [newMasteryLevel, newInteractions, newMasteryLevel, this.learningSystem.masteryThreshold, domain]);
     } else {
       await this.db.run(`
-        INSERT INTO alex_domain_mastery (domain, mastery_level, interactions, is_mastered)
+        INSERT INTO alex_domain_mastery (domain, mastery_level, total_interactions, is_mastered)
         VALUES (?, ?, 1, CASE WHEN ? >= ? THEN 1 ELSE 0 END)
       `, [domain, learningGained, learningGained, this.learningSystem.masteryThreshold]);
     }
@@ -2002,7 +2002,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     response.push(autonomousInsight);
     
     // Conclusion autonome
-    response.push(`Cette analyse reflète ma compréhension autonome développée à travers ${domainAutonomy.interactions} interactions dans ce domaine.`);
+    response.push(`Cette analyse reflète ma compréhension autonome développée à travers ${domainAutonomy.total_interactions} interactions dans ce domaine.`);
     
     return response.join(' ');
   }

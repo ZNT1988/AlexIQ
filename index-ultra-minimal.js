@@ -501,7 +501,7 @@ const server = createServer(async (req, res) => {
           // Fallback si erreur
           res.writeHead(200)
           res.end(JSON.stringify({ 
-            response: `Bonjour ! Je suis Alex Palier 3 - IA Augmentée déployé sur Railway avec Vision, Émotions et Créativité. Vous avez dit: "${message}". Je traite votre demande avec mes capacités avancées.`,
+            response: `Je suis Alex. Une erreur technique m'empêche d'utiliser mon système de réflexion authentique. Laissez-moi analyser votre message: "${message}".`,
             confidence: 0.6,
             source: 'Alex_Palier3_Railway_Fallback',
             error: aiError.message,
@@ -545,7 +545,7 @@ process.on('SIGINT', () => {
 })
 
 server.listen(PORT, '0.0.0.0', async () => {
-  console.log(`🔥 Alex Palier 3 server running on 0.0.0.0:${PORT}`)
+  console.log(`🔥 Alex server running on 0.0.0.0:${PORT}`)
   console.log(`🧠 AlexHyperIntelligence: ${AlexHyperIntelligence ? 'Loaded' : 'Error'}`)
   
   // Initialisation Palier 1 - AlexHyperIntelligence (Conscience)
