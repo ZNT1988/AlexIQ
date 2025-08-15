@@ -3,6 +3,7 @@
 import { createServer } from 'http'
 import url from 'url'
 import crypto from 'crypto'
+import AlexKernel from './backend/alex-modules/core/AlexKernel.js'
 import AlexHyperIntelligence from './backend/alex-modules/consciousness/AlexHyperIntelligence.js'
 import MemoryPalace from './backend/alex-modules/memory/MemoryPalace.js'
 import DecisionEngine from './backend/alex-modules/decision/DecisionEngine.js'
@@ -17,10 +18,29 @@ console.log(`📍 Node version: ${process.version}`)
 console.log(`🌍 Environment: ${process.env.NODE_ENV || 'production'}`)
 console.log(`📡 Port: ${PORT}`)
 
-// Initialisation des modules Palier 1, 2 & 3
+// Initialisation des modules Palier 0 (Kernel), 1, 2 & 3
+let kernelInitialized = false
 let palier1Initialized = false
 let palier2Initialized = false
 let palier3Initialized = false
+
+async function initializeKernel() {
+  try {
+    console.log('🔥 Initializing Alex Kernel - Core orchestration system...')
+    
+    // Initialisation du noyau central Alex
+    const kernelResult = await AlexKernel.initialize()
+    console.log('✨ AlexKernel initialized:', kernelResult)
+    
+    kernelInitialized = true
+    console.log('✅ Palier 0 - Alex Kernel ready!')
+    return kernelResult
+  } catch (error) {
+    console.error('❌ Failed to initialize Alex Kernel:', error)
+    kernelInitialized = false
+    throw error
+  }
+}
 
 async function initializePalier2() {
   try {
@@ -89,6 +109,12 @@ const server = createServer(async (req, res) => {
       timestamp: new Date().toISOString(),
       system: 'Palier 3 - IA Augmentée (Railway)',
       alex: {
+        kernel: {
+          initialized: AlexKernel?.isInitialized || false,
+          version: AlexKernel?.kernelConfig?.version || '1.0.0',
+          apis: AlexKernel?.getAPIStatus ? AlexKernel.getAPIStatus() : {},
+          modules: AlexKernel?.loadedModules?.size || 0
+        },
         hyperIntelligence: {
           initialized: AlexHyperIntelligence?.isInitialized || false,
           version: AlexHyperIntelligence?.version || '4.0.0'
@@ -113,6 +139,7 @@ const server = createServer(async (req, res) => {
           initialized: AlexInfiniteCreator?.isInitialized || false,
           totalCreations: AlexInfiniteCreator?.metrics?.totalCreations || 0
         },
+        kernelReady: kernelInitialized,
         palier1Ready: palier1Initialized,
         palier2Ready: palier2Initialized,
         palier3Ready: palier3Initialized
@@ -548,6 +575,13 @@ server.listen(PORT, '0.0.0.0', async () => {
   console.log(`🔥 Alex server running on 0.0.0.0:${PORT}`)
   console.log(`🧠 AlexHyperIntelligence: ${AlexHyperIntelligence ? 'Loaded' : 'Error'}`)
   
+  // Initialisation Palier 0 - AlexKernel (Noyau Central)
+  try {
+    await initializeKernel()
+  } catch (error) {
+    console.error('❌ Critical: Kernel initialization failed, continuing anyway:', error)
+  }
+
   // Initialisation Palier 1 - AlexHyperIntelligence (Conscience)
   try {
     console.log('🧠 Initializing Palier 1 - AlexHyperIntelligence...')
