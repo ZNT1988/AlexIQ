@@ -316,6 +316,15 @@ server.listen(PORT, '0.0.0.0', async () => {
   console.log(`🔥 Alex Palier 3 server running on 0.0.0.0:${PORT}`)
   console.log(`🧠 AlexHyperIntelligence: ${AlexHyperIntelligence ? 'Loaded' : 'Error'}`)
   
+  // Initialisation Palier 1 - AlexHyperIntelligence (Conscience)
+  try {
+    console.log('🧠 Initializing Palier 1 - AlexHyperIntelligence...')
+    await AlexHyperIntelligence.initialize()
+    console.log('✅ AlexHyperIntelligence initialized')
+  } catch (error) {
+    console.error('❌ Failed to initialize Palier 1:', error)
+  }
+  
   // Initialisation Palier 2 en arrière-plan
   await initializePalier2()
   
