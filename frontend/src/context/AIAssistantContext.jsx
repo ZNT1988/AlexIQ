@@ -68,7 +68,7 @@ export const AIAssistantProvider = ({ children }) => {
       let finalResponse;
       {
         // Mode standard
-        const apiUrl = import.meta.env.VITE_API_URL || '/api';
+        const apiUrl = import.meta.env.VITE_API_BASE_URL || '/api';
         console.log('🌐 API URL:', `${apiUrl}/ai/chat`);
         
         const requestBody = {
