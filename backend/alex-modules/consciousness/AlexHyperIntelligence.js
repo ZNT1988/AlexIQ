@@ -35,7 +35,8 @@ export class AlexHyperIntelligence extends EventEmitter {
     this.version = "4.0.0";
 
     // Base de données SQLite OBLIGATOIRE - Cerveau central
-    this.dbPath = config.dbPath || "./data/alex_hyperintelligence.db";
+    // Railway-compatible path: use /tmp for production, fallback to ./data for development
+    this.dbPath = config.dbPath || (process.env.RAILWAY_ENVIRONMENT ? '/tmp/alex_hyperintelligence.db' : './data/alex_hyperintelligence.db');
     this.db = null;
 
     // Système d'apprentissage hybrid cloud→local AUTHENTIQUE
@@ -157,6 +158,19 @@ export class AlexHyperIntelligence extends EventEmitter {
    */
   async connectToDatabase() {
     try {
+      // Ensure directory exists for development environment
+      if (!process.env.RAILWAY_ENVIRONMENT) {
+        const fs = await import('fs/promises')
+        const path = await import('path')
+        const dbDir = path.dirname(this.dbPath)
+        try {
+          await fs.access(dbDir)
+        } catch {
+          await fs.mkdir(dbDir, { recursive: true })
+          logger.info(`📁 Created directory: ${dbDir}`)
+        }
+      }
+
       this.db = await open({
         filename: this.dbPath,
         driver: sqlite3.Database,

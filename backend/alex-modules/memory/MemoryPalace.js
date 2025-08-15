@@ -14,7 +14,8 @@ export class MemoryPalace extends EventEmitter {
     
     this.name = 'MemoryPalace'
     this.version = '2.0.0'
-    this.dbPath = config.dbPath || './data/alex_memory_palace.db'
+    // Railway-compatible path: use /tmp for production, fallback to ./data for development
+    this.dbPath = config.dbPath || (process.env.RAILWAY_ENVIRONMENT ? '/tmp/alex_memory_palace.db' : './data/alex_memory_palace.db')
     this.db = null
     this.isInitialized = false
     
@@ -74,6 +75,19 @@ export class MemoryPalace extends EventEmitter {
    */
   async connectToDatabase() {
     try {
+      // Ensure directory exists for development environment
+      if (!process.env.RAILWAY_ENVIRONMENT) {
+        const fs = await import('fs/promises')
+        const path = await import('path')
+        const dbDir = path.dirname(this.dbPath)
+        try {
+          await fs.access(dbDir)
+        } catch {
+          await fs.mkdir(dbDir, { recursive: true })
+          logger.info(`📁 Created directory: ${dbDir}`)
+        }
+      }
+
       this.db = await open({
         filename: this.dbPath,
         driver: sqlite3.Database
