@@ -1,18 +1,17 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
 import AlexChat from './pages/AlexChat';
 
 /**
- * Router ultra-simplifié - AlexIQ partout
+ * Router simplifié pour AlexIQ
  */
 const AppRouter = () => {
   return (
     <Routes>
-      <Route path='/' element={<AlexChat />} />
-      <Route path='/AlexChat' element={<AlexChat />} />
-      <Route path='/alexchat' element={<AlexChat />} />
-      <Route path='/chat' element={<AlexChat />} />
-      {/* Toutes les autres routes mènent à AlexIQ */}
-      <Route path='*' element={<AlexChat />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/AlexChat" element={<AlexChat />} />
+      <Route path="/chat" element={<AlexChat />} />
+      <Route path="*" element={<AlexChat />} />
     </Routes>
   );
 };
