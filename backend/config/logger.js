@@ -53,24 +53,31 @@
 import winston from "winston";
 
 /**
- * @constant this.buildComplexObject(config) ${info.level}: ${info.message}`)
+ * Custom logging levels for HustleFinder IA
+ */
+const levels = {
+  error: 0,
+  warn: 1,
+  info: 2,
+  http: 3,
+  debug: 4
+};
+
+/**
+ * Logging format configuration
+ */
+const format = winston.format.combine(
+  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+  winston.format.errors({ stack: true }),
+  winston.format.json()
 );
 
 /**
  * @constant {winston.Logger} logger
  * @description Instance logger Winston configurée pour HustleFinder IA
- *
- * Configuration adaptative selon environnement:
- * - Development: niveau debug avec sortie console colorée
- * - Production: niveau info avec fichiers JSON structurés
- *
- * Transports configurés:
- * - Console: Affichage temps réel développement
- * - error.log: Fichier dédié aux erreurs critiques
- * - combined.log: Historique complet de tous les logs
  */
 const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || "info", // Default to info to reduce spam
+  level: process.env.LOG_LEVEL || "info",
   levels,
   format,
   transports: [

@@ -404,6 +404,64 @@ export class AlexHyperIntelligence extends EventEmitter {
   }
 
   /**
+   * Calibration intelligence adaptative
+   */
+  async calibrateAdaptiveIntelligence() {
+    try {
+      // Calibrage basé sur l'historique de performance
+      const recentInteractions = await this.db.all(`
+        SELECT 
+          AVG(response_confidence) as avg_confidence,
+          AVG(learning_extracted) as avg_learning,
+          COUNT(*) as total_interactions
+        FROM alex_interactions 
+        WHERE created_at > datetime('now', '-7 days')
+      `);
+
+      const stats = recentInteractions[0] || {
+        avg_confidence: 0.7,
+        avg_learning: 0.05,
+        total_interactions: 0
+      };
+
+      // Ajustement automatique des paramètres d'apprentissage
+      if (stats.avg_confidence > 0.85 && stats.total_interactions > 50) {
+        // Performance élevée -> augmenter autonomie locale
+        this.learningSystem.localAutonomy = Math.min(1.0, 
+          this.learningSystem.localAutonomy + 0.1
+        );
+        this.learningSystem.cloudDependency = Math.max(0.0,
+          this.learningSystem.cloudDependency - 0.1
+        );
+      } else if (stats.avg_confidence < 0.6) {
+        // Performance faible -> plus de cloud learning
+        this.learningSystem.cloudDependency = Math.min(1.0,
+          this.learningSystem.cloudDependency + 0.1
+        );
+        this.learningSystem.localAutonomy = Math.max(0.0,
+          this.learningSystem.localAutonomy - 0.1
+        );
+      }
+
+      // Mise à jour en base
+      await this.db.run(`
+        INSERT OR REPLACE INTO alex_system_state 
+        (key, value, updated_at) VALUES 
+        ('learning_system', ?, datetime('now'))
+      `, [JSON.stringify(this.learningSystem)]);
+
+      logger.info(
+        `⚙️ Adaptive intelligence calibrated - Local autonomy: ${(this.learningSystem.localAutonomy * 100).toFixed(1)}%`
+      );
+    } catch (error) {
+      logger.warn('Could not calibrate adaptive intelligence:', error);
+      // Valeurs par défaut sécurisées
+      this.learningSystem.localAutonomy = 0.3;
+      this.learningSystem.cloudDependency = 0.7;
+    }
+  }
+
+  /**
    * PROCESSUS CENTRAL: Intelligence hybride adaptative
    */
   async processWithHybridIntelligence(query, context = {}) {
