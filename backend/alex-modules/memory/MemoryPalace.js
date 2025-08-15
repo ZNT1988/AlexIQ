@@ -76,18 +76,15 @@ export class MemoryPalace extends EventEmitter {
    */
   async connectToDatabase() {
     try {
-      // Ensure directory exists for development environment
-      const isRailway = process.env.RAILWAY_STATIC_URL || process.env.RAILWAY_PUBLIC_DOMAIN || (process.env.PORT && !process.env.LOCALDEV)
-      if (!isRailway) {
-        const fs = await import('fs/promises')
-        const path = await import('path')
-        const dbDir = path.dirname(this.dbPath)
-        try {
-          await fs.access(dbDir)
-        } catch {
-          await fs.mkdir(dbDir, { recursive: true })
-          logger.info(`📁 Created directory: ${dbDir}`)
-        }
+      // Ensure directory exists for ALL environments (including Railway)
+      const fs = await import('fs/promises')
+      const path = await import('path')
+      const dbDir = path.dirname(this.dbPath)
+      try {
+        await fs.access(dbDir)
+      } catch {
+        await fs.mkdir(dbDir, { recursive: true })
+        logger.info(`📁 Created directory: ${dbDir}`)
       }
 
       this.db = await open({
