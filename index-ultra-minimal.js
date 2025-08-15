@@ -1,6 +1,5 @@
-// RAILWAY DEPLOYMENT - Palier 3 IA Augmentée 
-// Système Alex avec Vision, Émotions et Créativité + Licorne Business Modules
-// Build: v2.1.0 - Package dependencies synchronized for npm ci
+// RAILWAY DEPLOYMENT - Palier 3 IA Augmentée
+// Système Alex avec Vision, Émotions et Créativité
 import { createServer } from 'http'
 import url from 'url'
 import crypto from 'crypto'
