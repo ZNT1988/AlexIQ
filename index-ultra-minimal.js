@@ -141,7 +141,10 @@ const server = createServer(async (req, res) => {
           let response
 
           if (palier3Initialized && palier2Initialized && palier1Initialized) {
+            console.log('🧠 Using COMPLETE Alex with all paliers')
+            
             // 1. Récupération mémoires pertinentes
+            console.log('💾 Retrieving memories...')
             const relevantMemories = await MemoryPalace.retrieveMemories(message, 3)
             
             // 2. Analyse émotionnelle du message
@@ -269,12 +272,16 @@ const server = createServer(async (req, res) => {
           res.writeHead(200)
           res.end(JSON.stringify(response))
         } catch (aiError) {
+          // Log error for debugging
+          console.error('❌ Alex processing error:', aiError)
+          
           // Fallback si erreur
           res.writeHead(200)
           res.end(JSON.stringify({ 
             response: `Bonjour ! Je suis Alex Palier 3 - IA Augmentée déployé sur Railway avec Vision, Émotions et Créativité. Vous avez dit: "${message}". Je traite votre demande avec mes capacités avancées.`,
             confidence: 0.6,
             source: 'Alex_Palier3_Railway_Fallback',
+            error: aiError.message,
             timestamp: new Date().toISOString()
           }))
         }
