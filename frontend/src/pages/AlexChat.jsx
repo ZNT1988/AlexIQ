@@ -1,13 +1,13 @@
 import { AIAssistantProvider } from '../context/AIAssistantContext';
-import AlexIQUltimateInterface from '../components/Assistant/AlexIQUltimateInterface';
+import ModernChatInterface from '../components/Assistant/ModernChatInterface';
 
 /**
- * Page dédiée au chat avec AlexIQ - L'IA la plus avancée au monde
+ * Page dédiée au chat avec AlexIQ - Interface moderne style OpenAI/Anthropic
  */
 function AlexChat() {
   return (
     <AIAssistantProvider>
-      <AlexIQUltimateInterface />
+      <ModernChatInterface />
     </AIAssistantProvider>
   );
 }
