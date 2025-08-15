@@ -33,8 +33,4 @@
   "devDependencies": {
     "nodemon": "^3.0.2"
   },
-  "workspaces": [
-    "backend",
-    "frontend"
-  ]
 }
