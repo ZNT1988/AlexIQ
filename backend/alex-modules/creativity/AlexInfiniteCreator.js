@@ -340,7 +340,7 @@ export class AlexInfiniteCreator extends EventEmitter {
       innovationPotential: this.assessInnovationPotential(prompt),
       constraints: this.identifyConstraints(prompt, options),
       creativeGoals: this.identifyCreativeGoals(prompt),
-      targetAudience: this.identifyTargetAudience(prompt),
+      targetAudience: this.extractTargetAudience(prompt, options),
       timeline: this.extractTimeline(prompt, options),
       resources: this.extractResourceConstraints(prompt, options)
     }
@@ -1115,6 +1115,15 @@ export class AlexInfiniteCreator extends EventEmitter {
     if (prompt.match(/\b(budget.?limité|low.?budget|cheap)\b/i)) resources.push('limited_budget')
     if (prompt.match(/\b(équipe.?réduite|small.?team|solo)\b/i)) resources.push('limited_team')
     return resources
+  }
+
+  extractTargetAudience(prompt, options) {
+    if (options.targetAudience) return options.targetAudience
+    if (prompt.match(/\b(entreprises?|business|corporate)\b/i)) return 'Entreprises'
+    if (prompt.match(/\b(consommateurs?|clients?|customers?)\b/i)) return 'Consommateurs'
+    if (prompt.match(/\b(startups?|entrepreneurs?)\b/i)) return 'Entrepreneurs'
+    if (prompt.match(/\b(développeurs?|techs?|IT)\b/i)) return 'Développeurs'
+    return 'Professionnels innovants'
   }
 
   domainMatchesGoal(domain, goals) {
