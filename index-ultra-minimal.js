@@ -187,8 +187,8 @@ const server = createServer(async (req, res) => {
             
             // 6. Génération de réponse empathique
             const empathicResponse = await EmotionalIntelligence.generateEmpathicResponse(
-              result.content, 
-              emotionalAnalysis, 
+              emotionalAnalysis,
+              message, 
               { sessionId }
             )
             
