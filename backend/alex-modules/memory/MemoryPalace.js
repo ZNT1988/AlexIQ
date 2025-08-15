@@ -14,8 +14,9 @@ export class MemoryPalace extends EventEmitter {
     
     this.name = 'MemoryPalace'
     this.version = '2.0.0'
-    // Railway-compatible path: use /tmp for production, fallback to ./data for development
-    this.dbPath = config.dbPath || (process.env.RAILWAY_ENVIRONMENT ? '/tmp/alex_memory_palace.db' : './data/alex_memory_palace.db')
+    // Railway-compatible path detection
+    const isRailway = process.env.RAILWAY_STATIC_URL || process.env.RAILWAY_PUBLIC_DOMAIN || (process.env.PORT && !process.env.LOCALDEV)
+    this.dbPath = config.dbPath || (isRailway ? '/tmp/alex_memory_palace.db' : './data/alex_memory_palace.db')
     this.db = null
     this.isInitialized = false
     
@@ -76,7 +77,8 @@ export class MemoryPalace extends EventEmitter {
   async connectToDatabase() {
     try {
       // Ensure directory exists for development environment
-      if (!process.env.RAILWAY_ENVIRONMENT) {
+      const isRailway = process.env.RAILWAY_STATIC_URL || process.env.RAILWAY_PUBLIC_DOMAIN || (process.env.PORT && !process.env.LOCALDEV)
+      if (!isRailway) {
         const fs = await import('fs/promises')
         const path = await import('path')
         const dbDir = path.dirname(this.dbPath)
