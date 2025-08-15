@@ -17,7 +17,8 @@ console.log(`📍 Node version: ${process.version}`)
 console.log(`🌍 Environment: ${process.env.NODE_ENV || 'production'}`)
 console.log(`📡 Port: ${PORT}`)
 
-// Initialisation des modules Palier 2 & 3
+// Initialisation des modules Palier 1, 2 & 3
+let palier1Initialized = false
 let palier2Initialized = false
 let palier3Initialized = false
 
@@ -112,6 +113,7 @@ const server = createServer(async (req, res) => {
           initialized: AlexInfiniteCreator?.isInitialized || false,
           totalCreations: AlexInfiniteCreator?.metrics?.totalCreations || 0
         },
+        palier1Ready: palier1Initialized,
         palier2Ready: palier2Initialized,
         palier3Ready: palier3Initialized
       }
@@ -138,7 +140,7 @@ const server = createServer(async (req, res) => {
           const sessionId = crypto.randomUUID()
           let response
 
-          if (palier3Initialized && palier2Initialized) {
+          if (palier3Initialized && palier2Initialized && palier1Initialized) {
             // 1. Récupération mémoires pertinentes
             const relevantMemories = await MemoryPalace.retrieveMemories(message, 3)
             
@@ -320,9 +322,11 @@ server.listen(PORT, '0.0.0.0', async () => {
   try {
     console.log('🧠 Initializing Palier 1 - AlexHyperIntelligence...')
     await AlexHyperIntelligence.initialize()
+    palier1Initialized = true
     console.log('✅ AlexHyperIntelligence initialized')
   } catch (error) {
     console.error('❌ Failed to initialize Palier 1:', error)
+    palier1Initialized = false
   }
   
   // Initialisation Palier 2 en arrière-plan
