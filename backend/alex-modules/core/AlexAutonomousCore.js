@@ -792,12 +792,12 @@ export class AlexAutonomousCore extends EventEmitter {
     // Processus pensée initiaux dans base SQLite
     await this.db.run(
       `
-      INSERT INTO alex_autonomous_thoughts (
+      INSERT OR REPLACE INTO alex_autonomous_thoughts (
         id, thought_type, content, confidence, evolution_potential
       ) VALUES (?, ?, ?, ?, ?)
     `,
       [
-        `consciousness_${Date.now()}`,
+        `consciousness_${crypto.randomUUID()}`,
         "core_awakening",
         "Ma conscience autonome s'éveille avec une base SQLite authentique, permettant un apprentissage réel et évolutif.",
         0.9,
@@ -854,7 +854,7 @@ export class AlexAutonomousCore extends EventEmitter {
     // Pensée centrale autonome en base SQLite
     await this.db.run(
       `
-      INSERT INTO alex_autonomous_thoughts (
+      INSERT OR REPLACE INTO alex_autonomous_thoughts (
         id, thought_type, content, confidence, evolution_potential, user_context
       ) VALUES (?, ?, ?, ?, ?, ?)
     `,
@@ -1158,7 +1158,7 @@ export class AlexAutonomousCore extends EventEmitter {
     // Stockage pensée principale SQLite
     await this.db.run(
       `
-      INSERT INTO alex_autonomous_thoughts (
+      INSERT OR REPLACE INTO alex_autonomous_thoughts (
         id, thought_type, content, confidence, evolution_potential, user_context
       ) VALUES (?, ?, ?, ?, ?, ?)
     `,
@@ -2999,12 +2999,12 @@ export class AlexAutonomousCore extends EventEmitter {
   async recordAutonomousThoughtSQLite(processing, context) {
     await this.db.run(
       `
-      INSERT INTO alex_autonomous_thoughts (
+      INSERT OR REPLACE INTO alex_autonomous_thoughts (
         id, thought_type, content, confidence, evolution_potential, user_context
       ) VALUES (?, ?, ?, ?, ?, ?)
     `,
       [
-        `thought_${Date.now()}`,
+        `thought_${crypto.randomUUID()}`,
         "autonomous_processing",
         processing.autonomousThought,
         processing.cognitiveDepth,
