@@ -1,13 +1,25 @@
 /**
- * AIClient - Client IA simple pour Palier 1
- * Version simplifiée sans vraies APIs externes
+ * AIClient - Client IA AUTHENTIQUE avec vraies APIs
+ * TRANSFORMÉ pour utiliser les vraies APIs Claude/ChatGPT/Google
  */
+
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
 
 export class AIClient {
   constructor() {
+    // Configuration des vraies APIs
+    this.openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY
+    });
+    
+    this.anthropic = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY
+    });
+
     this.providers = {
-      openai: 'healthy',
-      anthropic: 'healthy'
+      openai: process.env.OPENAI_API_KEY ? 'healthy' : 'disabled',
+      anthropic: process.env.ANTHROPIC_API_KEY ? 'healthy' : 'disabled'
     };
   }
 
@@ -21,26 +33,77 @@ export class AIClient {
   async query(prompt, options = {}) {
     const { provider = 'anthropic', temperature = 0.7 } = options;
     
-    // Simulation d'une réponse intelligente pour le Palier 1
-    const responses = [
-      "Je comprends votre demande et je traite l'information avec mes capacités d'intelligence hybride.",
-      "Votre question nécessite une analyse approfondie que je peux effectuer grâce à mon système d'apprentissage continu.",
-      "En tant qu'Alex, je mobilise mes domaines de connaissance pour vous fournir une réponse pertinente.",
-      "Mon moteur d'intelligence hybride me permet d'adapter ma réponse selon le contexte de votre demande.",
-      "J'analyse votre requête avec mes capacités de compréhension contextuelle et d'intelligence émotionnelle."
-    ];
+    try {
+      if (provider === 'anthropic' && process.env.ANTHROPIC_API_KEY) {
+        // VRAIE API CLAUDE
+        const response = await this.anthropic.messages.create({
+          model: 'claude-3-sonnet-20240229',
+          max_tokens: 1000,
+          temperature,
+          messages: [
+            {
+              role: 'user',
+              content: prompt
+            }
+          ]
+        });
 
-    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-    
-    return {
-      content: `${randomResponse}\n\nConcernant votre demande: "${prompt.slice(0, 100)}...", je peux vous dire que je développe constamment mes capacités pour mieux vous servir.`,
-      model: provider === 'openai' ? 'gpt-4' : 'claude-3-sonnet-20240229',
-      usage: {
-        prompt_tokens: prompt.length / 4,
-        completion_tokens: 150,
-        total_tokens: (prompt.length / 4) + 150
+        return {
+          content: response.content[0].text,
+          model: 'claude-3-sonnet-20240229',
+          usage: {
+            prompt_tokens: response.usage.input_tokens,
+            completion_tokens: response.usage.output_tokens,
+            total_tokens: response.usage.input_tokens + response.usage.output_tokens
+          }
+        };
       }
-    };
+      
+      if (provider === 'openai' && process.env.OPENAI_API_KEY) {
+        // VRAIE API OPENAI
+        const response = await this.openai.chat.completions.create({
+          model: 'gpt-4',
+          temperature,
+          max_tokens: 1000,
+          messages: [
+            {
+              role: 'user',
+              content: prompt
+            }
+          ]
+        });
+
+        return {
+          content: response.choices[0].message.content,
+          model: 'gpt-4',
+          usage: response.usage
+        };
+      }
+
+      // Fallback si pas d'API keys configurées
+      return {
+        content: `Alex n'a pas accès aux APIs externes actuellement. Les clés API ne sont pas configurées pour ${provider}.`,
+        model: `${provider}-fallback`,
+        usage: {
+          prompt_tokens: 0,
+          completion_tokens: 50,
+          total_tokens: 50
+        }
+      };
+
+    } catch (error) {
+      console.error(`AI API Error (${provider}):`, error);
+      
+      return {
+        content: `Erreur temporaire de connexion avec ${provider}. Alex essaiera de vous répondre différemment.`,
+        model: `${provider}-error`,
+        usage: {
+          prompt_tokens: 0,
+          completion_tokens: 30,
+          total_tokens: 30
+        }
+      };
+    }
   }
 }
 
