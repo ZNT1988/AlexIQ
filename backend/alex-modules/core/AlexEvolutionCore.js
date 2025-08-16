@@ -745,20 +745,23 @@ export class AlexEvolutionCore extends EventEmitter {
    * Processus évolution autonomes
    */
   startEvolutionProcesses() {
+    // Stockage des intervalles pour cleanup
+    this.intervals = [];
+
     // Auto-évolution quotidienne
-    setInterval(async () => {
+    this.intervals.push(setInterval(async () => {
       await this.performDailyEvolution();
-    }, 86400000); // 24 heures
+    }, 86400000)); // 24 heures
 
     // Optimisation évolution
-    setInterval(async () => {
+    this.intervals.push(setInterval(async () => {
       await this.optimizeEvolutionSystem();
-    }, 21600000); // 6 heures
+    }, 21600000)); // 6 heures
 
     // Analyse tendances évolution
-    setInterval(async () => {
+    this.intervals.push(setInterval(async () => {
       await this.analyzeEvolutionTrends();
-    }, 3600000); // 1 heure
+    }, 3600000)); // 1 heure
 
     logger.info(`🧬 Evolution processes started for ${this.moduleName}`);
   }
@@ -890,6 +893,12 @@ export class AlexEvolutionCore extends EventEmitter {
    * Fermeture propre
    */
   async close() {
+    // Nettoyage des intervalles pour éviter memory leaks
+    if (this.intervals) {
+      this.intervals.forEach(interval => clearInterval(interval));
+      this.intervals = [];
+    }
+
     if (this.db) {
       await this.db.close();
       logger.info(`🧬 Evolution SQLite database closed for ${this.moduleName}`);

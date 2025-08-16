@@ -677,20 +677,23 @@ export class AlexAuthenticCore extends EventEmitter {
    * Processus autonomes en arrière-plan
    */
   startAutonomousProcesses() {
+    // Stockage des intervalles pour cleanup
+    this.intervals = [];
+
     // Maintenance mémoire toutes les heures
-    setInterval(async () => {
+    this.intervals.push(setInterval(async () => {
       await this.performMemoryMaintenance();
-    }, 3600000); // 1 heure
+    }, 3600000)); // 1 heure
 
     // Optimisation apprentissage toutes les 6 heures
-    setInterval(async () => {
+    this.intervals.push(setInterval(async () => {
       await this.optimizeLearningSystem();
-    }, 21600000); // 6 heures
+    }, 21600000)); // 6 heures
 
     // Évolution conscience quotidienne
-    setInterval(async () => {
+    this.intervals.push(setInterval(async () => {
       await this.evolveConsciousness();
-    }, 86400000); // 24 heures
+    }, 86400000)); // 24 heures
 
     logger.info(`⚡ Autonomous processes started for ${this.moduleName}`);
   }
@@ -869,6 +872,12 @@ export class AlexAuthenticCore extends EventEmitter {
    * Fermeture propre
    */
   async close() {
+    // Nettoyage des intervalles pour éviter memory leaks
+    if (this.intervals) {
+      this.intervals.forEach(interval => clearInterval(interval));
+      this.intervals = [];
+    }
+
     if (this.db) {
       await this.db.close();
       logger.info(`📊 SQLite database closed for ${this.moduleName}`);
