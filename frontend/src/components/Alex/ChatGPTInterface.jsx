@@ -48,8 +48,8 @@ const ChatGPTInterface = () => {
     setIsTyping(true);
 
     try {
-      // Connexion au backend Alex Palier 3 (port 3003)
-      const response = await fetch('http://localhost:3003/api/chat', {
+      // Connexion au backend Alex Palier 3 (production)
+      const response = await fetch('https://alexiq.site/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ const ChatGPTInterface = () => {
       // Message d'erreur avec suggestion
       const errorMessage = {
         type: 'assistant',
-        content: `Je rencontre actuellement des difficultés de connexion avec mes modules avancés. Cela peut être dû à:\n\n• Le backend Alex Palier 3 n'est pas démarré (port 3003)\n• Problème de connectivité réseau\n• Modules d'IA en cours d'initialisation\n\nVeuillez vérifier que le serveur Alex est actif ou réessayer dans quelques instants. Mes capacités d'IA avancée (Palier 3) incluent l'analyse émotionnelle et la créativité !`,
+        content: `Je rencontre actuellement des difficultés de connexion avec mes modules avancés. Cela peut être dû à:\n\n• Problème de connectivité réseau temporaire\n• Modules d'IA en cours d'initialisation\n• Maintenance du système en cours\n\nVeuillez réessayer dans quelques instants. Mes capacités d'IA avancée (Palier 3) incluent l'analyse émotionnelle et la créativité !`,
         timestamp: new Date(),
         id: Date.now(),
         isError: true
