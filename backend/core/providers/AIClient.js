@@ -8,18 +8,34 @@ import Anthropic from '@anthropic-ai/sdk';
 
 export class AIClient {
   constructor() {
-    // Configuration des vraies APIs
-    this.openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY
-    });
+    // Configuration des vraies APIs (seulement si clés disponibles)
+    this.openai = null;
+    this.anthropic = null;
+
+    // Initialiser seulement si clés API disponibles
+    if (process.env.OPENAI_API_KEY) {
+      try {
+        this.openai = new OpenAI({
+          apiKey: process.env.OPENAI_API_KEY
+        });
+      } catch (error) {
+        console.warn('Failed to initialize OpenAI client:', error.message);
+      }
+    }
     
-    this.anthropic = new Anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY
-    });
+    if (process.env.ANTHROPIC_API_KEY) {
+      try {
+        this.anthropic = new Anthropic({
+          apiKey: process.env.ANTHROPIC_API_KEY
+        });
+      } catch (error) {
+        console.warn('Failed to initialize Anthropic client:', error.message);
+      }
+    }
 
     this.providers = {
-      openai: process.env.OPENAI_API_KEY ? 'healthy' : 'disabled',
-      anthropic: process.env.ANTHROPIC_API_KEY ? 'healthy' : 'disabled'
+      openai: this.openai ? 'healthy' : 'disabled',
+      anthropic: this.anthropic ? 'healthy' : 'disabled'
     };
   }
 
@@ -34,7 +50,7 @@ export class AIClient {
     const { provider = 'anthropic', temperature = 0.7 } = options;
     
     try {
-      if (provider === 'anthropic' && process.env.ANTHROPIC_API_KEY) {
+      if (provider === 'anthropic' && this.anthropic) {
         // VRAIE API CLAUDE
         const response = await this.anthropic.messages.create({
           model: 'claude-3-sonnet-20240229',
@@ -59,7 +75,7 @@ export class AIClient {
         };
       }
       
-      if (provider === 'openai' && process.env.OPENAI_API_KEY) {
+      if (provider === 'openai' && this.openai) {
         // VRAIE API OPENAI
         const response = await this.openai.chat.completions.create({
           model: 'gpt-4',

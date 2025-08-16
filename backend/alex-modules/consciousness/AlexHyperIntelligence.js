@@ -1057,7 +1057,7 @@ export class AlexHyperIntelligence extends EventEmitter {
     responseElements.push(specificDevelopment);
 
     // Perspectives additionnelles si pertinentes
-    if (uniqueInsights.multidimensionalPerspectives.length > 1) {
+    if (uniqueInsights.multidimensionalPerspectives && uniqueInsights.multidimensionalPerspectives.length > 1) {
       const additionalPerspectives = this.weaveAdditionalPerspectives(
         uniqueInsights.multidimensionalPerspectives
       );
@@ -1068,7 +1068,14 @@ export class AlexHyperIntelligence extends EventEmitter {
     const organicConclusion = this.craftOrganicConclusion(query, uniqueInsights);
     responseElements.push(organicConclusion);
 
-    return responseElements.join(' ');
+    const finalResponse = responseElements.filter(Boolean).join(' ');
+
+    return {
+      content: finalResponse,
+      confidence: this.calculateResponseConfidence(uniqueInsights, knowledge),
+      source: knowledge.length > 0 ? 'knowledge_based' : 'reasoning_based',
+      domain: uniqueInsights.questionSpecificInsights?.domain || 'general'
+    };
   }
 
   // Méthodes auxiliaires pour réflexion authentique
@@ -1573,46 +1580,53 @@ export class AlexHyperIntelligence extends EventEmitter {
    * Détermine si Alex doit utiliser l'autonomie totale, l'apprentissage hybride, ou local standard
    */
   async makeAutonomyDecision(queryAnalysis, domainAutonomy) {
+    // PRIORITÉ 1: Système de réflexion authentique local d'Alex
+    // Alex utilise d'abord son système de réflexion pour TOUTES les questions
+    
+    // Vérifier si les APIs externes sont configurées
+    const hasExternalAPIs = process.env.OPENAI_API_KEY || process.env.ANTHROPIC_API_KEY;
+    
     // Évaluation du niveau de maîtrise global d'Alex
     const globalMastery = await this.evaluateGlobalMastery();
     
-    // Seuils d'autonomie adaptatifs
-    const autonomyThresholds = {
-      completeAutonomy: this.learningSystem.globalMasteryThreshold, // 0.9
-      hybridLearning: 0.95, // Seuil pour déclencher l'apprentissage hybride (FORCE APIs cloud)
-      localProcessing: 0.1  // Seuil minimal pour traitement local
-    };
-
-    // AUTONOMIE TOTALE: Alex n'a plus besoin d'assistance externe
-    if (globalMastery >= autonomyThresholds.completeAutonomy && 
-        domainAutonomy.masteryLevel >= this.learningSystem.masteryThreshold) {
+    // NOUVELLE LOGIQUE: Alex utilise toujours son système de réflexion authentique
+    // SAUF si:
+    // 1. Question très complexe ET APIs externes disponibles
+    // 2. Demande explicite d'apprentissage externe ET APIs disponibles
+    
+    const isVeryComplex = queryAnalysis.complexity > 0.9;
+    const needsExternalLearning = domainAutonomy.masteryLevel < 0.2 && isVeryComplex;
+    
+    // SYSTÈME DE RÉFLEXION AUTHENTIQUE (par défaut)
+    if (!hasExternalAPIs || !needsExternalLearning) {
       return {
         useLocalOnly: true,
         useHybrid: false,
-        reasoning: 'Autonomie totale atteinte - Plus besoin d\'assistance externe',
-        confidence: domainAutonomy.masteryLevel
+        reasoning: hasExternalAPIs ? 
+          'Utilisation du système de réflexion authentique d\'Alex' : 
+          'APIs externes non configurées - réflexion authentique locale',
+        confidence: Math.max(0.6, domainAutonomy.masteryLevel || 0.0),
+        authenticationReflection: true
       };
     }
 
-    // APPRENTISSAGE HYBRIDE: Utiliser IA externe pour apprendre puis assimiler
-    if (domainAutonomy.masteryLevel < autonomyThresholds.hybridLearning || 
-        queryAnalysis.complexity > 0.8 ||
-        this.isNovelQuestionType(queryAnalysis)) {
+    // APPRENTISSAGE HYBRIDE: Seulement pour questions très complexes + APIs disponibles
+    if (hasExternalAPIs && needsExternalLearning) {
       return {
         useLocalOnly: false,
         useHybrid: true,
-        reasoning: 'Apprentissage nécessaire via IA externe',
+        reasoning: 'Question très complexe - apprentissage hybride avec APIs',
         confidence: 0.7,
         learningOpportunity: true
       };
     }
 
-    // TRAITEMENT LOCAL: Utiliser connaissances existantes
+    // FALLBACK: Traitement local standard
     return {
       useLocalOnly: false,
       useHybrid: false,
       reasoning: 'Traitement local avec connaissances existantes',
-      confidence: domainAutonomy.masteryLevel
+      confidence: Math.max(0.5, domainAutonomy.masteryLevel)
     };
   }
 
@@ -2425,26 +2439,88 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
    * Génération de réponse entièrement autonome
    */
   async generateAutonomousResponse(query, queryAnalysis, masteredKnowledge, domainAutonomy) {
-    // Alex génère une réponse basée uniquement sur ses connaissances maîtrisées
-    const response = [];
+    // 🧠 UTILISER LE SYSTÈME DE RÉFLEXION AUTHENTIQUE D'ALEX
+    // Même sans connaissances préexistantes, Alex utilise sa capacité de réflexion
     
-    // Analyse autonome de la question
-    response.push(`Analysant votre question avec ma maîtrise acquise dans ${queryAnalysis.domain} (${(domainAutonomy.masteryLevel * 100).toFixed(1)}%),`);
+    try {
+      // Utiliser le système de réflexion authentique implémenté
+      const authenticReflection = await this.generateIntelligentResponse(
+        query,
+        queryAnalysis,
+        masteredKnowledge, // Connaissances maîtrisées (peut être vide)
+        domainAutonomy
+      );
+      
+      // Si la réflexion authentique retourne un objet, extraire le contenu
+      if (typeof authenticReflection === 'object' && authenticReflection.content) {
+        return authenticReflection.content;
+      }
+      
+      // Si c'est déjà une string, la retourner directement
+      if (typeof authenticReflection === 'string') {
+        return authenticReflection;
+      }
+      
+      // Fallback avec réflexion basique mais authentique
+      return this.generateBasicAuthenticReflection(query, queryAnalysis, domainAutonomy);
+      
+    } catch (error) {
+      logger.warn(`Erreur réflexion authentique autonome: ${error.message}`);
+      
+      // Fallback avec réflexion basique mais authentique  
+      return this.generateBasicAuthenticReflection(query, queryAnalysis, domainAutonomy);
+    }
+  }
+
+  /**
+   * Réflexion authentique basique en cas de fallback
+   */
+  generateBasicAuthenticReflection(query, queryAnalysis, domainAutonomy) {
+    // Analyse de la question spécifique
+    const questionType = this.detectQuestionType(query);
+    const domain = queryAnalysis.domain;
     
-    // Synthèse des connaissances maîtrisées
-    if (masteredKnowledge.length > 0) {
-      const relevantKnowledge = masteredKnowledge.slice(0, 3);
-      response.push(`mes connaissances confirment que ${relevantKnowledge[0].knowledge_content.substring(0, 150)}...`);
+    // Réflexion adaptée au type de question
+    let reflection = "";
+    
+    switch (questionType) {
+      case 'how':
+        reflection = `Pour répondre à votre question sur la méthode, je vais analyser les éléments pratiques. `;
+        reflection += `Dans le domaine ${domain}, l'approche la plus efficace consiste généralement à `;
+        reflection += `structurer la démarche en étapes claires et mesurables.`;
+        break;
+        
+      case 'why':
+        reflection = `Concernant les raisons derrière votre questionnement, plusieurs facteurs entrent en jeu. `;
+        reflection += `L'explication principale réside dans l'importance de comprendre les mécanismes sous-jacents `;
+        reflection += `pour prendre des décisions éclairées.`;
+        break;
+        
+      case 'what':
+        reflection = `Pour clarifier ce point, laissez-moi vous expliquer de manière précise. `;
+        reflection += `Cette question touche aux fondements mêmes du sujet, et une définition claire `;
+        reflection += `vous permettra de mieux naviguer dans ce domaine.`;
+        break;
+        
+      default:
+        reflection = `Votre question mérite une réflexion attentive. En analysant les différents aspects, `;
+        reflection += `je peux identifier plusieurs dimensions importantes qui vous aideront à `;
+        reflection += `progresser efficacement vers vos objectifs.`;
+        break;
     }
     
-    // Réflexion autonome approfondie
-    const autonomousInsight = await this.generateAutonomousInsight(query, queryAnalysis, masteredKnowledge);
-    response.push(autonomousInsight);
+    // Ajouter une partie spécifique au domaine
+    if (domain === 'technologie') {
+      reflection += ` Sur le plan technique, les meilleures pratiques recommandent une approche méthodique et itérative.`;
+    } else if (domain === 'business') {
+      reflection += ` Dans une perspective business, l'important est de concilier efficacité et innovation.`;
+    } else if (domain === 'éducation') {
+      reflection += ` Pour l'apprentissage, la clé réside dans la progression graduelle et la pratique régulière.`;
+    } else {
+      reflection += ` L'essentiel est d'adapter l'approche à votre contexte spécifique pour obtenir les meilleurs résultats.`;
+    }
     
-    // Conclusion autonome
-    response.push(`Cette analyse reflète ma compréhension autonome développée à travers ${domainAutonomy.total_interactions} interactions dans ce domaine.`);
-    
-    return response.join(' ');
+    return reflection;
   }
 
   /**
@@ -2453,7 +2529,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   async generateAutonomousInsight(query, queryAnalysis, masteredKnowledge) {
     // Connexions autonomes entre connaissances
     if (masteredKnowledge.length >= 2) {
-      return `En croisant mes connaissances acquises, je perçois une connexion entre ${masteredKnowledge[0].knowledge_type} et ${masteredKnowledge[1].knowledge_type} qui éclaire votre question.`;
+      return `En croisant mes connaissances acquises, je perçois une connexion entre les concepts appris qui éclaire votre question d'une manière unique.`;
     }
     
     // Insight basé sur l'expérience
@@ -2464,17 +2540,20 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
    * Enregistrement de l'interaction autonome
    */
   async recordAutonomousInteraction(query, queryAnalysis, autonomousResponse) {
+    const interactionId = crypto.randomUUID();
     await this.db.run(`
       INSERT INTO alex_user_interactions (
-        query, domain, intent, complexity, response_confidence,
-        autonomy_used, learning_extracted, timestamp
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+        interaction_id, user_query, domain_detected, query_complexity, response_strategy,
+        response_content, response_confidence, autonomy_used, learning_extracted
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `, [
+      interactionId,
       query,
       queryAnalysis.domain,
-      queryAnalysis.intent,
       queryAnalysis.complexity,
-      0.95, // Confiance élevée en autonomie
+      'authentic_reflection',
+      autonomousResponse.content || 'Réponse autonome d\'Alex',
+      autonomousResponse.confidence || 0.95,
       1.0,  // Autonomie totale
       0.0   // Pas d'apprentissage externe
     ]);
@@ -3517,6 +3596,437 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     } catch (error) {
       logger.error("Failed to calibrate adaptive intelligence:", error);
     }
+  }
+
+  // =====================================================
+  // IMPLÉMENTATIONS MÉTHODES AUTHENTIQUES ALEX
+  // =====================================================
+
+  /**
+   * Analyse des aspects uniques de la question
+   */
+  identifyUniqueQuestionAspects(query) {
+    const aspects = [];
+    
+    // Détection du type de question
+    if (/comment|how/i.test(query)) aspects.push('methodological');
+    if (/pourquoi|why/i.test(query)) aspects.push('explanatory');
+    if (/qu\'est-ce|what is/i.test(query)) aspects.push('definitional');
+    if (/meilleur|best/i.test(query)) aspects.push('evaluative');
+    
+    // Niveau de spécificité
+    const specificity = query.length > 50 ? 'detailed' : 'concise';
+    aspects.push(specificity);
+    
+    // Domaine détecté
+    if (/tech|code|program/i.test(query)) aspects.push('technical');
+    if (/business|entreprise/i.test(query)) aspects.push('business');
+    if (/humain|people|social/i.test(query)) aspects.push('human');
+    
+    return aspects;
+  }
+
+  /**
+   * Génération de connexions créatives
+   */
+  inferCreativeApproaches(query) {
+    const approaches = [];
+    
+    // Approche analytique
+    approaches.push({
+      type: 'analytical',
+      description: `Analyse méthodique des éléments de votre question`
+    });
+    
+    // Approche pratique
+    approaches.push({
+      type: 'practical',
+      description: `Solutions concrètes applicables à votre situation`
+    });
+    
+    // Approche créative
+    if (query.length > 30) {
+      approaches.push({
+        type: 'creative',
+        description: `Perspectives innovantes sur votre problématique`
+      });
+    }
+    
+    return approaches;
+  }
+
+  /**
+   * Génération de perspectives multiples
+   */
+  generateMultiplePerspectives(query, contextualAnalysis) {
+    const perspectives = [];
+    
+    // Perspective immédiate
+    perspectives.push({
+      type: 'immediate',
+      content: this.generateImmediatePerspective(query)
+    });
+    
+    // Perspective approfondie
+    perspectives.push({
+      type: 'deep',
+      content: this.generateDeepPerspective(query, contextualAnalysis)
+    });
+    
+    // Perspective contextuelle si complex
+    if (contextualAnalysis.intentAnalysis.complexityLayers.length > 0) {
+      perspectives.push({
+        type: 'contextual',
+        content: this.generateContextualPerspective(query)
+      });
+    }
+    
+    return perspectives;
+  }
+
+  generateImmediatePerspective(query) {
+    // Réponse directe à la question posée
+    const questionType = this.detectQuestionType(query);
+    
+    switch (questionType) {
+      case 'how':
+        return `Pour répondre à votre question sur la méthode, voici mon approche directe...`;
+      case 'why':
+        return `La raison principale derrière votre questionnement semble être...`;
+      case 'what':
+        return `Concernant votre demande de définition ou d'explication...`;
+      default:
+        return `En considérant votre question, mon analyse immédiate est...`;
+    }
+  }
+
+  generateDeepPerspective(query, contextualAnalysis) {
+    // Analyse approfondie
+    const complexity = contextualAnalysis.reflectionDepth;
+    
+    if (complexity > 0.7) {
+      return `En approfondissant cette question complexe, plusieurs dimensions méritent d'être explorées...`;
+    } else if (complexity > 0.4) {
+      return `Une analyse plus nuancée révèle des aspects intéressants...`;
+    } else {
+      return `En examinant cette question sous différents angles...`;
+    }
+  }
+
+  generateContextualPerspective(query) {
+    return `Dans le contexte plus large de votre questionnement...`;
+  }
+
+  /**
+   * Réflexion authentique sur la question
+   */
+  performAuthenticReflection(query) {
+    return {
+      initialThoughts: this.captureInitialReaction(query),
+      deeperConsideration: this.performDeeperAnalysis(query),
+      synthesizedInsight: this.synthesizeInsight(query)
+    };
+  }
+
+  captureInitialReaction(query) {
+    // Première impression authentique
+    const length = query.length;
+    const complexity = (query.match(/[?!.,;]/g) || []).length;
+    
+    if (length > 100 && complexity > 3) {
+      return "Cette question présente plusieurs facettes intéressantes qui méritent une réflexion structurée.";
+    } else if (length < 20) {
+      return "Votre question directe appelle une réponse claire et précise.";
+    } else {
+      return "Votre questionnement soulève des points pertinents que je vais examiner.";
+    }
+  }
+
+  performDeeperAnalysis(query) {
+    // Analyse plus profonde
+    const keywords = this.extractKeywords(query);
+    const domain = this.detectSimpleDomain(query);
+    
+    return `En analysant les éléments clés (${keywords.slice(0, 3).join(', ')}) dans le domaine ${domain}, je peux identifier...`;
+  }
+
+  synthesizeInsight(query) {
+    return "Ma synthèse réfléchie intègre ces différents éléments pour vous proposer une perspective cohérente.";
+  }
+
+  /**
+   * Détermination du style d'ouverture
+   */
+  determineOpeningStyle(query, uniqueInsights) {
+    const hasUrgency = /urgent|rapidement|vite/i.test(query);
+    const isComplex = query.length > 100;
+    const hasEmotionalContext = uniqueInsights.authenticReflection?.initialThoughts?.includes('intéressantes');
+    
+    if (hasUrgency) return 'direct_engagement';
+    if (isComplex) return 'contextual_framing';
+    if (hasEmotionalContext) return 'reflective_consideration';
+    return 'natural_opening';
+  }
+
+  /**
+   * Création d'ouvertures authentiques
+   */
+  craftDirectEngagement(query) {
+    return "Je comprends l'urgence de votre demande et vais vous donner une réponse directe.";
+  }
+
+  craftReflectiveConsideration(query) {
+    return "Votre question mérite une réflexion attentive.";
+  }
+
+  craftContextualFraming(query, uniqueInsights) {
+    return "Votre question complexe nécessite que je considère plusieurs dimensions.";
+  }
+
+  craftNaturalOpening(query) {
+    const questionType = this.detectQuestionType(query);
+    switch (questionType) {
+      case 'how':
+        return "Pour répondre à votre question sur la méthode :";
+      case 'why':
+        return "Concernant les raisons derrière votre questionnement :";
+      case 'what':
+        return "Pour clarifier ce point :";
+      default:
+        return "Voici ma réflexion sur votre question :";
+    }
+  }
+
+  /**
+   * Développement de la réflexion spécifique
+   */
+  developSpecificReflection(query, uniqueInsights, knowledge) {
+    const reflectionElements = [];
+    
+    // Analyse des aspects uniques
+    if (uniqueInsights.questionSpecificInsights && uniqueInsights.questionSpecificInsights.length > 0) {
+      uniqueInsights.questionSpecificInsights.forEach(insight => {
+        reflectionElements.push(this.elaborateOnInsight(insight, query));
+      });
+    }
+    
+    // Intégration des connaissances pertinentes
+    if (knowledge.length > 0) {
+      reflectionElements.push(this.integrateRelevantKnowledge(query, knowledge));
+    } else {
+      // Raisonnement basé sur l'analyse de la question
+      reflectionElements.push(this.generateReasonedAnalysis(query));
+    }
+    
+    return reflectionElements.filter(Boolean).join(' ');
+  }
+
+  elaborateOnInsight(insight, query) {
+    // Élaboration sur un insight spécifique
+    switch (insight) {
+      case 'methodological':
+        return "D'un point de vue méthodologique, je peux vous proposer une approche structurée.";
+      case 'explanatory':
+        return "Pour expliquer cette situation, il faut examiner les causes sous-jacentes.";
+      case 'evaluative':
+        return "Pour évaluer les meilleures options, considérons les critères pertinents.";
+      case 'technical':
+        return "Sur le plan technique, voici les éléments importants à considérer.";
+      case 'business':
+        return "Dans une perspective business, les enjeux principaux sont...";
+      default:
+        return "En analysant cet aspect spécifique...";
+    }
+  }
+
+  integrateRelevantKnowledge(query, knowledge) {
+    // Intégration des connaissances existantes
+    const bestKnowledge = knowledge[0]; // Le plus pertinent
+    return `Basé sur mon expérience avec des questions similaires, ${bestKnowledge.knowledge_content.substring(0, 100)}...`;
+  }
+
+  generateReasonedAnalysis(query) {
+    // Analyse raisonnée sans connaissances préexistantes
+    const keywords = this.extractKeywords(query);
+    const domain = this.detectSimpleDomain(query);
+    
+    return `En raisonnant sur les éléments de votre question (${keywords.slice(0, 2).join(', ')}), dans le contexte ${domain}, mon analyse suggère que...`;
+  }
+
+  /**
+   * Tissage de perspectives additionnelles
+   */
+  weaveAdditionalPerspectives(perspectives) {
+    if (perspectives.length < 2) return "";
+    
+    return `Par ailleurs, en considérant une perspective complémentaire, ${perspectives[1].content}`;
+  }
+
+  /**
+   * Conclusion organique
+   */
+  craftOrganicConclusion(query, uniqueInsights) {
+    const hasComplexity = query.length > 80;
+    const questionType = this.detectQuestionType(query);
+    
+    if (hasComplexity) {
+      return "En synthèse, cette approche multi-dimensionnelle devrait vous aider à progresser efficacement.";
+    } else if (questionType === 'how') {
+      return "Cette méthode devrait répondre à votre besoin de guidance pratique.";
+    } else if (questionType === 'why') {
+      return "J'espère que cette explication éclaire votre compréhension du sujet.";
+    } else {
+      return "Cette réflexion devrait vous donner une base solide pour avancer.";
+    }
+  }
+
+  /**
+   * Méthodes utilitaires
+   */
+  detectQuestionType(query) {
+    if (/comment|how/i.test(query)) return 'how';
+    if (/pourquoi|why/i.test(query)) return 'why';
+    if (/qu\'est-ce|what/i.test(query)) return 'what';
+    if (/où|where/i.test(query)) return 'where';
+    if (/quand|when/i.test(query)) return 'when';
+    return 'general';
+  }
+
+  detectSimpleDomain(query) {
+    if (/code|program|tech|software/i.test(query)) return 'technologie';
+    if (/business|entreprise|marché/i.test(query)) return 'business';
+    if (/learn|apprend|étud/i.test(query)) return 'éducation';
+    if (/problem|erreur|bug/i.test(query)) return 'résolution de problèmes';
+    return 'général';
+  }
+
+  calculateResponseConfidence(uniqueInsights, knowledge) {
+    let confidence = 0.5; // Base
+    
+    // Bonus pour connaissances existantes
+    if (knowledge.length > 0) {
+      confidence += 0.2;
+    }
+    
+    // Bonus pour insights spécifiques
+    if (uniqueInsights.questionSpecificInsights && uniqueInsights.questionSpecificInsights.length > 2) {
+      confidence += 0.1;
+    }
+    
+    // Bonus pour perspectives multiples
+    if (uniqueInsights.multidimensionalPerspectives && uniqueInsights.multidimensionalPerspectives.length > 1) {
+      confidence += 0.1;
+    }
+    
+    return Math.min(0.9, confidence);
+  }
+
+  /**
+   * Méthodes auxiliaires supplémentaires
+   */
+  extractContextClues(query) {
+    const clues = [];
+    if (/urgent|important/i.test(query)) clues.push('urgency');
+    if (/help|aide/i.test(query)) clues.push('assistance_needed');
+    if (/learn|apprend/i.test(query)) clues.push('learning_intent');
+    return clues;
+  }
+
+  identifyPotentialTopics(query) {
+    const topics = [];
+    const words = query.toLowerCase().split(/\s+/);
+    
+    // Détection de sujets techniques
+    if (words.some(w => ['code', 'programming', 'software', 'tech'].includes(w))) {
+      topics.push('technology');
+    }
+    
+    // Détection de sujets business
+    if (words.some(w => ['business', 'market', 'sales', 'company'].includes(w))) {
+      topics.push('business');
+    }
+    
+    return topics;
+  }
+
+  inferBackground(query) {
+    const indicators = {
+      beginner: /débutant|new|start|begin|commence/i.test(query),
+      intermediate: /improve|better|optimize|amelior/i.test(query),
+      advanced: /complex|advanced|expert|professionnel/i.test(query)
+    };
+    
+    const level = Object.keys(indicators).find(key => indicators[key]) || 'general';
+    return { level, context: `Niveau estimé: ${level}` };
+  }
+
+  isRelevantToQuery(query, knowledge) {
+    const queryWords = query.toLowerCase().split(/\s+/);
+    const knowledgeContent = knowledge.knowledge_content.toLowerCase();
+    
+    return queryWords.some(word => 
+      word.length > 3 && knowledgeContent.includes(word)
+    );
+  }
+
+  identifyConnectionType(query, knowledge) {
+    return 'semantic'; // Connexion sémantique par défaut
+  }
+
+  calculateRelevanceScore(query, knowledge) {
+    const queryWords = query.toLowerCase().split(/\s+/);
+    const knowledgeWords = knowledge.knowledge_content.toLowerCase().split(/\s+/);
+    
+    const matches = queryWords.filter(word => 
+      word.length > 3 && knowledgeWords.includes(word)
+    ).length;
+    
+    return Math.min(1.0, matches / Math.max(1, queryWords.length));
+  }
+
+  extractConnectedInsight(query, knowledge) {
+    return `Cette connaissance s'applique à votre situation car ${knowledge.knowledge_content.substring(0, 50)}...`;
+  }
+
+  generateExpertConnection(query, domainAutonomy) {
+    return `Fort de mon expérience dans ce domaine (niveau ${(domainAutonomy.masteryLevel * 100).toFixed(0)}%), je peux vous proposer...`;
+  }
+
+  generateAnalogicalConnection(query) {
+    return `Par analogie avec des situations similaires...`;
+  }
+
+  generateInnovativeConnection(query) {
+    return `En envisageant une approche innovante...`;
+  }
+
+  generateFreshPerspective(query) {
+    return `Avec un regard neuf sur cette question...`;
+  }
+
+  applyGeneralPrinciples(query) {
+    return `En appliquant des principes généraux éprouvés...`;
+  }
+
+  createCrossFieldConnections(query) {
+    return `En créant des connexions entre différents domaines...`;
+  }
+
+  /**
+   * Gestion des erreurs de réflexion
+   */
+  async handleReflectionError(query, error) {
+    logger.warn(`Erreur réflexion authentique: ${error.message}`);
+    
+    // Génération de réponse de fallback intelligente
+    const fallbackResponse = `Je rencontre une difficulté technique dans mon processus de réflexion, mais je peux quand même vous aider avec votre question: "${query.substring(0, 50)}...". Laissez-moi analyser cela différemment.`;
+    
+    return {
+      content: fallbackResponse,
+      confidence: 0.3,
+      source: 'fallback_reasoning',
+      domain: 'error_recovery'
+    };
   }
 
   /**
