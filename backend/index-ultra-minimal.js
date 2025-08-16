@@ -7,6 +7,7 @@ import DecisionEngine from './alex-modules/decision/DecisionEngine.js'
 import VisualCortex from './alex-modules/vision/VisualCortex.js'
 import EmotionalIntelligence from './alex-modules/emotion/EmotionalIntelligence.js'
 import AlexInfiniteCreator from './alex-modules/creativity/AlexInfiniteCreator.js'
+import AlexAuthenticCore from './alex-modules/core/AlexAuthenticCore.js'
 
 const PORT = process.env.PORT || 3003
 
@@ -17,6 +18,10 @@ let palier3Initialized = false
 async function initializePalier2() {
   try {
     console.log('🚀 Initializing Palier 2 modules...')
+    
+    // Initialisation AlexAuthenticCore (NOUVEAU - Template standard)
+    await AlexAuthenticCore.initialize()
+    console.log('🧠 AlexAuthenticCore initialized (Authentic Template)')
     
     // Initialisation MemoryPalace
     await MemoryPalace.initialize()
@@ -84,6 +89,10 @@ const server = createServer(async (req, res) => {
         hyperIntelligence: {
           initialized: AlexHyperIntelligence?.isInitialized || false,
           version: AlexHyperIntelligence?.version || '4.0.0'
+        },
+        authenticCore: {
+          initialized: AlexAuthenticCore?.isInitialized || false,
+          version: AlexAuthenticCore?.version || '3.0.0'
         },
         memoryPalace: {
           initialized: MemoryPalace?.isInitialized || false,
