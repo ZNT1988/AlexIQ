@@ -12,6 +12,7 @@
     "backend": "cd backend && npm start",
     "frontend": "cd frontend && npm run dev",
     "build": "npm run install-frontend && cd frontend && npm run build",
+    "build:railway": "cd frontend && npm ci && npm run build",
     "install-frontend": "cd frontend && npm install",
     "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
     "test": "cd backend && npm test && cd ../frontend && npm test"
