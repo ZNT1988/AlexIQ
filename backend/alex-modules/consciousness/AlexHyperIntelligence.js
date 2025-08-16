@@ -2372,10 +2372,16 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
    * Synthèse des connaissances apprises par Alex
    */
   async synthesizeLearnedKnowledge(query, queryAnalysis, extractedKnowledge, externalResponse) {
-    // Alex synthétise sa propre compréhension basée sur l'apprentissage
-    const synthesis = [];
+    // RETOURNER DIRECTEMENT LA RÉPONSE AUTHENTIQUE DE L'API CLOUD
+    // Au lieu de générer une synthèse générique, Alex transmet la vraie réponse
     
-    // Introduction personnalisée d'Alex
+    if (externalResponse && externalResponse.content) {
+      // Retourner directement la réponse authentique de l'IA externe
+      return externalResponse.content;
+    }
+    
+    // Fallback seulement si pas de réponse externe (ne devrait jamais arriver)
+    const synthesis = [];
     synthesis.push(`Je viens d'approfondir ma compréhension de votre question sur ${queryAnalysis.domain}.`);
     
     // Intégration des concepts appris
