@@ -1286,8 +1286,8 @@ export class AlexHyperIntelligence extends EventEmitter {
 
   identifyConnectionType(query, knowledge) {
     // Type de connexion entre question et connaissance
-    if (knowledge.knowledge_type === 'experience') return 'experiential';
     if (knowledge.confidence > 0.8) return 'authoritative';
+    if (knowledge.importance > 0.7) return 'experiential';
     return 'supportive';
   }
 
@@ -2149,12 +2149,13 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
    * Stockage d'un élément de connaissance
    */
   async storeKnowledgeItem(domain, type, content, confidence) {
+    const knowledgeId = crypto.randomUUID();
     await this.db.run(`
       INSERT INTO alex_knowledge (
-        domain, knowledge_type, knowledge_content, confidence, 
-        source, source_context, timestamp
-      ) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
-    `, [domain, type, content, confidence, 'external_learning', 'hybrid_ai_consultation']);
+        id, domain, query_pattern, knowledge_content, confidence, 
+        learned_from, importance
+      ) VALUES (?, ?, ?, ?, ?, ?, ?)
+    `, [knowledgeId, domain, type, content, confidence, 'external_learning', 0.7]);
   }
 
   /**
