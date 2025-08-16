@@ -51,6 +51,8 @@ jobs:
           args: >
             -Dsonar.projectKey=znt1988_AlexAIAnalyse
             -Dsonar.organization=znt1988
+            -Dsonar.sources=backend,frontend/src
+            -Dsonar.exclusions=**/node_modules/**,**/*.test.js,**/*.spec.js,**/dist/**,**/build/**,**/coverage/**,**/logs/**,**/data/**,**/alex_*.db,**/*.db,**/*.sqlite
 
       - name: SonarCloud Quality Gate Check
         uses: sonarqube-quality-gate-action@master
