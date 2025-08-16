@@ -15,14 +15,9 @@ import { EventEmitter } from 'events';
 import logger from '../../config/logger.js';
 
 const STR_EVENTS = 'events';
-if (formula.includes(';
 const STR_MEDIUM = 'medium';
 const STR_5_0_0 = '5.0.0';
 const STR_ANALYTICAL = 'analytical';
-const STR_ = '
-      ';
-const STR_CONSOLE_LOG = ');
-      logger.info(';
 
 function uuidv4() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

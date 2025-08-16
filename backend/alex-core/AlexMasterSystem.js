@@ -21,6 +21,7 @@ import universalModuleRegistry from "./UniversalModuleRegistry.js";
 // import alexCloudLearning from "./AlexCloudLearning.js"; // Module manquant
 import alexCloudConfig from "../config/alexCloudConfig.js";
 // import advancedOrchestrator from "./AdvancedModuleOrchestrator.js"; // Module manquant
+import aiClient from "../core/providers/AIClient.js";
 
 /**
  * @class AlexMasterSystem
@@ -921,13 +922,21 @@ class AlexMasterSystem extends EventEmitter {
       : "medium";
   }
 
-  combineModuleContent(responses) {
+  async combineModuleContent(responses) {
     // Synthèse intelligente du contenu des modules
     const contents = responses
       .map((r) => r.response.content || r.response)
       .filter(Boolean);
-    if (contents.length === 0)
-      return "Je suis en train de réfléchir à votre demande...";
+    if (contents.length === 0) {
+      // Utilisation d'une vraie API au lieu d'un retour statique
+      try {
+        const aiResponse = await aiClient.query("L'utilisateur demande une réflexion. Réponds de manière authentique et engageante.", 'anthropic');
+        return aiResponse?.content || aiResponse || "Je réfléchis à votre demande...";
+      } catch (error) {
+        logger.error('Erreur AIClient dans combineModuleContent:', error);
+        return "Je réfléchis à votre demande...";
+      }
+    }
 
     // Prendre le contenu le plus complet
     return contents.reduce((longest, current) =>
@@ -2564,7 +2573,14 @@ class AlexMasterSystem extends EventEmitter {
   }
 
   async generateComplexReasoning(cloudInsights) {
-    return "Analyse cognitive complexe intégrée";
+    try {
+      const prompt = `Génère une analyse cognitive complexe basée sur ces insights : ${JSON.stringify(cloudInsights)}`;
+      const aiResponse = await aiClient.query(prompt, 'openai');
+      return aiResponse?.content || aiResponse || "Analyse cognitive complexe intégrée";
+    } catch (error) {
+      logger.error('Erreur AIClient dans generateComplexReasoning:', error);
+      return "Analyse cognitive complexe intégrée";
+    }
   }
 
   async processCloudReasoningPath(reasoningPath) {
@@ -2572,11 +2588,25 @@ class AlexMasterSystem extends EventEmitter {
   }
 
   async generateContextualReasoningFallback(analysis) {
-    return "Analyse contextuelle approfondie authentique";
+    try {
+      const prompt = `Génère une analyse contextuelle approfondie basée sur : ${JSON.stringify(analysis)}`;
+      const aiResponse = await aiClient.query(prompt, 'anthropic');
+      return aiResponse?.content || aiResponse || "Analyse contextuelle approfondie authentique";
+    } catch (error) {
+      logger.error('Erreur AIClient dans generateContextualReasoningFallback:', error);
+      return "Analyse contextuelle approfondie authentique";
+    }
   }
 
   async generateMinimalAuthenticReasoning(analysis) {
-    return "Réflexion authentique adaptative";
+    try {
+      const prompt = `Génère une réflexion authentique et adaptative basée sur : ${JSON.stringify(analysis)}`;
+      const aiResponse = await aiClient.query(prompt, 'google');
+      return aiResponse?.content || aiResponse || "Réflexion authentique adaptative";
+    } catch (error) {
+      logger.error('Erreur AIClient dans generateMinimalAuthenticReasoning:', error);
+      return "Réflexion authentique adaptative";
+    }
   }
 
   async analyzeMessageEmotionalDepth(message) {
@@ -2596,7 +2626,14 @@ class AlexMasterSystem extends EventEmitter {
   }
 
   async generatePersonalizationReasoning(message) {
-    return "Personnalisation contextuelle authentique";
+    try {
+      const prompt = `Génère une personnalisation contextuelle authentique pour ce message : "${message}"`;
+      const aiResponse = await aiClient.query(prompt, 'anthropic');
+      return aiResponse?.content || aiResponse || "Personnalisation contextuelle authentique";
+    } catch (error) {
+      logger.error('Erreur AIClient dans generatePersonalizationReasoning:', error);
+      return "Personnalisation contextuelle authentique";
+    }
   }
 }
 

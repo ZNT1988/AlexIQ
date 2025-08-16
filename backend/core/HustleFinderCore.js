@@ -335,8 +335,8 @@ class HustleFinderCore extends EventEmitter {
     }
 
     return await neuroCore.process({
-      query: requestData.query
-      userId: requestData.userId
+      query: requestData.query,
+      userId: requestData.userId,
       context: requestData.enrichedContext || requestData.context || {}
     });
   }

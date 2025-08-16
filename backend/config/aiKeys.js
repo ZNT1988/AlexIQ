@@ -11,7 +11,9 @@ export const AI_KEYS = {
   OPENAI:    process.env.CLE_API_OPENAI || process.env.OPENAI_API_KEY || must('CLE_API_OPENAI'),
   ANTHROPIC: process.env.CLE_API_ANTHROPIC || process.env.ANTHROPIC_API_KEY || must('CLE_API_ANTHROPIC'),
   GOOGLE:    process.env.CLE_API_GOOGLE || process.env.GOOGLE_API_KEY || null,
-  GOOGLE_SA: process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || null
+  GOOGLE_SA: process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || null,
+  GOOGLE_MAPS: process.env.GOOGLE_MAPS_API_KEY || null,
+  JAVA_KEY: process.env.JAVA_API_KEY || null
 };
 
 export const GOOGLE_CFG = {

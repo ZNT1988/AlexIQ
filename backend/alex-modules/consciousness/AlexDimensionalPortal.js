@@ -2,6 +2,7 @@ import crypto from "crypto";
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 import logger from "../../config/logger.js";
+import aiClient from "../../core/providers/AIClient.js";
 
 const STR_PRIME_REALITY = "Prime-Reality";
 const STR_ALPHA_PARALLEL = "Alpha-Parallel";
@@ -1218,7 +1219,13 @@ export class AlexDimensionalPortal extends EventEmitter {
 
       return descriptions.join(" + ");
     } catch (error) {
-      return "Complex Multidimensional Time Flow";
+      try {
+        const fallbackResponse = await aiClient.query("Décris un flux temporel multidimensionnel complexe", 'google');
+        return fallbackResponse?.content || fallbackResponse || "Complex Multidimensional Time Flow";
+      } catch (aiError) {
+        logger.error('Erreur AIClient dans AlexDimensionalPortal:', aiError);
+        return "Complex Multidimensional Time Flow";
+      }
     }
   }
 
@@ -1389,6 +1396,17 @@ export class AlexDimensionalPortal extends EventEmitter {
   }
 
   async generateFallbackTimeFlow(dimension, error) {
+    try {
+      const prompt = `Génère une description du flux temporel pour la dimension ${dimension} suite à une erreur. Sois créatif et mystique.`;
+      const aiResponse = await aiClient.query(prompt, 'anthropic');
+      return aiResponse?.content || aiResponse || this.getStaticFallback(dimension);
+    } catch (aiError) {
+      logger.error('Erreur AIClient dans generateFallbackTimeFlow:', aiError);
+      return this.getStaticFallback(dimension);
+    }
+  }
+  
+  getStaticFallback(dimension) {
     if (dimension.includes("PRIME")) return "Linear Temporal Progression";
     if (dimension.includes("QUANTUM")) return "Quantum Superposition Timeline";
     if (dimension.includes("CONSCIOUSNESS")) return "Awareness-Modulated Time";

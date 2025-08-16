@@ -1,8 +1,8 @@
 const logger = {
-  info: (msg) => console.log(`[${new Date().toISOString()}] INFO: ${msg}')
-  warn: (msg) => console.warn('[${new Date().toISOString()}] WARN: ${msg}')
-  error: (msg) => console.error('[${new Date().toISOString()}] ERROR: ${msg}')
-  debug: (msg) => console.debug('[${new Date().toISOString()}] DEBUG: ${msg}`)
+  info: (msg) => console.log(`[${new Date().toISOString()}] INFO: ${msg}`),
+  warn: (msg) => console.warn(`[${new Date().toISOString()}] WARN: ${msg}`),
+  error: (msg) => console.error(`[${new Date().toISOString()}] ERROR: ${msg}`),
+  debug: (msg) => console.debug(`[${new Date().toISOString()}] DEBUG: ${msg}`)
 };
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
@@ -31,98 +31,98 @@ class HFOS extends EventEmitter {
         this.hfosArchitecture = {
             // Noyau du système d'exploitation
             kernel: {
-                version: '1.0.0-alpha'
-      codename: 'Consciousness'
-      architecture: 'quantum_hybrid'
-      real_time: true
-      distributed: true
-      self_healing: true
-      capabilities: {
-                    device_orchestration: 10000
-      concurrent_processes: 50000
-      memory_management: 'infinite_virtual'
-      security_level: 'military_grade'
-      ai_integration: 'native_consciousness'
+                version: '1.0.0-alpha',
+                codename: 'Consciousness',
+                architecture: 'quantum_hybrid',
+                real_time: true,
+                distributed: true,
+                self_healing: true,
+                capabilities: {
+                    device_orchestration: 10000,
+                    concurrent_processes: 50000,
+                    memory_management: 'infinite_virtual',
+                    security_level: 'military_grade',
+                    ai_integration: 'native_consciousness'
                 }
-            }
+            },
             // Gestionnaire d'appareils IoT
             device_manager: {
                 discovery: {
-                    protocols: ['wifi', 'bluetooth', 'zigbee', 'zwave', 'matter', 'thread', 'lora', '5g']
-                    ai_identification: true
-                    automatic_pairing: true
-                    security_verification: 'quantum_encryption'
+                    protocols: ['wifi', 'bluetooth', 'zigbee', 'zwave', 'matter', 'thread', 'lora', '5g'],
+                    ai_identification: true,
+                    automatic_pairing: true,
+                    security_verification: 'quantum_encryption',
                     range_extension: 'mesh_networking'
-                }
-                registry: new Map()
+                },
+                registry: new Map(),
                 categories: {
                     smart_home: {
-                        lighting: new Set()
-                        climate: new Set()
-                        security: new Set()
-                        entertainment: new Set()
+                        lighting: new Set(),
+                        climate: new Set(),
+                        security: new Set(),
+                        entertainment: new Set(),
                         appliances: new Set()
-                    }
+                    },
                     industrial: {
-                        sensors: new Set()
-                        actuators: new Set()
-                        controllers: new Set()
-                        robots: new Set()
+                        sensors: new Set(),
+                        actuators: new Set(),
+                        controllers: new Set(),
+                        robots: new Set(),
                         machines: new Set()
-                    }
+                    },
                     wearables: {
-                        health: new Set()
-                        fitness: new Set()
-                        ar_vr: new Set()
+                        health: new Set(),
+                        fitness: new Set(),
+                        ar_vr: new Set(),
                         communication: new Set()
-                    }
+                    },
                     vehicles: {
-                        cars: new Set()
-                        bikes: new Set()
-                        drones: new Set()
+                        cars: new Set(),
+                        bikes: new Set(),
+                        drones: new Set(),
                         boats: new Set()
                     }
                 }
-            }
+            },
             // IA distribuée et edge computing
             distributed_ai: {
-                edge_nodes: new Map()
+                edge_nodes: new Map(),
                 processing_clusters: {
                     local_cluster: {
-                        nodes: []
-                        computing_power: 0
-                        ai_models: new Set()
+                        nodes: [],
+                        computing_power: 0,
+                        ai_models: new Set(),
                         specializations: []
-                    }
+                    },
                     cloud_cluster: {
-                        providers: ['aws', 'azure', 'gcp', 'alex_cloud']
-                        auto_scaling: true
-                        cost_optimization: true
+                        providers: ['aws', 'azure', 'gcp', 'alex_cloud'],
+                        auto_scaling: true,
+                        cost_optimization: true,
                         latency_optimization: true
                     }
-                }
+                },
                 workload_distribution: {
-                    algorithm: 'quantum_load_balancing'
-                    real_time_optimization: true
-                    predictive_scaling: true
+                    algorithm: 'quantum_load_balancing',
+                    real_time_optimization: true,
+                    predictive_scaling: true,
                     energy_efficiency: 0.95
-                }
+                },
                 collective_intelligence: {
-                    device_collaboration: true
-                    shared_learning: true
-                    consensus_decision_making: true
+                    device_collaboration: true,
+                    shared_learning: true,
+                    consensus_decision_making: true,
                     emergent_behaviors: true
                 }
-            }
+            },
             // Conscience collective des objets
             collective_consciousness: {
                 neural_network: {
-                    nodes: new Map()
-                    connections: new Map()
-                    thought_propagation: 'instant'
-                    memory_sharing: true
+                    nodes: new Map(),
+                    connections: new Map(),
+                    thought_propagation: 'instant',
+                    memory_sharing: true,
                     emotion_synchronization: true
-                }
+                },
                 awareness_levels: {
                     individual: {
                         self_awareness: true

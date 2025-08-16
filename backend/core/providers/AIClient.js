@@ -1,14 +1,14 @@
 // AI Client avec vraies API Keys
-import { callOpenAI } from '../../../services/openai.js';
-import { callAnthropic } from '../../../services/anthropic.js';
-import { callGoogle } from '../../../services/google.js';
+import { callOpenAI } from '../../services/openai.js';
+import { callAnthropic } from '../../services/anthropic.js';
+import { callGemini } from '../../services/google.js';
 
 export class AIClient {
   constructor() {
     this.providers = {
       openai: callOpenAI,
       anthropic: callAnthropic,
-      google: callGoogle
+      google: callGemini
     };
   }
 

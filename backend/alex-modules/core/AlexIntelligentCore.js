@@ -329,10 +329,14 @@ export class AlexIntelligentCore extends EventEmitter {
    */
   async testLLMConnection() {
     try {
+      // VRAIE API call avec les clés - test authentique
+      const aiClient = await import('../../core/providers/AIClient.js');
+      const testResponse = await aiClient.default.query("Test connexion", 'openai');
       if (testResponse && testResponse.length > 0) {
         logger.info("✅ LLM connection test successful");
         return true;
       }
+      return false;
     } catch (error) {
       logger.error("❌ LLM connection test failed:", error);
       throw error;

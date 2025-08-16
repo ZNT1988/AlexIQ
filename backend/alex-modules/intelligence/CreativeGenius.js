@@ -1,10 +1,5 @@
-import logger from '../config/logger.js';
-
-
-// Constantes pour chaînes dupliquées (optimisation SonarJS)
-const STR_UNDEFINED = 'undefined';
-
-const crypto = require('crypto');
+import logger from '../../config/logger.js';
+import crypto from 'crypto';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_DIVINE = 'divine';

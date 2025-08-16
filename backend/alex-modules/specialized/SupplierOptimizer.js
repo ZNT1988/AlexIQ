@@ -6,15 +6,19 @@ const STR_ACTIVE = 'active';// SupplierOptimizer.js - Optimiseur Fournisseurs 36
 // Version: 5.0 - ALEX Conscious AI for Ferrero Supplier Intelligence
 
 import { EventEmitter } from 'events';
-import logger from '../config/logger.js';
+import logger from '../../config/logger.js';
 
-      }
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_MEDIUM = 'medium';
+
+// Configuration des catégories de fournisseurs
+const SUPPLIER_CATEGORIES = {
       packaging: {
-        name: 'Emballages'
-        categories: ['primary_packaging', 'secondary_packaging', 'labels']
-        criticality: STR_MEDIUM
+        name: 'Emballages',
+        categories: ['primary_packaging', 'secondary_packaging', 'labels'],
+        criticality: STR_MEDIUM,
         sustainability_requirements: STR_MEDIUM
-      }
+      },
       machinery: {
         name: 'Équipements'
         categories: ['production_equipment', 'maintenance_parts', 'tools']
