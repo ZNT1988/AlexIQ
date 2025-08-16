@@ -253,7 +253,7 @@ export class NeuroCore extends EventEmitter {
       });
     }
 
-    // Analyse des patterns temporels
+    // Analyse des patterns temporels
 
     // Recommandations basées sur la vision à long terme
     const visionaryRecommendations = this.generateVisionaryRecommendations(temporalPatterns);

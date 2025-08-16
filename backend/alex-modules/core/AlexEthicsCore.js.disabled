@@ -137,20 +137,22 @@ export class AlexEthicsCore extends EventEmitter {
 
     // Détection de contenu potentiellement harmful
     const harmfulPatterns = [
-      /violence|attaquer|blesser|tuer/
-      /illégal|criminel|frauduleux/
-      /harcèlement|discrimination|racisme/
-      /manipulation|tromperie|mensonge délibéré/
-      /accès non autorisé|piratage|crack/
+      /violence|attaquer|blesser|tuer/,
+      /illegal|criminel|frauduleux/,
+      /harcelement|discrimination|racisme/,
+      /manipulation|tromperie|mensonge/,
+      /acces.non.autorise|piratage|crack/
     ];
 
-    harmfulPatterns.forEach((pattern, _) => this.processLongOperation(args));
+    harmfulPatterns.forEach((pattern) => {
+      if (pattern.test(decisionText)) {
+        violations.push(`Contenu potentiellement problematique detecte`);
         score -= 0.3;
       }
     });
 
     return {
-      score: Math.max(0, score)
+      score: Math.max(0, score),
       violations: violations
     };
   }
@@ -189,8 +191,8 @@ export class AlexEthicsCore extends EventEmitter {
     const averageScore = Object.values(scores).reduce((sum, score) => sum + score, 0) / Object.keys(scores).length;
 
     return {
-      scores: scores
-      averageScore: averageScore
+      scores: scores,
+      averageScore: averageScore,
       recommendations: recommendations
     };
   }

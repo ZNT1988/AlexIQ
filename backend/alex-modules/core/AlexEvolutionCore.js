@@ -2,7 +2,7 @@ import crypto from "crypto";
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
 import { EventEmitter } from "events";
-import logger from "../../config/logger-simple.js";
+import logger from "../../config/logger.js";
 
 /**
  * @fileoverview AlexEvolutionCore - SYSTÈME D'ÉVOLUTION AUTHENTIQUE
