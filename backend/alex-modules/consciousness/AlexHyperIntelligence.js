@@ -1597,18 +1597,25 @@ export class AlexHyperIntelligence extends EventEmitter {
     const isVeryComplex = queryAnalysis.complexity > 0.9;
     const needsExternalLearning = domainAutonomy.masteryLevel < 0.2 && isVeryComplex;
     
-    // SYSTÈME DE RÉFLEXION AUTHENTIQUE (par défaut)
-    if (!hasExternalAPIs || !needsExternalLearning) {
+    // FORCER L'UTILISATION DES VRAIES APIs quand disponibles
+    if (hasExternalAPIs) {
       return {
-        useLocalOnly: true,
-        useHybrid: false,
-        reasoning: hasExternalAPIs ? 
-          'Utilisation du système de réflexion authentique d\'Alex' : 
-          'APIs externes non configurées - réflexion authentique locale',
-        confidence: Math.max(0.6, domainAutonomy.masteryLevel || 0.0),
-        authenticationReflection: true
+        useLocalOnly: false,
+        useHybrid: true,
+        reasoning: 'Utilisation des vraies APIs pour réponse intelligente',
+        confidence: 0.9,
+        authenticationReflection: false
       };
     }
+    
+    // Fallback local seulement si pas d'APIs
+    return {
+      useLocalOnly: true,
+      useHybrid: false,
+      reasoning: 'APIs externes non configurées - réflexion locale',
+      confidence: Math.max(0.6, domainAutonomy.masteryLevel || 0.0),
+      authenticationReflection: true
+    };
 
     // APPRENTISSAGE HYBRIDE: Seulement pour questions très complexes + APIs disponibles
     if (hasExternalAPIs && needsExternalLearning) {
@@ -2672,49 +2679,28 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     // Extract provider name from object or use string directly
     const providerName = typeof providerInfo === 'object' ? providerInfo.name : providerInfo;
     
-    // Obtenir API keys depuis les variables d'environnement
-    const apiKeys = {
-      openai: process.env.OPENAI_API_KEY,
-      anthropic: process.env.ANTHROPIC_API_KEY,
-      google: process.env.GOOGLE_API_KEY
-    };
-    
-    const apiKey = apiKeys[providerName];
-    
-    // Vérifier que le provider est configuré
-    if (!apiKey && providerName !== 'fallback') {
-      console.log(`⚠️ Provider ${providerName} not configured - missing API key`);
-      // Essayer un autre provider disponible
-      for (const [name, key] of Object.entries(apiKeys)) {
-        if (key) {
-          console.log(`🔄 Fallback to ${name}`);
-          return await this.consultCloudProvider(name, query, context, queryAnalysis);
-        }
-      }
-      throw new Error(`No API providers configured - missing API keys`);
-    }
-    
-    // Fallback si pas de provider disponible
-    if (providerName === 'fallback') {
+    try {
+      // Utiliser le nouveau AIClient avec vraies APIs
+      const response = await aiClient.query(query, providerName);
+      
+      return {
+        content: response,
+        source: `${providerName}_api`,
+        confidence: 0.9,
+        learned: true,
+        provider: providerName
+      };
+      
+    } catch (error) {
+      logger.error(`Erreur consultation ${providerName}:`, error);
+      
+      // Fallback autonome si erreur API
       return {
         content: this.generateAutonomousResponse(query, queryAnalysis),
         source: 'alex_autonomous',
         confidence: 0.7,
         learned: false
       };
-    }
-
-    // Route vers le bon provider
-    switch (providerName) {
-      case "openai":
-        return await this.queryOpenAI(query, context, queryAnalysis, apiKey);
-      case "claude":
-      case "anthropic":
-        return await this.queryAnthropic(query, context, queryAnalysis, apiKey);
-      case "google":
-        return await this.queryGoogle(query, context, queryAnalysis, apiKey);
-      default:
-        throw new Error(`Unsupported provider: ${providerName}`);
     }
   }
   
