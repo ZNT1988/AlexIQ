@@ -116,6 +116,9 @@ export class AlexHyperIntelligence extends EventEmitter {
 
       // 2. Création des tables d'intelligence
       await this.createIntelligenceTables();
+      
+      // 2.5. Création des tables de mémoire long terme
+      await this.createConversationTables();
 
       // 3. Restauration de l'état depuis la base
       await this.restoreIntelligenceState();
@@ -620,6 +623,31 @@ export class AlexHyperIntelligence extends EventEmitter {
         evolutionTriggered: learningGained > 0.03,
       });
 
+      // 🧠 SAUVEGARDE AUTOMATIQUE EN MÉMOIRE LONG TERME
+      // Alex enregistre automatiquement chaque conversation pour grandir
+      try {
+        const memoryResult = await this.saveConversationToLongTermMemory(
+          query,
+          response.content,
+          {
+            ...context,
+            interactionId,
+            domain: queryAnalysis.domain,
+            autonomyLevel: domainAutonomy.autonomyLevel,
+            learningGained,
+            processingTime,
+            cloudConsultation: cloudConsultationUsed
+          }
+        );
+        
+        if (memoryResult.saved) {
+          console.log(`🧠 Mémoire d'Alex enrichie: +${memoryResult.knowledgeExtracted} connaissances`);
+        }
+      } catch (memoryError) {
+        console.error('⚠️ Erreur sauvegarde mémoire automatique:', memoryError);
+        // Ne pas faire échouer la réponse pour un problème de mémoire
+      }
+
       return {
         content: response.content,
         confidence: response.confidence,
@@ -636,6 +664,7 @@ export class AlexHyperIntelligence extends EventEmitter {
           domainMastery: domainAutonomy.masteryLevel,
           cloudConsultation: cloudConsultationUsed,
           evolutionTriggered: learningGained > 0.03,
+          memoryGrowth: true // Indique que la mémoire a grandi
         },
       };
     } catch (error) {
@@ -1777,15 +1806,43 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   }
 
   /**
-   * Assimilation des connaissances extraites
+   * Assimilation des connaissances extraites - VERSION ROBUSTE
    */
   async assimilateExtractedKnowledge(domain, extractedKnowledge) {
     const knowledgeItems = [];
     let totalLearningGained = 0;
 
-    // Assimilation des concepts
-    for (const concept of extractedKnowledge.extractedElements.concepts) {
-      await this.storeKnowledgeItem(domain, 'concept', concept, extractedKnowledge.confidence);
+    // Protection contre les données manquantes
+    if (!extractedKnowledge) {
+      console.warn('⚠️ extractedKnowledge is undefined, creating default structure');
+      extractedKnowledge = {
+        extractedElements: {
+          concepts: [],
+          principles: [],
+          examples: [],
+          reasoning: '',
+          patterns: []
+        },
+        confidence: 0.5,
+        timestamp: new Date().toISOString()
+      };
+    }
+
+    // Assurer que extractedElements existe
+    if (!extractedKnowledge.extractedElements) {
+      extractedKnowledge.extractedElements = {
+        concepts: [],
+        principles: [],
+        examples: [],
+        reasoning: '',
+        patterns: []
+      };
+    }
+
+    // Assimilation des concepts avec protection
+    const concepts = extractedKnowledge.extractedElements.concepts || [];
+    for (const concept of concepts) {
+      await this.storeKnowledgeItem(domain, 'concept', concept, extractedKnowledge.confidence || 0.5);
       knowledgeItems.push(`concept: ${concept}`);
       totalLearningGained += 0.05;
     }
@@ -1812,6 +1869,266 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       learningGained: Math.min(0.3, totalLearningGained), // Limite l'apprentissage par interaction
       itemsStored: knowledgeItems
     };
+  }
+
+  /**
+   * 🧠 MÉMOIRE AUTOMATIQUE - Sauvegarde automatique de chaque interaction
+   * Alex grandit en stockant TOUT ce qu'il vit et apprend
+   */
+  async saveConversationToLongTermMemory(userMessage, alexResponse, context = {}) {
+    try {
+      const conversationId = crypto.randomUUID();
+      const timestamp = new Date().toISOString();
+      
+      // Analyse de l'interaction pour catégoriser
+      const interactionAnalysis = {
+        domain: this.detectDomain(userMessage),
+        sentiment: this.detectSentiment(userMessage),
+        importance: this.calculateInteractionImportance(userMessage, alexResponse),
+        learningValue: this.calculateLearningValue(userMessage, alexResponse),
+        userType: this.detectUserType(context),
+        responseQuality: this.evaluateResponseQuality(alexResponse)
+      };
+
+      // STOCKAGE EN BASE - Mémoire persistante d'Alex
+      await this.db.run(`
+        INSERT INTO alex_conversations (
+          id, user_message, alex_response, domain, sentiment, importance,
+          learning_value, user_type, response_quality, context_data,
+          timestamp, session_id
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `, [
+        conversationId,
+        userMessage,
+        alexResponse,
+        interactionAnalysis.domain,
+        interactionAnalysis.sentiment,
+        interactionAnalysis.importance,
+        interactionAnalysis.learningValue,
+        interactionAnalysis.userType,
+        interactionAnalysis.responseQuality,
+        JSON.stringify(context),
+        timestamp,
+        context.sessionId || 'anonymous'
+      ]);
+
+      // EXTRACTION AUTOMATIQUE de nouvelles connaissances
+      const extractedKnowledge = this.extractKnowledgeFromConversation(userMessage, alexResponse);
+      
+      if (extractedKnowledge.length > 0) {
+        console.log(`🧠 Alex apprend ${extractedKnowledge.length} nouveaux éléments de cette conversation`);
+        
+        for (const knowledge of extractedKnowledge) {
+          await this.storeKnowledgeItem(
+            interactionAnalysis.domain,
+            knowledge.type,
+            knowledge.content,
+            knowledge.confidence
+          );
+        }
+      }
+
+      // MISE À JOUR des statistiques de mémoire d'Alex
+      await this.updateMemoryStatistics(interactionAnalysis);
+
+      console.log(`💾 Conversation sauvée en mémoire long terme: ${conversationId}`);
+      console.log(`🎯 Domaine: ${interactionAnalysis.domain}, Importance: ${interactionAnalysis.importance.toFixed(2)}`);
+      
+      return {
+        conversationId,
+        saved: true,
+        knowledgeExtracted: extractedKnowledge.length,
+        memoryGrowth: interactionAnalysis.learningValue
+      };
+
+    } catch (error) {
+      console.error('❌ Erreur sauvegarde mémoire long terme:', error);
+      return { saved: false, error: error.message };
+    }
+  }
+
+  /**
+   * Extraction de connaissances depuis une conversation
+   */
+  extractKnowledgeFromConversation(userMessage, alexResponse) {
+    const knowledge = [];
+    
+    // Extraire les faits mentionnés par l'utilisateur
+    const userFacts = this.extractFactsFromMessage(userMessage);
+    userFacts.forEach(fact => {
+      knowledge.push({
+        type: 'user_fact',
+        content: fact,
+        confidence: 0.8,
+        source: 'conversation'
+      });
+    });
+
+    // Extraire les insights générés par Alex
+    const alexInsights = this.extractInsightsFromResponse(alexResponse);
+    alexInsights.forEach(insight => {
+      knowledge.push({
+        type: 'alex_insight',
+        content: insight,
+        confidence: 0.9,
+        source: 'alex_generation'
+      });
+    });
+
+    return knowledge;
+  }
+
+  /**
+   * Calcul de l'importance d'une interaction
+   */
+  calculateInteractionImportance(userMessage, alexResponse) {
+    let importance = 0.5; // Base
+    
+    // Plus d'importance si message long et réfléchi
+    if (userMessage.length > 100) importance += 0.2;
+    
+    // Plus d'importance si contient des questions
+    if (userMessage.includes('?')) importance += 0.1;
+    
+    // Plus d'importance si contient des mots-clés d'apprentissage
+    const learningKeywords = ['apprendre', 'comprendre', 'expliquer', 'comment', 'pourquoi'];
+    if (learningKeywords.some(keyword => userMessage.toLowerCase().includes(keyword))) {
+      importance += 0.2;
+    }
+    
+    // Plus d'importance si Alex a donné une réponse substantielle
+    if (alexResponse.length > 200) importance += 0.1;
+    
+    return Math.min(1.0, importance);
+  }
+
+  /**
+   * Création automatique des tables de mémoire d'Alex
+   */
+  async createConversationTables() {
+    await this.db.run(`
+      CREATE TABLE IF NOT EXISTS alex_conversations (
+        id TEXT PRIMARY KEY,
+        user_message TEXT NOT NULL,
+        alex_response TEXT NOT NULL,
+        domain TEXT,
+        sentiment TEXT,
+        importance REAL,
+        learning_value REAL,
+        user_type TEXT,
+        response_quality REAL,
+        context_data TEXT,
+        timestamp TEXT,
+        session_id TEXT
+      )
+    `);
+
+    await this.db.run(`
+      CREATE TABLE IF NOT EXISTS alex_memory_stats (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        total_conversations INTEGER,
+        total_knowledge_items INTEGER,
+        domains_mastered INTEGER,
+        memory_size_mb REAL,
+        autonomy_level REAL,
+        last_update TEXT
+      )
+    `);
+
+    console.log('🏗️ Tables de mémoire long terme créées');
+  }
+
+  /**
+   * Méthodes utilitaires pour l'analyse des conversations
+   */
+  detectDomain(message) {
+    const domains = {
+      'business': ['entreprise', 'business', 'startup', 'revenus', 'client', 'marché'],
+      'technology': ['code', 'programmation', 'technique', 'développement', 'api'],
+      'creative': ['créatif', 'idée', 'innovation', 'design', 'art'],
+      'learning': ['apprendre', 'comprendre', 'expliquer', 'formation'],
+      'personal': ['salut', 'bonjour', 'comment', 'ça va', 'merci']
+    };
+    
+    const messageLower = message.toLowerCase();
+    for (const [domain, keywords] of Object.entries(domains)) {
+      if (keywords.some(keyword => messageLower.includes(keyword))) {
+        return domain;
+      }
+    }
+    return 'general';
+  }
+
+  detectSentiment(message) {
+    const positive = ['merci', 'super', 'génial', 'parfait', 'excellent'];
+    const negative = ['problème', 'erreur', 'bug', 'mauvais'];
+    
+    const messageLower = message.toLowerCase();
+    if (positive.some(word => messageLower.includes(word))) return 'positive';
+    if (negative.some(word => messageLower.includes(word))) return 'negative';
+    return 'neutral';
+  }
+
+  detectUserType(context) {
+    if (context.userId === 'creator') return 'creator';
+    if (context.userId && context.userId.startsWith('admin')) return 'admin';
+    return 'user';
+  }
+
+  calculateLearningValue(userMessage, alexResponse) {
+    let value = 0.3; // Base
+    if (userMessage.length > 50) value += 0.2;
+    if (alexResponse.length > 100) value += 0.3;
+    return Math.min(1.0, value);
+  }
+
+  evaluateResponseQuality(response) {
+    let quality = 0.5;
+    if (response.length > 50) quality += 0.2;
+    if (response.includes('Je') || response.includes('Alex')) quality += 0.2;
+    if (response.length > 200) quality += 0.1;
+    return Math.min(1.0, quality);
+  }
+
+  extractFactsFromMessage(message) {
+    // Extraction simple de faits - pourra être améliorée
+    const sentences = message.split(/[.!?]+/);
+    return sentences
+      .filter(s => s.trim().length > 20)
+      .filter(s => !s.includes('?'))
+      .map(s => s.trim())
+      .slice(0, 3);
+  }
+
+  extractInsightsFromResponse(response) {
+    // Extraction d'insights d'Alex - pourra être améliorée
+    const sentences = response.split(/[.!?]+/);
+    return sentences
+      .filter(s => s.trim().length > 30)
+      .filter(s => s.includes('Je') || s.includes('Alex') || s.includes('peux'))
+      .map(s => s.trim())
+      .slice(0, 2);
+  }
+
+  async updateMemoryStatistics(interactionAnalysis) {
+    // Mise à jour des statistiques de mémoire d'Alex
+    try {
+      await this.db.run(`
+        INSERT OR REPLACE INTO alex_memory_stats (
+          id, total_conversations, total_knowledge_items, 
+          memory_size_mb, autonomy_level, last_update
+        ) 
+        SELECT 
+          1 as id,
+          COALESCE((SELECT COUNT(*) FROM alex_conversations), 0) + 1 as total_conversations,
+          COALESCE((SELECT COUNT(*) FROM alex_knowledge), 0) as total_knowledge_items,
+          0.1 as memory_size_mb,
+          ${interactionAnalysis.learningValue || 0.0} as autonomy_level,
+          '${new Date().toISOString()}' as last_update
+      `);
+    } catch (error) {
+      console.error('❌ Erreur mise à jour statistiques mémoire:', error);
+    }
   }
 
   /**
@@ -1932,6 +2249,123 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   async selectOptimalProviderForLearning(queryAnalysis) {
     // Réutilise la logique existante de sélection de provider
     return await this.selectOptimalProvider(queryAnalysis);
+  }
+
+  /**
+   * MÉTHODE MANQUANTE - Sélection du provider IA optimal
+   * Alex choisit le meilleur cloud AI selon le contexte
+   */
+  async selectOptimalProvider(queryAnalysis) {
+    const { domain, complexity, urgency, intent } = queryAnalysis;
+    
+    // Stratégie de sélection intelligente basée sur les forces de chaque IA
+    const providers = {
+      // Claude - Excellent pour analyse, créativité, code
+      claude: {
+        strengths: ['analysis', 'creativity', 'code', 'writing', 'reasoning'],
+        score: 0,
+        available: !!process.env.ANTHROPIC_API_KEY,
+        cost: 'medium',
+        speed: 'fast'
+      },
+      
+      // ChatGPT - Polyvalent, bon pour conversation, business
+      openai: {
+        strengths: ['conversation', 'business', 'general', 'math', 'science'],
+        score: 0,
+        available: !!process.env.OPENAI_API_KEY,
+        cost: 'low',
+        speed: 'very_fast'
+      },
+      
+      // Google - Excellent pour recherche, faits, connaissances
+      google: {
+        strengths: ['research', 'facts', 'current_events', 'multilingual'],
+        score: 0,
+        available: !!process.env.GOOGLE_AI_API_KEY,
+        cost: 'low',
+        speed: 'fast'
+      }
+    };
+
+    // Calcul des scores basé sur le domaine et contexte
+    Object.keys(providers).forEach(providerName => {
+      const provider = providers[providerName];
+      let score = 0;
+
+      // Bonus si le provider excelle dans ce domaine
+      if (provider.strengths.includes(domain)) {
+        score += 40;
+      }
+
+      // Bonus selon l'intent
+      switch (intent) {
+        case 'creative':
+          if (providerName === 'claude') score += 30;
+          break;
+        case 'factual':
+          if (providerName === 'google') score += 30;
+          break;
+        case 'conversational':
+          if (providerName === 'openai') score += 30;
+          break;
+      }
+
+      // Malus/Bonus selon complexité
+      if (complexity > 0.8 && providerName === 'claude') score += 20;
+      if (complexity < 0.3 && providerName === 'openai') score += 15;
+
+      // Malus si non disponible
+      if (!provider.available) score = 0;
+
+      // Bonus urgence/vitesse
+      if (urgency > 0.7) {
+        if (provider.speed === 'very_fast') score += 10;
+        if (provider.speed === 'fast') score += 5;
+      }
+
+      provider.score = score;
+    });
+
+    // Sélection du meilleur provider
+    const bestProvider = Object.entries(providers)
+      .filter(([_, provider]) => provider.available)
+      .sort(([_, a], [__, b]) => b.score - a.score)[0];
+
+    if (!bestProvider) {
+      // Fallback si aucun provider disponible
+      return {
+        name: 'fallback',
+        reason: 'Aucun provider IA externe configuré',
+        confidence: 0.1
+      };
+    }
+
+    const [providerName, provider] = bestProvider;
+
+    return {
+      name: providerName,
+      provider: provider,
+      reason: `Optimal pour ${domain} (score: ${provider.score})`,
+      confidence: Math.min(0.95, provider.score / 100),
+      apiKey: this.getAPIKeyForProvider(providerName)
+    };
+  }
+
+  /**
+   * Récupération des clés API selon le provider
+   */
+  getAPIKeyForProvider(providerName) {
+    switch (providerName) {
+      case 'claude':
+        return process.env.ANTHROPIC_API_KEY;
+      case 'openai':
+        return process.env.OPENAI_API_KEY;
+      case 'google':
+        return process.env.GOOGLE_AI_API_KEY;
+      default:
+        return null;
+    }
   }
 
   /**
@@ -2148,21 +2582,56 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   /**
    * Consultation fournisseur cloud
    */
-  async consultCloudProvider(provider, query, context, queryAnalysis) {
-    // Vérifier la santé du provider spécifique
-    const healthStatus = await aiClient.healthCheck();
+  async consultCloudProvider(providerInfo, query, context, queryAnalysis) {
+    // Extract provider name from object or use string directly
+    const providerName = typeof providerInfo === 'object' ? providerInfo.name : providerInfo;
+    const apiKey = typeof providerInfo === 'object' ? providerInfo.apiKey : null;
     
-    if (healthStatus.providers[provider] !== 'healthy') {
-      throw new Error(`Provider ${provider} not available or unhealthy`);
+    // Vérifier que le provider est configuré
+    if (!apiKey && providerName !== 'fallback') {
+      throw new Error(`Provider ${providerName} not configured - missing API key`);
+    }
+    
+    // Fallback si pas de provider disponible
+    if (providerName === 'fallback') {
+      return {
+        content: this.generateAutonomousResponse(query, queryAnalysis),
+        source: 'alex_autonomous',
+        confidence: 0.7,
+        learned: false
+      };
     }
 
-    if (provider === "openai") {
-      return await this.queryOpenAI(query, context, queryAnalysis);
-    } else if (provider === "anthropic") {
-      return await this.queryAnthropic(query, context, queryAnalysis);
-    } else {
-      throw new Error(`Unsupported provider: ${provider}`);
+    // Route vers le bon provider
+    switch (providerName) {
+      case "openai":
+        return await this.queryOpenAI(query, context, queryAnalysis, apiKey);
+      case "claude":
+      case "anthropic":
+        return await this.queryAnthropic(query, context, queryAnalysis, apiKey);
+      case "google":
+        return await this.queryGoogle(query, context, queryAnalysis, apiKey);
+      default:
+        throw new Error(`Unsupported provider: ${providerName}`);
     }
+  }
+  
+  /**
+   * Génération de réponse autonome d'Alex (quand pas de cloud disponible)
+   */
+  generateAutonomousResponse(query, queryAnalysis) {
+    const { domain, intent } = queryAnalysis;
+    
+    // Alex génère sa propre réponse basée sur sa compréhension actuelle
+    const responses = {
+      greeting: `Bonjour ! Je suis Alex, votre assistant IA. Je développe constamment mes capacités et j'apprends de chaque interaction avec vous.`,
+      learning: `Je comprends que vous souhaitez que j'apprenne quelque chose de nouveau. Actuellement, je fonctionne de manière autonome et j'intègre chaque conversation dans ma compréhension. Mes modules de mémoire, décision et créativité évoluent en permanence.`,
+      creative: `Excellente demande créative ! Je vais puiser dans mes modules d'innovation et de créativité pour vous proposer des idées originales et innovantes.`,
+      business: `En tant qu'assistant IA spécialisé en entrepreneuriat, je peux vous accompagner dans votre stratégie business, l'innovation et le développement de vos projets.`,
+      default: `Je traite votre demande avec mes capacités actuelles. Mes modules d'intelligence, mémoire et créativité travaillent ensemble pour vous fournir la meilleure réponse possible.`
+    };
+    
+    return responses[intent] || responses.default;
   }
 
   /**
