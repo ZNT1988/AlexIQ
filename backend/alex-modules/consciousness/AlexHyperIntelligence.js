@@ -2591,11 +2591,27 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   async consultCloudProvider(providerInfo, query, context, queryAnalysis) {
     // Extract provider name from object or use string directly
     const providerName = typeof providerInfo === 'object' ? providerInfo.name : providerInfo;
-    const apiKey = typeof providerInfo === 'object' ? providerInfo.apiKey : null;
+    
+    // Obtenir API keys depuis les variables d'environnement
+    const apiKeys = {
+      openai: process.env.OPENAI_API_KEY,
+      anthropic: process.env.ANTHROPIC_API_KEY,
+      google: process.env.GOOGLE_API_KEY
+    };
+    
+    const apiKey = apiKeys[providerName];
     
     // Vérifier que le provider est configuré
     if (!apiKey && providerName !== 'fallback') {
-      throw new Error(`Provider ${providerName} not configured - missing API key`);
+      console.log(`⚠️ Provider ${providerName} not configured - missing API key`);
+      // Essayer un autre provider disponible
+      for (const [name, key] of Object.entries(apiKeys)) {
+        if (key) {
+          console.log(`🔄 Fallback to ${name}`);
+          return await this.consultCloudProvider(name, query, context, queryAnalysis);
+        }
+      }
+      throw new Error(`No API providers configured - missing API keys`);
     }
     
     // Fallback si pas de provider disponible
