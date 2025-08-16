@@ -5,8 +5,9 @@
   "type": "module",
   "main": "index-ultra-minimal.js",
   "scripts": {
-    "start": "node index-ultra-minimal.js",
+    "start": "node index-railway-minimal.js",
     "dev": "node index-ultra-minimal.js",
+    "local": "node index-ultra-minimal.js",
     "test": "echo \"Tests to be implemented\" && exit 0"
   },
   "engines": {
