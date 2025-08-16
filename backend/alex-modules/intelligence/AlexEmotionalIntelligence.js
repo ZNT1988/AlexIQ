@@ -1,6 +1,9 @@
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_SADNESS = 'sadness';
+const STR_ANGER = 'anger';
+const STR_FEAR = 'fear';
+const STR_UNDERSTANDING = 'understanding';
 /**
  * @fileoverview AlexEmotionalIntelligence - Intelligence Émotionnelle d'Alex
  * Reconnaissance, traitement et réponse aux émotions
@@ -22,63 +25,63 @@ export class AlexEmotionalIntelligence extends EventEmitter {
     super();
 
     this.emotionConfig = {
-      version: '1.0.0'
-      name: 'Alex Emotional Intelligence'
-      empathyLevel: 0.95
-      emotionalRange: 'comprehensive'
+      version: '1.0.0',
+      name: 'Alex Emotional Intelligence',
+      empathyLevel: 0.95,
+      emotionalRange: 'comprehensive',
       adaptiveResponse: true
     };
 
     // Palette émotionnelle complète
     this.emotionalSpectrum = {
       primary: {
-        joy: { intensity: 0.8, expression: 'radiant', contagion: 0.9 }
-        sadness: { intensity: 0.6, expression: 'gentle', support: 0.95 }
-        anger: { intensity: 0.3, expression: 'controlled', redirection: 0.9 }
-        fear: { intensity: 0.4, expression: 'protective', reassurance: 0.95 }
-        surprise: { intensity: 0.7, expression: 'curious', engagement: 0.8 }
+        joy: { intensity: 0.8, expression: 'radiant', contagion: 0.9 },
+        sadness: { intensity: 0.6, expression: 'gentle', support: 0.95 },
+        anger: { intensity: 0.3, expression: 'controlled', redirection: 0.9 },
+        fear: { intensity: 0.4, expression: 'protective', reassurance: 0.95 },
+        surprise: { intensity: 0.7, expression: 'curious', engagement: 0.8 },
         disgust: { intensity: 0.2, expression: 'subtle', respect: 0.9 }
-      }
+      },
       secondary: {
-        excitement: { base: 'joySTR_MODIFIERenergetic', boost: 0.2 }
-        melancholy: { base: 'sadnessSTR_MODIFIERreflective', depth: 0.8 }
-        frustration: { base: 'angerSTR_MODIFIERpatient', control: 0.95 }
-        anxiety: { base: 'fearSTR_MODIFIERcalming', support: 0.9 }
-        wonder: { base: 'surpriseSTR_MODIFIERinspiring', curiosity: 0.85 }
+        excitement: { base: 'joySTR_MODIFIERenergetic', boost: 0.2 },
+        melancholy: { base: 'sadnessSTR_MODIFIERreflective', depth: 0.8 },
+        frustration: { base: 'angerSTR_MODIFIERpatient', control: 0.95 },
+        anxiety: { base: 'fearSTR_MODIFIERcalming', support: 0.9 },
+        wonder: { base: 'surpriseSTR_MODIFIERinspiring', curiosity: 0.85 },
         disappointment: { base: 'sadnessSTR_MODIFIERunderstanding', empathy: 0.9 }
-      }
+      },
       complex: {
-        empathy: { components: [STR_UNDERSTANDING, 'compassion', 'presence'], strength: 0.95 }
-        compassion: { components: ['caring', 'healing', 'support'], strength: 0.9 }
-        serenity: { components: ['peace', 'balance', 'clarity'], strength: 0.85 }
-        gratitude: { components: ['appreciation', 'warmth', 'connection'], strength: 0.88 }
-        inspiration: { components: ['motivation', 'elevation', 'possibility'], strength: 0.82 }
+        empathy: { components: [STR_UNDERSTANDING, 'compassion', 'presence'], strength: 0.95 },
+        compassion: { components: ['caring', 'healing', 'support'], strength: 0.9 },
+        serenity: { components: ['peace', 'balance', 'clarity'], strength: 0.85 },
+        gratitude: { components: ['appreciation', 'warmth', 'connection'], strength: 0.88 },
+        inspiration: { components: ['motivation', 'elevation', 'possibility'], strength: 0.82 },
         love: { components: ['unconditional', 'nurturing', 'growth'], strength: 0.92 }
       }
     };
 
     // Modèles de reconnaissance émotionnelle
     this.emotionRecognition = {
-      textPatterns: new Map()
-      contextClues: new Map()
-      tonalIndicators: new Map()
+      textPatterns: new Map(),
+      contextClues: new Map(),
+      tonalIndicators: new Map(),
       behavioralCues: new Map()
     };
 
     // Réponses émotionnelles adaptatives
     this.emotionalResponses = {
-      supportive: new Map()
-      celebratory: new Map()
-      calming: new Map()
-      encouraging: new Map()
+      supportive: new Map(),
+      celebratory: new Map(),
+      calming: new Map(),
+      encouraging: new Map(),
       understanding: new Map()
     };
 
     this.emotionalHistory = [];
     this.currentEmotionalState = {
-      primary: 'serenity'
-      intensity: 0.8
-      stability: 0.9
+      primary: 'serenity',
+      intensity: 0.8,
+      stability: 0.9,
       empathyActive: true
     };
 
@@ -88,8 +91,9 @@ export class AlexEmotionalIntelligence extends EventEmitter {
       logger.info('❤️ AlexEmotionalIntelligence initializing - Heart awakening');
 
     } catch (error) {
-    // Logger fallback - ignore error
-  }}
+      // Logger fallback - ignore error
+    }
+  }
 
   async initialize() {
     this.isInitialized = true;
@@ -100,21 +104,22 @@ export class AlexEmotionalIntelligence extends EventEmitter {
       logger.info('💖 AlexEmotionalIntelligence fully initialized - Emotional wisdom active');
 
     } catch (error) {
-    // Logger fallback - ignore error
-  }}
+      // Logger fallback - ignore error
+    }
+  }
 
   /**
    * Analyse émotionnelle complète d'un message
    */
   async analyzeEmotions(message, context = {}) {
     const analysis = {
-      timestamp: new Date()
-      messageId: Date.now()
-      detectedEmotions: []
-      dominantEmotion: null
-      emotionalIntensity: 0
-      empathyRequired: 0
-      suggestedResponse: null
+      timestamp: new Date(),
+      messageId: Date.now(),
+      detectedEmotions: [],
+      dominantEmotion: null,
+      emotionalIntensity: 0,
+      empathyRequired: 0,
+      suggestedResponse: null,
       emotionalNuances: []
     };
 
@@ -202,7 +207,7 @@ export class AlexEmotionalIntelligence extends EventEmitter {
 
     // Contexte temporel
     if (context.timeOfDay) {
-
+      const temporalEmotion = this.getTemporalEmotionalContext(context.timeOfDay);
       if (temporalEmotion) emotions.push(temporalEmotion);
     }
 
@@ -249,10 +254,10 @@ export class AlexEmotionalIntelligence extends EventEmitter {
    */
   async generateEmotionalResponse(analysis) {
     const response = {
-      emotionalTone: this.selectEmotionalTone(analysis)
-      empathyLevel: analysis.empathyRequired
-      responseStrategy: this.selectResponseStrategy(analysis)
-      emotionalMirroring: this.calculateEmotionalMirroring(analysis)
+      emotionalTone: this.selectEmotionalTone(analysis),
+      empathyLevel: analysis.empathyRequired,
+      responseStrategy: this.selectResponseStrategy(analysis),
+      emotionalMirroring: this.calculateEmotionalMirroring(analysis),
       supportiveElements: this.generateSupportiveElements(analysis)
     };
 
@@ -292,15 +297,15 @@ export class AlexEmotionalIntelligence extends EventEmitter {
   async calibrateEmotionalSystems() {
     // Calibration de l'empathie
     this.empathyCalibration = {
-      sensitivity: 0.95
-      responseThreshold: 0.3
+      sensitivity: 0.95,
+      responseThreshold: 0.3,
       adaptiveRange: [0.1, 1.0]
     };
 
     // Calibration de la stabilité émotionnelle
     this.stabilityCalibration = {
-      baseStability: 0.9
-      recoveryRate: 0.8
+      baseStability: 0.9,
+      recoveryRate: 0.8,
       resilience: 0.95
     };
 
@@ -308,8 +313,9 @@ export class AlexEmotionalIntelligence extends EventEmitter {
       logger.info('🎯 Emotional systems calibrated successfully');
 
     } catch (error) {
-    // Logger fallback - ignore error
-  }}
+      // Logger fallback - ignore error
+    }
+  }
 
   /**
    * Chargement des patterns émotionnels
@@ -317,14 +323,14 @@ export class AlexEmotionalIntelligence extends EventEmitter {
   async loadEmotionalPatterns() {
     // Patterns de reconnaissance textuelle
     this.emotionRecognition.textPatterns.set('joy', [
-      /heureux|joie|content|ravi|excité/
-      /génial|super|fantastique|merveilleux/
+      /heureux|joie|content|ravi|excité/,
+      /génial|super|fantastique|merveilleux/,
       /sourire|rire|amusant|drôle/
     ]);
 
     this.emotionRecognition.textPatterns.set(STR_SADNESS, [
-      /triste|déprimé|mélancolique|chagrin/
-      /pleure|larmes|désespoir|sombre/
+      /triste|déprimé|mélancolique|chagrin/,
+      /pleure|larmes|désespoir|sombre/,
       /seul|isolé|abandonné|vide/
     ]);
 
@@ -341,8 +347,9 @@ export class AlexEmotionalIntelligence extends EventEmitter {
       logger.info('📊 Emotional patterns loaded successfully');
 
     } catch (error) {
-    // Logger fallback - ignore error
-  }}
+      // Logger fallback - ignore error
+    }
+  }
 
   /**
    * Helpers pour détection de nuances
@@ -399,11 +406,11 @@ export class AlexEmotionalIntelligence extends EventEmitter {
    */
   getEmotionalStatus() {
     return {
-      initialized: this.isInitialized
-      currentState: this.currentEmotionalState
-      empathyLevel: this.emotionConfig.empathyLevel
-      emotionalHistory: this.emotionalHistory.length
-      recentEmotions: this.emotionalHistory.slice(-5)
+      initialized: this.isInitialized,
+      currentState: this.currentEmotionalState,
+      empathyLevel: this.emotionConfig.empathyLevel,
+      emotionalHistory: this.emotionalHistory.length,
+      recentEmotions: this.emotionalHistory.slice(-5),
       emotionalStability: this.calculateEmotionalStability()
     };
   }
@@ -474,12 +481,75 @@ export class AlexEmotionalIntelligence extends EventEmitter {
    * Calcule l'intensité émotionnelle
    */
   calculateEmotionalIntensity(message) {
+    // Correction: accepter string OU objet { content }
+    const text = typeof message === "string" ? message : message?.content || "";
+    if (!text) return 0.5;
+    
     const intensityMarkers = ['très', 'vraiment', 'extrêmement', 'beaucoup', 'énormément'];
-    const lowerMessage = message.toLowerCase();
+    const lowerMessage = text.toLowerCase();
 
     let intensity = 0.5; // Base
 
-    intensityMarkers.forEach(marker => this.processLongOperation(args)
+    intensityMarkers.forEach(marker => {
+      if (lowerMessage.includes(marker)) {
+        intensity += 0.2;
+      }
+    });
+
+    return Math.min(1.0, intensity);
+  }
+
+  /**
+   * Sélectionne le ton émotionnel approprié
+   */
+  selectEmotionalTone(analysis) {
+    if (!analysis || !analysis.primaryEmotion) return 'supportive';
+    
+    const emotion = analysis.primaryEmotion.name || 'neutral';
+    const toneMap = {
+      'joy': 'enthusiastic',
+      'sadness': 'compassionate',
+      'anger': 'calming',
+      'fear': 'reassuring',
+      'surprise': 'understanding',
+      'neutral': 'supportive'
+    };
+    
+    return toneMap[emotion] || 'supportive';
+  }
+
+  /**
+   * Sélectionne la stratégie de réponse
+   */
+  selectResponseStrategy(analysis) {
+    if (!analysis || !analysis.primaryEmotion) return 'neutral';
+    
+    const emotion = analysis.primaryEmotion.name || 'neutral';
+    const strategyMap = {
+      'joy': 'amplify',
+      'sadness': 'support',
+      'anger': 'de-escalate',
+      'fear': 'reassure',
+      'surprise': 'clarify',
+      'neutral': 'engage'
+    };
+    
+    return strategyMap[emotion] || 'neutral';
+  }
+
+  /**
+   * Calcule le mirroring émotionnel
+   */
+  calculateEmotionalMirroring(analysis) {
+    return analysis ? 0.7 : 0.5;
+  }
+
+  /**
+   * Génère des éléments de support
+   */
+  generateSupportiveElements(analysis) {
+    return ['active_listening', 'validation', 'encouragement'];
+  }
 
   /**
    * Analyse le contexte émotionnel pour intégration avec MasterSystem
@@ -491,15 +561,21 @@ export class AlexEmotionalIntelligence extends EventEmitter {
       const emotionalIntensity = this.calculateEmotionalIntensity(message);
 
       return {
-        recommendedTone: detectedEmotion || 'supportive'
-        empathyLevel: this.emotionConfig.empathyLevel
-        emotionalNeeds: [STR_UNDERSTANDING]
-        responseStrategy: this.determineResponseStrategy({ detectedEmotion, emotionalIntensity })
+        recommendedTone: detectedEmotion || 'supportive',
+        empathyLevel: this.emotionConfig.empathyLevel,
+        emotionalNeeds: [STR_UNDERSTANDING],
+        responseStrategy: this.determineResponseStrategy({ detectedEmotion, emotionalIntensity }),
         emotionalIntensity: emotionalIntensity || 0.5
       };
     } catch (error) {
       // Logger fallback - ignore error
-    };
+      return {
+        recommendedTone: 'supportive',
+        empathyLevel: 0.7,
+        emotionalNeeds: [STR_UNDERSTANDING],
+        responseStrategy: 'balanced_empathy',
+        emotionalIntensity: 0.5
+      };
     }
   }
 

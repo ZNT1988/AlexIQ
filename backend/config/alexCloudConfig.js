@@ -263,15 +263,22 @@ class AlexCloudConfig {
   }
 
   /**
-   * Fusion profonde d'objets
+   * Fusion profonde d'objets - Sécurisée contre la pollution de prototype
    */
   deepMerge(target, source) {
     for (const key in source) {
-      if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
-        if (!target[key]) target[key] = {};
-        this.deepMerge(target[key], source[key]);
-      } else {
-        target[key] = source[key];
+      // Prévenir la pollution de prototype
+      if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+        continue;
+      }
+      
+      if (source.hasOwnProperty(key)) {
+        if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+          if (!target[key]) target[key] = {};
+          this.deepMerge(target[key], source[key]);
+        } else {
+          target[key] = source[key];
+        }
       }
     }
   }

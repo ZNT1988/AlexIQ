@@ -7,6 +7,11 @@ on:
   pull_request:
     branches: [main, minimal-prod]
 
+permissions:
+  contents: read
+  actions: read
+  security-events: write
+
 jobs:
   build:
     runs-on: ubuntu-latest

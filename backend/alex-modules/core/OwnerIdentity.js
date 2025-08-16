@@ -1,74 +1,22 @@
-/**
- * Owner Identity Module for Railway deployment
- * Simple implementation for production stability
- */
+// Owner Identity - Stub pour démarrage
+export class OwnerIdentity {
+  constructor() {
+    this.owner = 'HustleFinder User';
+  }
 
-class OwnerIdentity {
-    constructor() {
-        this.name = process.env.OWNER_NAME || 'AlexIQ Owner';
-        this.id = process.env.OWNER_ID || 'alexiq-owner-001';
-        this.role = 'system-owner';
-        this.permissions = ['all'];
-        this.initialized = false;
-    }
+  static async initialize() {
+    return new OwnerIdentity();
+  }
 
-    async initialize() {
-        try {
-            this.initialized = true;
-            console.log(`Owner Identity initialized: ${this.name}`);
-            return this;
-        } catch (error) {
-            console.warn('Owner Identity initialization warning:', error);
-            this.initialized = true; // Continue anyway
-            return this;
-        }
-    }
-
-    getName() {
-        return this.name;
-    }
-
-    getId() {
-        return this.id;
-    }
-
-    getRole() {
-        return this.role;
-    }
-
-    getPermissions() {
-        return this.permissions;
-    }
-
-    hasPermission(permission) {
-        return this.permissions.includes('all') || this.permissions.includes(permission);
-    }
-
-    isInitialized() {
-        return this.initialized;
-    }
-
-    getProfile() {
-        return {
-            id: this.id,
-            name: this.name,
-            role: this.role,
-            permissions: this.permissions,
-            initialized: this.initialized
-        };
-    }
+  getOwnerInfo() {
+    return {
+      name: this.owner,
+      permissions: ['full_access']
+    };
+  }
 }
 
-// Singleton instance
-let ownerInstance = null;
+// Export functions pour compatibilité
+export const getOwnerIdentity = () => new OwnerIdentity().getOwnerInfo();
 
-export async function getOwnerIdentity() {
-    if (!ownerInstance) {
-        ownerInstance = new OwnerIdentity();
-        await ownerInstance.initialize();
-    }
-    return ownerInstance;
-}
-
-export { OwnerIdentity };
-export default OwnerIdentity;
+export default new OwnerIdentity();

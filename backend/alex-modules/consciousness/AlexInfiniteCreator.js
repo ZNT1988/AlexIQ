@@ -1216,8 +1216,6 @@ export class AlexInfiniteCreator extends EventEmitter {
   }
 }
 
-}
-
 // ============================================================================
 // CLASSES MOTEURS GÉNÉRATIFS AUTHENTIQUES - Remplacements des méthodes mystiques
 // ============================================================================
@@ -1232,6 +1230,48 @@ class TextGeneratorEngine {
     this.generatedTexts = new Map();
   }
   
+  /**
+   * Génère des idées créatives
+   */
+  async generateIdeas(prompt, options = {}) {
+    try {
+      const domain = options.domain || 'general';
+      const quantity = options.quantity || 3;
+      const creativity = options.creativity || 0.7;
+      
+      // Génération d'idées basée sur le prompt
+      const ideas = [];
+      for (let i = 0; i < quantity; i++) {
+        const idea = await this.generateText(prompt, 50, 'creative');
+        ideas.push({
+          title: `Idée ${i + 1}`,
+          description: idea.text || `Idée créative basée sur: ${prompt}`,
+          domain: domain,
+          creativity_score: creativity
+        });
+      }
+      
+      return {
+        ideas: ideas,
+        total: quantity,
+        domain: domain,
+        timestamp: new Date().toISOString()
+      };
+    } catch (error) {
+      return {
+        ideas: [{
+          title: "Idée par défaut",
+          description: "Améliorer l'expérience utilisateur avec l'IA",
+          domain: "business",
+          creativity_score: 0.5
+        }],
+        total: 1,
+        domain: "business",
+        error: error.message
+      };
+    }
+  }
+
   async generateText(concept, length = 100, style = 'neutral') {
     try {
       // Construction chaîne Markov basée sur concept

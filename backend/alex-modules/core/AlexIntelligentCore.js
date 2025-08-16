@@ -2422,5 +2422,4 @@ INSTRUCTIONS:
 }
 
 // Export class et singleton pour compatibilité
-export { AlexIntelligentCore };
 export default new AlexIntelligentCore({ moduleName: "AlexIntelligentCore" });

@@ -1,5 +1,0 @@
-[variables]
-NODE_VERSION = "18.19.0"
-
-[start]
-cmd = "node index-ultra-minimal.js"

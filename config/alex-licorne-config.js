@@ -311,18 +311,35 @@ class AlexLicorneConfig {
   }
 
   set(key, value) {
+    // Prévenir la pollution de prototype
+    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+      throw new Error('Cannot set prototype polluting property');
+    }
+    
     const keys = key.split(".");
     let target = this.config;
 
     for (let i = 0; i < keys.length - 1; i++) {
       const k = keys[i];
+      
+      // Prévenir la pollution de prototype
+      if (k === '__proto__' || k === 'constructor' || k === 'prototype') {
+        throw new Error('Cannot set prototype polluting property');
+      }
+      
       if (!target[k] || typeof target[k] !== "object") {
         target[k] = {};
       }
       target = target[k];
     }
 
-    target[keys[keys.length - 1]] = value;
+    const finalKey = keys[keys.length - 1];
+    // Prévenir la pollution de prototype pour la clé finale
+    if (finalKey === '__proto__' || finalKey === 'constructor' || finalKey === 'prototype') {
+      throw new Error('Cannot set prototype polluting property');
+    }
+    
+    target[finalKey] = value;
   }
 
   getServerConfig() {

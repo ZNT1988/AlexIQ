@@ -123,14 +123,21 @@ const ChatGPTInterface = () => {
   };
 
   const formatMessage = (content) => {
-    // Format avancé pour les messages (markdown-like)
+    // Format avancé pour les messages (markdown-like) - Sécurisé
     return content.split('\n').map((line, index) => {
-      // Gras pour **text**
-      let formattedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      // Italique pour *text*
-      formattedLine = formattedLine.replace(/\*(.*?)\*/g, '<em>$1</em>');
-      // Code pour `code`
-      formattedLine = formattedLine.replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 rounded">$1</code>');
+      // Échapper les caractères HTML dangereux
+      const escapedLine = line
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;');
+      
+      // Appliquer le formatage markdown de façon sécurisée
+      let formattedLine = escapedLine
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 rounded">$1</code>');
       
       return (
         <div key={index} className="mb-1" dangerouslySetInnerHTML={{ __html: formattedLine || '<br />' }} />
