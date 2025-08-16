@@ -8,6 +8,7 @@ import VisualCortex from './alex-modules/vision/VisualCortex.js'
 import EmotionalIntelligence from './alex-modules/emotion/EmotionalIntelligence.js'
 import AlexInfiniteCreator from './alex-modules/creativity/AlexInfiniteCreator.js'
 import AlexAuthenticCore from './alex-modules/core/AlexAuthenticCore.js'
+import AlexAutonomousCore from './alex-modules/core/AlexAutonomousCore.js'
 
 const PORT = process.env.PORT || 3003
 
@@ -22,6 +23,10 @@ async function initializePalier2() {
     // Initialisation AlexAuthenticCore (NOUVEAU - Template standard)
     await AlexAuthenticCore.initialize()
     console.log('🧠 AlexAuthenticCore initialized (Authentic Template)')
+    
+    // Initialisation AlexAutonomousCore (NOUVEAU - Autonomie progressive)
+    await AlexAutonomousCore.initialize()
+    console.log('🤖 AlexAutonomousCore initialized (Progressive Autonomy)')
     
     // Initialisation MemoryPalace
     await MemoryPalace.initialize()
@@ -93,6 +98,10 @@ const server = createServer(async (req, res) => {
         authenticCore: {
           initialized: AlexAuthenticCore?.isInitialized || false,
           version: AlexAuthenticCore?.version || '3.0.0'
+        },
+        autonomousCore: {
+          initialized: AlexAutonomousCore?.isInitialized || false,
+          version: AlexAutonomousCore?.version || '6.0.0'
         },
         memoryPalace: {
           initialized: MemoryPalace?.isInitialized || false,
