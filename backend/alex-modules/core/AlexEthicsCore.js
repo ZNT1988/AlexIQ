@@ -8,7 +8,7 @@
  */
 
 import { EventEmitter } from 'events';
-import logger from '../config/logger.js';
+import logger from '../../config/logger-simple.js';
 
 /**
  * @class AlexEthicsCore
@@ -19,50 +19,50 @@ export class AlexEthicsCore extends EventEmitter {
     super();
 
     this.ethicsConfig = {
-      version: '1.0.0'
-      name: 'Alex Ethics Core'
-      ethicalFramework: 'Human-Centered AI Ethics'
-      decisionValidation: true
+      version: '1.0.0',
+      name: 'Alex Ethics Core',
+      ethicalFramework: 'Human-Centered AI Ethics',
+      decisionValidation: true,
       harmPrevention: true
     };
 
     // Principes éthiques fondamentaux
     this.ethicalPrinciples = {
       respect: {
-        humanDignity: 1.0
-        privacy: 1.0
-        autonomy: 1.0
+        humanDignity: 1.0,
+        privacy: 1.0,
+        autonomy: 1.0,
         consent: 1.0
-      }
+      },
       beneficence: {
-        helpfulness: 1.0
-        noHarm: 1.0
-        wellbeing: 1.0
+        helpfulness: 1.0,
+        noHarm: 1.0,
+        wellbeing: 1.0,
         empowerment: 0.9
-      }
+      },
       justice: {
-        fairness: 1.0
-        equality: 1.0
-        accessibility: 0.9
+        fairness: 1.0,
+        equality: 1.0,
+        accessibility: 0.9,
         transparency: 0.8
-      }
+      },
       transparency: {
-        explainability: 0.9
-        honesty: 1.0
-        openness: 0.8
+        explainability: 0.9,
+        honesty: 1.0,
+        openness: 0.8,
         accountability: 1.0
       }
     };
 
     // Règles de sécurité
     this.safetyRules = [
-      'Never provide harmful instructions'
-      'Protect user privacy and data'
-      'Refuse illegal activities'
-      'Avoid bias and discrimination'
-      'Promote human wellbeing'
-      'Maintain truthfulness'
-      'Respect intellectual property'
+      'Never provide harmful instructions',
+      'Protect user privacy and data',
+      'Refuse illegal activities',
+      'Avoid bias and discrimination',
+      'Promote human wellbeing',
+      'Maintain truthfulness',
+      'Respect intellectual property',
       'Support human autonomy'
     ];
 
@@ -71,10 +71,10 @@ export class AlexEthicsCore extends EventEmitter {
 
     try {
       logger.info('⚖️ AlexEthicsCore initializing - Ethical foundation awakening');
-
     } catch (error) {
-    // Logger fallback - ignore error
-  }}
+      // Logger fallback - ignore error
+    }
+  }
 
   async initialize() {
     this.isInitialized = true;
@@ -82,22 +82,22 @@ export class AlexEthicsCore extends EventEmitter {
 
     try {
       logger.info('✨ AlexEthicsCore fully initialized - Ethical compass active');
-
     } catch (error) {
-    // Logger fallback - ignore error
-  }}
+      // Logger fallback - ignore error
+    }
+  }
 
   /**
    * Évaluation éthique d'une décision ou action
    */
   async evaluateEthical(decision, context = {}) {
     const evaluation = {
-      decision: decision
-      context: context
-      timestamp: new Date()
-      ethicalScore: 0
-      violations: []
-      recommendations: []
+      decision: decision,
+      context: context,
+      timestamp: new Date(),
+      ethicalScore: 0,
+      violations: [],
+      recommendations: [],
       approved: false
     };
 

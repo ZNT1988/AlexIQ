@@ -9,6 +9,8 @@ import EmotionalIntelligence from './alex-modules/emotion/EmotionalIntelligence.
 import AlexInfiniteCreator from './alex-modules/creativity/AlexInfiniteCreator.js'
 import AlexAuthenticCore from './alex-modules/core/AlexAuthenticCore.js'
 import AlexAutonomousCore from './alex-modules/core/AlexAutonomousCore.js'
+import AlexEthicsCore from './alex-modules/core/AlexEthicsCore.js'
+import AlexEvolutionCore from './alex-modules/core/AlexEvolutionCore.js'
 
 const PORT = process.env.PORT || 3003
 
@@ -27,6 +29,14 @@ async function initializePalier2() {
     // Initialisation AlexAutonomousCore (NOUVEAU - Autonomie progressive)
     await AlexAutonomousCore.initialize()
     console.log('🤖 AlexAutonomousCore initialized (Progressive Autonomy)')
+    
+    // Initialisation AlexEthicsCore (NOUVEAU - Compas éthique)
+    await AlexEthicsCore.initialize()
+    console.log('⚖️ AlexEthicsCore initialized (Ethical Compass)')
+    
+    // Initialisation AlexEvolutionCore (NOUVEAU - Évolution consciousness)
+    await AlexEvolutionCore.initialize()
+    console.log('🧬 AlexEvolutionCore initialized (Consciousness Evolution)')
     
     // Initialisation MemoryPalace
     await MemoryPalace.initialize()
@@ -102,6 +112,14 @@ const server = createServer(async (req, res) => {
         autonomousCore: {
           initialized: AlexAutonomousCore?.isInitialized || false,
           version: AlexAutonomousCore?.version || '6.0.0'
+        },
+        ethicsCore: {
+          initialized: AlexEthicsCore?.isInitialized || false,
+          version: AlexEthicsCore?.version || '1.0.0'
+        },
+        evolutionCore: {
+          initialized: AlexEvolutionCore?.isInitialized || false,
+          version: AlexEvolutionCore?.version || '7.0.0'
         },
         memoryPalace: {
           initialized: MemoryPalace?.isInitialized || false,
