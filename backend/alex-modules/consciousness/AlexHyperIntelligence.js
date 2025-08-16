@@ -45,8 +45,8 @@ export class AlexHyperIntelligence extends EventEmitter {
     this.learningSystem = {
       cloudDependency: 1.0, // Commence à 100% cloud
       localAutonomy: 0.0, // Progresse vers autonomie totale
-      masteryThreshold: 0.85, // Seuil pour devenir autonome sur un domaine
-      globalMasteryThreshold: 0.9, // Seuil pour autonomie globale
+      masteryThreshold: 0.95, // Seuil pour devenir autonome sur un domaine (TRÈS ÉLEVÉ - Force l'utilisation des APIs cloud)
+      globalMasteryThreshold: 0.99, // Seuil pour autonomie globale (TRÈS ÉLEVÉ - Force l'utilisation des APIs cloud)
       learningRate: 0.03, // Vitesse d'apprentissage adaptative
       adaptationSpeed: 0.02, // Vitesse d'adaptation aux nouveaux contextes
     };
@@ -1579,7 +1579,7 @@ export class AlexHyperIntelligence extends EventEmitter {
     // Seuils d'autonomie adaptatifs
     const autonomyThresholds = {
       completeAutonomy: this.learningSystem.globalMasteryThreshold, // 0.9
-      hybridLearning: 0.3, // Seuil pour déclencher l'apprentissage hybride
+      hybridLearning: 0.95, // Seuil pour déclencher l'apprentissage hybride (FORCE APIs cloud)
       localProcessing: 0.1  // Seuil minimal pour traitement local
     };
 
