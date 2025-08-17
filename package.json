@@ -1,5 +1,5 @@
 {
-  "name": "alex-palier3-railway",
+  "name": "hustle-finder-ia",
   "version": "3.0.1",
   "type": "module",
   "main": "index-ultra-minimal.js",
@@ -15,7 +15,15 @@
     "build:railway": "cd frontend && npm ci && npm run build",
     "install-frontend": "cd frontend && npm install",
     "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
-    "test": "cd backend && npm test && cd ../frontend && npm test"
+    "test": "cd backend && npm test && cd ../frontend && npm test",
+    "lint": "eslint . --ext .js,.mjs,.cjs",
+    "lint:fix": "eslint . --ext .js,.mjs,.cjs --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "syntax": "node backend/tools/check-syntax.cjs",
+    "audit:static": "node backend/tools/auditStaticDeep.cjs",
+    "audit:providers": "node backend/tools/auditProviders.cjs",
+    "guard:test": "node backend/tools/testAntiFakeGuard.cjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.5.2",
@@ -38,6 +46,10 @@
     "winston": "^3.11.0"
   },
   "devDependencies": {
+    "eslint": "^9.10.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "prettier": "^3.3.3",
     "nodemon": "^3.0.2"
   }
 }

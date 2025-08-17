@@ -1,6 +1,6 @@
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
-const STR_PRODUCTION = 'production';
+const STR_PRODUCTION = "production";
 
 /**
  * @fileoverview Auth - Middleware d'Authentification Révolutionnaire
@@ -55,7 +55,7 @@ const STR_PRODUCTION = 'production';
  * }
  */
 
-import logger from '../config/logger.js';
+import logger from "../config/logger.js";
 
 /**
  * @function createAuthMiddleware
@@ -83,14 +83,14 @@ import logger from '../config/logger.js';
  */
 export async function createAuthMiddleware() {
   const isProduction = process.env.NODE_ENV === STR_PRODUCTION;
-  const hasClerkKeys = process.env.CLERK_SECRET_KEY && process.env.CLERK_SECRET_KEY !== 'sk_test_your_key_here';
+  const hasClerkKeys = process.env.CLERK_SECRET_KEY && process.env.CLERK_SECRET_KEY !== "sk_test_your_key_here";
 
   if (isProduction && !hasClerkKeys) {
-    throw new Error('Clerk authentication keys are required in production');
+    throw new Error("Clerk authentication keys are required in production");
   }
 
   if (!hasClerkKeys) {
-    logger.warn('Using mock authentication middleware for development');
+    logger.warn("Using mock authentication middleware for development");
 
     /**
      * @function mockAuthMiddleware
@@ -104,19 +104,19 @@ export async function createAuthMiddleware() {
      * @param {Function} next - Fonction next Express
      */
     return (req, res, next) => {
-      logger.debug('Mock authentication applied for development');
+      logger.debug("Mock authentication applied for development");
       next();
     };
   }
 
   // Real Clerk authentication for production
   try {
-    const clerkModule = await import('@clerk/express');
+    const clerkModule = await import("@clerk/express");
     const requireAuth = clerkModule.requireAuth;
-    logger.info('Using real Clerk authentication');
+    logger.info("Using real Clerk authentication");
     return requireAuth();
   } catch (error) {
-    logger.error('Failed to load Clerk authentication:', error.message);
+    logger.error("Failed to load Clerk authentication:", error.message);
     throw error;
   }
 }
@@ -126,14 +126,14 @@ export async function getAuthMiddleware() {
   try {
     return await createAuthMiddleware();
   } catch (error) {
-    logger.error('Authentication middleware setup failed:', error.message);
+    logger.error("Authentication middleware setup failed:", error.message);
     throw error;
   }
 }
 
 // Helper to check if using mock auth
 export function isUsingMockAuth() {
-  const hasClerkKeys = process.env.CLERK_SECRET_KEY && process.env.CLERK_SECRET_KEY !== 'sk_test_your_key_here';
+  const hasClerkKeys = process.env.CLERK_SECRET_KEY && process.env.CLERK_SECRET_KEY !== "sk_test_your_key_here";
   return !hasClerkKeys && process.env.NODE_ENV !== STR_PRODUCTION;
 }
 

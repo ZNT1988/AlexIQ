@@ -1,5 +1,5 @@
 // backend/config/aiKeys.js
-import 'dotenv/config';
+import "dotenv/config";
 
 const must = (name) => {
   const v = process.env[name];
@@ -8,8 +8,8 @@ const must = (name) => {
 };
 
 export const AI_KEYS = {
-  OPENAI:    process.env.CLE_API_OPENAI || process.env.OPENAI_API_KEY || must('CLE_API_OPENAI'),
-  ANTHROPIC: process.env.CLE_API_ANTHROPIC || process.env.ANTHROPIC_API_KEY || must('CLE_API_ANTHROPIC'),
+  OPENAI:    process.env.CLE_API_OPENAI || process.env.OPENAI_API_KEY || must("CLE_API_OPENAI"),
+  ANTHROPIC: process.env.CLE_API_ANTHROPIC || process.env.ANTHROPIC_API_KEY || must("CLE_API_ANTHROPIC"),
   GOOGLE:    process.env.CLE_API_GOOGLE || process.env.GOOGLE_API_KEY || null,
   GOOGLE_SA: process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON || null,
   GOOGLE_MAPS: process.env.GOOGLE_MAPS_API_KEY || null,
@@ -18,6 +18,6 @@ export const AI_KEYS = {
 
 export const GOOGLE_CFG = {
   PROJECT_ID: process.env.GOOGLE_PROJECT_ID,
-  LOCATION:   process.env.GOOGLE_LOCATION || 'us-central1',
-  MODEL:      process.env.GOOGLE_VERTEX_MODEL || 'gemini-1.5-flash'
+  LOCATION:   process.env.GOOGLE_LOCATION || "us-central1",
+  MODEL:      process.env.GOOGLE_VERTEX_MODEL || "gemini-1.5-flash"
 };

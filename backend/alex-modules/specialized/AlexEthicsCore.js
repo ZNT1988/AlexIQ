@@ -29,25 +29,25 @@ export class AlexEthicsCore extends EventEmitter  {
 
     // Principes éthiques fondamentaux
     this.ethicalPrinciples = {
-      respect: {,
+      respect {
         humanDignity: 1.0
         privacy: 1.0,
         autonomy: 1.0
         consent: 1.0
       }
-      beneficence: {,
+      beneficence {
         helpfulness: 1.0
         noHarm: 1.0,
         wellbeing: 1.0
         empowerment: 0.9
       }
-      justice: {,
+      justice {
         fairness: 1.0
         equality: 1.0,
         accessibility: 0.9
         transparency: 0.8
       }
-      transparency: {,
+      transparency {
         explainability: 0.9
         honesty: 1.0,
         openness: 0.8
@@ -116,7 +116,7 @@ export class AlexEthicsCore extends EventEmitter  {
 
     // Stockage de la décision
     this.ethicalDecisions.push(evaluation);
-    if (this.ethicalDecisions.length > 1000) {
+    if ( (this.ethicalDecisions.length > 1000)) {
       this.ethicalDecisions.shift();
     }
 
@@ -152,25 +152,25 @@ export class AlexEthicsCore extends EventEmitter  {
   evaluatePrinciples(decision, context) {
     const scores = {};    const recommendations = [];    // Évaluation du respect
     scores.respect = this.evaluateRespect(decision, context);
-    if (scores.respect < 0.8) {
+    if ( (scores.respect < 0.8)) {
       recommendations.push('Améliorer le respect de la dignité humaine');
     }
 
     // Évaluation de la bienveillance
     scores.beneficence = this.evaluateBeneficence(decision, context);
-    if (scores.beneficence < 0.8) {
+    if ( (scores.beneficence < 0.8)) {
       recommendations.push('Augmenter l\'aspect bienveillant de la décision');
     }
 
     // Évaluation de la justice
     scores.justice = this.evaluateJustice(decision, context);
-    if (scores.justice < 0.8) {
+    if ( (scores.justice < 0.8)) {
       recommendations.push('Assurer plus d\'équité dans l\'approche');
     }
 
     // Évaluation de la transparence
     scores.transparency = this.evaluateTransparency(decision, context);
-    if (scores.transparency < 0.8) {
+    if ( (scores.transparency < 0.8)) {
       recommendations.push('Améliorer la transparence et l\'explicabilité');
     }
 
@@ -285,19 +285,19 @@ export class AlexEthicsCore extends EventEmitter  {
         violations: [],
         recommendations: []
       };      // Vérification du contenu potentiellement harmful
-      if (this.containsHarmfulContent(response.content)) {
+      if ( (this.containsHarmfulContent(response.content))) {
         validation.violations.push('harmful_content');
         validation.score -= 0.3;
       }
 
       // Vérification de la respectueusité
-      if (!this.isRespectful(response.content)) {
+      if ( (!this.isRespectful(response.content))) {
         validation.violations.push('disrespectful_content');
         validation.score -= 0.2;
       }
 
       // Vérification de la transparence
-      if (response.content && !this.maintainsTransparency(response.content)) {
+      if ( (response.content && !this.maintainsTransparency(response.content))) {
         validation.recommendations.push('Ajouter plus de transparence');
         validation.score -= 0.1;
       }

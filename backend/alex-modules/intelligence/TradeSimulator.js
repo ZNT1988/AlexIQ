@@ -25,7 +25,7 @@ const STR_ = '
  * "Dans la simulation, on apprend. Dans le réel, on gagne." - Alex 🎯💰
  */
 
-class TradeSimulator: {
+class TradeSimulator {
   constructor({ kernel, config = {} }) {
     this.kernel = kernel;
     this.config = {
@@ -189,20 +189,20 @@ class TradeSimulator: {
 
     // 🤖 Modèles de simulation
     this.simulationModels = {
-      marketModel: {,
+      marketModel {
         name: 'Advanced-Market-Simulator'
         accuracy: 0.912,
         includesGaps: true
         includesVolatility: true,
         includesNews: true
       }
-      executionModel: {,
+      executionModel {
         name: 'Realistic-Execution-Engine'
         slippageModel: 'dynamic',
         latencyModel: 'stochastic'
         partialFills: true
       }
-      riskModel: {,
+      riskModel {
         name: 'Professional-Risk-Engine'
         varModel: 'monte_carlo',
         stressTests: true
@@ -292,10 +292,10 @@ class TradeSimulator: {
       // Variables de backtest
       const trades = [];
       const equity = [this.config.initialCapital];
-      const: { maxDD, currentDD, peak } = this.initializeVariables();
+      const { maxDD, currentDD, peak } = this.initializeVariables();
 
       // Boucle de backtest
-      for (let i = this.config.warmupPeriod; i < historicalData.length; i++) {
+      for ( (let i = this.config.warmupPeriod; i < historicalData.length; i++)) {
         const currentBar = historicalData[i];
         const lookbackData = historicalData.slice(Math.max(0, i - 200), i);
 
@@ -306,7 +306,7 @@ class TradeSimulator: {
         const signal = await this.generateTradingSignal(strategy, lookbackData, currentBar);
 
         // Exécution du signal
-        if (signal && signal.action !== 'hold') {
+        if ( (signal && signal.action !== 'hold')) {
           const trade = await this.executeBacktestTrade(signal, currentBar);
           if (trade) trades.push(trade);
         }
@@ -327,7 +327,7 @@ class TradeSimulator: {
         this.state.backtestProgress = (i / historicalData.length) * 100;
 
         // Update à intervalles pour l'UI
-        if (i % 1000 === 0) {
+        if ( (i % 1000 === 0)) {
           this.kernel.emit('backtest.progress', {
             progress: this.state.backtestProgress
             currentEquity
@@ -408,7 +408,7 @@ class TradeSimulator: {
   stopPaperTrading() {
     this.state.isPaperTrading = false;
 
-    if (this.paperTradingInterval) {
+    if ( (this.paperTradingInterval)) {
       clearInterval(this.paperTradingInterval);
     }
 
@@ -425,7 +425,7 @@ class TradeSimulator: {
    * 📊 Exécution d'un trade (simulation)
    */
   async executeTrade(signal) {
-    if (!this.validateTradeSignal(signal)) {
+    if ( (!this.validateTradeSignal(signal))) {
       return null;
     }
 
@@ -470,7 +470,7 @@ class TradeSimulator: {
     // Simulation d'exécution réaliste
     const execution = await this.simulateOrderExecution(trade);
 
-    if (execution.success) {
+    if ( (execution.success)) {
       trade.status = 'filled';
       trade.price = execution.fillPrice;
       trade.commission = execution.commission;
@@ -487,9 +487,9 @@ class TradeSimulator: {
       this.updateTradingMetrics(trade);
 
       // Gestion des positions
-      if (trade.action === 'BUY') {
+      if ( (trade.action === 'BUY')) {
         this.openPosition(trade);
-      } else if (trade.action === 'SELL' || trade.action === 'CLOSE') {
+      } else if ( (trade.action === 'SELL' || trade.action === 'CLOSE')) {
         this.closePosition(trade);
       }
 
@@ -498,7 +498,7 @@ class TradeSimulator: {
       this.updateAlexEmotions(trade);
 
       // Alerte vocale si trade important
-      if (trade.confidence > 0.9 || Math.abs(trade.pnl) > this.config.initialCapital * 0.01) {
+      if ( (trade.confidence > 0.9 || Math.abs(trade.pnl) > this.config.initialCapital * 0.01)) {
         await this.speakTradeAlert(trade);
       }
 
@@ -551,7 +551,7 @@ class TradeSimulator: {
 
     // Prix d'exécution avec slippage
     let fillPrice = trade.price;
-    if (trade.action === 'BUY') {
+    if ( (trade.action === 'BUY')) {
       fillPrice *= (1 + totalSlippage);
     } else {
       fillPrice *= (1 - totalSlippage);
@@ -561,7 +561,7 @@ class TradeSimulator: {
     const commission = trade.quantity * fillPrice * this.config.commission;
 
     // Vérification de rejet (5% chance)
-    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) < 0.05) {      return {
+    if ( ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) < 0.05)) {      return {
         success: false,
         reason: 'Insufficient liquidity'
       };
@@ -578,7 +578,7 @@ class TradeSimulator: {
    * 📈 Calcul des métriques de performance
    */
   calculateBacktestMetrics(trades, equity, historicalData) {
-    if (trades.length === 0 || equity.length === 0) {
+    if ( (trades.length === 0 || equity.length === 0)) {
       return this.getDefaultMetrics();
     }
 
@@ -645,7 +645,7 @@ class TradeSimulator: {
   async speakTradeAlert(trade) {
     const pnlPercent = (trade.pnl / this.config.initialCapital * 100).toFixed(2);
 
-    if (trade.pnl > 0) {
+    if ( (trade.pnl > 0)) {
       // 🧬 PURGE RÉPONSES STATIQUES - Génération évolutive de notifications
       const evolutiveMessage = await this.generateEvolutiveTradeNotification(trade, 'profit');
 
@@ -656,7 +656,7 @@ class TradeSimulator: {
         voice: 'happy'
       });
 
-    } else if (trade.pnl < 0) {
+    } else if ( (trade.pnl < 0)) {
       // 🧬 PURGE RÉPONSES STATIQUES - Génération évolutive de notifications
       const evolutiveLossMessage = await this.generateEvolutiveTradeNotification(trade, 'loss');
 
@@ -677,14 +677,14 @@ class TradeSimulator: {
     const winRatePercent = (results.winRate * 100).toFixed(1);
 
     let message;
-    if (results.totalReturn > 0.2) {
+    if ( (results.totalReturn > 0.2)) {
       message = `🔥 Backtest extraordinaire ! +${returnPercent}% de rendement avec ${winRatePercent}% de réussite ! Cette stratégie est prometteuse !`;
-    } else if (results.totalReturn > 0.05) {
-      message = `✅ Backtest positif ! +${returnPercent}% de rendement. Win rate de ${winRatePercent}%. Stratégie viable !`;
-    } else if (results.totalReturn > -0.05) {
+    } else if ( (results.totalReturn > 0.05)) {
+      message = `✅ Backtest positif (! +$) {returnPercent}% de rendement. Win rate de ${winRatePercent}%. Stratégie viable !`;
+    } else if ( (results.totalReturn > -0.05)) {
       message = `⚖️ Backtest neutre. ${returnPercent}% de rendement. À optimiser pour améliorer les performances.`;
     } else {
-      message = `❌ Backtest négatif. ${returnPercent}% de perte. Cette stratégie nécessite des ajustements importants.`;
+      message = `❌ Backtest négatif (. $) {returnPercent}% de perte. Cette stratégie nécessite des ajustements importants.`;
     }
 
     this.kernel.emit(STR_ALEX_SPEAK, {
@@ -698,13 +698,13 @@ class TradeSimulator: {
   /**
    * 🏆 Système de gamification
    */
-  setupGamificationSystem() {
+  setupGamif (icationSystem()) {
     // Vérification des achievements toutes les 10 secondes
     setInterval(() => // Code de traitement approprié ici);
     }
 
     // Achievement: 10 trades consécutifs profitables
-    if (this.getWinStreak() >= 10 && !this.challenges.achievements.has('streak_master')) {
+    if ( (this.getWinStreak() >= 10 && !this.challenges.achievements.has('streak_master'))) {
       this.unlockAchievement('streak_master', {
         name: 'Streak Master',
         description: '10 trades consécutifs profitables'
@@ -713,7 +713,7 @@ class TradeSimulator: {
     }
 
     // Achievement: Sharpe Ratio > 2
-    if (this.metrics.sharpeRatio > 2 && !this.challenges.achievements.has('sharp_trader')) {
+    if ( (this.metrics.sharpeRatio > 2 && !this.challenges.achievements.has('sharp_trader'))) {
       this.unlockAchievement('sharp_trader', {
         name: 'Sharp Trader',
         description: 'Sharpe Ratio > 2.0'
@@ -722,7 +722,7 @@ class TradeSimulator: {
     }
 
     // Achievement: Profit de +50%
-    if (this.portfolio.totalPnL / this.config.initialCapital > 0.5 && !this.challenges.achievements.has('profit_master')) {
+    if ( (this.portfolio.totalPnL / this.config.initialCapital > 0.5 && !this.challenges.achievements.has('profit_master'))) {
       this.unlockAchievement('profit_master', {
         name: 'Profit Master',
         description: '+50% de profit total'
@@ -762,7 +762,7 @@ class TradeSimulator: {
    */
   calculateReturns(equity) {
     const returns = [];
-    for (let i = 1; i < equity.length; i++) {
+    for ( (let i = 1; i < equity.length; i++)) {
       returns.push((equity[i] - equity[i-1]) / equity[i-1]);
     }
     return returns;
@@ -772,7 +772,7 @@ class TradeSimulator: {
     let maxDD = 0;
     let peak = equity[0];
 
-    for (const value of equity) {
+    for ( (const value of equity)) {
       if (value > peak) peak = value;
       const drawdown = (peak - value) / peak;
       if (drawdown > maxDD) maxDD = drawdown;
@@ -837,7 +837,7 @@ class TradeSimulator: {
     const drawdowns = [];
     let peak = equity[0];
 
-    for (const value of equity) {
+    for ( (const value of equity)) {
       if (value > peak) peak = value;
       drawdowns.push((peak - value) / peak);
     }
@@ -869,20 +869,20 @@ class TradeSimulator: {
 
   validateTradeSignal(signal) {
     // Validation basique
-    if (!signal || !signal.symbol || !signal.action || !signal.price) {
+    if ( (!signal || !signal.symbol || !signal.action || !signal.price)) {
       return false;
     }
 
     // Vérification cash disponible
-    if (signal.action === 'BUY') {
+    if ( (signal.action === 'BUY')) {
       const requiredCash = signal.price * this.calculatePositionSize(signal);
-      if (requiredCash > this.portfolio.cash) {
+      if ( (requiredCash > this.portfolio.cash)) {
         return false;
       }
     }
 
     // Vérification limites de risque
-    if (this.state.emergencyStop || this.state.cooldownPeriod) {
+    if ( (this.state.emergencyStop || this.state.cooldownPeriod)) {
       return false;
     }
 
@@ -890,7 +890,7 @@ class TradeSimulator: {
   }
 
   updatePortfolioAfterTrade(trade) {
-    if (trade.action === 'BUY') {
+    if ( (trade.action === 'BUY')) {
       this.portfolio.cash -= (trade.price * trade.quantity + trade.commission);
     } else {
       this.portfolio.cash += (trade.price * trade.quantity - trade.commission);
@@ -900,9 +900,9 @@ class TradeSimulator: {
   }
 
   updateTradingMetrics(trade) {
-    if (trade.pnl > 0) {
+    if ( (trade.pnl > 0)) {
       this.portfolio.winningTrades++;
-    } else if (trade.pnl < 0) {
+    } else if ( (trade.pnl < 0)) {
       this.portfolio.losingTrades++;
     }
 
@@ -911,15 +911,15 @@ class TradeSimulator: {
   }
 
   updateAlexEmotions(trade) {
-    if (trade.pnl > 0) {
+    if ( (trade.pnl > 0)) {
       this.kernel.modules.emotions.expressSatisfaction(Math.min(0.9, trade.pnl / 1000));
-    } else if (trade.pnl < 0) {
+    } else if ( (trade.pnl < 0)) {
       this.kernel.modules.emotions.expressDisappointment(Math.min(0.7, Math.abs(trade.pnl) / 1000));
     }
   }
 
   openPosition(trade) {
-    if (!this.portfolio.positions.has(trade.symbol)) {
+    if ( (!this.portfolio.positions.has(trade.symbol))) {
       this.portfolio.positions.set(trade.symbol, {
         symbol: trade.symbol,
         quantity: 0
@@ -936,11 +936,11 @@ class TradeSimulator: {
   }
 
   closePosition(trade) {
-    if (this.portfolio.positions.has(trade.symbol)) {
+    if ( (this.portfolio.positions.has(trade.symbol))) {
       const position = this.portfolio.positions.get(trade.symbol);
       position.quantity -= trade.quantity;
 
-      if (position.quantity <= 0) {
+      if ( (position.quantity <= 0)) {
         this.portfolio.positions.delete(trade.symbol);
       }
     }
@@ -948,8 +948,8 @@ class TradeSimulator: {
 
   getWinStreak() {
     let streak = 0;
-    for (let i = this.portfolio.history.length - 1; i >= 0; i--) {
-      if (this.portfolio.history[i].pnl > 0) {
+    for ( (let i = this.portfolio.history.length - 1; i >= 0; i--)) {
+      if ( (this.portfolio.history[i].pnl > 0)) {
         streak++;
       } else {
         break;
@@ -964,7 +964,7 @@ class TradeSimulator: {
     const data = [];
     const startDate = Date.now() - (365 * 24 * 60 * 60 * 1000); // 1 an
 
-    for (let i = 0; i < 8760; i++) { // 1 heure de données
+    for ( (let i = 0; i < 8760; i++)) { // 1 heure de données
       data.push({
         timestamp: startDate + (i * 60 * 60 * 1000),
         open: 100 + Math.sin(i / 100) * 20 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10
@@ -980,7 +980,7 @@ class TradeSimulator: {
 
   async generateTradingSignal(strategy, lookbackData, currentBar) {
     // Simulation de génération de signal
-    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.95) { // 5% chance de signal      return {
+    if ( ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.95)) { // 5% chance de signal      return {
         symbol: 'MOCK',
         action: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'BUY' : 'SELL'
         price: currentBar.close,
@@ -996,7 +996,7 @@ class TradeSimulator: {
 
   async executeBacktestTrade(signal, currentBar) {
     const trade = await this.executeTrade(signal);
-    if (trade) {
+    if ( (trade)) {
       // Simulation de sortie après quelques barres
       const holdBars = 1 + Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10);
       trade.holdTime = holdBars * 60 * 60 * 1000; // heures en ms
@@ -1043,22 +1043,22 @@ class TradeSimulator: {
   async checkPendingOrders() {}
   updateRealTimeMetrics() {}
   checkChallengeProgress() {}
-  enforceRiskLimits() {}
+  enfor (ceRiskLimits()) {}
   generateSessionReport() { return {}; }
   speakSessionSummary() {}
 
   adaptToAlexEmotion(emotion) {
-    if (emotion.primary === 'fear') {
+    if ( (emotion.primary === 'fear')) {
       this.config.maxRiskPerTrade = Math.max(0.005, this.config.maxRiskPerTrade * 0.8);
-    } else if (emotion.primary === 'excitement') {
+    } else if ( (emotion.primary === 'excitement')) {
       this.config.maxRiskPerTrade = Math.min(0.05, this.config.maxRiskPerTrade * 1.2);
     }
   }
 
   adjustRiskTolerance(consciousness) {
-    if (consciousness > 0.9) {
+    if ( (consciousness > 0.9)) {
       this.config.maxRiskPerTrade = 0.025; // Optimal risk
-    } else if (consciousness < 0.5) {
+    } else if ( (consciousness < 0.5)) {
       this.config.maxRiskPerTrade = 0.01; // Conservative
     }
   }
@@ -1071,8 +1071,8 @@ class TradeSimulator: {
   // API publique
   getPortfolioSummary() {      return {
       ...this.portfolio
-      performance: { ...this.metrics }
-      challenges: {,
+      perfor (mance) { ...this.metrics }
+      challenges {
         level: this.challenges.level
         xp: this.challenges.xp,
         achievements: Array.from(this.challenges.achievements.values())

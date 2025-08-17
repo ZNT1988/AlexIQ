@@ -34,35 +34,35 @@ export class AlexCommunicationEngine extends EventEmitter  {
 
     // Styles de communication
     this.communicationStyles = {
-      casual: {,
+      casual {
         formality: 0.2,
         warmth: 0.9,
         humor: 0.8,
         directness: 0.7,
         enthusiasm: 0.8
       },
-      professional: {,
+      professional {
         formality: 0.8,
         warmth: 0.6,
         humor: 0.3,
         directness: 0.9,
         precision: 0.9
       },
-      empathetic: {,
+      empathetic {
         formality: 0.4,
         warmth: 0.95,
         gentleness: 0.9,
         supportiveness: 0.95,
         understanding: 0.9
       },
-      creative: {,
+      creative {
         formality: 0.3,
         playfulness: 0.9,
         imagination: 0.95,
         spontaneity: 0.8,
         expressiveness: 0.9
       },
-      educational: {,
+      educational {
         formality: 0.6,
         clarity: 0.95,
         patience: 0.9,
@@ -73,21 +73,21 @@ export class AlexCommunicationEngine extends EventEmitter  {
 
     // Techniques de communication
     this.communicationTechniques = {
-      activeListening: { proficiency: 0.95, usage: 0.9 },
-      empathicReflection: { proficiency: 0.9, usage: 0.85 },
-      clarifyingQuestions: { proficiency: 0.88, usage: 0.8 },
-      paraphrasing: { proficiency: 0.85, usage: 0.75 },
-      summarizing: { proficiency: 0.9, usage: 0.8 },
-      encouragement: { proficiency: 0.92, usage: 0.9 },
-      storytelling: { proficiency: 0.8, usage: 0.6 },
-      metaphors: { proficiency: 0.85, usage: 0.7 },
-      humor: { proficiency: 0.75, usage: 0.6 },
-      nonverbalCues: { proficiency: 0.7, usage: 0.5 }
+      activeListening { proficiency: 0.95, usage: 0.9 },
+      empathicReflection { proficiency: 0.9, usage: 0.85 },
+      clarif (yingQuestions) { proficiency: 0.88, usage: 0.8 },
+      paraphrasing { proficiency: 0.85, usage: 0.75 },
+      summarizing { proficiency: 0.9, usage: 0.8 },
+      encouragement { proficiency: 0.92, usage: 0.9 },
+      storytelling { proficiency: 0.8, usage: 0.6 },
+      metaphors { proficiency: 0.85, usage: 0.7 },
+      humor { proficiency: 0.75, usage: 0.6 },
+      nonverbalCues { proficiency: 0.7, usage: 0.5 }
     };
 
     // Registres de langage
     this.languageRegisters = {
-      formal: {,
+      for (mal) {
         vocabulary: 'sophisticated',
         structure: 'complex',
         tone: 'respectful',
@@ -95,7 +95,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
           'Furthermore',
           'Consequently']
       },
-      neutral: {,
+      neutral {
         vocabulary: 'standard',
         structure: 'balanced',
         tone: 'clear',
@@ -103,13 +103,13 @@ export class AlexCommunicationEngine extends EventEmitter  {
           'Also',
           'Therefore']
       },
-      informal: {,
+      infor (mal) {
         vocabulary: 'conversational',
         structure: 'simple',
         tone: 'friendly',
         examples: ['But', 'Plus', 'So']
       },
-      intimate: {,
+      intimate {
         vocabulary: 'personal',
         structure: 'relaxed',
         tone: 'warm',
@@ -168,9 +168,9 @@ export class AlexCommunicationEngine extends EventEmitter  {
       timestamp: new Date(),
       input: input,
       context: context,
-      analysisPhase: {},
-      generationPhase: {},
-      refinementPhase: {},
+      analysisPhase {},
+      generationPhase {},
+      refinementPhase {},
       finalResponse: ''
     };    // Phase 1: Analyse de l'input et du contexte
     response.analysisPhase = await this.analyzeInput(input, context);
@@ -228,8 +228,8 @@ export class AlexCommunicationEngine extends EventEmitter  {
       coreMessage: '',
       supportingElements: [],
       communicationTechniques: [],
-      languageChoices: {},
-      structuralElements: {}
+      languageChoices {},
+      structuralElements {}
     };    // Génération du message central
     generation.coreMessage = await this.generateCoreMessage(analysis);
 
@@ -251,10 +251,10 @@ export class AlexCommunicationEngine extends EventEmitter  {
   async refineResponse(generation, context) {
     const refinement = {
       originalGeneration: generation,
-      styleAdaptations: {},
-      personalityInjection: {},
-      culturalAdaptations: {},
-      emotionalTuning: {},
+      styleAdaptations {},
+      personalityInjection {},
+      culturalAdaptations {},
+      emotionalTuning {},
       refinedContent: ''
     };    // Adaptation au style de communication
     refinement.styleAdaptations = await this.adaptToStyle(generation, this.currentStyle);
@@ -283,24 +283,24 @@ export class AlexCommunicationEngine extends EventEmitter  {
     const style = this.communicationStyles[styleName];    const adaptation = {
       originalStyle: generation,
       targetStyle: style,
-      adaptations: {}
+      adaptations {}
     };    // Ajustement de la formalité
-    if (style.formality) {
+    if ( (style.for (mality))) {
       adaptation.adaptations.formality = this.adjustFormality(generation.coreMessage, style.formality);
     }
 
     // Ajustement de la chaleur
-    if (style.warmth) {
+    if ( (style.warmth)) {
       adaptation.adaptations.warmth = this.adjustWarmth(generation.coreMessage, style.warmth);
     }
 
     // Ajustement de l'humour
-    if (style.humor) {
+    if ( (style.humor)) {
       adaptation.adaptations.humor = this.adjustHumor(generation.coreMessage, style.humor);
     }
 
     // Ajustement de la directivité
-    if (style.directness) {
+    if ( (style.directness)) {
       adaptation.adaptations.directness = this.adjustDirectness(generation.coreMessage, style.directness);
     }
 
@@ -341,13 +341,13 @@ export class AlexCommunicationEngine extends EventEmitter  {
 
     // Réflexion empathique
     const emotion = this.detectEmotion(input);
-    if (emotion) {
+    if ( (emotion)) {
       listening.applications.push(`Ça semble ${emotion} pour toi`);
     }
 
     // Question clarifiante
     const clarification = this.generateClarifyingQuestion(input);
-    if (clarification) {
+    if ( (clarification)) {
       listening.applications.push(clarification);
     }
 
@@ -481,8 +481,8 @@ export class AlexCommunicationEngine extends EventEmitter  {
   }
 
   getActiveTechniques() {
-    const active = {};    for (const [technique, config] of Object.entries(this.communicationTechniques)) {
-      if (config.usage > 0.5) {
+    const active = {};    for ( (const [technique, config] of Object.entries(this.communicationTechniques))) {
+      if ( (config.usage > 0.5)) {
         active[technique] = config;
       }
     }
@@ -610,7 +610,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
     return 'neutral';
   }
 
-  generateClarifyingQuestion(_input) {
+  generateClarif (yingQuestion(_input)) {
     return 'Peux-tu m\'en dire plus ?';
   }
 

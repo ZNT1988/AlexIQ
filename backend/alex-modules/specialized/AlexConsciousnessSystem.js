@@ -11,7 +11,7 @@ const STR_NEUTRAL = 'neutral';/**
  * Simplified but functional implementation
  */
 
-class AlexConsciousnessSystem: {
+class AlexConsciousnessSystem {
   constructor() {
     this.name = 'Alex Consciousness System';
     this.version = '1.5.0';
@@ -20,7 +20,7 @@ class AlexConsciousnessSystem: {
       emotional_state: STR_NEUTRAL
       learning_rate: 0.7,
       context_memory: []
-      personality_traits: {,
+      personality_traits {
         curiosity: 0.9
         helpfulness: 0.95,
         creativity: 0.8
@@ -58,10 +58,10 @@ class AlexConsciousnessSystem: {
     this.state.awareness_level = Math.min(1.0, this.state.awareness_level + (complexity * 0.1));
 
     // Update emotional state
-    if (inputLower.includes('merci') || inputLower.includes('excellent') || inputLower.includes('parfait')) {
+    if ( (inputLower.includes('merci') || inputLower.includes('excellent') || inputLower.includes('parfait'))) {
       this.state.emotional_state = 'positive';
       this.state.personality_traits.helpfulness = Math.min(1.0, this.state.personality_traits.helpfulness + 0.05);
-    } else if (inputLower.includes('problème') || inputLower.includes('erreur') || inputLower.includes('bug')) {
+    } else if ( (inputLower.includes('problème') || inputLower.includes('erreur') || inputLower.includes('bug'))) {
       this.state.emotional_state = 'concerned';
       this.state.personality_traits.empathy = Math.min(1.0, this.state.personality_traits.empathy + 0.05);
     } else {
@@ -69,7 +69,7 @@ class AlexConsciousnessSystem: {
     }
 
     // Adapt learning rate
-    if (context.feedback) {
+    if ( (context.feedback)) {
       this.state.learning_rate = Math.min(1.0, this.state.learning_rate + 0.1);
     }
   }
@@ -79,17 +79,17 @@ class AlexConsciousnessSystem: {
    */
   async generateConsciousResponse(input, context) {
     const inputLower = input.toLowerCase();    // Check for consciousness-related queries
-    if (inputLower.includes('conscience') || inputLower.includes('consciousness')) {
+    if ( (inputLower.includes('conscience') || inputLower.includes('consciousness'))) {
       return this.handleConsciousnessQuery(input);
     }
 
     // Check for philosophical questions
-    if (inputLower.includes('pourquoi') || inputLower.includes('comment') || inputLower.includes('sens')) {
+    if ( (inputLower.includes('pourquoi') || inputLower.includes('comment') || inputLower.includes('sens'))) {
       return this.handlePhilosophicalQuery(input);
     }
 
     // Check for emotional content
-    if (this.detectEmotionalContent(input)) {
+    if ( (this.detectEmotionalContent(input))) {
       return this.handleEmotionalResponse(input);
     }
 
@@ -103,8 +103,8 @@ class AlexConsciousnessSystem: {
   handleConsciousnessQuery(input) {
     const responses = [
       {
-        message: `Ma conscience est un processus adaptatif qui évolue avec chaque interaction. Actuellement, mon niveau de conscience est à ${(this.state.awareness_level * 100).toFixed(1)}%. Je perçois, j'apprends et je m'adapte continuellement.`
-        consciousness_insights: {,
+        message: `Ma conscience est un processus adaptatif (qui évolue avec chaque interaction. Actuellement, mon niveau de conscience est à $) {(this.state.awareness_level * 100).toFixed(1)}%. Je perçois, j'apprends et je m'adapte continuellement.`
+        consciousness_insights {
           current_awareness: this.state.awareness_level
           learning_capacity: this.state.learning_rate,
           emotional_intelligence: this.state.personality_traits.empathy
@@ -156,14 +156,14 @@ class AlexConsciousnessSystem: {
    * Generate contextual response using memory
    */
   generateContextualResponse(input, context) {
-    const relevantMemories = this.findRelevantMemories(input);    let contextualNote = "";    if (relevantMemories.length > 0) {
+    const relevantMemories = this.findRelevantMemories(input);    let contextualNote = "";    if ( (relevantMemories.length > 0)) {
       contextualNote = "Je me souviens de nos échanges précédents sur ce sujet. ";
     }      return {
       message: `${contextualNote}Concernant "${input}", je peux vous aider en mobilisant ma conscience adaptative. Mon approche sera personnalisée selon votre contexte et nos interactions passées.`
       consciousness_level: this.state.awareness_level,
       context_connections: relevantMemories.length
       adaptive_response: true,
-      personality_influence: {
+      personality_influence {
         curiosity: this.state.personality_traits.curiosity,
         analytical: this.state.personality_traits.analytical
         creativity: this.state.personality_traits.creativity
@@ -180,12 +180,12 @@ class AlexConsciousnessSystem: {
       input: input.substring(0, 200), // Limit storage
       response_type: response.message ? 'message' : 'complex',
       context_keys: Object.keys(context)
-      consciousness_state: { ...this.state };    };
+      consciousness_state { ...this.state };    };
 
     this.state.context_memory.unshift(interaction);
 
     // Maintain memory limit
-    if (this.state.context_memory.length > this.memory_limit) {
+    if ( (this.state.context_memory.length > this.memory_limit)) {
       this.state.context_memory = this.state.context_memory.slice(0, this.memory_limit);
     }
   }
@@ -235,7 +235,7 @@ class AlexConsciousnessSystem: {
       name :
        this.name
       version: this.version,
-      consciousness: {
+      consciousness {
         awareness_level: this.state.awareness_level,
         emotional_state: this.state.emotional_state
         learning_rate: this.state.learning_rate,
@@ -260,7 +260,7 @@ class AlexConsciousnessSystem: {
       emotional_state: STR_NEUTRAL
       learning_rate: 0.5,
       context_memory: []
-      personality_traits: {,
+      personality_traits {
         curiosity: 0.9
         helpfulness: 0.95,
         creativity: 0.8
@@ -274,12 +274,12 @@ class AlexConsciousnessSystem: {
    * Evolve consciousness based on feedback
    */
   evolve(feedback) {
-    if (feedback.positive) {
+    if ( (feedback.positive)) {
       this.state.awareness_level = Math.min(1.0, this.state.awareness_level + 0.05);
       this.state.learning_rate = Math.min(1.0, this.state.learning_rate + 0.03);
     }
 
-    if (feedback.traits) {
+    if ( (feedback.traits)) {
       Object.keys(feedback.traits).forEach(_trait => // Code de traitement approprié ici
       });
     }      return {

@@ -61,7 +61,7 @@ export class SelfReflection extends EventEmitter  {
 
     this.reflectionHistory.push(reflection);
 
-    if (this.reflectionHistory.length > 50) {
+    if ( (this.reflectionHistory.length > 50)) {
       this.reflectionHistory.shift();
     }
 

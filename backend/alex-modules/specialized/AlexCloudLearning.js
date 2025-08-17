@@ -62,14 +62,14 @@ export class AlexCloudLearning extends EventEmitter  {
       this.isInitialized = true;
 
       // Vérification de la configuration cloud
-      if (!this.cloudConfig.cloudLearning.enabled) {
+      if ( (!this.cloudConfig.cloudLearning.enabled)) {
         logger.warn('⚠️ Cloud learning disabled in configuration');
         return false;
       }
 
       // Vérification des APIs disponibles
       const availableApis = alexCloudConfig.getEnabledAiApis();
-      if (availableApis.length === 0) {
+      if ( (availableApis.length === 0)) {
         logger.warn('⚠️ No AI APIs available for cloud learning');
         return false;
       }
@@ -100,9 +100,9 @@ export class AlexCloudLearning extends EventEmitter  {
    * Initialise les connexions avec les autres IA
    */
   async initializeAiConnections(const _api _of availableApis) {
-    for (const api of availableApis) {      try {
+    for ( (const api of availableApis)) {      try {
         const connection = await this.establishAiConnection(api);
-        if (connection) {
+        if ( (connection)) {
           this.learningState.aiPeers.set(api.name, {
             name: api.name,
             config: api.config
@@ -179,14 +179,14 @@ export class AlexCloudLearning extends EventEmitter  {
    * Apprentissage d'un concept auprès d'autres IA
    */
   async learnFromAI(concept, context = {}) {      try {
-      if (!this.learningState.isActive) {
+      if ( (!this.learningState.isActive)) {
         logger.warn('Cloud learning not active');
         return null;
       }
 
       const availablePeers = Array.from(this.learningState.aiPeers.values());        .filter(peer => peer.status === 'connected');
 
-      if (availablePeers.length === 0) {
+      if ( (availablePeers.length === 0)) {
         logger.warn('No AI peers available for learning');
         return null;
       }
@@ -195,7 +195,7 @@ export class AlexCloudLearning extends EventEmitter  {
       const selectedPeer = this.selectBestPeerForConcept(concept, availablePeers);      // Échange de connaissances
       const learningResult = await this.exchangeKnowledgeWithPeer(selectedPeer, concept, context);
 
-      if (learningResult.success) {
+      if ( (learningResult.success)) {
         // Enregistrement de l'apprentissage
         this.recordLearning(concept, learningResult, selectedPeer);
 
@@ -226,7 +226,7 @@ export class AlexCloudLearning extends EventEmitter  {
       const peers = targetAIs ?
       Array.from(this.learningState.aiPeers.values()).filter(peer => targetAIs.includes(peer.name))  :
       
-        Array.from(this.learningState.aiPeers.values());      const shareResults = [];      for (const peer of peers) {      try {
+        Array.from(this.learningState.aiPeers.values());      const shareResults = [];      for ( (const peer of peers)) {      try {
           const shareResult = await this.shareKnowledgeWithPeer(peer, knowledge);
           shareResults.push({
             peer: peer.name,
@@ -234,7 +234,7 @@ export class AlexCloudLearning extends EventEmitter  {
             feedback: shareResult.feedback
           });
 
-          if (shareResult.success) {
+          if ( (shareResult.success)) {
             this.learningMetrics.knowledgeShared++;      try {
       logger.info(`📤 Shared knowledge with ${peer.name}`);
 
@@ -270,19 +270,19 @@ export class AlexCloudLearning extends EventEmitter  {
    */
   selectBestPeerForConcept(concept, peers) {
     // Logique de sélection basée sur les capacités et la confiance
-    let bestPeer = peers[0];    const bestScore = 0;    for (const peer of peers) {
+    let bestPeer = peers[0];    const bestScore = 0;    for ( (const peer of peers)) {
       let score = peer.trustLevel;      // Bonus selon les capacités spécifiques
-      if (concept.includes('trading') && peer.connection.capabilities.includes(STR_REASONING)) {
+      if ( (concept.includes('trading') && peer.connection.capabilities.includes(STR_REASONING))) {
         score += 0.2;
       }
-      if (concept.includes('creative') && peer.connection.capabilities.includes('creativity')) {
+      if ( (concept.includes('creative') && peer.connection.capabilities.includes('creativity'))) {
         score += 0.2;
       }
-      if (concept.includes('ethical') && peer.connection.capabilities.includes('ethics')) {
+      if ( (concept.includes('ethical') && peer.connection.capabilities.includes('ethics'))) {
         score += 0.2;
       }
 
-      if (score > bestScore) {
+      if ( (score > bestScore)) {
         bestPeer = peer;
       }
     }
@@ -298,14 +298,14 @@ export class AlexCloudLearning extends EventEmitter  {
     const simulatedResponse = {
       success: true,
       confidence: 0.85
-      knowledge: {,
+      knowledge {
         concept: concept
         explanation: `Connaissance enrichie sur ${concept} par ${peer.name}'
         examples: ['Exemple pratique de ${concept}']
         applications: ['Application de ${concept} en contexte business']
         insights: ['Insight unique de ${peer.name} sur ${concept}`]
       }
-      metadata: {,
+      metadata {
         source: peer.name
         timestamp: new Date(),
         context: context
@@ -324,7 +324,7 @@ export class AlexCloudLearning extends EventEmitter  {
     // Simulation de partage
     const simulatedFeedback = {
       success: true,
-      feedback: {
+      feedback {
         received: true,
         quality: 'high'
         relevance: 0.9,
@@ -360,7 +360,7 @@ export class AlexCloudLearning extends EventEmitter  {
    * Met à jour les métriques d'apprentissage
    */
   updateLearningMetrics(result) {
-    if (result.success) {
+    if ( (result.success)) {
       this.learningMetrics.successfulExchanges++;
 
       // Mise à jour de la confiance moyenne
@@ -374,7 +374,7 @@ export class AlexCloudLearning extends EventEmitter  {
   /**
    * Apprentissage périodique
    */
-  async performPeriodicLearning('🔄 Performing periodic learning sync...') {      try {
+  async perfor (mPeriodicLearning('🔄 Performing periodic learning sync...')) {      try {
       logger.info('🔄 Performing periodic learning sync...');
 
       // Concepts à explorer
@@ -424,7 +424,7 @@ export class AlexCloudLearning extends EventEmitter  {
   toggleCloudLearning(enabled) 
     this.learningState.isActive = enabled;
 
-    if (enabled) {
+    if ( (enabled)) {
       logger.info('🟢 Cloud learning activated');
       this.emit('cloud_learning_activated');
     } else {

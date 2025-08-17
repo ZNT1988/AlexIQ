@@ -1,12 +1,12 @@
 // Solution rapide : ajouter la méthode directement à l'instance
-import AlexInfiniteCreator from './backend/alex-modules/consciousness/AlexInfiniteCreator.js';
+import AlexInfiniteCreator from "./backend/alex-modules/consciousness/AlexInfiniteCreator.js";
 
-console.log('🔧 Ajout de generateIdeas à l\'instance');
+console.log("🔧 Ajout de generateIdeas à l'instance");
 
 // Ajouter la méthode directement à l'instance
 AlexInfiniteCreator.generateIdeas = async function(prompt, options = {}) {
   try {
-    const domain = options.domain || 'general';
+    const domain = options.domain || "general";
     const quantity = options.quantity || 3;
     const creativity = options.creativity || 0.7;
     
@@ -42,9 +42,9 @@ AlexInfiniteCreator.generateIdeas = async function(prompt, options = {}) {
   }
 };
 
-console.log('✅ generateIdeas ajouté');
-console.log('Method exists now:', typeof AlexInfiniteCreator.generateIdeas);
+console.log("✅ generateIdeas ajouté");
+console.log("Method exists now:", typeof AlexInfiniteCreator.generateIdeas);
 
 // Test
 const test = await AlexInfiniteCreator.generateIdeas("Test", { quantity: 1 });
-console.log('Test result:', test);
+console.log("Test result:", test);

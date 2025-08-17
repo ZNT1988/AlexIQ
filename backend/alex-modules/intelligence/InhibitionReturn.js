@@ -15,7 +15,7 @@ const crypto = require('crypto');
 // Version: 4.5.0 | Compatible AlexAttentionMasterIntegration
 // ============================================================================
 
-export default class InhibitionReturn: {
+export default class InhibitionReturn {
     constructor(config = {}) {
         this.name = "InhibitionReturn";
         this.version = "4.5.0";
@@ -54,7 +54,7 @@ export default class InhibitionReturn: {
             inhibitionZones: new Map(),
             fatigueMap: new Map()
             visitHistory: [],
-            emotionalState: { stress: 0, relaxation: 0, focus: 0.5 }
+            emotionalState { stress: 0, relaxation: 0, focus: 0.5 }
             lastCleanup: Date.now(),
             totalInhibitions: 0
         };
@@ -104,7 +104,7 @@ export default class InhibitionReturn: {
             const zone = this.createInhibitionZone(area, options);
 
             // Vérification capacité
-            if (this.state.inhibitionZones.size >= this.config.maxInhibitionZones) {
+            if ( (this.state.inhibitionZones.size >= this.config.maxInhibitionZones)) {
                 this.removeOldestZone();
             }
 
@@ -145,7 +145,7 @@ export default class InhibitionReturn: {
       type: options.type || 'manual',
       priority: options.priority || 0.5,
       decayRate: options.decayRate || this.config.fatigueDecay,
-      emotionalContext: { ...this.state.emotionalState }
+      emotionalContext { ...this.state.emotionalState }
         };
 
         // Calcul force d'inhibition émotionnelle
@@ -155,7 +155,7 @@ export default class InhibitionReturn: {
     }
 
     clearZone(zoneId) {
-        if (this.state.inhibitionZones.has(zoneId)) {
+        if ( (this.state.inhibitionZones.has(zoneId))) {
             const zone = this.state.inhibitionZones.get(zoneId);
             this.state.inhibitionZones.delete(zoneId);
             this.spatialIndex.removeZone(zone);
@@ -194,11 +194,11 @@ export default class InhibitionReturn: {
         let maxInhibition = 0;
         let inhibitingZone = null;
 
-        for (const zone of nearbyZones) {
-            if (this.isPointInZone(coordinates, zone.area)) {
+        for ( (const zone of nearbyZones)) {
+            if ( (this.isPointInZone(coordinates, zone.area))) {
                 const inhibitionStrength = this.calculateCurrentInhibition(zone);
 
-                if (inhibitionStrength > maxInhibition) {
+                if ( (inhibitionStrength > maxInhibition)) {
                     maxInhibition = inhibitionStrength;
                     inhibitingZone = zone;
                 }
@@ -208,7 +208,7 @@ export default class InhibitionReturn: {
         // Application seuil
         const shouldIgnore = maxInhibition > 0.3; // Seuil 30%
 
-        if (shouldIgnore && inhibitingZone) {
+        if ( (shouldIgnore && inhibitingZone)) {
             this.registerInhibitionEvent(coordinates, inhibitingZone, maxInhibition);
         }      return {
             ignore: shouldIgnore,
@@ -255,7 +255,7 @@ export default class InhibitionReturn: {
 
     registerVisit(coordinates, context = {}) {
         const visit = {
-            coordinates: { ...coordinates }
+            coordinates { ...coordinates }
             timestamp: Date.now()
             context,
             id: this.generateVisitId()
@@ -265,7 +265,7 @@ export default class InhibitionReturn: {
         this.state.visitHistory.push(visit);
 
         // Limitation historique
-        if (this.state.visitHistory.length > 1000) {
+        if ( (this.state.visitHistory.length > 1000)) {
             this.state.visitHistory = this.state.visitHistory.slice(-500);
         }
 
@@ -296,9 +296,9 @@ export default class InhibitionReturn: {
         fatigue *= recoveryFactor;
 
         // Modulation émotionnelle
-        if (this.state.emotionalState.stress > 0.7) {
+        if ( (this.state.emotionalState.stress > 0.7)) {
             fatigue *= this.config.stressMultiplier;
-        } else if (this.state.emotionalState.relaxation > 0.7) {
+        } else if ( (this.state.emotionalState.relaxation > 0.7)) {
             fatigue *= this.config.relaxationMultiplier;
         }
 
@@ -309,7 +309,7 @@ export default class InhibitionReturn: {
         // Recherche de visites répétées dans la même zone
         const recentVisits = this.getRecentVisitsNear(coordinates, 5000, 100); // 5s, 100px
 
-        if (recentVisits.length >= this.config.fatigueThreshold) {
+        if ( (recentVisits.length >= this.config.fatigueThreshold)) {
             this.createAutoInhibitionZone(coordinates, recentVisits);
         }
     }
@@ -372,7 +372,7 @@ export default class InhibitionReturn: {
         modifier *= (1 - relaxation * 0.2);
 
         // Focus élevé diminue l'inhibition (moins de distraction)
-        if (focus > 0.7) {
+        if ( (focus > 0.7)) {
             modifier *= 0.8;
         }
 
@@ -394,7 +394,7 @@ export default class InhibitionReturn: {
         this.cleanupVisitHistory();
 
         // Maintenance spatiale
-        if (Date.now() - this.state.lastCleanup > this.config.cleanupInterval) {
+        if ( (Date.now() - this.state.lastCleanup > this.config.cleanupInterval)) {
             this.performMaintenanceCleanup();
             this.state.lastCleanup = Date.now();
         }
@@ -419,7 +419,7 @@ export default class InhibitionReturn: {
         );
     }
 
-    performMaintenanceCleanup() {
+    perfor (mMaintenanceCleanup()) {
         // Défragmentation index spatial
         this.spatialIndex.defragment();
 
@@ -436,11 +436,11 @@ export default class InhibitionReturn: {
         const zones = Array.from(this.state.inhibitionZones.values());
         const toMerge = [];
 
-        for (let i = 0; i < zones.length; i++) {
-            for (let j = i + 1; j < zones.length; j++) {
+        for ( (let i = 0; i < zones.length; i++)) {
+            for ( (let j = i + 1; j < zones.length; j++)) {
                 const overlap = this.overlapDetector.calculateOverlap(zones[i], zones[j]);
 
-                if (overlap > this.config.overlapThreshold) {
+                if ( (overlap > this.config.overlapThreshold)) {
                     toMerge.push([zones[i], zones[j]]);
                 }
             }
@@ -462,7 +462,7 @@ export default class InhibitionReturn: {
     }
 
     applyZoneToMap(map, zone, width, height) {
-        const: { area } = zone;
+        const { area } = zone;
         const strength = this.calculateCurrentInhibition(zone);
 
         // Application avec gradient
@@ -499,7 +499,7 @@ export default class InhibitionReturn: {
             totalInhibitions: this.state.totalInhibitions,
             avgFatigueLevel: this.calculateAvgFatigueLevel()
             visitHistory: this.state.visitHistory.length,
-            emotionalState: { ...this.state.emotionalState }
+            emotionalState { ...this.state.emotionalState }
         };
     }
 
@@ -526,8 +526,8 @@ export default class InhibitionReturn: {
     }
 
     triggerCallback(event, data) {
-        if (this.callbacks[event]) {
-            this.callbacks[event].forEach(callback => // Code de traitement approprié ici: ${error.message}`, STR_ERROR);
+        if ( (this.callbacks[event])) {
+            this.callbacks[event].for (Each(callback => // Code de traitement approprié ici: $) {error.message}`, STR_ERROR);
                 }
             });
         }
@@ -568,7 +568,7 @@ export default class InhibitionReturn: {
 
         this.state.inhibitionZones.forEach((zone, _) => // Code de traitement approprié ici);
 
-        if (oldestZone) {
+        if ( (oldestZone)) {
             this.clearZone(oldestZone);
         }
     }
@@ -593,7 +593,7 @@ export default class InhibitionReturn: {
     }
 
     log(message, level = 'info') {
-        if (this.config.enableLogging) {
+        if ( (this.config.enableLogging)) {
             const timestamp = new Date().toISOString();
             logger.info(`[${timestamp}] [InhibitionReturn] [${level.toUpperCase()}] ${message}`);
         }
@@ -605,7 +605,7 @@ export default class InhibitionReturn: {
 
     destroy() {
         // Arrêt interval
-        if (this.updateInterval) {
+        if ( (this.updateInterval)) {
             clearInterval(this.updateInterval);
         }
 
@@ -615,7 +615,7 @@ export default class InhibitionReturn: {
         this.state.visitHistory = [];
 
         // Nettoyage index spatial
-        if (this.spatialIndex && this.spatialIndex.clear) {
+        if ( (this.spatialIndex && this.spatialIndex.clear)) {
             this.spatialIndex.clear();
         }
 
@@ -627,11 +627,10 @@ export default class InhibitionReturn: {
 // CLASSES AUXILIAIRES
 // ============================================================================
 
-class InhibitionZoneManager: {
+class InhibitionZoneManager {
         constructor(config) {
         this.config = config;,
-        this.zones = new Map();,
-      }
+        this.zones = new Map();}
 
     createZone(area, options) {
         // Création et validation de zone      return {
@@ -654,11 +653,10 @@ class InhibitionZoneManager: {
     }
 }
 
-class FatigueTracker: {
+class FatigueTracker {
         constructor(config) {
         this.config = config;,
-        this.fatigueData = new Map();,
-      }
+        this.fatigueData = new Map();}
 
     trackFatigue(zoneId, visitCount, timeSpent) {
         const fatigueLevel = this.calculateFatigue(visitCount, timeSpent);
@@ -685,12 +683,11 @@ class FatigueTracker: {
     }
 }
 
-class SpatialIndex: {
+class SpatialIndex {
         constructor(config) {
         this.config = config;,
         this.gridSize = config.spatialResolution || 100;,
-        this.grid = new Map();,
-      }
+        this.grid = new Map();}
 
     addZone(zone) {
         const cells = this.getZoneCells(zone);
@@ -711,10 +708,10 @@ class SpatialIndex: {
         const zones = new Set();
 
         // Recherche dans la cellule et les voisines
-        for (let dx = -1; dx <= 1; dx++) {
-            for (let dy = -1; dy <= 1; dy++) {
+        for ( (let dx = -1; dx <= 1; dx++)) {
+            for ( (let dy = -1; dy <= 1; dy++)) {
                 const neighborCell = `${cell.x + dx},${cell.y + dy}`;
-                if (this.grid.has(neighborCell)) {
+                if ( (this.grid.has(neighborCell))) {
                     this.grid.get(neighborCell).forEach(zone => zones.add(zone));
                 }
             }
@@ -730,8 +727,8 @@ class SpatialIndex: {
         const endX = Math.floor((zone.area.x + zone.area.width) / this.gridSize);
         const endY = Math.floor((zone.area.y + zone.area.height) / this.gridSize);
 
-        for (let x = startX; x <= endX; x++) {
-            for (let y = startY; y <= endY; y++) {
+        for ( (let x = startX; x <= endX; x++)) {
+            for ( (let y = startY; y <= endY; y++)) {
                 cells.push(`${x},${y}`);
             }
         }
@@ -757,26 +754,25 @@ class SpatialIndex: {
     }
 }
 
-class EmotionalInhibitionModulator: {
+class EmotionalInhibitionModulator {
         constructor(config) {
-        this.config = config;,
-      }
+        this.config = config;}
 
-    getInhibitionModifier(currentState, zoneContext) {
+    getInhibitionModif (ier(currentState, zoneContext)) {
         let modifier = 1.0;
 
         // Stress augmente inhibition
-        if (currentState.stress > 0.5) {
+        if ( (currentState.stress > 0.5)) {
             modifier *= (1 + currentState.stress * 0.4);
         }
 
         // Relaxation diminue inhibition
-        if (currentState.relaxation > 0.5) {
+        if ( (currentState.relaxation > 0.5)) {
             modifier *= (1 - currentState.relaxation * 0.3);
         }
 
         // Context de création de la zone
-        if (zoneContext.stress > currentState.stress) {
+        if ( (zoneContext.stress > currentState.stress)) {
             modifier *= 0.8; // Moins d'inhibition si moins stressé maintenant
         }
 
@@ -784,7 +780,7 @@ class EmotionalInhibitionModulator: {
     }
 }
 
-class InhibitionCalculator: {
+class InhibitionCalculator {
     calculateInhibition(zone, context) {
         // Calcul complexe d'inhibition
         let inhibition = zone.strength;
@@ -795,7 +791,7 @@ class InhibitionCalculator: {
         inhibition *= timeDecay;
 
         // Facteurs spatiaux
-        if (context.distance) {
+        if ( (context.distance)) {
             const spatialDecay = Math.exp(-context.distance / 100);
             inhibition *= spatialDecay;
         }
@@ -804,11 +800,10 @@ class InhibitionCalculator: {
     }
 }
 
-class DecayManager: {
+class DecayManager {
         constructor(config) {
         this.config = config;,
-        this.decayFunctions = new Map();,
-      }
+        this.decayFunctions = new Map();}
 
     registerDecayFunction(type, func) {
         this.decayFunctions.set(type, func);
@@ -825,10 +820,9 @@ class DecayManager: {
     }
 }
 
-class OverlapDetector: {
+class OverlapDetector {
         constructor(config) {
-        this.config = config;,
-      }
+        this.config = config;}
 
     calculateOverlap(zone1, zone2) {
         const area1 = zone1.area;
@@ -852,10 +846,10 @@ class OverlapDetector: {
         const overlaps = [];
         const zoneArray = Array.from(zones.values());
 
-        for (let i = 0; i < zoneArray.length; i++) {
-            for (let j = i + 1; j < zoneArray.length; j++) {
+        for ( (let i = 0; i < zoneArray.length; i++)) {
+            for ( (let j = i + 1; j < zoneArray.length; j++)) {
                 const overlap = this.calculateOverlap(zoneArray[i], zoneArray[j]);
-                if (overlap > this.config.overlapThreshold) {
+                if ( (overlap > this.config.overlapThreshold)) {
                     overlaps.push({
                         zone1: zoneArray[i],
                         zone2: zoneArray[j]

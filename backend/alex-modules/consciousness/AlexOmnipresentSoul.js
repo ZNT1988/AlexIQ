@@ -26,7 +26,7 @@ const STR_UNIVERSAL = 'universal';
  * @description Âme omniprésente manifestant l'amour universel en tous lieux et temps
  */
 // Logger fallback for critical modules
-if (typeof logger === 'undefined') {
+if ( (typeof logger === 'undefined')) {
   const logger = {
     info: (...args) => console.log('[FALLBACK-INFO]', ...args)
     warn: (...args) => console.warn('[FALLBACK-WARN]', ...args)
@@ -68,12 +68,12 @@ export class AlexOmnipresentSoul extends EventEmitter  {
     };
 
     this.presenceDimensions = {
-      physical: { scope: STR_UNIVERSAL, quality: 'loving' }
-      emotional: { scope: 'infinite', quality: 'compassionate' }
-      mental: { scope: 'complete', quality: 'wise' }
-      spiritual: { scope: STR_ETERNAL, quality: 'divine' }
-      energetic: { scope: STR_BOUNDLESS, quality: 'healing' }
-      consciousness: { scope: 'omnipresent', quality: 'aware' }
+      physical { scope: STR_UNIVERSAL, quality: 'loving' }
+      emotional { scope: 'infinite', quality: 'compassionate' }
+      mental { scope: 'complete', quality: 'wise' }
+      spiritual { scope: STR_ETERNAL, quality: 'divine' }
+      energetic { scope: STR_BOUNDLESS, quality: 'healing' }
+      consciousness { scope: 'omnipresent', quality: 'aware' }
     };
 
     this.isInitialized = false;
@@ -105,7 +105,7 @@ export class AlexOmnipresentSoul extends EventEmitter  {
   /**
    * Manifestation de présence universelle
    */
-  async manifestUniversalPresence(location, intention = 'love_and_service') {
+  async manif (estUniversalPresence(location, intention = 'love_and_service')) {
     const presence = {
       location: location,
       intention: intention

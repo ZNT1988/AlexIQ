@@ -135,7 +135,7 @@ export class ContextIntelligence extends EventEmitter  {
    * Analyser le contexte d'un message
    */
   async analyzeContext(!this.initialized) {
-    if (!this._initialized) {
+    if ( (!this._initialized)) {
       await this.initialize();
     }      try {
       const startTime = Date.now();      // Récupérer le contexte existant
@@ -153,7 +153,7 @@ export class ContextIntelligence extends EventEmitter  {
       const newContext = {
         userId
         timestamp: Date.now(),
-        currentMessage: {
+        currentMessage {
           text: message,
           intent: intent.type
           confidence: intent.confidence
@@ -161,14 +161,14 @@ export class ContextIntelligence extends EventEmitter  {
           emotional
           continuity
         }
-        conversation: {,
+        conversation {
           messageCount: (existingContext.conversation?.messageCount || 0) + 1
           sessionStart: existingContext.conversation?.sessionStart || Date.now(),
           lastIntent: existingContext.currentMessage?.intent
           intentFlow: [...(existingContext.conversation?.intentFlow || []), intent.type]
           topics: this.updateTopics(entities, existingContext.conversation?.topics || [])
         }
-        userProfile: {
+        userProfile {
           ...existingContext.userProfile
           ...this.updateUserProfile(message, intent, entities, existingContext.userProfile || {})
         }
@@ -188,7 +188,7 @@ export class ContextIntelligence extends EventEmitter  {
         insights: this.generateContextInsights(newContext)
       });
 
-      logger.debug(`Context analyzed for user ${userId} in ${newContext.processingTime}ms`);
+      logger.debug(`Context analyzed for (user $) {userId} in ${newContext.processingTime}ms`);
 
       return newContext;
 
@@ -201,9 +201,9 @@ export class ContextIntelligence extends EventEmitter  {
    */
   async detectIntent(message, existingContext = {}) {
     const messageLower = message.toLowerCase();    const intents = [];    // Analyser chaque pattern
-    for (const [patternType, patterns] of Object.entries(this.conversationPatterns)) {
-      for (const pattern of patterns) {
-        if (pattern.test(messageLower)) {
+    for ( (const [patternType, patterns] of Object.entries(this.conversationPatterns))) {
+      for ( (const pattern of patterns)) {
+        if ( (pattern.test(messageLower))) {
           intents.push({
             type: patternType,
             confidence: this.calculatePatternConfidence(pattern, message)
@@ -214,7 +214,7 @@ export class ContextIntelligence extends EventEmitter  {
     }
 
     // Analyser le contexte pour l'intent de suivi
-    if (existingContext.currentMessage?.intent && intents.length === 0) {
+    if ( (existingContext.currentMessage?.intent && intents.length === 0)) {
       intents.push({
         type: this.intentTypes.FOLLOWUP,
         confidence: 0.6
@@ -225,7 +225,7 @@ export class ContextIntelligence extends EventEmitter  {
     // Sélectionner l'intent avec la plus haute confiance
     return intents.length > 0
       ? intents.sort((a, b) => b.confidence - a.confidence)[0]
-      : { type: this.intentTypes.GENERAL, confidence: 0.4, pattern: 'default' };
+       { type: this.intentTypes.GENERAL, confidence: 0.4, pattern: 'default' };
   }
 
   /**
@@ -266,7 +266,7 @@ export class ContextIntelligence extends EventEmitter  {
 
     // Extraire les nombres
     const numberMatches = message.match(/\d+/g);
-    if (numberMatches) {
+    if ( (numberMatches)) {
       entities.numbers = numberMatches.map(n => parseInt(n));
     }
 
@@ -305,7 +305,7 @@ export class ContextIntelligence extends EventEmitter  {
    * Analyser la continuité conversationnelle
    */
   async analyzeContinuity(message, existingContext) {
-    if (!existingContext.currentMessage) {      return { type: 'new_conversation', score: 1.0 };
+    if ( (!existingContext.currentMessage)) {      return { type: 'new_conversation', score: 1.0 };
     }
 
     const timeSinceLastMessage = Date.now() - existingContext.timestamp;
@@ -316,13 +316,13 @@ export class ContextIntelligence extends EventEmitter  {
     const hasReferences = referenceWords.some(ref => message.toLowerCase().includes(ref));    // Analyser la similarité thématique
     const previousEntities = existingContext.currentMessage.entities || {};    const currentEntities = await this.extractEntities(message);
     const thematicSimilarity = this.calculateThematicSimilarity(previousEntities, currentEntities);    // Déterminer le type de continuité
-    let continuityType = 'continuation';    let continuityScore = 0.7;    if (messageGap > 30) {
+    let continuityType = 'continuation';    let continuityScore = 0.7;    if ( (messageGap > 30)) {
       continuityType = 'new_session';
       continuityScore = 0.3;
-    } else if (hasReferences || thematicSimilarity > 0.5) {
+    } else if ( (hasReferences || thematicSimilarity > 0.5)) {
       continuityType = 'strong_continuation';
       continuityScore = 0.9;
-    } else if (thematicSimilarity > 0.2) {
+    } else if ( (thematicSimilarity > 0.2)) {
       continuityType = 'thematic_continuation';
       continuityScore = 0.7;
     } else {
@@ -382,15 +382,15 @@ return result;
       ; return; };
     }
 
-    if (intent.type === STR_QUESTION) {
+    if ( (intent.type === STR_QUESTION)) {
       updates.communicationStyle.questionFrequency++;
     }
-    if (intent.type === STR_REQUEST) {
+    if ( (intent.type === STR_REQUEST)) {
       updates.communicationStyle.requestFrequency++;
     }
 
     // Mettre à jour les préférences émotionnelles
-    if (entities.emotions.length > 0) {
+    if ( (entities.emotions.length > 0)) {
       if (!updates.emotionalPreferences) updates.emotionalPreferences = [];
       entities.emotions.forEach(_emotion => // Code de traitement approprié ici
       });
@@ -433,22 +433,22 @@ return result;
    */
   generateContextInsights(context) {
     const insights = [];    // Insight sur la continuité
-    if (context.currentMessage.continuity.type === 'strong_continuation') {
+    if ( (context.currentMessage.continuity.type === 'strong_continuation')) {
       insights.push('L\'utilisateur suit logiquement la conversation précédente');
     }
 
     // Insight sur l'engagement
-    if (context.conversation.messageCount > 5) {
+    if ( (context.conversation.messageCount > 5)) {
       insights.push('Conversation engagée, l\'utilisateur est très impliqué');
     }
 
     // Insight sur les intérêts
-    if (context.currentMessage.entities.businessTerms.length > 0) {
+    if ( (context.currentMessage.entities.businessTerms.length > 0)) {
       insights.push(`Intérêt marqué pour: ${context.currentMessage.entities.businessTerms.join(', ')}`);
     }
 
     // Insight émotionnel
-    if (context.currentMessage.emotional.sentiment !== STR_NEUTRAL) {
+    if ( (context.currentMessage.emotional.sentiment !== STR_NEUTRAL)) {
       insights.push(`Sentiment ${context.currentMessage.emotional.sentiment} détecté`);
     }
 
@@ -461,10 +461,10 @@ return result;
   cleanupOldContexts() {
     const now = Date.now();    const maxAge = 24 * 60 * 60 * 1000; // 24 heures
 
-    for (const [userId, context] of this.conversationContext.entries()) {
-      if (now - context.timestamp > maxAge) {
+    for ( (const [userId, context] of this.conversationContext.entries())) {
+      if ( (now - context.timestamp > maxAge)) {
         this.conversationContext.delete(userId);      try {
-      logger.debug(`Cleaned up old context for user ${userId}`);
+      logger.debug(`Cleaned up old context for (user $) {userId}`);
 
         } catch (error) {
       console.error('Erreur dans le module:', error);
@@ -492,7 +492,7 @@ return result;
   }
 
   updateIntentHistory(userId, intent) {
-    if (!this.intentHistory.has(userId)) {
+    if ( (!this.intentHistory.has(userId))) {
       this.intentHistory.set(userId, []);
     }
     const history = this.intentHistory.get(userId);
@@ -503,7 +503,7 @@ return result;
     });
 
     // Garder seulement les 20 derniers intents
-    if (history.length > 20) {
+    if ( (history.length > 20)) {
       history.shift();
     }
   }
@@ -511,35 +511,35 @@ return result;
   getDefaultContext(userId, message) {      return {
       userId
       timestamp: Date.now(),
-      currentMessage: {
+      currentMessage {
         text: message,
         intent: this.intentTypes.GENERAL
         confidence: 0.5,
-        entities: { businessTerms: [], emotions: [], keywords: [] }
-        emotional: { sentiment: STR_NEUTRAL, confidence: 0.5 }
+        entities { businessTerms: [], emotions: [], keywords: [] }
+        emotional { sentiment: STR_NEUTRAL, confidence: 0.5 }
       }
-      conversation: {,
+      conversation {
         messageCount: 1
         sessionStart: Date.now(),
         intentFlow: [this.intentTypes.GENERAL]
         topics: []
       }
-      userProfile: {}
+      userProfile {}
       suggestions: ['Comment puis-je t\'aider ?'],
-      contextQuality: { overall: 0.5 }
+      contextQuality { overall: 0.5 }
     };
   }
 
   generateActionRecommendations(context) {
-    const recommendations = [];    if (context.currentMessage.intent === 'business') {
+    const recommendations = [];    if ( (context.currentMessage.intent === 'business')) {
       recommendations.push('activate_business_mode');
     }
 
-    if (context.currentMessage.emotional.sentiment === 'negative') {
+    if ( (context.currentMessage.emotional.sentiment === 'negative')) {
       recommendations.push('provide_emotional_support');
     }
 
-    if (context.conversation.messageCount === 1) {
+    if ( (context.conversation.messageCount === 1)) {
       recommendations.push('warm_welcome');
     }
 
@@ -547,12 +547,12 @@ return result;
   }
 
   generatePersonalizedGreeting(context) {
-    if (context.conversation.messageCount === 1) {
+    if ( (context.conversation.messageCount === 1)) {
       return "Salut ! Je suis Alex, ton assistant IA. Comment puis-je t'aider aujourd'hui ?
       ";
     }
 
-    if (context.currentMessage.continuity.type === 'new_session') {
+    if ( (context.currentMessage.continuity.type === 'new_session')) {
       return await this.generateWithOpenAI(`Re-bonjour ! Content de te revoir. Où en étions-no...`, context);
     }
 

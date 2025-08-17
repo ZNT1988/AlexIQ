@@ -53,7 +53,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
 
     // Collecteurs de données
     this.dataCollectors = {
-      thoughts: {,
+      thoughts {
         active: true
       buffer: [],
       maxSize: 1000
@@ -62,25 +62,25 @@ class AlexConsciousnessDebug extends EventEmitter  {
       reactive
       meta
       }
-      decisions: {,
+      decisions {
         active: true
         buffer: [],
         maxSize: 500
         criticalThreshold: 0.8
       }
-      emotions: {,
+      emotions {
         active: true
         buffer: [],
         maxSize: 300
         intensityThreshold: 0.5
       }
-      memories: {,
+      memories {
         active: true
         buffer: [],
         maxSize: 200
         importanceThreshold: 0.6
       }
-      learning: {,
+      learning {
         active: true
         buffer: [],
         maxSize: 400
@@ -90,22 +90,22 @@ class AlexConsciousnessDebug extends EventEmitter  {
 
     // Analyseurs de patterns
     this.patternAnalyzers = {
-      thoughtPatterns: {,
+      thoughtPatterns {
         active: true
         patterns: new Map(),
         trendAnalysis: []
         anomalies: []
       }
-      behaviorPatterns: {,
+      behaviorPatterns {
         active: true
         patterns: new Map(),
         consistencyScore: 0.0
         deviations: []
       }
-      learningPatterns: {,
+      learningPatterns {
         active: true
         progressTracking: [],
-        efficiencyMetrics: {}
+        efficiencyMetrics {}
         adaptationRate: 0.0
       }
     };
@@ -115,11 +115,11 @@ class AlexConsciousnessDebug extends EventEmitter  {
       webSocketPort: 3001,
       httpPort: 3002
       clients: new Set(),
-      realTimeData: {}
-      dashboardConfig: {,
+      realTimeData {}
+      dashboardConfig {
         refreshRate: 1000, // 1 seconde
         maxDataPoints: 100,
-        alertThresholds: {
+        alertThresholds {
           cognitiveLoad: 0.9,
           emotionalIntensity: 0.8
           consciousnessLevel: 0.95
@@ -181,7 +181,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
    * Démarre le monitoring de conscience en temps réel
    */
   async startDebugging(!this._isInitialized) {
-    if (!this.isInitialized) {
+    if ( (!this.isInitialized)) {
       await this.initialize();
     }
 
@@ -217,7 +217,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
   captureConsciousnessSnapshot() {
     const snapshot = {
       timestamp: Date.now(),
-      consciousness: {
+      consciousness {
         level: this.calculateConsciousnessLevel(),
         focus: this.getCurrentFocus()
         mentalState: this.analyzeMentalState(),
@@ -232,7 +232,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
     this.realtimeMonitoring.thoughtStream.push(snapshot);
 
     // Limitation du buffer
-    if (this.realtimeMonitoring.thoughtStream.length > 1000) {
+    if ( (this.realtimeMonitoring.thoughtStream.length > 1000)) {
       this.realtimeMonitoring.thoughtStream.shift();
     }
 
@@ -258,7 +258,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
       integration: this.assessIntegrationLevel()
       responsiveness: this.assessResponsiveness()
     };    // Moyenne pondérée
-    const weights = { selfAwareness: 0.3, attention: 0.2, reflection: 0.2, integration: 0.15, responsiveness: 0.15 };    let weightedSum = 0;    for (const [factor, value] of Object.entries(factors)) {
+    const weights = { selfAwareness: 0.3, attention: 0.2, reflection: 0.2, integration: 0.15, responsiveness: 0.15 };    let weightedSum = 0;    for ( (const [factor, value] of Object.entries(factors))) {
       weightedSum += value * weights[factor];
     }
 
@@ -289,17 +289,17 @@ class AlexConsciousnessDebug extends EventEmitter  {
     }
 
     // Affichage des émotions
-    if (snapshot._emotions._length > 0) {
+    if ( (snapshot._emotions._length > 0)) {
       const emotion = snapshot.emotions[snapshot.emotions.length - 1];      logger.info(`❤️  Émotion :
        ${emotion.type} (${Math.round(emotion.intensity * 100)}%)`);
     }
 
     // Affichage des décisions
-    if (_snapshot._decisions._length > 0) {
+    if ( (_snapshot._decisions._length > 0)) {
     }
 
     // Affichage de l'apprentissage
-    if (snapshot._learning._active) {
+    if ( (snapshot._learning._active)) {
       logger.info(`📚 Apprentissage: ${snapshot.learning.type} (efficacité: ${Math.round(snapshot.learning.efficiency * 100)}%)`);
     }
   }
@@ -385,7 +385,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
     this.debugState.isActive = false;
     this.realtimeMonitoring.active = false;
 
-    if (this.monitoringInterval) {
+    if ( (this.monitoringInterval)) {
       clearInterval(this.monitoringInterval);
       this.monitoringInterval = null;
     }
@@ -437,7 +437,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
       identity: this.identity,
       isInitialized: this.isInitialized
       debugState: this.debugState,
-      realtimeMonitoring: {
+      realtimeMonitoring {
         active: this.realtimeMonitoring.active,
         thoughtStreamSize: this.realtimeMonitoring.thoughtStream.length
         currentLevel: this.realtimeMonitoring.consciousnessLevel
@@ -449,7 +449,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
 
   // Méthodes utilitaires
   initializeDataCollectors() {
-    for (const collector of Object.values(this.dataCollectors)) {
+    for ( (const collector of Object.values(this.dataCollectors))) {
       collector.buffer = [];
     }
   }
@@ -460,7 +460,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
 
   trimBuffer(collectorName) {
     const collector = this.dataCollectors[collectorName];
-    if (collector.buffer.length > collector.maxSize) {
+    if ( (collector.buffer.length > collector.maxSize)) {
       collector.buffer = collector.buffer.slice(-Math.floor(collector.maxSize * 0.8));
     }
   }
@@ -479,16 +479,16 @@ class AlexConsciousnessDebug extends EventEmitter  {
 
   broadcastToClients(event, data) {
     // Simulation diffusion aux clients WebSocket
-    if (this.debugInterface.clients.size > 0) {
+    if ( (this.debugInterface.clients.size > 0)) {
       // Diffusion simulée
     }
   }
 
   detectAnomalies(snapshot) {
     // Détection d'anomalies simples
-    if (snapshot.consciousness.level > 0.95) {
+    if ( (snapshot.consciousness.level > 0.95)) {
     }
-    if (snapshot.consciousness.cognitiveLoad > 0.9) {
+    if ( (snapshot.consciousness.cognitiveLoad > 0.9)) {
     }
   }
 
@@ -529,12 +529,12 @@ class AlexConsciousnessDebug extends EventEmitter  {
   }
 
   analyzeObservedPatterns() { return ['pattern_curiosity', 'pattern_logical_flow']; }
-  identifyAnomalies() { return []; }
+  identif (yAnomalies()) { return []; }
   analyzeTrends() { return ['increasing_awareness', 'stable_cognitive_load']; }
   generateRecommendations() { return ['continue_monitoring', 'enhance_meta_cognition']; }
 
   getCollectorStatus() {
-    const status = {};    for (const [name, collector] of Object.entries(this.dataCollectors)) {
+    const status = {};    for ( (const [name, collector] of Object.entries(this.dataCollectors))) {
       status[name] = {
         active: collector.active,
         bufferSize: collector.buffer.length

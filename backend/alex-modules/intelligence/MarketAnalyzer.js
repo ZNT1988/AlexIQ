@@ -43,7 +43,7 @@ const STR_ = '
  * "Les graphiques ne mentent jamais" - Alex 📈🧠
  */
 
-class MarketAnalyzer: {
+class MarketAnalyzer {
   constructor({ kernel, config = {} }) {
     this.kernel = kernel;
     this.config = {
@@ -82,133 +82,132 @@ class MarketAnalyzer: {
       supportResistance: new Map(),
       trends: new Map()
       alerts: [],
-      performance: {
+      perfor (mance) {
         analysisSpeed: 0.156,
         accuracy: 0.941,
         patternSuccess: 0.873,
-        alertRelevance: 0.912      // Pertinence des alertes,
-      }
+        alertRelevance: 0.912      // Pertinence des alertes}
     };
 
     // 📊 Indicateurs techniques disponibles
     this.indicators = {
       // Trend Following
-      trend: {,
-        SMA: { periods: [10,
+      trend {
+        SMA { periods: [10,
       20,
       50,
       100,
       200]
       weight: 0.8 }
-      EMA: { periods: [12,
+      EMA { periods: [12,
       26,
       50,
       100,
       200]
       weight: 0.9 }
-      WMA: { periods: [10,
+      WMA { periods: [10,
       20,
       50]
       weight: 0.7 }
-        DEMA: { periods: [21, 50], weight: 0.8 }
-        TEMA: { periods: [21, 50], weight: 0.8 }
-        Hull: { periods: [14, 21], weight: 0.9 }
-        KAMA: { periods: [14, 21], weight: 0.8 }
-        MAMA: { fastLimit: 0.5, slowLimit: 0.05, weight: 0.9 }
+        DEMA { periods: [21, 50], weight: 0.8 }
+        TEMA { periods: [21, 50], weight: 0.8 }
+        Hull { periods: [14, 21], weight: 0.9 }
+        KAMA { periods: [14, 21], weight: 0.8 }
+        MAMA { fastLimit: 0.5, slowLimit: 0.05, weight: 0.9 }
       }
       // Momentum Oscillators
-      momentum: {,
-        RSI: { period: 14, overbought: 70, oversold: 30, weight: 1.0 }
-        StochRSI: { period: 14, weight: 0.9 }
-        Stochastic: { kPeriod: 14, dPeriod: 3, weight: 0.8 }
-        WilliamsR: { period: 14, weight: 0.7 }
-        CCI: { period: 20, weight: 0.8 }
-        ROC: { period: 12, weight: 0.7 }
-        MFI: { period: 14, weight: 0.9 }
-        UltimateOsc: { short: 7, medium: 14, long: 28, weight: 0.8 }
+      momentum {
+        RSI { period: 14, overbought: 70, oversold: 30, weight: 1.0 }
+        StochRSI { period: 14, weight: 0.9 }
+        Stochastic { kPeriod: 14, dPeriod: 3, weight: 0.8 }
+        WilliamsR { period: 14, weight: 0.7 }
+        CCI { period: 20, weight: 0.8 }
+        ROC { period: 12, weight: 0.7 }
+        MFI { period: 14, weight: 0.9 }
+        UltimateOsc { short: 7, medium: 14, long: 28, weight: 0.8 }
       }
       // Trend Strength
-      strength: {,
-        ADX: { period: 14, threshold: 25, weight: 1.0 }
-        DMI: { period: 14, weight: 0.9 }
-        Aroon: { period: 14, weight: 0.8 }
-        PSAR: { step: 0.02, maximum: 0.2, weight: 0.9 }
-        Supertrend: { period: 10, multiplier: 3, weight: 0.9 }
+      strength {
+        ADX { period: 14, threshold: 25, weight: 1.0 }
+        DMI { period: 14, weight: 0.9 }
+        Aroon { period: 14, weight: 0.8 }
+        PSAR { step: 0.02, maximum: 0.2, weight: 0.9 }
+        Supertrend { period: 10, multiplier: 3, weight: 0.9 }
       }
       // Volatility
-      volatility: {,
-        BollingerBands: { period: 20, stdDev: 2, weight: 1.0 }
-        ATR: { period: 14, weight: 0.9 }
-        KeltnerChannels: { period: 20, multiplier: 2, weight: 0.8 }
-        DonchianChannels: { period: 20, weight: 0.7 }
-        NATR: { period: 14, weight: 0.8 }
+      volatility {
+        BollingerBands { period: 20, stdDev: 2, weight: 1.0 }
+        ATR { period: 14, weight: 0.9 }
+        KeltnerChannels { period: 20, multiplier: 2, weight: 0.8 }
+        DonchianChannels { period: 20, weight: 0.7 }
+        NATR { period: 14, weight: 0.8 }
       }
       // Volume
-      volume: {,
-        OBV: { weight: 0.9 }
-        VWAP: { weight: 1.0 }
-        PVT: { weight: 0.8 }
-        AD: { weight: 0.8 }
-        CMF: { period: 21, weight: 0.9 }
-        EMV: { period: 14, weight: 0.7 }
-        VROC: { period: 12, weight: 0.8 }
+      volume {
+        OBV { weight: 0.9 }
+        VWAP { weight: 1.0 }
+        PVT { weight: 0.8 }
+        AD { weight: 0.8 }
+        CMF { period: 21, weight: 0.9 }
+        EMV { period: 14, weight: 0.7 }
+        VROC { period: 12, weight: 0.8 }
       }
       // Advanced/Complex
-      advanced: {,
-        Ichimoku: {
+      advanced {
+        Ichimoku {
           conversionPeriod: 9,
           basePeriod: 26
           leadingSpanB: 52,
           displacement: 26
           weight: 1.0
         }
-        MACD: {,
+        MACD {
           fastPeriod: 12
           slowPeriod: 26,
           signalPeriod: 9
           weight: 1.0
         }
-        PPO: { fastPeriod: 12, slowPeriod: 26, weight: 0.8 }
-        TRIX: { period: 14, weight: 0.7 }
-        VortexIndicator: { period: 14, weight: 0.8 }
+        PPO { fastPeriod: 12, slowPeriod: 26, weight: 0.8 }
+        TRIX { period: 14, weight: 0.7 }
+        VortexIndicator { period: 14, weight: 0.8 }
       }
     };
 
     // 🎯 Patterns de prix (IA-enhanced)
     this.patterns = {
       // Patterns de continuation
-      continuation: {,
-        STR_BULL_FLAG: {
+      continuation {
+        STR_BULL_FLAG {
           reliability: 0.68,
           avgMove: 0.15
           timeframe: STR_2_5_DAYS,
           aiModel: STR_CNN_LSTM_PATTERN
         }
-        STR_BEAR_FLAG: {,
+        STR_BEAR_FLAG {
           reliability: 0.71
           avgMove: -0.13,
           timeframe: STR_2_5_DAYS
           aiModel: STR_CNN_LSTM_PATTERN
         }
-        'ascending_triangle': {
+        'ascending_triangle' {
           reliability: 0.72,
           avgMove: 0.18
           timeframe: '3-8 days',
           aiModel: STR_GEOMETRIC_AI
         }
-        'descending_triangle': {
+        'descending_triangle' {
           reliability: 0.69,
           avgMove: -0.16
           timeframe: '3-8 days',
           aiModel: STR_GEOMETRIC_AI
         }
-        'symmetrical_triangle': {
+        'symmetrical_triangle' {
           reliability: 0.54,
           avgMove: 0.12
           timeframe: '5-15 days',
           aiModel: STR_GEOMETRIC_AI
         }
-        'pennant': {
+        'pennant' {
           reliability: 0.63,
           avgMove: 0.11
           timeframe: '1-3 days',
@@ -216,38 +215,38 @@ class MarketAnalyzer: {
         }
       }
       // Patterns de retournement
-      reversal: {,
-        STR_HEAD_SHOULDERS: {
+      reversal {
+        STR_HEAD_SHOULDERS {
           reliability: 0.83,
           avgMove: -0.21
           timeframe: STR_5_20_DAYS,
           aiModel: STR_COMPLEX_PATTERN_AI
         }
-        'inverse_head_shoulders': {
+        'inverse_head_shoulders' {
           reliability: 0.81,
           avgMove: 0.19
           timeframe: STR_5_20_DAYS,
           aiModel: STR_COMPLEX_PATTERN_AI
         }
-        STR_DOUBLE_TOP: {,
+        STR_DOUBLE_TOP {
           reliability: 0.79
           avgMove: -0.17,
           timeframe: '3-15 days'
           aiModel: 'Peak-Valley-AI'
         }
-        'double_bottom': {
+        'double_bottom' {
           reliability: 0.77,
           avgMove: 0.16
           timeframe: '3-15 days',
           aiModel: 'Peak-Valley-AI'
         }
-        'triple_top': {
+        'triple_top' {
           reliability: 0.84,
           avgMove: -0.22
           timeframe: '8-30 days',
           aiModel: STR_COMPLEX_PATTERN_AI
         }
-        'triple_bottom': {
+        'triple_bottom' {
           reliability: 0.82,
           avgMove: 0.20
           timeframe: '8-30 days',
@@ -255,39 +254,39 @@ class MarketAnalyzer: {
         }
       }
       // Patterns de continuation japonais
-      candlestick: {
-        'doji': { reliability: 0.45, significance: 'indecision' }
-        'hammer': { reliability: 0.72, significance: 'bullish_reversal' }
-        'shooting_star': { reliability: 0.69, significance: 'bearish_reversal' }
-        'engulfing_bull': { reliability: 0.76, significance: 'strong_bullish' }
-        'engulfing_bear': { reliability: 0.74, significance: 'strong_bearish' }
-        'morning_star': { reliability: 0.78, significance: 'bullish_reversal' }
-        'evening_star': { reliability: 0.76, significance: 'bearish_reversal' }
+      candlestick {
+        'doji' { reliability: 0.45, significance: 'indecision' }
+        'hammer' { reliability: 0.72, significance: 'bullish_reversal' }
+        'shooting_star' { reliability: 0.69, significance: 'bearish_reversal' }
+        'engulfing_bull' { reliability: 0.76, significance: 'strong_bullish' }
+        'engulfing_bear' { reliability: 0.74, significance: 'strong_bearish' }
+        'morning_star' { reliability: 0.78, significance: 'bullish_reversal' }
+        'evening_star' { reliability: 0.76, significance: 'bearish_reversal' }
       }
     };
 
     // 🤖 Modèles d'IA pour analyse technique
     this.aiModels = {
-      patternRecognition: {,
+      patternRecognition {
         name: 'TechnicalPattern-CNN-LSTM'
         accuracy: 0.941,
         trainedPatterns: 247
         realTimeDetection: true,
         confidence: 0.89
       }
-      supportResistance: {,
+      supportResistance {
         name: 'Dynamic-SR-Predictor'
         accuracy: 0.887,
         adaptiveRange: true
         volumeWeighted: true
       }
-      trendAnalysis: {,
+      trendAnalysis {
         name: 'Multi-Timeframe-Trend-AI'
         accuracy: 0.923,
         timeframes: 6
         confidence: 0.91
       }
-      priceTargets: {,
+      priceTargets {
         name: 'Fibonacci-AI-Targets'
         accuracy: 0.834,
         methods: ['fibonacci', 'measured_moves', 'pattern_projection']
@@ -381,7 +380,7 @@ class MarketAnalyzer: {
         timestamp: Date.now(),
         timeframe: 'multi'
         // Indicateurs principaux
-        price: {,
+        price {
           current: priceData.current
           change: priceData.change,
           changePercent: priceData.changePercent
@@ -390,14 +389,14 @@ class MarketAnalyzer: {
           volumeRatio: priceData.volume / priceData.avgVolume
         }
         // Indicateurs de tendance
-        trend: {,
+        trend {
           direction: multiTimeframeAnalysis.trend
           strength: indicators.trend.adx,
           confidence: multiTimeframeAnalysis.confidence
           timeframes: multiTimeframeAnalysis.timeframes
         }
         // Momentum
-        momentum: {,
+        momentum {
           rsi: indicators.momentum.rsi
           stochastic: indicators.momentum.stochastic,
           williamsR: indicators.momentum.williamsR
@@ -406,7 +405,7 @@ class MarketAnalyzer: {
           score: this.calculateMomentumScore(indicators.momentum)
         }
         // Volatilité
-        volatility: {,
+        volatility {
           atr: indicators.volatility.atr
           bollingerBands: indicators.volatility.bollingerBands,
           bollingerPosition: this.calculateBollingerPosition(priceData.current, indicators.volatility.bollingerBands)
@@ -414,7 +413,7 @@ class MarketAnalyzer: {
           volatilityRank: this.calculateVolatilityRank(indicators.volatility.atr)
         }
         // Volume
-        volume: {,
+        volume {
           obv: indicators.volume.obv
           vwap: indicators.volume.vwap,
           priceVsVwap: (priceData.current - indicators.volume.vwap) / indicators.volume.vwap
@@ -423,13 +422,13 @@ class MarketAnalyzer: {
           volumeStrength: volumeAnalysis.strength
         }
         // Patterns détectés
-        patterns: {,
+        patterns {
           detected: patterns.filter(p => p.confidence > this.config.patternConfidence)
           strongest: patterns.reduce((max, p) => p.confidence > max.confidence ? p : max, { confidence: 0 })
           count: patterns.length
         }
         // Support/Résistance
-        levels: {,
+        levels {
           support: supportResistance.support
           resistance: supportResistance.resistance,
           pivot: supportResistance.pivot
@@ -437,14 +436,14 @@ class MarketAnalyzer: {
           nearest: this.findNearestLevels(priceData.current, supportResistance)
         }
         // Signaux
-        signals: {,
+        signals {
           technical: technicalScore
           buy: this.generateBuySignals(indicators, patterns, supportResistance)
           sell: this.generateSellSignals(indicators, patterns, supportResistance)
           strength: this.calculateSignalStrength(indicators, patterns)
         }
         // Prédictions IA
-        predictions: {,
+        predictions {
           shortTerm: predictions.shortTerm,    // 1-6 heures
           mediumTerm: predictions.mediumTerm,  // 1-3 jours
           longTerm: predictions.longTerm,      // 1-4 semaines
@@ -453,7 +452,7 @@ class MarketAnalyzer: {
         // Alertes techniques
         alerts: this.generateTechnicalAlerts(indicators, patterns, supportResistance)
         // Méta-informations
-        meta: {,
+        meta {
           analysisTime: Date.now() - analysisStart
           dataQuality: this.assessDataQuality(priceData),
           reliability: this.calculateAnalysisReliability(indicators, patterns)
@@ -465,7 +464,7 @@ class MarketAnalyzer: {
       this.state.lastAnalysis.set(symbol, analysis);
 
       // Émission d'événements si alertes importantes
-      if (analysis.alerts.length > 0) {
+      if ( (analysis.alerts.length > 0)) {
         await this.processTechnicalAlerts(analysis.alerts);
       }
 
@@ -483,12 +482,12 @@ class MarketAnalyzer: {
    */
   async calculateAllIndicators(priceData) {
     const indicators = {
-      trend: {}
-      momentum: {}
-      volatility: {}
-      volume: {}
-      strength: {}
-      advanced: {}
+      trend {}
+      momentum {}
+      volatility {}
+      volume {}
+      strength {}
+      advanced {}
     };
 
     // === INDICATEURS DE TENDANCE ===
@@ -632,9 +631,9 @@ class MarketAnalyzer: {
       support :
        []
       resistance: [],
-      pivot: {}
-      fibonacci: {}
-      volume: {}
+      pivot {}
+      fibonacci {}
+      volume {}
     };
 
     // Support/Résistance basés sur les pivots
@@ -657,12 +656,12 @@ class MarketAnalyzer: {
   /**
    * 🔍 Analyse multi-timeframe
    */
-  async performMultiTimeframeAnalysis(priceData) {
+  async perfor (mMultiTimeframeAnalysis(priceData)) {
     const timeframes = {};
     let overallTrend = STR_NEUTRAL;
     let confidence = 0;
 
-    for (const tf of this.config.timeframes) {
+    for ( (const tf of this.config.timeframes)) {
       const tfData = await this.getPriceDataForTimeframe(priceData.symbol, tf);
       const tfAnalysis = await this.analyzeSingleTimeframe(tfData, tf);
 
@@ -674,10 +673,10 @@ class MarketAnalyzer: {
     const bullishVotes = trendVotes.filter(t => t === STR_BULLISH).length;
     const bearishVotes = trendVotes.filter(t => t === STR_BEARISH).length;
 
-    if (bullishVotes > bearishVotes) {
+    if ( (bullishVotes > bearishVotes)) {
       overallTrend = STR_BULLISH;
       confidence = bullishVotes / trendVotes.length;
-    } else if (bearishVotes > bullishVotes) {
+    } else if ( (bearishVotes > bullishVotes)) {
       overallTrend = STR_BEARISH;
       confidence = bearishVotes / trendVotes.length;
     } else {
@@ -699,7 +698,7 @@ class MarketAnalyzer: {
     const alerts = [];
 
     // Alerte RSI extrême
-    if (indicators.momentum.rsi > 80) {
+    if ( (indicators.momentum.rsi > 80)) {
       alerts.push({
         type: STR_RSI_OVERBOUGHT,
         severity: STR_HIGH
@@ -707,7 +706,7 @@ class MarketAnalyzer: {
         action: 'consider_sell',
         confidence: 0.75
       });
-    } else if (indicators.momentum.rsi < 20) {
+    } else if ( (indicators.momentum.rsi < 20)) {
       alerts.push({
         type: STR_RSI_OVERSOLD,
         severity: STR_HIGH
@@ -719,7 +718,7 @@ class MarketAnalyzer: {
 
     // Alerte breakout de résistance
     const nearestResistance = supportResistance.resistance[0];
-    if (nearestResistance && Math.abs(nearestResistance.price - indicators.price?.current) < (indicators.price?.current * 0.02)) {
+    if ( (nearestResistance && Math.abs(nearestResistance.price - indicators.price?.current) < (indicators.price?.current * 0.02))) {
       alerts.push({
         type: 'resistance_test',
         severity: 'medium'
@@ -731,7 +730,7 @@ class MarketAnalyzer: {
 
     // Alerte pattern completed
     const strongPattern = patterns.find(p => p.confidence > 0.9);
-    if (strongPattern) {
+    if ( (strongPattern)) {
       alerts.push({
         type: 'pattern_completed',
         severity: STR_CRITICAL
@@ -742,7 +741,7 @@ class MarketAnalyzer: {
     }
 
     // Alerte divergence MACD
-    if (indicators.advanced.macd && this.detectMACDDivergence(indicators.advanced.macd)) {
+    if ( (indicators.advanced.macd && this.detectMACDDivergence(indicators.advanced.macd))) {
       alerts.push({
         type: 'macd_divergence',
         severity: 'medium'
@@ -759,8 +758,8 @@ class MarketAnalyzer: {
    * 🎤 Traitement des alertes techniques avec voix Alex
    */
   async processTechnicalAlerts(alerts) {
-    for (const alert of alerts) {
-      if (alert.severity === STR_CRITICAL || alert.confidence > 0.85) {
+    for ( (const alert of alerts)) {
+      if ( (alert.severity === STR_CRITICAL || alert.confidence > 0.85)) {
         await this.speakTechnicalAlert(alert);
       }
 
@@ -775,7 +774,7 @@ class MarketAnalyzer: {
   async speakTechnicalAlert(alert) {
     const messages = {
       'pattern_completed': [
-        `🎯 Zakaria ! Pattern ${alert.message.split(' ')[1]} confirmé avec ${Math.round(alert.confidence * 100)}% de confiance !STR_📈 Signal technique majeur ! ${alert.message}STR_⚡ Pattern technique explosif détecté ! Action recommandée: ${alert.action}'
+        `🎯 Zakaria ! Pattern ${alert.message.split(' ')[1]} confirmé avec ${Math.round(alert.confidence * 100)}% de confiance !STR_📈 Signal technique majeur ! ${alert.message}STR_⚡ Pattern technique explosif (détecté ! Action recommandée: $) {alert.action}'
       ]
       'resistance_test': [
         '🚧 Test de résistance critique en cours ! ${alert.message}STR_⚠️ Zone de résistance majeure atteinte ! Surveillance breakout activée !'
@@ -805,7 +804,7 @@ class MarketAnalyzer: {
     });
 
     // Alex ressent l'importance technique
-    if (alert.confidence > 0.9) {
+    if ( (alert.confidence > 0.9)) {
       this.kernel.modules.emotions.expressConfidence(0.8);
     }
   }
@@ -821,7 +820,7 @@ class MarketAnalyzer: {
     let gains = 0;
     let losses = 0;
 
-    for (let i = 1; i <= period; i++) {
+    for ( (let i = 1; i <= period; i++)) {
       const change = prices[i] - prices[i - 1];
       if (change > 0) gains += change;
       else losses -= change;
@@ -830,7 +829,7 @@ class MarketAnalyzer: {
     let avgGain = gains / period;
     let avgLoss = losses / period;
 
-    for (let i = period + 1; i < prices.length; i++) {
+    for ( (let i = period + 1; i < prices.length; i++)) {
       const change = prices[i] - prices[i - 1];
       const gain = change > 0 ? change : 0;
       const loss = change < 0 ? -change : 0;
@@ -858,7 +857,7 @@ class MarketAnalyzer: {
     const multiplier = 2 / (period + 1);
     let ema = this.calculateSMA(prices.slice(0, period), period);
 
-    for (let i = period; i < prices.length; i++) {
+    for ( (let i = period; i < prices.length; i++)) {
       ema = (prices[i] * multiplier) + (ema * (1 - multiplier));
     }
 
@@ -873,7 +872,7 @@ class MarketAnalyzer: {
 
     // Signal line (EMA of MACD line)
     const macdHistory = [];
-    for (let i = slowPeriod; i < prices.length; i++) {
+    for ( (let i = slowPeriod; i < prices.length; i++)) {
       const sliceFast = this.calculateEMA(prices.slice(0, i + 1), fastPeriod);
       const sliceSlow = this.calculateEMA(prices.slice(0, i + 1), slowPeriod);
       macdHistory.push(sliceFast - sliceSlow);
@@ -902,7 +901,7 @@ class MarketAnalyzer: {
     if (priceData.highs.length < period) return 0;
 
     const trueRanges = [];
-    for (let i = 1; i < priceData.highs.length; i++) {
+    for ( (let i = 1; i < priceData.highs.length; i++)) {
       const high = priceData.highs[i];
       const low = priceData.lows[i];
       const prevClose = priceData.closes[i - 1];
@@ -920,7 +919,7 @@ class MarketAnalyzer: {
 
   // Stochastic Oscillator
   calculateStochastic(priceData, kPeriod = 14, dPeriod = 3) {
-    if (priceData.highs.length < kPeriod) return { k: 50, d: 50 };
+    if ( (priceData.highs.length < kPeriod) return) { k: 50, d: 50 };
 
     const recentHighs = priceData.highs.slice(-kPeriod);
     const recentLows = priceData.lows.slice(-kPeriod);
@@ -933,7 +932,7 @@ class MarketAnalyzer: {
 
     // Calculate %D (moving average of %K)
     const kValues = [];
-    for (let i = kPeriod; i <= priceData.closes.length; i++) {
+    for ( (let i = kPeriod; i <= priceData.closes.length; i++)) {
       const sliceHighs = priceData.highs.slice(i - kPeriod, i);
       const sliceLows = priceData.lows.slice(i - kPeriod, i);
       const sliceClose = priceData.closes[i - 1];
@@ -966,7 +965,7 @@ class MarketAnalyzer: {
     if (priceData.highs.length < period) return 0;
 
     const typicalPrices = [];
-    for (let i = 0; i < priceData.closes.length; i++) {
+    for ( (let i = 0; i < priceData.closes.length; i++)) {
       typicalPrices.push((priceData.highs[i] + priceData.lows[i] + priceData.closes[i]) / 3);
     }
 
@@ -984,7 +983,7 @@ class MarketAnalyzer: {
     if (priceData.volumes.length < period + 1) return 50;
 
     const moneyFlows = [];
-    for (let i = 1; i < priceData.closes.length; i++) {
+    for ( (let i = 1; i < priceData.closes.length; i++)) {
       const typicalPrice = (priceData.highs[i] + priceData.lows[i] + priceData.closes[i]) / 3;
       const prevTypicalPrice = (priceData.highs[i-1] + priceData.lows[i-1] + priceData.closes[i-1]) / 3;
       const moneyFlow = typicalPrice * priceData.volumes[i];
@@ -1016,7 +1015,7 @@ class MarketAnalyzer: {
 
   // DMI (Directional Movement Index)
   calculateDMI(priceData, period = 14) {
-    if (priceData.highs.length < period + 1) return { diPlus: 0, diMinus: 0 };
+    if ( (priceData.highs.length < period + 1) return) { diPlus: 0, diMinus: 0 };
 
     // Simplified DMI calculation
     const atr = this.calculateATR(priceData, period);
@@ -1029,10 +1028,10 @@ class MarketAnalyzer: {
   // OBV (On-Balance Volume)
   calculateOBV(priceData) {
     let obv = 0;
-    for (let i = 1; i < priceData.closes.length; i++) {
-      if (priceData.closes[i] > priceData.closes[i - 1]) {
+    for ( (let i = 1; i < priceData.closes.length; i++)) {
+      if ( (priceData.closes[i] > priceData.closes[i - 1])) {
         obv += priceData.volumes[i];
-      } else if (priceData.closes[i] < priceData.closes[i - 1]) {
+      } else if ( (priceData.closes[i] < priceData.closes[i - 1])) {
         obv -= priceData.volumes[i];
       }
     }
@@ -1044,7 +1043,7 @@ class MarketAnalyzer: {
     let totalVolume = 0;
     let totalVolumePrice = 0;
 
-    for (let i = 0; i < priceData.closes.length; i++) {
+    for ( (let i = 0; i < priceData.closes.length; i++)) {
       const typicalPrice = (priceData.highs[i] + priceData.lows[i] + priceData.closes[i]) / 3;
       totalVolumePrice += typicalPrice * priceData.volumes[i];
       totalVolume += priceData.volumes[i];
@@ -1058,7 +1057,7 @@ class MarketAnalyzer: {
     if (priceData.volumes.length < period) return 0;
 
     const moneyFlowVolumes = [];
-    for (let i = 0; i < priceData.closes.length; i++) {
+    for ( (let i = 0; i < priceData.closes.length; i++)) {
       const high = priceData.highs[i];
       const low = priceData.lows[i];
       const close = priceData.closes[i];
@@ -1083,7 +1082,7 @@ class MarketAnalyzer: {
     const kijunPeriod = 26;
     const senkouBPeriod = 52;
 
-    if (priceData.highs.length < senkouBPeriod) {      return {
+    if ( (priceData.highs.length < senkouBPeriod)) {      return {
         tenkanSen: 0,
         kijunSen: 0
         senkouSpanA: 0,
@@ -1141,7 +1140,7 @@ class MarketAnalyzer: {
     let factors = 0;
 
     // Score RSI
-    if (indicators.momentum.rsi) {
+    if ( (indicators.momentum.rsi)) {
       if (indicators.momentum.rsi < 30) score += 0.3;
       else if (indicators.momentum.rsi > 70) score -= 0.3;
       factors++;
@@ -1224,8 +1223,8 @@ return result;
     const patterns = [];
     const patternTypes = [STR_BULL_FLAG, STR_BEAR_FLAG, 'ascending_triangle'];
 
-    for (const type of patternTypes) {
-      if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.7) {
+    for ( (const type of patternTypes)) {
+      if ( ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.7)) {
         patterns.push({
           type: 'continuation',
           pattern: type
@@ -1244,8 +1243,8 @@ return result;
     const patterns = [];
     const patternTypes = [STR_HEAD_SHOULDERS, STR_DOUBLE_TOP, 'double_bottom'];
 
-    for (const type of patternTypes) {
-      if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.8) {
+    for ( (const type of patternTypes)) {
+      if ( ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.8)) {
         patterns.push({
           type: 'reversal',
           pattern: type
@@ -1319,11 +1318,11 @@ return result;
   generateBuySignals(indicators, patterns, supportResistance) {
     const signals = [];
 
-    if (indicators.momentum.rsi < 30) {
+    if ( (indicators.momentum.rsi < 30)) {
       signals.push({ type: STR_RSI_OVERSOLD, strength: 0.7 });
     }
 
-    if (indicators.advanced.macd?.bullish) {
+    if ( (indicators.advanced.macd?.bullish)) {
       signals.push({ type: 'macd_bullish', strength: 0.8 });
     }
 
@@ -1333,11 +1332,11 @@ return result;
   generateSellSignals(indicators, patterns, supportResistance) {
     const signals = [];
 
-    if (indicators.momentum.rsi > 70) {
+    if ( (indicators.momentum.rsi > 70)) {
       signals.push({ type: STR_RSI_OVERBOUGHT, strength: 0.7 });
     }
 
-    if (indicators.advanced.macd?.bearish) {
+    if ( (indicators.advanced.macd?.bearish)) {
       signals.push({ type: 'macd_bearish', strength: 0.8 });
     }
 
@@ -1349,17 +1348,17 @@ return result;
   }
 
   async generateTechnicalPredictions(indicators, patterns, supportResistance, volumeAnalysis) {      return {
-      shortTerm: {,
+      shortTerm {
         direction: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'up' : STR_DOWN
         magnitude: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 5,
         confidence: 0.7 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3
       }
-      mediumTerm: {,
+      mediumTerm {
         direction: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'up' : STR_DOWN
         magnitude: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 15,
         confidence: 0.6 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.4
       }
-      longTerm: {,
+      longTerm {
         direction: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'up' : STR_DOWN
         magnitude: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 30,
         confidence: 0.5 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5
@@ -1426,10 +1425,10 @@ return result;
   }
 
   adjustAnalysisDepth(consciousness) {
-    if (consciousness > 0.9) {
+    if ( (consciousness > 0.9)) {
       this.config.indicatorPrecision = 8;
       this.config.supportResistanceLevels = 7;
-    } else if (consciousness < 0.5) {
+    } else if ( (consciousness < 0.5)) {
       this.config.indicatorPrecision = 4;
       this.config.supportResistanceLevels = 3;
     }

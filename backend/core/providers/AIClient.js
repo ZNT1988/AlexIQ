@@ -1,7 +1,7 @@
 // AI Client avec vraies API Keys
-import { callOpenAI } from '../../services/openai.js';
-import { callAnthropic } from '../../services/anthropic.js';
-import { callGemini } from '../../services/google.js';
+import { callOpenAI } from "../../services/openai.js";
+import { callAnthropic } from "../../services/anthropic.js";
+import { callGemini } from "../../services/google.js";
 
 export class AIClient {
   constructor() {
@@ -12,7 +12,7 @@ export class AIClient {
     };
   }
 
-  async query(prompt, provider = 'openai') {
+  async query(prompt, provider = "openai") {
     try {
       const providerFunc = this.providers[provider];
       if (!providerFunc) {
@@ -37,16 +37,16 @@ export class AIClient {
 
   async queryMultiple(prompt) {
     const results = await Promise.allSettled([
-      this.query(prompt, 'openai'),
-      this.query(prompt, 'anthropic'),
-      this.query(prompt, 'google')
+      this.query(prompt, "openai"),
+      this.query(prompt, "anthropic"),
+      this.query(prompt, "google")
     ]);
 
     return results.map((result, index) => {
-      const providers = ['openai', 'anthropic', 'google'];
+      const providers = ["openai", "anthropic", "google"];
       return {
         provider: providers[index],
-        ...(result.status === 'fulfilled' ? result.value : { success: false, error: result.reason })
+        ...(result.status === "fulfilled" ? result.value : { success: false, error: result.reason })
       };
     });
   }

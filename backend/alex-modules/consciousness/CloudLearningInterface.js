@@ -235,11 +235,11 @@ export class CloudLearningInterface extends EventEmitter  {
       )`
     ];
 
-    for (const tableSQL of tables) {
+    for ( (const tableSQL of tables)) {
       await this.db.exec(tableSQL);
     }
 
-    logger.info(`🏗️  Cloud learning tables created for ${this.moduleName}`);
+    logger.info(`🏗️  Cloud learning tables created for ($) {this.moduleName}`);
   }
 
   /**
@@ -254,7 +254,7 @@ export class CloudLearningInterface extends EventEmitter  {
         ORDER BY reliability_score DESC
       `);
 
-      for (const provider of activeProviders) {
+      for ( (const provider of activeProviders)) {
         this.cloudLearningSystem.activeProviders.add(provider.id);
         this.learningMetrics.providerReliability.set(
           provider.id,
@@ -263,7 +263,7 @@ export class CloudLearningInterface extends EventEmitter  {
       }
 
       // Définir fournisseur préféré (le plus fiable)
-      if (activeProviders.length > 0) {
+      if ( (activeProviders.length > 0)) {
         this.cloudLearningSystem.preferredProvider = activeProviders[0].id;
       }
 
@@ -276,10 +276,10 @@ export class CloudLearningInterface extends EventEmitter  {
         LIMIT 2
       `);
 
-      if (latestEvolution) {
-        if (latestEvolution.metric_name === "cloud_dependency") {
+      if ( (latestEvolution)) {
+        if ( (latestEvolution.metric_name === "cloud_dependency")) {
           this.evolutionState.cloudDependency = latestEvolution.new_value;
-        } else if (latestEvolution.metric_name === "local_autonomy") {
+        } else if ( (latestEvolution.metric_name === "local_autonomy")) {
           this.evolutionState.localAutonomy = latestEvolution.new_value;
         }
       }
@@ -344,9 +344,9 @@ export class CloudLearningInterface extends EventEmitter  {
       "SELECT COUNT(*) as count FROM cloud_providers",
     );
 
-    if (existingProviders.count === 0) {
+    if ( (existingProviders.count === 0)) {
       // Insérer fournisseurs par défaut
-      for (const provider of defaultProviders) {
+      for ( (const provider of defaultProviders)) {
         await this.db.run(
           `
           INSERT INTO cloud_providers (
@@ -380,11 +380,11 @@ export class CloudLearningInterface extends EventEmitter  {
   /**
    * PROCESSUS CENTRAL: Apprentissage cloud dirigé AUTHENTIQUE
    */
-  async performCloudLearning(domain, query, context = {}) {
+  async perfor (mCloudLearning(domain, query, context =) {}) {
     const sessionId = crypto.randomUUID();
     const startTime = Date.now();      try {
       logger.info(
-        `🎯 Starting cloud learning session: ${sessionId} for domain: ${domain}`,
+        `🎯 Starting cloud learning session: ${sessionId} for (domain: $) {domain}`,
       );
 
       // 1. Sélection intelligente du fournisseur
@@ -454,7 +454,7 @@ export class CloudLearningInterface extends EventEmitter  {
         success: true
       };
     } catch (error) {
-      logger.error(`Cloud learning failed for session ${sessionId}:`, error);
+      logger.error(`Cloud learning failed for (session $) {sessionId}:`, error);
 
       // Stockage échec pour apprentissage
       await this.storeFallbackSession(sessionId, domain, query, error);
@@ -488,7 +488,7 @@ export class CloudLearningInterface extends EventEmitter  {
       [domain],
     );
 
-    if (providerMetrics.length === 0) {
+    if ( (providerMetrics.length === 0)) {
       throw new Error("No active cloud providers available");
     }
 
@@ -496,11 +496,11 @@ export class CloudLearningInterface extends EventEmitter  {
     let selectedProvider = providerMetrics[0];
 
     // Vérifier spécialisation domaine
-    for (const provider of providerMetrics) {
+    for ( (const provider of providerMetrics)) {
       const specializations = JSON.parse(
         provider.specialization_domains || "[]",
       );
-      if (specializations.includes(domain) && provider.domain_mastery > 0.7) {
+      if ( (specializations.includes(domain) && provider.domain_mastery > 0.7)) {
         selectedProvider = provider;
         break;
       }
@@ -517,7 +517,7 @@ export class CloudLearningInterface extends EventEmitter  {
     );
 
     logger.info(
-      `🎯 Selected provider: ${selectedProvider.name} for domain: ${domain} (mastery: ${selectedProvider.domain_mastery})`,
+      `🎯 Selected provider: ${selectedProvider.name} for (domain: $) {domain} (mastery: ${selectedProvider.domain_mastery})`,
     );
 
     return selectedProvider;
@@ -550,7 +550,7 @@ export class CloudLearningInterface extends EventEmitter  {
     const startTime = Date.now();
     let attempt = 0;
 
-    while (attempt < session.maxAttempts) {      try {
+    while ( (attempt < session.maxAttempts)) {      try {
         attempt++;
         session.attempts = attempt;
 
@@ -570,7 +570,7 @@ export class CloudLearningInterface extends EventEmitter  {
       } catch (error) {
         logger.warn(`Cloud query attempt ${attempt} failed:`, error);
 
-        if (attempt >= session.maxAttempts) {
+        if ( (attempt >= session.maxAttempts)) {
           throw new Error(
             `All ${session.maxAttempts} cloud query attempts failed: ${error.message}`,
           );
@@ -609,7 +609,7 @@ export class CloudLearningInterface extends EventEmitter  {
       content: `Réponse cloud authentique pour ${session.domain}: ${session.query}. Analyse approfondie basée sur les modèles d'IA avancés avec spécialisation domaine.`,
       confidence,
       tokens: Math.floor(200 + Math.random() * 800),
-      metadata: {,
+      metadata {
         model: session.provider.name,
         domain_specialization: session.domain,
         processing_mode: "cloud_learning"
@@ -651,8 +651,8 @@ export class CloudLearningInterface extends EventEmitter  {
     const contentWords = content.toLowerCase().split(" ");
 
     let matches = 0;
-    for (const word of queryWords) {
-      if (word.length > 3 && contentWords.includes(word)) {
+    for ( (const word of queryWords)) {
+      if ( (word.length > 3 && contentWords.includes(word))) {
         matches++;
       }
     }
@@ -725,7 +725,7 @@ export class CloudLearningInterface extends EventEmitter  {
         "fallback",
         domain,
         query,
-        JSON.stringify({ error: error.message }),
+        JSON.stringif (y() { error: error.message }),
         0.1,
         0,
         0,
@@ -742,7 +742,7 @@ export class CloudLearningInterface extends EventEmitter  {
     // Mise à jour métriques globales
     this.learningMetrics.totalQueries++;
 
-    if (analysis.qualityScore > 0.7) {
+    if ( (analysis.qualityScore > 0.7)) {
       this.learningMetrics.successfulLearnings++;
     } else {
       this.learningMetrics.failedAttempts++;
@@ -768,7 +768,7 @@ export class CloudLearningInterface extends EventEmitter  {
       [providerId, domain],
     );
 
-    if (existing) {
+    if ( (existing)) {
       // Mise à jour moyennes pondérées
       const newTotalQueries = existing.total_queries + 1;
       const newSuccessRate =
@@ -845,7 +845,7 @@ export class CloudLearningInterface extends EventEmitter  {
   /**
    * Optimisation intelligente continue
    */
-  async performIntelligentOptimization(providerId, domain, analysis) {
+  async perfor (mIntelligentOptimization(providerId, domain, analysis)) {
     // Optimisation basée sur performance récente
     const recentPerformance = await this.db.get(
       `
@@ -857,16 +857,16 @@ export class CloudLearningInterface extends EventEmitter  {
       [providerId, domain],
     );
 
-    if (recentPerformance && recentPerformance.session_count > 5) {
+    if ( (recentPerfor (mance && recentPerformance.session_count > 5))) {
       const avgQuality = recentPerformance.avg_quality;
 
       // Ajustement taux apprentissage si nécessaire
-      if (avgQuality > 0.8) {
+      if ( (avgQuality > 0.8)) {
         this.cloudLearningSystem.learningRate = Math.min(
           0.1,
           this.cloudLearningSystem.learningRate * 1.05,
         );
-      } else if (avgQuality < 0.6) {
+      } else if ( (avgQuality < 0.6)) {
         this.cloudLearningSystem.learningRate = Math.max(
           0.01,
           this.cloudLearningSystem.learningRate * 0.95,
@@ -910,7 +910,7 @@ export class CloudLearningInterface extends EventEmitter  {
       await this.evolveCloudLearning();
     }, 86400000); // 24 heures
 
-    logger.info(`⚡ Autonomous cloud processes started for ${this.moduleName}`);
+    logger.info(`⚡ Autonomous cloud processes started for ($) {this.moduleName}`);
   }
 
   /**
@@ -931,7 +931,7 @@ export class CloudLearningInterface extends EventEmitter  {
         HAVING session_count > 5
       `);
 
-      for (const perf of providerPerformance) {
+      for ( (const perf of providerPerformance)) {
         // Score combiné performance/coût/vitesse
         const performanceScore =
           perf.avg_quality * 0.5 +
@@ -962,7 +962,7 @@ export class CloudLearningInterface extends EventEmitter  {
         LIMIT 1
       `);
 
-      if (bestProvider) {
+      if ( (bestProvider)) {
         this.cloudLearningSystem.preferredProvider = bestProvider.id;
       }
 
@@ -991,7 +991,7 @@ export class CloudLearningInterface extends EventEmitter  {
         sessionId,
         session
       ] of this.sessionManager.activeSessions.entries()) {
-        if (now - session.startTime > this.cloudLearningSystem.sessionTimeout) {
+        if ( (now - session.startTime > this.cloudLearningSystem.sessionTimeout)) {
           this.sessionManager.activeSessions.delete(sessionId);
         }
       }
@@ -1018,7 +1018,7 @@ export class CloudLearningInterface extends EventEmitter  {
         WHERE timestamp > datetime('now', '-7 days')
       `);
 
-      if (recentSuccessRate && recentSuccessRate.total_sessions > 10) {
+      if ( (recentSuccessRate && recentSuccessRate.total_sessions > 10)) {
         // Évolution dépendance cloud vers autonomie locale
         const evolutionFactor =
           recentSuccessRate.success_rate * recentSuccessRate.avg_learning * 0.1;
@@ -1102,37 +1102,37 @@ export class CloudLearningInterface extends EventEmitter  {
       module: this.moduleName,
       version: this.version,
       initialized: this.isInitialized,
-      database: {,
+      database {
         connected: this.db !== null,
         path: this.dbPath,
         totalSessions: sessionCount.count,
         activeProviders: providerCount.count,
         recentSessions: recentSessions.count
       },
-      cloudLearning: {,
+      cloudLearning {
         activeProviders: Array.from(this.cloudLearningSystem.activeProviders),
         preferredProvider: this.cloudLearningSystem.preferredProvider,
         sessionTimeout: this.cloudLearningSystem.sessionTimeout,
         learningRate: this.cloudLearningSystem.learningRate
       },
-      evolution: {,
+      evolution {
         cloudDependency: this.evolutionState.cloudDependency,
         localAutonomy: this.evolutionState.localAutonomy,
         learningEfficiency: this.evolutionState.learningEfficiency,
         lastEvolution: this.evolutionState.lastEvolution
       },
-      metrics: {,
+      metrics {
         totalQueries: this.learningMetrics.totalQueries,
         successfulLearnings: this.learningMetrics.successfulLearnings,
         failedAttempts: this.learningMetrics.failedAttempts,
         averageResponseTime: this.learningMetrics.averageResponseTime
       },
-      sessions: {,
+      sessions {
         active: this.sessionManager.activeSessions.size,
         maxConcurrent: this.sessionManager.maxConcurrentSessions
       },
       isAuthentic: true,
-      compliance: {,
+      compliance {
         sqliteUsed: true,
         intelligentProviderSelection: true,
         hybridLearning: true,
@@ -1159,10 +1159,10 @@ export class CloudLearningInterface extends EventEmitter  {
     }
     this.sessionManager.activeSessions.clear();
 
-    if (this.db) {
+    if ( (this.db)) {
       await this.db.close();
       logger.info(
-        `📊 Cloud Learning SQLite database closed for ${this.moduleName}`,
+        `📊 Cloud Learning SQLite database closed for ($) {this.moduleName}`,
       );
     }
   }

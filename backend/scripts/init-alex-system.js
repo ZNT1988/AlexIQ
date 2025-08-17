@@ -17,7 +17,7 @@ class AlexSystemInitializer {
       "alex-modules/specialized/MemoryPalace.js",
       "alex-modules/consciousness/CloudLearningInterface.js",
       "alex-modules/core/AppStoreModuleManager.js",
-      "alex-modules/core/AlexSaaSArchitecture.js",
+      "alex-modules/core/AlexSaaSArchitecture.js"
     ];
   }
 
@@ -31,7 +31,7 @@ class AlexSystemInitializer {
       await this.runHealthChecks();
 
     } catch (error) {
-      console.error('System initialization failed:', error.message);
+      console.error("System initialization failed:", error.message);
       await this.logError(error);
       process.exit(1);
     }
@@ -47,7 +47,7 @@ class AlexSystemInitializer {
       "extensions",
       "cache",
       "tenants",
-      "monitoring",
+      "monitoring"
     ];
 
     for (const dir of dirs) {
@@ -117,7 +117,7 @@ class AlexSystemInitializer {
                         performance_score REAL,
                         cost REAL,
                         timestamp INTEGER
-                    )`,
+                    )`
         ];
 
         let completed = 0;
@@ -141,7 +141,7 @@ class AlexSystemInitializer {
         name: "Alex HustleFinder LICORNE",
         version: "1.0.0",
         environment: process.env.NODE_ENV || "development",
-        initialized: new Date().toISOString(),
+        initialized: new Date().toISOString()
       },
 
       intelligence: {
@@ -149,32 +149,32 @@ class AlexSystemInitializer {
           cloudDependency: 0.8,
           localAutonomy: 0.2,
           evolutionRate: 0.1,
-          maxCloudRequests: 1000,
+          maxCloudRequests: 1000
         },
 
         memorySystem: {
           consolidationInterval: 3600000,
           forgettingCurve: 0.95,
           emotionalBoost: 1.5,
-          maxMemories: 100000,
-        },
+          maxMemories: 100000
+        }
       },
 
       saas: {
         maxTenants: 10000,
         defaultTier: "starter",
         jwtSecret: this.generateSecureToken(),
-        sessionTimeout: 86400000,
+        sessionTimeout: 86400000
       },
 
       cloud: {
         providers: {
           openai: { enabled: true, priority: 1 },
           anthropic: { enabled: true, priority: 2 },
-          google: { enabled: false, priority: 3 },
+          google: { enabled: false, priority: 3 }
         },
         fallbackStrategy: "local",
-        timeout: 30000,
+        timeout: 30000
       },
 
       monitoring: {
@@ -183,9 +183,9 @@ class AlexSystemInitializer {
         alertThresholds: {
           cpu: 80,
           memory: 85,
-          errorRate: 5,
-        },
-      },
+          errorRate: 5
+        }
+      }
     };
 
     await fs.writeFile(this.configPath, JSON.stringify(config, null, 2));
@@ -226,7 +226,7 @@ class AlexSystemInitializer {
       /switch\s*\([^)]*\)\s*\{/g,
       /case\s+['"][^'"]*['"]:/g,
       /new Map\(\[/g,
-      /const\s+\w+\s*=\s*\{[^}]*['"]:\s*['"][^'"]*['"]/g,
+      /const\s+\w+\s*=\s*\{[^}]*['"]:\s*['"][^'"]*['"]/g
     ];
 
     return staticPatterns.some((pattern) => pattern.test(content));
@@ -238,7 +238,7 @@ class AlexSystemInitializer {
       () => this.initializeMemoryPalace(),
       () => this.initializeCloudLearning(),
       () => this.initializeSaaSArchitecture(),
-      () => this.createSystemMonitoring(),
+      () => this.createSystemMonitoring()
     ];
 
     for (const task of bootstrapTasks) {
@@ -258,13 +258,13 @@ class AlexSystemInitializer {
           "active",
           Date.now(),
           JSON.stringify({ cloudDependency: 0.8, domains: [] }),
-          JSON.stringify({ totalLearning: 0, autonomyLevel: 0.2 }),
+          JSON.stringify({ totalLearning: 0, autonomyLevel: 0.2 })
         ],
         (err) => {
           db.close();
           if (err) reject(err);
           else resolve();
-        },
+        }
       );
     });
   }
@@ -280,13 +280,13 @@ class AlexSystemInitializer {
           "MemoryPalace",
           "active",
           Date.now(),
-          JSON.stringify({ maxMemories: 100000, consolidationEnabled: true }),
+          JSON.stringify({ maxMemories: 100000, consolidationEnabled: true })
         ],
         (err) => {
           db.close();
           if (err) reject(err);
           else resolve();
-        },
+        }
       );
     });
   }
@@ -304,14 +304,14 @@ class AlexSystemInitializer {
           Date.now(),
           JSON.stringify({
             providers: ["openai", "anthropic"],
-            fallback: "local",
-          }),
+            fallback: "local"
+          })
         ],
         (err) => {
           db.close();
           if (err) reject(err);
           else resolve();
-        },
+        }
       );
     });
   }
@@ -327,13 +327,13 @@ class AlexSystemInitializer {
           "system-admin",
           "enterprise",
           Date.now(),
-          JSON.stringify({ apiCalls: 0, storageUsed: 0 }),
+          JSON.stringify({ apiCalls: 0, storageUsed: 0 })
         ],
         (err) => {
           db.close();
           if (err) reject(err);
           else resolve();
-        },
+        }
       );
     });
   }
@@ -354,7 +354,7 @@ setInterval(() => {
 
     await fs.writeFile(
       path.join(this.baseDir, "scripts", "health-monitor.js"),
-      monitoringScript,
+      monitoringScript
     );
   }
 
@@ -363,7 +363,7 @@ setInterval(() => {
       () => this.checkDatabaseConnection(),
       () => this.checkConfigurationIntegrity(),
       () => this.checkModuleCompatibility(),
-      () => this.checkResourceAvailability(),
+      () => this.checkResourceAvailability()
     ];
 
     for (const check of checks) {
@@ -397,7 +397,7 @@ setInterval(() => {
   async checkResourceAvailability() {
     const freeMemory = process.memoryUsage().heapUsed / 1024 / 1024;
     if (freeMemory > 1000) {
-      console.error('High memory usage warning:', Math.round(freeMemory), 'MB');
+      console.error("High memory usage warning:", Math.round(freeMemory), "MB");
     }
   }
 
@@ -409,13 +409,13 @@ setInterval(() => {
     const logEntry = {
       timestamp: new Date().toISOString(),
       error: error.message,
-      stack: error.stack,
+      stack: error.stack
     };
 
     try {
       await fs.appendFile(this.logPath, JSON.stringify(logEntry) + "\n");
     } catch (logError) {
-      console.error('Failed to write to log file:', logError.message);
+      console.error("Failed to write to log file:", logError.message);
     }
   }
 }

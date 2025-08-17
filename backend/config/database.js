@@ -3,9 +3,9 @@
  * Configuration hybride avec fallback automatique SQLite pour développement
  */
 
-import pg from 'pg';
-import { fileURLToPath } from 'url';
-import path from 'path';
+import pg from "pg";
+import { fileURLToPath } from "url";
+import path from "path";
 
 // Import SQLite fallback functions
 import {
@@ -14,7 +14,7 @@ import {
   query as querySQLite,
   withTransaction as withTransactionSQLite,
   closeDatabase as closeSQLite
-} from './database-sqlite.js';
+} from "./database-sqlite.js";
 
 const { Pool } = pg;
 const __filename = fileURLToPath(import.meta.url);
@@ -23,10 +23,10 @@ const __dirname = path.dirname(__filename);
 // Configuration PostgreSQL
 const config = {
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
   max: 20, // Maximum number of clients in the pool
   idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
-  connectionTimeoutMillis: 2000, // Return an error after 2 seconds if connection could not be established
+  connectionTimeoutMillis: 2000 // Return an error after 2 seconds if connection could not be established
 };
 
 // Pool de connexions PostgreSQL
@@ -35,19 +35,19 @@ let isConnected = false;
 let usingSQLiteFallback = false;
 
 // Initialize PostgreSQL pool
-if (process.env.DATABASE_URL && process.env.DATABASE_URL !== 'sqlite') {
+if (process.env.DATABASE_URL && process.env.DATABASE_URL !== "sqlite") {
   try {
     pool = new Pool(config);
     
-    pool.on('error', (err) => {
-      console.error('PostgreSQL pool error:', err.message);
+    pool.on("error", (err) => {
+      console.error("PostgreSQL pool error:", err.message);
       process.exit(-1);
     });
     
     // Test connection
     pool.connect((err, client, release) => {
       if (err) {
-        console.error('PostgreSQL connection failed, falling back to SQLite:', err.message);
+        console.error("PostgreSQL connection failed, falling back to SQLite:", err.message);
         usingSQLiteFallback = true;
         initSQLite();
       } else {
@@ -56,11 +56,11 @@ if (process.env.DATABASE_URL && process.env.DATABASE_URL !== 'sqlite') {
       }
     });
   } catch (error) {
-    console.error('Error initializing PostgreSQL pool:', error.message);
+    console.error("Error initializing PostgreSQL pool:", error.message);
     usingSQLiteFallback = true;
   }
 } else {
-  console.log('🔄 Using SQLite database (development mode)');
+  console.log("🔄 Using SQLite database (development mode)");
   usingSQLiteFallback = true;
 }
 
@@ -76,7 +76,7 @@ export async function query(text, params = []) {
   }
   
   if (!pool) {
-    throw new Error('Database not initialized');
+    throw new Error("Database not initialized");
   }
   
   const start = Date.now();
@@ -85,7 +85,7 @@ export async function query(text, params = []) {
     const duration = Date.now() - start;
     return res;
   } catch (error) {
-    console.error('Database query error:', error.message);
+    console.error("Database query error:", error.message);
     throw error;
   }
 }
@@ -101,17 +101,17 @@ export async function withTransaction(callback) {
   }
   
   if (!pool) {
-    throw new Error('Database not initialized');
+    throw new Error("Database not initialized");
   }
   
   const client = await pool.connect();
   try {
-    await client.query('BEGIN');
+    await client.query("BEGIN");
     const result = await callback(client);
-    await client.query('COMMIT');
+    await client.query("COMMIT");
     return result;
   } catch (error) {
-    await client.query('ROLLBACK');
+    await client.query("ROLLBACK");
     throw error;
   } finally {
     client.release();
@@ -133,11 +133,11 @@ export async function testConnection() {
   
   try {
     const client = await pool.connect();
-    await client.query('SELECT NOW()');
+    await client.query("SELECT NOW()");
     client.release();
     return true;
   } catch (error) {
-    console.error('Database connection test failed:', error.message);
+    console.error("Database connection test failed:", error.message);
     return false;
   }
 }
@@ -193,7 +193,7 @@ export async function initializeDatabase() {
     `);
     
   } catch (error) {
-    console.error('Database initialization failed:', error.message);
+    console.error("Database initialization failed:", error.message);
     throw error;
   }
 }

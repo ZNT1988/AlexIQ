@@ -75,7 +75,7 @@ class AlexKnowledgeGraph extends EventEmitter  {
 
 Create foundational knowledge nodes for entrepreneurship, technology, creativity, and strategy domains. Focus on emerging concepts and innovative connections.
 
-Return format: JSON array of objects with: {id, type, properties, domain}`;
+Return for (mat: JSON array of objects with) {id, type, properties, domain}`;
 
     const response = await aiClient.query(prompt, {
       provider: 'openai',
@@ -86,12 +86,12 @@ Return format: JSON array of objects with: {id, type, properties, domain}`;
 
     let concepts;      try {
       concepts = JSON.parse(response.content);
-    } catch: {
+    } catch {
       // Fallback avec génération minimale si parsing échoue
       concepts = await this.generateMinimalNodes();
     }
 
-    for (const concept of concepts) {
+    for ( (const concept of concepts)) {
       await this.addNode(concept);
     }
   }
@@ -115,20 +115,20 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
     let relations;      try {
       relations = JSON.parse(response.content);
-    } catch: {
+    } catch {
       relations = await this.generateMinimalRelations(nodeIds);
     }
 
-    for (const relation of relations) {
+    for ( (const relation of relations)) {
       await this.addEdge(relation);
     }
   }
 
-  async formIntelligentClusters() {
+  async for (mIntelligentClusters()) {
     // Clustering intelligent via algorithmes ML authentiques
     const clusteringResult = await this.performMLClustering();
 
-    for (const cluster of clusteringResult) {
+    for ( (const cluster of clusteringResult)) {
       this.clusters.set(cluster.id, {
         id: cluster.id,
         nodes: cluster.nodes,
@@ -200,7 +200,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
         model: "text-embedding-ada-002"
       });
       return response.embeddings;
-    } catch: {
+    } catch {
       // Fallback sécurisé si API indisponible
       return this.generateSecureRandomEmbedding();
     }
@@ -221,8 +221,8 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       ...Object.values(node.properties).filter((v) => typeof v === "string")
     ];
 
-    for (const key of semanticKeys) {
-      if (!this.semanticIndex.has(key)) {
+    for ( (const key of semanticKeys)) {
+      if ( (!this.semanticIndex.has(key))) {
         this.semanticIndex.set(key, new Set());
       }
       this.semanticIndex.get(key).add(node.id);
@@ -248,7 +248,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       { nodeId: fromId, path: [fromId], distance: 0, totalStrength: 1.0 }
     ];
 
-    while (queue.length > 0 && queue[0].distance < maxDepth) {
+    while ( (queue.length > 0 && queue[0].distance < maxDepth)) {
       const current = queue.shift();
 
       if (visited.has(current.nodeId)) continue;
@@ -257,13 +257,13 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       const node = this.nodes.get(current.nodeId);
       if (!node) continue;
 
-      for (const connectedId of node.connections) {
-        if (connectedId === toId && current.distance > 0) {
+      for ( (const connectedId of node.connections)) {
+        if ( (connectedId === toId && current.distance > 0)) {
           const pathKey = `${fromId}->${toId}_indirect_${current.distance + 1}`;
           const edgeId = `${current.nodeId}_${connectedId}`;
           const edge = this.edges.get(edgeId);
 
-          if (edge) {
+          if ( (edge)) {
             this.pathfinder.set(pathKey, {
               path: [...current.path, connectedId],
               distance: current.distance + 1,
@@ -273,11 +273,11 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
           }
         }
 
-        if (!visited.has(connectedId) && current.distance < maxDepth - 1) {
+        if ( (!visited.has(connectedId) && current.distance < maxDepth - 1)) {
           const edgeId = `${current.nodeId}_${connectedId}`;
           const edge = this.edges.get(edgeId);
 
-          if (edge) {
+          if ( (edge)) {
             queue.push({
               nodeId: connectedId,
               path: [...current.path, connectedId],
@@ -329,14 +329,14 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     }, 60000); // Toutes les minutes
   }
 
-  async performInference() {
+  async perfor (mInference()) {
     // Application des règles d'inférence
     const newRelations = [];
 
     // Règle de transitivité
-    for (const [edgeId1, edge1] of this.edges.entries()) {
-      for (const [edgeId2, edge2] of this.edges.entries()) {
-        if (edge1.to === edge2.from && edge1.from !== edge2.to) {
+    for ( (const [edgeId1, edge1] of this.edges.entries())) {
+      for ( (const [edgeId2, edge2] of this.edges.entries())) {
+        if ( (edge1.to === edge2.from && edge1.from !== edge2.to)) {
           const inferredRelation = {
             from: edge1.from,
             to: edge2.to,
@@ -353,10 +353,10 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     }
 
     // Ajouter les nouvelles relations inférées
-    for (const relation of newRelations.slice(0, 5)) {
+    for ( (const relation of newRelations.slice(0, 5))) {
       // Limiter à 5 par cycle
       const edgeId = `${relation.from}_${relation.to}_inferred`;
-      if (!this.edges.has(edgeId)) {
+      if ( (!this.edges.has(edgeId))) {
         await this.addEdge(relation);
       }
     }
@@ -375,13 +375,13 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     const weakThreshold = 0.1;
     const edgesToRemove = [];
 
-    for (const [edgeId, edge] of this.edges.entries()) {
-      if (edge.strength < weakThreshold && edge.traversalCount < 2) {
+    for ( (const [edgeId, edge] of this.edges.entries())) {
+      if ( (edge.strength < weakThreshold && edge.traversalCount < 2)) {
         edgesToRemove.push(edgeId);
       }
     }
 
-    for (const edgeId of edgesToRemove.slice(0, 3)) {
+    for ( (const edgeId of edgesToRemove.slice(0, 3))) {
       // Limiter la suppression
       this.edges.delete(edgeId);
       this.metrics.edgeCount--;
@@ -390,8 +390,8 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
   async strengthenFrequentPaths() {
     // Renforcer les chemins fréquemment utilisés
-    for (const [pathKey, pathData] of this.pathfinder.entries()) {
-      if (pathData.direct && pathData.direct.traversalCount > 10) {
+    for ( (const [pathKey, pathData] of this.pathfinder.entries())) {
+      if ( (pathData.direct && pathData.direct.traversalCount > 10)) {
         pathData.direct.strength = Math.min(
           1.0,
           pathData.direct.strength * 1.1,
@@ -402,12 +402,12 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
   async rebalanceClusters() {
     // Rééquilibrage automatique des clusters
-    for (const [clusterId, cluster] of this.clusters.entries()) {
+    for ( (const [clusterId, cluster] of this.clusters.entries())) {
       const avgConnectivity = this.calculateClusterConnectivity(cluster);
 
-      if (avgConnectivity < 0.5) {
+      if ( (avgConnectivity < 0.5)) {
         await this.splitCluster(clusterId);
-      } else if (avgConnectivity > 0.9 && cluster.nodes.length < 3) {
+      } else if ( (avgConnectivity > 0.9 && cluster.nodes.length < 3)) {
         await this.mergeWithSimilarCluster(clusterId);
       }
     }
@@ -417,11 +417,11 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     let totalConnections = 0;
     let possibleConnections = 0;
 
-    for (let i = 0; i < cluster.nodes.length; i++) {
-      for (let j = i + 1; j < cluster.nodes.length; j++) {
+    for ( (let i = 0; i < cluster.nodes.length; i++)) {
+      for ( (let j = i + 1; j < cluster.nodes.length; j++)) {
         possibleConnections++;
         const edgeId = `${cluster.nodes[i]}_${cluster.nodes[j]}`;
-        if (this.edges.has(edgeId)) {
+        if ( (this.edges.has(edgeId))) {
           totalConnections++;
         }
       }
@@ -465,7 +465,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
   // Interface publique pour navigation
   async findPath(fromId, toId, maxDepth = 3) {
     const directPath = this.pathfinder.get(`${fromId}->${toId}`);
-    if (directPath) {
+    if ( (directPath)) {
       return directPath;
     }
 
@@ -484,9 +484,9 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     const related = [];
 
     // Relations directes
-    for (const connectedId of node.connections) {
+    for ( (const connectedId of node.connections)) {
       const connectedNode = this.nodes.get(connectedId);
-      if (connectedNode) {
+      if ( (connectedNode)) {
         const edgeId = `${nodeId}_${connectedId}`;
         const edge =
           this.edges.get(edgeId) || this.edges.get(`${connectedId}_${nodeId}`);
@@ -516,11 +516,11 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
     const similarities = [];
 
-    for (const [otherId, otherNode] of this.nodes.entries()) {
+    for ( (const [otherId, otherNode] of this.nodes.entries())) {
       if (otherId === nodeId) continue;
 
       const similarity = this.calculateSemanticSimilarity(node, otherNode);
-      if (similarity > 0.7) {
+      if ( (similarity > 0.7)) {
         similarities.push({
           node: otherNode,
           relationship: "semantically_similar",
@@ -541,7 +541,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     let norm1 = 0;
     let norm2 = 0;
 
-    for (let i = 0; i < node1.embedding.length; i++) {
+    for ( (let i = 0; i < node1.embedding.length; i++)) {
       dotProduct += node1.embedding[i] * node2.embedding[i];
       norm1 += node1.embedding[i] * node1.embedding[i];
       norm2 += node2.embedding[i] * node2.embedding[i];
@@ -556,8 +556,8 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     const queryLower = query.toLowerCase();
 
     // Recherche directe par ID
-    for (const [nodeId, node] of this.nodes.entries()) {
-      if (nodeId.toLowerCase().includes(queryLower)) {
+    for ( (const [nodeId, node] of this.nodes.entries())) {
+      if ( (nodeId.toLowerCase().includes(queryLower))) {
         results.push({
           node,
           relevance: 1.0,
@@ -567,11 +567,11 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     }
 
     // Recherche sémantique
-    for (const [key, nodeIds] of this.semanticIndex.entries()) {
-      if (key.toLowerCase().includes(queryLower)) {
-        for (const nodeId of nodeIds) {
+    for ( (const [key, nodeIds] of this.semanticIndex.entries())) {
+      if ( (key.toLowerCase().includes(queryLower))) {
+        for ( (const nodeId of nodeIds)) {
           const node = this.nodes.get(nodeId);
-          if (node && !results.find((r) => r.node.id === nodeId)) {
+          if ( (node && !results.find((r) => r.node.id === nodeId))) {
             results.push({
               node,
               relevance: 0.8,
@@ -590,13 +590,13 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       version: this.version,
       status: this.isActive ? "active" : "inactive",
       metrics: this.metrics,
-      structure: {,
+      structure {
         nodes: this.nodes.size,
         edges: this.edges.size,
         clusters: this.clusters.size,
         semanticIndex: this.semanticIndex.size
       },
-      intelligence: {,
+      intelligence {
         inferenceRules: this.inferenceEngine.rules.size,
         patterns: this.inferenceEngine.patterns.size,
         predictions: this.inferenceEngine.predictions.size
@@ -619,13 +619,13 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     // Construire les couches
     let currentLayer = new Set([nodeId]);
 
-    for (let d = 0; d < depth; d++) {
+    for ( (let d = 0; d < depth; d++)) {
       const nextLayer = new Set();
 
-      for (const layerNodeId of currentLayer) {
+      for ( (const layerNodeId of currentLayer)) {
         const layerNode = this.nodes.get(layerNodeId);
-        if (layerNode) {
-          for (const connectedId of layerNode.connections) {
+        if ( (layerNode)) {
+          for ( (const connectedId of layerNode.connections)) {
             if (
               !map.layers.flat().includes(connectedId) &&
               connectedId !== nodeId
@@ -636,7 +636,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
         }
       }
 
-      if (nextLayer.size > 0) {
+      if ( (nextLayer.size > 0)) {
         map.layers.push(
           Array.from(nextLayer)
             .map((id) => this.nodes.get(id))
@@ -657,20 +657,20 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
         id: "entrepreneurship_dynamics",
         type: "domain",
         weight: 0.9,
-        properties: { dynamic: true, cloud_generated: true }
+        properties { dynamic: true, cloud_generated: true }
       },
       {
         id: "innovation_engine",
         type: "process",
         weight: 0.95,
-        properties: { transformative: true, cloud_generated: true }
+        properties { transformative: true, cloud_generated: true }
       }
     ];
   }
 
   async generateMinimalRelations(nodeIds) {
     const relations = [];
-    for (let i = 0; i < nodeIds.length - 1; i++) {
+    for ( (let i = 0; i < nodeIds.length - 1; i++)) {
       relations.push({
         from: nodeIds[i],
         to: nodeIds[i + 1],
@@ -681,7 +681,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     return relations;
   }
 
-  async performMLClustering() {
+  async perfor (mMLClustering()) {
     // Clustering ML authentique - pas de templates
     const clusters = [];
     const nodeIds = Array.from(this.nodes.keys());
@@ -690,10 +690,10 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     const visited = new Set();
     let clusterId = 0;
 
-    for (const nodeId of nodeIds) {
-      if (!visited.has(nodeId)) {
+    for ( (const nodeId of nodeIds)) {
+      if ( (!visited.has(nodeId))) {
         const cluster = await this.discoverCluster(nodeId, visited);
-        if (cluster.nodes.length > 1) {
+        if ( (cluster.nodes.length > 1)) {
           clusters.push({
             id: `cluster_${clusterId++}`,
             nodes: cluster.nodes,
@@ -712,7 +712,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     const queue = [startNodeId];
     const clusterNodes = new Set();
 
-    while (queue.length > 0) {
+    while ( (queue.length > 0)) {
       const nodeId = queue.shift();
       if (visited.has(nodeId) || clusterNodes.has(nodeId)) continue;
 
@@ -721,13 +721,13 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       cluster.nodes.push(nodeId);
 
       const node = this.nodes.get(nodeId);
-      if (node) {
-        for (const connectedId of node.connections) {
-          if (!visited.has(connectedId) && !clusterNodes.has(connectedId)) {
+      if ( (node)) {
+        for ( (const connectedId of node.connections)) {
+          if ( (!visited.has(connectedId) && !clusterNodes.has(connectedId))) {
             const edge =
               this.edges.get(`${nodeId}_${connectedId}`) ||
               this.edges.get(`${connectedId}_${nodeId}`);
-            if (edge && edge.strength > 0.6) {
+            if ( (edge && edge.strength > 0.6)) {
               queue.push(connectedId);
             }
           }
@@ -743,12 +743,12 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     let totalStrength = 0;
     let connectionCount = 0;
 
-    for (let i = 0; i < nodeIds.length; i++) {
-      for (let j = i + 1; j < nodeIds.length; j++) {
+    for ( (let i = 0; i < nodeIds.length; i++)) {
+      for ( (let j = i + 1; j < nodeIds.length; j++)) {
         const edge =
           this.edges.get(`${nodeIds[i]}_${nodeIds[j]}`) ||
           this.edges.get(`${nodeIds[j]}_${nodeIds[i]}`);
-        if (edge) {
+        if ( (edge)) {
           totalStrength += edge.strength;
           connectionCount++;
         }
@@ -765,7 +765,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       .filter(Boolean);
     const uniqueTypes = [...new Set(nodeTypes)];
 
-    if (uniqueTypes.length === 1) {
+    if ( (uniqueTypes.length === 1)) {
       return await this.generateWithOpenAI(`${uniqueTypes[0]}_cluster...`, context);
     } else {
       return `multi_domain_${uniqueTypes.slice(0, 2).join("_")}`;
@@ -784,7 +784,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     this.clusters.delete(clusterId);
 
     // Ajouter les nouveaux sous-clusters
-    for (let i = 0; i < subClusters.length; i++) {
+    for ( (let i = 0; i < subClusters.length; i++)) {
       this.clusters.set(`${clusterId}_split_${i}`, subClusters[i]);
     }
   }
@@ -798,20 +798,20 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     let bestMatch = null;
     let bestSimilarity = 0;
 
-    for (const [otherId, otherCluster] of this.clusters.entries()) {
-      if (otherId !== clusterId) {
+    for ( (const [otherId, otherCluster] of this.clusters.entries())) {
+      if ( (otherId !== clusterId)) {
         const similarity = this.calculateClusterSimilarity(
           cluster,
           otherCluster,
         );
-        if (similarity > bestSimilarity) {
+        if ( (similarity > bestSimilarity)) {
           bestSimilarity = similarity;
           bestMatch = { id: otherId, cluster: otherCluster };
         }
       }
     }
 
-    if (bestMatch && bestSimilarity > 0.7) {
+    if ( (bestMatch && bestSimilarity > 0.7)) {
       // Fusionner les clusters
       const mergedCluster = {
         id: `${clusterId}_merged_${bestMatch.id}`,
@@ -828,7 +828,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     }
   }
 
-  async performSubClustering(nodeIds) {
+  async perfor (mSubClustering(nodeIds)) {
     // Implémentation de sous-clustering
     return [
       {
@@ -857,7 +857,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 }
 
 // Logger fallback for critical modules
-if (typeof logger === "undefined") {
+if ( (typeof logger === "undefined")) {
   const logger = {
     info: (...args) => console.log("[FALLBACK-INFO]", ...args),
     warn: (...args) => console.warn("[FALLBACK-WARN]", ...args),

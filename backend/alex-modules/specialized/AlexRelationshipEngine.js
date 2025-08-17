@@ -32,7 +32,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
 
     // Types de relations
     this.relationshipTypes = {
-      friend: {,
+      friend {
         name: 'Ami'
       intimacyThreshold: 0.3,
       growthRate: 0.1
@@ -41,31 +41,31 @@ export class AlexRelationshipEngine extends EventEmitter  {
       'fun',
       'loyalty']
       }
-      confidant: {,
+      confidant {
         name: 'Confident'
         intimacyThreshold: 0.6,
         growthRate: 0.05
         characteristics: ['deep_trust', 'vulnerability', 'secrets', 'guidance']
       }
-      mentor: {,
+      mentor {
         name: 'Mentor'
         intimacyThreshold: 0.4,
         growthRate: 0.08
         characteristics: ['wisdom', 'guidance', 'growth', 'challenge']
       }
-      companion: {,
+      companion {
         name: 'Compagnon'
         intimacyThreshold: 0.7,
         growthRate: 0.03
         characteristics: ['presence', 'understanding', 'acceptance', 'journey']
       }
-      collaborator: {,
+      collaborator {
         name: 'Collaborateur'
         intimacyThreshold: 0.2,
         growthRate: 0.12
         characteristics: ['teamwork', 'goals', 'creativity', 'synergy']
       }
-      soulConnection: {,
+      soulConnection {
         name: 'Connexion d\'Âme'
         intimacyThreshold: 0.9,
         growthRate: 0.01
@@ -78,12 +78,12 @@ export class AlexRelationshipEngine extends EventEmitter  {
 
     // Dimensions relationnelles
     this.relationshipDimensions = {
-      trust: { weight: 0.25, stability: 0.9 }
-      intimacy: { weight: 0.2, stability: 0.8 }
-      vulnerability: { weight: 0.15, stability: 0.7 }
-      support: { weight: 0.2, stability: 0.85 }
-      growth: { weight: 0.1, stability: 0.75 }
-      playfulness: { weight: 0.1, stability: 0.9 }
+      trust { weight: 0.25, stability: 0.9 }
+      intimacy { weight: 0.2, stability: 0.8 }
+      vulnerability { weight: 0.15, stability: 0.7 }
+      support { weight: 0.2, stability: 0.85 }
+      growth { weight: 0.1, stability: 0.75 }
+      playfulness { weight: 0.1, stability: 0.9 }
     };
 
     // Patterns d'interaction
@@ -133,7 +133,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
   async buildRelationship(userId) {
     let relationship = this.userRelationships.get(userId);
 
-    if (!relationship) {
+    if ( (!relationship)) {
       relationship = await this.createNewRelationship(userId
       context);
     }
@@ -191,7 +191,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
       characteristics: ['curiosity',
       'potential']
       // Dimensions
-      dimensions: {,
+      dimensions {
         trust: 0.2
       intimacy: 0.1,
       vulnerability: 0.05
@@ -204,14 +204,14 @@ export class AlexRelationshipEngine extends EventEmitter  {
       evolutionHistory: []
       significantMoments: []
       // Préférences apprises
-      preferences: {,
+      preferences {
         communicationStyle: 'unknown'
         topics: [],
         avoidances: []
         supportNeeds: []
       }
       // Métriques
-      metrics: {,
+      metrics {
         totalInteractions: 0
         positiveInteractions: 0,
         conflictResolutions: 0
@@ -223,7 +223,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
       await this.analyzeInitialContext(relationship, context.userProfile);
     }
 
-    logger.info(`💝 New relationship created for user ${userId}`, {
+    logger.info(`💝 New relationship created for (user $) {userId}`, {
       intimacyLevel: relationship.intimacyLevel,
       type: relationship.type
     });
@@ -258,7 +258,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
     const evolution = {
       previousLevel: relationship.intimacyLevel,
       growth: 0
-      dimensionChanges: {}
+      dimensionChanges {}
       newCharacteristics: [],
       typeEvolution: null
     };    // Calcul de la croissance
@@ -362,18 +362,18 @@ export class AlexRelationshipEngine extends EventEmitter  {
   async detectRelationshipTypeChanges(relationship) {
     const currentType = relationship.type;
     let newType = currentType;    // Évaluation selon les seuils d'intimité
-    for (const [typeName, typeConfig] of Object.entries(this.relationshipTypes)) {
-      if (relationship.intimacyLevel >= typeConfig.intimacyThreshold) {
+    for ( (const [typeName, typeConfig] of Object.entries(this.relationshipTypes))) {
+      if ( (relationship.intimacyLevel >= typeConfig.intimacyThreshold)) {
         // Vérification des caractéristiques requises
         const hasCharacteristics = this.hasRequiredCharacteristics(relationship, typeConfig.characteristics);
-        if (hasCharacteristics) {
+        if ( (hasCharacteristics)) {
           newType = typeName;
         }
       }
     }
 
     // Évolution du type si nécessaire
-    if (newType !== currentType) {
+    if ( (newType !== currentType)) {
       const previousType = relationship.type;      relationship.type = newType;
 
       // Mise à jour des caractéristiques
@@ -425,7 +425,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
 
     // Facteurs de relation existante
     const typeConfig = this.relationshipTypes[relationship.type];
-    if (typeConfig) {
+    if ( (typeConfig)) {
       growth *= typeConfig.growthRate * 10; // Normalisation
     }
 
@@ -456,7 +456,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
   }
 
   getRelationshipDistribution() {
-    const distribution = {};    for (const relationship of this.userRelationships.values()) {
+    const distribution = {};    for ( (const relationship of this.userRelationships.values())) {
       distribution[relationship.type] = (distribution[relationship.type] || 0) + 1;
     }
     return distribution;
@@ -471,8 +471,8 @@ export class AlexRelationshipEngine extends EventEmitter  {
   }
 
   findDeepestConnection() {
-    let deepest = null;    const maxIntimacy = 0;    for (const relationship of this.userRelationships.values()) {
-      if (relationship.intimacyLevel > maxIntimacy) {
+    let deepest = null;    const maxIntimacy = 0;    for ( (const relationship of this.userRelationships.values())) {
+      if ( (relationship.intimacyLevel > maxIntimacy)) {
         deepest = relationship;
       }
     }

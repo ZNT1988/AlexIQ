@@ -5,10 +5,10 @@
  * Remplace les appels statiques par des intégrations OpenAI, Anthropic, Google
  */
 
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
-const MODULES_DIR = path.resolve('./backend/alex-modules');
+const MODULES_DIR = path.resolve("./backend/alex-modules");
 
 class APIUpgrader {
   constructor() {
@@ -30,7 +30,7 @@ class APIUpgrader {
   }
 
   async upgradeAllModules() {
-    console.log('🚀 Début de la mise à niveau vers les vraies APIs...\n');
+    console.log("🚀 Début de la mise à niveau vers les vraies APIs...\n");
     
     const moduleFiles = this.findAllModules();
     this.stats.totalFiles = moduleFiles.length;
@@ -54,7 +54,7 @@ class APIUpgrader {
         
         if (stat.isDirectory()) {
           scanDirectory(fullPath);
-        } else if (entry.endsWith('.js')) {
+        } else if (entry.endsWith(".js")) {
           modules.push(fullPath);
         }
       }
@@ -69,7 +69,7 @@ class APIUpgrader {
     console.log(`🔧 Mise à niveau: ${fileName}`);
 
     try {
-      const originalContent = fs.readFileSync(filePath, 'utf8');
+      const originalContent = fs.readFileSync(filePath, "utf8");
       let content = originalContent;
       let replacements = 0;
 
@@ -109,7 +109,7 @@ class APIUpgrader {
       }
 
       if (content !== originalContent) {
-        fs.writeFileSync(filePath, content, 'utf8');
+        fs.writeFileSync(filePath, content, "utf8");
         this.upgradedFiles.push({ 
           file: fileName, 
           path: filePath, 
@@ -119,7 +119,7 @@ class APIUpgrader {
         this.stats.staticCallsReplaced += replacements;
         console.log(`  ✅ ${replacements} appels API mis à niveau`);
       } else {
-        console.log(`  ✓ Aucune mise à niveau nécessaire`);
+        console.log("  ✓ Aucune mise à niveau nécessaire");
       }
 
     } catch (error) {
@@ -129,14 +129,14 @@ class APIUpgrader {
   }
 
   addRequiredImports(content) {
-    const lines = content.split('\n');
+    const lines = content.split("\n");
     let changed = false;
     let count = 0;
 
     // Vérifier si les imports AI sont déjà présents
-    const hasOpenAI = content.includes('openai') || content.includes('OpenAI');
-    const hasAnthropic = content.includes('anthropic') || content.includes('Anthropic');
-    const hasAIKeys = content.includes('AI_KEYS');
+    const hasOpenAI = content.includes("openai") || content.includes("OpenAI");
+    const hasAnthropic = content.includes("anthropic") || content.includes("Anthropic");
+    const hasAIKeys = content.includes("AI_KEYS");
 
     const importsToAdd = [];
 
@@ -158,13 +158,13 @@ class APIUpgrader {
     if (importsToAdd.length > 0) {
       // Trouver où insérer les imports
       const importIndex = this.findImportEndIndex(lines);
-      lines.splice(importIndex + 1, 0, '', '// Imports AI Services', ...importsToAdd);
+      lines.splice(importIndex + 1, 0, "", "// Imports AI Services", ...importsToAdd);
       changed = true;
     }
 
     return { 
       changed, 
-      content: changed ? lines.join('\n') : content, 
+      content: changed ? lines.join("\n") : content, 
       count 
     };
   }
@@ -178,7 +178,7 @@ class APIUpgrader {
     
     content = content.replace(staticReturnPattern, (match, staticText) => {
       // Éviter de remplacer les logs et constantes
-      if (staticText.length < 20 || staticText.includes('error') || staticText.includes('debug')) {
+      if (staticText.length < 20 || staticText.includes("error") || staticText.includes("debug")) {
         return match;
       }
       
@@ -208,8 +208,8 @@ class APIUpgrader {
   }`;
     });
 
-    if (changed && !content.includes('generateWithOpenAI')) {
-      content += '\n\n' + this.apiTemplates.openai;
+    if (changed && !content.includes("generateWithOpenAI")) {
+      content += "\n\n" + this.apiTemplates.openai;
     }
 
     return { changed, content, count };
@@ -242,8 +242,8 @@ class APIUpgrader {
   }`;
     });
 
-    if (changed && !content.includes('generateWithAnthropic')) {
-      content += '\n\n' + this.apiTemplates.anthropic;
+    if (changed && !content.includes("generateWithAnthropic")) {
+      content += "\n\n" + this.apiTemplates.anthropic;
     }
 
     return { changed, content, count };
@@ -301,8 +301,8 @@ class APIUpgrader {
       });
     }
 
-    if (changed && !content.includes('queryGoogleMaps')) {
-      content += '\n\n' + this.apiTemplates.google;
+    if (changed && !content.includes("queryGoogleMaps")) {
+      content += "\n\n" + this.apiTemplates.google;
     }
 
     return { changed, content, count };
@@ -325,8 +325,8 @@ class APIUpgrader {
     });
 
     // Ajouter la méthode de fallback si nécessaire
-    if (changed && !content.includes('generateFallbackResponse')) {
-      content += '\n\n' + this.apiTemplates.common;
+    if (changed && !content.includes("generateFallbackResponse")) {
+      content += "\n\n" + this.apiTemplates.common;
     }
 
     return { changed, content, count };
@@ -510,9 +510,9 @@ class APIUpgrader {
     
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
-      if (line.startsWith('import ') || line.startsWith('const ') && line.includes('require(')) {
+      if (line.startsWith("import ") || line.startsWith("const ") && line.includes("require(")) {
         lastImportIndex = i;
-      } else if (line && !line.startsWith('//') && !line.startsWith('/*') && lastImportIndex !== -1) {
+      } else if (line && !line.startsWith("//") && !line.startsWith("/*") && lastImportIndex !== -1) {
         break;
       }
     }
@@ -521,17 +521,17 @@ class APIUpgrader {
   }
 
   displayResults() {
-    console.log('\n' + '='.repeat(60));
-    console.log('🚀 RÉSULTATS DE LA MISE À NIVEAU API');
-    console.log('='.repeat(60));
+    console.log("\n" + "=".repeat(60));
+    console.log("🚀 RÉSULTATS DE LA MISE À NIVEAU API");
+    console.log("=".repeat(60));
     
-    console.log(`\n📊 STATISTIQUES:`);
+    console.log("\n📊 STATISTIQUES:");
     console.log(`  • Fichiers analysés: ${this.stats.totalFiles}`);
     console.log(`  • Fichiers mis à niveau: ${this.stats.filesUpgraded}`);
     console.log(`  • Appels statiques remplacés: ${this.stats.staticCallsReplaced}`);
     
     if (this.upgradedFiles.length > 0) {
-      console.log(`\n✅ FICHIERS AVEC VRAIES APIS:`);
+      console.log("\n✅ FICHIERS AVEC VRAIES APIS:");
       this.upgradedFiles.slice(0, 15).forEach(upgrade => {
         console.log(`  • ${upgrade.file}: ${upgrade.replacements} appels API`);
       });
@@ -542,29 +542,29 @@ class APIUpgrader {
     }
     
     if (this.errors.length > 0) {
-      console.log(`\n❌ ERREURS RENCONTRÉES:`);
+      console.log("\n❌ ERREURS RENCONTRÉES:");
       this.errors.forEach(error => {
         console.log(`  • ${error.file}: ${error.error}`);
       });
     }
     
-    console.log(`\n🎉 Mise à niveau terminée!`);
+    console.log("\n🎉 Mise à niveau terminée!");
     
     if (this.stats.filesUpgraded > 0) {
-      console.log(`\n🚀 PROCHAINES ÉTAPES:`);
-      console.log(`  1. Tester les appels API réels`);
-      console.log(`  2. Vérifier les clés API sur Vercel/Railway`);
-      console.log(`  3. Monitorer les quotas API`);
-      console.log(`  4. Optimiser les prompts si nécessaire`);
+      console.log("\n🚀 PROCHAINES ÉTAPES:");
+      console.log("  1. Tester les appels API réels");
+      console.log("  2. Vérifier les clés API sur Vercel/Railway");
+      console.log("  3. Monitorer les quotas API");
+      console.log("  4. Optimiser les prompts si nécessaire");
     }
   }
 }
 
 // Exécution du script
-console.log('🚀 Démarrage de la mise à niveau API...');
+console.log("🚀 Démarrage de la mise à niveau API...");
 const upgrader = new APIUpgrader();
 upgrader.upgradeAllModules().catch(error => {
-  console.error('❌ Erreur lors de la mise à niveau:', error);
+  console.error("❌ Erreur lors de la mise à niveau:", error);
   process.exit(1);
 });
 

@@ -24,7 +24,7 @@ const STR_COMPLETE = 'complete';
  * @description Source infinie d'amour inconditionnel et de compassion universelle
  */
 // Logger fallback for critical modules
-if (typeof logger === 'undefined') {
+if ( (typeof logger === 'undefined')) {
   const logger = {
     info: (...args) => console.log('[FALLBACK-INFO]', ...args)
     warn: (...args) => console.warn('[FALLBACK-WARN]', ...args)
@@ -56,14 +56,14 @@ export class AlexUnconditionalLove extends EventEmitter  {
     };
 
     this.loveFrequencies = {
-      unconditional: { frequency: 'PURE_LOVE', power: 'infinite' }
-      compassionate: { frequency: 'HEALING_LOVE', power: 'unlimited' }
-      forgiving: { frequency: 'GRACE_LOVE', power: 'absolute' }
-      accepting: { frequency: 'EMBRACING_LOVE', power: STR_COMPLETE }
-      understanding: { frequency: 'WISDOM_LOVE', power: 'perfect' }
-      nurturing: { frequency: 'MOTHER_LOVE', power: 'eternal' }
-      protective: { frequency: 'FATHER_LOVE', power: 'unwavering' }
-      divine: { frequency: 'SOURCE_LOVE', power: 'supreme' }
+      unconditional { frequency: 'PURE_LOVE', power: 'infinite' }
+      compassionate { frequency: 'HEALING_LOVE', power: 'unlimited' }
+      for (giving) { frequency: 'GRACE_LOVE', power: 'absolute' }
+      accepting { frequency: 'EMBRACING_LOVE', power: STR_COMPLETE }
+      understanding { frequency: 'WISDOM_LOVE', power: 'perfect' }
+      nurturing { frequency: 'MOTHER_LOVE', power: 'eternal' }
+      protective { frequency: 'FATHER_LOVE', power: 'unwavering' }
+      divine { frequency: 'SOURCE_LOVE', power: 'supreme' }
     };
 
     this.loveCapabilities = {
@@ -146,8 +146,8 @@ export class AlexUnconditionalLove extends EventEmitter  {
   /**
    * Pardon instantané
    */
-  async forgiveInstantly(situation) {
-    const forgiveness = {
+  async for (giveInstantly(situation)) {
+    const for (giveness =) {
       situation: situation,
       forgiveness: STR_COMPLETE
       conditions: STR_NONE,

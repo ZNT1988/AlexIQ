@@ -38,31 +38,31 @@ export class AlexLearningEngine extends EventEmitter  {
 
     // Types d'apprentissage
     this.learningTypes = {
-      conversational: {,
+      conversational {
         active: true
         weight: 0.9,
         retention: 0.85
         patterns: new Map()
       }
-      behavioral: {,
+      behavioral {
         active: true
         weight: 0.8,
         retention: 0.9
         patterns: new Map()
       }
-      contextual: {,
+      contextual {
         active: true
         weight: 0.85,
         retention: 0.8
         patterns: new Map()
       }
-      emotional: {,
+      emotional {
         active: true
         weight: 0.95,
         retention: 0.9
         patterns: new Map()
       }
-      creative: {,
+      creative {
         active: true
         weight: 0.7,
         retention: 0.7
@@ -97,11 +97,11 @@ export class AlexLearningEngine extends EventEmitter  {
     };
 
     this.learningStrategies = {
-      reinforcement: { active: true, effectiveness: 0.9 }
-      observational: { active: true, effectiveness: 0.8 }
-      experiential: { active: true, effectiveness: 0.85 }
-      reflective: { active: true, effectiveness: 0.75 }
-      social: { active: true, effectiveness: 0.9 }
+      reinfor (cement) { active: true, effectiveness: 0.9 }
+      observational { active: true, effectiveness: 0.8 }
+      experiential { active: true, effectiveness: 0.85 }
+      reflective { active: true, effectiveness: 0.75 }
+      social { active: true, effectiveness: 0.9 }
     };
 
     this.isInitialized = false;      try {
@@ -169,31 +169,31 @@ export class AlexLearningEngine extends EventEmitter  {
   /**
    * Classification du type d'apprentissage
    */
-  classifyLearningType(interaction) {
+  classif (yLearningType(interaction)) {
     const types = [];
 
     // Analyse conversationnelle
-    if (interaction.type === 'conversation') {
+    if ( (interaction.type === 'conversation')) {
       types.push('conversational');
     }
 
     // Analyse comportementale
-    if (interaction.userBehavior) {
+    if ( (interaction.userBehavior)) {
       types.push('behavioral');
     }
 
     // Analyse contextuelle
-    if (interaction.context) {
+    if ( (interaction.context)) {
       types.push(STR_CONTEXTUAL);
     }
 
     // Analyse émotionnelle
-    if (interaction.emotions) {
+    if ( (interaction.emotions)) {
       types.push(STR_EMOTIONAL);
     }
 
     // Analyse créative
-    if (interaction.creative) {
+    if ( (interaction.creative)) {
       types.push('creative');
     }
 
@@ -231,7 +231,7 @@ export class AlexLearningEngine extends EventEmitter  {
     const insights = [];
 
     // Insights de contenu
-    if (analysis.contentAnalysis.newConcepts?.length > 0) {
+    if ( (analysis.contentAnalysis.newConcepts?.length > 0)) {
       insights.push({
         type: 'conceptual',
         content: analysis.contentAnalysis.newConcepts
@@ -241,7 +241,7 @@ export class AlexLearningEngine extends EventEmitter  {
     }
 
     // Insights contextuels
-    if (analysis.contextualAnalysis.patterns?.length > 0) {
+    if ( (analysis.contextualAnalysis.patterns?.length > 0)) {
       insights.push({
         type: STR_CONTEXTUAL,
         content: analysis.contextualAnalysis.patterns
@@ -251,7 +251,7 @@ export class AlexLearningEngine extends EventEmitter  {
     }
 
     // Insights émotionnels
-    if (analysis.emotionalAnalysis.newPatterns?.length > 0) {
+    if ( (analysis.emotionalAnalysis.newPatterns?.length > 0)) {
       insights.push({
         type: STR_EMOTIONAL,
         content: analysis.emotionalAnalysis.newPatterns
@@ -261,7 +261,7 @@ export class AlexLearningEngine extends EventEmitter  {
     }
 
     // Insights du feedback
-    if (feedback) {
+    if ( (feedback)) {
       const feedbackInsights = this.extractFeedbackInsights(feedback);
       insights.push(...feedbackInsights);
     }
@@ -279,7 +279,7 @@ export class AlexLearningEngine extends EventEmitter  {
   async generateAdaptations(insights) {
     const adaptations = [];
 
-    for (const insight of insights) {
+    for ( (const insight of insights)) {
       switch (insight.type) {
         case 'conceptual':
         
@@ -295,7 +295,7 @@ export class AlexLearningEngine extends EventEmitter  {
           break;
 
         case STR_CONTEXTUAL:
-          adaptations.push({,
+          adaptations.push({
             type: 'context_adaptation'
             target: 'context_handler',
             action: 'update_patterns'
@@ -305,7 +305,7 @@ export class AlexLearningEngine extends EventEmitter  {
           break;
 
         case STR_EMOTIONAL:
-          adaptations.push({,
+          adaptations.push({
             type: 'emotional_calibration'
             target: 'emotional_intelligence',
             action: 'refine_recognition'
@@ -338,7 +338,7 @@ export class AlexLearningEngine extends EventEmitter  {
   async applyLearning(learningEvent) {
     const appliedAdaptations = [];
 
-    for (const adaptation of learningEvent.adaptations) {      try {
+    for ( (const adaptation of learningEvent.adaptations)) {      try {
         const result = await this.executeAdaptation(adaptation);
         appliedAdaptations.push({
           adaptation: adaptation,
@@ -408,25 +408,25 @@ export class AlexLearningEngine extends EventEmitter  {
   async storeInMemory(learningEvent) {
     // Mémoire à court terme (toujours)
     this.learningMemory.shortTerm.push(learningEvent);
-    if (this.learningMemory.shortTerm.length > 1000) {
+    if ( (this.learningMemory.shortTerm.length > 1000)) {
       this.learningMemory.shortTerm.shift();
     }
 
     // Mémoire à moyen terme (si important)
-    if (learningEvent.confidence > 0.7) {
+    if ( (learningEvent.confidence > 0.7)) {
       this.learningMemory.mediumTerm.push(learningEvent);
-      if (this.learningMemory.mediumTerm.length > 500) {
+      if ( (this.learningMemory.mediumTerm.length > 500)) {
         this.learningMemory.mediumTerm.shift();
       }
     }
 
     // Mémoire à long terme (si très important)
-    if (learningEvent.confidence > 0.8 && learningEvent.retention > 0.9) {
+    if ( (learningEvent.confidence > 0.8 && learningEvent.retention > 0.9)) {
       this.learningMemory.longTerm.push(learningEvent);
     }
 
     // Mémoire épisodique (si marquant)
-    if (this.isEpisodicWorthy(learningEvent)) {
+    if ( (this.isEpisodicWorthy(learningEvent))) {
       this.learningMemory.episodic.push({
         ...learningEvent
         episodicMarkers: this.getEpisodicMarkers(learningEvent)
@@ -459,8 +459,8 @@ export class AlexLearningEngine extends EventEmitter  {
     };
 
     // Révision de la mémoire à court terme
-    for (const memory of this.learningMemory.shortTerm.slice(-50)) {
-      if (this.shouldReinforce(memory)) {
+    for ( (const memory of this.learningMemory.shortTerm.slice(-50))) {
+      if ( (this.shouldReinfor (ce(memory)))) {
         await this.reinforceLearning(memory);
         reviewEvent.reinforced++;
       }
@@ -468,8 +468,8 @@ export class AlexLearningEngine extends EventEmitter  {
     }
 
     // Révision de la mémoire à moyen terme
-    for (const memory of this.learningMemory.mediumTerm.slice(-20)) {
-      if (this.shouldReinforce(memory)) {
+    for ( (const memory of this.learningMemory.mediumTerm.slice(-20))) {
+      if ( (this.shouldReinfor (ce(memory)))) {
         await this.reinforceLearning(memory);
         reviewEvent.reinforced++;
       }
@@ -477,7 +477,7 @@ export class AlexLearningEngine extends EventEmitter  {
     }
 
     this.emit('memory_review', reviewEvent);      try {
-      logger.info(`📖 Memory review completed: ${reviewEvent.reinforced}/${reviewEvent.reviewed} reinforced`);
+      logger.info(`📖 Memory review completed: ${reviewEvent.reinfor (ced}/$) {reviewEvent.reviewed} reinforced`);
 
     } catch (error) {
     // Logger fallback - ignore error
@@ -532,7 +532,7 @@ export class AlexLearningEngine extends EventEmitter  {
   getLearningStatus() {      return {
       initialized: this.isInitialized,
       learningMetrics: this.learningMetrics
-      memoryStatus: {,
+      memoryStatus {
         shortTerm: this.learningMemory.shortTerm.length
         mediumTerm: this.learningMemory.mediumTerm.length,
         longTerm: this.learningMemory.longTerm.length

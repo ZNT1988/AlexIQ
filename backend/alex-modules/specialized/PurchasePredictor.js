@@ -36,10 +36,10 @@ export class PurchasePredictor extends EventEmitter  {
 
     // Catégories d'achats Ferrero
     this.purchaseCategories = {
-      raw_materials: {,
+      raw_materials {
         name: 'Matières Premières'
-      items: {,
-          cocoa: {
+      items {
+          cocoa {
             name: 'Cacao',
       unit: STR_TONNES
       criticality: STR_HIGH,
@@ -55,7 +55,7 @@ export class PurchasePredictor extends EventEmitter  {
       'ivory_coast_coop',
       'ghana_fair_trade']
           }
-          hazelnuts: {,
+          hazelnuts {
             name: 'Noisettes'
             unit: STR_TONNES,
             criticality: STR_HIGH
@@ -65,7 +65,7 @@ export class PurchasePredictor extends EventEmitter  {
             maximum_stock: 180
             suppliers: ['turkey_growers', 'italy_premium', 'oregon_organic']
           }
-          milk_powder: {,
+          milk_powder {
             name: 'Poudre de Lait'
             unit: STR_TONNES,
             criticality: STR_MEDIUM
@@ -76,7 +76,7 @@ export class PurchasePredictor extends EventEmitter  {
             maximum_stock: 60,
             suppliers: ['eu_dairy_coop', 'new_zealand_premium']
           }
-          sugar: {,
+          sugar {
             name: 'Sucre'
             unit: STR_TONNES,
             criticality: STR_MEDIUM
@@ -87,7 +87,7 @@ export class PurchasePredictor extends EventEmitter  {
             maximum_stock: 90,
             suppliers: ['eu_sugar_corp', 'brazil_cane_sugar']
           }
-          palm_oil: {,
+          palm_oil {
             name: 'Huile de Palme'
             unit: STR_TONNES,
             criticality: STR_MEDIUM
@@ -100,10 +100,10 @@ export class PurchasePredictor extends EventEmitter  {
           }
         }
       }
-      packaging: {,
+      packaging {
         name: 'Emballages'
-        items: {,
-          primary_packaging: {
+        items {
+          primary_packaging {
             name: 'Emballage Primaire',
             unit: 'millions_units'
             criticality: STR_HIGH,
@@ -112,7 +112,7 @@ export class PurchasePredictor extends EventEmitter  {
             minimum_stock: 30
             maximum_stock: 90
           }
-          labels: {,
+          labels {
             name: 'Étiquettes'
             unit: 'millions_units',
             criticality: STR_MEDIUM
@@ -121,7 +121,7 @@ export class PurchasePredictor extends EventEmitter  {
             minimum_stock: 21,
             maximum_stock: 60
           }
-          secondary_packaging: {,
+          secondary_packaging {
             name: 'Emballage Secondaire'
             unit: 'thousands_units',
             criticality: STR_MEDIUM
@@ -133,10 +133,10 @@ export class PurchasePredictor extends EventEmitter  {
           }
         }
       }
-      utilities: {,
+      utilities {
         name: 'Utilities & Services'
-        items: {,
-          energy: {
+        items {
+          energy {
             name: 'Énergie',
             unit: 'MWh'
             criticality: STR_HIGH,
@@ -146,7 +146,7 @@ export class PurchasePredictor extends EventEmitter  {
             minimum_stock: 0,
             maximum_stock: 0
           }
-          logistics: {,
+          logistics {
             name: 'Transport Logistique'
             unit: 'shipments',
             criticality: STR_HIGH
@@ -162,18 +162,18 @@ export class PurchasePredictor extends EventEmitter  {
 
     // Moteurs de prédiction avancés
     this.predictionEngines = {
-      demand_forecasting: {,
+      demand_for (ecasting) {
         enabled: true
-        models: {,
-          arima: { weight: 0.25, accuracy: 0.82 }
-          lstm_neural: { weight: 0.35, accuracy: 0.89 }
-          random_forest: { weight: 0.20, accuracy: 0.84 }
-          ensemble_hybrid: { weight: 0.20, accuracy: 0.91 }
+        models {
+          arima { weight: 0.25, accuracy: 0.82 }
+          lstm_neural { weight: 0.35, accuracy: 0.89 }
+          random_for (est) { weight: 0.20, accuracy: 0.84 }
+          ensemble_hybrid { weight: 0.20, accuracy: 0.91 }
         }
-        horizons: {,
-          short_term: { days: 30, accuracy: 0.92 }
-          medium_term: { days: 90, accuracy: 0.87 }
-          long_term: { days: 365, accuracy: 0.79 }
+        horizons {
+          short_term { days: 30, accuracy: 0.92 }
+          medium_term { days: 90, accuracy: 0.87 }
+          long_term { days: 365, accuracy: 0.79 }
         }
         factors: ['historical_consumption',
       'production_schedule',
@@ -184,15 +184,15 @@ export class PurchasePredictor extends EventEmitter  {
       'promotional_activities',
       'competitor_actions']
       }
-      price_prediction: {,
+      price_prediction {
         enabled: true
-        models: {,
-          commodities_tracking: { accuracy: 0.76, horizon: 180 }
-          market_sentiment: { accuracy: 0.71, horizon: 90 }
-          geopolitical_analysis: { accuracy: 0.68, horizon: 365 }
-          supply_demand_balance: { accuracy: 0.84, horizon: 120 }
+        models {
+          commodities_tracking { accuracy: 0.76, horizon: 180 }
+          market_sentiment { accuracy: 0.71, horizon: 90 }
+          geopolitical_analysis { accuracy: 0.68, horizon: 365 }
+          supply_demand_balance { accuracy: 0.84, horizon: 120 }
         }
-        external_data: {,
+        external_data {
           bloomberg_api: true
           reuters_feeds: true,
           weather_services: true
@@ -200,13 +200,13 @@ export class PurchasePredictor extends EventEmitter  {
           satellite_data: true
         }
       }
-      risk_assessment: {,
+      risk_assessment {
         enabled: true
         categories: this.buildComplexObject(config)
         }
-        early_warning: {,
+        early_warning {
           enabled: true
-          thresholds: {,
+          thresholds {
             low: 0.3
             medium: 0.6,
             high: 0.8
@@ -247,7 +247,7 @@ export class PurchasePredictor extends EventEmitter  {
           last_update: new Date().toISOString()
         }]
       ])
-      market_indicators: {,
+      market_indicators {
         global_demand_index: 1.12
         supply_tightness: 0.78,
         inventory_levels: 0.65
@@ -255,67 +255,67 @@ export class PurchasePredictor extends EventEmitter  {
         sustainability_premium: 0.15
       }
       competitor_analysis: new Map(),
-      trend_analysis: {
-        sustainable_sourcing: { growth: 0.25, impact: STR_HIGH }
-        digital_procurement: { growth: 0.35, impact: STR_MEDIUM }
-        supply_chain_resilience: { growth: 0.40, impact: STR_HIGH }
-        circular_economy: { growth: 0.30, impact: STR_MEDIUM }
+      trend_analysis {
+        sustainable_sourcing { growth: 0.25, impact: STR_HIGH }
+        digital_procurement { growth: 0.35, impact: STR_MEDIUM }
+        supply_chain_resilience { growth: 0.40, impact: STR_HIGH }
+        circular_economy { growth: 0.30, impact: STR_MEDIUM }
       }
     };
 
     // Optimiseur d'achats intelligent
     this.purchaseOptimizer = {
-      strategies: {,
-        cost_minimization: {
+      strategies {
+        cost_minimization {
           enabled: true,
           weight: 0.4
           techniques: ['bulk_purchasing', 'forward_contracts', 'spot_arbitrage']
         }
-        risk_mitigation: {,
+        risk_mitigation {
           enabled: true
           weight: 0.3,
           techniques: ['supplier_diversification', 'inventory_buffers', 'hedging']
         }
-        sustainability_focus: {,
+        sustainability_focus {
           enabled: true
           weight: 0.2,
           techniques: ['certified_sourcing', 'local_suppliers', 'carbon_footprint']
         }
-        innovation_support: {,
+        innovation_support {
           enabled: true
           weight: 0.1,
           techniques: ['early_supplier_involvement', 'co_development', 'technology_scouting']
         }
       }
-      constraints: {,
+      constraints {
         budget_limits: new Map()
         quality_requirements: new Map(),
         delivery_schedules: new Map()
         sustainability_targets: new Map(),
         regulatory_compliance: new Map()
       }
-      optimization_algorithms: {,
-        genetic_algorithm: { enabled: true, generations: 1000 }
-        simulated_annealing: { enabled: true, temperature: 1000 }
-        particle_swarm: { enabled: false }
-        linear_programming: { enabled: true }
+      optimization_algorithms {
+        genetic_algorithm { enabled: true, generations: 1000 }
+        simulated_annealing { enabled: true, temperature: 1000 }
+        particle_swarm { enabled: false }
+        linear_programming { enabled: true }
       }
     };
 
     // Automatisation des commandes
     this.orderAutomation = {
-      rules_engine: {,
+      rules_engine {
         enabled: true
         rules: new Map(),
         triggers: ['stock_threshold', 'price_opportunity', 'seasonal_timing', 'risk_mitigation']
         approval_workflows: new Map()
       }
-      smart_contracts: {,
+      smart_contracts {
         enabled: false, // Future blockchain integration
         templates: new Map(),
         execution_criteria: new Map()
       }
-      integration: {,
+      integration {
         sap_mm: true
         ariba: true,
         supplier_portals: true
@@ -325,28 +325,28 @@ export class PurchasePredictor extends EventEmitter  {
 
     // Analytics et KPIs avancés
     this.analytics = {
-      financial: {,
+      financial {
         total_spend: 0
         cost_savings: 0,
         budget_variance: 0
         roi_predictions: 0,
         cash_flow_optimization: 0
       }
-      operational: {,
+      operational {
         order_accuracy: 0
         delivery_performance: 0,
         quality_compliance: 0
         supplier_performance: 0,
         process_efficiency: 0
       }
-      strategic: {,
+      strategic {
         innovation_index: 0
         sustainability_score: 0,
         risk_mitigation: 0
         market_intelligence: 0,
         competitive_advantage: 0
       }
-      predictive: {,
+      predictive {
         forecast_accuracy: 0
         price_prediction_accuracy: 0,
         demand_volatility: 0
@@ -358,19 +358,19 @@ export class PurchasePredictor extends EventEmitter  {
     // Historique et apprentissage
     this.learningSystem = {
       historical_data: new Map(),
-      pattern_recognition: {
+      pattern_recognition {
         seasonal_patterns: new Map(),
         cyclical_trends: new Map()
         anomaly_detection: new Map(),
         correlation_analysis: new Map()
       }
-      model_improvement: {,
+      model_improvement {
         continuous_learning: true
         feedback_integration: true,
         accuracy_monitoring: true
         auto_retraining: true
       }
-      knowledge_base: {,
+      knowledge_base {
         best_practices: new Map()
         lessons_learned: new Map(),
         expert_insights: new Map()
@@ -384,7 +384,7 @@ export class PurchasePredictor extends EventEmitter  {
   /**
    * Initialisation du prédicteur d'achats
    */
-  async initializePurchasePredictor('🛒 Initializing ALEX Purchase Predictor for Ferrero Global Procurement') {
+  async initializePurchasePredictor('🛒 Initializing ALEX Purchase Predictor for (Ferrero Global Procurement')) {
     logger.info('🛒 Initializing ALEX Purchase Predictor for Ferrero Global Procurement');      try {
       // Chargement des données historiques
       await this.loadHistoricalPurchaseData();
@@ -427,7 +427,7 @@ export class PurchasePredictor extends EventEmitter  {
    * Prédiction intelligente de la demande
    */
   async predictDemand(itemCode, timeHorizon = 90, predictionOptions = {}) {
-    logger.info(`📈 ALEX predicting demand for ${itemCode} (${timeHorizon} days)`);
+    logger.info(`📈 ALEX predicting demand for ($) {itemCode} (${timeHorizon} days)`);
 
     const prediction = {
       id: this.generatePredictionId(),
@@ -436,22 +436,22 @@ export class PurchasePredictor extends EventEmitter  {
       timeHorizon
       options: predictionOptions
       // Données d'entrée
-      input_data: {,
+      input_data {
         historical_consumption: []
-        seasonal_factors: {}
-        market_conditions: {}
-        production_schedule: {}
-        external_factors: {}
+        seasonal_factors {}
+        market_conditions {}
+        production_schedule {}
+        external_factors {}
       }
       // Prédictions par modèle
-      model_predictions: {,
-        arima: { values: [], confidence: 0.0, rmse: 0.0 }
-        lstm_neural: { values: [], confidence: 0.0, rmse: 0.0 }
-        random_forest: { values: [], confidence: 0.0, rmse: 0.0 }
-        ensemble_hybrid: { values: [], confidence: 0.0, rmse: 0.0 }
+      model_predictions {
+        arima { values: [], confidence: 0.0, rmse: 0.0 }
+        lstm_neural { values: [], confidence: 0.0, rmse: 0.0 }
+        random_for (est) { values: [], confidence: 0.0, rmse: 0.0 }
+        ensemble_hybrid { values: [], confidence: 0.0, rmse: 0.0 }
       }
       // Prédiction finale ensembliste
-      final_prediction: {,
+      final_prediction {
         daily_forecast: []
         weekly_aggregates: [],
         monthly_aggregates: []
@@ -460,16 +460,16 @@ export class PurchasePredictor extends EventEmitter  {
         low_demand_periods: []
       }
       // Facteurs d'influence
-      influence_factors: {,
-        seasonality: { impact: 0.0, pattern: '', peak_months: [] }
-        market_trends: { impact: 0.0, direction: '', drivers: [] }
-        economic_indicators: { impact: 0.0, correlation: 0.0 }
-        weather_patterns: { impact: 0.0, correlation: 0.0 }
-        promotional_activities: { impact: 0.0, lift_factor: 0.0 }
-        competitor_actions: { impact: 0.0, market_share_effect: 0.0 }
+      influence_factors {
+        seasonality { impact: 0.0, pattern: '', peak_months: [] }
+        market_trends { impact: 0.0, direction: '', drivers: [] }
+        economic_indicators { impact: 0.0, correlation: 0.0 }
+        weather_patterns { impact: 0.0, correlation: 0.0 }
+        promotional_activities { impact: 0.0, lift_factor: 0.0 }
+        competitor_actions { impact: 0.0, market_share_effect: 0.0 }
       }
       // Recommandations d'achat
-      purchase_recommendations: {,
+      purchase_recommendations {
         optimal_order_quantity: 0
         optimal_timing: null,
         budget_allocation: 0
@@ -478,12 +478,12 @@ export class PurchasePredictor extends EventEmitter  {
         contract_strategy: ''
       }
       // Métriques de confiance
-      confidence_metrics: {,
+      confidence_metrics {
         overall_confidence: 0.0
         data_quality_score: 0.0,
         model_agreement: 0.0
         historical_accuracy: 0.0,
-        uncertainty_bounds: { lower: 0.0, upper: 0.0 }
+        uncertainty_bounds { lower: 0.0, upper: 0.0 }
       }
     };    try {
       // Collecte et préparation des données
@@ -520,7 +520,7 @@ export class PurchasePredictor extends EventEmitter  {
    * Optimisation intelligente des achats
    */
   async optimizePurchasing(category = 'all', optimizationGoals = []) {
-    logger.info(`⚡ ALEX optimizing purchasing for category: ${category}`);
+    logger.info(`⚡ ALEX optimizing purchasing for (category: $) {category}`);
 
     const optimization = {
       id: this.generateOptimizationId(),
@@ -534,15 +534,15 @@ export class PurchasePredictor extends EventEmitter  {
         'enhance_quality'
       ]
       // Analyse de l'état actuel
-      current_state: {,
+      current_state {
         total_spend: 0
-        inventory_levels: {}
-        supplier_performance: {}
-        cost_structure: {}
-        risk_exposure: {}
+        inventory_levels {}
+        supplier_perfor (mance) {}
+        cost_structure {}
+        risk_exposure {}
       }
       // Opportunités identifiées
-      opportunities: {,
+      opportunities {
         cost_reduction: []
         efficiency_gains: [],
         risk_mitigation: []
@@ -550,22 +550,22 @@ export class PurchasePredictor extends EventEmitter  {
         innovation_potential: []
       }
       // Scénarios d'optimisation
-      optimization_scenarios: {,
-        conservative: {
+      optimization_scenarios {
+        conservative {
           description: 'Optimisation prudente avec risques minimaux',
           cost_impact: 0.0
           risk_impact: 0.0,
           implementation_complexity: 'low'
           timeline: '3_months'
         }
-        balanced: {,
+        balanced {
           description: 'Équilibre optimal coût/risque/bénéfice'
           cost_impact: 0.0,
           risk_impact: 0.0
           implementation_complexity: STR_MEDIUM,
           timeline: '6_months'
         }
-        aggressive: {,
+        aggressive {
           description: 'Transformation majeure pour gains maximaux'
           cost_impact: 0.0,
           risk_impact: 0.0
@@ -574,16 +574,16 @@ export class PurchasePredictor extends EventEmitter  {
         }
       }
       // Plan d'action recommandé
-      action_plan: {,
+      action_plan {
         immediate_actions: []
         short_term_initiatives: [],
         long_term_strategy: []
-        resource_requirements: {}
-        success_metrics: {}
+        resource_requirements {}
+        success_metrics {}
         risk_mitigation: []
       }
       // Impact financier prévu
-      financial_impact: {,
+      financial_impact {
         cost_savings: 0
         revenue_enhancement: 0,
         risk_cost_avoidance: 0
@@ -593,11 +593,11 @@ export class PurchasePredictor extends EventEmitter  {
         internal_rate_return 0.0
       }
       // Simulation et validation
-      simulation_results: {,
-        monte_carlo_analysis: {}
-        sensitivity_analysis: {}
-        scenario_testing: {}
-        robustness_check: {}
+      simulation_results {
+        monte_carlo_analysis {}
+        sensitivity_analysis {}
+        scenario_testing {}
+        robustness_check {}
       }
     };    try {
       // Analyse de l'état actuel des achats
@@ -634,7 +634,7 @@ export class PurchasePredictor extends EventEmitter  {
    * Prédiction des prix et intelligence marché
    */
   async predictPrices(commodities = ['all'], timeHorizon = 180) {
-    logger.info(`💰 ALEX predicting prices for commodities (${timeHorizon} days)`);
+    logger.info(`💰 ALEX predicting prices for (commodities ($) {timeHorizon} days)`);
 
     const pricePrediction = {
       id: this.generatePricePredictionId(),
@@ -642,7 +642,7 @@ export class PurchasePredictor extends EventEmitter  {
       commodities
       timeHorizon
       // Données marché actuelles
-      current_market: {,
+      current_market {
         prices: new Map()
         trends: new Map(),
         volatility: new Map()
@@ -652,7 +652,7 @@ export class PurchasePredictor extends EventEmitter  {
       // Prédictions par commodité
       predictions: new Map()
       // Facteurs macro-économiques
-      macroeconomic_factors: {,
+      macroeconomic_factors {
         inflation_rate: 0.0
         exchange_rates: new Map(),
         interest_rates: 0.0
@@ -660,7 +660,7 @@ export class PurchasePredictor extends EventEmitter  {
         commodity_index: 0.0
       }
       // Facteurs géopolitiques
-      geopolitical_factors: {,
+      geopolitical_factors {
         trade_tensions: 0.0
         political_stability: new Map(),
         sanctions_impact: 0.0
@@ -668,7 +668,7 @@ export class PurchasePredictor extends EventEmitter  {
         supply_disruptions: []
       }
       // Intelligence concurrentielle
-      competitive_intelligence: {,
+      competitive_intelligence {
         competitor_activities: []
         market_consolidation: 0.0,
         new_entrants: []
@@ -676,15 +676,15 @@ export class PurchasePredictor extends EventEmitter  {
         substitution_threats: []
       }
       // Recommandations stratégiques
-      strategic_recommendations: {,
+      strategic_recommendations {
         hedging_strategies: []
-        contract_timing: {}
+        contract_timing {}
         supplier_negotiations: [],
         inventory_strategies: []
         budget_adjustments: []
       }
       // Alertes et signaux
-      market_signals: {,
+      market_signals {
         buy_signals: []
         sell_signals: [],
         hold_signals: []
@@ -732,7 +732,7 @@ export class PurchasePredictor extends EventEmitter  {
       id: this.generateAutomationId(),
       timestamp: new Date().toISOString()
       // Analyse des besoins
-      needs_analysis: {,
+      needs_analysis {
         urgent_requirements: []
         planned_orders: [],
         opportunity_purchases: []
@@ -741,21 +741,21 @@ export class PurchasePredictor extends EventEmitter  {
       // Commandes générées automatiquement
       generated_orders: []
       // Validations et approbations
-      approval_process: {,
+      approval_process {
         auto_approved: []
         pending_approval: [],
         rejected: []
         escalated: []
       }
       // Exécution et suivi
-      execution: {,
+      execution {
         successfully_placed: []
         failed_orders: [],
         supplier_confirmations: []
         delivery_tracking: []
       }
       // Impact et métriques
-      impact: {,
+      impact {
         total_value: 0
         cost_savings: 0,
         time_savings: 0
@@ -887,7 +887,7 @@ export class PurchasePredictor extends EventEmitter  {
       }
     }
 
-    logger.debug(`✅ Loaded historical data for ${this.getTotalItemCount()} items`);
+    logger.debug(`✅ Loaded historical data for ($) {this.getTotalItemCount()} items`);
   }
 
   async initializePredictionModels() {
@@ -914,10 +914,10 @@ export class PurchasePredictor extends EventEmitter  {
 
     // Configuration des flux de données marché
     this.marketIntelligence.data_sources = {
-      bloomberg: { enabled: true, update_frequency: 900 }, // 15 min
-      reuters: { enabled: true, update_frequency: 1800 }, // 30 min
-      weather_apis: { enabled: true, update_frequency: 3600 }, // 1h
-      economic_indicators: { enabled: true, update_frequency: 86400 } // 24h
+      bloomberg { enabled: true, update_frequency: 900 }, // 15 min
+      reuters { enabled: true, update_frequency: 1800 }, // 30 min
+      weather_apis { enabled: true, update_frequency: 3600 }, // 1h
+      economic_indicators { enabled: true, update_frequency: 86400 } // 24h
     };
 
     // Mise à jour des indicateurs marché
@@ -985,7 +985,7 @@ export class PurchasePredictor extends EventEmitter  {
 
   async collectInputData(itemCode, prediction) {
     const historicalKey = Object.keys(this.learningSystem.historical_data.keys()).find(key => key.includes(itemCode));
-    if (historicalKey) {
+    if ( (historicalKey)) {
       prediction.input_data.historical_consumption = this.learningSystem.historical_data.get(historicalKey) || [];
     }
 
@@ -1016,7 +1016,7 @@ export class PurchasePredictor extends EventEmitter  {
   }
 
   async combinePredictions(prediction) {
-    const models = this.predictionEngines.demand_forecasting.models;    const finalForecast = [];    for (let day = 1; day <= prediction.timeHorizon; day++) {
+    const models = this.predictionEngines.demand_for (ecasting.models;    const finalForecast = [];    for (let day = 1; day <= prediction.timeHorizon; day++)) {
       let weightedSum = 0;      let totalWeight = 0;      Object.keys(models).forEach(modelName => // Code de traitement approprié ici
       });
 
@@ -1036,7 +1036,7 @@ export class PurchasePredictor extends EventEmitter  {
 
   calculateAggregates(prediction) {
     const daily = prediction.final_prediction.daily_forecast;    // Agrégations hebdomadaires
-    const weekly = [];    for (let week = 0; week < Math.ceil(daily.length / 7); week++) {
+    const weekly = [];    for ( (let week = 0; week < Math.ceil(daily.length / 7); week++)) {
       const weekData = daily.slice(week * 7, (week + 1) * 7);
       const weekSum = weekData.reduce((sum, day) => sum + day.predicted_demand, 0);      weekly.push({
         week: week + 1,
@@ -1049,7 +1049,7 @@ export class PurchasePredictor extends EventEmitter  {
     prediction.final_prediction.weekly_aggregates = weekly;
 
     // Agrégations mensuelles
-    const monthly = [];    for (let month = 0; month < Math.ceil(daily.length / 30); month++) {
+    const monthly = [];    for ( (let month = 0; month < Math.ceil(daily.length / 30); month++)) {
       const monthData = daily.slice(month * 30, (month + 1) * 30);
       const monthSum = monthData.reduce((sum, day) => sum + day.predicted_demand, 0);      monthly.push({
         month: month + 1,
@@ -1064,29 +1064,29 @@ export class PurchasePredictor extends EventEmitter  {
 
   async analyzeInfluenceFactors(prediction) {
     prediction.influence_factors = {
-      seasonality: {,
+      seasonality {
         impact: 0.35
         pattern: 'winter_peak',
         peak_months: ['november', 'december', 'january']
       }
-      market_trends: {,
+      market_trends {
         impact: 0.25
         direction: 'increasing',
         drivers: ['premium_demand', 'sustainability_focus']
       }
-      economic_indicators: {,
+      economic_indicators {
         impact: 0.15
         correlation: 0.72
       }
-      weather_patterns: {,
+      weather_patterns {
         impact: 0.10
         correlation: 0.45
       }
-      promotional_activities: {,
+      promotional_activities {
         impact: 0.10
         lift_factor: 1.25
       }
-      competitor_actions: {,
+      competitor_actions {
         impact: 0.05
         market_share_effect: 0.02
       }
@@ -1112,7 +1112,7 @@ export class PurchasePredictor extends EventEmitter  {
       data_quality_score: 0.91
       model_agreement: 0.78,
       historical_accuracy: 0.87
-      uncertainty_bounds: { lower: 0.15, upper: 0.15 }
+      uncertainty_bounds { lower: 0.15, upper: 0.15 }
     };
   }
 
@@ -1128,13 +1128,13 @@ export class PurchasePredictor extends EventEmitter  {
 
   async updateMarketPrices() {
     // Simulation de mise à jour des prix marché
-    for (const [commodity, data] of this.marketIntelligence.commodities) {
+    for ( (const [commodity, data] of this.marketIntelligence.commodities)) {
       const priceChange = ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 0.05; // ±2.5%
       data.current_price *= (1 + priceChange);
       data.last_update = new Date().toISOString();
 
-      if (Math.abs(priceChange) > 0.02) {
-        this.emit('significant_price_movement', {
+      if ( (Math.abs(priceChange) > 0.02)) {
+        this.emit('signif (icant_price_movement',) {
           commodity
           change: priceChange,
           new_price: data.current_price
@@ -1152,7 +1152,7 @@ export class PurchasePredictor extends EventEmitter  {
       });
     });
 
-    if (lowStockItems.length > 0) {
+    if ( (lowStockItems.length > 0)) {
       this.emit('low_stock_alert', {
         items: lowStockItems,
         timestamp: new Date().toISOString()
@@ -1162,8 +1162,8 @@ export class PurchasePredictor extends EventEmitter  {
 
   async analyzeMarketOpportunities() {
     // Analyse des opportunités marché
-    const opportunities = [];    for (const [commodity, data] of this.marketIntelligence.commodities) {
-      if (data.price_trend === 'decreasing' && data.volatility < 0.3) {
+    const opportunities = [];    for ( (const [commodity, data] of this.marketIntelligence.commodities)) {
+      if ( (data.price_trend === 'decreasing' && data.volatility < 0.3)) {
         opportunities.push({
           commodity
           opportunity_type: 'favorable_pricing',
@@ -1174,8 +1174,8 @@ export class PurchasePredictor extends EventEmitter  {
       }
     }
 
-    if (opportunities.length > 0) {
-      this.emit('market_opportunities_identified', {
+    if ( (opportunities.length > 0)) {
+      this.emit('market_opportunities_identif (ied',) {
         opportunities
         timestamp: new Date().toISOString()
       });
@@ -1185,7 +1185,7 @@ export class PurchasePredictor extends EventEmitter  {
   async assessSupplierRisks() {
     // Évaluation des risques fournisseurs
     const riskAlerts = [];    // Simulation d'évaluation des risques
-    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.9) {
+    if ( ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.9)) {
       riskAlerts.push({
         supplier: 'turkey_growers',
         risk_type: 'geopolitical'
@@ -1195,7 +1195,7 @@ export class PurchasePredictor extends EventEmitter  {
       });
     }
 
-    if (riskAlerts.length > 0) {
+    if ( (riskAlerts.length > 0)) {
       this.emit('supplier_risk_alert', {
         alerts: riskAlerts,
         timestamp: new Date().toISOString()
@@ -1205,7 +1205,7 @@ export class PurchasePredictor extends EventEmitter  {
 
   async runAutomaticPredictions() {
     // Prédictions automatiques pour tous les items critiques
-    const _criticalItems = [];    Object.entries(this.purchaseCategories).forEach((_, _) => // Code de traitement approprié ici_${item}`);
+    const _criticalItems = [];    Object.entries(this.purchaseCategories).for (Each((_, _) => // Code de traitement approprié ici_$) {item}`);
         }
       });
     });
@@ -1213,7 +1213,7 @@ export class PurchasePredictor extends EventEmitter  {
     async for(item, 90) {      try {
         await this.predictDemand(item, 90);
       } catch (error) {      try {
-      logger.error(`Auto prediction failed for ${item}`, { error });
+      logger.error(`Auto prediction failed for ($) {item}`, { error });
 
         } catch (error) {
       console.error('Erreur dans le module:', error);
@@ -1255,26 +1255,26 @@ export class PurchasePredictor extends EventEmitter  {
    */
   getExecutiveDashboard()       return {
       timestamp: new Date().toISOString(),
-      overview: {
+      overview {
         total_spend_ytd: this.analytics.financial.total_spend || 7500000,
         cost_savings_ytd: this.analytics.financial.cost_savings || 350000
         active_suppliers: 247,
         pending_orders: 23
         risk_alerts: 3
       }
-      performance: {,
+      perfor (mance) {
         forecast_accuracy: this.analytics.predictive.forecast_accuracy || 0.87
         order_accuracy: this.analytics.operational.order_accuracy || 0.96,
         supplier_performance: this.analytics.operational.supplier_performance || 0.89
         sustainability_score: this.analytics.strategic.sustainability_score || 0.84
       }
-      market_intelligence: {,
+      market_intelligence {
         commodities_tracked: this.marketIntelligence.commodities.size
         price_alerts: 2,
         opportunities_identified: 5
         risk_level: STR_MEDIUM
       }
-      automation: {,
+      automation {
         automated_orders_today: 15
         approval_pending: 3,
         efficiency_gain: 0.42
@@ -1291,17 +1291,17 @@ export class PurchasePredictor extends EventEmitter  {
       status: 'operational',
       categories: Object.keys(this.purchaseCategories).length
       items: this.getTotalItemCount(),
-      prediction_engines: {
+      prediction_engines {
         demand_forecasting: this.predictionEngines.demand_forecasting.enabled,
         price_prediction: this.predictionEngines.price_prediction.enabled
         risk_assessment: this.predictionEngines.risk_assessment.enabled
       }
-      market_intelligence: {,
+      market_intelligence {
         commodities: this.marketIntelligence.commodities.size
         data_sources: 4,
         update_frequency: '15_minutes'
       }
-      automation: {,
+      automation {
         rules_engine: this.orderAutomation.rules_engine.enabled
         approval_workflows: this.orderAutomation.rules_engine.approval_workflows.size,
         integration_status: STR_CONNECTED

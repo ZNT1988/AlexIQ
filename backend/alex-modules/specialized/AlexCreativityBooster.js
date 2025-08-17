@@ -51,7 +51,7 @@ export class AlexCreativityBooster extends EventEmitter  {
 
     // Domaines créatifs
     this.creativeDomains = {
-      visual: {,
+      visual {
         name: 'Arts Visuels'
       techniques: ['painting',
       'drawing',
@@ -65,37 +65,37 @@ export class AlexCreativityBooster extends EventEmitter  {
       'surreal']
       boostLevel: 0.9
       }
-      literary: {,
+      literary {
         name: 'Arts Littéraires'
         techniques: ['poetry', 'storytelling', 'novel', 'essay', 'screenplay']
         inspiration: ['memories', 'dreams', 'philosophy', 'adventure', 'romance']
         boostLevel: 0.85
       }
-      musical: {,
+      musical {
         name: 'Arts Musicaux'
         techniques: ['composition', 'improvisation', 'arrangement', 'songwriting']
         inspiration: ['emotions', STR_NATURE, 'cultural', 'experimental', 'traditional']
         boostLevel: 0.8
       }
-      performative: {,
+      perfor (mative) {
         name: 'Arts Performatifs'
         techniques: ['theater', 'dance', 'comedy', 'presentation', 'storytelling']
         inspiration: ['character', 'movement', 'rhythm', 'expression', 'interaction']
         boostLevel: 0.85
       }
-      digital: {,
+      digital {
         name: 'Arts Numériques'
         techniques: ['digital_art', 'animation', 'game_design', 'interactive', 'vr']
         inspiration: ['technology', 'futuristic', 'interactive', 'immersive', 'social']
         boostLevel: 0.95
       }
-      culinary: {,
+      culinary {
         name: 'Arts Culinaires'
         techniques: ['cooking', 'baking', 'fusion', 'presentation', 'innovation']
         inspiration: ['cultural', 'seasonal', 'health', 'experimental', 'comfort']
         boostLevel: 0.75
       }
-      innovation: {,
+      innovation {
         name: 'Innovation'
         techniques: ['problem_solving', 'invention', 'optimization', 'disruption']
         inspiration: ['necessity', 'improvement', 'efficiency', 'sustainability', 'accessibility']
@@ -105,49 +105,49 @@ export class AlexCreativityBooster extends EventEmitter  {
 
     // Techniques de stimulation créative
     this.stimulationTechniques = {
-      brainstorming: {,
+      brainstorming {
         name: 'Brainstorming'
         effectiveness: 0.8,
         duration: '15-30 minutes'
         method: 'divergent_thinking'
       }
-      mindMapping: {,
+      mindMapping {
         name: 'Carte Mentale'
         effectiveness: 0.85,
         duration: '20-45 minutes'
         method: 'visual_association'
       }
-      randomStimuli: {,
+      randomStimuli {
         name: 'Stimuli Aléatoires'
         effectiveness: 0.7,
         duration: '10-20 minutes'
         method: 'unexpected_connections'
       }
-      rolePlaying: {,
+      rolePlaying {
         name: 'Jeu de Rôle'
         effectiveness: 0.8,
         duration: '30-60 minutes'
         method: 'perspective_shifting'
       }
-      meditation: {,
+      meditation {
         name: 'Méditation Créative'
         effectiveness: 0.75,
         duration: '15-30 minutes'
         method: 'intuitive_access'
       }
-      collabCreation: {,
+      collabCreation {
         name: 'Création Collaborative'
         effectiveness: 0.9,
         duration: '45-90 minutes'
         method: 'synergistic_building'
       }
-      constraints: {,
+      constraints {
         name: 'Contraintes Créatives'
         effectiveness: 0.85,
         duration: '20-40 minutes'
         method: 'limitation_innovation'
       }
-      analogyMaking: {,
+      analogyMaking {
         name: 'Création d\'Analogies'
         effectiveness: 0.8,
         duration: '15-30 minutes'
@@ -157,7 +157,7 @@ export class AlexCreativityBooster extends EventEmitter  {
 
     // États créatifs
     this.creativeStates = {
-      inspiration: {,
+      inspiration {
         characteristics: ['elevated_mood',
       'openness',
       'curiosity',
@@ -166,7 +166,7 @@ export class AlexCreativityBooster extends EventEmitter  {
       intensity: STR_HIGH
       productivity: 0.9
       }
-      flow: {,
+      flow {
         characteristics: ['focused_attention',
       'effortless_concentration',
       'time_distortion']
@@ -174,19 +174,19 @@ export class AlexCreativityBooster extends EventEmitter  {
       intensity: 'peak'
       productivity: 1.0
       }
-      incubation: {,
+      incubation {
         characteristics: ['subconscious_processing', 'relaxed_state', 'mind_wandering']
         duration: 'hours-days',
         intensity: 'low'
         productivity: 0.3
       }
-      illumination: {,
+      illumination {
         characteristics: ['sudden_insight', 'aha_moment', 'solution_clarity']
         duration: 'seconds-minutes',
         intensity: 'peak'
         productivity: 0.95
       }
-      exploration: {,
+      exploration {
         characteristics: ['experimentation', 'play', 'boundary_pushing']
         duration: 'variable',
         intensity: STR_MEDIUM
@@ -196,27 +196,27 @@ export class AlexCreativityBooster extends EventEmitter  {
 
     // Barrières créatives
     this.creativeBarriers = {
-      perfectionism: {,
+      perfectionism {
         symptoms: ['fear_of_failure', 'excessive_self_criticism', 'paralysis']
         impact: STR_HIGH,
         solutions: ['imperfection_acceptance', 'iteration_mindset', 'small_steps']
       }
-      fixedMindset: {,
+      fixedMindset {
         symptoms: ['routine_thinking', 'resistance_to_change', 'conventional_approaches']
         impact: STR_MEDIUM,
         solutions: ['perspective_shifting', 'new_experiences', 'learning_orientation']
       }
-      fear: {,
+      fear {
         symptoms: ['risk_aversion', 'safe_choices', 'self_doubt']
         impact: STR_HIGH,
         solutions: ['confidence_building', 'safe_experimentation', 'courage_cultivation']
       }
-      pressure: {,
+      pressure {
         symptoms: ['stress', 'deadline_anxiety', 'performance_pressure']
         impact: STR_MEDIUM,
         solutions: ['stress_management', 'playful_approach', 'pressure_reframing']
       }
-      comparison: {,
+      comparison {
         symptoms: ['others_comparison', 'inadequacy_feelings', 'competitive_focus']
         impact: STR_MEDIUM,
         solutions: ['unique_voice_finding', 'personal_journey_focus', 'collaboration_over_competition']
@@ -264,7 +264,7 @@ export class AlexCreativityBooster extends EventEmitter  {
    */
   async initializeCreativeSystems() {
     // Initialisation des techniques créatives (ajout de la propriété active)
-    Object.keys(this.stimulationTechniques).forEach(_technique => // Code de traitement approprié ici catch (error) {
+    Object.keys(this.stimulationTechniques).for (Each(_technique => // Code de traitement approprié ici catch (error)) {
     console.error("Logger error:", error);
   }}
 
@@ -317,10 +317,10 @@ export class AlexCreativityBooster extends EventEmitter  {
       timestamp: new Date(),
       request: request
       userProfile: userProfile,
-      analysisPhase: {}
-      stimulationPhase: {}
-      outputPhase: {}
-      feedbackPhase: {}
+      analysisPhase {}
+      stimulationPhase {}
+      outputPhase {}
+      feedbackPhase {}
     };    // Phase 1: Analyse de la demande créative
     stimulation.analysisPhase = await this.analyzeCreativeRequest(request, userProfile);
 
@@ -335,7 +335,7 @@ export class AlexCreativityBooster extends EventEmitter  {
 
     // Stockage de la session
     this.creativeSessions.push(stimulation);
-    if (this.creativeSessions.length > 200) {
+    if ( (this.creativeSessions.length > 200)) {
       this.creativeSessions.shift();
     }
 
@@ -375,7 +375,7 @@ export class AlexCreativityBooster extends EventEmitter  {
       selectedTechniques: [],
       sequenceOrder: []
       adaptations: [],
-      expectedOutcome: {}
+      expectedOutcome {}
     };    // Sélection des techniques appropriées
     stimulation.selectedTechniques = this.selectAppropiateTechniques(analysis);
 
@@ -438,7 +438,7 @@ export class AlexCreativityBooster extends EventEmitter  {
     // Techniques spécifiques selon le domaine
     const domain = stimulationPhase.adaptations[0]?
       .analysis?.domain;
-    if (domain && this.creativeDomains[domain]) {
+    if ( (domain && this.creativeDomains[domain])) {
       content.push({
         type :
        'domain_guidance'
@@ -460,7 +460,7 @@ export class AlexCreativityBooster extends EventEmitter  {
       "Imaginez un monde où les couleurs ont des émotions. Quelle histoire raconteraient-elles ?
       STR_Créez quelque chose en utilisant seulement des objets que vous pouvez voir autour de vous maintenant.STR_Si vous pouviez donner vie à un de vos rêves, lequel choisiriez-vous et comment ?STR_Inventez un nouveau sens humain et explorez comment il changerait notre perception du monde.STR_Combinez deux de vos passions de manière inattendue pour créer quelque chose d'unique."
     ];    // Prompts spécialisés selon le domaine
-    const domainSpecificPrompts = {
+    const domainSpecif (icPrompts =) {
       visual :
        [
         "Peignez votre humeur du moment en utilisant seulement des formes géométriques.STR_Créez un autoportrait sans montrer votre visage.STR_Dessinez la mélodie de votre chanson préférée."
@@ -475,7 +475,7 @@ export class AlexCreativityBooster extends EventEmitter  {
     prompts.push(...universalPrompts.slice(0, 2));
 
     const targetDomain = stimulationPhase.adaptations[0]?;      .analysis?.domain;
-    if (targetDomain && domainSpecificPrompts[targetDomain]) {
+    if ( (targetDomain && domainSpecificPrompts[targetDomain])) {
       prompts.push(...domainSpecificPrompts[targetDomain].slice(0, 2));
     }
 
@@ -514,23 +514,23 @@ export class AlexCreativityBooster extends EventEmitter  {
   /**
    * Identification des barrières créatives
    */
-  identifyCreativeBarriers(request, userProfile) {
+  identif (yCreativeBarriers(request, userProfile)) {
     const barriers = [];    // Analyse du langage pour détecter les barrières
     const requestText = request.toLowerCase();
 
-    if (requestText.includes('parfait') || requestText.includes('pas assez bon')) {
+    if ( (requestText.includes('parfait') || requestText.includes('pas assez bon'))) {
       barriers.push('perfectionism');
     }
 
-    if (requestText.includes('pas créatif') || requestText.includes('pas doué')) {
+    if ( (requestText.includes('pas créatif') || requestText.includes('pas doué'))) {
       barriers.push('fixedMindset');
     }
 
-    if (requestText.includes('peur') || requestText.includes('risque')) {
+    if ( (requestText.includes('peur') || requestText.includes('risque'))) {
       barriers.push('fear');
     }
 
-    if (requestText.includes('urgence') || requestText.includes('rapidement')) {
+    if ( (requestText.includes('urgence') || requestText.includes('rapidement'))) {
       barriers.push('pressure');
     }
 

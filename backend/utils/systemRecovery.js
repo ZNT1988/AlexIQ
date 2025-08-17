@@ -3,9 +3,9 @@
  * Detecte et corrige automatiquement les erreurs courantes
  */
 
-import fs from 'fs';
-import path from 'path';
-import logger from '../config/logger.js';
+import fs from "fs";
+import path from "path";
+import logger from "../config/logger.js";
 
 class SystemRecovery {
   constructor() {
@@ -18,12 +18,12 @@ class SystemRecovery {
    */
   async detectAndRecover() {
     if (this.isRecovering) {
-      logger.warn('Recovery deja en cours, abandon...');
+      logger.warn("Recovery deja en cours, abandon...");
       return false;
     }
 
     this.isRecovering = true;
-    logger.info('Demarrage du systeme de recuperation automatique...');
+    logger.info("Demarrage du systeme de recuperation automatique...");
 
     try {
       // 1. Verifier les modules core
@@ -38,7 +38,7 @@ class SystemRecovery {
       // 4. Nettoyer les caches
       await this.clearCaches();
 
-      logger.info('Recuperation automatique terminee avec succes');
+      logger.info("Recuperation automatique terminee avec succes");
       return true;
 
     } catch (error) {
@@ -53,26 +53,26 @@ class SystemRecovery {
    */
   async checkCoreModules() {
     const coreModules = [
-      'core/HustleFinderCore.js',
-      'core/NeuroCore.js',
-      'core/AlexEvolutionCore.js',
-      'core/SoulPrintGenerator.js'
+      "core/HustleFinderCore.js",
+      "core/NeuroCore.js",
+      "core/AlexEvolutionCore.js",
+      "core/SoulPrintGenerator.js"
     ];
 
     for (const module of coreModules) {
       const modulePath = path.resolve(module);
 
       if (!fs.existsSync(modulePath)) {
-        logger.error('Module manquant: ' + module);
-        throw new Error('Module critique manquant: ' + module);
+        logger.error("Module manquant: " + module);
+        throw new Error("Module critique manquant: " + module);
       }
 
       // Verifier que le module peut etre importe
       try {
-        await import('file://' + modulePath);
-        logger.info('Module OK: ' + module);
+        await import("file://" + modulePath);
+        logger.info("Module OK: " + module);
       } catch (error) {
-        logger.error('Erreur d\'import pour ' + module + ':', error.message);
+        logger.error("Erreur d'import pour " + module + ":", error.message);
         throw error;
       }
     }
@@ -83,22 +83,22 @@ class SystemRecovery {
    */
   async removeDuplicates() {
     const duplicates = [
-      'systems/HustleFinderCore.js',
-      'systems/AlexMasterSystem.js',
-      'systems/PersonalAssistant.js',
-      'systems/VisualCortex.js',
-      'systems/AlexMemoryPalace.js'
+      "systems/HustleFinderCore.js",
+      "systems/AlexMasterSystem.js",
+      "systems/PersonalAssistant.js",
+      "systems/VisualCortex.js",
+      "systems/AlexMemoryPalace.js"
     ];
 
     for (const duplicate of duplicates) {
       if (fs.existsSync(duplicate)) {
         try {
           fs.unlinkSync(duplicate);
-          logger.info('Doublon supprime: ' + duplicate);
-          this.recoveryActions.push('Supprime doublon: ' + duplicate);
+          logger.info("Doublon supprime: " + duplicate);
+          this.recoveryActions.push("Supprime doublon: " + duplicate);
         } catch (error) {
           try {
-            logger.warn('Impossible de supprimer ' + duplicate + ':', error.message);
+            logger.warn("Impossible de supprimer " + duplicate + ":", error.message);
           } catch (error) {
             // Logger fallback - ignore error
           }
@@ -112,18 +112,18 @@ class SystemRecovery {
    */
   async validateConfiguration() {
     // Verifier .env
-    if (!fs.existsSync('.env')) {
-      const defaultEnv = 'PORT=8080\n';
-      fs.writeFileSync('.env', defaultEnv);
-      logger.info('Fichier .env cree avec configuration par defaut');
-      this.recoveryActions.push('Cree fichier .env par defaut');
+    if (!fs.existsSync(".env")) {
+      const defaultEnv = "PORT=8080\n";
+      fs.writeFileSync(".env", defaultEnv);
+      logger.info("Fichier .env cree avec configuration par defaut");
+      this.recoveryActions.push("Cree fichier .env par defaut");
     }
 
     // Verifier dossier logs
-    if (!fs.existsSync('logs')) {
-      fs.mkdirSync('logs', { recursive: true });
-      logger.info('Dossier logs cree');
-      this.recoveryActions.push('Cree dossier logs');
+    if (!fs.existsSync("logs")) {
+      fs.mkdirSync("logs", { recursive: true });
+      logger.info("Dossier logs cree");
+      this.recoveryActions.push("Cree dossier logs");
     }
   }
 
@@ -132,20 +132,20 @@ class SystemRecovery {
    */
   async clearCaches() {
     const cachePaths = [
-      'node_modules/.cache',
-      '.cache',
-      'temp'
+      "node_modules/.cache",
+      ".cache",
+      "temp"
     ];
 
     for (const cachePath of cachePaths) {
       if (fs.existsSync(cachePath)) {
         try {
           fs.rmSync(cachePath, { recursive: true, force: true });
-          logger.info('Cache nettoye: ' + cachePath);
-          this.recoveryActions.push('Cache nettoye: ' + cachePath);
+          logger.info("Cache nettoye: " + cachePath);
+          this.recoveryActions.push("Cache nettoye: " + cachePath);
         } catch (error) {
           try {
-            logger.warn('Impossible de nettoyer ' + cachePath + ':', error.message);
+            logger.warn("Impossible de nettoyer " + cachePath + ":", error.message);
           } catch (error) {
             // Logger fallback - ignore error
           }

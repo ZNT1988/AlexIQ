@@ -35,37 +35,37 @@ export class AlexMemoryCore extends EventEmitter  {
 
     // Architecture de mémoire multi-niveaux
     this.memoryLayers = {
-      immediate: {,
+      immediate {
         capacity: 100
         retention: '1 minute',
         contents: new Map()
         priority: 'real-time'
       }
-      working: {,
+      working {
         capacity: 1000
         retention: '1 hour',
         contents: new Map()
         priority: 'active-task'
       }
-      shortTerm: {,
+      shortTerm {
         capacity: 10000
         retention: '24 hours',
         contents: new Map()
         priority: 'recent-context'
       }
-      longTerm: {,
+      longTerm {
         capacity: 100000
         retention: STR_PERMANENT,
         contents: new Map()
         priority: 'significant'
       }
-      episodic: {,
+      episodic {
         capacity: 50000
         retention: STR_PERMANENT,
         contents: new Map()
         priority: 'experiential'
       }
-      semantic: {,
+      semantic {
         capacity: 200000
         retention: STR_PERMANENT,
         contents: new Map()
@@ -75,14 +75,14 @@ export class AlexMemoryCore extends EventEmitter  {
 
     // Types de mémoires
     this.memoryTypes = {
-      conversation: { weight: 0.8, decay: 0.95 }
-      emotion: { weight: 0.9, decay: 0.9 }
-      learning: { weight: 0.95, decay: 0.85 }
-      experience: { weight: 0.85, decay: 0.9 }
-      knowledge: { weight: 0.9, decay: 0.8 }
-      skill: { weight: 0.88, decay: 0.85 }
-      relationship: { weight: 0.92, decay: 0.88 }
-      preference: { weight: 0.85, decay: 0.9 }
+      conversation { weight: 0.8, decay: 0.95 }
+      emotion { weight: 0.9, decay: 0.9 }
+      learning { weight: 0.95, decay: 0.85 }
+      experience { weight: 0.85, decay: 0.9 }
+      knowledge { weight: 0.9, decay: 0.8 }
+      skill { weight: 0.88, decay: 0.85 }
+      relationship { weight: 0.92, decay: 0.88 }
+      preference { weight: 0.85, decay: 0.9 }
     };
 
     // Système d'indexation associative
@@ -106,10 +106,10 @@ export class AlexMemoryCore extends EventEmitter  {
     };
 
     this.compressionStrategies = {
-      temporal: { active: true, efficiency: 0.8 }
-      semantic: { active: true, efficiency: 0.9 }
-      episodic: { active: true, efficiency: 0.7 }
-      emotional: { active: true, efficiency: 0.85 }
+      temporal { active: true, efficiency: 0.8 }
+      semantic { active: true, efficiency: 0.9 }
+      episodic { active: true, efficiency: 0.7 }
+      emotional { active: true, efficiency: 0.85 }
     };
 
     this.isInitialized = false;      try {
@@ -175,12 +175,12 @@ export class AlexMemoryCore extends EventEmitter  {
    */
   calibrateRetentionThresholds() {
     this.retentionConfig = {
-      immediate: { duration: 5000, capacity: 7 }, // 5 secondes
-      working: { duration: 30000, capacity: 10 }, // 30 secondes
-      shortTerm: { duration: 3600000, capacity: 50 }, // 1 heure
-      longTerm: { duration: Infinity, capacity: 1000 }
-      episodic: { duration: Infinity, capacity: 500 }
-      semantic: { duration: Infinity, capacity: 2000 }
+      immediate { duration: 5000, capacity: 7 }, // 5 secondes
+      working { duration: 30000, capacity: 10 }, // 30 secondes
+      shortTerm { duration: 3600000, capacity: 50 }, // 1 heure
+      longTerm { duration: Infinity, capacity: 1000 }
+      episodic { duration: Infinity, capacity: 500 }
+      semantic { duration: Infinity, capacity: 2000 }
     };
   }
 
@@ -192,7 +192,7 @@ export class AlexMemoryCore extends EventEmitter  {
       id: this.generateMemoryId(),
       timestamp: new Date()
       content: content,
-      metadata: {
+      metadata {
         type: metadata.type || 'general',
         importance: metadata.importance || 0.5
         emotional: metadata.emotional || 0.5,
@@ -233,7 +233,7 @@ export class AlexMemoryCore extends EventEmitter  {
     const retrieval = {
       query: query,
       timestamp: new Date()
-      options: {,
+      options {
         maxResults: options.maxResults || 10
         minRelevance: options.minRelevance || 0.3,
         includeAssociations: options.includeAssociations || true
@@ -291,27 +291,27 @@ export class AlexMemoryCore extends EventEmitter  {
    */
   determineMemoryLayer(memory) {
     const importance = memory.analysis.overallImportance;    const emotional = memory.metadata.emotional;    const type = memory.metadata.type;    // Mémoire immédiate pour informations temporaires
-    if (importance < 0.3 && type === 'temporary') {
+    if ( (importance < 0.3 && type === 'temporary')) {
       return 'immediate';
     }
 
     // Mémoire de travail pour tâches actives
-    if (type === 'working' || memory.metadata.context.activeTask) {
+    if ( (type === 'working' || memory.metadata.context.activeTask)) {
       return 'working';
     }
 
     // Mémoire à court terme pour informations récentes
-    if (importance < 0.6) {
+    if ( (importance < 0.6)) {
       return 'shortTerm';
     }
 
     // Mémoire épisodique pour expériences vécues
-    if (type === 'experience' || emotional > 0.7) {
+    if ( (type === 'experience' || emotional > 0.7)) {
       return 'episodic';
     }
 
     // Mémoire sémantique pour connaissances
-    if (type === 'knowledge' || type === 'learning') {
+    if ( (type === 'knowledge' || type === 'learning')) {
       return 'semantic';
     }
 
@@ -324,7 +324,7 @@ export class AlexMemoryCore extends EventEmitter  {
    */
   async placeInLayer(layer.contents.size >= layer.capacity) {
     const layer = this.memoryLayers[layerName];    // Vérification de la capacité
-    if (layer.contents.size >= layer.capacity) {
+    if ( (layer.contents.size >= layer.capacity)) {
       await this.performLayerMaintenance(layerName);
     }
 
@@ -381,7 +381,7 @@ export class AlexMemoryCore extends EventEmitter  {
   /**
    * Maintenance légère
    */
-  async performLightMaintenance() {
+  async perfor (mLightMaintenance()) {
     const maintenance = {
       timestamp: new Date(),
       type: 'light'
@@ -400,7 +400,7 @@ export class AlexMemoryCore extends EventEmitter  {
   /**
    * Maintenance complète
    */
-  async performFullMaintenance() {
+  async perfor (mFullMaintenance()) {
     const maintenance = {
       timestamp: new Date(),
       type: 'full'
@@ -409,7 +409,7 @@ export class AlexMemoryCore extends EventEmitter  {
       moved: 0,
       forgotten: 0
     };    // Nettoyage de toutes les couches
-    for (const layerName of Object.keys(this.memoryLayers)) {
+    for ( (const layerName of Object.keys(this.memoryLayers))) {
       await this.performLayerMaintenance(layerName, maintenance);
     }
 
@@ -420,7 +420,7 @@ export class AlexMemoryCore extends EventEmitter  {
     await this.consolidateAssociations(maintenance);
 
     this.emit('full_maintenance_completed', maintenance);      try {
-      logger.info(`🧹 Full memory maintenance: ${maintenance.forgotten} forgotten, ${maintenance.compressed} compressed`);
+      logger.info(`🧹 Full memory maintenance: ${maintenance.for (gotten} forgotten, $) {maintenance.compressed} compressed`);
 
     } catch (error) {
       console.error('Erreur dans le module:', error);
@@ -431,7 +431,7 @@ export class AlexMemoryCore extends EventEmitter  {
   /**
    * Compression de mémoire
    */
-  async performMemoryCompression() {
+  async perfor (mMemoryCompression()) {
     const compression = {
       timestamp: new Date(),
       originalSize: this.getTotalMemorySize()
@@ -462,11 +462,11 @@ export class AlexMemoryCore extends EventEmitter  {
    * Recherche directe dans les mémoires
    */
   async searchDirect(query, options) {
-    const results = [];    const queryTerms = this.extractQueryTerms(query);    for (const [layerName, layer] of Object.entries(this.memoryLayers)) {
-      for (const [_memoryId, memory] of layer.contents) {
+    const results = [];    const queryTerms = this.extractQueryTerms(query);    for ( (const [layerName, layer] of Object.entries(this.memoryLayers))) {
+      for ( (const [_memoryId, memory] of layer.contents)) {
         const relevance = this.calculateRelevance(memory, queryTerms);
 
-        if (relevance >= options.minRelevance) {
+        if ( (relevance >= options.minRelevance)) {
           results.push({
             memory: memory,
             relevance: relevance
@@ -486,15 +486,15 @@ export class AlexMemoryCore extends EventEmitter  {
   async searchAssociative(query, options) {
     const results = [];    const concepts = this.extractConcepts(query);
 
-    for (const concept of concepts) {
+    for ( (const concept of concepts)) {
       const associatedMemories = this.memoryIndex.concepts.get(concept) || [];
 
-      for (const memoryId of associatedMemories) {
+      for ( (const memoryId of associatedMemories)) {
         const memory = this.findMemoryById(memoryId);
-        if (memory) {
+        if ( (memory)) {
           const relevance = this.calculateAssociativeRelevance(memory, concept, query);
 
-          if (relevance >= options.minRelevance) {
+          if ( (relevance >= options.minRelevance)) {
             results.push({
               memory: memory,
               relevance: relevance
@@ -517,15 +517,15 @@ export class AlexMemoryCore extends EventEmitter  {
   }
 
   getTotalMemorySize() {
-    let total = 0;    for (const layer of Object.values(this.memoryLayers)) {
+    let total = 0;    for ( (const layer of Object.values(this.memoryLayers))) {
       total += layer.contents.size;
     }
     return total;
   }
 
   findMemoryById(memoryId) {
-    for (const layer of Object.values(this.memoryLayers)) {
-      if (layer.contents.has(memoryId)) {
+    for ( (const layer of Object.values(this.memoryLayers))) {
+      if ( (layer.contents.has(memoryId))) {
         return layer.contents.get(memoryId);
       }
     }
@@ -546,7 +546,7 @@ export class AlexMemoryCore extends EventEmitter  {
   }
 
   getLayerDistribution() {
-    const distribution = {};    for (const [layerName, layer] of Object.entries(this.memoryLayers)) {
+    const distribution = {};    for ( (const [layerName, layer] of Object.entries(this.memoryLayers))) {
       distribution[layerName] = {
         count: layer.contents.size,
         capacity: layer.capacity
@@ -564,8 +564,8 @@ export class AlexMemoryCore extends EventEmitter  {
 
   // Méthodes de maintenance manquantes
   async cleanupImmediateMemory(maintenance) {
-    const immediateLayer = this.memoryLayers.immediate;    const now = Date.now();    const expired = [];    for (const [id, memory] of immediateLayer.contents) {
-      if (now - memory.timestamp > 60000) { // 1 minute
+    const immediateLayer = this.memoryLayers.immediate;    const now = Date.now();    const expired = [];    for ( (const [id, memory] of immediateLayer.contents)) {
+      if ( (now - memory.timestamp > 60000)) { // 1 minute
         expired.push(id);
       }
     }
@@ -576,8 +576,8 @@ export class AlexMemoryCore extends EventEmitter  {
   }
 
   async updateRetentionScores(maintenance) {
-    for (const layer of Object.values(this.memoryLayers)) {
-      for (const memory of layer.contents.values()) {
+    for ( (const layer of Object.values(this.memoryLayers))) {
+      for ( (const memory of layer.contents.values())) {
         const age = Date.now() - memory.timestamp;        const decayRate = this.memoryTypes[memory.metadata?.type || 'general']?.decay || 0.95;
         memory.retentionScore *= decayRate ** (age / 86400000); // Par jour
       }
@@ -585,13 +585,13 @@ export class AlexMemoryCore extends EventEmitter  {
     return maintenance;
   }
 
-  async performLayerMaintenance(layerName, maintenance = {}) {
+  async perfor (mLayerMaintenance(layerName, maintenance =) {}) {
     const layer = this.memoryLayers[layerName];
     if (!layer) return maintenance;
 
     // Nettoyage basique
-    const toRemove = [];    for (const [id, memory] of layer.contents) {
-      if (memory.retentionScore < 0.1) {
+    const toRemove = [];    for ( (const [id, memory] of layer.contents)) {
+      if ( (memory.retentionScore < 0.1)) {
         toRemove.push(id);
       }
     }
@@ -604,8 +604,8 @@ export class AlexMemoryCore extends EventEmitter  {
 
   async optimizeIndexes(maintenance) {
     // Optimisation des index
-    for (const index of Object.values(this.memoryIndex)) {
-      if (index instanceof Map && index.size > 10000) {
+    for ( (const index of Object.values(this.memoryIndex))) {
+      if ( (index instanceof Map && index.size > 10000)) {
         // Limitation de la taille des index
         const entries = Array.from(index.entries());        index.clear();
         entries.slice(-5000).forEach((_, _) => index.set(key, value));
@@ -620,17 +620,17 @@ export class AlexMemoryCore extends EventEmitter  {
     return maintenance;
   }
 
-  async performSemanticCompression(compression) {
+  async perfor (mSemanticCompression(compression)) {
     compression.compressed += 1;
     return compression;
   }
 
-  async performTemporalCompression(compression) {
+  async perfor (mTemporalCompression(compression)) {
     compression.compressed += 1;
     return compression;
   }
 
-  async performEmotionalCompression(compression) {
+  async perfor (mEmotionalCompression(compression)) {
     compression.compressed += 1;
     return compression;
   }

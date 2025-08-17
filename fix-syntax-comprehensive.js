@@ -5,10 +5,10 @@
  * Corrige : virgules manquantes, constantes non définies, code incomplet
  */
 
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
-const MODULES_DIR = path.resolve('./backend/alex-modules');
+const MODULES_DIR = path.resolve("./backend/alex-modules");
 
 class SyntaxFixer {
   constructor() {
@@ -22,7 +22,7 @@ class SyntaxFixer {
   }
 
   async fixAllModules() {
-    console.log('🔧 Début de la correction des modules...\n');
+    console.log("🔧 Début de la correction des modules...\n");
     
     const moduleFiles = this.findAllModules();
     this.stats.totalFiles = moduleFiles.length;
@@ -46,7 +46,7 @@ class SyntaxFixer {
         
         if (stat.isDirectory()) {
           scanDirectory(fullPath);
-        } else if (entry.endsWith('.js')) {
+        } else if (entry.endsWith(".js")) {
           modules.push(fullPath);
         }
       }
@@ -61,7 +61,7 @@ class SyntaxFixer {
     console.log(`🔧 Correction: ${fileName}`);
 
     try {
-      const originalContent = fs.readFileSync(filePath, 'utf8');
+      const originalContent = fs.readFileSync(filePath, "utf8");
       let content = originalContent;
       let issuesFixed = 0;
 
@@ -94,13 +94,13 @@ class SyntaxFixer {
       }
 
       if (content !== originalContent) {
-        fs.writeFileSync(filePath, content, 'utf8');
+        fs.writeFileSync(filePath, content, "utf8");
         this.fixedFiles.push({ file: fileName, path: filePath, issues: issuesFixed });
         this.stats.filesFixed++;
         this.stats.issuesFixed += issuesFixed;
         console.log(`  ✅ ${issuesFixed} problèmes corrigés`);
       } else {
-        console.log(`  ✓ Aucune correction nécessaire`);
+        console.log("  ✓ Aucune correction nécessaire");
       }
 
     } catch (error) {
@@ -110,7 +110,7 @@ class SyntaxFixer {
   }
 
   addMissingConstants(content) {
-    const lines = content.split('\n');
+    const lines = content.split("\n");
     const usedConstants = new Set();
     const definedConstants = new Set();
     
@@ -135,11 +135,11 @@ class SyntaxFixer {
 
     // Définir les constantes manquantes communes
     const constantDefinitions = {
-      'STR_QUESTION': 'question',
-      'STR_REQUEST': 'request',
-      'STR_NEUTRAL': 'neutral',
-      'STR_UNDERSTANDING': 'understanding',
-      'STR_MODIFIER': 'modifier'
+      "STR_QUESTION": "question",
+      "STR_REQUEST": "request",
+      "STR_NEUTRAL": "neutral",
+      "STR_UNDERSTANDING": "understanding",
+      "STR_MODIFIER": "modifier"
     };
 
     let constantsToAdd = [];
@@ -148,22 +148,22 @@ class SyntaxFixer {
         constantsToAdd.push(`const ${constName} = '${constantDefinitions[constName]}';`);
       } else {
         // Deviner la valeur basée sur le nom
-        const value = constName.replace('STR_', '').toLowerCase();
+        const value = constName.replace("STR_", "").toLowerCase();
         constantsToAdd.push(`const ${constName} = '${value}';`);
       }
     });
 
     if (constantsToAdd.length > 0) {
-      const headerComment = '// Constantes pour chaînes dupliquées (optimisation SonarJS)';
-      const constantsBlock = constantsToAdd.join('\n');
+      const headerComment = "// Constantes pour chaînes dupliquées (optimisation SonarJS)";
+      const constantsBlock = constantsToAdd.join("\n");
       
       // Insérer après les imports ou au début
       const importEndIndex = this.findImportEndIndex(lines);
-      lines.splice(importEndIndex + 1, 0, '', headerComment, constantsBlock);
+      lines.splice(importEndIndex + 1, 0, "", headerComment, constantsBlock);
       
       return { 
         fixed: true, 
-        content: lines.join('\n'), 
+        content: lines.join("\n"), 
         count: constantsToAdd.length 
       };
     }
@@ -177,20 +177,20 @@ class SyntaxFixer {
     
     // Corriger les objets multi-lignes
     content = content.replace(/(\w+:\s*[^,\n}]+)(\n\s+\w+:)/g, (match, p1, p2) => {
-      if (!p1.endsWith(',')) {
+      if (!p1.endsWith(",")) {
         count++;
         fixed = true;
-        return p1 + ',' + p2;
+        return p1 + "," + p2;
       }
       return match;
     });
 
     // Corriger les arrays multi-lignes
     content = content.replace(/('[^']*'|"[^"]*"|\w+)(\n\s+('[^']*'|"[^"]*"|\w+))/g, (match, p1, p2) => {
-      if (!p1.endsWith(',') && !p2.trim().startsWith(']')) {
+      if (!p1.endsWith(",") && !p2.trim().startsWith("]")) {
         count++;
         fixed = true;
-        return p1 + ',' + p2;
+        return p1 + "," + p2;
       }
       return match;
     });
@@ -206,7 +206,7 @@ class SyntaxFixer {
     content = content.replace(/this\.processLongOperation\(args\)/g, () => {
       count++;
       fixed = true;
-      return '// Code de traitement approprié ici';
+      return "// Code de traitement approprié ici";
     });
 
     // Remplacer les STR_MODIFIER non résolus
@@ -230,7 +230,7 @@ class SyntaxFixer {
     content = content.replace(/\.forEach\(\w+ => this\.processLongOperation\(args\)\s*\)/g, () => {
       count++;
       fixed = true;
-      return '.forEach(item => {\n    // Traitement de l\'item\n    console.log(item);\n  })';
+      return ".forEach(item => {\n    // Traitement de l'item\n    console.log(item);\n  })";
     });
 
     return { fixed, content, count };
@@ -242,7 +242,7 @@ class SyntaxFixer {
 
     // Corriger les propriétés d'objet manquantes de deux-points
     content = content.replace(/(\w+)\s+(\{|\[)/g, (match, prop, bracket) => {
-      if (!match.includes(':')) {
+      if (!match.includes(":")) {
         count++;
         fixed = true;
         return `${prop}: ${bracket}`;
@@ -272,9 +272,9 @@ class SyntaxFixer {
     
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
-      if (line.startsWith('import ') || line.startsWith('const ') && line.includes('require(')) {
+      if (line.startsWith("import ") || line.startsWith("const ") && line.includes("require(")) {
         lastImportIndex = i;
-      } else if (line && !line.startsWith('//') && !line.startsWith('/*') && lastImportIndex !== -1) {
+      } else if (line && !line.startsWith("//") && !line.startsWith("/*") && lastImportIndex !== -1) {
         break;
       }
     }
@@ -283,45 +283,45 @@ class SyntaxFixer {
   }
 
   displayResults() {
-    console.log('\n' + '='.repeat(60));
-    console.log('🎯 RÉSULTATS DE LA CORRECTION');
-    console.log('='.repeat(60));
+    console.log("\n" + "=".repeat(60));
+    console.log("🎯 RÉSULTATS DE LA CORRECTION");
+    console.log("=".repeat(60));
     
-    console.log(`\n📊 STATISTIQUES:`);
+    console.log("\n📊 STATISTIQUES:");
     console.log(`  • Fichiers analysés: ${this.stats.totalFiles}`);
     console.log(`  • Fichiers corrigés: ${this.stats.filesFixed}`);
     console.log(`  • Problèmes résolus: ${this.stats.issuesFixed}`);
     
     if (this.fixedFiles.length > 0) {
-      console.log(`\n✅ FICHIERS CORRIGÉS:`);
+      console.log("\n✅ FICHIERS CORRIGÉS:");
       this.fixedFiles.forEach(fix => {
         console.log(`  • ${fix.file}: ${fix.issues} corrections`);
       });
     }
     
     if (this.errors.length > 0) {
-      console.log(`\n❌ ERREURS RENCONTRÉES:`);
+      console.log("\n❌ ERREURS RENCONTRÉES:");
       this.errors.forEach(error => {
         console.log(`  • ${error.file}: ${error.error}`);
       });
     }
     
-    console.log(`\n🎉 Correction terminée!`);
+    console.log("\n🎉 Correction terminée!");
     
     if (this.stats.filesFixed > 0) {
-      console.log(`\n🚀 PROCHAINES ÉTAPES:`);
-      console.log(`  1. Vérifier les modules corrigés`);
-      console.log(`  2. Tester le fonctionnement`);
-      console.log(`  3. Remplacer les appels API statiques`);
+      console.log("\n🚀 PROCHAINES ÉTAPES:");
+      console.log("  1. Vérifier les modules corrigés");
+      console.log("  2. Tester le fonctionnement");
+      console.log("  3. Remplacer les appels API statiques");
     }
   }
 }
 
 // Exécution du script
-console.log('🚀 Démarrage de la correction syntaxique...');
+console.log("🚀 Démarrage de la correction syntaxique...");
 const fixer = new SyntaxFixer();
 fixer.fixAllModules().catch(error => {
-  console.error('❌ Erreur lors de la correction:', error);
+  console.error("❌ Erreur lors de la correction:", error);
   process.exit(1);
 });
 

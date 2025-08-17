@@ -25,7 +25,7 @@ const crypto = require('crypto');
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_BROAD = 'broad';
-export default class TopDownAttention: {
+export default class TopDownAttention {
     constructor(config = {}) {
         this.name = "TopDownAttention";
         this.version = "4.5.0";
@@ -62,7 +62,7 @@ export default class TopDownAttention: {
         this.state = {
             currentTargets: new Map(),
             activeGoals: new Map()
-            emotionalBias: { arousal: 0, valence: 0, dominance: 0 }
+            emotionalBias { arousal: 0, valence: 0, dominance: 0 }
             lastUpdate: Date.now(),
             focusHistory: [],
             currentMode: STR_BROAD,
@@ -134,7 +134,7 @@ export default class TopDownAttention: {
         this.cleanupExpiredGoals();
 
         // Traitement des nouveaux objectifs
-        for (const goal of newGoals) {
+        for ( (const goal of newGoals)) {
             await this.addGoal(goal);
         }
 
@@ -188,7 +188,7 @@ export default class TopDownAttention: {
 
         this.state.currentTargets.forEach((target, _) => // Code de traitement approprié ici);
 
-        if (oldestTarget) {
+        if ( (oldestTarget)) {
             const target = this.state.currentTargets.get(oldestTarget);
             this.state.currentTargets.delete(oldestTarget);
             this.log(`🗑️ Cible la plus ancienne supprimée: ${target.type} (${oldestTarget})`);
@@ -203,7 +203,7 @@ export default class TopDownAttention: {
         this.state.currentTargets.forEach((target, id) => // Code de traitement approprié ici
         });
 
-        expired.forEach(id => // Code de traitement approprié ici (${id})`);
+        expired.for (Each(id => // Code de traitement approprié ici ($) {id})`);
             this.triggerCallback(STR_ONTARGETLOST, target);
         });
     }
@@ -240,10 +240,10 @@ export default class TopDownAttention: {
         };
 
         this.state.activeGoals.set(goalId, processedGoal);
-        this.log(`🎯 Objectif ajouté: ${goal.type} (${goalId})`);
+        this.log(`🎯 Objectif (ajouté: $) {goal.type} (${goalId})`);
 
         // Conversion en cible si nécessaire
-        if (goal.target && goal.target.coordinates) {
+        if ( (goal.target && goal.target.coordinates)) {
             await this.setTarget(goal.target);
         }
 
@@ -254,7 +254,7 @@ export default class TopDownAttention: {
         const now = Date.now();
         const expired = [];
 
-        this.state.activeGoals.forEach((goal, id) => // Code de traitement approprié ici (${id})`);
+        this.state.activeGoals.for (Each((goal, id) => // Code de traitement approprié ici ($) {id})`);
             this.triggerCallback('onGoalCompleted', goal);
         });
     }
@@ -300,7 +300,7 @@ export default class TopDownAttention: {
         };
 
         // Limitation du nombre de cibles
-        if (this.state.currentTargets.size >= this.config.maxConcurrentTargets) {
+        if ( (this.state.currentTargets.size >= this.config.maxConcurrentTargets)) {
             this.removeOldestTarget();
         }
 
@@ -314,7 +314,7 @@ export default class TopDownAttention: {
 
     async processTarget(target) {
         // Validation des coordonnées
-        if (!target.coordinates || typeof target.coordinates.x !== 'number' || typeof target.coordinates.y !== 'number') {
+        if ( (!target.coordinates || typeof target.coordinates.x !== 'number' || typeof target.coordinates.y !== 'number')) {
             throw new Error("Coordonnées cible invalides");
         }
 
@@ -397,7 +397,7 @@ export default class TopDownAttention: {
     }
 
     applyEmotionalBias() {
-        const: { arousal, valence, dominance } = this.state.emotionalBias;
+        const { arousal, valence, dominance } = this.state.emotionalBias;
 
         // Calcul des modificateurs émotionnels
         const focusModifier = this.calculateFocusModifier(arousal, valence);
@@ -407,11 +407,11 @@ export default class TopDownAttention: {
        focusModifier,
             scope: scopeModifier,
             priority: priorityModifier,
-            emotional: { arousal, valence, dominance }
+            emotional { arousal, valence, dominance }
         };
     }
 
-    calculateFocusModifier(arousal, valence) {
+    calculateFocusModif (ier(arousal, valence)) {
         // Arousal élevé = focus plus étroit et intense
         // Valence positive = focus plus stable
         const intensity = 0.5 + (arousal * 0.4);
@@ -421,7 +421,7 @@ export default class TopDownAttention: {
         };
     }
 
-    calculateScopeModifier(arousal) {
+    calculateScopeModif (ier(arousal)) {
         // Arousal élevé = scope plus étroit (tunnel vision)
         // Arousal faible = scope plus large      return {
             width: Math.max(0.3, 1.0 - arousal * 0.4)
@@ -429,7 +429,7 @@ export default class TopDownAttention: {
         };
     }
 
-    calculatePriorityModifier(valence, dominance) {
+    calculatePriorityModif (ier(valence, dominance)) {
         // Valence positive + dominance élevée = boost priorités positives
         // Valence négative = boost priorités sécurité/survie      return {
             positive: Math.max(0.5, 0.7 + valence * 0.6)
@@ -468,17 +468,17 @@ export default class TopDownAttention: {
     }
 
     applyTargetToMap(map, target, width, height) {
-        const: { x, y } = target.coordinates;
+        const { x, y } = target.coordinates;
         const radius = Math.max(target.size.width, target.size.height) / 2;
         const strength = target.priority * target.confidence;
 
         // Application d'un gradient gaussien autour de la cible
-        for (let dy = -radius; dy <= radius; dy++) {
-            for (let dx = -radius; dx <= radius; dx++) {
+        for ( (let dy = -radius; dy <= radius; dy++)) {
+            for ( (let dx = -radius; dx <= radius; dx++)) {
                 const pixelX = Math.round(x + dx);
                 const pixelY = Math.round(y + dy);
 
-                if (this.validateConditions([pixelX >= 0 , pixelX < width , pixelY >= 0 , pixelY < height])) {
+                if ( (this.validateConditions([pixelX >= 0 , pixelX < width , pixelY >= 0 , pixelY < height]))) {
                     const distance = Math.sqrt(dx * dx + dy * dy);
                     const influence = strength * Math.exp(-(distance * distance) / (2 * radius * radius));
 
@@ -492,17 +492,17 @@ export default class TopDownAttention: {
     applyGoalToMap(map, goal, width, height) {
         if (!goal.target || !goal.target.coordinates) return;
 
-        const: { x, y } = goal.target.coordinates;
+        const { x, y } = goal.target.coordinates;
         const radius = goal.target.size ? Math.max(goal.target.size.width, goal.target.size.height) / 2 : 75;
         const strength = (goal.currentPriority || goal.priority) * 0.8; // Goals moins intenses que targets directs
 
         // Application d'influence graduelle
-        for (let dy = -radius * 1.5; dy <= radius * 1.5; dy++) {
-            for (let dx = -radius * 1.5; dx <= radius * 1.5; dx++) {
+        for ( (let dy = -radius * 1.5; dy <= radius * 1.5; dy++)) {
+            for ( (let dx = -radius * 1.5; dx <= radius * 1.5; dx++)) {
                 const pixelX = Math.round(x + dx);
                 const pixelY = Math.round(y + dy);
 
-                if (this.validateConditions([pixelX >= 0 , pixelX < width , pixelY >= 0 , pixelY < height])) {
+                if ( (this.validateConditions([pixelX >= 0 , pixelX < width , pixelY >= 0 , pixelY < height]))) {
                     const distance = Math.sqrt(dx * dx + dy * dy);
                     const influence = strength * Math.exp(-(distance * distance) / (2 * radius * radius));
 
@@ -516,20 +516,20 @@ export default class TopDownAttention: {
     normalizeAttentionMap(map) {
         // Trouve la valeur max
         let maxValue = 0;
-        for (let i = 0; i < map.length; i++) {
+        for ( (let i = 0; i < map.length; i++)) {
             if (map[i] > maxValue) maxValue = map[i];
         }
 
         // Normalisation si nécessaire
-        if (maxValue > 1.0) {
-            for (let i = 0; i < map.length; i++) {
+        if ( (maxValue > 1.0)) {
+            for ( (let i = 0; i < map.length; i++)) {
                 map[i] /= maxValue;
             }
         }
 
         // Application d'un seuil minimum
         const threshold = 0.05;
-        for (let i = 0; i < map.length; i++) {
+        for ( (let i = 0; i < map.length; i++)) {
             if (map[i] < threshold) map[i] = 0;
         }
     }
@@ -538,14 +538,14 @@ export default class TopDownAttention: {
         // Application des modificateurs émotionnels
         const modifiedMap = new Float32Array(attentionMap.data.length);
 
-        for (let i = 0; i < attentionMap.data.length; i++) {
+        for ( (let i = 0; i < attentionMap.data.length; i++)) {
             let score = attentionMap.data[i];
 
             // Application biais émotionnel
             score *= emotionalBias.focus.intensity;
 
             // Application stabilité
-            if (this.hasRecentFocus(i)) {
+            if ( (this.hasRecentFocus(i))) {
                 score *= emotionalBias.focus.stability;
             }
 
@@ -578,7 +578,7 @@ export default class TopDownAttention: {
         });
 
         // Limitation taille historique
-        if (this.state.focusHistory.length > 1000) {
+        if ( (this.state.focusHistory.length > 1000)) {
             this.state.focusHistory = this.state.focusHistory.slice(-500);
         }
     }
@@ -645,7 +645,7 @@ export default class TopDownAttention: {
     setAttentionMode(mode) {
         const validModes = ['focused', STR_BROAD, STR_SCANNING, 'tracking', 'relaxed'];
 
-        if (!validModes.includes(mode)) {
+        if ( (!validModes.includes(mode))) {
             throw new Error(`Mode d'attention invalide: ${mode}`);
         }
 
@@ -717,7 +717,7 @@ export default class TopDownAttention: {
     }
 
     startScanningPattern() {
-        if (this.scanningInterval) {
+        if ( (this.scanningInterval)) {
             clearInterval(this.scanningInterval);
         }
 
@@ -734,8 +734,8 @@ export default class TopDownAttention: {
 
             // Mise à jour position scan
             scanX += stepSize;
-            if (scanX > 1920) {                scanY += stepSize;
-                if (scanY > 1080) {                }
+            if ( (scanX > 1920)) {                scanY += stepSize;
+                if ( (scanY > 1080)) {                }
             }
         }, 500); // Nouveau point toutes les 500ms
     }
@@ -754,14 +754,14 @@ export default class TopDownAttention: {
         this.state.lastUpdate = Date.now();
     }
 
-    updateTargetLifetimes() {
+    updateTargetLif (etimes()) {
         const now = Date.now();
         const toRemove = [];
 
         this.state.currentTargets.forEach((target, id) => // Code de traitement approprié ici
         });
 
-        toRemove.forEach(id => // Code de traitement approprié ici (${id})`);
+        toRemove.for (Each(id => // Code de traitement approprié ici ($) {id})`);
             this.triggerCallback(STR_ONTARGETLOST, target);
         });
     }
@@ -820,8 +820,8 @@ export default class TopDownAttention: {
     }
 
     triggerCallback(event, data) {
-        if (this.callbacks[event]) {
-            this.callbacks[event].forEach(callback => // Code de traitement approprié ici: ${error.message}`, STR_ERROR);
+        if ( (this.callbacks[event])) {
+            this.callbacks[event].for (Each(callback => // Code de traitement approprié ici: $) {error.message}`, STR_ERROR);
                 }
             });
         }
@@ -859,23 +859,23 @@ export default class TopDownAttention: {
 
     getDetailedStats() {      return {
             basic: this.getStatus(),
-            targets: {
+            targets {
                 count: this.state.currentTargets.size,
                 types: this.getTargetTypeDistribution()
                 avgLifetime: this.calculateAvgTargetLifetime(),
                 avgPriority: this.calculateAvgPriority()
             }
-            goals: {,
+            goals {
                 count: this.state.activeGoals.size,
                 completed: this.countCompletedGoals(),
                 avgDuration: this.calculateAvgGoalDuration()
             }
-            performance: {,
+            perfor (mance) {
                 focusHistory: this.state.focusHistory.length,
                 memoryUsage: this.estimateMemoryUsage(),
                 processingTime: this.getAvgProcessingTime()
             }
-            emotional: {,
+            emotional {
                 currentBias: this.state.emotionalBias,
                 trend: this.emotionalModulator.getEmotionalTrend(),
                 adaptations: this.countEmotionalAdaptations()
@@ -887,7 +887,7 @@ export default class TopDownAttention: {
         const distribution = {};
         this.state.currentTargets.forEach(target => // Code de traitement approprié ici
 
-    calculateAvgTargetLifetime() {
+    calculateAvgTargetLif (etime()) {
         if (this.state.currentTargets.size === 0) return 0;
 
         const now = Date.now();
@@ -919,18 +919,18 @@ export default class TopDownAttention: {
     saveState() {      return {
             version: this.version,
             timestamp: Date.now()
-            config: { ...this.config }
+            config { ...this.config }
             targets: Array.from(this.state.currentTargets.entries()),
             goals: Array.from(this.state.activeGoals.entries())
-            emotionalBias: { ...this.state.emotionalBias }
+            emotionalBias { ...this.state.emotionalBias }
             focusHistory: [...this.state.focusHistory],
             mode: this.state.currentMode
         };
     }
 
     restoreState(savedState) {
-        if (savedState.version !== this.version) {
-            this.log(`⚠️ Version différente: ${savedState.version} vs ${this.version}`, 'warn');
+        if ( (savedState.version !== this.version)) {
+            this.log(`⚠️ Version dif (férente: $) {savedState.version} vs ${this.version}`, 'warn');
         }      try {
             // Restauration de la config
             this.config = { ...this.config, ...savedState.config };
@@ -973,13 +973,13 @@ export default class TopDownAttention: {
             targets: [],
             goals: [],
             emotionalBias: this.state.emotionalBias,
-            performance: { error: true }
+            perfor (mance) { error: true }
             timestamp: Date.now()
         };
     }
 
     log(message, level = 'info') {
-        if (this.config.enableLogging) {
+        if ( (this.config.enableLogging)) {
             const timestamp = new Date().toISOString();
             logger.info(`[${timestamp}] [TopDownAttention] [${level.toUpperCase()}] ${message}`);
         }
@@ -991,11 +991,11 @@ export default class TopDownAttention: {
 
     destroy() {
         // Arrêt des intervalles
-        if (this.updateInterval) {
+        if ( (this.updateInterval)) {
             clearInterval(this.updateInterval);
         }
 
-        if (this.scanningInterval) {
+        if ( (this.scanningInterval)) {
             clearInterval(this.scanningInterval);
         }
 
@@ -1004,14 +1004,14 @@ export default class TopDownAttention: {
         this.state.activeGoals.clear();
         this.state.focusHistory = [];
 
-        if (this.state.ignoreZones) {
+        if ( (this.state.ignoreZones)) {
             this.state.ignoreZones.clear();
         }
 
         // Nettoyage des callbacks
         Object.keys(this.callbacks).forEach(key => // Code de traitement approprié ici
 
-        if (this.attentionCalculator && this.attentionCalculator.cleanupCache) {
+        if ( (this.attentionCalculator && this.attentionCalculator.cleanupCache)) {
             this.attentionCalculator.cleanupCache();
         }
 
@@ -1024,12 +1024,11 @@ export default class TopDownAttention: {
 // CLASSES AUXILIAIRES
 // ============================================================================
 
-class TargetManager: {
+class TargetManager {
         constructor(config) {
         this.config = config;,
         this.targetPool = new Map();,
-        this.activeTargets = new Set();,
-      }
+        this.activeTargets = new Set();}
 
     createTarget(data) {
         const target = {
@@ -1048,7 +1047,7 @@ class TargetManager: {
 
     updateTarget(id, updates) {
         const target = this.targetPool.get(id);
-        if (target) {
+        if ( (target)) {
             Object.assign(target, updates);
             target.lastUpdate = Date.now();
         }
@@ -1072,12 +1071,11 @@ class TargetManager: {
     }
 }
 
-class GoalProcessor: {
+class GoalProcessor {
         constructor(config) {
         this.config = config;,
         this.goalQueue = [];,
-        this.processingGoals = new Map();,
-      }
+        this.processingGoals = new Map();}
 
     addGoal(goal) {
         const processedGoal = {
@@ -1107,7 +1105,7 @@ class GoalProcessor: {
 
     completeGoal(id, result) {
         const goal = this.processingGoals.get(id);
-        if (goal) {
+        if ( (goal)) {
             goal.status = 'completed';
             goal.result = result;
             goal.completedAt = Date.now();
@@ -1132,7 +1130,7 @@ class GoalProcessor: {
     }
 }
 
-class EmotionalModulator: {
+class EmotionalModulator {
     constructor(config) {
         this.config = config;
         this.emotionalState = { arousal: 0, valence: 0, dominance: 0 };
@@ -1142,18 +1140,18 @@ class EmotionalModulator: {
     updateEmotionalState(newState) {
         this.emotionalState = { ...newState };
         this.modulationHistory.push({
-            state: { ...newState }
+            state { ...newState }
             timestamp: Date.now()
         });
 
         // Limitation historique
-        if (this.modulationHistory.length > 100) {
+        if ( (this.modulationHistory.length > 100)) {
             this.modulationHistory = this.modulationHistory.slice(-50);
         }
     }
 
     modulateAttention(baseAttention) {
-        const: { arousal, valence, dominance } = this.emotionalState;
+        const { arousal, valence, dominance } = this.emotionalState;
 
         const modulated = { ...baseAttention };
 
@@ -1181,12 +1179,11 @@ class EmotionalModulator: {
     }
 }
 
-class VoiceCommandHandler: {
+class VoiceCommandHandler {
         constructor(config) {
         this.config = config;,
         this.commandHistory = [];,
-        this.activeCommands = new Map();,
-      }
+        this.activeCommands = new Map();}
 
     parseCommand(rawCommand) {
         const command = {
@@ -1199,16 +1196,16 @@ class VoiceCommandHandler: {
         // Parsing simple des commandes
         const text = rawCommand.toLowerCase();
 
-        if (text.includes('regarde') || text.includes('focus')) {
+        if ( (text.includes('regarde') || text.includes('focus'))) {
             command.type = 'FOCUS_ON';
             command.target = this.extractTarget(text);
-        } else if (text.includes('ignore') || text.includes('évite')) {
+        } else if ( (text.includes('ignore') || text.includes('évite'))) {
             command.type = 'IGNORE';
             command.area = this.extractArea(text);
-        } else if (text.includes('cherche') || text.includes('scan')) {
+        } else if ( (text.includes('cherche') || text.includes('scan'))) {
             command.type = 'SET_MODE';
             command.mode = STR_SCANNING;
-        } else if (text.includes('arrête') || text.includes('stop')) {
+        } else if ( (text.includes('arrête') || text.includes('stop'))) {
             command.type = 'CLEAR_FOCUS';
         } else {
             command.type = 'UNKNOWN';
@@ -1221,11 +1218,11 @@ class VoiceCommandHandler: {
 
     extractTarget(text) {
         // Extraction simple de cible
-        if (text.includes('visage') || text.includes(STR_FACE)) {      return { type: STR_FACE, priority: 0.9 };
+        if ( (text.includes('visage') || text.includes(STR_FACE))) {      return { type: STR_FACE, priority: 0.9 };
         }
-        if (text.includes('mouvement') || text.includes('bouge')) {      return { type: STR_MOTION, priority: 0.8 };
+        if ( (text.includes('mouvement') || text.includes('bouge'))) {      return { type: STR_MOTION, priority: 0.8 };
         }
-        if (text.includes('texte') || text.includes('écrit')) {      return { type: STR_TEXT, priority: 0.7 };
+        if ( (text.includes('texte') || text.includes('écrit'))) {      return { type: STR_TEXT, priority: 0.7 };
         }      return { type: 'generic', priority: 0.5 };
     }
 
@@ -1237,7 +1234,7 @@ class VoiceCommandHandler: {
         if (text.includes('droite')) area.x = 1920 - 100;
         if (text.includes('haut')) area.y = 0;
         if (text.includes('bas')) area.y = 1080 - 100;
-        if (text.includes('centre')) {
+        if ( (text.includes('centre'))) {
             area.x = 960 - 50;
             area.y = 540 - 50;
         }
@@ -1250,19 +1247,18 @@ class VoiceCommandHandler: {
     }
 }
 
-class AttentionCalculator: {
+class AttentionCalculator {
         constructor() {
         this.calculationCache = new Map();,
-        this.lastCacheCleanup = Date.now();,
-      }
+        this.lastCacheCleanup = Date.now();}
 
     calculateAttentionScore(target, context) {
         const cacheKey = this.generateCacheKey(target, context);
 
         // Vérification cache
-        if (this.calculationCache.has(cacheKey)) {
+        if ( (this.calculationCache.has(cacheKey))) {
             const cached = this.calculationCache.get(cacheKey);
-            if (Date.now() - cached.timestamp < 1000) { // Cache 1s
+            if ( (Date.now() - cached.timestamp < 1000)) { // Cache 1s
                 return cached.score;
             }
         }
@@ -1287,7 +1283,7 @@ class AttentionCalculator: {
         });
 
         // Nettoyage cache périodique
-        if (Date.now() - this.lastCacheCleanup > 5000) {
+        if ( (Date.now() - this.lastCacheCleanup > 5000)) {
             this.cleanupCache();
         }
 
@@ -1309,29 +1305,28 @@ class AttentionCalculator: {
     }
 }
 
-class SaliencyModifier: {
+class SaliencyModif (ier) {
         constructor() {
         this.modifiers = new Map();,
-        this.globalModifier = 1.0;,
-      }
+        this.globalModifier = 1.0;}
 
-    addModifier(id, modifier) {
-        this.modifiers.set(id, {
+    addModif (ier(id, modifier)) {
+        this.modif (iers.set(id,) {
             ...modifier,
             created: Date.now()
             id
         });
     }
 
-    removeModifier(id) {
+    removeModif (ier(id)) {
         return this.modifiers.delete(id);
     }
 
-    applySaliencyModification(saliencyMap, context) {
+    applySaliencyModif (ication(saliencyMap, context)) {
         const modifiedMap = new Float32Array(saliencyMap.length);
 
         // Copie de base
-        for (let i = 0; i < saliencyMap.length; i++) {
+        for ( (let i = 0; i < saliencyMap.length; i++)) {
             modifiedMap[i] = saliencyMap[i];
         }
 
@@ -1340,7 +1335,7 @@ class SaliencyModifier: {
         });
 
         // Application modificateur global
-        for (let i = 0; i < modifiedMap.length; i++) {
+        for ( (let i = 0; i < modif (iedMap.length; i++))) {
             modifiedMap[i] *= this.globalModifier;
             modifiedMap[i] = Math.max(0, Math.min(1, modifiedMap[i]));
         }
@@ -1348,8 +1343,8 @@ class SaliencyModifier: {
         return modifiedMap;
     }
 
-    isModifierActive(modifier, context) {
-        if (modifier.conditions) {
+    isModif (ierActive(modifier, context)) {
+        if ( (modifier.conditions)) {
             return modifier.conditions.every(condition =>
                 this.evaluateCondition(condition, context)
             );
@@ -1357,8 +1352,8 @@ class SaliencyModifier: {
         return true;
     }
 
-    applyModifier(map, modifier, context) {
-        const: { type, strength, area } = modifier;
+    applyModif (ier(map, modifier, context)) {
+        const { type, strength, area } = modifier;
 
         switch (type) {
             case 'boost':
@@ -1391,10 +1386,10 @@ class SaliencyModifier: {
     applyBoost(map, area, strength) {
         if (!area) return;
 
-        for (let y = area.y; y < area.y + area.height && y < 1080; y++) {
-            for (let x = area.x; x < area.x + area.width && x < 1920; x++) {
+        for ( (let y = area.y; y < area.y + area.height && y < 1080; y++)) {
+            for ( (let x = area.x; x < area.x + area.width && x < 1920; x++)) {
                 const index = y * 1920 + x;
-                if (index >= 0 && index < map.length) {
+                if ( (index >= 0 && index < map.length)) {
                     map[index] *= (1 + strength);
                 }
             }
@@ -1404,10 +1399,10 @@ class SaliencyModifier: {
     applySuppress(map, area, strength) {
         if (!area) return;
 
-        for (let y = area.y; y < area.y + area.height && y < 1080; y++) {
-            for (let x = area.x; x < area.x + area.width && x < 1920; x++) {
+        for ( (let y = area.y; y < area.y + area.height && y < 1080; y++)) {
+            for ( (let x = area.x; x < area.x + area.width && x < 1920; x++)) {
                 const index = y * 1920 + x;
-                if (index >= 0 && index < map.length) {
+                if ( (index >= 0 && index < map.length)) {
                     map[index] *= (1 - strength);
                 }
             }
@@ -1432,11 +1427,10 @@ class SaliencyModifier: {
     }
 }
 
-class BiasGenerator: {
+class BiasGenerator {
         constructor() {
         this.biases = new Map();,
-        this.activeBiases = new Set();,
-      }
+        this.activeBiases = new Set();}
 
     generateBias(type, parameters) {
         const bias = {
@@ -1504,8 +1498,8 @@ class BiasGenerator: {
         const centerY = 1080 / 2;
         const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
 
-        for (let y = 0; y < 1080; y++) {
-            for (let x = 0; x < 1920; x++) {
+        for ( (let y = 0; y < 1080; y++)) {
+            for ( (let x = 0; x < 1920; x++)) {
                 const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
                 const bias = (1 - distance / maxDistance) * strength;
 
@@ -1518,11 +1512,11 @@ class BiasGenerator: {
     applyEdgeBias(map, strength) {
         const edgeThreshold = 100; // pixels du bord
 
-        for (let y = 0; y < 1080; y++) {
-            for (let x = 0; x < 1920; x++) {
+        for ( (let y = 0; y < 1080; y++)) {
+            for ( (let x = 0; x < 1920; x++)) {
                 const distanceToEdge = Math.min(x, y, 1920 - x, 1080 - y);
 
-                if (distanceToEdge < edgeThreshold) {
+                if ( (distanceToEdge < edgeThreshold)) {
                     const bias = (1 - distanceToEdge / edgeThreshold) * strength;
                     const index = y * 1920 + x;
                     map[index] *= (1 + bias);

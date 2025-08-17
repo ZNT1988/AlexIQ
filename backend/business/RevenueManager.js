@@ -15,26 +15,26 @@ class RevenueManager extends EventEmitter {
         revenue: 0,
         transactions: 0,
         newCustomers: 0,
-        churn: 0,
+        churn: 0
       },
       month: {
         revenue: 0,
         transactions: 0,
         recurring: 0,
-        oneTime: 0,
+        oneTime: 0
       },
       lifetime: {
         totalRevenue: 0,
         totalCustomers: 0,
-        avgRevenuePerUser: 0,
-      },
+        avgRevenuePerUser: 0
+      }
     };
 
     this.analyticsData = {
       conversions: [],
       churnPredictions: [],
       revenueForecasts: [],
-      customerSegments: {},
+      customerSegments: {}
     };
 
     this.initializeDatabase();
@@ -46,7 +46,7 @@ class RevenueManager extends EventEmitter {
     const dbPath = this.config.get("database.path");
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        console.error('Database initialization error:', err.message);
+        console.error("Database initialization error:", err.message);
         return;
       }
       this.createRevenueTables();
@@ -113,12 +113,12 @@ class RevenueManager extends EventEmitter {
                 status TEXT DEFAULT 'active',
                 results TEXT DEFAULT '{}',
                 metadata TEXT DEFAULT '{}'
-            )`,
+            )`
     ];
 
     tables.forEach((sql) => {
       this.db.run(sql, (err) => {
-        if (err) console.error('Error creating revenue table:', err.message);
+        if (err) console.error("Error creating revenue table:", err.message);
       });
     });
   }
@@ -151,7 +151,7 @@ class RevenueManager extends EventEmitter {
       billing_period: transaction.billingPeriod || "monthly",
       payment_method: transaction.paymentMethod,
       status: transaction.status || "completed",
-      metadata: JSON.stringify(transaction.metadata || {}),
+      metadata: JSON.stringify(transaction.metadata || {})
     };
 
     try {
@@ -162,12 +162,12 @@ class RevenueManager extends EventEmitter {
 
       this.emit("transactionCompleted", {
         ...transactionData,
-        id: transactionId,
+        id: transactionId
       });
 
       return transactionId;
     } catch (error) {
-      console.error('Error recording transaction:', error.message);
+      console.error("Error recording transaction:", error.message);
       throw error;
     }
   }
@@ -192,12 +192,12 @@ class RevenueManager extends EventEmitter {
           transaction.billing_period,
           transaction.payment_method,
           transaction.status,
-          transaction.metadata,
+          transaction.metadata
         ],
         function (err) {
           if (err) reject(err);
           else resolve(this.lastID);
-        },
+        }
       );
     });
   }
@@ -216,7 +216,7 @@ class RevenueManager extends EventEmitter {
           churn_risk_score: 0.1,
           engagement_score: 0.5,
           conversion_score: 0.3,
-          metadata: "{}",
+          metadata: "{}"
         };
         await this.insertCustomerAnalytics(customer);
       }
@@ -232,10 +232,10 @@ class RevenueManager extends EventEmitter {
         churn_risk_score: churnRisk,
         engagement_score: engagementScore,
         last_activity: new Date().toISOString(),
-        tier: transaction.tier || customer.tier,
+        tier: transaction.tier || customer.tier
       });
     } catch (error) {
-      console.error('Error updating customer analytics:', error.message);
+      console.error("Error updating customer analytics:", error.message);
     }
   }
 
@@ -269,12 +269,12 @@ class RevenueManager extends EventEmitter {
           customer.churn_risk_score,
           customer.engagement_score,
           customer.conversion_score,
-          customer.metadata,
+          customer.metadata
         ],
         function (err) {
           if (err) reject(err);
           else resolve(this.lastID);
-        },
+        }
       );
     });
   }
@@ -353,7 +353,7 @@ class RevenueManager extends EventEmitter {
       this.revenueMetrics.month = await this.getMonthlyMetrics();
       this.revenueMetrics.lifetime = await this.getLifetimeMetrics();
     } catch (error) {
-      console.error('Error updating revenue metrics:', error.message);
+      console.error("Error updating revenue metrics:", error.message);
     }
   }
 
@@ -374,7 +374,7 @@ class RevenueManager extends EventEmitter {
             revenue: row.revenue || 0,
             transactions: row.transactions || 0,
             newCustomers: 0,
-            churn: 0,
+            churn: 0
           });
       });
     });
@@ -399,7 +399,7 @@ class RevenueManager extends EventEmitter {
             revenue: row.revenue || 0,
             transactions: row.transactions || 0,
             recurring: row.recurring || 0,
-            oneTime: row.oneTime || 0,
+            oneTime: row.oneTime || 0
           });
       });
     });
@@ -423,7 +423,7 @@ class RevenueManager extends EventEmitter {
           resolve({
             totalRevenue: row.totalRevenue || 0,
             totalCustomers: row.totalCustomers || 0,
-            avgRevenuePerUser: avgRevenuePerUser,
+            avgRevenuePerUser: avgRevenuePerUser
           });
         }
       });
@@ -437,10 +437,10 @@ class RevenueManager extends EventEmitter {
         this.analyzeConversions(),
         this.predictChurn(),
         this.forecastRevenue(),
-        this.segmentCustomers(),
+        this.segmentCustomers()
       ]);
     } catch (error) {
-      console.error('Error running analytics:', error.message);
+      console.error("Error running analytics:", error.message);
     }
   }
 
@@ -451,7 +451,7 @@ class RevenueManager extends EventEmitter {
       stage: conv.stage,
       rate: conv.conversion_rate,
       value: conv.avg_value,
-      volume: conv.volume,
+      volume: conv.volume
     }));
   }
 
@@ -483,7 +483,7 @@ class RevenueManager extends EventEmitter {
       tenantId: customer.tenant_id,
       riskScore: customer.churn_risk_score,
       riskLevel: this.getChurnRiskLevel(customer.churn_risk_score),
-      recommendations: this.getChurnPreventionRecommendations(customer),
+      recommendations: this.getChurnPreventionRecommendations(customer)
     }));
   }
 
@@ -564,8 +564,8 @@ class RevenueManager extends EventEmitter {
           period: "next_30_days",
           predicted: 0,
           confidence: 0,
-          factors: ["Insufficient data"],
-        },
+          factors: ["Insufficient data"]
+        }
       ];
     }
 
@@ -592,9 +592,9 @@ class RevenueManager extends EventEmitter {
         factors: [
           `Tendance: ${trend > 0 ? "+" : ""}${trend.toFixed(1)}%`,
           `Saisonnalité: ${seasonality > 0 ? "+" : ""}${seasonality.toFixed(1)}%`,
-          `Base quotidienne: ${avgDaily.toFixed(2)}€`,
-        ],
-      },
+          `Base quotidienne: ${avgDaily.toFixed(2)}€`
+        ]
+      }
     ];
   }
 
@@ -626,7 +626,7 @@ class RevenueManager extends EventEmitter {
 
     return Math.min(
       0.95,
-      dataQuality * 0.5 + trendStability * 0.3 + (1 - variance / 1000) * 0.2,
+      dataQuality * 0.5 + trendStability * 0.3 + (1 - variance / 1000) * 0.2
     );
   }
 
@@ -651,7 +651,7 @@ class RevenueManager extends EventEmitter {
         f.period,
         f.predicted,
         f.confidence,
-        JSON.stringify(f.factors),
+        JSON.stringify(f.factors)
       ]);
     }
   }
@@ -684,7 +684,7 @@ class RevenueManager extends EventEmitter {
               avgLifetimeValue: row.avg_ltv,
               avgChurnRisk: row.avg_churn_risk,
               avgEngagement: row.avg_engagement,
-              healthScore: this.calculateSegmentHealth(row),
+              healthScore: this.calculateSegmentHealth(row)
             };
           });
           resolve(segments);
@@ -706,7 +706,7 @@ class RevenueManager extends EventEmitter {
     if (this.revenueMetrics.today.revenue > 10000) {
       this.emit("revenueGoalAchieved", {
         goal: "daily",
-        amount: this.revenueMetrics.today.revenue,
+        amount: this.revenueMetrics.today.revenue
       });
     }
   }
@@ -739,7 +739,7 @@ class RevenueManager extends EventEmitter {
       profile: customer,
       transactionHistory: transactions,
       insights: this.generateCustomerInsights(customer, transactions),
-      recommendations: this.getCustomerRecommendations(customer),
+      recommendations: this.getCustomerRecommendations(customer)
     };
 
     return insights;
@@ -768,7 +768,7 @@ class RevenueManager extends EventEmitter {
       insights.push({
         type: "warning",
         message: "Risque de churn élevé",
-        priority: "high",
+        priority: "high"
       });
     }
 
@@ -776,7 +776,7 @@ class RevenueManager extends EventEmitter {
       insights.push({
         type: "success",
         message: "Client à haute valeur",
-        priority: "medium",
+        priority: "medium"
       });
     }
 
@@ -784,7 +784,7 @@ class RevenueManager extends EventEmitter {
       insights.push({
         type: "info",
         message: "Client fidèle avec historique riche",
-        priority: "low",
+        priority: "low"
       });
     }
 
@@ -816,7 +816,7 @@ class RevenueManager extends EventEmitter {
       revenue: this.revenueMetrics,
       analytics: this.analyticsData,
       kpis: await this.calculateKPIs(),
-      recommendations: this.generateBusinessRecommendations(),
+      recommendations: this.generateBusinessRecommendations()
     };
 
     return report;
@@ -828,7 +828,7 @@ class RevenueManager extends EventEmitter {
       churnRate: await this.calculateChurnRate(),
       ltv: this.revenueMetrics.lifetime.avgRevenuePerUser,
       cac: await this.calculateCAC(),
-      conversionRate: await this.calculateConversionRate(),
+      conversionRate: await this.calculateConversionRate()
     };
   }
 
@@ -849,7 +849,7 @@ class RevenueManager extends EventEmitter {
       "Optimiser le funnel de conversion",
       "Réduire le taux de churn",
       "Augmenter l'engagement des utilisateurs",
-      "Développer de nouvelles fonctionnalités premium",
+      "Développer de nouvelles fonctionnalités premium"
     ];
   }
 
@@ -861,14 +861,14 @@ class RevenueManager extends EventEmitter {
       totalCustomers: this.revenueMetrics.lifetime.totalCustomers,
       avgRevenuePerUser: this.revenueMetrics.lifetime.avgRevenuePerUser,
       churnPredictions: this.analyticsData.churnPredictions.length,
-      forecastAccuracy: this.analyticsData.revenueForecasts[0]?.confidence || 0,
+      forecastAccuracy: this.analyticsData.revenueForecasts[0]?.confidence || 0
     };
   }
 
   async shutdown() {
     if (this.db) {
       this.db.close((err) => {
-        if (err) console.error('Error closing database:', err.message);
+        if (err) console.error("Error closing database:", err.message);
       });
     }
   }

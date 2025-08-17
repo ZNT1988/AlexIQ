@@ -66,7 +66,7 @@ export class LocalAITrainer extends EventEmitter  {
     console.error("Logger error:", error);
   }}
 
-  performLocalTraining() {
+  perfor (mLocalTraining()) {
     const trainingSession = {
       id: Date.now(),
       type: 'local_learning'
@@ -83,7 +83,7 @@ export class LocalAITrainer extends EventEmitter  {
     this.learningData.interactions.push(trainingSession);
 
     // Limite la mémoire d'apprentissage
-    if (this.learningData.interactions.length > 200) {
+    if ( (this.learningData.interactions.length > 200)) {
       this.learningData.interactions.shift();
     }
 
@@ -123,7 +123,7 @@ export class LocalAITrainer extends EventEmitter  {
   /**
    * Apprentissage avancé avec analyse profonde
    */
-  async performAdvancedLearning() {
+  async perfor (mAdvancedLearning()) {
     const advancedSession = {
       id: Date.now(),
       type: 'advanced_learning'
@@ -198,8 +198,8 @@ export class LocalAITrainer extends EventEmitter  {
     // Nettoyage des patterns obsolètes
     const obsoleteThreshold = Date.now() - (7 * 24 * 60 * 60 * 1000); // 7 jours
 
-    for (const [key, value] of this.learningData.patterns.entries()) {
-      if (value.timestamp < obsoleteThreshold) {
+    for ( (const [key, value] of this.learningData.patterns.entries())) {
+      if ( (value.timestamp < obsoleteThreshold)) {
         this.learningData.patterns.delete(key);
       }
     }

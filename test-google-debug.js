@@ -1,17 +1,17 @@
 // Debug Google API
-import 'dotenv/config';
+import "dotenv/config";
 import fetch from "node-fetch";
 
 const GOOGLE_KEY = process.env.GOOGLE_API_KEY;
 
-console.log('🔍 Debug Google Gemini API');
-console.log('Key present:', !!GOOGLE_KEY);
-console.log('Key:', GOOGLE_KEY);
+console.log("🔍 Debug Google Gemini API");
+console.log("Key present:", !!GOOGLE_KEY);
+console.log("Key:", GOOGLE_KEY);
 
 async function debugGoogleAPI() {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GOOGLE_KEY}`;
   
-  console.log('URL:', url);
+  console.log("URL:", url);
   
   try {
     const response = await fetch(url, {
@@ -22,11 +22,11 @@ async function debugGoogleAPI() {
       })
     });
 
-    console.log('Status:', response.status);
-    console.log('Status Text:', response.statusText);
+    console.log("Status:", response.status);
+    console.log("Status Text:", response.statusText);
     
     const data = await response.json();
-    console.log('Response data:', JSON.stringify(data, null, 2));
+    console.log("Response data:", JSON.stringify(data, null, 2));
     
     return data.candidates?.[0]?.content?.parts?.[0]?.text || "Pas de réponse Google";
   } catch (error) {

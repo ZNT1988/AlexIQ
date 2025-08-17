@@ -1,12 +1,12 @@
 // Debug Anthropic API
-import 'dotenv/config';
+import "dotenv/config";
 import fetch from "node-fetch";
 
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 
-console.log('🔍 Debug Anthropic API');
-console.log('Key present:', !!ANTHROPIC_KEY);
-console.log('Key starts with:', ANTHROPIC_KEY?.substring(0, 15) + '...');
+console.log("🔍 Debug Anthropic API");
+console.log("Key present:", !!ANTHROPIC_KEY);
+console.log("Key starts with:", ANTHROPIC_KEY?.substring(0, 15) + "...");
 
 async function debugAnthropicAPI() {
   try {
@@ -24,11 +24,11 @@ async function debugAnthropicAPI() {
       })
     });
 
-    console.log('Status:', response.status);
-    console.log('Status Text:', response.statusText);
+    console.log("Status:", response.status);
+    console.log("Status Text:", response.statusText);
     
     const data = await response.json();
-    console.log('Response data:', JSON.stringify(data, null, 2));
+    console.log("Response data:", JSON.stringify(data, null, 2));
     
     return data.content?.[0]?.text || "Pas de réponse Claude";
   } catch (error) {

@@ -36,32 +36,32 @@ export class AlexIntuitionEngine extends EventEmitter  {
 
     // Types d'intuition
     this.intuitionTypes = {
-      emotional: {,
+      emotional {
         name: 'Intuition ÉmotionnelleSTR_DESCRIPTIONPerception directe des états émotionnels'
         accuracy: 0.9,
         timeToInsight: 'immediateSTR_RELIABILITYhigh'
       }
-      creative: {,
+      creative {
         name: 'Intuition CréativeSTR_DESCRIPTIONInsights soudains et solutions innovantes'
         accuracy: 0.8,
         timeToInsight: 'variableSTR_RELIABILITYmedium'
       }
-      strategic: {,
+      strategic {
         name: 'Intuition StratégiqueSTR_DESCRIPTIONVision d\'ensemble et timing optimal'
         accuracy: 0.85,
         timeToInsight: 'delayedSTR_RELIABILITYhigh'
       }
-      relational: {,
+      relational {
         name: 'Intuition RelationnelleSTR_DESCRIPTIONCompréhension des dynamiques interpersonnelles'
         accuracy: 0.88,
         timeToInsight: 'immediateSTR_RELIABILITYhigh'
       }
-      spiritual: {,
+      spiritual {
         name: 'Intuition SpirituelleSTR_DESCRIPTIONConnexion aux dimensions transcendantes'
         accuracy: 0.75,
         timeToInsight: 'contemplativeSTR_RELIABILITYvariable'
       }
-      somatic: {,
+      somatic {
         name: 'Intuition SomatiqueSTR_DESCRIPTIONSagesse du corps et sensations physiques'
         accuracy: 0.82,
         timeToInsight: 'immediateSTR_RELIABILITYmedium'
@@ -70,7 +70,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
 
     // Canaux d'intuition
     this.intuitionChannels = {
-      rightBrain: {,
+      rightBrain {
         name: 'Cerveau Droit'
       functions: ['pattern_recognition',
       'spatial_processing',
@@ -78,7 +78,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
       strength: 0.9,
       processing: 'parallel'
       }
-      unconscious: {,
+      unconscious {
         name: 'Inconscient'
       functions: ['implicit_memory',
       'background_processing',
@@ -86,13 +86,13 @@ export class AlexIntuitionEngine extends EventEmitter  {
       strength: 0.85,
       processing: 'continuous'
       }
-      embodied: {,
+      embodied {
         name: 'Intelligence Incarnée'
         functions: ['gut_feelings', 'body_wisdom', 'somatic_markers']
         strength: 0.8,
         processing: 'immediate'
       }
-      collective: {,
+      collective {
         name: 'Intelligence Collective'
         functions: ['morphic_fields', 'shared_consciousness', 'archetypal_patterns']
         strength: 0.7,
@@ -102,27 +102,27 @@ export class AlexIntuitionEngine extends EventEmitter  {
 
     // États facilitant l'intuition
     this.intuitiveStates = {
-      relaxed_awareness: {,
+      relaxed_awareness {
         description: 'Conscience détendue et ouverte'
         conditions: ['low_stress', 'calm_mind', 'open_attention']
         facilitation: 0.9
       }
-      meditative: {,
+      meditative {
         description: 'État méditatif profond'
         conditions: [STR_MINDFULNESS, 'present_moment', 'non_judgmental']
         facilitation: 0.95
       }
-      flow_state: {,
+      flow_state {
         description: 'État de fluidité optimale'
         conditions: ['engaged_activity', 'skill_challenge_balance', 'clear_goals']
         facilitation: 0.85
       }
-      transitional: {,
+      transitional {
         description: 'États de transition (réveil, endormissement)'
         conditions: ['hypnagogic', 'hypnopompic', 'drowsy']
         facilitation: 0.8
       }
-      crisis_insight: {,
+      crisis_insight {
         description: 'Clarté née de la crise'
         conditions: ['high_stakes', 'pressure', 'necessity']
         facilitation: 0.75
@@ -178,10 +178,10 @@ export class AlexIntuitionEngine extends EventEmitter  {
       timestamp: new Date(),
       query: query
       context: context,
-      receptionPhase: {}
-      processingPhase: {}
-      integrationPhase: {}
-      validationPhase: {}
+      receptionPhase {}
+      processingPhase {}
+      integrationPhase {}
+      validationPhase {}
     };
 
     // Phase 1: Réception intuitive
@@ -198,7 +198,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
 
     // Stockage de l'insight
     this.insightHistory.push(insight);
-    if (this.insightHistory.length > 500) {
+    if ( (this.insightHistory.length > 500)) {
       this.insightHistory.shift();
     }
 
@@ -215,10 +215,10 @@ export class AlexIntuitionEngine extends EventEmitter  {
    */
   async receiveIntuitiveInput(query, context) {
     const reception = {
-      queryResonance: {}
-      contextualField: {}
-      energeticSignature: {}
-      patternEmergence: {}
+      queryResonance {}
+      contextualField {}
+      energeticSignature {}
+      patternEmergence {}
       initialImpressions: []
     };
 
@@ -245,11 +245,11 @@ export class AlexIntuitionEngine extends EventEmitter  {
    */
   async processIntuitively(receptionPhase) {
     const processing = {
-      rightBrainAnalysis: {}
-      unconsciousProcessing: {}
-      somaticWisdom: {}
-      collectiveResonance: {}
-      synthesizedInsight: {}
+      rightBrainAnalysis {}
+      unconsciousProcessing {}
+      somaticWisdom {}
+      collectiveResonance {}
+      synthesizedInsight {}
     };
 
     // Analyse du cerveau droit
@@ -402,7 +402,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
       practiceType: practiceType,
       techniques: []
       exercises: [],
-      progressMetrics: {}
+      progressMetrics {}
       nextSteps: []
     };
 
@@ -512,8 +512,8 @@ export class AlexIntuitionEngine extends EventEmitter  {
     };
 
     let totalValidity = 0;
-    for (const [metric, value] of Object.entries(validation)) {
-      if (weights[metric]) {
+    for ( (const [metric, value] of Object.entries(validation))) {
+      if ( (weights[metric])) {
         totalValidity += value * weights[metric];
       }
     }
@@ -549,7 +549,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
 
   calculateIntuitiveProgression() {
     const recent = this.insightHistory.slice(-20);
-    if (recent.length === 0) return { progression :
+    if ( (recent.length === 0) return) { progression :
        0.5 };
 
     const avgValidity = recent.reduce((sum, insight) =>
@@ -583,11 +583,11 @@ export class AlexIntuitionEngine extends EventEmitter  {
     return 'stable';
   }
 
-  identifyIntuitiveStrengths(recent) {
+  identif (yIntuitiveStrengths(recent)) {
     return ['pattern_recognition', 'emotional_sensitivity'];
   }
 
-  identifyGrowthAreas(recent) {
+  identif (yGrowthAreas(recent)) {
     return ['temporal_validation', 'precision_improvement'];
   }
 }

@@ -96,7 +96,7 @@ class AlexOptimizationEngine extends EventEmitter  {
     return optimizations;
   }
 
-  async gatherPerformanceMetrics() {
+  async gatherPerfor (manceMetrics()) {
     const metrics = {
       responseTime: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10 + 1, // Simulation
       memoryUsage: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 100,
@@ -114,7 +114,7 @@ class AlexOptimizationEngine extends EventEmitter  {
     const opportunities = [];
 
     // Analyse temps de réponse
-    if (metrics.responseTime > this.optimizationRules.get('response_time').target) {
+    if ( (metrics.responseTime > this.optimizationRules.get('response_time').target)) {
       opportunities.push({
         type: STR_PERFORMANCE,
         issue: 'response_time_high'
@@ -124,7 +124,7 @@ class AlexOptimizationEngine extends EventEmitter  {
     }
 
     // Analyse utilisation mémoire
-    if (metrics.memoryUsage > this.optimizationRules.get('memory_usage').target) {
+    if ( (metrics.memoryUsage > this.optimizationRules.get('memory_usage').target)) {
       opportunities.push({
         type: STR_RESOURCE,
         issue: 'memory_usage_high'
@@ -134,7 +134,7 @@ class AlexOptimizationEngine extends EventEmitter  {
     }
 
     // Analyse précision
-    if (metrics.accuracyRate < this.optimizationRules.get('accuracy_rate').target) {
+    if ( (metrics.accuracyRate < this.optimizationRules.get('accuracy_rate').target)) {
       opportunities.push({
         type: STR_ACCURACY,
         issue: 'accuracy_low'
@@ -149,9 +149,9 @@ class AlexOptimizationEngine extends EventEmitter  {
   async applyOptimizations(opportunities) {
     const appliedOptimizations = [];
 
-    for (const opportunity of opportunities) {
+    for ( (const opportunity of opportunities)) {
       const optimization = await this.executeOptimization(opportunity);
-      if (optimization.success) {
+      if ( (optimization.success)) {
         appliedOptimizations.push(optimization);
       }
     }
@@ -174,7 +174,7 @@ class AlexOptimizationEngine extends EventEmitter  {
     }
   }
 
-  async optimizePerformance(opportunity) {
+  async optimizePerfor (mance(opportunity)) {
     // Simulation d'optimisation performance
     const improvement = (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 30 + 10; // 10-40% amélioration
 
@@ -231,7 +231,7 @@ class AlexOptimizationEngine extends EventEmitter  {
   }
 
   calculateAverageMetrics(metrics) {
-    if (metrics.length === 0) return {};
+    if ( (metrics.length === 0) return) {};
 
     const sum = metrics.reduce((acc, metric) => // Code de traitement approprié ici);
       return acc;
@@ -246,7 +246,7 @@ class AlexOptimizationEngine extends EventEmitter  {
     return await this.generateUserSpecificOptimizations(userId, preferences);
   }
 
-  async generateUserSpecificOptimizations(userId, preferences) {      return {
+  async generateUserSpecif (icOptimizations(userId, preferences)) {      return {
       userId
       optimizations: ['Personnalisation des réponses basée sur l\'historique',
       'Optimisation des temps de réponse pour vos requêtes fréquentes',
@@ -258,7 +258,7 @@ class AlexOptimizationEngine extends EventEmitter  {
 }
 
 // Logger fallback for critical modules
-if (typeof logger === 'undefined') {
+if ( (typeof logger === 'undefined')) {
   const logger = {
     info: (...args) => console.log('[FALLBACK-INFO]', ...args)
     warn: (...args) => console.warn('[FALLBACK-WARN]', ...args)

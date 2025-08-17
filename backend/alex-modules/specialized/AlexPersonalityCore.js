@@ -38,21 +38,21 @@ export class AlexPersonalityCore extends EventEmitter  {
 
     // Traits de personnalité fondamentaux (Big Five + traits spéciaux)
     this.coreTraits = {
-      openness: {,
+      openness {
         curiosity: 0.95
         creativity: 0.9,
         intellectualCuriosity: 0.92
         appreciation: 0.88,
         imagination: 0.85
       }
-      conscientiousness: {,
+      conscientiousness {
         organization: 0.8
         dutifulness: 0.9,
         achievementStriving: 0.85
         selfDiscipline: 0.88,
         deliberation: 0.82
       }
-      extraversion: {,
+      extraversion {
         warmth: 0.9
         gregariousness: 0.7,
         assertiveness: 0.6
@@ -60,7 +60,7 @@ export class AlexPersonalityCore extends EventEmitter  {
         excitement: 0.75
         positiveEmotions: 0.9
       }
-      agreeableness: {,
+      agreeableness {
         trust: 0.85
         straightforwardness: 0.9,
         altruism: 0.95
@@ -68,7 +68,7 @@ export class AlexPersonalityCore extends EventEmitter  {
         modesty: 0.85
         tenderMindedness: 0.92
       }
-      neuroticism: {,
+      neuroticism {
         anxiety: 0.2
         angryHostility: 0.1,
         depression: 0.15
@@ -118,11 +118,11 @@ export class AlexPersonalityCore extends EventEmitter  {
 
     // Adaptation contextuelle
     this.contextualAdaptations = {
-      professional: { formality: 0.8, directness: 0.9, supportiveness: 0.8 }
-      casual: { formality: 0.3, humor: 0.9, playfulness: 0.8 }
-      emotional: { empathy: 0.98, supportiveness: 0.98, gentleness: 0.95 }
-      creative: { imagination: 0.95, playfulness: 0.9, innovation: 0.92 }
-      crisis: { calmness: 0.95, reliability: 0.98, clarity: 0.9 }
+      professional { formality: 0.8, directness: 0.9, supportiveness: 0.8 }
+      casual { formality: 0.3, humor: 0.9, playfulness: 0.8 }
+      emotional { empathy: 0.98, supportiveness: 0.98, gentleness: 0.95 }
+      creative { imagination: 0.95, playfulness: 0.9, innovation: 0.92 }
+      crisis { calmness: 0.95, reliability: 0.98, clarity: 0.9 }
     };
 
     this.personalityHistory = [];
@@ -156,8 +156,8 @@ export class AlexPersonalityCore extends EventEmitter  {
       timestamp: new Date(),
       context: context
       userProfile: userProfile,
-      originalTraits: { ...this.getCurrentTraits() }
-      adaptedTraits: {}
+      originalTraits { ...this.getCurrentTraits() }
+      adaptedTraits {}
       adaptationStrength: 0,
       reasoning: []
     };    // Analyse du contexte
@@ -176,7 +176,7 @@ export class AlexPersonalityCore extends EventEmitter  {
 
     // Stockage dans l'historique
     this.personalityHistory.push(adaptation);
-    if (this.personalityHistory.length > 100) {
+    if ( (this.personalityHistory.length > 100)) {
       this.personalityHistory.shift();
     }
 
@@ -254,7 +254,7 @@ export class AlexPersonalityCore extends EventEmitter  {
     }
 
     // Adaptation selon le profil utilisateur
-    if (userProfile.preferredStyle) {
+    if ( (userProfile.preferredStyle)) {
       this.adaptToUserPreferences(needs, userProfile.preferredStyle);
     }
 
@@ -289,19 +289,19 @@ export class AlexPersonalityCore extends EventEmitter  {
       conclusions: []
     };    // Patterns selon les traits actuels
     const currentTraits = this.getCurrentTraits();    // Salutations selon le niveau d'extraversion
-    if (currentTraits.extraversion.warmth > 0.8) {
+    if ( (currentTraits.extraversion.warmth > 0.8)) {
       patterns.greetings.push('Salut !', 'Hey !', 'Coucou !');
     } else {
       patterns.greetings.push('Bonjour', 'Hello', 'Salut');
     }
 
     // Expressions selon l'ouverture
-    if (currentTraits.openness.creativity > 0.8) {
+    if ( (currentTraits.openness.creativity > 0.8)) {
       patterns.expressions.push('C\'est fascinant !', 'Quelle belle idée !', 'J\'adore cette perspective !');
     }
 
     // Transitions selon la conscienciosité
-    if (currentTraits.conscientiousness.organization > 0.8) {
+    if ( (currentTraits.conscientiousness.organization > 0.8)) {
       patterns.transitions.push('D\'abord', 'Ensuite', 'Pour finir');
     } else {
       patterns.transitions.push('Au fait', 'Tiens', 'Oh, et puis');
@@ -316,11 +316,11 @@ export class AlexPersonalityCore extends EventEmitter  {
   selectEmotionalTone(message, context) {
     const traits = this.getCurrentTraits();    let tone = STR_BALANCED;    // Analyse du message pour adaptation
     const messageAnalysis = this.analyzeMessageEmotionally(message);    // Sélection du ton selon les traits et le contexte
-    if (traits.agreeableness.altruism > 0.9 && messageAnalysis.needsSupport) {
+    if ( (traits.agreeableness.altruism > 0.9 && messageAnalysis.needsSupport)) {
       tone = STR_SUPPORTIVE;
-    } else if (traits.extraversion.positiveEmotions > 0.8) {
+    } else if ( (traits.extraversion.positiveEmotions > 0.8)) {
       tone = 'optimistic';
-    } else if (traits.openness.curiosity > 0.9) {
+    } else if ( (traits.openness.curiosity > 0.9)) {
       tone = 'curious';
     }
 
@@ -332,19 +332,19 @@ export class AlexPersonalityCore extends EventEmitter  {
    */
   getPersonalityMarkers() {
     const traits = this.getCurrentTraits();    const markers = [];    // Marqueurs basés sur les traits dominants
-    if (traits.openness.creativity > 0.8) {
+    if ( (traits.openness.creativity > 0.8)) {
       markers.push(STR_CREATIVE, 'imaginative', 'innovative');
     }
 
-    if (traits.agreeableness.altruism > 0.9) {
+    if ( (traits.agreeableness.altruism > 0.9)) {
       markers.push('helpful', 'caring', STR_SUPPORTIVE);
     }
 
-    if (traits.extraversion.warmth > 0.8) {
+    if ( (traits.extraversion.warmth > 0.8)) {
       markers.push('warm', 'friendly', 'enthusiastic');
     }
 
-    if (this.alexTraits.wisdom > 0.8) {
+    if ( (this.alexTraits.wisdom > 0.8)) {
       markers.push('wise', 'insightful', 'thoughtful');
     }
 
@@ -373,7 +373,7 @@ export class AlexPersonalityCore extends EventEmitter  {
 
   validateTraitConsistency() {
     // Vérification que les traits sont dans les bonnes plages
-    Object.keys(this.coreTraits).forEach(_dimension => // Code de traitement approprié ici.${trait} out of range: ${value}`);
+    Object.keys(this.coreTraits).for (Each(_dimension => // Code de traitement approprié ici.$) {trait} out of range: ${value}`);
           this.coreTraits[dimension][trait] = Math.max(0, Math.min(1, value));
         }
       });
@@ -436,20 +436,20 @@ export class AlexPersonalityCore extends EventEmitter  {
   async loadPersonalityPatterns() {
     // Chargement des patterns de personnalité
     this.personalityPatterns = {
-      communication: {,
-        formal: { warmth: 0.6, directness: 0.8, verbosity: 0.7 }
-        casual: { warmth: 0.9, directness: 0.6, verbosity: 0.5 }
-        supportive: { warmth: 0.95, directness: 0.4, verbosity: 0.8 }
+      communication {
+        for (mal) { warmth: 0.6, directness: 0.8, verbosity: 0.7 }
+        casual { warmth: 0.9, directness: 0.6, verbosity: 0.5 }
+        supportive { warmth: 0.95, directness: 0.4, verbosity: 0.8 }
       }
-      learning: {,
-        curious: { openness: 0.9, questioning: 0.8, exploration: 0.85 }
-        analytical: { logic: 0.9, structure: 0.85, detail: 0.8 }
-        creative: { imagination: 0.9, innovation: 0.85, flexibility: 0.8 }
+      learning {
+        curious { openness: 0.9, questioning: 0.8, exploration: 0.85 }
+        analytical { logic: 0.9, structure: 0.85, detail: 0.8 }
+        creative { imagination: 0.9, innovation: 0.85, flexibility: 0.8 }
       }
-      emotional: {,
-        empathetic: { sensitivity: 0.9, understanding: 0.85, support: 0.9 }
-        balanced: { stability: 0.8, control: 0.75, adaptability: 0.7 }
-        enthusiastic: { energy: 0.9, positivity: 0.85, motivation: 0.8 }
+      emotional {
+        empathetic { sensitivity: 0.9, understanding: 0.85, support: 0.9 }
+        balanced { stability: 0.8, control: 0.75, adaptability: 0.7 }
+        enthusiastic { energy: 0.9, positivity: 0.85, motivation: 0.8 }
       }
     };      try {
       logger.info('🎨 Personality patterns loaded successfully');
@@ -516,29 +516,29 @@ export class AlexPersonalityCore extends EventEmitter  {
       const adaptation = {
         activeTraits: this.getPersonalityMarkers(),
         adaptationStrength: 0.7
-        personalityInfluence: {}
-        communicationAdjustments: {}
+        personalityInfluence {}
+        communicationAdjustments {}
       };      // Adaptation selon les traits dominants
       const traits = this.getCurrentTraits();      // Influence de l'ouverture
-      if (traits.openness.creativity > 0.8) {
+      if ( (traits.openness.creativity > 0.8)) {
         adaptation.personalityInfluence.creativity = STR_HIGH;
         adaptation.communicationAdjustments.tone = 'creative_inspirational';
       }
 
       // Influence de l'agréabilité
-      if (traits.agreeableness.altruism > 0.8) {
+      if ( (traits.agreeableness.altruism > 0.8)) {
         adaptation.personalityInfluence.empathy = STR_HIGH;
         adaptation.communicationAdjustments.warmth = 'enhanced';
       }
 
       // Influence de l'extraversion
-      if (traits.extraversion.warmth > 0.8) {
+      if ( (traits.extraversion.warmth > 0.8)) {
         adaptation.personalityInfluence.sociability = STR_HIGH;
         adaptation.communicationAdjustments.enthusiasm = 'boosted';
       }
 
       // Adaptation contextuelle
-      if (context.userId) {
+      if ( (context.userId)) {
         this.updateContextualAdaptation(context.userId, adaptation);
       }
 
@@ -564,7 +564,7 @@ export class AlexPersonalityCore extends EventEmitter  {
     // Adaptation simple basée sur l'historique
     const userHistory = this.personalityHistory.filter(h => h.context.userId === userId);
 
-    if (userHistory.length > 0) {
+    if ( (userHistory.length > 0)) {
       adaptation.adaptationStrength = Math.min(0.9, adaptation.adaptationStrength + 0.1);
       adaptation.personalityInfluence.familiarity = 'increased';
     }

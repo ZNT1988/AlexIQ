@@ -1,22 +1,22 @@
-import crypto from 'crypto';
+import crypto from "crypto";
 
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
-const STR_ERROR = 'error';
-const STR_HEALTHY = 'healthy';
-const STR_MISSING = 'missing';
-const STR_DEGRADED = 'degraded';
-const STR_CRITICAL = 'critical';
-const STR_ENV = '.env';
+const STR_ERROR = "error";
+const STR_HEALTHY = "healthy";
+const STR_MISSING = "missing";
+const STR_DEGRADED = "degraded";
+const STR_CRITICAL = "critical";
+const STR_ENV = ".env";
 /**
  * Health Check Amélioré avec diagnostics détaillés
  * Fournit des informations complètes sur l'état du système
  */
 
-import fs from 'fs';
-import path from 'path';
-import { performance } from 'perf_hooks';
-import logger from '../config/logger.js';
+import fs from "fs";
+import path from "path";
+import { performance } from "perf_hooks";
+import logger from "../config/logger.js";
 
 class EnhancedHealthCheck {
   constructor() {
@@ -85,7 +85,7 @@ class EnhancedHealthCheck {
 
     } catch (error) {
       // Logger fallback - ignore error
-      logger.error('Error during full health check:', error);
+      logger.error("Error during full health check:", error);
       throw error;
     }
   }
@@ -116,10 +116,10 @@ class EnhancedHealthCheck {
    */
   async checkCoreModules() {
     const modules = [
-      { name: 'HustleFinderCore', path: './core/HustleFinderCore.js' },
-      { name: 'NeuroCore', path: './core/NeuroCore.js' },
-      { name: 'AlexEvolutionCore', path: './core/AlexEvolutionCore.js' },
-      { name: 'SoulPrintGenerator', path: './core/SoulPrintGenerator.js' }
+      { name: "HustleFinderCore", path: "./core/HustleFinderCore.js" },
+      { name: "NeuroCore", path: "./core/NeuroCore.js" },
+      { name: "AlexEvolutionCore", path: "./core/AlexEvolutionCore.js" },
+      { name: "SoulPrintGenerator", path: "./core/SoulPrintGenerator.js" }
     ];
 
     const results = {};
@@ -132,7 +132,7 @@ class EnhancedHealthCheck {
         if (!fs.existsSync(modulePath)) {
           results[module.name] = {
             status: STR_MISSING,
-            error: 'Fichier non trouvé'
+            error: "Fichier non trouvé"
           };
           overallStatus = STR_CRITICAL;
           continue;
@@ -172,12 +172,12 @@ class EnhancedHealthCheck {
   async checkDatabase() {
     try {
       // Vérifier si SQLite fonctionne
-      const dbPath = './database.sqlite';
+      const dbPath = "./database.sqlite";
       const dbExists = fs.existsSync(dbPath);
 
       return {
         status: STR_HEALTHY,
-        type: 'sqlite',
+        type: "sqlite",
         exists: dbExists,
         size: dbExists ? fs.statSync(dbPath).size : 0,
         lastModified: dbExists ? fs.statSync(dbPath).mtime : null
@@ -217,8 +217,8 @@ class EnhancedHealthCheck {
         heapTotal: Math.round(memory.heapTotal / 1024 / 1024),
         rss: Math.round(memory.rss / 1024 / 1024)
       },
-      loadAverage: process.platform !== 'win32' ? require('os').loadavg() : [0, 0, 0]
-    , sum : sum};
+      loadAverage: process.platform !== "win32" ? require("os").loadavg() : [0, 0, 0]
+      , sum : sum };
   }
 
   /**
@@ -226,8 +226,8 @@ class EnhancedHealthCheck {
    */
   async checkFileIntegrity() {
     const criticalFiles = [
-      'index.js',
-      'package.json',
+      "index.js",
+      "package.json",
       STR_ENV
     ];
 
@@ -238,7 +238,7 @@ class EnhancedHealthCheck {
       if (fs.existsSync(file)) {
         const stats = fs.statSync(file);
         results[file] = {
-          status: 'present',
+          status: "present",
           size: stats.size,
           lastModified: stats.mtime
         };
@@ -279,30 +279,30 @@ class EnhancedHealthCheck {
     // Recommandations mémoire
     if (result.performance.memoryUsage.heapUsed > 100) {
       recommendations.push({
-        type: 'performance',
-        severity: 'medium',
-        message: 'Utilisation mémoire élevée, considérez un redémarrage',
-        action: 'restart_suggested'
+        type: "performance",
+        severity: "medium",
+        message: "Utilisation mémoire élevée, considérez un redémarrage",
+        action: "restart_suggested"
       });
     }
 
     // Recommandations modules
     if (result.checks.coreModules.status !== STR_HEALTHY) {
       recommendations.push({
-        type: 'modules',
-        severity: 'high',
-        message: 'Problèmes détectés dans les modules core',
-        action: 'check_modules'
+        type: "modules",
+        severity: "high",
+        message: "Problèmes détectés dans les modules core",
+        action: "check_modules"
       });
     }
 
     // Recommandations fichiers
     if (result.checks.fileIntegrity.status !== STR_HEALTHY) {
       recommendations.push({
-        type: 'files',
-        severity: 'medium',
-        message: 'Fichiers critiques manquants ou corrompus',
-        action: 'restore_files'
+        type: "files",
+        severity: "medium",
+        message: "Fichiers critiques manquants ou corrompus",
+        action: "restore_files"
       });
     }
 
@@ -318,11 +318,11 @@ class EnhancedHealthCheck {
     // Auto-fix: créer .env si manquant
     if (result.checks.fileIntegrity.files[STR_ENV]?.status === STR_MISSING) {
       try {
-        const defaultEnv = 'PORT=8080\nNODE_ENV=development\n';
+        const defaultEnv = "PORT=8080\nNODE_ENV=development\n";
         fs.writeFileSync(STR_ENV, defaultEnv);
-        fixes.push('Créé fichier .env par défaut');
+        fixes.push("Créé fichier .env par défaut");
       } catch (error) {
-        logger.error('Impossible de créer .env :', error);
+        logger.error("Impossible de créer .env :", error);
         throw error;
       }
     }

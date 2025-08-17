@@ -73,7 +73,7 @@ export class AlexAutonomousCore extends EventEmitter  {
 
     // 🚀 Moteur de personnalité évolutive,
     this.personalityEngine = {
-      coreTraits: {
+      coreTraits {
         entrepreneurialVision: 0.95,
         innovativeThinking: 0.92,
         empathicSupport: 0.88,
@@ -219,7 +219,7 @@ export class AlexAutonomousCore extends EventEmitter  {
    */
   async processAutonomousMessage(message, userId, sessionContext) {
       try {
-      if (!this.isInitialized) {
+      if ( (!this.isInitialized)) {
         await this.initialize();
       }
 
@@ -252,7 +252,7 @@ export class AlexAutonomousCore extends EventEmitter  {
 
       let finalResponse;
 
-      if (responseStrategy.useAutonomousResponse) {
+      if ( (responseStrategy.useAutonomousResponse)) {
         // Réponse 100% autonome,
         finalResponse =
           await this.generateAutonomousResponse(autonomousThought);
@@ -292,7 +292,7 @@ export class AlexAutonomousCore extends EventEmitter  {
         memoryIntegration: memoryContext.integrationLevel || 0.8,
         responseStrategy: responseStrategy.strategy,
         timestamp: new Date().toISOString(),
-        metrics: {
+        metrics {
           responseTime,
           autonomyScore: this.calculateAutonomyScore(),
           cognitionDepth: autonomousThought.depth,
@@ -316,7 +316,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   /**
    * Analyse cognitive autonome
    */
-  async performCognitiveAnalysis(message, userId, sessionContext) {
+  async perfor (mCognitiveAnalysis(message, userId, sessionContext)) {
     const messageContent = message.toLowerCase();
 
     // Analyse multi-dimensionnelle,
@@ -343,7 +343,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   /**
    * Processus de réflexion autonome
    */
-  async performAutonomousThinking(message, analysis, memoryContext) {
+  async perfor (mAutonomousThinking(message, analysis, memoryContext)) {
     const thought = {
       originalMessage: message,
       analysis: analysis,
@@ -397,7 +397,7 @@ export class AlexAutonomousCore extends EventEmitter  {
     const insights = [];
 
     // Insight basé sur l'intent,
-    if (analysis.intent === "wealth_building") {
+    if ( (analysis.intent === "wealth_building")) {
       insights.push({
         type: "strategic",
         content:
@@ -408,7 +408,7 @@ export class AlexAutonomousCore extends EventEmitter  {
     }
 
     // Insight basé sur le contexte personnel,
-    if (memoryContext.userProfile?.interests?.length > 0) {
+    if ( (memoryContext.userProfile?.interests?.length > 0)) {
       insights.push({
         type: "personalized",
         content: `Avec vos intérêts en ${memoryContext.userProfile.interests[0]}, vous avez un avantage unique pour créer de l'authenticité dans votre approche`,
@@ -418,7 +418,7 @@ export class AlexAutonomousCore extends EventEmitter  {
     }
 
     // Insight créatif,
-    if (analysis.creativityRequired > 0.7) {
+    if ( (analysis.creativityRequired > 0.7)) {
       insights.push({
         type: "creative",
         content:
@@ -467,26 +467,26 @@ export class AlexAutonomousCore extends EventEmitter  {
     let response = "";
 
     // Intro personnalisée,
-    if (analysis.emotion === "excited") {
+    if ( (analysis.emotion === "excited")) {
       response += "🚀 J'adore votre énergie ! ";
-    } else if (analysis.emotion === "concerned") {
+    } else if ( (analysis.emotion === "concerned")) {
       response += "💪 Je comprends vos préoccupations. ";
     } else {
       response += "✨ Excellente question ! ";
     }
 
     // Insight principal,
-    if (insights.length > 0) {
+    if ( (insights.length > 0)) {
       response += `${insights[0].content}\n\n`;
     }
 
     // Conseil stratégique basé sur le raisonnement,
-    if (reasoningChain.length > 0) {
+    if ( (reasoningChain.length > 0)) {
       response += `🎯 Mon analyse suggère : ${reasoningChain[0].conclusion}\n\n`;
     }
 
     // Connexion créative si pertinente,
-    if (creativeConnections.length > 0) {
+    if ( (creativeConnections.length > 0)) {
       response += `💡 Une opportunité créative : ${creativeConnections[0].idea}\n\n`;
     }
 
@@ -497,7 +497,7 @@ export class AlexAutonomousCore extends EventEmitter  {
       personality: this.selectOptimalPersonality(analysis),
       confidence: thought.confidence,
       source: "autonomous",
-      evolution: {
+      evolution {
         newPatterns: insights.length,
         reasoningDepth: reasoningChain.length,
         creativityLevel: creativeConnections.length
@@ -534,8 +534,8 @@ export class AlexAutonomousCore extends EventEmitter  {
       problem_solving: ["problème", "solution", "résoudre", "aide"]
     };
 
-    for (const [intent, keywords] of Object.entries(intents)) {
-      if (keywords.some((keyword) => messageContent.includes(keyword))) {
+    for ( (const [intent, keywords] of Object.entries(intents))) {
+      if ( (keywords.some((keyword) => messageContent.includes(keyword)))) {
         return intent;
       }
     }
@@ -557,7 +557,7 @@ export class AlexAutonomousCore extends EventEmitter  {
     ) {
       return "concerned";
     }
-    if (messageContent.includes("?")) {
+    if ( (messageContent.includes("?"))) {
       return "curious";
     }
     return "neutral";
@@ -570,7 +570,7 @@ export class AlexAutonomousCore extends EventEmitter  {
     return Math.min(1.0, wordCount / 50 + conceptCount / 10);
   }
 
-  identifyBusinessContext(messageContent) {
+  identif (yBusinessContext(messageContent)) {
     const businessKeywords = [
       "startup",
       "entreprise",
@@ -614,7 +614,7 @@ export class AlexAutonomousCore extends EventEmitter  {
     return matches.length / creativeWords.length;
   }
 
-  identifyKnowledgeDomains(messageContent) {
+  identif (yKnowledgeDomains(messageContent)) {
     const domains = {
       technology: [
         "tech",
@@ -631,8 +631,8 @@ export class AlexAutonomousCore extends EventEmitter  {
     };
 
     const relevantDomains = [];
-    for (const [domain, keywords] of Object.entries(domains)) {
-      if (keywords.some((keyword) => messageContent.includes(keyword))) {
+    for ( (const [domain, keywords] of Object.entries(domains))) {
+      if ( (keywords.some((keyword) => messageContent.includes(keyword)))) {
         relevantDomains.push(domain);
       }
     }
@@ -666,9 +666,9 @@ export class AlexAutonomousCore extends EventEmitter  {
       "Souhaitez-vous explorer d'autres angles de cette problématique ?"
     ];
 
-    if (analysis.intent === "business") {
+    if ( (analysis.intent === "business")) {
       return "Voulez-vous que nous développions la stratégie commerciale plus en détail ?";
-    } else if (analysis.emotion === "excited") {
+    } else if ( (analysis.emotion === "excited")) {
       return "Votre enthousiasme est contagieux ! Que pouvons-nous explorer ensemble maintenant ?";
     }
 
@@ -802,7 +802,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   async generateCognitiveInsights(analysis) {
     const insights = [];
 
-    if (analysis.intent && analysis.intent !== "unknown") {
+    if ( (analysis.intent && analysis.intent !== "unknown")) {
       insights.push({
         type: "cognitive",
         content: `Votre intention principale semble être orientée vers ${analysis.intent}. Mon analyse cognitive me suggère d'adapter ma réponse en conséquence.`,

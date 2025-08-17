@@ -4,10 +4,10 @@
  * Correction spécifique des arrays mal formatés
  */
 
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
-const MODULES_DIR = path.resolve('./backend/alex-modules');
+const MODULES_DIR = path.resolve("./backend/alex-modules");
 
 class ArraySyntaxFixer {
   constructor() {
@@ -20,7 +20,7 @@ class ArraySyntaxFixer {
   }
 
   async fixAllModules() {
-    console.log('🔧 Correction des arrays mal formatés...\n');
+    console.log("🔧 Correction des arrays mal formatés...\n");
     
     const moduleFiles = this.findAllModules();
     this.stats.totalFiles = moduleFiles.length;
@@ -44,7 +44,7 @@ class ArraySyntaxFixer {
         
         if (stat.isDirectory()) {
           scanDirectory(fullPath);
-        } else if (entry.endsWith('.js')) {
+        } else if (entry.endsWith(".js")) {
           modules.push(fullPath);
         }
       }
@@ -58,18 +58,18 @@ class ArraySyntaxFixer {
     const fileName = path.basename(filePath);
 
     try {
-      const originalContent = fs.readFileSync(filePath, 'utf8');
+      const originalContent = fs.readFileSync(filePath, "utf8");
       let content = originalContent;
       let fixes = 0;
 
       // 1. Corriger les arrays sans virgules entre éléments
       const arrayPattern = /(\w+):\s*\[([^\]]*)\]/gs;
       content = content.replace(arrayPattern, (match, propName, arrayContent) => {
-        if (!arrayContent.includes(',') && arrayContent.includes('\n')) {
+        if (!arrayContent.includes(",") && arrayContent.includes("\n")) {
           // C'est un array multi-ligne sans virgules
-          const lines = arrayContent.split('\n').map(line => line.trim()).filter(line => line);
+          const lines = arrayContent.split("\n").map(line => line.trim()).filter(line => line);
           if (lines.length > 1) {
-            const fixedArrayContent = lines.join(',\n      ');
+            const fixedArrayContent = lines.join(",\n      ");
             fixes++;
             return `${propName}: [${fixedArrayContent}]`;
           }
@@ -80,19 +80,19 @@ class ArraySyntaxFixer {
       // 2. Corriger les objets avec propriétés sans virgules
       const objectPattern = /(\w+):\s*\{([^}]*)\}/gs;
       content = content.replace(objectPattern, (match, propName, objectContent) => {
-        if (!objectContent.includes(',') && objectContent.includes('\n')) {
+        if (!objectContent.includes(",") && objectContent.includes("\n")) {
           // C'est un objet multi-ligne sans virgules
-          const lines = objectContent.split('\n')
+          const lines = objectContent.split("\n")
             .map(line => line.trim())
-            .filter(line => line && !line.startsWith('//'));
+            .filter(line => line && !line.startsWith("//"));
           
           if (lines.length > 1) {
             const fixedObjectContent = lines.map(line => {
-              if (!line.endsWith(',') && !line.endsWith('{') && !line.endsWith('}')) {
-                return line + ',';
+              if (!line.endsWith(",") && !line.endsWith("{") && !line.endsWith("}")) {
+                return line + ",";
               }
               return line;
-            }).join('\n        ');
+            }).join("\n        ");
             fixes++;
             return `${propName}: {\n        ${fixedObjectContent}\n      }`;
           }
@@ -101,20 +101,20 @@ class ArraySyntaxFixer {
       });
 
       // 3. Corriger les virgules manquantes spécifiques
-      content = content.replace(/(\w+:\s*0)(\n\s+\w+:)/g, '$1,$2');
-      content = content.replace(/(\])(\n\s+\w+:)/g, '$1,$2');
-      content = content.replace(/(true)(\n\s+\w+:)/g, '$1,$2');
-      content = content.replace(/(false)(\n\s+\w+:)/g, '$1,$2');
-      content = content.replace(/('[\w\s]+')(\n\s+\w+:)/g, '$1,$2');
+      content = content.replace(/(\w+:\s*0)(\n\s+\w+:)/g, "$1,$2");
+      content = content.replace(/(\])(\n\s+\w+:)/g, "$1,$2");
+      content = content.replace(/(true)(\n\s+\w+:)/g, "$1,$2");
+      content = content.replace(/(false)(\n\s+\w+:)/g, "$1,$2");
+      content = content.replace(/('[\w\s]+')(\n\s+\w+:)/g, "$1,$2");
 
       // 4. Corriger les arrays de regex
-      content = content.replace(/(\/[^\/]+\/[gimuy]*)(\n\s*\/[^\/]+\/[gimuy]*)/g, '$1,$2');
+      content = content.replace(/(\/[^\/]+\/[gimuy]*)(\n\s*\/[^\/]+\/[gimuy]*)/g, "$1,$2");
 
       // 5. Corriger les propriétés sans deux-points
-      content = content.replace(/^\s*(\w+)\s+(\[|\{)/gm, '      $1: $2');
+      content = content.replace(/^\s*(\w+)\s+(\[|\{)/gm, "      $1: $2");
 
       if (content !== originalContent) {
-        fs.writeFileSync(filePath, content, 'utf8');
+        fs.writeFileSync(filePath, content, "utf8");
         this.fixedFiles.push({ file: fileName, fixes: fixes });
         this.stats.filesFixed++;
         this.stats.errorsFixed += fixes;
@@ -127,16 +127,16 @@ class ArraySyntaxFixer {
   }
 
   displayResults() {
-    console.log('\n' + '='.repeat(50));
-    console.log('🎯 CORRECTION ARRAYS TERMINÉE');
-    console.log('='.repeat(50));
+    console.log("\n" + "=".repeat(50));
+    console.log("🎯 CORRECTION ARRAYS TERMINÉE");
+    console.log("=".repeat(50));
     
-    console.log(`\n📊 Statistiques:`);
+    console.log("\n📊 Statistiques:");
     console.log(`  • Fichiers analysés: ${this.stats.totalFiles}`);
     console.log(`  • Fichiers corrigés: ${this.stats.filesFixed}`);
     console.log(`  • Erreurs corrigées: ${this.stats.errorsFixed}`);
     
-    console.log('\n🎉 Correction terminée!');
+    console.log("\n🎉 Correction terminée!");
   }
 }
 

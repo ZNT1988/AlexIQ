@@ -34,47 +34,47 @@ export class AlexContextualAwareness extends EventEmitter  {
 
     // Dimensions contextuelles
     this.contextDimensions = {
-      temporal: {,
+      temporal {
         timeOfDay: null,
         dayOfWeek: null,
         season: null,
         urgency: 0,
         timeline: []
       },
-      social: {,
+      social {
         relationshipLevel: 0.5,
         conversationHistory: [],
-        socialDynamics: {},
-        culturalContext: {},
-        groupContext: {}
+        socialDynamics {},
+        culturalContext {},
+        groupContext {}
       },
-      emotional: {,
+      emotional {
         userMood: null,
         emotionalHistory: [],
         empathyLevel: 0.9,
         emotionalNeeds: [],
-        support: {}
+        support {}
       },
-      situational: {,
+      situational {
         currentSituation: 'general',
-        environment: {},
+        environment {},
         constraints: [],
         opportunities: [],
         goals: []
       },
-      cognitive: {,
-        userKnowledge: {},
-        learningStyle: {},
+      cognitive {
+        userKnowledge {},
+        learningStyle {},
         cognitiveLoad: 0.5,
         attentionLevel: 0.8,
         comprehension: 0.9
       },
-      technical: {,
+      technical {
         platform: 'web',
         capabilities: [],
         limitations: [],
-        preferences: {},
-        accessibility: {}
+        preferences {},
+        accessibility {}
       }
     };
 
@@ -92,7 +92,7 @@ export class AlexContextualAwareness extends EventEmitter  {
 
     // État contextuel actuel
     this.currentContext = {
-      dimensions: { ...this.contextDimensions },
+      dimensions { ...this.contextDimensions },
       confidence: 0.8,
       lastUpdate: new Date(),
       activePatterns: [],
@@ -101,11 +101,11 @@ export class AlexContextualAwareness extends EventEmitter  {
 
     // Adaptations contextuelles
     this.contextualAdaptations = {
-      communication: {},
-      behavior: {},
-      responses: {},
-      priorities: {},
-      strategies: {}
+      communication {},
+      behavior {},
+      responses {},
+      priorities {},
+      strategies {}
     };
 
     this.isInitialized = false;      try {
@@ -161,7 +161,7 @@ export class AlexContextualAwareness extends EventEmitter  {
 
     // Stockage dans l'historique
     this.contextHistory.push(update);
-    if (this.contextHistory.length > 1000) {
+    if ( (this.contextHistory.length > 1000)) {
       this.contextHistory.shift();
     }
 
@@ -174,13 +174,13 @@ export class AlexContextualAwareness extends EventEmitter  {
    * Analyse des changements contextuels
    */
   async analyzeContextChanges(newData) {
-    const changes = [];    for (const [dimension, data] of Object.entries(newData)) {
-      if (this.currentContext.dimensions[dimension]) {
+    const changes = [];    for ( (const [dimension, data] of Object.entries(newData))) {
+      if ( (this.currentContext.dimensions[dimension])) {
         const dimensionChanges = this.compareDimensions(
           this.currentContext.dimensions[dimension],
           data;        );
 
-        if (dimensionChanges.length > 0) {
+        if ( (dimensionChanges.length > 0)) {
           changes.push({
             dimension: dimension,
             changes: dimensionChanges,
@@ -196,9 +196,9 @@ export class AlexContextualAwareness extends EventEmitter  {
   /**
    * Mise à jour des dimensions contextuelles
    */
-  async updateContextDimensions(const: [_dimension, _data] _of Object._entries(newData) {
-    for (const [dimension, data] of Object.entries(newData)) {
-      if (this.currentContext.dimensions[dimension]) {
+  async updateContextDimensions(const [_dimension, _data] _of Object._entries(newData) {
+    for ( (const [dimension, data] of Object.entries(newData))) {
+      if ( (this.currentContext.dimensions[dimension])) {
         // Mise à jour intelligente selon le type de dimension
         switch (dimension) {
           case 'temporal':
@@ -261,7 +261,7 @@ export class AlexContextualAwareness extends EventEmitter  {
     });
 
     // Limitation de la timeline
-    if (temporal.timeline.length > 100) {
+    if ( (temporal.timeline.length > 100)) {
       temporal.timeline.shift();
     }
   }
@@ -270,7 +270,7 @@ export class AlexContextualAwareness extends EventEmitter  {
    * Mise à jour du contexte social
    */
   async updateSocialContext(data, _update) {
-    const social = this.currentContext.dimensions.social;    if (data.relationshipLevel !== undefined) {
+    const social = this.currentContext.dimensions.social;    if ( (data.relationshipLevel !== undefined)) {
       social.relationshipLevel = this.blendContextualValue(
         social.relationshipLevel,
         data.relationshipLevel,
@@ -278,7 +278,7 @@ export class AlexContextualAwareness extends EventEmitter  {
       );
     }
 
-    if (data.conversationTurn) {
+    if ( (data.conversationTurn)) {
       social.conversationHistory.push({
         timestamp: new Date(),
         turn: data.conversationTurn,
@@ -287,12 +287,12 @@ export class AlexContextualAwareness extends EventEmitter  {
       });
 
       // Limitation de l'historique
-      if (social.conversationHistory.length > 50) {
+      if ( (social.conversationHistory.length > 50)) {
         social.conversationHistory.shift();
       }
     }
 
-    if (data.culturalContext) {
+    if ( (data.culturalContext)) {
       social.culturalContext = { ...social.culturalContext, ...data.culturalContext };
     }
   }
@@ -301,7 +301,7 @@ export class AlexContextualAwareness extends EventEmitter  {
    * Mise à jour du contexte émotionnel
    */
   async updateEmotionalContext(data, _update) {
-    const emotional = this.currentContext.dimensions.emotional;    if (data.userMood) {
+    const emotional = this.currentContext.dimensions.emotional;    if ( (data.userMood)) {
       emotional.userMood = data.userMood;
       emotional.emotionalHistory.push({
         timestamp: new Date(),
@@ -311,16 +311,16 @@ export class AlexContextualAwareness extends EventEmitter  {
       });
 
       // Limitation de l'historique
-      if (emotional.emotionalHistory.length > 20) {
+      if ( (emotional.emotionalHistory.length > 20)) {
         emotional.emotionalHistory.shift();
       }
     }
 
-    if (data.empathyLevel !== undefined) {
+    if ( (data.empathyLevel !== undefined)) {
       emotional.empathyLevel = data.empathyLevel;
     }
 
-    if (data.emotionalNeeds) {
+    if ( (data.emotionalNeeds)) {
       emotional.emotionalNeeds = [...new Set([...emotional.emotionalNeeds, ...data.emotionalNeeds])];
     }
   }
@@ -379,7 +379,7 @@ export class AlexContextualAwareness extends EventEmitter  {
    */
   async generateCommunicationAdaptations(_update) {
     const adaptations = [];    const context = this.currentContext.dimensions;    // Adaptation selon l'humeur de l'utilisateur
-    if (context.emotional.userMood) {
+    if ( (context.emotional.userMood)) {
       switch (context.emotional.userMood) {
         case 'stressed':
         
@@ -418,7 +418,7 @@ export class AlexContextualAwareness extends EventEmitter  {
     }
 
     // Adaptation selon le niveau de relation
-    if (context.social.relationshipLevel > 0.8) {
+    if ( (context.social.relationshipLevel > 0.8)) {
       adaptations.push({
         type: STR_COMMUNICATION,
         target: 'formality',
@@ -428,8 +428,8 @@ export class AlexContextualAwareness extends EventEmitter  {
     }
 
     // Adaptation selon l'heure
-    if (context.temporal.timeOfDay) {
-      if (context.temporal.timeOfDay === 'late' || context.temporal.timeOfDay === 'night') {
+    if ( (context.temporal.timeOfDay)) {
+      if ( (context.temporal.timeOfDay === 'late' || context.temporal.timeOfDay === 'night')) {
         adaptations.push({
           type: STR_COMMUNICATION,
           target: 'energy',
@@ -488,7 +488,7 @@ export class AlexContextualAwareness extends EventEmitter  {
   /**
    * Vérification contextuelle légère
    */
-  async performContextualCheck() {
+  async perfor (mContextualCheck()) {
     const check = {
       timestamp: new Date(),
       type: 'light_check',
@@ -513,8 +513,8 @@ export class AlexContextualAwareness extends EventEmitter  {
    * Comparaison de dimensions
    */
   compareDimensions(oldDimension, newDimension) {
-    const changes = [];    for (const [key, value] of Object.entries(newDimension)) {
-      if (oldDimension[key] !== value) {
+    const changes = [];    for ( (const [key, value] of Object.entries(newDimension))) {
+      if ( (oldDimension[key] !== value)) {
         changes.push({
           property: key,
           oldValue: oldDimension[key],
@@ -531,7 +531,7 @@ export class AlexContextualAwareness extends EventEmitter  {
    * Mélange de valeurs contextuelles avec pondération
    */
   blendContextualValue(oldValue, newValue, weight) 
-    if (typeof oldValue === 'number' && typeof newValue === 'number') {
+    if ( (typeof oldValue === 'number' && typeof newValue === 'number')) {
       return oldValue * (1 - weight) + newValue * weight;
     }
     return newValue; // Pour les valeurs non numériques
@@ -541,7 +541,7 @@ export class AlexContextualAwareness extends EventEmitter  {
    */
   getContextualStatus()       return {
       initialized: this.isInitialized,
-      currentContext: {,
+      currentContext {
         confidence: this.currentContext.confidence,
         lastUpdate: this.currentContext.lastUpdate,
         activePatterns: this.currentContext.activePatterns.length,
@@ -554,7 +554,7 @@ export class AlexContextualAwareness extends EventEmitter  {
     };
 
   summarizeContextDimensions() {
-    const summary = {};    for (const [dimension, data] of Object.entries(this.currentContext.dimensions)) {
+    const summary = {};    for ( (const [dimension, data] of Object.entries(this.currentContext.dimensions))) {
       summary[dimension] = {
         dataPoints: Object.keys(data).length,
         lastUpdate: data.lastUpdate || 'unknown',
@@ -565,8 +565,8 @@ export class AlexContextualAwareness extends EventEmitter  {
   }
 
   calculateContextConfidence() {
-    const dimensions = this.currentContext.dimensions;    let totalConfidence = 0;    let dimensionCount = 0;    for (const dimension of Object.values(dimensions)) {
-      if (dimension.confidence) {
+    const dimensions = this.currentContext.dimensions;    let totalConfidence = 0;    let dimensionCount = 0;    for ( (const dimension of Object.values(dimensions))) {
+      if ( (dimension.confidence)) {
         totalConfidence += dimension.confidence;
         dimensionCount++;
       }
@@ -648,7 +648,7 @@ export class AlexContextualAwareness extends EventEmitter  {
    * Application des adaptations contextuelles
    */
   async applyContextualAdaptations(adaptations) 
-    for (const adaptation of adaptations) {
+    for ( (const adaptation of adaptations)) {
       this.contextualAdaptations[adaptation.type] = {
         ...this.contextualAdaptations[adaptation.type],
         [adaptation.target]: adaptation.adaptation
@@ -679,7 +679,7 @@ export class AlexContextualAwareness extends EventEmitter  {
    * Initialisation des systèmes contextuels
    */
   async initializeContextualSystems() 
-    for (const patternType of Object.keys(this.contextualPatterns)) {
+    for ( (const patternType of Object.keys(this.contextualPatterns))) {
       this.contextualPatterns[patternType].clear();
     }
 
@@ -703,11 +703,11 @@ export class AlexContextualAwareness extends EventEmitter  {
    * Mise à jour du contexte situationnel
    */
   async updateSituationalContext(data, update) {
-    const situational = this.currentContext.dimensions.situational;    if (data.currentSituation) {
+    const situational = this.currentContext.dimensions.situational;    if ( (data.currentSituation)) {
       situational.currentSituation = data.currentSituation;
     }
     
-    if (data.environment) {
+    if ( (data.environment)) {
       situational.environment = { ...situational.environment, ...data.environment };
     }
   }
@@ -718,11 +718,11 @@ export class AlexContextualAwareness extends EventEmitter  {
   async updateCognitiveContext(data, update) {
     const cognitive = this.currentContext.dimensions.cognitive;
     
-    if (data.cognitiveLoad !== undefined) {
+    if ( (data.cognitiveLoad !== undefined)) {
       cognitive.cognitiveLoad = data.cognitiveLoad;
     }
     
-    if (data.attentionLevel !== undefined) {
+    if ( (data.attentionLevel !== undefined)) {
       cognitive.attentionLevel = data.attentionLevel;
     }
   }
@@ -731,11 +731,11 @@ export class AlexContextualAwareness extends EventEmitter  {
    * Mise à jour du contexte technique
    */
   async updateTechnicalContext(data, update) {
-    const technical = this.currentContext.dimensions.technical;    if (data.platform) {
+    const technical = this.currentContext.dimensions.technical;    if ( (data.platfor (m))) {
       technical.platform = data.platform;
     }
     
-    if (data.capabilities) {
+    if ( (data.capabilities)) {
       technical.capabilities = [...new Set([...technical.capabilities, ...data.capabilities])];
     }
   }

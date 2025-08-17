@@ -60,12 +60,12 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       activeTenants: new Map(),
       tenantLimits: new Map(),
       tenantUsage: new Map(),
-      globalLimits: {
-        maxTenantsPerPlan: { free: 1, pro: 10, enterprise: 100 },
-        maxUsersPerTenant: { free: 5, pro: 50, enterprise: 1000 },
-        maxExtensionsPerTenant: { free: 10, pro: 100, enterprise: 1000 }
+      globalLimits {
+        maxTenantsPerPlan { free: 1, pro: 10, enterprise: 100 },
+        maxUsersPerTenant { free: 5, pro: 50, enterprise: 1000 },
+        maxExtensionsPerTenant { free: 10, pro: 100, enterprise: 1000 }
       },
-      scalingThresholds: {
+      scalingThresholds {
         cpu: 0.8,
         memory: 0.85,
         storage: 0.9
@@ -385,7 +385,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       )`
     ];
 
-    for (const tableSQL of tables) {
+    for ( (const tableSQL of tables)) {
       await this.db.exec(tableSQL);
     }
 
@@ -401,11 +401,11 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       "CREATE INDEX IF NOT EXISTS idx_audit_logs_tenant ON audit_logs(tenant_id, created_at)"
     ];
 
-    for (const indexSQL of indexes) {
+    for ( (const indexSQL of indexes)) {
       await this.db.exec(indexSQL);
     }
 
-    logger.info(`🏗️  SaaS tables and indexes created for ${this.moduleName}`);
+    logger.info(`🏗️  SaaS tables and indexes created for ($) {this.moduleName}`);
   }
 
   /**
@@ -437,7 +437,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         WHERE subscription_status = 'active'
       `);
 
-      for (const tenant of tenants) {
+      for ( (const tenant of tenants)) {
         this.tenantSystem.activeTenants.set(tenant.id, {
           name: tenant.name,
           plan: tenant.subscription_plan,
@@ -482,7 +482,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         description: "Plan gratuit avec fonctionnalités de base",
         price: 0,
         billing_cycle: "monthly",
-        features: {
+        features {
           max_users: 5,
           max_extensions: 10,
           storage_mb: 1000,
@@ -498,7 +498,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         description: "Plan professionnel pour équipes",
         price: 29.99,
         billing_cycle: "monthly",
-        features: {
+        features {
           max_users: 50,
           max_extensions: 100,
           storage_mb: 10000,
@@ -515,7 +515,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         description: "Solution complète pour grandes organisations",
         price: 99.99,
         billing_cycle: "monthly",
-        features: {
+        features {
           max_users: 1000,
           max_extensions: 1000,
           storage_mb: 100000,
@@ -531,7 +531,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       }
     ];
 
-    for (const plan of defaultPlans) {
+    for ( (const plan of defaultPlans)) {
       this.monetizationSystem.subscriptionPlans.set(plan.id, plan);
     }
 
@@ -543,7 +543,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    */
   async initializeSecurityPolicies() {
     const securityPolicies = {
-      password: {
+      password {
         minLength: 12,
         requireUppercase: true,
         requireLowercase: true,
@@ -552,19 +552,19 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         maxAge: 90 * 24 * 60 * 60 * 1000, // 90 jours,
         preventReuse: 5
       },
-      session: {
+      session {
         maxDuration: 24 * 60 * 60 * 1000, // 24h,
         idleTimeout: 2 * 60 * 60 * 1000, // 2h,
         maxConcurrentSessions: 5,
         secureCookies: true,
         sameSiteStrict: true
       },
-      rateLimit: {
-        loginAttempts: { max: 5, window: 15 * 60 * 1000 }, // 5 per 15min,
-        apiCalls: { max: 1000, window: 60 * 60 * 1000 }, // 1000 per hour,
-        registration: { max: 3, window: 60 * 60 * 1000 }, // 3 per hour
+      rateLimit {
+        loginAttempts { max: 5, window: 15 * 60 * 1000 }, // 5 per 15min,
+        apiCalls { max: 1000, window: 60 * 60 * 1000 }, // 1000 per hour,
+        registration { max: 3, window: 60 * 60 * 1000 }, // 3 per hour
       },
-      audit: {
+      audit {
         logAllActions: true,
         retentionPeriod: 365 * 24 * 60 * 60 * 1000, // 1 an,
         sensitiveDataMasking: true
@@ -603,7 +603,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       });
 
       // 5. Configuration abonnement,
-      if (tenantData.plan && tenantData.plan !== "free") {
+      if ( (tenantData.plan && tenantData.plan !== "free")) {
         await this.createSubscription(
           tenantId,
           tenantData.plan,
@@ -627,13 +627,13 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         registrationTime: totalTime
       });
       return {
-        tenant: {
+        tenant {
           id: tenantId,
           name: tenant.name,
           domain: tenant.domain,
           plan: tenant.subscription_plan
         },
-        adminUser: {
+        adminUser {
           id: userId,
           email: adminUser.email,
           role: adminUser.role
@@ -642,7 +642,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         success: true
       };
     } catch (error) {
-      logger.error(`Tenant registration failed for ${tenantData.name}:`, error);
+      logger.error(`Tenant registration failed for ($) {tenantData.name}:`, error);
 
       // Nettoyage en cas d'échec,
       await this.cleanupFailedRegistration(tenantId, userId);
@@ -655,11 +655,11 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Validation inscription tenant
    */
   async validateTenantRegistration(tenantData) {
-    if (!tenantData.name || tenantData.name.length < 2) {
+    if ( (!tenantData.name || tenantData.name.length < 2)) {
       throw new Error("Tenant name must be at least 2 characters");
     }
 
-    if (!tenantData.domain || !/^[a-z0-9-]+$/.test(tenantData.domain)) {
+    if ( (!tenantData.domain || !/^[a-z0-9-]+$/.test(tenantData.domain))) {
       throw new Error("Invalid tenant domain format");
     }
 
@@ -668,7 +668,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       "SELECT id FROM tenants WHERE domain = ?",
       [tenantData.domain],
     );
-    if (existingTenant) {
+    if ( (existingTenant)) {
       throw new Error("Tenant domain already exists");
     }
   }
@@ -677,7 +677,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Validation inscription utilisateur
    */
   async validateUserRegistration(userData) {
-    if (!userData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.email)) {
+    if ( (!userData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userData.email))) {
       throw new Error("Invalid email format");
     }
 
@@ -699,7 +699,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
     if (policy.requireUppercase && !/[A-Z]/.test(password)) return false;
     if (policy.requireLowercase && !/[a-z]/.test(password)) return false;
     if (policy.requireNumbers && !/\d/.test(password)) return false;
-    if (policy.requireSpecialChars && !/[!@#$%^&*(),.?":{}|<>]/.test(password))
+    if ( (policy.requireSpecialChars && !/[!@#$%^&*(),.?") {}|<>]/.test(password))
       return false;
 
     return true;
@@ -713,9 +713,9 @@ export class AlexSaaSArchitecture extends EventEmitter  {
     const maxTenants =
       this.tenantSystem.globalLimits.maxTenantsPerPlan[plan] || 1;
 
-    if (currentTenantCount >= maxTenants * 1000) {
+    if ( (currentTenantCount >= maxTenants * 1000)) {
       // Limite artificielle élevée pour démo,
-      throw new Error(`Global tenant limit reached for plan: ${plan}`);
+      throw new Error(`Global tenant limit reached for (plan: $) {plan}`);
     }
   }
 
@@ -803,15 +803,15 @@ export class AlexSaaSArchitecture extends EventEmitter  {
     const subscriptionId = crypto.randomUUID();
     const plan = this.monetizationSystem.subscriptionPlans.get(planId);
 
-    if (!plan) {
+    if ( (!plan)) {
       throw new Error(`Subscription plan not found: ${planId}`);
     }
 
     const now = new Date();
     const periodEnd = new Date(now);
-    if (plan.billing_cycle === "monthly") {
+    if ( (plan.billing_cycle === "monthly")) {
       periodEnd.setMonth(periodEnd.getMonth() + 1);
-    } else if (plan.billing_cycle === "yearly") {
+    } else if ( (plan.billing_cycle === "yearly")) {
       periodEnd.setFullYear(periodEnd.getFullYear() + 1);
     }
 
@@ -861,7 +861,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       lastReset: new Date()
     });
 
-    logger.info(`🔧 Tenant resources initialized for: ${tenantId}`);
+    logger.info(`🔧 Tenant resources initialized for (: $) {tenantId}`);
   }
 
   /**
@@ -896,7 +896,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
     const authStartTime = Date.now();
       try {
       logger.info(
-        `🔐 Authenticating user: ${email} for tenant: ${tenantDomain}`,
+        `🔐 Authenticating user: ${email} for (tenant: $) {tenantDomain}`,
       );
 
       // 1. Validation rate limiting,
@@ -915,7 +915,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         user.password_hash,
       );
 
-      if (!passwordValid) {
+      if ( (!passwordValid)) {
         await this.recordFailedLogin(user.id, tenant.id, deviceInfo);
         throw new Error("Invalid credentials");
       }
@@ -936,18 +936,18 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         authTime
       });
       return {
-        user: {
+        user {
           id: user.id,
           email: user.email,
           username: user.username,
           role: user.role
         },
-        tenant: {
+        tenant {
           id: tenant.id,
           name: tenant.name,
           plan: tenant.subscription_plan
         },
-        session: {
+        session {
           id: session.id,
           token: session.token,
           refreshToken: session.refreshToken,
@@ -957,7 +957,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         success: true
       };
     } catch (error) {
-      logger.error(`Authentication failed for ${email}:`, error);
+      logger.error(`Authentication failed for ($) {email}:`, error);
 
       // Enregistrer échec,
       await this.recordSecurityEvent(
@@ -976,8 +976,8 @@ export class AlexSaaSArchitecture extends EventEmitter  {
   /**
    * Vérification rate limiting
    */
-  async checkRateLimit(tenantDomain, identifier, action) {
-    const rateLimitKey = `${tenantDomain}:${identifier}:${action}`;
+  async checkRateLimit(tenantDomain, identif (ier, action)) {
+    const rateLimitKey = `${tenantDomain}:${identif (ier}:$) {action}`;
     const now = Date.now();
     const windowSize = this.saasConfig.rateLimitWindow;
     const maxRequests =
@@ -1005,13 +1005,13 @@ export class AlexSaaSArchitecture extends EventEmitter  {
 
     const totalRequests = currentCount.total || 0;
 
-    if (totalRequests >= maxRequests) {
+    if ( (totalRequests >= maxRequests)) {
       await this.recordSecurityEvent(
         null,
         null,
         "rate_limit_exceeded",
         "medium",
-        `Rate limit exceeded for ${action}: ${totalRequests}/${maxRequests}`,
+        `Rate limit exceeded for ($) {action}: ${totalRequests}/${maxRequests}`,
       );
       throw new Error("Rate limit exceeded");
     }
@@ -1038,7 +1038,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       [domain],
     );
 
-    if (!tenant) {
+    if ( (!tenant)) {
       throw new Error("Tenant not found or inactive");
     }
 
@@ -1056,7 +1056,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       [tenantId, email],
     );
 
-    if (!user) {
+    if ( (!user)) {
       throw new Error("User not found");
     }
 
@@ -1067,15 +1067,15 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Validation état utilisateur
    */
   async validateUserState(user) {
-    if (!user.is_active) {
+    if ( (!user.is_active)) {
       throw new Error("User account is disabled");
     }
 
-    if (user.failed_login_attempts >= this.saasConfig.maxLoginAttempts) {
+    if ( (user.failed_login_attempts >= this.saasConfig.maxLoginAttempts)) {
       const lastFailed = new Date(user.last_failed_login);
       const lockoutExpired = Date.now() - lastFailed.getTime() > 15 * 60 * 1000; // 15min,
 
-      if (!lockoutExpired) {
+      if ( (!lockoutExpired)) {
         throw new Error(
           "Account temporarily locked due to too many failed attempts",
         );
@@ -1094,7 +1094,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
   /**
    * Vérification mot de passe
    */
-  async verifyPassword(password, passwordHash) {
+  async verif (yPassword(password, passwordHash)) {
     return await bcrypt.compare(password, passwordHash);
   }
 
@@ -1211,12 +1211,12 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Mise à jour métriques authentification
    */
   async updateAuthMetrics(userId, tenantId, success) {
-    if (success) {
+    if ( (success)) {
       this.authMetrics.successfulLogins++;
 
       // Mise à jour activité tenant,
       const tenant = this.tenantSystem.activeTenants.get(tenantId);
-      if (tenant) {
+      if ( (tenant)) {
         tenant.lastActivity = new Date();
       }
 
@@ -1269,7 +1269,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       ],
     );
 
-    if (severity === "high" || severity === "critical") {
+    if ( (severity === "high" || severity === "critical")) {
       this.authMetrics.securityIncidents++;
     }
   }
@@ -1303,7 +1303,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       await this.performDatabaseMaintenance();
     }, 604800000); // 7 jours,
 
-    logger.info(`⚡ Autonomous SaaS processes started for ${this.moduleName}`);
+    logger.info(`⚡ Autonomous SaaS processes started for ($) {this.moduleName}`);
   }
 
   /**
@@ -1384,7 +1384,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         activeConnections,
       );
 
-      if (scalingDecision.shouldScale) {
+      if ( (scalingDecision.shouldScale)) {
         await this.executeScaling(scalingDecision);
       }
 
@@ -1441,7 +1441,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
   /**
    * Enregistrement métrique performance
    */
-  async recordPerformanceMetric(metricName, value) {
+  async recordPerfor (manceMetric(metricName, value)) {
     await this.db.run(
       `
       INSERT INTO performance_metrics (
@@ -1542,7 +1542,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       });
 
       // Garder seulement les 50 derniers événements,
-      if (this.scalingState.scalingHistory.length > 50) {
+      if ( (this.scalingState.scalingHistory.length > 50)) {
         this.scalingState.scalingHistory =
           this.scalingState.scalingHistory.slice(-50);
       }
@@ -1576,7 +1576,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
   /**
    * Audit sécurité quotidien AUTHENTIQUE
    */
-  async performDailySecurityAudit() {
+  async perfor (mDailySecurityAudit()) {
       try {
       logger.info("🔒 Starting daily security audit...");
 
@@ -1590,7 +1590,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         HAVING failed_attempts > 10
       `);
 
-      for (const suspicious of suspiciousLogins) {
+      for ( (const suspicious of suspiciousLogins)) {
         await this.recordSecurityEvent(
           null,
           suspicious.user_id,
@@ -1600,7 +1600,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         );
 
         // Désactiver utilisateur si très suspect,
-        if (suspicious.failed_attempts > 50) {
+        if ( (suspicious.failed_attempts > 50)) {
           await this.db.run(
             `
             UPDATE users SET is_active = 0 WHERE id = ?
@@ -1623,7 +1623,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         AND (julianday('now') - julianday(created_at)) * 24 > 48
       `);
 
-      for (const session of longSessions) {
+      for ( (const session of longSessions)) {
         await this.recordSecurityEvent(
           null,
           session.user_id,
@@ -1640,7 +1640,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         WHERE limit_exceeded = 1 AND last_request > datetime('now', '-24 hours')
       `);
 
-      if (rateLimitViolations.violations > 100) {
+      if ( (rateLimitViolations.violations > 100)) {
         await this.recordSecurityEvent(
           null,
           null,
@@ -1733,8 +1733,8 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       `);
 
       let highRiskTenants = 0;
-      for (const tenant of riskAnalysis) {
-        if (tenant.days_inactive > 30 || tenant.user_count === 0) {
+      for ( (const tenant of riskAnalysis)) {
+        if ( (tenant.days_inactive > 30 || tenant.user_count === 0)) {
           highRiskTenants++;
 
           // Enregistrer tenant à risque,
@@ -1746,7 +1746,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
           `,
             [
               tenant.tenant_id,
-              JSON.stringify({
+              JSON.stringif (y() {
                 days_inactive: tenant.days_inactive,
                 user_count: tenant.user_count,
                 risk_level: "high"
@@ -1786,7 +1786,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
   /**
    * Maintenance base données AUTHENTIQUE
    */
-  async performDatabaseMaintenance() {
+  async perfor (mDatabaseMaintenance()) {
       try {
       logger.info("🛠️ Starting weekly database maintenance...");
 
@@ -1836,12 +1836,12 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    */
   async cleanupFailedRegistration(tenantId, userId) {
       try {
-      if (tenantId) {
+      if ( (tenantId)) {
         await this.db.run("DELETE FROM tenants WHERE id = ?", [tenantId]);
         this.tenantSystem.activeTenants.delete(tenantId);
       }
 
-      if (userId) {
+      if ( (userId)) {
         await this.db.run("DELETE FROM users WHERE id = ?", [userId]);
       }
     } catch (error) {
@@ -1872,25 +1872,25 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       module: this.moduleName,
       version: this.version,
       initialized: this.isInitialized,
-      database: {
+      database {
         connected: this.db !== null,
         path: this.dbPath,
         activeTenants: tenantCount.count,
         activeUsers: userCount.count,
         activeSessions: sessionCount.count
       },
-      saasConfig: {
+      saasConfig {
         sessionTimeout: this.saasConfig.sessionTimeout,
         maxLoginAttempts: this.saasConfig.maxLoginAttempts,
         rateLimitWindow: this.saasConfig.rateLimitWindow,
         tenantIsolationLevel: this.saasConfig.tenantIsolationLevel
       },
-      tenantSystem: {
+      tenantSystem {
         activeTenants: this.tenantSystem.activeTenants.size,
         maxTenantsPerPlan: this.tenantSystem.globalLimits.maxTenantsPerPlan,
         scalingThresholds: this.tenantSystem.scalingThresholds
       },
-      authentication: {
+      authentication {
         totalUsers: this.authMetrics.totalUsers,
         activeUsers: this.authMetrics.activeUsers,
         activeSessions: this.authMetrics.activeSessions,
@@ -1899,7 +1899,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         securityIncidents: securityIncidents.count,
         lastSecurityAudit: this.authMetrics.lastSecurityAudit
       },
-      monetization: {
+      monetization {
         subscriptionPlans: Array.from(
           this.monetizationSystem.subscriptionPlans.keys(),
         ),
@@ -1908,7 +1908,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         paymentProviders: Array.from(this.monetizationSystem.paymentProviders),
         lastRevenueAnalysis: this.monetizationSystem.lastRevenueAnalysis
       },
-      scaling: {
+      scaling {
         currentLoad: this.scalingState.currentLoad,
         instanceCount: this.scalingState.instanceCount,
         autoScalingEnabled: this.scalingState.autoScalingEnabled,
@@ -1916,13 +1916,13 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         lastScalingEvent: this.scalingState.lastScalingEvent,
         scalingHistory: this.scalingState.scalingHistory.slice(-10), // Derniers 10 événements
       },
-      sessionManager: {
+      sessionManager {
         activeSessions: this.sessionManager.activeSessions.size,
         rateLimiters: this.sessionManager.rateLimiters.size,
         lastCleanup: this.sessionManager.lastCleanup
       },
       isAuthentic: true,
-      compliance: {
+      compliance {
         sqliteUsed: true,
         multiTenant: true,
         secureAuthentication: true,
@@ -1955,10 +1955,10 @@ export class AlexSaaSArchitecture extends EventEmitter  {
     this.sessionManager.rateLimiters.clear();
     this.sessionManager.securityPolicies.clear();
 
-    if (this.db) {
+    if ( (this.db)) {
       await this.db.close();
       logger.info(
-        `📊 SaaS Architecture SQLite database closed for ${this.moduleName}`,
+        `📊 SaaS Architecture SQLite database closed for ($) {this.moduleName}`,
       );
     }
   }

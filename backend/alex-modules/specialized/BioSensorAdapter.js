@@ -112,13 +112,13 @@ import logger from '../config/logger.js';
  * - Prédit tendances santé à court/moyen terme
  * - Optimise recommandations selon lifestyle
  *
- * @property: {Object} deviceManager - Gestionnaire périphériques bio
- * @property: {Object} dataProcessor - Processeur données biométriques
- * @property: {Object} patternAnalyzer - Analyseur patterns santé
- * @property: {Object} healthOracle - Oracle prédictions santé
- * @property: {Object} alertSystem - Système alertes intelligentes
+ * @property {Object} deviceManager - Gestionnaire périphériques bio
+ * @property {Object} dataProcessor - Processeur données biométriques
+ * @property {Object} patternAnalyzer - Analyseur patterns santé
+ * @property {Object} healthOracle - Oracle prédictions santé
+ * @property {Object} alertSystem - Système alertes intelligentes
  */
-export class BioSensorAdapter: {
+export class BioSensorAdapter {
     /**
      * @constructor
      * @description Initialise l'adaptateur capteurs biométriques
@@ -126,13 +126,13 @@ export class BioSensorAdapter: {
      * Configure gestionnaire périphériques, processeurs données
      * et systèmes d'analyse pour écosystème santé connecté
      *
-     * @param: {Object} options - Configuration bio-adaptateur
-     * @param: {Array} [options.supportedDevices] - Types capteurs supportés
-     * @param: {boolean} [options.continuousMonitoring=true] - Monitoring continu
-     * @param: {boolean} [options.predictiveMode=true] - Mode prédictif activé
-     * @param: {number} [options.alertSensitivity=0.8] - Sensibilité alertes
-     * @param: {boolean} [options.medicalInterface=false] - Interface médicale
-     * @param: {boolean} [options.privacyMode=true] - Mode confidentialité
+     * @param {Object} options - Configuration bio-adaptateur
+     * @param {Array} [options.supportedDevices] - Types capteurs supportés
+     * @param {boolean} [options.continuousMonitoring=true] - Monitoring continu
+     * @param {boolean} [options.predictiveMode=true] - Mode prédictif activé
+     * @param {number} [options.alertSensitivity=0.8] - Sensibilité alertes
+     * @param {boolean} [options.medicalInterface=false] - Interface médicale
+     * @param {boolean} [options.privacyMode=true] - Mode confidentialité
      */
     constructor(options = {}) {
         this.config = {
@@ -167,32 +167,32 @@ export class BioSensorAdapter: {
     /**
      * @method getDefaultSupportedDevices
      * @description Retourne les types de capteurs supportés par défaut
-     * @returns: {Array} Liste capteurs biométriques supportés
+     * @returns {Array} Liste capteurs biométriques supportés
      * @private
      */
     getDefaultSupportedDevices() {
         return [
-            // Montres connectées principales: {
+            // Montres connectées principales {
                 type: 'smartwatch',
                 brands: ['apple_watch', 'galaxy_watch', 'fitbit', 'garmin', 'wear_os']
                 sensors: [STR_HEART_RATE, 'spo2', 'ecg', STR_TEMPERATURE, STR_ACTIVITY, STR_SLEEP]
             }
-            // Bagues intelligentes: {
+            // Bagues intelligentes {
                 type: 'smart_ring',
                 brands: ['oura', 'motiv', 'samsung_galaxy_ring', 'amazfit']
                 sensors: [STR_HEART_RATE, 'hrv', STR_TEMPERATURE, STR_SLEEP, STR_ACTIVITY]
             }
-            // Capteurs médicaux spécialisés: {
+            // Capteurs médicaux spécialisés {
                 type: 'medical_device',
                 brands: ['freestyle_libre', 'dexcom', 'omron', 'withings']
                 sensors: [STR_GLUCOSE, 'blood_pressure', 'weight', 'body_composition']
             }
-            // Capteurs environnementaux portables: {
+            // Capteurs environnementaux portables {
                 type: 'environmental_sensor',
                 brands: ['air_quality_monitors', 'uv_sensors']
                 sensors: ['air_quality', 'uv_exposure', 'noise_level']
             }
-            // Capteurs stress et bien-être: {
+            // Capteurs stress et bien-être {
                 type: 'wellness_sensor',
                 brands: ['muse', 'heartmath', 'spire']
                 sensors: [STR_STRESS, 'meditation', 'breathing', 'coherence']
@@ -208,7 +208,7 @@ export class BioSensorAdapter: {
     initializeDeviceManager() {
         this.deviceManager = {
             connectedDevices: new Map(),
-            deviceDrivers: {
+            deviceDrivers {
                 apple_watch: new AppleWatchDriver(),
                 galaxy_watch: new GalaxyWatchDriver()
                 fitbit: new FitbitDriver(),
@@ -217,7 +217,7 @@ export class BioSensorAdapter: {
                 omron_bp: new OmronBloodPressureDriver()
                 withings_scale: new WithingsScaleDriver()
             }
-            connectionManagers: {,
+            connectionManagers {
                 bluetooth: new BluetoothConnectionManager()
                 wifi: new WiFiConnectionManager(),
                 nfc: new NFCConnectionManager()
@@ -225,7 +225,7 @@ export class BioSensorAdapter: {
             }
             discoveryEngine: new DeviceDiscoveryEngine(),
             syncScheduler: new SyncScheduler()
-            statistics: {,
+            statistics {
                 devicesConnected: 0
                 dataPointsCollected: 0,
                 lastSync: null
@@ -241,7 +241,7 @@ export class BioSensorAdapter: {
      */
     initializeDataProcessor() {
         this.dataProcessor = {
-            processors: {,
+            processors {
                 heartRate: new HeartRateProcessor()
                 bloodOxygen: new BloodOxygenProcessor(),
                 temperature: new TemperatureProcessor()
@@ -251,18 +251,18 @@ export class BioSensorAdapter: {
                 sleep: new SleepProcessor()
                 stress: new StressProcessor()
             }
-            normalizers: {,
+            normalizers {
                 temporal: new TemporalNormalizer()
                 unit: new UnitNormalizer(),
                 outlier: new OutlierNormalizer()
                 missing: new MissingDataNormalizer()
             }
-            validators: {,
+            validators {
                 range: new RangeValidator()
                 consistency: new ConsistencyValidator(),
                 quality: new DataQualityValidator()
             }
-            aggregators: {,
+            aggregators {
                 realtime: new RealtimeAggregator()
                 hourly: new HourlyAggregator(),
                 daily: new DailyAggregator()
@@ -280,7 +280,7 @@ export class BioSensorAdapter: {
      */
     initializePatternAnalyzer() {
         this.patternAnalyzer = {
-            analyzers: {,
+            analyzers {
                 circadian: new CircadianPatternAnalyzer()
                 trend: new TrendAnalyzer(),
                 anomaly: new AnomalyDetector()
@@ -288,13 +288,13 @@ export class BioSensorAdapter: {
                 seasonal: new SeasonalPatternAnalyzer()
                 lifestyle: new LifestyleCorrelationAnalyzer()
             }
-            models: {,
+            models {
                 baseline: new BaselineModel()
                 predictive: new PredictiveModel(),
                 anomaly: new AnomalyModel()
                 risk: new RiskAssessmentModel()
             }
-            learningEngine: {,
+            learningEngine {
                 personal: new PersonalPatternLearner()
                 population: new PopulationPatternLearner(),
                 adaptive: new AdaptiveLearner()
@@ -309,7 +309,7 @@ export class BioSensorAdapter: {
      */
     initializeHealthOracle() {
         this.healthOracle = {
-            predictors: {,
+            predictors {
                 illness: new IllnessPrediction()
                 fatigue: new FatiguePrediction(),
                 stress: new StressPrediction()
@@ -317,14 +317,14 @@ export class BioSensorAdapter: {
                 performance: new PerformancePrediction()
                 recovery: new RecoveryPrediction()
             }
-            recommenders: {,
+            recommenders {
                 lifestyle: new LifestyleRecommender()
                 exercise: new ExerciseRecommender(),
                 nutrition: new NutritionRecommender()
                 sleep: new SleepRecommender(),
                 stress: new StressRecommender()
             }
-            riskAssessors: {,
+            riskAssessors {
                 cardiovascular: new CardiovascularRiskAssessor()
                 metabolic: new MetabolicRiskAssessor(),
                 mental: new MentalHealthRiskAssessor()
@@ -340,13 +340,12 @@ export class BioSensorAdapter: {
      * Interface principale pour établir connexions avec multiple
      * capteurs biométriques et démarrer monitoring intégré
      *
-     * @param: {Object} ecosystemRequest - Requête écosystème bio
-     * @param: {Array} ecosystemRequest.devices - Liste périphériques cible
-     * @param: {Array} [ecosystemRequest.monitoring] - Paramètres à monitorer
-     * @param: {boolean} [ecosystemRequest.alerting=true] - Système alertes
-     * @param: {boolean} [ecosystemRequest.predictions=true] - Mode prédictif
-     * @param: {Object} [ecosystemRequest.thresholds] - Seuils personnalisés
-     * @returns: {Promise<Object>} Écosystème bio connecté avec statut
+     * @param {Object} ecosystemRequest - Requête écosystème bio
+     * @param {Array} ecosystemRequest.devices - Liste périphériques cible
+     * @param {Array} [ecosystemRequest.monitoring] - Paramètres à monitorer
+     * @param {boolean} [ecosystemRequest.alerting=true] - Système alertes
+     * @param {boolean} [ecosystemRequest.predictions=true] - Mode prédictif (* @param) {Object} [ecosystemRequest.thresholds] - Seuils personnalisés
+     * @returns {Promise<Object>} Écosystème bio connecté avec statut
      *
      * @example
      * const ecosystem = await bioAdapter.connectBioEcosystem({
@@ -358,9 +357,9 @@ export class BioSensorAdapter: {
      *   monitoring: [STR_HEART_RATE, STR_SLEEP, STR_GLUCOSE, STR_STRESS]
      *   alerting: true
      *   predictions: true
-     *   thresholds: {
-     *     heart_rate: { min: 60, max: 100, resting: 55 }
-     *     glucose: { target: 90, alert_high: 180, alert_low: 70 }
+     *   thresholds {
+     *     heart_rate { min: 60, max: 100, resting: 55 }
+     *     glucose { target: 90, alert_high: 180, alert_low: 70 }
      *   }
      * });     */
     async connectBioEcosystem(ecosystemRequest) {
@@ -429,7 +428,7 @@ export class BioSensorAdapter: {
                 alerting: !!ecosystem.alerting
                 predictions: !!ecosystem.predictions,
                 status: ecosystem.status
-                metadata: {,
+                metadata {
                     setupTime: ecosystem.duration
                     monitoringFrequency: ecosystem.monitoring.frequency,
                     dataTypes: ecosystem.monitoring.dataTypes
@@ -456,17 +455,17 @@ export class BioSensorAdapter: {
      * Lance surveillance santé personnalisée avec apprentissage
      * patterns individuels et génération insights proactifs
      *
-     * @param: {Object} monitoringRequest - Requête monitoring santé
-     * @param: {Object} monitoringRequest.user - Profil utilisateur complet
-     * @param: {boolean} [monitoringRequest.continuous=true] - Monitoring continu
-     * @param: {string} [monitoringRequest.alertThresholds] - Type seuils alertes
-     * @param: {boolean} [monitoringRequest.learningMode=true] - Apprentissage patterns
-     * @param: {Array} [monitoringRequest.focusAreas] - Zones prioritaires
-     * @returns: {Promise<Object>} Session monitoring santé active
+     * @param {Object} monitoringRequest - Requête monitoring santé
+     * @param {Object} monitoringRequest.user - Profil utilisateur complet
+     * @param {boolean} [monitoringRequest.continuous=true] - Monitoring continu
+     * @param {string} [monitoringRequest.alertThresholds] - Type seuils alertes
+     * @param {boolean} [monitoringRequest.learningMode=true] - Apprentissage patterns
+     * @param {Array} [monitoringRequest.focusAreas] - Zones prioritaires
+     * @returns {Promise<Object>} Session monitoring santé active
      *
      * @example
      * const monitoring = await bioAdapter.startHealthMonitoring({
-     *   user: {
+     *   user {
      *     id: 'user123'
      *     age: 35
      *     gender: 'female'
@@ -491,7 +490,7 @@ export class BioSensorAdapter: {
             id: monitoringId,
             startTime: Date.now()
             user: monitoringRequest.user,
-            session: {
+            session {
                 active: true,
                 parameters: []
                 baselines: null,
@@ -560,12 +559,12 @@ export class BioSensorAdapter: {
      * Utilise données biométriques historiques et actuelles pour
      * générer prédictions santé personnalisées et recommandations
      *
-     * @param: {Object} predictionRequest - Requête prédiction santé
-     * @param: {string} predictionRequest.userId - ID utilisateur
-     * @param: {string} [predictionRequest.timeframe=STR_1WEEK] - Horizon prédiction
-     * @param: {Array} [predictionRequest.focusMetrics] - Métriques prioritaires
-     * @param: {boolean} [predictionRequest.includeRisks=true] - Inclure risques
-     * @returns: {Promise<Object>} Prédictions santé avec recommandations
+     * @param {Object} predictionRequest - Requête prédiction santé
+     * @param {string} predictionRequest.userId - ID utilisateur
+     * @param {string} [predictionRequest.timeframe=STR_1WEEK] - Horizon prédiction
+     * @param {Array} [predictionRequest.focusMetrics] - Métriques prioritaires
+     * @param {boolean} [predictionRequest.includeRisks=true] - Inclure risques
+     * @returns {Promise<Object>} Prédictions santé avec recommandations
      *
      * @example
      * const prediction = await bioAdapter.predictHealthTrend({
@@ -638,7 +637,7 @@ export class BioSensorAdapter: {
                 risks: prediction.risks,
                 recommendations: prediction.recommendations
                 confidence: this.calculatePredictionConfidence(prediction.analysis),
-                metadata: {
+                metadata {
                     dataPointsAnalyzed: historicalData.totalPoints,
                     patternsIdentified: prediction.analysis.patterns.length
                     predictionAccuracy: prediction.analysis.historicalAccuracy,
@@ -668,7 +667,7 @@ export class BioSensorAdapter: {
      */
     async connectBioDevice(deviceSpec, ecosystem) {
         const driver = this.deviceManager.deviceDrivers[deviceSpec.type];
-        if (!driver) {
+        if ( (!driver)) {
             throw new Error(`Device type not supported: ${deviceSpec.type}`);
         }
 
@@ -738,9 +737,9 @@ export class BioSensorAdapter: {
     }
 
     async establishPersonalBaselines(user, config) {      return {
-            heartRate: { resting: 65, max: 180 }
-            sleep: { duration: 8, quality: 0.8 }
-            stress: { baseline: 0.3, threshold: 0.7 }
+            heartRate { resting: 65, max: 180 }
+            sleep { duration: 8, quality: 0.8 }
+            stress { baseline: 0.3, threshold: 0.7 }
         };
     }
 
@@ -841,7 +840,7 @@ export class BioSensorAdapter: {
 // =======================================
 
 // Device Drivers
-class AppleWatchDriver: {
+class AppleWatchDriver {
     async connect(_deviceId) {      return {
             success: true,
             capabilities: [STR_HEART_RATE, 'ecg', 'spo2']
@@ -850,107 +849,107 @@ class AppleWatchDriver: {
     }
 }
 
-class GalaxyWatchDriver: {
+class GalaxyWatchDriver {
     async connect(_deviceId) {      return { success: true, capabilities: [STR_HEART_RATE, STR_SLEEP] };
     }
 }
 
-class FitbitDriver: {
+class FitbitDriver {
     async connect(_deviceId) {      return { success: true, capabilities: ['steps', STR_HEART_RATE] };
     }
 }
 
-class OuraRingDriver: {
+class OuraRingDriver {
     async connect(_deviceId) {      return { success: true, capabilities: ['hrv', STR_TEMPERATURE, STR_SLEEP] };
     }
 }
 
-class FreestyleLibreDriver: {
+class FreestyleLibreDriver {
     async connect(_deviceId) {      return { success: true, capabilities: [STR_GLUCOSE] };
     }
 }
 
-class OmronBloodPressureDriver: {
+class OmronBloodPressureDriver {
     async connect(_deviceId) {      return { success: true, capabilities: ['blood_pressure'] };
     }
 }
 
-class WithingsScaleDriver: {
+class WithingsScaleDriver {
     async connect(_deviceId) {      return { success: true, capabilities: ['weight', 'body_composition'] };
     }
 }
 
 // Connection Managers
-class BluetoothConnectionManager: {}
-class WiFiConnectionManager: {}
-class NFCConnectionManager: {}
-class APIConnectionManager: {}
-class DeviceDiscoveryEngine: {}
-class SyncScheduler: {}
+class BluetoothConnectionManager {}
+class WiFiConnectionManager {}
+class NFCConnectionManager {}
+class APIConnectionManager {}
+class DeviceDiscoveryEngine {}
+class SyncScheduler {}
 
 // Data Processors
-class HeartRateProcessor: {}
-class BloodOxygenProcessor: {}
-class TemperatureProcessor: {}
-class BloodPressureProcessor: {}
-class GlucoseProcessor: {}
-class ActivityProcessor: {}
-class SleepProcessor: {}
-class StressProcessor: {}
+class HeartRateProcessor {}
+class BloodOxygenProcessor {}
+class TemperatureProcessor {}
+class BloodPressureProcessor {}
+class GlucoseProcessor {}
+class ActivityProcessor {}
+class SleepProcessor {}
+class StressProcessor {}
 
 // Normalizers & Validators
-class TemporalNormalizer: {}
-class UnitNormalizer: {}
-class OutlierNormalizer: {}
-class MissingDataNormalizer: {}
-class RangeValidator: {}
-class ConsistencyValidator: {}
-class DataQualityValidator: {}
+class TemporalNormalizer {}
+class UnitNormalizer {}
+class OutlierNormalizer {}
+class MissingDataNormalizer {}
+class RangeValidator {}
+class ConsistencyValidator {}
+class DataQualityValidator {}
 
 // Aggregators
-class RealtimeAggregator: {}
-class HourlyAggregator: {}
-class DailyAggregator: {}
-class WeeklyAggregator: {}
+class RealtimeAggregator {}
+class HourlyAggregator {}
+class DailyAggregator {}
+class WeeklyAggregator {}
 
 // Pattern Analyzers
-class CircadianPatternAnalyzer: {}
-class TrendAnalyzer: {}
-class AnomalyDetector: {}
-class CorrelationAnalyzer: {}
-class SeasonalPatternAnalyzer: {}
-class LifestyleCorrelationAnalyzer: {}
+class CircadianPatternAnalyzer {}
+class TrendAnalyzer {}
+class AnomalyDetector {}
+class CorrelationAnalyzer {}
+class SeasonalPatternAnalyzer {}
+class Lif (estyleCorrelationAnalyzer) {}
 
 // Models
-class BaselineModel: {}
-class PredictiveModel: {}
-class AnomalyModel: {}
-class RiskAssessmentModel: {}
+class BaselineModel {}
+class PredictiveModel {}
+class AnomalyModel {}
+class RiskAssessmentModel {}
 
 // Learning Engines
-class PersonalPatternLearner: {}
-class PopulationPatternLearner: {}
-class AdaptiveLearner: {}
+class PersonalPatternLearner {}
+class PopulationPatternLearner {}
+class AdaptiveLearner {}
 
 // Health Predictors
-class IllnessPrediction: {}
-class FatiguePrediction: {}
-class StressPrediction: {}
-class SleepQualityPrediction: {}
-class PerformancePrediction: {}
-class RecoveryPrediction: {}
+class IllnessPrediction {}
+class FatiguePrediction {}
+class StressPrediction {}
+class SleepQualityPrediction {}
+class Perfor (mancePrediction) {}
+class RecoveryPrediction {}
 
 // Recommenders
-class LifestyleRecommender: {}
-class ExerciseRecommender: {}
-class NutritionRecommender: {}
-class SleepRecommender: {}
-class StressRecommender: {}
+class Lif (estyleRecommender) {}
+class ExerciseRecommender {}
+class NutritionRecommender {}
+class SleepRecommender {}
+class StressRecommender {}
 
 // Risk Assessors
-class CardiovascularRiskAssessor: {}
-class MetabolicRiskAssessor: {}
-class MentalHealthRiskAssessor: {}
-class ChronicDiseaseRiskAssessor: {}
+class CardiovascularRiskAssessor {}
+class MetabolicRiskAssessor {}
+class MentalHealthRiskAssessor {}
+class ChronicDiseaseRiskAssessor {}
 
 export default BioSensorAdapter;

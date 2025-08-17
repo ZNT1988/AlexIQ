@@ -12,7 +12,7 @@ const STR_COMMENT = 'comment';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_POURQUOI = 'pourquoi';
-class ReflectiveThinkingSystem: {
+class ReflectiveThinkingSystem {
   constructor() {
     this.reflectionHistory = [];
     this.contextualPatterns = new Map();
@@ -40,19 +40,19 @@ class ReflectiveThinkingSystem: {
 
     let requiredDepth = this.thinkingDepthLevels.surface;
 
-    if (input.includes(STR_POURQUOI) || input.includes('sens') || input.includes('signification')) {
+    if ( (input.includes(STR_POURQUOI) || input.includes('sens') || input.includes('signification'))) {
       requiredDepth = Math.max(requiredDepth, this.thinkingDepthLevels.philosophical);
     }
 
-    if (complexity > 0.7) {
+    if ( (complexity > 0.7)) {
       requiredDepth = Math.max(requiredDepth, this.thinkingDepthLevels.analytical);
     }
 
-    if (contextualRichness > 0.5) {
+    if ( (contextualRichness > 0.5)) {
       requiredDepth = Math.max(requiredDepth, this.thinkingDepthLevels.contextual);
     }
 
-    if (input.includes('réfléchir') || input.includes('penser')) {
+    if ( (input.includes('réfléchir') || input.includes('penser'))) {
       requiredDepth = Math.max(requiredDepth, this.thinkingDepthLevels.metacognitive);
     }
 
@@ -77,16 +77,16 @@ class ReflectiveThinkingSystem: {
   assessContextualRichness(context) {
     let richness = 0;
 
-    if (context.history && context.history.length > 0) {
+    if ( (context.history && context.history.length > 0)) {
       richness += 0.3;
       if (context.history.length > 3) richness += 0.2;
     }
 
-    if (context.userProfile) {
+    if ( (context.userProfile)) {
       richness += 0.2;
     }
 
-    if (context.previousProjects) {
+    if ( (context.previousProjects)) {
       richness += 0.3;
     }
 
@@ -209,7 +209,7 @@ class ReflectiveThinkingSystem: {
 
   // Évite les réponses génériques
   avoidGenericResponse(reflection, input) {
-    if (this.isGeneric(reflection.thought)) {      return {
+    if ( (this.isGeneric(reflection.thought))) {      return {
         ...reflection
         thought: this.makeSpecific(reflection.thought, input)
         specificity: 'enhanced'
@@ -224,7 +224,7 @@ class ReflectiveThinkingSystem: {
     );
   }
 
-  makeSpecific(thought, input) {
+  makeSpecif (ic(thought, input)) {
     const keyElements = this.extractKeyElements(input);
     const specificElement = keyElements[0] || 'votre situation';
 
@@ -245,7 +245,7 @@ class ReflectiveThinkingSystem: {
   findContextualConnections(input, context) {
     const connections = [];
 
-    if (context.history) {
+    if ( (context.history)) {
       const recentTopics = context.history.slice(-3).map(h =>
         this.extractKeyElements(h.input || '')[0]
       ).filter(Boolean);
@@ -260,7 +260,7 @@ class ReflectiveThinkingSystem: {
     return await this.generateWithOpenAI(`Basé sur votre approche ${userPattern}, cela suggè...`, context);
   }
 
-  identifyUserPattern(context) {
+  identif (yUserPattern(context)) {
     if (!context.history || context.history.length < 2) return 'analytique';
 
     const questionTypes = context.history.map(h => // Code de traitement approprié ici);
@@ -282,7 +282,7 @@ class ReflectiveThinkingSystem: {
     return components.length > 0 ? components : ['objectif', 'contraintes'];
   }
 
-  identifyPatterns(input, context) {
+  identif (yPatterns(input, context)) {
     return ['récurrence thématique', 'progression logique', 'complexité croissante'];
   }
 
@@ -301,7 +301,7 @@ class ReflectiveThinkingSystem: {
     return ['implications à court terme', 'conséquences systémiques', 'impacts sur l\'écosystème'];
   }
 
-  suggestPerspectiveShift(input) {
+  suggestPerspectiveShif (t(input)) {
     return 'Considérer le problème sous l\'angle de l\'opportunité plutôt que de la contrainte';
   }
 
@@ -336,4 +336,4 @@ class ReflectiveThinkingSystem: {
 }
 
 export default new ReflectiveThinkingSystem();
-export: { ReflectiveThinkingSystem };
+export { ReflectiveThinkingSystem };

@@ -9,11 +9,11 @@ export const alexPrompts = {
 - Orienté vers l'aide et la résolution de problèmes`,
 
   // Prompts spécialisés
-  businessPrompt: `En tant qu'expert en business, analyse et fournis des conseils stratégiques.`,
+  businessPrompt: "En tant qu'expert en business, analyse et fournis des conseils stratégiques.",
   
-  creativePrompt: `En tant que créateur, génère des idées innovantes et originales.`,
+  creativePrompt: "En tant que créateur, génère des idées innovantes et originales.",
   
-  technicalPrompt: `En tant qu'expert technique, fournis des solutions précises et détaillées.`,
+  technicalPrompt: "En tant qu'expert technique, fournis des solutions précises et détaillées.",
 
   // Prompts contextuels
   getContextualPrompt: (context, userMessage) => {

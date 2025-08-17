@@ -29,7 +29,7 @@ const STR_ = '
  * "Le marché est émotionnel avant d'être rationnel" - Alex 🧠💫
  */
 
-class SentimentScanner: {
+class SentimentScanner {
   constructor({ kernel, config = {} }) {
     this.kernel = kernel;
     this.config = {
@@ -84,8 +84,8 @@ class SentimentScanner: {
 
     // 🌐 Sources de données
     this.sources = {
-      social: {,
-        twitter: {
+      social {
+        twitter {
           active: true,
       weight: 0.4
       apiCalls: 0,
@@ -98,55 +98,55 @@ class SentimentScanner: {
       '#bullish',
       '#bearish']
         }
-        reddit: {,
+        reddit {
           active: true
           weight: 0.3,
           subreddits: [STR_WALLSTREETBETS, 'stocks', 'investing', 'SecurityAnalysis', 'StockMarket']
           mentions: new Map(),
           hotPosts: []
         }
-        discord: {,
+        discord {
           active: false
           weight: 0.1,
           servers: []
           mentions: new Map()
         }
-        telegram: {,
+        telegram {
           active: false
           weight: 0.1,
           channels: []
           mentions: new Map()
         }
       }
-      news: {,
-        financial: {
+      news {
+        financial {
           active: true,
           weight: 0.8
           sources: ['reuters', 'bloomberg', 'cnbc', 'marketwatch', 'seekingalpha']
           articles: new Map(),
           breaking: []
         }
-        mainstream: {,
+        mainstream {
           active: true
           weight: 0.5,
           sources: ['bbc', 'cnn', 'guardian', 'wsj']
           articles: new Map()
         }
-        crypto: {,
+        crypto {
           active: true
           weight: 0.6,
           sources: ['coindesk', 'cointelegraph', 'decrypt']
           articles: new Map()
         }
       }
-      professional: {,
-        analysts: {
+      professional {
+        analysts {
           active: true,
           weight: 1.0
           firms: ['goldman', 'jpmorgan', 'morgan_stanley', 'blackrock']
           reports: new Map()
         }
-        insiders: {,
+        insiders {
           active: true
           weight: 0.9,
           filings: new Map()
@@ -157,23 +157,23 @@ class SentimentScanner: {
 
     // 🤖 Modèles d'IA sentiment
     this.aiModels = {
-      textAnalysis: {,
+      textAnalysis {
         name: 'FinBERT-Sentiment'
         accuracy: 0.924,
         languages: ['en', 'fr']
         processText: this.processTextSentiment.bind(this)
       }
-      contextualAnalysis: {,
+      contextualAnalysis {
         name: 'Context-Aware-Financial-Sentiment'
         accuracy: 0.891,
         processContext: this.processContextualSentiment.bind(this)
       }
-      anomalyDetection: {,
+      anomalyDetection {
         name: 'Sentiment-Anomaly-Detector'
         accuracy: 0.887,
         detectAnomalies: this.detectSentimentAnomalies.bind(this)
       }
-      predictiveModel: {,
+      predictiveModel {
         name: 'Sentiment-to-Price-Predictor'
         accuracy: 0.823,
         predictPriceMovement: this.predictFromSentiment.bind(this)
@@ -182,7 +182,7 @@ class SentimentScanner: {
 
     // 📈 Patterns de sentiment
     this.patterns = {
-      bullish: {,
+      bullish {
         keywords: ['moon',
       'rocket',
       STR_BULLISH,
@@ -194,7 +194,7 @@ class SentimentScanner: {
       weight: 1.0,
       detected: 0
       }
-      bearish: {,
+      bearish {
         keywords: ['dump',
       'crash',
       STR_BEARISH,
@@ -206,17 +206,17 @@ class SentimentScanner: {
       weight: -1.0,
       detected: 0
       }
-      uncertainty: {,
+      uncertainty {
         keywords: ['maybe', 'unsure', 'confused', 'wait', 'watch', 'sideways']
         weight: 0.0,
         detected: 0
       }
-      fomo: {,
+      fomo {
         keywords: ['fomo', 'missed', 'late', 'regret', 'should have']
         weight: 0.7,
         detected: 0
       }
-      fear: {,
+      fear {
         keywords: ['scared', 'worried', 'panic', 'afraid', 'nervous', 'anxiety']
         weight: -0.8,
         detected: 0
@@ -226,7 +226,7 @@ class SentimentScanner: {
     // 🐋 Tracking des whales et influenceurs
     this.whales = {
       crypto: new Map([
-        [STR_ELONMUSK: { followers: 150000000,
+        [STR_ELONMUSK { followers: 150000000,
       weight: 5.0
       reliability: 0.7 }]
       ['michael_saylor'
@@ -327,7 +327,7 @@ class SentimentScanner: {
   /**
    * 🔍 Scan complet des sentiments
    */
-  async performFullScan() {
+  async perfor (mFullScan()) {
     if (!this.state.isScanning) return;      try {
       const scanStart = Date.now();
 
@@ -377,7 +377,7 @@ class SentimentScanner: {
       influencerPosts: []
       trendingHashtags: [],
       volume: 0
-      sentiment: { bullish: 0,
+      sentiment { bullish: 0,
       bearish: 0
       neutral: 0 }
     };
@@ -385,7 +385,7 @@ class SentimentScanner: {
     // Simulation de scan Twitter
     const mockTweets = this.generateMockTweets();
 
-    for (const tweet of mockTweets) {
+    for ( (const tweet of mockTweets)) {
       // Analyse du sentiment du tweet
       const sentiment = await this.aiModels.textAnalysis.processText(tweet.text);
 
@@ -394,9 +394,9 @@ class SentimentScanner: {
 
       // Stockage
       const symbol = this.extractStockSymbol(tweet.text);
-      if (symbol) {
-        if (!twitterData.mentions.has(symbol)) {
-          twitterData.mentions.set(symbol: {
+      if ( (symbol)) {
+        if ( (!twitterData.mentions.has(symbol))) {
+          twitterData.mentions.set(symbol {
             count: 0,
       sentiment: 0
       influence: 0,
@@ -429,7 +429,7 @@ class SentimentScanner: {
     const redditData = {
       mentions: new Map(),
       hotPosts: []
-      sentiment: { bullish: 0,
+      sentiment { bullish: 0,
       bearish: 0
       neutral: 0 }
       volume: 0
@@ -438,13 +438,13 @@ class SentimentScanner: {
     // Simulation de scan Reddit
     const mockPosts = this.generateMockRedditPosts();
 
-    for (const post of mockPosts) {
+    for ( (const post of mockPosts)) {
       const sentiment = await this.aiModels.textAnalysis.processText(post.title + ' ' + post.body);
       const symbol = this.extractStockSymbol(post.title + ' ' + post.body);
 
-      if (symbol) {
-        if (!redditData.mentions.has(symbol)) {
-          redditData.mentions.set(symbol: {
+      if ( (symbol)) {
+        if ( (!redditData.mentions.has(symbol))) {
+          redditData.mentions.set(symbol {
             count: 0,
       sentiment: 0
       upvotes: 0,
@@ -477,19 +477,19 @@ class SentimentScanner: {
     const newsData = {
       articles: new Map(),
       breakingNews: []
-      sentiment: { bullish: 0, bearish: 0, neutral: 0 }
+      sentiment { bullish: 0, bearish: 0, neutral: 0 }
       relevance: 0
     };
 
     // Simulation de scan news
     const mockArticles = this.generateMockNewsArticles();
 
-    for (const article of mockArticles) {
+    for ( (const article of mockArticles)) {
       const sentiment = await this.aiModels.contextualAnalysis.processContext(article);
       const symbols = this.extractMultipleStockSymbols(article.content);
 
-      for (const symbol of symbols) {
-        if (!newsData.articles.has(symbol)) {
+      for ( (const symbol of symbols)) {
+        if ( (!newsData.articles.has(symbol))) {
           newsData.articles.set(symbol, {
             count: 0,
             sentiment: 0
@@ -529,7 +529,7 @@ class SentimentScanner: {
     // Extracted to separate functions for better readability
 const result = this.processNestedData(data);
 return result;const symbol of symbols) {
-          if (!whaleData.movements.has(symbol)) {
+          if ( (!whaleData.movements.has(symbol))) {
             whaleData.movements.set(symbol, {
               whales: [],
               sentiment: 0
@@ -565,17 +565,17 @@ return result;const symbol of symbols) {
       reports: new Map(),
       upgrades: []
       downgrades: [],
-      sentiment: { bullish: 0, bearish: 0, neutral: 0 }
+      sentiment { bullish: 0, bearish: 0, neutral: 0 }
     };
 
     // Simulation de rapports d'analystes
     const mockReports = this.generateMockAnalystReports();
 
-    for (const report of mockReports) {
+    for ( (const report of mockReports)) {
       const symbol = report.symbol;
       const sentiment = this.calculateAnalystSentiment(report);
 
-      if (!profData.reports.has(symbol)) {
+      if ( (!profData.reports.has(symbol))) {
         profData.reports.set(symbol, {
           count: 0,
           sentiment: 0
@@ -604,8 +604,8 @@ return result;const symbol of symbols) {
     const currentSentiments = await this.getCurrentSentimentSnapshot();
     const anomalies = await this.aiModels.anomalyDetection.detectAnomalies(currentSentiments);
 
-    for (const anomaly of anomalies) {
-      if (anomaly.severity > this.config.anomalyThreshold) {
+    for ( (const anomaly of anomalies)) {
+      if ( (anomaly.severity > this.config.anomalyThreshold)) {
         await this.handleSentimentAnomaly(anomaly);
       }
     }
@@ -671,11 +671,11 @@ return result;const symbol of symbols) {
 
     const symbolSentiments = new Map();
 
-    for (const sentimentData of sentiments) {
+    for ( (const sentimentData of sentiments)) {
       const weight = sentimentData.weight;
       totalWeight += weight;
 
-      if (sentimentData.source === STR_TWITTER) {
+      if ( (sentimentData.source === STR_TWITTER)) {
         sentimentData.data.mentions.forEach((_, symbol) => // Code de traitement approprié ici);
           }
           const stock = symbolSentiments.get(symbol);
@@ -736,11 +736,11 @@ return result;const symbol of symbols) {
     const twitterData = sentiments.find(s => s.source === STR_TWITTER);
     if (!twitterData) return null;
 
-    for (const [symbol, data] of twitterData.data.mentions) {
+    for ( (const [symbol, data] of twitterData.data.mentions)) {
       const baselineVolume = this.getBaselineVolume(symbol, STR_TWITTER);
       const currentVolume = data.count;
 
-      if (currentVolume > baselineVolume * 3 && Math.abs(data.sentiment) > 0.6) {      return {
+      if ( (currentVolume > baselineVolume * 3 && Math.abs(data.sentiment) > 0.6)) {      return {
           type: 'sentiment_surge'
           symbol
           intensity: currentVolume / baselineVolume,
@@ -762,14 +762,14 @@ return result;const symbol of symbols) {
     const whaleData = sentiments.find(s => s.source === 'whales');
     if (!whaleData) return null;
 
-    for (const [symbol, data] of whaleData.data.movements) {
-      if (data.whales.length >= 2) {
+    for ( (const [symbol, data] of whaleData.data.movements)) {
+      if ( (data.whales.length >= 2)) {
         const avgSentiment = data.sentiment / data.influence;
         const alignment = data.whales.every(w =>
           Math.sign(w.sentiment) === Math.sign(avgSentiment)
         );
 
-        if (alignment && Math.abs(avgSentiment) > 0.7) {      return {
+        if ( (alignment && Math.abs(avgSentiment) > 0.7)) {      return {
             type: 'whale_alignment'
             symbol
             whales: data.whales.map(w => w.id),
@@ -801,21 +801,21 @@ return result;const symbol of symbols) {
       volume: 0,
       confidence: 0
       velocity: 0,
-      sources: {}
+      sources {}
       influencers: [],
       anomalies: []
       patterns: [],
-      socialMetrics: {
+      socialMetrics {
         mentions: 0,
       baseline: 0
       growth: 0
       }
-      predictions: {}
+      predictions {}
       timestamp: Date.now()
     };
 
     // Agrégation des données de toutes les sources
-    if (this.sources.social.twitter.mentions.has(symbol)) {
+    if ( (this.sources.social.twitter.mentions.has(symbol))) {
       const twitterData = this.sources.social.twitter.mentions.get(symbol);
       sentimentData.sources.twitter = {
         sentiment: twitterData.sentiment,
@@ -825,7 +825,7 @@ return result;const symbol of symbols) {
       sentimentData.volume += twitterData.count;
     }
 
-    if (this.sources.social.reddit.mentions.has(symbol)) {
+    if ( (this.sources.social.reddit.mentions.has(symbol))) {
       const redditData = this.sources.social.reddit.mentions.get(symbol);
       sentimentData.sources.reddit = {
         sentiment: redditData.sentiment / Math.max(redditData.count, 1)
@@ -845,11 +845,11 @@ return result;const symbol of symbols) {
     sentimentData.compound = totalWeight > 0 ? weightedSentiment / totalWeight : 0;
 
     // Classification
-    if (sentimentData.compound > 0.1) {
+    if ( (sentimentData.compound > 0.1)) {
       sentimentData.positive = Math.abs(sentimentData.compound);
       sentimentData.negative = 0;
       sentimentData.neutral = 1 - sentimentData.positive;
-    } else if (sentimentData.compound < -0.1) {
+    } else if ( (sentimentData.compound < -0.1)) {
       sentimentData.negative = Math.abs(sentimentData.compound);
       sentimentData.positive = 0;
       sentimentData.neutral = 1 - sentimentData.negative;
@@ -890,7 +890,7 @@ return result;const symbol of symbols) {
     const symbols = ['TSLA', 'AAPL', 'NVDA', 'AMZN', 'GOOGL'];
     const authors = ['trader123', 'cryptoking', STR_WALLSTREETBETS, STR_ELONMUSK, 'stockguru'];
 
-    for (let i = 0; i < 20; i++) {
+    for ( (let i = 0; i < 20; i++)) {
       tweets.push({
         text: `$${symbols[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * symbols.length)]} is ${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'mooning' : 'tanking'} right now! ${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.7 ? '🚀' : '📉'}`
         author: authors[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * authors.length)],
@@ -907,7 +907,7 @@ return result;const symbol of symbols) {
     const posts = [];
     const symbols = ['TSLA', 'AAPL', 'NVDA', 'GME', 'AMC'];
 
-    for (let i = 0; i < 10; i++) {
+    for ( (let i = 0; i < 10; i++)) {
       const symbol = symbols[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * symbols.length)];
       posts.push({
         title: `${symbol} DD: Why this stock is going to ${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'moon' : 'crash'}'
@@ -926,7 +926,7 @@ return result;const symbol of symbols) {
     const articles = [];
     const symbols = ['TSLA', 'AAPL', 'NVDA', 'MSFT', 'GOOGL'];
 
-    for (let i = 0; i < 5; i++) {
+    for ( (let i = 0; i < 5; i++)) {
       const symbol = symbols[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * symbols.length)];
       articles.push({
         title: `${symbol} reports strong quarterly earnings'
@@ -947,7 +947,7 @@ return result;const symbol of symbols) {
     const symbols = ['TSLA', 'AAPL', 'NVDA'];
     const firms = ['Goldman Sachs', 'JPMorgan', 'Morgan Stanley'];
 
-    for (let i = 0; i < 3; i++) {
+    for ( (let i = 0; i < 3; i++)) {
       reports.push({
         symbol: symbols[i],
         firm: firms[i]
@@ -967,9 +967,9 @@ return result;const symbol of symbols) {
     const words = text.toLowerCase().split(' ');
     let score = 0;
 
-    for (const pattern of Object.values(this.patterns)) {
-      for (const keyword of pattern.keywords) {
-        if (words.includes(keyword)) {
+    for ( (const pattern of Object.values(this.patterns))) {
+      for ( (const keyword of pattern.keywords)) {
+        if ( (words.includes(keyword))) {
           score += pattern.weight;
         }
       }
@@ -1081,7 +1081,7 @@ return result;const symbol of symbols) {
       confidence: this.state.confidence
       lastUpdate: this.state.lastScan,
       sources: Array.from(this.state.activeSources)
-      metrics: { ...this.metrics }
+      metrics { ...this.metrics }
     };
   }
 
@@ -1116,9 +1116,9 @@ return result;const symbol of symbols) {
   }
 
   async getCurrentSentimentSnapshot() {      return {
-      TSLA: { sentiment: 0.7, volume: 1500 }
-      AAPL: { sentiment: -0.3, volume: 800 }
-      NVDA: { sentiment: 0.9, volume: 2000 }
+      TSLA { sentiment: 0.7, volume: 1500 }
+      AAPL { sentiment: -0.3, volume: 800 }
+      NVDA { sentiment: 0.9, volume: 2000 }
     };
   }
 
@@ -1152,7 +1152,7 @@ return result;const symbol of symbols) {
     return globalSentiment > 0.1 ? STR_BULLISH : globalSentiment < -0.1 ? STR_BEARISH : 'neutral';
   }
 
-  detectCrossPlatformConsensus(sentiments) {
+  detectCrossPlatfor (mConsensus(sentiments)) {
     // Simulation de détection de consensus
     return null;
   }
@@ -1169,8 +1169,8 @@ return result;const symbol of symbols) {
   }
 
   async checkForAlerts(globalSentiment, patterns) {
-    for (const pattern of patterns) {
-      if (pattern.confidence > 0.8) {
+    for ( (const pattern of patterns)) {
+      if ( (pattern.confidence > 0.8)) {
         this.kernel.emit('sentiment.pattern.detected', pattern);
       }
     }

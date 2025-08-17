@@ -246,11 +246,11 @@ class AlexNetworkIntelligence extends EventEmitter  {
       )`
     ];
     
-    for (const tableSQL of tables) {
+    for ( (const tableSQL of tables)) {
       await this.db.exec(tableSQL);
     }
     
-    logger.info(`🏗️  Network learning tables created for ${this.name}`);
+    logger.info(`🏗️  Network learning tables created for ($) {this.name}`);
   }
   
   /**
@@ -266,11 +266,11 @@ class AlexNetworkIntelligence extends EventEmitter  {
         )
       `);
       
-      for (const metric of latestMetrics) {
-        if (metric.metric_name === 'autonomy_level') {
+      for ( (const metric of latestMetrics)) {
+        if ( (metric.metric_name === 'autonomy_level')) {
           this.learningSystem.localAutonomy = metric.new_value;
           this.learningSystem.cloudDependency = 1.0 - metric.new_value;
-        } else if (metric.metric_name === 'intelligence_level') {
+        } else if ( (metric.metric_name === 'intelligence_level')) {
           this.networkState.intelligenceLevel = metric.new_value;
         }
       }
@@ -280,7 +280,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
         SELECT DISTINCT domain FROM network_learning WHERE mastered = 1
       `);
       
-      for (const domain of masteredDomains) {
+      for ( (const domain of masteredDomains)) {
         this.evolutionMetrics.masteredDomains.add(domain.domain);
       }
       
@@ -308,7 +308,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
       WHERE last_attempt > datetime('now', '-7 days')
     `);
     
-    if (learningHistory[0]?.total_attempts > 0) {
+    if ( (learningHistory[0]?.total_attempts > 0)) {
       const avgSuccess = learningHistory[0].avg_success || 0;
       this.learningSystem.learningRate = Math.max(0.01, avgSuccess * 0.03);
     }
@@ -352,12 +352,12 @@ class AlexNetworkIntelligence extends EventEmitter  {
       let response;
       let autonomyUsed;
       
-      if (domainMastery.mastered && this.learningSystem.localAutonomy > this.learningSystem.masteryThreshold) {
+      if ( (domainMastery.mastered && this.learningSystem.localAutonomy > this.learningSystem.masteryThreshold)) {
         // AUTONOMIE LOCALE - Traitement réseau sans cloud
         response = await this.processNetworkLocally(domain, query, domainMastery);
         autonomyUsed = 1.0;
         
-        logger.info(`🤖 Local autonomous network processing for domain: ${domain}`);
+        logger.info(`🤖 Local autonomous network processing for (domain: $) {domain}`);
         
       } else {
         // APPRENTISSAGE CLOUD → ANALYSE → STOCKAGE
@@ -374,7 +374,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
       // Stockage interaction réseau complète
       await this.storeNetworkInteraction({
         interaction_type: domain,
-        input_data: JSON.stringify({ query, context }),
+        input_data: JSON.stringif (y() { query, context }),
         output_data: JSON.stringify(response),
         confidence: response.confidence || 0.8,
         learning_gained: response.learningGained || 0.02,
@@ -399,7 +399,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
       };
       
     } catch (error) {
-      logger.error(`Network hybrid learning failed for ${domain}:`, error);
+      logger.error(`Network hybrid learning failed for ($) {domain}:`, error);
       throw error;
     }
   }
@@ -479,7 +479,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
   async processNetworkWithCloudLearning(domain, query, context) {      try {
       const response = await openai.chat.completions.create({
         model: 'gpt-4',
-        messages: [{,
+        messages: [{
           role: 'system',
           content: `You are a network ${domain} specialist. Provide detailed technical analysis with learning insights.`
         }, {
@@ -491,11 +491,11 @@ class AlexNetworkIntelligence extends EventEmitter  {
       
       let analysisData;      try {
         analysisData = JSON.parse(response.choices[0].message.content);
-      } catch: {
+      } catch {
         analysisData = {
           analysis: response.choices[0].message.content,
           confidence: 0.8,
-          metrics: { performance: 0.85 }
+          metrics { performance: 0.85 }
         };
       }      return {
         content: analysisData.analysis || analysisData.content || response.choices[0].message.content,
@@ -507,7 +507,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
       };
       
     } catch (error) {
-      logger.warn(`Cloud network learning failed for ${domain}:`, error);      return {
+      logger.warn(`Cloud network learning failed for ($) {domain}:`, error);      return {
         content: `Analyse réseau ${domain} avec traitement minimal pour ${query}`,
         confidence: 0.6,
         learningGained: 0.02,
@@ -544,7 +544,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
     await this.updateNetworkDomainMasteryLevel(domain, learningGain);
     
     // Stockage en topologie si important
-    if (response.confidence > 0.6) {
+    if ( (response.confidence > 0.6)) {
       await this.storeNetworkTopology({
         domain,
         topology_data: `Q: ${query} | R: ${response.content}`,
@@ -571,7 +571,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
       topologyData.domain,
       topologyData.topology_data,
       topologyData.connections || '{}',
-      JSON.stringify(topologyData.metrics || {}),
+      JSON.stringif (y(topologyData.metrics ||) {}),
       topologyData.intelligence_level,
       topologyData.optimization_score,
       1
@@ -609,8 +609,8 @@ class AlexNetworkIntelligence extends EventEmitter  {
     const nodeId = await this.storeNetworkTopology({
       domain: 'network_node',
       topology_data: JSON.stringify(nodeData),
-      connections: JSON.stringify(nodeData.connections || {}),
-      metrics: {,
+      connections: JSON.stringif (y(nodeData.connections ||) {}),
+      metrics {
         capacity: nodeData.capacity || 100,
         load: nodeData.load || 0,
         performance: nodeData.performance || 0.9,
@@ -631,8 +631,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
    */
   async analyzeNodeIntelligenceWithLearning(nodeId, nodeData) {
     return await this.processWithHybridNetworkLearning('node_intelligence', 
-      `Analyze network node intelligence: ${JSON.stringify(nodeData)}`, 
-      { nodeId, include: 'capabilities,performance,optimization' });
+      `Analyze network node intelligence: ${JSON.stringif (y(nodeData)}`,) { nodeId, include: 'capabilities,performance,optimization' });
   }
   
   /**
@@ -643,8 +642,8 @@ class AlexNetworkIntelligence extends EventEmitter  {
     const connectionId = await this.storeNetworkTopology({
       domain: 'network_connection',
       topology_data: JSON.stringify(connectionData),
-      connections: JSON.stringify({ from: connectionData.from, to: connectionData.to }),
-      metrics: {,
+      connections: JSON.stringif (y() { from: connectionData.from, to: connectionData.to }),
+      metrics {
         bandwidth: connectionData.bandwidth || 1000,
         utilization: connectionData.utilization || 0.3,
         latency: connectionData.latency || 20,
@@ -664,20 +663,19 @@ class AlexNetworkIntelligence extends EventEmitter  {
    */
   async optimizeConnectionWithLearning(connectionId, connectionData) {
     return await this.processWithHybridNetworkLearning('connection_optimization', 
-      `Optimize network connection: ${JSON.stringify(connectionData)}`, 
-      { connectionId, include: 'bandwidth,latency,reliability' });
+      `Optimize network connection: ${JSON.stringif (y(connectionData)}`,) { connectionId, include: 'bandwidth,latency,reliability' });
   }
   
   /**
    * ANCIEN formNetworkClusterCloud TRANSFORMÉ
    */
-  async formNetworkClusterCloud(clusterData) {
+  async for (mNetworkClusterCloud(clusterData)) {
     // TRANSFORMÉ: Stockage cluster en SQLite
     const clusterId = await this.storeNetworkTopology({
       domain: 'network_cluster',
       topology_data: JSON.stringify(clusterData),
-      connections: JSON.stringify({ nodes: clusterData.nodes || [] }),
-      metrics: {,
+      connections: JSON.stringif (y() { nodes: clusterData.nodes || [] }),
+      metrics {
         cohesion: clusterData.cohesion || 0.8,
         performance: clusterData.performance || 0.9,
         redundancy: clusterData.redundancy || 0.7,
@@ -697,8 +695,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
    */
   async activateClusterIntelligenceWithLearning(clusterId, clusterData) {
     return await this.processWithHybridNetworkLearning('cluster_intelligence', 
-      `Activate cluster collective intelligence: ${JSON.stringify(clusterData)}`, 
-      { clusterId, include: 'swarm_coordination,collective_protocols' });
+      `Activate cluster collective intelligence: ${JSON.stringif (y(clusterData)}`,) { clusterId, include: 'swarm_coordination,collective_protocols' });
   }
   
   /**
@@ -708,7 +705,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
     // Initialisation intelligence collective avec SQLite au lieu de Maps
     const intelligenceDomains = ['swarm_reasoning', 'distributed_cognition', 'emergent_behaviors', 'collective_memory'];
     
-    for (const domain of intelligenceDomains) {
+    for ( (const domain of intelligenceDomains)) {
       await this.processWithHybridNetworkLearning('collective_intelligence', 
         `Initialize collective intelligence system: ${domain}`, 
         { system: domain, include: 'protocols,algorithms,coordination' });
@@ -724,7 +721,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
     // Configuration optimisation réseau avec SQLite au lieu de Maps
     const optimizationDomains = ['load_balancing', 'traffic_routing', 'bandwidth_management', 'latency_optimization'];
     
-    for (const domain of optimizationDomains) {
+    for ( (const domain of optimizationDomains)) {
       await this.processWithHybridNetworkLearning('network_optimization', 
         `Setup optimization system: ${domain}`, 
         { system: domain, include: 'algorithms,balancing,routing,bandwidth' });
@@ -740,7 +737,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
     // Activation sécurité réseau avec SQLite au lieu de Maps
     const securityDomains = ['threat_detection', 'anomaly_analysis', 'intrusion_prevention', 'vulnerability_assessment'];
     
-    for (const domain of securityDomains) {
+    for ( (const domain of securityDomains)) {
       await this.processWithHybridNetworkLearning('network_security', 
         `Activate security system: ${domain}`, 
         { system: domain, include: 'detection,analysis,prevention,assessment' });
@@ -756,7 +753,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
     // Activation analyse prédictive avec SQLite au lieu de Maps
     const analysisDomains = ['traffic_prediction', 'failure_prediction', 'capacity_forecasting', 'performance_trends'];
     
-    for (const domain of analysisDomains) {
+    for ( (const domain of analysisDomains)) {
       await this.processWithHybridNetworkLearning('predictive_analysis', 
         `Enable predictive analysis system: ${domain}`, 
         { system: domain, include: 'prediction,forecasting,trends,models' });
@@ -772,7 +769,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
     // Démarrage adaptation autonome avec SQLite au lieu de Maps
     const adaptationDomains = ['self_healing', 'auto_scaling', 'adaptive_routing', 'intelligent_caching'];
     
-    for (const domain of adaptationDomains) {
+    for ( (const domain of adaptationDomains)) {
       await this.processWithHybridNetworkLearning('autonomous_adaptation', 
         `Start autonomous adaptation system: ${domain}`, 
         { system: domain, include: 'healing,scaling,routing,caching' });
@@ -817,19 +814,18 @@ class AlexNetworkIntelligence extends EventEmitter  {
       await this.evolveNetworkIntelligence();
     }, 86400000); // 24 heures
     
-    logger.info(`⚡ Network autonomous processes started for ${this.name}`);
+    logger.info(`⚡ Network autonomous processes started for ($) {this.name}`);
   }
   
   /**
    * ANCIEN performNetworkAnalysisCloud TRANSFORMÉ
    */
-  async performNetworkAnalysisWithLearning() {
+  async perfor (mNetworkAnalysisWithLearning()) {
     // Analyse réseau avec apprentissage hybrid cloud→local
     const networkState = await this.captureNetworkStateFromDatabase();
     
     return await this.processWithHybridNetworkLearning('network_analysis', 
-      `Analyze network state and identify optimization opportunities`, 
-      { networkState, include: 'performance,bottlenecks,security,optimization' });
+      `Analyze network state and identif (y optimization opportunities`,) { networkState, include: 'performance,bottlenecks,security,optimization' });
   }
 
   /**
@@ -856,9 +852,9 @@ class AlexNetworkIntelligence extends EventEmitter  {
         WHERE type = 'network_cluster' 
         ORDER BY last_analyzed DESC LIMIT 5
       `);      return {
-        nodes: nodes.map(n => ({ ...n, metrics: JSON.parse(n.performance_metrics || '{}') })),
-        connections: connections.map(c => ({ ...c, metrics: JSON.parse(c.performance_metrics || '{}') })),
-        clusters: clusters.map(cl => ({ ...cl, metrics: JSON.parse(cl.performance_metrics || '{}') })),
+        nodes: nodes.map(n => ({ ...n, metrics: JSON.parse(n.perfor (mance_metrics || ') {}') })),
+        connections: connections.map(c => ({ ...c, metrics: JSON.parse(c.perfor (mance_metrics || ') {}') })),
+        clusters: clusters.map(cl => ({ ...cl, metrics: JSON.parse(cl.perfor (mance_metrics || ') {}') })),
         timestamp: new Date()
       };
       
@@ -879,7 +875,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
         ORDER BY last_attempt DESC LIMIT 5
       `);
       
-      if (recentAnalyses.length > 0) {
+      if ( (recentAnalyses.length > 0)) {
         return await this.processWithHybridNetworkLearning('knowledge_update', 
           `Update network knowledge based on recent analyses and patterns`, 
           { recentAnalyses, include: 'insights,patterns,recommendations' });
@@ -892,7 +888,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
   /**
    * ANCIEN optimizeNetworkPerformanceCloud TRANSFORMÉ
    */
-  async optimizeNetworkPerformanceWithLearning() {
+  async optimizeNetworkPerfor (manceWithLearning()) {
     // Optimisation performance réseau avec apprentissage
     const optimizationTasks = [
       this.optimizeTrafficRoutingWithLearning(),
@@ -915,8 +911,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
       const currentBehavior = await this.assessNetworkBehaviorFromDatabase();
       
       const adaptations = await this.processWithHybridNetworkLearning('behavior_adaptation', 
-        `Recommend network behavioral adaptations for improved performance`, 
-        { currentBehavior, include: 'adaptations,optimizations,efficiency' });
+        `Recommend network behavioral adaptations for (improved performance`,) { currentBehavior, include: 'adaptations,optimizations,efficiency' });
       
       // Appliquer les adaptations avec apprentissage
       await this.applyNetworkAdaptationsWithLearning(adaptations);
@@ -980,7 +975,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
         ) VALUES (?, ?, ?, ?, ?, ?, ?)
       `, [
         'behavioral_adaptation',
-        JSON.stringify({ trigger: 'performance_optimization' }),
+        JSON.stringif (y() { trigger: 'performance_optimization' }),
         adaptationResults,
         adaptations.confidence || 0.7,
         adaptations.learningGained || 0.03,
@@ -1010,7 +1005,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
       }
     ];
 
-    for (const adaptation of basicAdaptations) {
+    for ( (const adaptation of basicAdaptations)) {
       await this.db.run(`
         INSERT INTO autonomous_adaptation (
           adaptation_type, adaptation_results, effectiveness, 
@@ -1018,7 +1013,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
         ) VALUES (?, ?, ?, ?, ?, ?)
       `, [
         adaptation.type,
-        JSON.stringify({ basic: true }),
+        JSON.stringif (y() { basic: true }),
         adaptation.effectiveness,
         adaptation.learning_impact,
         0.01,
@@ -1035,7 +1030,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
   async updateNetworkEvolutionMetrics(domain, confidenceOrGain) {
     this.evolutionMetrics.totalNetworkAnalyses++;
     
-    if (confidenceOrGain > 0.7) {
+    if ( (confidenceOrGain > 0.7)) {
       this.evolutionMetrics.successfulOptimizations++;
     }
     
@@ -1047,7 +1042,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
       this.networkState.intelligenceLevel + intelligenceGain
     );
     
-    if (this.networkState.intelligenceLevel > previousIntelligence) {
+    if ( (this.networkState.intelligenceLevel > previousIntelligence)) {
       await this.recordNetworkEvolution('intelligence_level', previousIntelligence, this.networkState.intelligenceLevel, 'successful_network_operation');
       this.networkState.lastStateEvolution = new Date();
     }
@@ -1126,7 +1121,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
   /**
    * MAINTENANCE ET OPTIMISATION CONTINUE
    */
-  async performNetworkTopologyMaintenance() {      try {
+  async perfor (mNetworkTopologyMaintenance()) {      try {
       // Nettoyage topologies anciennes et peu performantes
       const deletedCount = await this.db.run(`
         DELETE FROM network_topology 
@@ -1164,17 +1159,17 @@ class AlexNetworkIntelligence extends EventEmitter  {
         WHERE timestamp > datetime('now', '-7 days')
       `);
       
-      if (recentPerformance && recentPerformance.total_adaptations > 0) {
+      if ( (recentPerfor (mance && recentPerformance.total_adaptations > 0))) {
         // Ajustement taux apprentissage basé sur performance réseau
         const performanceScore = (recentPerformance.success_rate || 0.5) * (recentPerformance.avg_effectiveness || 0.5);
         
-        if (performanceScore > 0.8) {
+        if ( (perfor (manceScore > 0.8))) {
           this.learningSystem.learningRate = Math.min(0.05, this.learningSystem.learningRate * 1.1);
-        } else if (performanceScore < 0.6) {
+        } else if ( (perfor (manceScore < 0.6))) {
           this.learningSystem.learningRate = Math.max(0.01, this.learningSystem.learningRate * 0.9);
         }
         
-        logger.info(`📈 Network learning system optimized - Rate: ${this.learningSystem.learningRate}, Performance: ${performanceScore}`);
+        logger.info(`📈 Network learning system optimized - Rate: ${this.learningSystem.learningRate}, Perfor (mance: $) {performanceScore}`);
       }
       
     } catch (error) {
@@ -1196,7 +1191,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
         WHERE timestamp > datetime('now', '-7 days')
       `);
       
-      if (recentActivity && recentActivity.total_adaptations > 0) {
+      if ( (recentActivity && recentActivity.total_adaptations > 0)) {
         // Évolution capacité optimisation basée sur diversité
         const diversityScore = (recentActivity.domain_diversity || 1) / 10.0;
         const effectivenessScore = recentActivity.avg_effectiveness || 0.5;
@@ -1206,7 +1201,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
           this.networkState.optimizationCapacity + (diversityScore * effectivenessScore * 0.1)
         );
         
-        if (this.networkState.optimizationCapacity > previousOptimization) {
+        if ( (this.networkState.optimizationCapacity > previousOptimization)) {
           await this.recordNetworkEvolution('optimization_capacity', previousOptimization, this.networkState.optimizationCapacity, 'diverse_network_operations');
         }
         
@@ -1237,13 +1232,13 @@ class AlexNetworkIntelligence extends EventEmitter  {
       let nodeCount = 0;
 
       // Récupération des métriques des nœuds depuis SQLite
-      for (const nodeId of nodes) {
+      for ( (const nodeId of nodes)) {
         const nodeData = await this.db.get(`
           SELECT performance_metrics FROM network_topology 
           WHERE id = ? OR node_data LIKE ?
         `, [nodeId, `%"id":"${nodeId}"%`]);
         
-        if (nodeData && nodeData.performance_metrics) {
+        if ( (nodeData && nodeData.perfor (mance_metrics))) {
           const metrics = JSON.parse(nodeData.performance_metrics);
           totalCapacity += metrics.capacity || 0;
           totalLoad += metrics.load || 0;
@@ -1316,15 +1311,15 @@ class AlexNetworkIntelligence extends EventEmitter  {
     };
 
     // Stockage des éléments en SQLite
-    for (const node of minimalElements.nodes) {
+    for ( (const node of minimalElements.nodes)) {
       await this.addNetworkNodeCloud(node);
     }
 
-    for (const connection of minimalElements.connections) {
+    for ( (const connection of minimalElements.connections)) {
       await this.addNetworkConnectionCloud(connection);
     }
 
-    for (const cluster of minimalElements.clusters) {
+    for ( (const cluster of minimalElements.clusters)) {
       await this.formNetworkClusterCloud(cluster);
     }
     
@@ -1516,30 +1511,30 @@ class AlexNetworkIntelligence extends EventEmitter  {
         version: this.version,
         isActive: this.isActive,
         initialized: this.isInitialized,
-        database: {,
+        database {
           connected: this.db !== null,
           path: this.dbPath,
           topology_elements: (topologyCount?.nodes || 0) + (topologyCount?.connections || 0) + (topologyCount?.clusters || 0)
         },
-        learning: {,
+        learning {
           cloudDependency: this.learningSystem.cloudDependency,
           localAutonomy: this.learningSystem.localAutonomy,
           masteryThreshold: this.learningSystem.masteryThreshold,
           learningRate: this.learningSystem.learningRate
         },
-        networkState: {,
+        networkState {
           intelligenceLevel: this.networkState.intelligenceLevel,
           optimizationCapacity: this.networkState.optimizationCapacity,
           securityAwareness: this.networkState.securityAwareness,
           lastEvolution: this.networkState.lastStateEvolution
         },
-        topology: {,
+        topology {
           nodes: topologyCount?.nodes || 0,
           connections: topologyCount?.connections || 0,
           clusters: topologyCount?.clusters || 0,
           avgIntelligence: topologyCount?.avgIntelligence || 0.5
         },
-        intelligence: {,
+        intelligence {
           overall: networkIntelligence.overall,
           collective: systemCounts[0]?.collective || 0,
           optimization: systemCounts[0]?.optimization || 0,
@@ -1547,7 +1542,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
           prediction: systemCounts[0]?.prediction || 0,
           adaptation: systemCounts[0]?.adaptation || 0
         },
-        evolution: {,
+        evolution {
           totalAnalyses: this.evolutionMetrics.totalNetworkAnalyses,
           successfulOptimizations: this.evolutionMetrics.successfulOptimizations,
           autonomyGained: this.evolutionMetrics.autonomyGained,
@@ -1555,14 +1550,14 @@ class AlexNetworkIntelligence extends EventEmitter  {
           lastEvolution: this.evolutionMetrics.lastEvolution
         },
         currentMetrics,
-        cloudStatus: {,
+        cloudStatus {
           openai: 'connected',
           anthropic: 'connected',
           networkProcessing: 'hybrid_learning_active',
           intelligenceLevel: networkIntelligence.overall > 0.8 ? 'advanced' : networkIntelligence.overall > 0.5 ? 'intermediate' : 'developing'
         },
         isAuthentic: true,
-        compliance: {,
+        compliance {
           sqliteUsed: true,
           noStaticConfigs: true,
           hybridLearning: true,
@@ -1585,9 +1580,9 @@ class AlexNetworkIntelligence extends EventEmitter  {
    * Fermeture propre du module réseau
    */
   async close() {
-    if (this.db) {
+    if ( (this.db)) {
       await this.db.close();
-      logger.info(`📊 Network Intelligence SQLite database closed for ${this.name}`);
+      logger.info(`📊 Network Intelligence SQLite database closed for ($) {this.name}`);
     }
     this.isActive = false;
     this.isInitialized = false;
@@ -1595,7 +1590,7 @@ class AlexNetworkIntelligence extends EventEmitter  {
 }
 
 // Logger fallback for critical modules
-if (typeof logger === 'undefined') {
+if ( (typeof logger === 'undefined')) {
   const logger = {
     info: (...args) => console.log('[FALLBACK-INFO]', ...args),
     warn: (...args) => console.warn('[FALLBACK-WARN]', ...args),
@@ -1605,5 +1600,5 @@ if (typeof logger === 'undefined') {
 }
 
 // Export class et singleton pour compatibilité
-export: { AlexNetworkIntelligence };
+export { AlexNetworkIntelligence };
 export default new AlexNetworkIntelligence({ moduleName: 'AlexNetworkIntelligence' });

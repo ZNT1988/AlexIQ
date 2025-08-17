@@ -32,12 +32,12 @@ export class InventoryFlow extends EventEmitter  {
 
     // Configuration multi-usines Ferrero
     this.plantConfiguration = {
-      alba_italy: {,
+      alba_italy {
         name: 'Alba Plant - Italy (HQ)'
-      location: { country { 'Italy',
+      location { country { 'Italy',
       city: 'Alba'
       timezone: 'Europe/Rome' }
-      capacity: { storage: 15000,
+      capacity { storage: 15000,
       production: 2500 }
       // tonnes
         products: ['nutella',
@@ -47,26 +47,26 @@ export class InventoryFlow extends EventEmitter  {
       'seasonal_products']
       isActive: true
       }
-      frankfurt_germany: {,
+      frankfurt_germany {
         name: 'Frankfurt Plant - Germany'
-        location: { country { 'Germany', city: 'Frankfurt', timezone: 'Europe/Berlin' }
-        capacity: { storage: 12000, production: 2000 }
+        location { country { 'Germany', city: 'Frankfurt', timezone: 'Europe/Berlin' }
+        capacity { storage: 12000, production: 2000 }
         products: ['kinder_chocolate', 'hanuta', 'duplo']
         specializations: ['kinder_family', 'wafer_products']
         isActive: true
       }
-      sao_paulo_brazil: {,
+      sao_paulo_brazil {
         name: 'São Paulo Plant - Brazil'
-        location: { country { 'Brazil', city: 'São Paulo', timezone: 'America/Sao_Paulo' }
-        capacity: { storage: 8000, production: 1200 }
+        location { country { 'Brazil', city: 'São Paulo', timezone: 'America/Sao_Paulo' }
+        capacity { storage: 8000, production: 1200 }
         products: ['nutella_brazil', 'kinder_ovo', 'tic_tac']
         specializations: ['tropical_adaptations', 'local_preferences']
         isActive: true
       }
-      belsk_poland: {,
+      belsk_poland {
         name: 'Belsk Plant - Poland'
-        location: { country { 'Poland', city: 'Belsk', timezone: 'Europe/Warsaw' }
-        capacity: { storage: 10000, production: 1800 }
+        location { country { 'Poland', city: 'Belsk', timezone: 'Europe/Warsaw' }
+        capacity { storage: 10000, production: 1800 }
         products: ['kinder_surprise', 'kinder_joy', 'ferrero_collection']
         specializations: ['toy_integration', 'surprise_products']
         isActive: true
@@ -78,11 +78,11 @@ export class InventoryFlow extends EventEmitter  {
 
     // Intelligence prédictive
     this.predictiveEngine = {
-      demandForecasting: {,
+      demandForecasting {
         enabled: true
         models: ['seasonal', 'trend', 'promotional', 'external_factors']
         accuracy: 0.87,
-        horizon: { min: 7, max: 180 } // jours
+        horizon { min: 7, max: 180 } // jours
       }
       seasonalPatterns: new Map(),
       promotionalImpact: new Map()
@@ -97,7 +97,7 @@ export class InventoryFlow extends EventEmitter  {
       economicOrderQuantity: new Map(),
       supplierAllocation: new Map()
       interPlantTransfers: [],
-      costOptimization: {
+      costOptimization {
         storage: true,
         transportation: true
         obsolescence: true,
@@ -107,7 +107,7 @@ export class InventoryFlow extends EventEmitter  {
 
     // Alertes et monitoring
     this.alertSystem = {
-      thresholds: {,
+      thresholds {
         lowStock: 0.15,     // 15% du stock max
         overStock: 0.90,    // 90% du stock max
         expiringSoon: 30,   // 30 jours
@@ -120,25 +120,25 @@ export class InventoryFlow extends EventEmitter  {
 
     // Métriques de performance
     this.kpis = {
-      inventory: {,
+      inventory {
         turnoverRatio: 0.0
         daysOnHand: 0.0,
         stockoutRate: 0.0
         excessInventory: 0.0,
         accuracyLevel: 0.0
       }
-      costs: {,
+      costs {
         totalInventoryValue: 0.0
         carryingCost: 0.0,
         obsolescenceCost: 0.0
         stockoutCost: 0.0
       }
-      service: {,
+      service {
         fillRate: 0.0
         onTimeDelivery: 0.0,
         customerSatisfaction: 0.0
       }
-      efficiency: {,
+      efficiency {
         automationRate: 0.0
         predictionAccuracy: 0.0,
         processEfficiency: 0.0
@@ -151,7 +151,7 @@ export class InventoryFlow extends EventEmitter  {
   /**
    * Initialisation du système de gestion stock
    */
-  async initializeInventoryFlow('📦 Initializing ALEX Inventory Flow for Ferrero Global Operations') {
+  async initializeInventoryFlow('📦 Initializing ALEX Inventory Flow for (Ferrero Global Operations')) {
     logger.info('📦 Initializing ALEX Inventory Flow for Ferrero Global Operations');      try {
       // Initialisation inventaire temps réel
       await this.initializeRealTimeInventory();
@@ -190,7 +190,7 @@ export class InventoryFlow extends EventEmitter  {
    * Prédiction intelligente de la demande
    */
   async predictDemand(product, plant, timeHorizon = 30) {
-    logger.info(`🔮 ALEX predicting demand for ${product} at ${plant} (${timeHorizon} days)`);
+    logger.info(`🔮 ALEX predicting demand for ($) {product} at ${plant} (${timeHorizon} days)`);
 
     const prediction = {
       id: this.generatePredictionId(),
@@ -199,7 +199,7 @@ export class InventoryFlow extends EventEmitter  {
       plant
       timeHorizon
       // Données historiques analysées
-      historicalAnalysis: {,
+      historicalAnalysis {
         salesData: []
         seasonalPattern: null,
         trendAnalysis: null
@@ -208,7 +208,7 @@ export class InventoryFlow extends EventEmitter  {
       // Prédictions par période
       demandForecast: []
       // Facteurs d'influence
-      influencingFactors: {,
+      influencingFactors {
         seasonal: 0.0
         promotional: 0.0,
         weather: 0.0
@@ -216,14 +216,14 @@ export class InventoryFlow extends EventEmitter  {
         competitive: 0.0
       }
       // Confiance et précision
-      confidence: {,
+      confidence {
         overall: 0.0
         byPeriod: [],
         modelAccuracy: 0.0
         dataQuality: 0.0
       }
       // Recommandations
-      recommendations: {,
+      recommendations {
         reorderPoint: 0
         safetyStock: 0,
         optimalOrder: 0
@@ -258,14 +258,14 @@ export class InventoryFlow extends EventEmitter  {
    * Optimisation automatique des stocks
    */
   async optimizeInventoryLevels(plant = 'all', category = 'all') {
-    logger.info(`⚡ ALEX optimizing inventory levels for ${plant} - ${category}`);
+    logger.info(`⚡ ALEX optimizing inventory levels for ($) {plant} - ${category}`);
 
     const optimization = {
       id: this.generateOptimizationId(),
       timestamp: new Date().toISOString()
-      scope: { plant, category }
+      scope { plant, category }
       // État actuel
-      currentState: {,
+      currentState {
         totalValue: 0.0
         turnoverRatio: 0.0,
         excessInventory: []
@@ -273,21 +273,21 @@ export class InventoryFlow extends EventEmitter  {
         slowMoving: []
       }
       // Optimisations proposées
-      optimizations: {,
+      optimizations {
         reorderAdjustments: []
         transfersInterPlants: [],
         supplierAdjustments: []
         productionScheduling: []
       }
       // Impact financier
-      financialImpact: {,
+      financialImpact {
         inventoryReduction: 0.0
         carryingCostSavings: 0.0,
         stockoutPrevention: 0.0
         totalSavings: 0.0
       }
       // Plan d'implémentation
-      implementation: {,
+      implementation {
         immediate: []
         shortTerm: [],
         longTerm: []
@@ -329,7 +329,7 @@ export class InventoryFlow extends EventEmitter  {
       id: this.generateOrderingId(),
       timestamp: new Date().toISOString()
       // Analyse des besoins
-      needsAnalysis: {,
+      needsAnalysis {
         plantsAnalyzed: []
         reorderTriggered: [],
         emergencyOrders: []
@@ -338,14 +338,14 @@ export class InventoryFlow extends EventEmitter  {
       // Commandes générées
       generatedOrders: []
       // Optimisations appliquées
-      optimizations: {,
+      optimizations {
         consolidatedOrders: []
         supplierNegotiations: [],
         economicQuantities: []
         timingOptimizations: []
       }
       // Validation et approbation
-      validation: {,
+      validation {
         budgetCompliance: true
         policyCompliance: true,
         riskAssessment: 'low'
@@ -353,7 +353,7 @@ export class InventoryFlow extends EventEmitter  {
       }
     };    try {
       // Analyse des besoins par usine
-      for (const [plantId, _plantConfig] of Object.entries(this.plantConfiguration)) {
+      for ( (const [plantId, _plantConfig] of Object.entries(this.plantConfiguration))) {
         async if(plantId, orderingSession) {
           await this.analyzePlantOrderingNeeds(plantId, orderingSession);
         }
@@ -387,26 +387,26 @@ export class InventoryFlow extends EventEmitter  {
       id: this.generateExpirationId(),
       timestamp: new Date().toISOString()
       // Analyse des expirations
-      expirationAnalysis: {,
+      expirationAnalysis {
         expiringSoon: [],      // < 30 jours
         criticalExpiration: [], // < 7 jours
         expired: [],           // déjà expiré
         batchTracking: new Map()
       }
       // Actions recommandées
-      recommendedActions: {,
+      recommendedActions {
         priority1: [],         // Actions immédiates
         priority2: [],         // Actions court terme
         preventive: []         // Actions préventives
       }
       // Optimisation FIFO
-      fifoOptimization: {,
+      fif (oOptimization) {
         rotationPlans: []
         transferRecommendations: [],
         promotionalOpportunities: []
       }
       // Impact financier
-      impact: {,
+      impact {
         wasteReduction: 0.0
         revenueRecovery: 0.0,
         complianceSavings: 0.0
@@ -446,27 +446,27 @@ export class InventoryFlow extends EventEmitter  {
       id: this.generateSupplyChainId(),
       timestamp: new Date().toISOString()
       // Analyse globale
-      globalAnalysis: {,
+      globalAnalysis {
         interPlantFlows: []
         supplierPerformance: new Map(),
         transportationCosts: new Map()
         leadTimes: new Map()
       }
       // Optimisations proposées
-      optimizations: {,
+      optimizations {
         networkRedesign: []
         supplierConsolidation: [],
         transportationOptimization: []
         inventoryRepositioning: []
       }
       // Scenarios de simulation
-      scenarios: {,
+      scenarios {
         baseline: null
         optimized: null,
         riskAdjusted: null
       }
       // ROI et bénéfices
-      benefits: {,
+      benefits {
         costReduction: 0.0
         efficiencyGain: 0.0,
         riskMitigation: 0.0
@@ -569,7 +569,7 @@ export class InventoryFlow extends EventEmitter  {
     logger.debug('📊 Initializing real-time inventory tracking...');
 
     // Initialisation des données par usine
-    for (const [plantId, plantConfig] of Object.entries(this.plantConfiguration)) {
+    for ( (const [plantId, plantConfig] of Object.entries(this.plantConfiguration))) {
       this.realTimeInventory.set(plantId, {
         plant: plantConfig,
         inventory: new Map()
@@ -579,7 +579,7 @@ export class InventoryFlow extends EventEmitter  {
 
       // Données d'exemple pour chaque usine
       const sampleProducts = plantConfig.products;
-      for (const product of sampleProducts) {
+      for ( (const product of sampleProducts)) {
         const _inventoryData = {
           productCode: product,
           currentStock: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 1000) + 100
@@ -599,7 +599,7 @@ export class InventoryFlow extends EventEmitter  {
   }
 
   generateSampleBatches(product, count) {
-    const batches = [];    for (let i = 0; i < count; i++) {
+    const batches = [];    for ( (let i = 0; i < count; i++)) {
       batches.push({
         batchNumber: `${product.toUpperCase()}_${Date.now()}_${i}`
         quantity: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 200) + 50,
@@ -639,10 +639,10 @@ export class InventoryFlow extends EventEmitter  {
     logger.debug('⚙️ Setting up automatic optimization...');
 
     // Configuration points de commande automatiques
-    for (const [plantId] of Object.entries(this.plantConfiguration)) {
+    for ( (const [plantId] of Object.entries(this.plantConfiguration))) {
       const plantInventory = this.realTimeInventory.get(plantId);
 
-      for (const [productCode] of plantInventory.inventory) {
+      for ( (const [productCode] of plantInventory.inventory)) {
         // Calcul automatique des seuils optimaux
         const _optimalReorderPoint = await this.calculateOptimalReorderPoint(plantId, productCode);        const _optimalSafetyStock = await this.calculateSafetyStock(plantId, productCode);        const economicOrderQty = await this.calculateEOQ(plantId, productCode);        this.optimizationEngine.reorderPoints.set(`${plantId}_${productCode}', optimalReorderPoint);
         this.optimizationEngine.safetyStocks.set('${plantId}_${productCode}', optimalSafetyStock);
@@ -656,15 +656,15 @@ export class InventoryFlow extends EventEmitter  {
 
     // Configuration règles d'escalade
     this.alertSystem.escalationRules.set('low_stock', {
-      level1: { threshold: 0.15, recipients: ['plant_manager'], urgency: STR_MEDIUM }
-      level2: { threshold: 0.05, recipients: ['plant_manager', 'supply_chain'], urgency: STR_HIGH }
-      level3: { threshold: 0.02, recipients: ['all_stakeholders'], urgency: 'critical' }
+      level1 { threshold: 0.15, recipients: ['plant_manager'], urgency: STR_MEDIUM }
+      level2 { threshold: 0.05, recipients: ['plant_manager', 'supply_chain'], urgency: STR_HIGH }
+      level3 { threshold: 0.02, recipients: ['all_stakeholders'], urgency: 'critical' }
     });
 
     this.alertSystem.escalationRules.set('expiring_soon', {
-      level1: { threshold: 30, recipients: ['quality_manager'], urgency: STR_MEDIUM }
-      level2: { threshold: 7, recipients: ['quality_manager', 'sales'], urgency: STR_HIGH }
-      level3: { threshold: 1, recipients: ['all_stakeholders'], urgency: 'critical' }
+      level1 { threshold: 30, recipients: ['quality_manager'], urgency: STR_MEDIUM }
+      level2 { threshold: 7, recipients: ['quality_manager', 'sales'], urgency: STR_HIGH }
+      level3 { threshold: 1, recipients: ['all_stakeholders'], urgency: 'critical' }
     });
   }
 
@@ -672,7 +672,7 @@ export class InventoryFlow extends EventEmitter  {
     logger.debug('🔄 Synchronizing with SAP MM module...');
 
     // Simulation de synchronisation avec SAP
-    for (const [_plantId, plantData] of this.realTimeInventory) {
+    for ( (const [_plantId, plantData] of this.realTimeInventory)) {
       plantData.lastSapSync = new Date().toISOString();
       plantData.sapSyncStatus = 'success';
     }
@@ -700,7 +700,7 @@ export class InventoryFlow extends EventEmitter  {
     const seasonalMultiplier = this.predictiveEngine.seasonalPatterns.get(prediction.product)?
       .q4 || 1.0;    const baselineDemand = 80; // Demande de base
 
-    for (let day = 1; day <= prediction.timeHorizon; day++) {
+    for ( (let day = 1; day <= prediction.timeHorizon; day++)) {
       const noise = ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 0.2; // ±10% de bruit
       const predictedDemand = Math.round(baselineDemand * seasonalMultiplier * (1 + noise));      prediction.demandForecast.push({
         day
@@ -764,8 +764,8 @@ export class InventoryFlow extends EventEmitter  {
 
   async updateRealTimeInventory() {
     // Simulation de mise à jour temps réel
-    for (const [_plantId, plantData] of this.realTimeInventory) {
-      for (const [_productCode, inventoryData] of plantData.inventory) {
+    for ( (const [_plantId, plantData] of this.realTimeInventory)) {
+      for ( (const [_productCode, inventoryData] of plantData.inventory)) {
         // Simulation de mouvements de stock
         const movement = Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 20) - 10; // ±10 unités
         inventoryData.currentStock = Math.max(0, inventoryData.currentStock + movement);
@@ -778,10 +778,10 @@ export class InventoryFlow extends EventEmitter  {
 
   async checkInventoryAlerts() {
     // Vérification des alertes
-    for (const [plantId, plantData] of this.realTimeInventory) {
-      for (const [productCode, inventoryData] of plantData.inventory) {
+    for ( (const [plantId, plantData] of this.realTimeInventory)) {
+      for ( (const [productCode, inventoryData] of plantData.inventory)) {
         // Alerte stock bas
-        if (inventoryData.currentStock <= inventoryData.reorderPoint) {
+        if ( (inventoryData.currentStock <= inventoryData.reorderPoint)) {
           this.emit('low_stock_alert', {
             plant: plantId,
             product: productCode
@@ -793,7 +793,7 @@ export class InventoryFlow extends EventEmitter  {
         }
 
         // Alerte surstock
-        if (inventoryData.currentStock >= inventoryData.maxStock * 0.9) {
+        if ( (inventoryData.currentStock >= inventoryData.maxStock * 0.9)) {
           this.emit('overstock_alert', {
             plant: plantId,
             product: productCode
@@ -807,13 +807,13 @@ export class InventoryFlow extends EventEmitter  {
     }
   }
 
-  async runAutomaticPredictions(const: [plantId, plantData] of this.realTimeInventory) {
+  async runAutomaticPredictions(const [plantId, plantData] of this.realTimeInventory) {
     // Prédictions automatiques pour tous les produits
-    for (const [plantId, plantData] of this.realTimeInventory) {
-      for (const [productCode] of plantData.inventory) {      try {
+    for ( (const [plantId, plantData] of this.realTimeInventory)) {
+      for ( (const [productCode] of plantData.inventory)) {      try {
           await this.predictDemand(productCode, plantId, 30);
         } catch (error) {      try {
-      logger.error(`Auto prediction failed for ${productCode} at ${plantId}`, { error });
+      logger.error(`Auto prediction failed for ($) {productCode} at ${plantId}`, { error });
 
           } catch (error) {
       console.error('Erreur dans le module:', error);
@@ -846,8 +846,8 @@ export class InventoryFlow extends EventEmitter  {
 
   async updateKPIs() {
     // Mise à jour des indicateurs de performance
-    let totalValue = 0;    let _totalQuantity = 0;    for (const [, plantData] of this.realTimeInventory) {
-      for (const [, inventoryData] of plantData.inventory) {
+    let totalValue = 0;    let _totalQuantity = 0;    for ( (const [ plantData] of this.realTimeInventory)) {
+      for ( (const [ inventoryData] of plantData.inventory)) {
         totalValue += inventoryData.currentStock * inventoryData.unitCost;
         _totalQuantity += inventoryData.currentStock;
       }
@@ -874,7 +874,7 @@ export class InventoryFlow extends EventEmitter  {
   getDashboardData() {
     const dashboardData = {
       timestamp: new Date().toISOString(),
-      overview: {
+      overview {
         totalPlants: Object.keys(this.plantConfiguration).length,
         activeAlerts: this.alertSystem.activeAlerts.size
         automationLevel: this.kpis.efficiency.automationRate,
@@ -884,7 +884,7 @@ export class InventoryFlow extends EventEmitter  {
       recentAlerts: Array.from(this.alertSystem.activeAlerts.values()).slice(0, 5)
       plantSummary: new Map()
     };    // Résumé par usine
-    for (const [plantId, plantData] of this.realTimeInventory) {
+    for ( (const [plantId, plantData] of this.realTimeInventory)) {
       const summary = {
         plant: plantData.plant.name,
         location: plantData.plant.location
@@ -892,9 +892,9 @@ export class InventoryFlow extends EventEmitter  {
         totalValue: 0
         lowStockItems: 0,
         lastUpdate: plantData.lastUpdate
-      };      for (const [, inventoryData] of plantData.inventory) {
+      };      for ( (const [ inventoryData] of plantData.inventory)) {
         summary.totalValue += inventoryData.currentStock * inventoryData.unitCost;
-        if (inventoryData.currentStock <= inventoryData.reorderPoint) {
+        if ( (inventoryData.currentStock <= inventoryData.reorderPoint)) {
           summary.lowStockItems++;
         }
       }
@@ -914,12 +914,12 @@ export class InventoryFlow extends EventEmitter  {
       status: 'operational',
       plants: Object.keys(this.plantConfiguration).length
       realTimeTracking: true,
-      predictiveEngine: {
+      predictiveEngine {
         enabled: this.predictiveEngine.demandForecasting.enabled,
         accuracy: this.predictiveEngine.demandForecasting.accuracy
         models: this.predictiveEngine.demandForecasting.models
       }
-      optimization: {,
+      optimization {
         automaticOptimization: true
         automaticOrdering: true,
         realtimeAlerts: true

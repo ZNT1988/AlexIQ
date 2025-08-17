@@ -32,7 +32,7 @@ class BackupManager extends EventEmitter {
     const dbPath = this.config.get("database.path");
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        console.error('Database initialization error:', err.message);
+        console.error("Database initialization error:", err.message);
         return;
       }
       
@@ -73,12 +73,12 @@ class BackupManager extends EventEmitter {
                 next_run DATETIME,
                 retention_days INTEGER DEFAULT 30,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-            )`,
+            )`
     ];
 
     tables.forEach((sql) => {
       this.db.run(sql, (err) => {
-        if (err) console.error('Error creating backup table:', err.message);
+        if (err) console.error("Error creating backup table:", err.message);
       });
     });
 
@@ -91,14 +91,14 @@ class BackupManager extends EventEmitter {
         schedule_name: "daily_full_backup",
         backup_type: "full",
         cron_expression: "0 2 * * *",
-        retention_days: 7,
+        retention_days: 7
       },
       {
         schedule_name: "hourly_incremental",
         backup_type: "incremental",
         cron_expression: "0 * * * *",
-        retention_days: 2,
-      },
+        retention_days: 2
+      }
     ];
 
     defaultSchedules.forEach((schedule) => {
@@ -112,8 +112,8 @@ class BackupManager extends EventEmitter {
           schedule.schedule_name,
           schedule.backup_type,
           schedule.cron_expression,
-          schedule.retention_days,
-        ],
+          schedule.retention_days
+        ]
       );
     });
   }
@@ -129,7 +129,7 @@ class BackupManager extends EventEmitter {
     try {
       await fs.mkdir(this.backupPath, { recursive: true });
     } catch (error) {
-      console.error('Error creating backup directory:', error.message);
+      console.error("Error creating backup directory:", error.message);
       throw error;
     }
   }
@@ -162,11 +162,11 @@ class BackupManager extends EventEmitter {
     try {
       await this.createBackup("scheduled");
     } catch (error) {
-      console.error('Scheduled backup failed:', error.message);
+      console.error("Scheduled backup failed:", error.message);
       this.emit("backupFailed", {
         type: "scheduled",
         error: error.message,
-        timestamp: new Date().toISOString(),
+        timestamp: new Date().toISOString()
       });
     }
   }
@@ -202,8 +202,8 @@ class BackupManager extends EventEmitter {
         metadata: JSON.stringify({
           originalSize: backupData.length,
           compressionRatio: (backupData.length / fileStats.size).toFixed(2),
-          ...options,
-        }),
+          ...options
+        })
       };
 
       await this.recordBackup(backupRecord);
@@ -218,25 +218,25 @@ class BackupManager extends EventEmitter {
         fileName: backupFileName,
         size: fileStats.size,
         duration: duration,
-        type: type,
+        type: type
       });
 
       return backupRecord;
     } catch (error) {
-      console.error('Backup creation failed:', error.message);
+      console.error("Backup creation failed:", error.message);
       await this.recordBackup({
         id: backupId,
         backup_type: type,
         file_path: backupFilePath,
         status: "failed",
         duration: Date.now() - startTime,
-        metadata: JSON.stringify({ error: error.message }),
+        metadata: JSON.stringify({ error: error.message })
       });
 
       this.emit("backupFailed", {
         id: backupId,
         type: type,
-        error: error.message,
+        error: error.message
       });
 
       throw error;
@@ -262,19 +262,19 @@ class BackupManager extends EventEmitter {
 
               if (err) {
                 reject(
-                  new Error(`Vérification intégrité échouée: ${err.message}`),
+                  new Error(`Vérification intégrité échouée: ${err.message}`)
                 );
               } else if (row.integrity_check !== "ok") {
                 reject(
                   new Error(
-                    `Intégrité base compromise: ${row.integrity_check}`,
-                  ),
+                    `Intégrité base compromise: ${row.integrity_check}`
+                  )
                 );
               } else {
                 resolve();
               }
             });
-          },
+          }
         );
       });
     } catch (error) {
@@ -323,11 +323,11 @@ class BackupManager extends EventEmitter {
                         .map((v) =>
                           typeof v === "string"
                             ? `'${v.replace(/'/g, "''")}'`
-                            : v,
+                            : v
                         )
                         .join(",");
                       dump.push(
-                        `INSERT INTO ${row.name} (${columns}) VALUES (${values});`,
+                        `INSERT INTO ${row.name} (${columns}) VALUES (${values});`
                       );
                     });
                   }
@@ -336,9 +336,9 @@ class BackupManager extends EventEmitter {
               () => {
                 db.close();
                 resolve(Buffer.from(dump.join("\n")));
-              },
+              }
             );
-          },
+          }
         );
       });
     });
@@ -367,12 +367,12 @@ class BackupManager extends EventEmitter {
           backup.checksum,
           backup.status,
           backup.duration,
-          backup.metadata,
+          backup.metadata
         ],
         function (err) {
           if (err) reject(err);
           else resolve(this.lastID);
-        },
+        }
       );
     });
   }
@@ -388,19 +388,19 @@ class BackupManager extends EventEmitter {
         backup_id: backupId,
         verification_status: "success",
         integrity_check: true,
-        restore_test: false,
+        restore_test: false
       };
 
       await this.recordVerification(verificationResult);
 
     } catch (error) {
-      console.error('Backup verification failed:', error.message);
+      console.error("Backup verification failed:", error.message);
       await this.recordVerification({
         backup_id: backupId,
         verification_status: "failed",
         integrity_check: false,
         restore_test: false,
-        error_message: error.message,
+        error_message: error.message
       });
     }
   }
@@ -420,12 +420,12 @@ class BackupManager extends EventEmitter {
           verification.verification_status,
           verification.integrity_check,
           verification.restore_test,
-          verification.error_message,
+          verification.error_message
         ],
         function (err) {
           if (err) reject(err);
           else resolve(this.lastID);
-        },
+        }
       );
     });
   }
@@ -460,12 +460,12 @@ class BackupManager extends EventEmitter {
       this.emit("restoreCompleted", {
         backupId: backupId,
         restorePath: restorePath,
-        duration: duration,
+        duration: duration
       });
 
       return restorePath;
     } catch (error) {
-      console.error('Restore failed:', error.message);
+      console.error("Restore failed:", error.message);
       throw error;
     }
   }
@@ -536,11 +536,11 @@ class BackupManager extends EventEmitter {
 
       const oldBackups = await this.listBackups({
         since: "1970-01-01",
-        status: "completed",
+        status: "completed"
       });
 
       const toDelete = oldBackups.filter(
-        (backup) => new Date(backup.timestamp) < cutoffDate,
+        (backup) => new Date(backup.timestamp) < cutoffDate
       );
 
       for (const backup of toDelete) {
@@ -548,16 +548,16 @@ class BackupManager extends EventEmitter {
           await fs.unlink(backup.file_path);
           await this.deleteBackupRecord(backup.id);
         } catch (error) {
-          console.error('Error deleting backup file:', error.message);
+          console.error("Error deleting backup file:", error.message);
         }
       }
 
       this.emit("cleanupCompleted", {
         deleted: toDelete.length,
-        retention: retention,
+        retention: retention
       });
     } catch (error) {
-      console.error('Cleanup failed:', error.message);
+      console.error("Cleanup failed:", error.message);
     }
   }
 
@@ -565,7 +565,7 @@ class BackupManager extends EventEmitter {
     return new Promise((resolve, reject) => {
       this.db.serialize(() => {
         this.db.run("DELETE FROM backup_verification WHERE backup_id = ?", [
-          backupId,
+          backupId
         ]);
         this.db.run(
           "DELETE FROM backup_history WHERE id = ?",
@@ -573,7 +573,7 @@ class BackupManager extends EventEmitter {
           function (err) {
             if (err) reject(err);
             else resolve(this.changes);
-          },
+          }
         );
       });
     });
@@ -583,7 +583,7 @@ class BackupManager extends EventEmitter {
     try {
       this.backupHistory = await this.listBackups({ limit: 100 });
     } catch (error) {
-      console.error('Error loading backup history:', error.message);
+      console.error("Error loading backup history:", error.message);
     }
   }
 
@@ -614,13 +614,13 @@ class BackupManager extends EventEmitter {
 
   getStats() {
     const completed = this.backupHistory.filter(
-      (b) => b.status === "completed",
+      (b) => b.status === "completed"
     );
     const failed = this.backupHistory.filter((b) => b.status === "failed");
 
     const totalSize = completed.reduce(
       (sum, backup) => sum + (backup.file_size || 0),
-      0,
+      0
     );
     const avgDuration =
       completed.length > 0
@@ -637,7 +637,7 @@ class BackupManager extends EventEmitter {
       averageDuration: Math.round(avgDuration),
       isRunning: this.isRunning,
       lastBackup:
-        this.backupHistory.length > 0 ? this.backupHistory[0].timestamp : null,
+        this.backupHistory.length > 0 ? this.backupHistory[0].timestamp : null
     };
   }
 
@@ -654,7 +654,7 @@ class BackupManager extends EventEmitter {
 
     if (this.db) {
       this.db.close((err) => {
-        if (err) console.error('Error closing database:', err.message);
+        if (err) console.error("Error closing database:", err.message);
       });
     }
 

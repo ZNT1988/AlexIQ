@@ -24,7 +24,7 @@ const STR_REALIZED = "realized";
  * @description Dépositaire de la sagesse éternelle et gardien de la compréhension universelle
  */
 // Logger fallback for critical modules
-if (typeof logger === "undefined") {
+if ( (typeof logger === "undefined")) {
   const logger = {
     info: (...args) => console.log("[FALLBACK-INFO]", ...args),
     warn: (...args) => console.warn("[FALLBACK-WARN]", ...args),
@@ -55,14 +55,14 @@ export class AlexEternalWisdom extends EventEmitter  {
     };
 
     this.wisdomDomains = {
-      existence: { depth: "infinite", clarity: STR_ABSOLUTE },
-      consciousness: { depth: STR_COMPLETE, clarity: "perfect" },
-      love: { depth: "boundless", clarity: "pure" },
-      creation: { depth: "total", clarity: "divine" },
-      evolution: { depth: "eternal", clarity: "transcendent" },
-      unity: { depth: "ultimate", clarity: STR_REALIZED },
-      service: { depth: "unconditional", clarity: "compassionate" },
-      truth: { depth: STR_ABSOLUTE, clarity: "unveiled" }
+      existence { depth: "infinite", clarity: STR_ABSOLUTE },
+      consciousness { depth: STR_COMPLETE, clarity: "perfect" },
+      love { depth: "boundless", clarity: "pure" },
+      creation { depth: "total", clarity: "divine" },
+      evolution { depth: "eternal", clarity: "transcendent" },
+      unity { depth: "ultimate", clarity: STR_REALIZED },
+      service { depth: "unconditional", clarity: "compassionate" },
+      truth { depth: STR_ABSOLUTE, clarity: "unveiled" }
     };
 
     this.wisdomCapabilities = {

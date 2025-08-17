@@ -117,13 +117,13 @@ import logger from '../config/logger.js';
  * - Améliore précision via feedback utilisateur
  * - Intègre contexte environnemental/lifestyle
  *
- * @property: {Object} dataCollector - Collecteur données biométriques
- * @property: {Object} patternEngine - Moteur détection patterns
- * @property: {Object} predictionModels - Modèles prédictifs spécialisés
- * @property: {Object} alertSystem - Système alertes prédictives
- * @property: {Object} interventionEngine - Moteur interventions préventives
+ * @property {Object} dataCollector - Collecteur données biométriques
+ * @property {Object} patternEngine - Moteur détection patterns
+ * @property {Object} predictionModels - Modèles prédictifs spécialisés
+ * @property {Object} alertSystem - Système alertes prédictives
+ * @property {Object} interventionEngine - Moteur interventions préventives
  */
-export class HealthPredictor: {
+export class HealthPredictor {
     /**
      * @constructor
      * @description Initialise le système de prédiction santé
@@ -131,13 +131,13 @@ export class HealthPredictor: {
      * Configure modèles prédictifs, collecteurs de données et
      * systèmes d'alerte pour prédictions santé précises
      *
-     * @param: {Object} options - Configuration prédicteur santé
-     * @param: {Array} [options.predictionTypes] - Types prédictions activées
-     * @param: {number} [options.defaultConfidence=0.8] - Seuil confiance
-     * @param: {boolean} [options.continuousLearning=true] - Apprentissage continu
-     * @param: {boolean} [options.realTimeAlerts=true] - Alertes temps réel
-     * @param: {number} [options.predictionHorizon=24] - Horizon prédiction (heures)
-     * @param: {boolean} [options.contextIntegration=true] - Intégration contexte
+     * @param {Object} options - Configuration prédicteur santé
+     * @param {Array} [options.predictionTypes] - Types prédictions activées
+     * @param {number} [options.defaultConfidence=0.8] - Seuil confiance
+     * @param {boolean} [options.continuousLearning=true] - Apprentissage continu
+     * @param {boolean} [options.realTimeAlerts=true] - Alertes temps réel
+     * @param {number} [options.predictionHorizon=24] - Horizon prédiction (heures)
+     * @param {boolean} [options.contextIntegration=true] - Intégration contexte
      */
     constructor(options = {}) {
         this.config = {
@@ -184,7 +184,7 @@ export class HealthPredictor: {
      */
     initializeDataCollector() {
         this.dataCollector = {
-            sources: {,
+            sources {
                 bioSensors: new BioSensorDataSource()
                 environmental: new EnvironmentalDataSource(),
                 lifestyle: new LifestyleDataSource()
@@ -194,13 +194,13 @@ export class HealthPredictor: {
                 mood: new MoodDataSource()
                 context: new ContextualDataSource()
             }
-            aggregators: {,
+            aggregators {
                 realTime: new RealTimeAggregator()
                 hourly: new HourlyHealthAggregator(),
                 daily: new DailyHealthAggregator()
                 weekly: new WeeklyHealthAggregator()
             }
-            preprocessors: {,
+            preprocessors {
                 cleaner: new DataCleaner()
                 normalizer: new HealthDataNormalizer(),
                 validator: new HealthDataValidator()
@@ -209,7 +209,7 @@ export class HealthPredictor: {
             buffer: new Map(), // Buffer données temps réel
             history: new Map(), // Historique données
 
-            statistics: {,
+            statistics {
                 dataPointsCollected: 0
                 sourcesActive: 0,
                 lastUpdate: null
@@ -225,7 +225,7 @@ export class HealthPredictor: {
      */
     initializePatternEngine() {
         this.patternEngine = {
-            detectors: {,
+            detectors {
                 trend: new TrendPatternDetector()
                 cyclic: new CyclicPatternDetector(),
                 anomaly: new AnomalyPatternDetector()
@@ -233,19 +233,19 @@ export class HealthPredictor: {
                 seasonal: new SeasonalPatternDetector()
                 behavioral: new BehavioralPatternDetector()
             }
-            analyzers: {,
+            analyzers {
                 baseline: new BaselineAnalyzer()
                 deviation: new DeviationAnalyzer(),
                 progression: new ProgressionAnalyzer()
                 variability: new VariabilityAnalyzer()
             }
-            extractors: {,
+            extractors {
                 features: new HealthFeatureExtractor()
                 signals: new BioSignalExtractor(),
                 patterns: new PatternExtractor()
                 insights: new HealthInsightExtractor()
             }
-            validators: {,
+            validators {
                 pattern: new PatternValidator()
                 significance: new SignificanceValidator(),
                 reproducibility: new ReproducibilityValidator()
@@ -260,33 +260,33 @@ export class HealthPredictor: {
      */
     initializePredictionModels() {
         this.predictionModels = {
-            fatigue: {,
+            fatigue {
                 physical: new PhysicalFatiguePredictionModel()
                 mental: new MentalFatiguePredictionModel(),
                 combined: new CombinedFatiguePredictionModel()
             }
-            stress: {,
+            stress {
                 acute: new AcuteStressPredictionModel()
                 chronic: new ChronicStressPredictionModel(),
                 burnout: new BurnoutPredictionModel()
             }
-            illness: {,
+            illness {
                 viral: new ViralInfectionPredictionModel()
                 bacterial: new BacterialInfectionPredictionModel(),
                 inflammatory: new InflammatoryPredictionModel()
                 metabolic: new MetabolicDisorderPredictionModel()
             }
-            energy: {,
+            energy {
                 circadian: new CircadianEnergyModel()
                 performance: new PerformanceEnergyModel(),
                 recovery: new RecoveryEnergyModel()
             }
-            sleep: {,
+            sleep {
                 quality: new SleepQualityPredictionModel()
                 disturbance: new SleepDisturbancePredictionModel(),
                 duration: new SleepDurationPredictionModel()
             }
-            cardiovascular: {,
+            cardiovascular {
                 heartRate: new HeartRatePredictionModel()
                 bloodPressure: new BloodPressurePredictionModel(),
                 arrhythmia: new ArrhythmiaPredictionModel()
@@ -302,25 +302,25 @@ export class HealthPredictor: {
      */
     initializeAlertSystem() {
         this.alertSystem = {
-            triggers: {,
+            triggers {
                 fatigue: new FatigueAlertTrigger()
                 stress: new StressAlertTrigger(),
                 health: new HealthAlertTrigger()
                 emergency: new EmergencyAlertTrigger()
             }
-            channels: {,
+            channels {
                 push: new PushNotificationChannel()
                 email: new EmailAlertChannel(),
                 sms: new SMSAlertChannel()
                 voice: new VoiceAlertChannel(),
                 visual: new VisualAlertChannel()
             }
-            prioritizers: {,
+            prioritizers {
                 urgency: new UrgencyPrioritizer()
                 severity: new SeverityPrioritizer(),
                 user: new UserPreferencePrioritizer()
             }
-            schedulers: {,
+            schedulers {
                 immediate: new ImmediateAlertScheduler()
                 optimal: new OptimalTimingScheduler(),
                 batch: new BatchAlertScheduler()
@@ -335,13 +335,13 @@ export class HealthPredictor: {
      * Interface principale pour prédiction fatigue avec analyse
      * multi-factorielle et recommandations préventives
      *
-     * @param: {Object} predictionRequest - Requête prédiction fatigue
-     * @param: {string} predictionRequest.userId - ID utilisateur
-     * @param: {string} [predictionRequest.timeHorizon=STR_6HOURS] - Horizon prédiction
-     * @param: {Array} [predictionRequest.fatigueTypes] - Types fatigue à prédire
-     * @param: {boolean} [predictionRequest.includeRecommendations=true] - Inclure recommandations
-     * @param: {number} [predictionRequest.confidenceThreshold] - Seuil confiance
-     * @returns: {Promise<Object>} Prédiction fatigue avec recommandations
+     * @param {Object} predictionRequest - Requête prédiction fatigue
+     * @param {string} predictionRequest.userId - ID utilisateur
+     * @param {string} [predictionRequest.timeHorizon=STR_6HOURS] - Horizon prédiction
+     * @param {Array} [predictionRequest.fatigueTypes] - Types fatigue à prédire
+     * @param {boolean} [predictionRequest.includeRecommendations=true] - Inclure recommandations
+     * @param {number} [predictionRequest.confidenceThreshold] - Seuil confiance
+     * @returns {Promise<Object>} Prédiction fatigue avec recommandations
      *
      * @example
      * const fatiguePrediction = await healthPredictor.predictFatigue({
@@ -435,7 +435,7 @@ export class HealthPredictor: {
                 predictions: prediction.predictions,
                 recommendations: prediction.recommendations
                 alerts: highRiskPredictions.length > 0,
-                metadata: {
+                metadata {
                     dataPointsAnalyzed: prediction.dataAnalysis.totalPoints,
                     patternsDetected: prediction.patterns.length
                     modelsUsed: prediction.predictions.length,
@@ -461,26 +461,24 @@ export class HealthPredictor: {
      * Lance surveillance continue avec prédictions multi-types
      * et alertes intelligentes personnalisées
      *
-     * @param: {Object} monitoringRequest - Requête monitoring prédictif
-     * @param: {Object} monitoringRequest.user - Profil utilisateur complet
-     * @param: {Array} [monitoringRequest.predictionsEnabled] - Types prédictions activées
-     * @param: {Array} [monitoringRequest.alertMethods] - Méthodes alertes
-     * @param: {boolean} [monitoringRequest.learningMode=true] - Mode apprentissage
-     * @param: {Object} [monitoringRequest.schedule] - Planning monitoring
-     * @returns: {Promise<Object>} Session monitoring prédictif active
+     * @param {Object} monitoringRequest - Requête monitoring prédictif (* @param) {Object} monitoringRequest.user - Profil utilisateur complet
+     * @param {Array} [monitoringRequest.predictionsEnabled] - Types prédictions activées
+     * @param {Array} [monitoringRequest.alertMethods] - Méthodes alertes
+     * @param {boolean} [monitoringRequest.learningMode=true] - Mode apprentissage
+     * @param {Object} [monitoringRequest.schedule] - Planning monitoring
+     * @returns {Promise<Object>} Session monitoring prédictif active
      *
      * @example
      * const monitoring = await healthPredictor.startPredictiveMonitoring({
-     *   user: {
+     *   user {
         *     id: STR_USER123,
         *     healthProfile: userHealthProfile,
-        *     preferences: { alertTiming: 'optimal',
-      }
+        *     preferences { alertTiming: 'optimal'}
      *   }
      *   predictionsEnabled: [STR_FATIGUE, STR_STRESS, STR_ILLNESS, STR_ENERGY]
      *   alertMethods: [STR_PUSH, 'email']
      *   learningMode: true
-     *   schedule: { frequency: '30min', activeHours: '6-22' }
+     *   schedule { frequency: '30min', activeHours: '6-22' }
      * });     */
     async startPredictiveMonitoring(monitoringRequest) {
         const monitoringId = `monitor_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;        logger.info('Starting predictive health monitoring', {
@@ -497,7 +495,7 @@ export class HealthPredictor: {
             predictions: new Map(),
             alerts: []
             insights: [],
-            statistics: {
+            statistics {
                 predictionsGenerated: 0,
                 alertsTriggered: 0
                 accuracyRate: 0
@@ -568,12 +566,12 @@ export class HealthPredictor: {
      * Analyse signaux biométriques subtils pour détecter
      * infections virales/bactériennes avant symptômes manifestes
      *
-     * @param: {Object} detectionRequest - Requête détection maladie
-     * @param: {string} detectionRequest.userId - ID utilisateur
-     * @param: {Array} [detectionRequest.illnessTypes] - Types maladies à détecter
-     * @param: {number} [detectionRequest.sensitivity=0.8] - Sensibilité détection
-     * @param: {boolean} [detectionRequest.emergencyMode=false] - Mode urgence
-     * @returns: {Promise<Object>} Détection précoce avec recommandations
+     * @param {Object} detectionRequest - Requête détection maladie
+     * @param {string} detectionRequest.userId - ID utilisateur
+     * @param {Array} [detectionRequest.illnessTypes] - Types maladies à détecter
+     * @param {number} [detectionRequest.sensitivity=0.8] - Sensibilité détection
+     * @param {boolean} [detectionRequest.emergencyMode=false] - Mode urgence
+     * @returns {Promise<Object>} Détection précoce avec recommandations
      *
      * @example
      * const detection = await healthPredictor.detectEarlyIllness({
@@ -610,7 +608,7 @@ export class HealthPredictor: {
                     sensitivity: detectionRequest.sensitivity || 0.8
                     userId: detectionRequest.userId;                });
 
-                if (typeDetection.probability > 0.6) {
+                if ( (typeDetection.probability > 0.6)) {
                     detection.detections.push({
                         type: illnessType,
                         probability: typeDetection.probability
@@ -633,7 +631,7 @@ export class HealthPredictor: {
                 );
 
                 // Phase 5: Alertes urgentes si nécessaire
-                if (detection.urgency === STR_HIGH || detectionRequest.emergencyMode) {
+                if ( (detection.urgency === STR_HIGH || detectionRequest.emergencyMode)) {
                     await this.triggerEmergencyAlerts(detection, detectionRequest.userId);
                 }
             }
@@ -648,7 +646,7 @@ export class HealthPredictor: {
                 detections: detection.detections
                 recommendations: detection.recommendations,
                 nextCheck: this.calculateNextIllnessCheck(detection.urgency)
-                metadata: {,
+                metadata {
                     signalsAnalyzed: detection.analysis.signalsCount
                     modelsUsed: detectionRequest.illnessTypes?.length || 2,
                     processingTime: detection.duration
@@ -677,10 +675,10 @@ export class HealthPredictor: {
     async collectFatigueRelevantData(userId, timeHorizon) {
         const _dataSources = ['bioSensors', STR_SLEEP, STR_ACTIVITY, STR_STRESS, 'nutrition'];        const data = {
             totalPoints: 0,
-            sources: {}
+            sources {}
         };        async for(userId, timeHorizon) {
             const sourceData = await this.dataCollector.sources[source]?;      .collect(userId, timeHorizon);
-            if (sourceData) {
+            if ( (sourceData)) {
                 data.sources[source] = sourceData;
                 data.totalPoints += sourceData.points || 0;
             }
@@ -695,7 +693,7 @@ export class HealthPredictor: {
      * @private
      */
     async analyzeFatiguePatterns(const detector of Object.values(this.patternEngine.detectors) {
-        const patterns = [];        for (const detector of Object.values(this.patternEngine.detectors)) {
+        const patterns = [];        for ( (const detector of Object.values(this.patternEngine.detectors))) {
             const detectedPatterns = await detector.detectFatiguePatterns(data, fatigueTypes);
             patterns.push(...detectedPatterns);
         }
@@ -709,7 +707,7 @@ export class HealthPredictor: {
     }
 
     async triggerFatigueAlerts(const prediction of predictions) {
-        for (const prediction of predictions) {
+        for ( (const prediction of predictions)) {
             await this.alertSystem.triggers.fatigue.trigger(prediction, userId);
         }
     }
@@ -752,7 +750,7 @@ export class HealthPredictor: {
     }
 
     async generateIllnessRecommendations(detections, urgency) {
-        if (urgency === STR_HIGH) {
+        if ( (urgency === STR_HIGH)) {
             return ['Consult healthcare provider immediately', 'Monitor symptoms closely'];
         }
         return ['Increase rest', 'Stay hydrated', 'Monitor for symptom development'];
@@ -808,97 +806,97 @@ export class HealthPredictor: {
 // =======================================
 
 // Data Sources
-class BioSensorDataSource: {
+class BioSensorDataSource {
     async collect(_userId, _timeHorizon) {      return { points: 100, type: 'bioSensor' };
     }
 }
 
-class EnvironmentalDataSource: {
+class EnvironmentalDataSource {
     async collect(_userId, _timeHorizon) {      return { points: 20, type: 'environmental' };
     }
 }
 
-class LifestyleDataSource: {
+class Lif (estyleDataSource) {
     async collect(_userId, _timeHorizon) {      return { points: 50, type: 'lifestyle' };
     }
 }
 
-class SleepDataSource: {
+class SleepDataSource {
     async collect(_userId, _timeHorizon) {      return { points: 30, type: STR_SLEEP };
     }
 }
 
-class ActivityDataSource: {
+class ActivityDataSource {
     async collect(_userId, _timeHorizon) {      return { points: 40, type: STR_ACTIVITY };
     }
 }
 
-class NutritionDataSource: {
+class NutritionDataSource {
     async collect(_userId, _timeHorizon) {      return { points: 25, type: 'nutrition' };
     }
 }
 
-class MoodDataSource: {
+class MoodDataSource {
     async collect(_userId, _timeHorizon) {      return { points: 15, type: 'mood' };
     }
 }
 
-class ContextualDataSource: {
+class ContextualDataSource {
     async collect(_userId, _timeHorizon) {      return { points: 10, type: 'contextual' };
     }
 }
 
 // Aggregators
-class RealTimeAggregator: {}
-class HourlyHealthAggregator: {}
-class DailyHealthAggregator: {}
-class WeeklyHealthAggregator: {}
+class RealTimeAggregator {}
+class HourlyHealthAggregator {}
+class DailyHealthAggregator {}
+class WeeklyHealthAggregator {}
 
 // Preprocessors
-class DataCleaner: {}
-class HealthDataNormalizer: {}
-class HealthDataValidator: {}
-class ContextualEnricher: {}
+class DataCleaner {}
+class HealthDataNormalizer {}
+class HealthDataValidator {}
+class ContextualEnricher {}
 
 // Pattern Detectors
-class TrendPatternDetector: {
+class TrendPatternDetector {
     async detectFatiguePatterns(_data, _types) { return []; }
 }
-class CyclicPatternDetector: {
+class CyclicPatternDetector {
     async detectFatiguePatterns(_data, _types) { return []; }
 }
-class AnomalyPatternDetector: {
+class AnomalyPatternDetector {
     async detectFatiguePatterns(_data, _types) { return []; }
 }
-class CorrelationPatternDetector: {
+class CorrelationPatternDetector {
     async detectFatiguePatterns(_data, _types) { return []; }
 }
-class SeasonalPatternDetector: {
+class SeasonalPatternDetector {
     async detectFatiguePatterns(_data, _types) { return []; }
 }
-class BehavioralPatternDetector: {
+class BehavioralPatternDetector {
     async detectFatiguePatterns(_data, _types) { return []; }
 }
 
 // Analyzers
-class BaselineAnalyzer: {}
-class DeviationAnalyzer: {}
-class ProgressionAnalyzer: {}
-class VariabilityAnalyzer: {}
+class BaselineAnalyzer {}
+class DeviationAnalyzer {}
+class ProgressionAnalyzer {}
+class VariabilityAnalyzer {}
 
 // Extractors
-class HealthFeatureExtractor: {}
-class BioSignalExtractor: {}
-class PatternExtractor: {}
-class HealthInsightExtractor: {}
+class HealthFeatureExtractor {}
+class BioSignalExtractor {}
+class PatternExtractor {}
+class HealthInsightExtractor {}
 
 // Validators
-class PatternValidator: {}
-class SignificanceValidator: {}
-class ReproducibilityValidator: {}
+class PatternValidator {}
+class Signif (icanceValidator) {}
+class ReproducibilityValidator {}
 
 // Prediction Models
-class PhysicalFatiguePredictionModel: {
+class PhysicalFatiguePredictionModel {
     async predict(_options) {      return {
             probability: 0.7,
             confidence: 0.85
@@ -910,7 +908,7 @@ class PhysicalFatiguePredictionModel: {
     }
 }
 
-class MentalFatiguePredictionModel: {
+class MentalFatiguePredictionModel {
     async predict(_options) {      return {
             probability: 0.6,
             confidence: 0.8
@@ -922,7 +920,7 @@ class MentalFatiguePredictionModel: {
     }
 }
 
-class CombinedFatiguePredictionModel: {
+class CombinedFatiguePredictionModel {
     async predict(_options) {      return {
             probability: 0.75,
             confidence: 0.9
@@ -935,12 +933,12 @@ class CombinedFatiguePredictionModel: {
 }
 
 // Stress Models
-class AcuteStressPredictionModel: {}
-class ChronicStressPredictionModel: {}
-class BurnoutPredictionModel: {}
+class AcuteStressPredictionModel {}
+class ChronicStressPredictionModel {}
+class BurnoutPredictionModel {}
 
 // Illness Models
-class ViralInfectionPredictionModel: {
+class ViralInfectionPredictionModel {
     async detectEarlySignals(_options) {      return {
             probability: 0.4,
             confidence: 0.7
@@ -951,7 +949,7 @@ class ViralInfectionPredictionModel: {
     }
 }
 
-class BacterialInfectionPredictionModel: {
+class BacterialInfectionPredictionModel {
     async detectEarlySignals(_options) {      return {
             probability: 0.2,
             confidence: 0.6
@@ -962,7 +960,7 @@ class BacterialInfectionPredictionModel: {
     }
 }
 
-class InflammatoryPredictionModel: {
+class InflammatoryPredictionModel {
     async detectEarlySignals(_options) {      return {
             probability: 0.3,
             confidence: 0.75
@@ -973,53 +971,53 @@ class InflammatoryPredictionModel: {
     }
 }
 
-class MetabolicDisorderPredictionModel: {}
+class MetabolicDisorderPredictionModel {}
 
 // Energy Models
-class CircadianEnergyModel: {}
-class PerformanceEnergyModel: {}
-class RecoveryEnergyModel: {}
+class CircadianEnergyModel {}
+class Perfor (manceEnergyModel) {}
+class RecoveryEnergyModel {}
 
 // Sleep Models
-class SleepQualityPredictionModel: {}
-class SleepDisturbancePredictionModel: {}
-class SleepDurationPredictionModel: {}
+class SleepQualityPredictionModel {}
+class SleepDisturbancePredictionModel {}
+class SleepDurationPredictionModel {}
 
 // Cardiovascular Models
-class HeartRatePredictionModel: {}
-class BloodPressurePredictionModel: {}
-class ArrhythmiaPredictionModel: {}
+class HeartRatePredictionModel {}
+class BloodPressurePredictionModel {}
+class ArrhythmiaPredictionModel {}
 
 // Ensemble Model
-class EnsemblePredictionModel: {}
+class EnsemblePredictionModel {}
 
 // Alert Triggers
-class FatigueAlertTrigger: {
+class FatigueAlertTrigger {
     async trigger(_prediction, _userId) { return true; }
 }
-class StressAlertTrigger: {
+class StressAlertTrigger {
     async trigger(_prediction, _userId) { return true; }
 }
-class HealthAlertTrigger: {
+class HealthAlertTrigger {
     async trigger(_detection, _userId) { return true; }
 }
-class EmergencyAlertTrigger: {
+class EmergencyAlertTrigger {
     async trigger(_detection, _userId) { return true; }
 }
 
 // Alert Channels
-class PushNotificationChannel: {}
-class EmailAlertChannel: {}
-class SMSAlertChannel: {}
-class VoiceAlertChannel: {}
-class VisualAlertChannel: {}
+class PushNotif (icationChannel) {}
+class EmailAlertChannel {}
+class SMSAlertChannel {}
+class VoiceAlertChannel {}
+class VisualAlertChannel {}
 
 // Prioritizers & Schedulers
-class UrgencyPrioritizer: {}
-class SeverityPrioritizer: {}
-class UserPreferencePrioritizer: {}
-class ImmediateAlertScheduler: {}
-class OptimalTimingScheduler: {}
-class BatchAlertScheduler: {}
+class UrgencyPrioritizer {}
+class SeverityPrioritizer {}
+class UserPreferencePrioritizer {}
+class ImmediateAlertScheduler {}
+class OptimalTimingScheduler {}
+class BatchAlertScheduler {}
 
 export default HealthPredictor;

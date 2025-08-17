@@ -1,9 +1,9 @@
 // backend/services/google.js — Gemini via Vertex AI (service account)
-import { GoogleAuth } from 'google-auth-library';
-import { AI_KEYS, GOOGLE_CFG } from '../config/aiKeys.js';
+import { GoogleAuth } from "google-auth-library";
+import { AI_KEYS, GOOGLE_CFG } from "../config/aiKeys.js";
 
 const CREDS = AI_KEYS.GOOGLE_SA ? JSON.parse(AI_KEYS.GOOGLE_SA) : null;
-if (!CREDS) throw new Error('Missing GOOGLE_APPLICATION_CREDENTIALS_JSON');
+if (!CREDS) throw new Error("Missing GOOGLE_APPLICATION_CREDENTIALS_JSON");
 
 const auth = new GoogleAuth({
   credentials: CREDS,
@@ -18,9 +18,9 @@ export async function callGemini(prompt) {
 
   const { data } = await client.request({
     url,
-    method: 'POST',
-    data: { contents: [{ role: 'user', parts: [{ text: String(prompt ?? '') }] }] }
+    method: "POST",
+    data: { contents: [{ role: "user", parts: [{ text: String(prompt ?? "") }] }] }
   });
 
-  return data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
+  return data?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
 }

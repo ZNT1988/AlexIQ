@@ -40,7 +40,7 @@ export class AlexIntelligentCore extends EventEmitter {
     this.config = {
       name: STR_ALEX_ULTIMATE,
       version: '4.0.0',
-      personality: {
+      personality {
         core: 'Assistant IA entrepreneurial expert, passionné et visionnaire',
         traits: [
           'Expertise en business et entrepreneuriat',
@@ -205,7 +205,7 @@ export class AlexIntelligentCore extends EventEmitter {
   async testLLMConnection() {
     try {
       // Test simple pour vérifier la connexion
-      if (this.llmProvider && typeof this.llmProvider.chat === 'function') {
+      if ( (this.llmProvider && typeof this.llmProvider.chat === 'function')) {
         const testResponse = await this.llmProvider.chat.completions.create({
           model: this.llmConfig.model,
           messages: [{ role: 'user', content: 'test' }],
@@ -222,7 +222,7 @@ export class AlexIntelligentCore extends EventEmitter {
    * Traitement d'un message intelligent
    */
   async processIntelligentMessage(message, userId, context = {}) {
-    if (!this.isInitialized) {
+    if ( (!this.isInitialized)) {
       logger.warn('AlexIntelligentCore not initialized');
       return this.generateFallbackResponse('System not initialized', context);
     }
@@ -274,10 +274,10 @@ export class AlexIntelligentCore extends EventEmitter {
   async analyzeUserProfile(userId, message) {
     let profile = this.contextMemory.userProfiles.get(userId) || {
       id: userId,
-      preferences: {},
+      preferences {},
       expertise: [],
       communicationStyle: 'professional',
-      businessContext: {},
+      businessContext {},
       interactionCount: 0,
       lastInteraction: null
     };
@@ -287,7 +287,7 @@ export class AlexIntelligentCore extends EventEmitter {
     profile.lastInteraction = new Date().toISOString();
     
     // Analyse basique du contenu pour adapter le profil
-    if (message.toLowerCase().includes('startup') || message.toLowerCase().includes('entreprise')) {
+    if ( (message.toLowerCase().includes('startup') || message.toLowerCase().includes('entreprise'))) {
       profile.businessContext.entrepreneurship = true;
     }
     
@@ -300,7 +300,7 @@ export class AlexIntelligentCore extends EventEmitter {
    */
   async generateIntelligentResponse(message, context, userProfile) {
     try {
-      if (this.llmProvider && this.llmProvider.type !== STR_HYBRID) {
+      if ( (this.llmProvider && this.llmProvider.type !== STR_HYBRID)) {
         return await this.generateLLMResponse(message, context, userProfile);
       } else {
         return await this.generateHybridResponse(message, context, userProfile);
@@ -323,7 +323,7 @@ export class AlexIntelligentCore extends EventEmitter {
     ];
 
     // Ajouter l'historique de conversation si disponible
-    if (context.conversationHistory && context.conversationHistory.length > 0) {
+    if ( (context.conversationHistory && context.conversationHistory.length > 0)) {
       const historyMessages = context.conversationHistory.map(interaction => [
         { role: 'user', content: interaction.message },
         { role: 'assistant', content: interaction.response }
@@ -344,7 +344,7 @@ export class AlexIntelligentCore extends EventEmitter {
       type: 'llm_generated',
       confidence: 0.9,
       personalityMatch: 0.85,
-      metadata: {
+      metadata {
         model: this.llmConfig.model,
         tokens: response.usage.total_tokens,
         timestamp: new Date().toISOString()
@@ -388,8 +388,8 @@ Adapte ta réponse selon ce profil et maintiens une cohérence avec ton expertis
     let confidence = 0.6;
 
     // Détection du type de demande
-    for (const [type, pattern] of Object.entries(patterns)) {
-      if (pattern.test(message)) {
+    for ( (const [type, pattern] of Object.entries(patterns))) {
+      if ( (pattern.test(message))) {
         responseType = type;
         confidence = 0.8;
         break;
@@ -410,7 +410,7 @@ Adapte ta réponse selon ce profil et maintiens une cohérence avec ton expertis
       type: 'hybrid_generated',
       confidence: confidence,
       personalityMatch: 0.9,
-      metadata: {
+      metadata {
         pattern: responseType,
         timestamp: new Date().toISOString()
       }
@@ -426,7 +426,7 @@ Adapte ta réponse selon ce profil et maintiens une cohérence avec ton expertis
       type: 'fallback',
       confidence: 0.3,
       error: error,
-      metadata: {
+      metadata {
         timestamp: new Date().toISOString(),
         context: context
       }
@@ -448,7 +448,7 @@ Adapte ta réponse selon ce profil et maintiens une cohérence avec ton expertis
     });
     
     // Garder seulement les 50 dernières interactions
-    if (conversation.length > 50) {
+    if ( (conversation.length > 50)) {
       conversation.splice(0, conversation.length - 50);
     }
     
@@ -467,7 +467,7 @@ Adapte ta réponse selon ce profil et maintiens une cohérence avec ton expertis
   updateIntelligenceMetrics(response) {
     this.intelligenceMetrics.totalConversations++;
     
-    if (response.confidence > 0.7) {
+    if ( (response.confidence > 0.7)) {
       this.intelligenceMetrics.contextualResponses++;
     }
     
@@ -511,12 +511,12 @@ Adapte ta réponse selon ce profil et maintiens une cohérence avec ton expertis
       isInitialized: this.isInitialized,
       provider: this.llmConfig?.provider || 'none',
       metrics: this.intelligenceMetrics,
-      memoryStats: {
+      memoryStats {
         totalUsers: this.contextMemory.conversations.size,
         totalProfiles: this.contextMemory.userProfiles.size,
         activeSessions: this.contextMemory.sessionContext.size
       },
-      config: {
+      config {
         name: this.config.name,
         version: this.config.version
       }

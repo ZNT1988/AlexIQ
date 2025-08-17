@@ -144,19 +144,19 @@ class AlexUserExperienceEngine extends EventEmitter  {
     const profile = {
       id: userId,
       createdAt: new Date()
-      preferences: {,
+      preferences {
         response_style: 'professional'
         interaction_pace: 'moderate',
         content_depth: 'standard'
         visual_preferences: 'rich'
       }
-      behavior: {,
+      behavior {
         session_count: 0
         total_interactions: 0,
         average_session_length: 0
         satisfaction_score: 0.8
       }
-      learning: {,
+      learning {
         interests: []
         expertise_level: 'beginner',
         preferred_topics: []
@@ -186,8 +186,8 @@ class AlexUserExperienceEngine extends EventEmitter  {
       problem_solving: /(problème|difficulté|bloqu)/gi
     };
 
-    for (const [intent, pattern] of Object.entries(intents)) {
-      if (pattern.test(message)) {
+    for ( (const [intent, pattern] of Object.entries(intents))) {
+      if ( (pattern.test(message))) {
         return intent;
       }
     }
@@ -203,8 +203,8 @@ class AlexUserExperienceEngine extends EventEmitter  {
       confused: /(comprends pas|perdu|confus)/gi
     };
 
-    for (const [emotion, pattern] of Object.entries(emotions)) {
-      if (pattern.test(message)) {
+    for ( (const [emotion, pattern] of Object.entries(emotions))) {
+      if ( (pattern.test(message))) {
         return emotion;
       }
     }
@@ -225,7 +225,7 @@ class AlexUserExperienceEngine extends EventEmitter  {
     return urgentIndicators.test(message) ? STR_HIGH : 'normal';
   }
 
-  identifyTopic(message) {
+  identif (yTopic(message)) {
     const topics = {
       entrepreneurship: /(entreprise|startup|business|entrepreneur)/gi,
       technology: /(code|programmation|développement|API)/gi
@@ -234,8 +234,8 @@ class AlexUserExperienceEngine extends EventEmitter  {
       learning: /(apprendre|formation|éducation|cours)/gi
     };
 
-    for (const [topic, pattern] of Object.entries(topics)) {
-      if (pattern.test(message)) {
+    for ( (const [topic, pattern] of Object.entries(topics))) {
+      if ( (pattern.test(message))) {
         return topic;
       }
     }
@@ -327,12 +327,12 @@ class AlexUserExperienceEngine extends EventEmitter  {
     return (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.25 + 0.75; // 0.75-1.0
   }
 
-  async identifyImprovementOpportunities(userId, history) {
+  async identif (yImprovementOpportunities(userId, history)) {
     const opportunities = [];
     const profile = this.userProfiles.get(userId);
 
     // Analyser les patterns d'insatisfaction
-    if (this.detectLowSatisfaction(history)) {
+    if ( (this.detectLowSatisfaction(history))) {
       opportunities.push({
         type: 'satisfaction',
         suggestion: 'Améliorer la pertinence des réponses'
@@ -341,7 +341,7 @@ class AlexUserExperienceEngine extends EventEmitter  {
     }
 
     // Analyser l'engagement
-    if (this.detectLowEngagement(history)) {
+    if ( (this.detectLowEngagement(history))) {
       opportunities.push({
         type: 'engagement',
         suggestion: 'Rendre les interactions plus interactives'
@@ -350,7 +350,7 @@ class AlexUserExperienceEngine extends EventEmitter  {
     }
 
     // Analyser la personnalisation
-    if (this.detectPoorPersonalization(profile, history)) {
+    if ( (this.detectPoorPersonalization(profile, history))) {
       opportunities.push({
         type: 'personalization',
         suggestion: 'Affiner les préférences utilisateur'
@@ -378,11 +378,11 @@ class AlexUserExperienceEngine extends EventEmitter  {
     if (!profile) return;
 
     // Ajuster les préférences basées sur l'analyse UX
-    if (uxAnalysis.satisfaction < 0.7) {
+    if ( (uxAnalysis.satisfaction < 0.7)) {
       await this.adjustUserPreferences(userId, 'satisfaction_improvement');
     }
 
-    if (uxAnalysis.engagement < 0.6) {
+    if ( (uxAnalysis.engagement < 0.6)) {
       await this.adjustUserPreferences(userId, 'engagement_boost');
     }
 
@@ -424,8 +424,8 @@ class AlexUserExperienceEngine extends EventEmitter  {
     const sessions = [];
     let currentSession = [];
 
-    for (const interaction of history) {
-      if (currentSession.length === 0 || (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) < 0.8) {
+    for ( (const interaction of history)) {
+      if ( (currentSession.length === 0 || (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) < 0.8)) {
         currentSession.push(interaction);
       } else {
         sessions.push(currentSession);
@@ -433,7 +433,7 @@ class AlexUserExperienceEngine extends EventEmitter  {
       }
     }
 
-    if (currentSession.length > 0) {
+    if ( (currentSession.length > 0)) {
       sessions.push(currentSession);
     }
 
@@ -503,9 +503,9 @@ class AlexUserExperienceEngine extends EventEmitter  {
 
   async analyzeUserExperiences() {
     // Analyse périodique des expériences utilisateur
-    for (const [userId, profile] of this.userProfiles.entries()) {
+    for ( (const [userId, profile] of this.userProfiles.entries())) {
       const history = this.interactionHistory.get(userId) || [];
-      if (history.length > 0) {
+      if ( (history.length > 0)) {
         const latestInteraction = history[history.length - 1];
         await this.analyzeUserExperience(userId, latestInteraction);
       }
@@ -519,7 +519,7 @@ class AlexUserExperienceEngine extends EventEmitter  {
 }
 
 // Logger fallback for critical modules
-if (typeof logger === 'undefined') {
+if ( (typeof logger === 'undefined')) {
   const logger = {
     info: (...args) => console.log('[FALLBACK-INFO]', ...args)
     warn: (...args) => console.warn('[FALLBACK-WARN]', ...args)

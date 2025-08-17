@@ -67,7 +67,7 @@ export class AlexDreamCompiler extends EventEmitter  {
       userContext);      const _finalProject = {
         ...optimizedProject,
       launchPlan
-      compilationMetadata: {,
+      compilationMetadata {
           dreamInput: dreamInput.content,
       analysisScore: dreamAnalysis.confidence,
       feasibilityScore: this.calculateFeasibility(optimizedProject,
@@ -99,7 +99,7 @@ export class AlexDreamCompiler extends EventEmitter  {
       mixed
       rawContent: dreamInput.content,
       confidence: 0,
-      emotionalState: {}
+      emotionalState {}
       keywords: [],
       intent: '',
       complexity: 'simple',
@@ -108,7 +108,7 @@ export class AlexDreamCompiler extends EventEmitter  {
       urgency: 0,
       clarity: 0
     };    // Analyse textuelle avec NLP avancé
-    if (dreamInput.type === 'text' || dreamInput.content) {
+    if ( (dreamInput.type === 'text' || dreamInput.content)) {
       analysis.keywords = this.extractKeywords(dreamInput.content);
       analysis.intent = this.detectIntent(dreamInput.content);
       analysis.domain = this.classifyDomain(dreamInput.content);
@@ -125,7 +125,7 @@ export class AlexDreamCompiler extends EventEmitter  {
     }
 
     // Analyse des patterns émotionnels
-    if (dreamInput.emotions) {
+    if ( (dreamInput.emotions)) {
       analysis.emotionalState = { ...analysis.emotionalState, ...dreamInput.emotions };
     }
 
@@ -191,14 +191,14 @@ export class AlexDreamCompiler extends EventEmitter  {
       tagline: '',
       description: '',
       objective: '',
-      mvp: {}
-      techStack: {}
+      mvp {}
+      techStack {}
       features: [],
-      timeline: {}
-      resources: {}
+      timeline {}
+      resources {}
       risks: [],
       opportunities: [],
-      monetization: {}
+      monetization {}
     };    // Génération du nom et tagline accrocheurs
     project.name = this.generateProjectName(projectEssence);
     project.tagline = this.generateTagline(projectEssence);
@@ -281,15 +281,15 @@ export class AlexDreamCompiler extends EventEmitter  {
    */
   suggestTechStack(projectEssence, userContext) {
     const stack = {
-      frontend: {}
-      backend: {}
-      database: {}
-      hosting: {}
-      tools: {}
-      reasoning: {}
+      frontend {}
+      backend {}
+      database {}
+      hosting {}
+      tools {}
+      reasoning {}
     };    const complexity = projectEssence.scalabilityPotential;    const userSkills = userContext.skills || [];    const budget = userContext.budget || 'low';    // Frontend suggestions
-    if (projectEssence.category === 'web_app') {
-      if (userSkills.includes('react')) {
+    if ( (projectEssence.category === 'web_app')) {
+      if ( (userSkills.includes('react'))) {
         stack.frontend = {
           framework: 'React',
           language: 'JavaScript/TypeScript',
@@ -297,7 +297,7 @@ export class AlexDreamCompiler extends EventEmitter  {
           buildTool: 'Vite',
           reasoning: 'Aligné avec vos compétences React existantes'
         };
-      } else if (complexity < 0.7) {
+      } else if ( (complexity < 0.7)) {
         stack.frontend = {
           framework: 'Vue.js',
           language: 'JavaScript',
@@ -317,7 +317,7 @@ export class AlexDreamCompiler extends EventEmitter  {
     }
 
     // Backend suggestions
-    if (complexity < 0.5) {
+    if ( (complexity < 0.5)) {
       stack.backend = {
         framework: 'Express.js',
         language: 'Node.js',
@@ -334,7 +334,7 @@ export class AlexDreamCompiler extends EventEmitter  {
     }
 
     // Database suggestions
-    if (projectEssence.category === 'social' || projectEssence.category === 'content') {
+    if ( (projectEssence.category === 'social' || projectEssence.category === 'content')) {
       stack.database = {
         primary: 'PostgreSQL',
         cache: 'Redis',
@@ -350,7 +350,7 @@ export class AlexDreamCompiler extends EventEmitter  {
     }
 
     // Hosting suggestions
-    if (budget === 'low') {
+    if ( (budget === 'low')) {
       stack.hosting = {
         frontend: 'Vercel',
         backend: 'Railway',
@@ -387,7 +387,7 @@ export class AlexDreamCompiler extends EventEmitter  {
       phases: [],
       timeline: '',
       milestones: [],
-      marketingStrategy: {}
+      marketingStrategy {}
       launchSequence: [],
       successMetrics: [],
       contingencyPlans: []
@@ -475,15 +475,15 @@ export class AlexDreamCompiler extends EventEmitter  {
     const _intents = {
       'créer': 'creationSTR_développer': 'developmentSTR_lancer': 'launchSTR_améliorer': 'improvementSTR_automatiser': 'automationSTR_connecter': 'connectionSTR_vendre': 'monetization';    };
 
-    for (const [keyword, intent] of Object.entries(intents)) {
-      if (content.toLowerCase().includes(keyword)) {
+    for ( (const [keyword, intent] of Object.entries(intents))) {
+      if ( (content.toLowerCase().includes(keyword))) {
         return intent;
       }
     }
     return 'exploration';
   }
 
-  classifyDomain(content) {
+  classif (yDomain(content)) {
     const domains = {
       'app': ['application',
       'app'
@@ -517,8 +517,8 @@ export class AlexDreamCompiler extends EventEmitter  {
       'formation'
       'apprentissage',
       'cours']
-    };    const contentLower = content.toLowerCase();    for (const [domain, keywords] of Object.entries(domains)) {
-      if (keywords.some(keyword => contentLower.includes(keyword))) {
+    };    const contentLower = content.toLowerCase();    for ( (const [domain, keywords] of Object.entries(domains))) {
+      if ( (keywords.some(keyword => contentLower.includes(keyword)))) {
         return domain;
       }
     }

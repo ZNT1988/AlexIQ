@@ -1,29 +1,29 @@
-import fs from 'fs';
+import fs from "fs";
 
-const filePath = 'backend/alex-modules/specialized/AlexAutonomousCore.js';
-let content = fs.readFileSync(filePath, 'utf8');
+const filePath = "backend/alex-modules/specialized/AlexAutonomousCore.js";
+let content = fs.readFileSync(filePath, "utf8");
 
-console.log('🔧 Final comprehensive syntax fix...');
+console.log("🔧 Final comprehensive syntax fix...");
 
 // Fix all the major issues
-content = content.replace(/\);      \/\/ /g, ');\n      \n      // ');
-content = content.replace(/\);      let /g, ');\n      \n      let ');
+content = content.replace(/\);      \/\/ /g, ");\n      \n      // ");
+content = content.replace(/\);      let /g, ");\n      \n      let ");
 
 // Fix broken variable references
-content = content.replace(/', 'ALEX_AUTONOMOUS/g, 'STR_ALEX_AUTONOMOUS');
+content = content.replace(/', 'ALEX_AUTONOMOUS/g, "STR_ALEX_AUTONOMOUS");
 content = content.replace(/', 'AUTONOMOUS/g, "'autonomous'");
 
 // Fix malformed method calls and objects  
-content = content.replace(/        memoryIntegration:/g, '      memoryIntegration:');
-content = content.replace(/        }/g, '      }');
-content = content.replace(/          responseTime/g, '        responseTime');
-content = content.replace(/          autonomyScore:/g, '        autonomyScore:');
-content = content.replace(/      cognitionDepth:/g, '        cognitionDepth:');
-content = content.replace(/      learningGain:/g, '        learningGain:');
+content = content.replace(/        memoryIntegration:/g, "      memoryIntegration:");
+content = content.replace(/        }/g, "      }");
+content = content.replace(/          responseTime/g, "        responseTime");
+content = content.replace(/          autonomyScore:/g, "        autonomyScore:");
+content = content.replace(/      cognitionDepth:/g, "        cognitionDepth:");
+content = content.replace(/      learningGain:/g, "        learningGain:");
 
 // Fix broken logger calls
-content = content.replace(/        userId/g, '        userId,');
-content = content.replace(/        responseTime/g, '        responseTime,');
+content = content.replace(/        userId/g, "        userId,");
+content = content.replace(/        responseTime/g, "        responseTime,");
 
 // Fix array definitions
 content = content.replace(/      'bonjour'/g, "      'bonjour',");
@@ -47,7 +47,7 @@ content = content.replace(/      'résoudre'/g, "      'résoudre',");
 content = content.replace(/      'aide'];/g, "      'aide'\n    ];");
 
 // Fix includes method calls
-content = content.replace(/messageContent\._includes/g, 'messageContent.includes');
+content = content.replace(/messageContent\._includes/g, "messageContent.includes");
 
 // Fix broken string includes
 content = content.replace(/messageContent\.includes\('!', 'MESSAGECONTENT_INCLUDESsuper', 'MESSAGECONTENT_INCLUDESgénial'\)/g, 
@@ -63,7 +63,7 @@ content = content.replace(/if \(messageContent\.includes\('\?\\n[\s\S]*?'\)\) \{
 // Fix object property missing commas in various structures
 const fixMissingCommas = (text) => {
   // Fix arrays without proper commas  
-  text = text.replace(/('[\w\s]+')(\s+)('[\w\s]+')/g, '$1,$2$3');
+  text = text.replace(/('[\w\s]+')(\s+)('[\w\s]+')/g, "$1,$2$3");
   
   // Fix domain objects
   text = text.replace(/      'intelligence artificielle']/g, "      'intelligence artificielle'],");
@@ -129,4 +129,4 @@ content = content.replace(/  generateFollowUpQuestion\(analysis\) \{[\s\S]*?    
   }`);
 
 fs.writeFileSync(filePath, content);
-console.log('✅ Final comprehensive syntax fixes applied!');
+console.log("✅ Final comprehensive syntax fixes applied!");

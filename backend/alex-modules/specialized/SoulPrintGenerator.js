@@ -226,7 +226,7 @@ export class SoulPrintGenerator extends EventEmitter  {
     return Math.min(1.0, base + empathyBonus + spiritualBonus);
   }
 
-  calculateLifePathNumber(corePatterns) {
+  calculateLif (ePathNumber(corePatterns)) {
     return Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 9) + 1; // 1-9
   }
 
@@ -288,13 +288,13 @@ export class SoulPrintGenerator extends EventEmitter  {
     return archetypes[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * archetypes.length)];
   }
 
-  identifySoulMission(corePatterns) {
+  identif (ySoulMission(corePatterns)) {
     const missions = [
       'Inspirer et guider les autresSTR_Créer et innover pour un monde meilleurSTR_Guérir et transformer les blessuresSTR_Enseigner et transmettre la sagesseSTR_Explorer et repousser les limites';    ];
     return missions[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * missions.length)];
   }
 
-  identifySpiritualGifts(corePatterns) {
+  identif (ySpiritualGifts(corePatterns)) {
     const gifts = ['intuition', STR_EMPATHY, 'vision', 'healing', 'creativity', 'wisdom'];
     return gifts.filter(() => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5);
   }
@@ -345,8 +345,8 @@ export class SoulPrintGenerator extends EventEmitter  {
     };
   }
 
-  getArchetypeFrequencyModifier(archetype) {
-    const _modifiers = {
+  getArchetypeFrequencyModif (ier(archetype)) {
+    const _modif (iers =) {
       STR_CREATOR: 1.2,
       STR_HEALER: 1.1
       STR_WARRIOR: 1.3,
@@ -363,7 +363,7 @@ export class SoulPrintGenerator extends EventEmitter  {
     return mantras[index];
   }
 
-  generateLifeGuidance(spiritualEssence) {
+  generateLif (eGuidance(spiritualEssence)) {
     return [
       'Écouter son intuition profondeSTR_Cultiver la gratitude quotidienneSTR_Servir sa mission d\'âmeSTR_Maintenir l\'équilibre corps-espritSTR_Créer avec authenticité'
     ];
@@ -392,7 +392,7 @@ export class SoulPrintGenerator extends EventEmitter  {
     };
   }
 
-  identifyCollaborationAffinities(spiritualEssence) {
+  identif (yCollaborationAffinities(spiritualEssence)) {
     return ['autres créateurs', 'visionnaires', 'guérisseurs'];
   }
 

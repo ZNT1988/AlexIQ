@@ -28,14 +28,14 @@ class AlexLicorneMaintenance {
       integrity: this.checkIntegrity.bind(this),
       stats: this.showStatistics.bind(this),
       cleanup: this.cleanupOldData.bind(this),
-      help: this.showHelp.bind(this),
+      help: this.showHelp.bind(this)
     };
   }
 
   async run() {
     const command = process.argv[2] || "help";
 
-    console.log(`🦄 ALEX LICORNE - Maintenance`);
+    console.log("🦄 ALEX LICORNE - Maintenance");
     console.log(`Commande: ${command}`);
     console.log(`Base: ${this.dbPath}`);
     console.log("");
@@ -69,7 +69,7 @@ class AlexLicorneMaintenance {
     const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
     const backupFile = path.join(
       this.backupPath,
-      `manual-backup-${timestamp}.sqlite`,
+      `manual-backup-${timestamp}.sqlite`
     );
 
     // Simple file copy for SQLite
@@ -102,7 +102,7 @@ class AlexLicorneMaintenance {
 
             console.log(`   Pages après: ${afterPages.page_count}`);
             console.log(
-              `   Économie: ${beforePages.page_count - afterPages.page_count} pages`,
+              `   Économie: ${beforePages.page_count - afterPages.page_count} pages`
             );
 
             db.close();
@@ -159,25 +159,25 @@ class AlexLicorneMaintenance {
       const queries = [
         {
           label: "Services infinis",
-          query: "SELECT COUNT(*) as count FROM infinite_services",
+          query: "SELECT COUNT(*) as count FROM infinite_services"
         },
         {
           label: "Êtres servis",
-          query: "SELECT COUNT(*) as count FROM served_beings",
+          query: "SELECT COUNT(*) as count FROM served_beings"
         },
         { label: "Tenants", query: "SELECT COUNT(*) as count FROM tenants" },
         {
           label: "Transactions",
-          query: "SELECT COUNT(*) as count FROM revenue_transactions",
+          query: "SELECT COUNT(*) as count FROM revenue_transactions"
         },
         {
           label: "Métriques système",
-          query: "SELECT COUNT(*) as count FROM system_metrics_history",
+          query: "SELECT COUNT(*) as count FROM system_metrics_history"
         },
         {
           label: "Backups",
-          query: "SELECT COUNT(*) as count FROM backup_history",
-        },
+          query: "SELECT COUNT(*) as count FROM backup_history"
+        }
       ];
 
       let completed = 0;
@@ -213,16 +213,16 @@ class AlexLicorneMaintenance {
       const cleanupQueries = [
         {
           label: "Métriques > 30 jours",
-          query: `DELETE FROM system_metrics_history WHERE timestamp < datetime('now', '-30 days')`,
+          query: "DELETE FROM system_metrics_history WHERE timestamp < datetime('now', '-30 days')"
         },
         {
           label: "Logs système > 7 jours",
-          query: `DELETE FROM system_alerts WHERE timestamp < datetime('now', '-7 days') AND resolved = 1`,
+          query: "DELETE FROM system_alerts WHERE timestamp < datetime('now', '-7 days') AND resolved = 1"
         },
         {
           label: "Sessions expirées",
-          query: `DELETE FROM tenant_sessions WHERE expires_at < datetime('now')`,
-        },
+          query: "DELETE FROM tenant_sessions WHERE expires_at < datetime('now')"
+        }
       ];
 
       let completed = 0;

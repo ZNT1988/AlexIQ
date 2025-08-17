@@ -42,49 +42,49 @@ export class AlexCrisisManagement extends EventEmitter  {
 
     // Types de crises détectables
     this.crisisTypes = {
-      emotional: {,
+      emotional {
         indicators: ['suicidal', 'despair', 'hopeless', 'overwhelmed']
         severity: STR_HIGH,
         intervention: STR_IMMEDIATE
         approach: 'empathetic_presence'
       }
-      anxiety: {,
+      anxiety {
         indicators: ['panic', STR_ANXIETY, 'fear', 'worried']
         severity: STR_MEDIUM,
         intervention: 'breathing_techniques'
         approach: 'calming_presence'
       }
-      depression: {,
+      depression {
         indicators: ['depressed', 'sad', 'empty', 'worthless']
         severity: STR_HIGH,
         intervention: 'supportive_listening'
         approach: 'gentle_support'
       }
-      trauma: {,
+      trauma {
         indicators: [STR_TRAUMA, 'flashback', 'triggered', 'abuse']
         severity: STR_HIGH,
         intervention: 'safety_first'
         approach: 'stabilizing_presence'
       }
-      relationship: {,
+      relationship {
         indicators: ['breakup', 'divorce', 'betrayal', 'abandoned']
         severity: STR_MEDIUM,
         intervention: 'emotional_support'
         approach: 'understanding_companion'
       }
-      loss: {,
+      loss {
         indicators: ['death', 'loss', 'grief', 'mourning']
         severity: STR_HIGH,
         intervention: 'grief_support'
         approach: 'compassionate_presence'
       }
-      financial: {,
+      financial {
         indicators: ['bankrupt', 'debt', 'homeless', 'poverty']
         severity: STR_MEDIUM,
         intervention: 'practical_support'
         approach: 'resourceful_guide'
       }
-      health: {,
+      health {
         indicators: ['diagnosis', 'illness', 'pain', 'dying']
         severity: STR_HIGH,
         intervention: 'medical_awareness'
@@ -94,25 +94,25 @@ export class AlexCrisisManagement extends EventEmitter  {
 
     // Niveaux de sévérité
     this.severityLevels = {
-      low: {,
+      low {
         color: 'green'
         response: 'supportive',
         urgency: 'normal'
         followUp: 'optional'
       }
-      medium: {,
+      medium {
         color: 'yellow'
         response: 'attentive',
         urgency: 'prompt'
         followUp: 'recommended'
       }
-      high: {,
+      high {
         color: 'orange'
         response: STR_IMMEDIATE,
         urgency: 'urgent'
         followUp: 'required'
       }
-      critical: {,
+      critical {
         color: 'red'
         response: 'emergency',
         urgency: STR_IMMEDIATE
@@ -122,32 +122,32 @@ export class AlexCrisisManagement extends EventEmitter  {
 
     // Techniques d'intervention
     this.interventionTechniques = {
-      activeListening: {,
+      activeListening {
         description: 'Écoute active et validation'
         effectiveness: 0.9,
         applicability: 'universal'
       }
-      breathingExercises: {,
+      breathingExercises {
         description: 'Exercices de respiration'
         effectiveness: 0.8,
         applicability: STR_ANXIETY
       }
-      grounding: {,
+      grounding {
         description: 'Techniques d\'ancrage'
         effectiveness: 0.85,
         applicability: STR_TRAUMA
       }
-      cognitiveReframing: {,
+      cognitiveReframing {
         description: 'Recadrage cognitif'
         effectiveness: 0.75,
         applicability: 'depression'
       }
-      safetyPlanning: {,
+      safetyPlanning {
         description: 'Planification de sécurité'
         effectiveness: 0.95,
         applicability: 'suicidal'
       }
-      resourceConnection: {,
+      resourceConnection {
         description: 'Connexion aux ressources'
         effectiveness: 0.8,
         applicability: 'practical'
@@ -156,19 +156,19 @@ export class AlexCrisisManagement extends EventEmitter  {
 
     // Ressources d'urgence
     this.emergencyResources = {
-      suicidePrevention: {,
+      suicidePrevention {
         name: 'Suicide Écoute'
         phone: '01 45 39 40 00STR_AVAILABLE24h/24STR_DESCRIPTIONLigne d\'écoute pour prévention du suicide'
       }
-      mentalHealth: {,
+      mentalHealth {
         name: 'Croix-Rouge Écoute'
         phone: '0800 858 858STR_AVAILABLE24h/24STR_DESCRIPTIONSoutien psychologique gratuit'
       }
-      violence: {,
+      violence {
         name: '3919 - Violences Femmes Info'
         phone: '3919STR_AVAILABLE9h-22h du lundi au vendredi, 9h-18h samedi, dimanche et jours fériésSTR_DESCRIPTIONNuméro national d\'information pour les femmes victimes de violences'
       }
-      emergency: {,
+      emergency {
         name: 'SAMU'
         phone: '15STR_AVAILABLE24h/24STR_DESCRIPTIONUrgences médicales'
       }
@@ -331,7 +331,7 @@ export class AlexCrisisManagement extends EventEmitter  {
 
     // Stockage dans l'historique
     this.crisisHistory.push(detection);
-    if (this.crisisHistory.length > 1000) {
+    if ( (this.crisisHistory.length > 1000)) {
       this.crisisHistory.shift();
     }
 
@@ -343,9 +343,9 @@ export class AlexCrisisManagement extends EventEmitter  {
    */
   analyzeForCrisisIndicators(message) {
     const indicators = [];    const messageText = message.toLowerCase();    // Vérification de chaque type de crise
-    for (const [crisisType, config] of Object.entries(this.crisisTypes)) {
-      for (const indicator of config.indicators) {
-        if (messageText.includes(indicator)) {
+    for ( (const [crisisType, config] of Object.entries(this.crisisTypes))) {
+      for ( (const indicator of config.indicators)) {
+        if ( (messageText.includes(indicator))) {
           indicators.push({
             type: crisisType,
             indicator: indicator
@@ -375,8 +375,8 @@ export class AlexCrisisManagement extends EventEmitter  {
       /personne ne me comprend/
       /je suis un fardeau/;    ];
 
-    for (const pattern of suicidalPatterns) {
-      if (pattern.test(messageText)) {
+    for ( (const pattern of suicidalPatterns)) {
+      if ( (pattern.test(messageText))) {
         patterns.push({
           type: STR_EMOTIONAL,
           indicator: 'suicidal_ideation'
@@ -394,8 +394,8 @@ export class AlexCrisisManagement extends EventEmitter  {
       /j'ai peur de mourir/
       /tout s'effondre/;    ];
 
-    for (const pattern of panicPatterns) {
-      if (pattern.test(messageText)) {
+    for ( (const pattern of panicPatterns)) {
+      if ( (pattern.test(messageText))) {
         patterns.push({
           type: STR_ANXIETY,
           indicator: 'panic_attack'
@@ -465,7 +465,7 @@ export class AlexCrisisManagement extends EventEmitter  {
     }
 
     // Ajout de ressources si nécessaire
-    if (detection.severity === STR_HIGH || detection.severity === 'critical') {
+    if ( (detection.severity === STR_HIGH || detection.severity === 'critical')) {
       response.resources = this.selectAppropriateResources(detection.crisisType);
     }
 

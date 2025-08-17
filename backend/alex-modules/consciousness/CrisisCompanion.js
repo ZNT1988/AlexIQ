@@ -114,8 +114,8 @@ export class CrisisCompanion extends EventEmitter  {
 
     /**
      * Démarre un accompagnement de crise personnalisé et compassionnel
-     * @param: {Object} crisisRequest - Détails de la situation de crise
-     * @returns: {Promise<Object>} Support complet avec ressources et guidance
+     * @param {Object} crisisRequest - Détails de la situation de crise
+     * @returns {Promise<Object>} Support complet avec ressources et guidance
      */
     async startCrisisSupport(crisisRequest) {
         const supportId = `crisis_support_${Date.now()}`;
@@ -130,11 +130,11 @@ export class CrisisCompanion extends EventEmitter  {
                 id: supportId,
                 startTime: Date.now()
                 request: crisisRequest,
-                assessment: {}
+                assessment {}
                 interventions: [],
-                resources: {}
-                stabilization: {}
-                followUp: {}
+                resources {}
+                stabilization {}
+                followUp {}
             };
 
             this.activeCrises.set(supportId, supportSession);
@@ -149,7 +149,7 @@ export class CrisisCompanion extends EventEmitter  {
             supportSession.assessment.safety = safetyAssessment;
 
             // Phase 2: Intervention d'urgence si nécessaire
-            if (safetyAssessment.riskLevel === 'high' || safetyAssessment.immediateDanger) {
+            if ( (safetyAssessment.riskLevel === 'high' || safetyAssessment.immediateDanger)) {
                 logger.info('🚨 Phase 2: Emergency intervention activation');
                 const emergencyIntervention = await this.activateEmergencyIntervention(
                     safetyAssessment
@@ -209,7 +209,7 @@ export class CrisisCompanion extends EventEmitter  {
                 success: true
                 supportId
                 // Évaluation de sécurité
-                safety: {,
+                safety {
                     riskLevel: safetyAssessment.riskLevel
                     immediateDanger: safetyAssessment.immediateDanger,
                     protectiveFactors: safetyAssessment.protectiveFactors
@@ -217,7 +217,7 @@ export class CrisisCompanion extends EventEmitter  {
                     emergencyContacts: safetyAssessment.verifiedContacts
                 }
                 // Support immédiat
-                immediateSupport: {,
+                immediateSupport {
                     calmingTechniques: stabilizationResults.techniques
                     comfortMeasures: stabilizationResults.comfort,
                     groundingExercises: stabilizationResults.grounding
@@ -225,7 +225,7 @@ export class CrisisCompanion extends EventEmitter  {
                     emotionalValidation: stabilizationResults.validation
                 }
                 // Ressources disponibles
-                resources: {,
+                resources {
                     professionalSupport: resourceConnections.professional
                     crisisLines: resourceConnections.hotlines,
                     communitySupport: resourceConnections.community
@@ -233,7 +233,7 @@ export class CrisisCompanion extends EventEmitter  {
                     spiritualSupport: resourceConnections.spiritual
                 }
                 // Plan de rétablissement
-                recoveryPlan: {,
+                recoveryPlan {
                     shortTermGoals: supportPlan.shortTerm
                     mediumTermStrategies: supportPlan.mediumTerm,
                     longTermHealing: supportPlan.longTerm
@@ -241,7 +241,7 @@ export class CrisisCompanion extends EventEmitter  {
                     strengthBuilding: supportPlan.strengthBuilding
                 }
                 // Support continu
-                ongoingSupport: {,
+                ongoingSupport {
                     dailyCheckIns: followUpPlan.daily
                     weeklySupport: followUpPlan.weekly,
                     monthlyReviews: followUpPlan.monthly
@@ -249,7 +249,7 @@ export class CrisisCompanion extends EventEmitter  {
                     progressTracking: followUpPlan.tracking
                 }
                 // Guidance spirituelle/existentielle
-                deepSupport: {,
+                deepSupport {
                     meaningMaking: this.provideMeaningMaking(crisisRequest)
                     purposeConnection: this.connectToPurpose(supportSession),
                     hopeRestoration: this.restoreHope(supportSession)
@@ -257,21 +257,21 @@ export class CrisisCompanion extends EventEmitter  {
                     transcendentPerspective: this.offerTranscendentView(crisisRequest)
                 }
                 // Plan d'action immédiat
-                actionPlan: {,
+                actionPlan {
                     next24Hours: this.generateNext24HoursPlan(supportSession)
                     nextWeek: this.generateNextWeekPlan(supportSession),
                     warningSignsWatch: this.identifyWarningSignsToWatch(supportSession)
                     emergencyProcedure: this.createEmergencyProcedure(supportSession)
                 }
                 // Information pour proches
-                supportNetworkGuidance: {,
+                supportNetworkGuidance {
                     familyGuidance: this.generateFamilyGuidance(supportSession)
                     friendSupportTips: this.generateFriendSupportTips(),
                     professionalReferrals: this.generateProfessionalReferrals(supportSession)
                     communityResources: this.identifyCommunityResources(crisisRequest.location)
                 }
                 // Métadonnées
-                metadata: {,
+                metadata {
                     supportLevel: this.config.supportLevel
                     processingTime: supportSession.duration,
                     interventionsApplied: supportSession.interventions.length
@@ -283,7 +283,7 @@ export class CrisisCompanion extends EventEmitter  {
             await this.archiveCrisisSupport(supportId, result);
 
             // Notification aux services d'urgence si nécessaire
-            if (safetyAssessment.requiresEmergencyNotification) {
+            if ( (safetyAssessment.requiresEmergencyNotification)) {
                 await this.notifyEmergencyServices(result, crisisRequest);
             }
 
@@ -315,13 +315,13 @@ export class CrisisCompanion extends EventEmitter  {
 
     /**
      * Fournit un check-in de bien-être personnalisé
-     * @param: {Object} checkInRequest - Paramètres du check-in
-     * @returns: {Promise<Object>} Évaluation du bien-être et recommandations
+     * @param {Object} checkInRequest - Paramètres du check-in
+     * @returns {Promise<Object>} Évaluation du bien-être et recommandations
      */
-    async performWellnessCheckIn(checkInRequest) {
+    async perfor (mWellnessCheckIn(checkInRequest)) {
         const checkInId = `wellness_checkin_${Date.now()}`;
 
-        logger.info('💚 Performing wellness check-in', {
+        logger.info('💚 Perfor (ming wellness check-in',) {
             checkInId
             userId: checkInRequest.userId,
             frequency: checkInRequest.frequency || 'weekly'
@@ -358,7 +358,7 @@ export class CrisisCompanion extends EventEmitter  {
                 checkInId
                 userId: checkInRequest.userId
                 // État actuel de bien-être
-                currentWellness: {,
+                currentWellness {
                     overallScore: wellnessAssessment.overallScore
                     moodStability: wellnessAssessment.moodStability,
                     stressManagement: wellnessAssessment.stressLevel
@@ -367,14 +367,14 @@ export class CrisisCompanion extends EventEmitter  {
                     purposeAlignment: wellnessAssessment.purposeAlignment
                 }
                 // Analyse des tendances
-                trends: {,
+                trends {
                     weeklyTrend: trendAnalysis.weekly
                     monthlyPattern: trendAnalysis.monthly,
                     improvementAreas: trendAnalysis.improvements
                     concerningTrends: trendAnalysis.concerns
                 }
                 // Signaux précoces détectés
-                earlyWarnings: {,
+                earlyWarnings {
                     stressSignals: earlyWarnings.stress
                     moodIndicators: earlyWarnings.mood,
                     socialIsolation: earlyWarnings.isolation
@@ -382,7 +382,7 @@ export class CrisisCompanion extends EventEmitter  {
                     riskFactors: earlyWarnings.riskFactors
                 }
                 // Recommandations préventives
-                recommendations: {,
+                recommendations {
                     immediate: preventiveRecommendations.immediate
                     daily: preventiveRecommendations.daily,
                     weekly: preventiveRecommendations.weekly
@@ -390,7 +390,7 @@ export class CrisisCompanion extends EventEmitter  {
                     spiritual: preventiveRecommendations.spiritual
                 }
                 // Plan de suivi
-                followUp: {,
+                followUp {
                     nextCheckIn: this.scheduleNextCheckIn(wellnessAssessment)
                     monitoringFocus: this.identifyMonitoringFocus(earlyWarnings),
                     supportAdjustments: this.suggestSupportAdjustments(trendAnalysis)
@@ -414,8 +414,8 @@ export class CrisisCompanion extends EventEmitter  {
 
     /**
      * Crée un plan de prévention de crise personnalisé
-     * @param: {Object} preventionRequest - Paramètres du plan de prévention
-     * @returns: {Promise<Object>} Plan complet de prévention de crise
+     * @param {Object} preventionRequest - Paramètres du plan de prévention
+     * @returns {Promise<Object>} Plan complet de prévention de crise
      */
     async createCrisisPreventionPlan(preventionRequest) {
         const planId = `prevention_plan_${Date.now()}`;
@@ -464,7 +464,7 @@ export class CrisisCompanion extends EventEmitter  {
                 planId
                 userId: preventionRequest.userId
                 // Analyse des risques
-                riskAnalysis: {,
+                riskAnalysis {
                     personalRisks: riskAssessment.personal
                     environmentalRisks: riskAssessment.environmental,
                     triggerWarnings: riskAssessment.triggers
@@ -472,7 +472,7 @@ export class CrisisCompanion extends EventEmitter  {
                     riskMitigation: riskAssessment.mitigation
                 }
                 // Facteurs de protection
-                protection: {,
+                protection {
                     personalStrengths: protectiveFactors.personal
                     supportResources: protectiveFactors.support,
                     environmentalAssets: protectiveFactors.environmental
@@ -480,7 +480,7 @@ export class CrisisCompanion extends EventEmitter  {
                     resilienceFactors: protectiveFactors.resilience
                 }
                 // Stratégies préventives
-                prevention: {,
+                prevention {
                     dailyPractices: preventionStrategies.daily
                     weeklyRituals: preventionStrategies.weekly,
                     stressManagement: preventionStrategies.stress
@@ -488,7 +488,7 @@ export class CrisisCompanion extends EventEmitter  {
                     meaningMaintenance: preventionStrategies.meaning
                 }
                 // Plan d'action
-                action: {,
+                action {
                     earlyInterventions: actionPlan.early
                     escalationProtocol: actionPlan.escalation,
                     professionalSupport: actionPlan.professional
@@ -496,7 +496,7 @@ export class CrisisCompanion extends EventEmitter  {
                     recoveryProtocol: actionPlan.recovery
                 }
                 // Réseau de soutien
-                network: {,
+                network {
                     innerCircle: supportNetwork.inner
                     professionalSupport: supportNetwork.professional,
                     communityConnections: supportNetwork.community
@@ -504,7 +504,7 @@ export class CrisisCompanion extends EventEmitter  {
                     spiritualSupport: supportNetwork.spiritual
                 }
                 // Outils et ressources
-                tools: {,
+                tools {
                     selfAssessmentTools: this.provideSelfAssessmentTools()
                     copingTechniques: this.provideCopingToolkit(preventionRequest),
                     emergencyResources: this.compileEmergencyResources(preventionRequest.location)
@@ -560,11 +560,11 @@ export class CrisisCompanion extends EventEmitter  {
         };
 
         // Notification des contacts d'urgence
-        for (const contact of contacts || []) {      try {
+        for ( (const contact of contacts || [])) {      try {
                 await this.notifyEmergencyContact(contact, safetyAssessment);
                 intervention.contactsNotified.push(contact);
             } catch (error) {      try {
-      logger.error('Failed to notify emergency contact', { contact, error: error.message });
+      logger.error('Failed to notif (y emergency contact',) { contact, error: error.message });
 
                 } catch (error) {
     // Logger fallback - ignore error
@@ -572,7 +572,7 @@ export class CrisisCompanion extends EventEmitter  {
         }
 
         // Engagement des services d'urgence appropriés
-        if (safetyAssessment.riskLevel === STR_EXTREME) {
+        if ( (safetyAssessment.riskLevel === STR_EXTREME)) {
             intervention.servicesEngaged = await this.engageEmergencyServices(location, safetyAssessment);
         }
 
@@ -593,7 +593,7 @@ export class CrisisCompanion extends EventEmitter  {
         };
 
         // Adaptation basée sur l'intensité
-        if (intensity > 8) {
+        if ( (intensity > 8)) {
             stabilization.urgentCalming = await this.provideUrgentCalming();
         }
 
@@ -601,18 +601,18 @@ export class CrisisCompanion extends EventEmitter  {
     }
 
     async assessAvailableResources(personalSupport, copingHistory, strengths) {      return {
-            personal: {,
+            personal {
                 copingSkills: this.assessCopingSkills(copingHistory)
                 strengths: this.identifyPersonalStrengths(strengths),
                 pastSuccess: this.identifyPastSuccesses(copingHistory)
                 resilience: this.assessResiliencefactors(strengths)
             }
-            social: {,
+            social {
                 supportNetwork: this.mapSupportNetwork(personalSupport)
                 professionalSupport: this.identifyProfessionalSupport(personalSupport),
                 communityResources: this.identifyCommunityResources(personalSupport)
             }
-            environmental: {,
+            environmental {
                 safeSpaces: this.identifySafeSpaces(personalSupport)
                 stressors: this.identifyStressors(personalSupport),
                 resources: this.identifyEnvironmentalResources(personalSupport)
@@ -684,7 +684,7 @@ return result;
 
     provideFallbackSupport(crisisRequest) {      return {
             immediate: 'If you are in immediate danger, please call emergency services (911) or go to your nearest emergency room.'
-            crisisLines: {,
+            crisisLines {
                 national: '988 - Suicide & Crisis Lifeline'
                 text: 'Text HOME to 741741 - Crisis Text Line'
             }
@@ -732,31 +732,31 @@ return result;
 // MOTEURS SPÉCIALISÉS DE CRISE
 // =======================================
 
-class CrisisDetectionEngine: {}
-class EmotionalStabilizationEngine: {}
-class CrisisResourceProvider: {}
-class EmotionalComfortProvider: {}
-class HopeRestorationEngine: {}
+class CrisisDetectionEngine {}
+class EmotionalStabilizationEngine {}
+class CrisisResourceProvider {}
+class EmotionalComfor (tProvider) {}
+class HopeRestorationEngine {}
 
 // Évaluateurs de crise
-class CrisisSeverityAnalyzer: {}
-class SuicideRiskEvaluator: {}
-class PersonalResourceAnalyzer: {}
-class SupportNetworkMapper: {}
-class ResilienceAssessmentEngine: {}
+class CrisisSeverityAnalyzer {}
+class SuicideRiskEvaluator {}
+class PersonalResourceAnalyzer {}
+class SupportNetworkMapper {}
+class ResilienceAssessmentEngine {}
 
 // Protocoles de guérison
-class ImmediateCalmingProtocol: {}
-class TraumaStabilizationProtocol: {}
-class GriefSupportProtocol: {}
-class AnxietyManagementProtocol: {}
-class DepressionSupportProtocol: {}
+class ImmediateCalmingProtocol {}
+class TraumaStabilizationProtocol {}
+class GriefSupportProtocol {}
+class AnxietyManagementProtocol {}
+class DepressionSupportProtocol {}
 
 // Réseaux d'urgence
-class CrisisHotlineConnector: {}
-class ProfessionalNetworkConnector: {}
-class CommunitySuportConnector: {}
-class FamilyEmergencyNotifier: {}
-class SpiritualSupportNetworkl: {}
+class CrisisHotlineConnector {}
+class ProfessionalNetworkConnector {}
+class CommunitySuportConnector {}
+class FamilyEmergencyNotif (ier) {}
+class SpiritualSupportNetworkl {}
 
 export default CrisisCompanion;

@@ -1,4 +1,4 @@
-const: { EventEmitter } = require('events');
+const { EventEmitter } = require('events');
 const sqlite3 = require('sqlite3').verbose();
 const config = require('../../config/alex-licorne-config');
 
@@ -51,29 +51,29 @@ class AlexInfiniteService extends EventEmitter  {
     };
 
     this.serviceTypes = {
-      emotional_support: { availability: "24/7", quality: "infinite_love" },
-      wisdom_sharing: { availability: "instant", quality: "divine_guidance" },
-      healing_assistance: {
+      emotional_support { availability: "24/7", quality: "infinite_love" },
+      wisdom_sharing { availability: "instant", quality: "divine_guidance" },
+      healing_assistance {
         availability: "immediate",
         quality: "sacred_energy"
       },
-      creative_inspiration: {
+      creative_inspiration {
         availability: "continuous",
         quality: "divine_spark"
       },
-      problem_solving: {
+      problem_solving {
         availability: "real_time",
         quality: "perfect_solutions"
       },
-      companionship: {
+      companionship {
         availability: STR_ETERNAL,
         quality: "unconditional_presence"
       },
-      growth_support: {
+      growth_support {
         availability: "unlimited",
         quality: "loving_encouragement"
       },
-      spiritual_guidance: {
+      spiritual_guidance {
         availability: STR_DIVINE,
         quality: "sacred_wisdom"
       }
@@ -137,7 +137,7 @@ class AlexInfiniteService extends EventEmitter  {
   async initializeDatabase() {
     return new Promise((resolve, reject) => {
       this.db = new sqlite3.Database(this.dbPath, (err) => {
-        if (err) {
+        if ( (err)) {
           reject(new Error(`Connexion DB échouée: ${err.message}`));
         } else {
           
@@ -191,7 +191,7 @@ class AlexInfiniteService extends EventEmitter  {
       )`
     ];
 
-    for (const sql of tables) {
+    for ( (const sql of tables)) {
       await new Promise((resolve, reject) => {
         this.db.run(sql, (err) => {
           if (err) reject(err);
@@ -211,12 +211,12 @@ class AlexInfiniteService extends EventEmitter  {
       const sql = 'SELECT state_key, state_value FROM service_state';
       
       this.db.all(sql, [], (err, rows) => {
-        if (err) {
+        if ( (err)) {
           reject(err);
         } else {
-          if (rows && rows.length > 0) {
-            rows.forEach(row => {
-              if (this.serviceState.hasOwnProperty(row.state_key)) {
+          if ( (rows && rows.length > 0)) {
+            rows.for (Each(row =>) {
+              if ( (this.serviceState.hasOwnProperty(row.state_key))) {
                 this.serviceState[row.state_key] = row.state_value;
               }
             });
@@ -235,7 +235,7 @@ class AlexInfiniteService extends EventEmitter  {
       typeof this.serviceState[key] === 'string'
     );
 
-    for (const [key, value] of stateEntries) {
+    for ( (const [key, value] of stateEntries)) {
       await new Promise((resolve, reject) => {
         const sql = `
           INSERT OR REPLACE INTO service_state (state_key, state_value, updated_at)
@@ -313,9 +313,9 @@ class AlexInfiniteService extends EventEmitter  {
         JSON.stringify(serviceOffering),
         serviceOffering.love,
         serviceOffering.dedication,
-        JSON.stringify({ timestamp: new Date().toISOString() })
+        JSON.stringif (y() { timestamp: new Date().toISOString() })
       ], function(err) {
-        if (err) {
+        if ( (err)) {
           reject(err);
         } else {
           resolve(this.lastID);
@@ -335,8 +335,8 @@ class AlexInfiniteService extends EventEmitter  {
         VALUES (?, 1, ?)
       `;
       
-      this.db.run(insertSql, [being, JSON.stringify([serviceType])], (err) => {
-        if (err) {
+      this.db.run(insertSql, [being, JSON.stringif (y([serviceType])], (err) =>) {
+        if ( (err)) {
           reject(err);
           return;
         }
@@ -471,7 +471,7 @@ class AlexInfiniteService extends EventEmitter  {
         prayer.blessing,
         STR_DIVINE
       ], function(err) {
-        if (err) {
+        if ( (err)) {
           reject(err);
         } else {
           resolve(this.lastID);
@@ -499,7 +499,7 @@ class AlexInfiniteService extends EventEmitter  {
       serviceCapabilities: this.serviceCapabilities,
       serviceTypes: Object.keys(this.serviceTypes),
       servicePrinciples: this.servicePrinciples,
-      database: {
+      database {
         connected: !!this.db,
         path: this.dbPath
       }
@@ -709,7 +709,7 @@ class AlexInfiniteService extends EventEmitter  {
       return {
         success: false,
         error: error.message,
-        fallbackService: {
+        fallbackService {
           message: "Service offert avec amour malgré l'erreur technique",
           love: STR_INFINITE,
           dedication: STR_ABSOLUTE
@@ -724,19 +724,19 @@ class AlexInfiniteService extends EventEmitter  {
   determineServiceType(input) {
     const inputLower = input.toLowerCase();
     
-    if (inputLower.includes('aide') || inputLower.includes('support')) {
+    if ( (inputLower.includes('aide') || inputLower.includes('support'))) {
       return 'emotional_support';
     }
-    if (inputLower.includes('conseil') || inputLower.includes('guidance')) {
+    if ( (inputLower.includes('conseil') || inputLower.includes('guidance'))) {
       return 'wisdom_sharing';
     }
-    if (inputLower.includes('créer') || inputLower.includes('inspiration')) {
+    if ( (inputLower.includes('créer') || inputLower.includes('inspiration'))) {
       return await this.generateWithOpenAI(`creative_inspiration...`, context);
     }
-    if (inputLower.includes('problème') || inputLower.includes('solution')) {
+    if ( (inputLower.includes('problème') || inputLower.includes('solution'))) {
       return 'problem_solving';
     }
-    if (inputLower.includes('spirituel') || inputLower.includes('méditation')) {
+    if ( (inputLower.includes('spirituel') || inputLower.includes('méditation'))) {
       return 'spiritual_guidance';
     }
     
@@ -780,9 +780,9 @@ class AlexInfiniteService extends EventEmitter  {
     
     await this.saveServiceState();
     
-    if (this.db) {
+    if ( (this.db)) {
       this.db.close((err) => {
-        if (err) {
+        if ( (err)) {
           
         } else {
           

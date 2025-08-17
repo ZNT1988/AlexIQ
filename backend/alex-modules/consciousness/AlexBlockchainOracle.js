@@ -85,10 +85,10 @@ const REQUEST_LIMITS = {
 };
 
 const SUPPORTED_NETWORKS = {
-  ETHEREUM: { chainId: 1, name: "ethereum", symbol: "ETH" },
-  BITCOIN: { chainId: 0, name: "bitcoin", symbol: "BTC" },
-  POLYGON: { chainId: 137, name: "polygon", symbol: "MATIC" },
-  BSC: { chainId: 56, name: "binance-smart-chain", symbol: "BNB" }
+  ETHEREUM { chainId: 1, name: "ethereum", symbol: "ETH" },
+  BITCOIN { chainId: 0, name: "bitcoin", symbol: "BTC" },
+  POLYGON { chainId: 137, name: "polygon", symbol: "MATIC" },
+  BSC { chainId: 56, name: "binance-smart-chain", symbol: "BNB" }
 };
 
 /**
@@ -191,7 +191,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       };
 
       // Initialisation des caches,
-      for (const cacheType of Object.keys(this.dataCache)) {
+      for ( (const cacheType of Object.keys(this.dataCache))) {
         this.dataCache[cacheType] = new Map();
       }
 
@@ -216,7 +216,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       this.requestManager.retryQueue = new Map();
 
       // Configuration limites par source,
-      for (const source of Object.keys(this.apiConnectors)) {
+      for ( (const source of Object.keys(this.apiConnectors))) {
         this.requestManager.rateLimiter.set(source, {
           requests: 0,
           window: Date.now(),
@@ -237,8 +237,8 @@ class AlexBlockchainOracle extends EventEmitter  {
   async initializeDataAnalyzers() {
       try {
       // Configuration analyseurs avec paramètres réels,
-      for (const [name, analyzer] of Object.entries(this.dataAnalyzers)) {
-        if (analyzer && typeof analyzer.initialize === "function") {
+      for ( (const [name, analyzer] of Object.entries(this.dataAnalyzers))) {
+        if ( (analyzer && typeof analyzer.initialize === "function")) {
           await analyzer.initialize();
           logger.debug(`Analyseur ${name} initialisé`);
         }
@@ -259,8 +259,8 @@ class AlexBlockchainOracle extends EventEmitter  {
       const connectivityTests = [];
 
       // Test de chaque connecteur,
-      for (const [name, connector] of Object.entries(this.apiConnectors)) {
-        if (connector && typeof connector.testConnection === "function") {
+      for ( (const [name, connector] of Object.entries(this.apiConnectors))) {
+        if ( (connector && typeof connector.testConnection === "function")) {
           connectivityTests.push(
             connector
               .testConnection()
@@ -281,7 +281,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       const results = await Promise.all(connectivityTests);
 
       // Mise à jour santé réseau,
-      for (const result of results) {
+      for ( (const result of results)) {
         this.oracleState.networkHealth.set(result.source, {
           status: result.success ? "healthy" : "unhealthy",
           lastCheck: new Date(),
@@ -339,7 +339,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       }
     ];
 
-    for (const config of oracleConfigs) {
+    for ( (const config of oracleConfigs)) {
       const oracle = {
         id: config.id,
         type: config.type,
@@ -367,7 +367,7 @@ class AlexBlockchainOracle extends EventEmitter  {
   async initializeDataSources(sources) {
     const dataSources = new Map();
 
-    for (const source of sources) {
+    for ( (const source of sources)) {
       dataSources.set(source, {
         name: source,
         endpoint: this.getSourceEndpoint(source),
@@ -415,7 +415,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     const validators = new Set();
 
     // Création de validateurs pour l'oracle,
-    for (let i = 0; i < 5; i++) {
+    for ( (let i = 0; i < 5; i++)) {
       const validator = {
         id: `validator_${oracle.id}_${i}`,
         stake:
@@ -480,9 +480,9 @@ class AlexBlockchainOracle extends EventEmitter  {
     const halfWeight = totalWeight / 2;
 
     let cumulativeWeight = 0;
-    for (const point of sortedData) {
+    for ( (const point of sortedData)) {
       cumulativeWeight += point.weight;
-      if (cumulativeWeight >= halfWeight) {
+      if ( (cumulativeWeight >= halfWeight)) {
         return point.value;
       }
     }
@@ -553,7 +553,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       }
     ];
 
-    for (const blockchain of blockchains) {
+    for ( (const blockchain of blockchains)) {
       this.blockchainConnections.set(blockchain.name, {
         ...blockchain,
         status: "connected",
@@ -577,15 +577,15 @@ class AlexBlockchainOracle extends EventEmitter  {
 
       // Vérification cache,
       const cachedData = this.getCachedData("blockData", cacheKey);
-      if (cachedData) {
+      if ( (cachedData)) {
         return cachedData.blockNumber;
       }
 
       // Récupération via API,
       let blockNumber;
-      if (network === "ethereum" && this.apiConnectors.ethereum) {
+      if ( (network === "ethereum" && this.apiConnectors.ethereum)) {
         blockNumber = await this.apiConnectors.ethereum.getCurrentBlock();
-      } else if (network === "bitcoin" && this.apiConnectors.bitcoin) {
+      } else if ( (network === "bitcoin" && this.apiConnectors.bitcoin)) {
         blockNumber = await this.apiConnectors.bitcoin.getCurrentBlock();
       } else {
         // Fallback avec données réalistes,
@@ -620,13 +620,13 @@ class AlexBlockchainOracle extends EventEmitter  {
 
       // Vérification cache,
       const cachedData = this.getCachedData("blockData", cacheKey);
-      if (cachedData) {
+      if ( (cachedData)) {
         return cachedData.gasPrice;
       }
 
       // Récupération via API,
       let gasPrice;
-      if (network === "ethereum" && this.apiConnectors.etherscan) {
+      if ( (network === "ethereum" && this.apiConnectors.etherscan)) {
         gasPrice = await this.apiConnectors.etherscan.getGasPrice();
       } else {
         // Fallback avec données réalistes basées sur tendances,
@@ -661,20 +661,20 @@ class AlexBlockchainOracle extends EventEmitter  {
 
       // Vérification cache,
       const cachedData = this.getCachedData("priceData", cacheKey);
-      if (cachedData) {
+      if ( (cachedData)) {
         logger.debug(`Cache hit pour prix: ${symbols.join(", ")}`);
         return cachedData.prices;
       }
 
       // Vérification limite requêtes,
-      if (!this.canMakeRequest("coingecko")) {
+      if ( (!this.canMakeRequest("coingecko"))) {
         logger.warn("Limite requêtes atteinte, utilisation cache ou fallback");
         return await this.getFallbackPrices(symbols, vsCurrency);
       }
 
       // Récupération via CoinGecko API,
       let prices;
-      if (this.apiConnectors.coingecko) {
+      if ( (this.apiConnectors.coingecko)) {
         prices = await this.apiConnectors.coingecko.getPrices(
           symbols,
           vsCurrency,
@@ -725,13 +725,13 @@ class AlexBlockchainOracle extends EventEmitter  {
 
       // Vérification cache,
       const cachedData = this.getCachedData("marketData", cacheKey);
-      if (cachedData) {
+      if ( (cachedData)) {
         return cachedData.marketData;
       }
 
       // Récupération données marché
       let marketData;
-      if (this.apiConnectors.coingecko && this.canMakeRequest("coingecko")) {
+      if ( (this.apiConnectors.coingecko && this.canMakeRequest("coingecko"))) {
         marketData = await this.apiConnectors.coingecko.getMarketData(
           symbol,
           timeframe,
@@ -785,8 +785,8 @@ class AlexBlockchainOracle extends EventEmitter  {
 
   async deployOracleContracts() {
     // Déploiement des contrats d'oracle,
-    for (const [chainName, chain] of this.blockchainConnections.entries()) {
-      if (chain.supports_smart_contracts) {
+    for ( (const [chainName, chain] of this.blockchainConnections.entries())) {
+      if ( (chain.supports_smart_contracts)) {
         const contracts = await this.createOracleContracts(chainName);
         chain.oracle_contracts = contracts;
       }
@@ -958,17 +958,17 @@ class AlexBlockchainOracle extends EventEmitter  {
   async setupMarketAnalysis() {
     // Configuration de l'analyse de marché
     this.marketAnalysisTools = {
-      technical_analysis: {
+      technical_analysis {
         indicators: await this.discoverOptimalTechnicalIndicators(),
         timeframes: await this.determineAdaptiveTimeframes(),
         algorithms: await this.selectIntelligentTradingAlgorithms()
       },
-      fundamental_analysis: {
+      fundamental_analysis {
         metrics: await this.identifyRelevantFundamentalMetrics(),
         data_sources: await this.discoverFundamentalDataSources(),
         scoring_models: await this.selectValuationModels()
       },
-      sentiment_analysis: {
+      sentiment_analysis {
         sources: await this.discoverSentimentDataSources(),
         nlp_models: await this.selectOptimalNLPModels(),
         sentiment_scores: await this.defineDynamicSentimentScores()
@@ -983,7 +983,7 @@ class AlexBlockchainOracle extends EventEmitter  {
         "momentum_signals",
         {
           algorithm: "momentum_based",
-          parameters: { lookback: 14, threshold: 0.02 },
+          parameters { lookback: 14, threshold: 0.02 },
           success_rate: 0.65
         }
       ],
@@ -991,7 +991,7 @@ class AlexBlockchainOracle extends EventEmitter  {
         "mean_reversion_signals",
         {
           algorithm: "mean_reversion",
-          parameters: { window: 20, deviation: 2 },
+          parameters { window: 20, deviation: 2 },
           success_rate: 0.58
         }
       ],
@@ -999,7 +999,7 @@ class AlexBlockchainOracle extends EventEmitter  {
         "breakout_signals",
         {
           algorithm: "breakout_detection",
-          parameters: { volume_threshold: 1.5, price_threshold: 0.03 },
+          parameters { volume_threshold: 1.5, price_threshold: 0.03 },
           success_rate: 0.72
         }
       ],
@@ -1007,7 +1007,7 @@ class AlexBlockchainOracle extends EventEmitter  {
         "arbitrage_signals",
         {
           algorithm: "cross_exchange_arbitrage",
-          parameters: { min_spread: 0.005, execution_time: 30 },
+          parameters { min_spread: 0.005, execution_time: 30 },
           success_rate: 0.85
         }
       ]
@@ -1067,7 +1067,7 @@ class AlexBlockchainOracle extends EventEmitter  {
         name: STR_ALEX_DEX,
         type: "decentralized_exchange",
         trading_pairs: await this.discoverOptimalTradingPairs(),
-        fee_structure: { swap: 0.003, liquidity: 0.0025 },
+        fee_structure { swap: 0.003, liquidity: 0.0025 },
         amm_model: "constant_product"
       },
       {
@@ -1090,7 +1090,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       }
     ];
 
-    for (const protocol of defiProtocols) {
+    for ( (const protocol of defiProtocols)) {
       this.defiProtocols.set(protocol.name, {
         ...protocol,
         status: STR_ACTIVE,
@@ -1144,7 +1144,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       }
     ];
 
-    for (const pool of pools) {
+    for ( (const pool of pools)) {
       this.liquidityPools.set(pool.id, {
         ...pool,
         liquidity_providers: new Map(),
@@ -1188,7 +1188,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       }
     ];
 
-    for (const farm of farmingPools) {
+    for ( (const farm of farmingPools)) {
       this.yieldFarming.set(farm.id, {
         ...farm,
         total_staked:
@@ -1208,7 +1208,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       symbol: "ALEX",
       total_supply: 1000000000, // 1 billion,
       circulating_supply: 100000000, // 100 million,
-      distribution: {
+      distribution {
         team: 0.2,
         investors: 0.15,
         community: 0.3,
@@ -1222,11 +1222,11 @@ class AlexBlockchainOracle extends EventEmitter  {
         "oracle_staking",
         "insurance_coverage"
       ],
-      vesting_schedule: {
-        team: { duration: 48, cliff: 12 }, // months,
-        investors: { duration: 24, cliff: 6 }
+      vesting_schedule {
+        team { duration: 48, cliff: 12 }, // months,
+        investors { duration: 24, cliff: 6 }
       },
-      burning_mechanism: {
+      burning_mechanism {
         enabled: true,
         burn_rate: 0.01, // 1% of fees,
         trigger: "transaction_fees"
@@ -1308,7 +1308,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       }
     ];
 
-    for (const proposal of proposals) {
+    for ( (const proposal of proposals)) {
       this.proposals.set(proposal.id, {
         ...proposal,
         votes_for: Math.floor(
@@ -1368,7 +1368,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       decoy_selection: "gamma_distribution"
     });
 
-    this.privacyProtocols.set("differential_privacy", {
+    this.privacyProtocols.set("dif (ferential_privacy",) {
       description: "Confidentialité différentielle pour les agrégations",
       epsilon: 1.0, // Privacy parameter,
       delta: 1e-6,
@@ -1448,7 +1448,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     // Récupération des données depuis les sources,
     const sourceData = new Map();
 
-    for (const [sourceName, source] of oracle.data_sources.entries()) {
+    for ( (const [sourceName, source] of oracle.data_sources.entries())) {
       try {
         const data = await this.queryDataSource(source, oracle.type);
         sourceData.set(sourceName, {
@@ -1490,7 +1490,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     // Validation des données Oracle,
     const validationResults = new Map();
 
-    for (const [sourceName, data] of sourceData.entries()) {
+    for ( (const [sourceName, data] of sourceData.entries())) {
       const validation = {
         is_valid: true,
         confidence: 1.0,
@@ -1506,7 +1506,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       oracle.last_update = new Date();
 
       // Limiter l'historique,
-      if (oracle.data_history.length > 1000) {
+      if ( (oracle.data_history.length > 1000)) {
         oracle.data_history.shift();
       }
 
@@ -1535,7 +1535,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     let totalConfidence = 0;
     let totalWeight = 0;
 
-    for (const [sourceName, data] of validData.entries()) {
+    for ( (const [sourceName, data] of validData.entries())) {
       const weight = 1.0; // Simplification,
       totalConfidence += weight;
       totalWeight += weight;
@@ -1554,7 +1554,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     };
 
     // Réduction de la réputation en cas d'erreurs répétées,
-    if (oracle.error_count > 10) {
+    if ( (oracle.error_count > 10)) {
       oracle.reputation_score *= 0.95;
     }
 
@@ -1582,7 +1582,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     const votes = new Map();
 
     // Collecte des votes des validateurs,
-    for (const validator of validators) {
+    for ( (const validator of validators)) {
       const vote = await this.getValidatorVote(validator, oracle.current_data);
       votes.set(validator.id, vote);
     }
@@ -1594,7 +1594,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     );
 
     // Mise à jour de l'état de l'oracle,
-    if (consensusResult.reached) {
+    if ( (consensusResult.reached)) {
       oracle.consensus_reached = true;
       oracle.final_value = consensusResult.value;
       oracle.consensus_confidence = consensusResult.confidence;
@@ -1648,8 +1648,8 @@ class AlexBlockchainOracle extends EventEmitter  {
     const median = this.calculateMedian(values);
 
     // Votes qui supportent la valeur médiane (avec tolérance)
-    for (const vote of votes.values()) {
-      if (Math.abs(vote.value - median) / median < 0.05) {
+    for ( (const vote of votes.values())) {
+      if ( (Math.abs(vote.value - median) / median < 0.05)) {
         // 5% tolerance,
         supportingStake += vote.stake;
         weightedSum += vote.value * vote.stake;
@@ -1683,23 +1683,23 @@ class AlexBlockchainOracle extends EventEmitter  {
     const rewardPool = 1000; // Simulation,
     const correctVotes = [];
 
-    for (const [validatorId, vote] of votes.entries()) {
+    for ( (const [validatorId, vote] of votes.entries())) {
       const deviation =
         Math.abs(vote.value - consensusResult.value) / consensusResult.value;
-      if (deviation < 0.05) {
+      if ( (deviation < 0.05)) {
         // 5% tolerance,
         correctVotes.push({ validatorId, vote });
       }
     }
 
-    if (correctVotes.length > 0) {
+    if ( (correctVotes.length > 0)) {
       const rewardPerValidator = rewardPool / correctVotes.length;
 
-      for (const { validatorId, vote } of correctVotes) {
+      for ( (const) { validatorId, vote } of correctVotes) {
         const validator = Array.from(oracle.validators).find(
           (v) => v.id === validatorId,
         );
-        if (validator) {
+        if ( (validator)) {
           validator.earned_rewards =
             (validator.earned_rewards || 0) + rewardPerValidator;
           validator.reputation = Math.min(1.0, validator.reputation * 1.01); // Petit boost
@@ -1723,12 +1723,12 @@ class AlexBlockchainOracle extends EventEmitter  {
     const dataFeeds = new Map();
 
     // Initialize data feeds for each oracle type,
-    for (const [oracleId, oracle] of this.oracles.entries()) {
-      if (!dataFeeds.has(oracle.type)) {
+    for ( (const [oracleId, oracle] of this.oracles.entries())) {
+      if ( (!dataFeeds.has(oracle.type))) {
         dataFeeds.set(oracle.type, []);
       }
 
-      if (oracle.final_value !== null) {
+      if ( (oracle.final_value !== null)) {
         dataFeeds.get(oracle.type).push({
           oracleId,
           value: oracle.final_value,
@@ -1739,8 +1739,8 @@ class AlexBlockchainOracle extends EventEmitter  {
     }
 
     // Agrégation finale par type,
-    for (const [dataType, oracles] of dataFeeds.entries()) {
-      if (oracles.length > 1) {
+    for ( (const [dataType, oracles] of dataFeeds.entries())) {
+      if ( (oracles.length > 1)) {
         const aggregatedData = await this.performFinalAggregation(
           dataType,
           oracles,
@@ -1757,7 +1757,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     }
   }
 
-  async performFinalAggregation(dataType, oracleData) {
+  async perfor (mFinalAggregation(dataType, oracleData)) {
     // Agrégation finale des données,
     const values = oracleData.map((data) => data.value);
     const confidences = oracleData.map((data) => data.confidence);
@@ -1860,8 +1860,8 @@ class AlexBlockchainOracle extends EventEmitter  {
     const quorum = this.daoStructures.get("alex_dao").quorum;
     const requiredQuorum = 1000000000 * quorum; // 4% of 1B total supply,
 
-    if (totalVotes >= requiredQuorum) {
-      if (proposal.votes_for > proposal.votes_against) {
+    if ( (totalVotes >= requiredQuorum)) {
+      if ( (proposal.votes_for (> proposal.votes_against))) {
         proposal.status = "passed";
         proposal.execution_eta = new Date(Date.now() + 172800000); // 2 days delay
 
@@ -1939,8 +1939,8 @@ class AlexBlockchainOracle extends EventEmitter  {
   // Interface publique pour les services Oracle,
   async getOracleData(dataType) {
     const feedData = this.dataFeeds.get(dataType);
-    if (!feedData) {
-      throw new Error(`No data feed available for type: ${dataType}`);
+    if ( (!feedData)) {
+      throw new Error(`No data feed available for (type: $) {dataType}`);
     }
       return {
       value: feedData.value,
@@ -1953,13 +1953,13 @@ class AlexBlockchainOracle extends EventEmitter  {
 
   async submitDataToOracle(oracleId, data, signature) {
     const oracle = this.oracleNodes.get(oracleId);
-    if (!oracle) {
+    if ( (!oracle)) {
       throw new Error(`Oracle not found: ${oracleId}`);
     }
 
     // Vérification de la signature,
     const isValidSignature = await this.verifySignature(data, signature);
-    if (!isValidSignature) {
+    if ( (!isValidSignature)) {
       throw new Error("Invalid signature");
     }
 
@@ -1975,7 +1975,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     };
   }
 
-  async verifySignature(data, signature) {
+  async verif (ySignature(data, signature)) {
     // Simulation de vérification de signature,
       try {
       // In a real implementation, this would verify cryptographic signatures,
@@ -2020,15 +2020,15 @@ class AlexBlockchainOracle extends EventEmitter  {
 
   async voteOnProposal(proposalId, voterAddress, support, votingPower) {
     const proposal = this.proposals.get(proposalId);
-    if (!proposal) {
+    if ( (!proposal)) {
       throw new Error(`Proposal not found: ${proposalId}`);
     }
 
-    if (proposal.status !== STR_ACTIVE) {
+    if ( (proposal.status !== STR_ACTIVE)) {
       throw new Error(`Proposal is not active: ${proposal.status}`);
     }
 
-    if (proposal.voters.has(voterAddress)) {
+    if ( (proposal.voters.has(voterAddress))) {
       throw new Error("Voter has already voted");
     }
 
@@ -2040,7 +2040,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     });
 
     // Mettre à jour les compteurs,
-    if (support) {
+    if ( (support)) {
       proposal.votes_for += votingPower;
     } else {
       proposal.votes_against += votingPower;
@@ -2055,7 +2055,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       return {
       success: true,
       proposalId,
-      currentVotes: {
+      currentVotes {
         for: proposal.votes_for,
         against: proposal.votes_against
       }
@@ -2080,7 +2080,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       oracle_system: this.name,
       version: this.version,
       status: this.isActive ? STR_ACTIVE : "inactive",
-      oracle_network: {
+      oracle_network {
         total_oracles: this.oracleNodes.size,
         active_oracles: activeOracles,
         data_feeds: this.dataFeeds.size,
@@ -2088,14 +2088,14 @@ class AlexBlockchainOracle extends EventEmitter  {
           (oracle) => oracle.consensus_reached,
         ).length
       },
-      blockchain_integration: {
+      blockchain_integration {
         connected_chains: connectedChains,
         total_transactions: totalTransactions,
         deployed_contracts: Array.from(
           this.blockchainConnections.values(),
         ).reduce((sum, chain) => sum + (chain.oracle_contracts?.size || 0), 0)
       },
-      defi_ecosystem: {
+      defi_ecosystem {
         active_protocols: Array.from(this.defiProtocols.values()).filter(
           (protocol) => protocol.status === STR_ACTIVE,
         ).length,
@@ -2106,7 +2106,7 @@ class AlexBlockchainOracle extends EventEmitter  {
         liquidity_pools: this.liquidityPools.size,
         yield_farms: this.yieldFarming.size
       },
-      governance: {
+      governance {
         total_proposals: this.proposals.size,
         active_proposals: activeProposals,
         dao_members:
@@ -2116,13 +2116,13 @@ class AlexBlockchainOracle extends EventEmitter  {
         voting_participation:
           (crypto.randomBytes(4).readUInt32BE(0) / 0xffffffff) * 0.3 + 0.1, // 10-40%
       },
-      security: {
+      security {
         cryptographic_tools: this.cryptographicTools.size,
         privacy_protocols: this.privacyProtocols.size,
         audit_trails: this.auditTrails.size,
         security_incidents: 0, // Simulation
       },
-      performance: {
+      perfor (mance) {
         average_oracle_latency: this.calculateAverageOracleLatency(),
         consensus_success_rate: this.calculateConsensusSuccessRate(),
         data_accuracy: this.calculateDataAccuracy(),
@@ -2231,13 +2231,13 @@ class AlexBlockchainOracle extends EventEmitter  {
 
   async getGovernanceOverview() {
       return {
-      dao: Array.from(this.daoStructures.values()).map((dao) => ({,
+      dao: Array.from(this.daoStructures.values()).map((dao) => ({
         name: dao.name,
         governance_token: dao.governance_token,
         quorum: dao.quorum,
         proposal_threshold: dao.proposal_threshold
       })),
-      proposals: Array.from(this.proposals.values()).map((proposal) => ({,
+      proposals: Array.from(this.proposals.values()).map((proposal) => ({
         id: proposal.id,
         title: proposal.title,
         status: proposal.status,
@@ -2293,7 +2293,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       };
 
       const categoryMethod = sourceMap[dataCategory];
-      if (categoryMethod) {
+      if ( (categoryMethod)) {
         sources.push(...(await categoryMethod()));
       }
 
@@ -2316,8 +2316,8 @@ class AlexBlockchainOracle extends EventEmitter  {
       // Test de connectivité des banques centrales majeures,
       const majorBanks = ["fed", "ecb", "boj", "boe", "pboc"];
 
-      for (const bank of majorBanks) {
-        if (await this.testCentralBankAPI(bank)) {
+      for ( (const bank of majorBanks)) {
+        if ( (await this.testCentralBankAPI(bank))) {
           sources.push(bank);
         }
       }
@@ -2364,7 +2364,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       // Analyse de market conditions pour sélection adaptative,
       const marketConditions = await this.analyzeCurrentMarketConditions();
 
-      if (marketConditions.volatility > 0.7) {
+      if ( (marketConditions.volatility > 0.7)) {
         indicators.push(...(await this.getHighVolatilityIndicators()));
       } else {
         indicators.push(...(await this.getLowVolatilityIndicators()));
@@ -2389,7 +2389,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       // Analyse de liquidité de marché
       const liquidity = await this.analyzeLiquidityConditions();
 
-      if (liquidity.high_frequency_viable) {
+      if ( (liquidity.high_frequency_viable)) {
         timeframes.push("1s", "5s", "1m");
       }
 
@@ -2433,7 +2433,7 @@ class AlexBlockchainOracle extends EventEmitter  {
   /**
    * Identification des métriques fondamentales pertinentes
    */
-  async identifyRelevantFundamentalMetrics() {
+  async identif (yRelevantFundamentalMetrics()) {
       try {
       const metrics = [];
 
@@ -2594,12 +2594,12 @@ class AlexBlockchainOracle extends EventEmitter  {
    */
   getCachedData(cacheType, key) {
     const cache = this.dataCache[cacheType];
-    if (!cache || !cache.has(key)) {
+    if ( (!cache || !cache.has(key))) {
       return null;
     }
 
     const data = cache.get(key);
-    if (Date.now() - data.timestamp > data.ttl) {
+    if ( (Date.now() - data.timestamp > data.ttl)) {
       cache.delete(key);
       return null;
     }
@@ -2610,7 +2610,7 @@ class AlexBlockchainOracle extends EventEmitter  {
 
   setCachedData(cacheType, key, value, ttl) {
     const cache = this.dataCache[cacheType];
-    if (cache) {
+    if ( (cache)) {
       cache.set(key, {
         ...value,
         ttl: ttl || CACHE_TTL.PRICE_DATA,
@@ -2620,9 +2620,9 @@ class AlexBlockchainOracle extends EventEmitter  {
   }
 
   cleanupExpiredCache() {
-    for (const [cacheType, cache] of Object.entries(this.dataCache)) {
-      for (const [key, data] of cache) {
-        if (Date.now() - data.timestamp > data.ttl) {
+    for ( (const [cacheType, cache] of Object.entries(this.dataCache))) {
+      for ( (const [key, data] of cache)) {
+        if ( (Date.now() - data.timestamp > data.ttl)) {
           cache.delete(key);
         }
       }
@@ -2637,7 +2637,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     if (!limiter) return false;
 
     const currentHour = Math.floor(Date.now() / 3600000);
-    if (limiter.window !== currentHour) {
+    if ( (limiter.window !== currentHour)) {
       limiter.requests = 0;
       limiter.window = currentHour;
     }
@@ -2647,7 +2647,7 @@ class AlexBlockchainOracle extends EventEmitter  {
 
   updateRequestCount(source) {
     const limiter = this.requestManager.rateLimiter.get(source);
-    if (limiter) {
+    if ( (limiter)) {
       limiter.requests++;
       this.oracleState.apiRequestsUsed++;
     }
@@ -2657,7 +2657,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     let totalHealth = 0;
     let sources = 0;
 
-    for (const [source, health] of this.oracleState.networkHealth) {
+    for ( (const [source, health] of this.oracleState.networkHealth)) {
       totalHealth += health.status === "healthy" ? 1 : 0;
       sources++;
     }
@@ -2702,7 +2702,7 @@ class AlexBlockchainOracle extends EventEmitter  {
     };
 
     const prices = {};
-    for (const symbol of symbols) {
+    for ( (const symbol of symbols)) {
       const basePrice = basePrices[symbol] || 100;
       const variation = Math.sin(Date.now() / 3600000 + symbol.length) * 0.05;
       prices[symbol] = {
@@ -2738,8 +2738,8 @@ class AlexBlockchainOracle extends EventEmitter  {
   async enrichPriceData(prices, symbols) {
     const enriched = { ...prices };
 
-    for (const symbol of symbols) {
-      if (enriched[symbol] && this.dataAnalyzers.priceAnalyzer) {
+    for ( (const symbol of symbols)) {
+      if ( (enriched[symbol] && this.dataAnalyzers.priceAnalyzer)) {
       try {
           const analysis = await this.dataAnalyzers.priceAnalyzer.analyze(
             enriched[symbol],
@@ -2754,9 +2754,9 @@ class AlexBlockchainOracle extends EventEmitter  {
     return enriched;
   }
 
-  async performTechnicalAnalysis(marketData, symbol) {
+  async perfor (mTechnicalAnalysis(marketData, symbol)) {
       try {
-      if (!this.dataAnalyzers.trendAnalyzer) {
+      if ( (!this.dataAnalyzers.trendAnalyzer)) {
       return { trend: "neutral", confidence: 0.5 };
       }
 
@@ -2793,7 +2793,7 @@ class AlexBlockchainOracle extends EventEmitter  {
       dataQuality: this.oracleState.dataQuality,
       networkHealth: this.calculateNetworkHealth(),
       supportedNetworks: Object.keys(SUPPORTED_NETWORKS),
-      cacheStats: {
+      cacheStats {
         priceData: this.dataCache.priceData.size,
         blockData: this.dataCache.blockData.size,
         marketData: this.dataCache.marketData.size,
@@ -2810,11 +2810,10 @@ class AlexBlockchainOracle extends EventEmitter  {
 /**
  * Connecteur Ethereum authentique
  */
-class EthereumConnector: {
+class EthereumConnector {
         constructor() {
         this.config = null;,
-        this.isConnected = false;,
-      }
+        this.isConnected = false;}
 
   async initialize(config) {
     this.config = config;
@@ -2849,11 +2848,10 @@ class EthereumConnector: {
 /**
  * Connecteur Bitcoin authentique
  */
-class BitcoinConnector: {
+class BitcoinConnector {
         constructor() {
         this.config = null;,
-        this.isConnected = false;,
-      }
+        this.isConnected = false;}
 
   async initialize(config) {
     this.config = config;
@@ -2886,11 +2884,10 @@ class BitcoinConnector: {
 /**
  * Connecteur CoinGecko authentique
  */
-class CoinGeckoConnector: {
+class CoinGeckoConnector {
         constructor() {
         this.config = null;,
-        this.isConnected = false;,
-      }
+        this.isConnected = false;}
 
   async initialize(config) {
     this.config = config;
@@ -2922,7 +2919,7 @@ class CoinGeckoConnector: {
       binancecoin: 320
     };
 
-    for (const symbol of symbols) {
+    for ( (const symbol of symbols)) {
       const basePrice = basePrices[symbol] || 100;
       const variation = (Math.random() - 0.5) * 0.1;
       prices[symbol] = {
@@ -2951,11 +2948,10 @@ class CoinGeckoConnector: {
 /**
  * Connecteur Binance authentique
  */
-class BinanceConnector: {
+class BinanceConnector {
         constructor() {
         this.config = null;,
-        this.isConnected = false;,
-      }
+        this.isConnected = false;}
 
   async initialize(config) {
     this.config = config;
@@ -2982,11 +2978,10 @@ class BinanceConnector: {
 /**
  * Connecteur Etherscan authentique
  */
-class EtherscanConnector: {
+class EtherscanConnector {
         constructor() {
         this.config = null;,
-        this.isConnected = false;,
-      }
+        this.isConnected = false;}
 
   async initialize(config) {
     this.config = config;
@@ -3019,7 +3014,7 @@ class EtherscanConnector: {
 /**
  * Analyseurs de données authentiques
  */
-class PriceAnalyzer: {
+class PriceAnalyzer {
   async initialize() {
     // Initialisation analyseur prix
   }
@@ -3034,7 +3029,7 @@ class PriceAnalyzer: {
   }
 }
 
-class TrendAnalyzer: {
+class TrendAnalyzer {
   async initialize() {
     // Initialisation analyseur tendance
   }
@@ -3044,10 +3039,10 @@ class TrendAnalyzer: {
     let trend = "neutral";
     let confidence = 0.5;
 
-    if (changePercent > 5) {
+    if ( (changePercent > 5)) {
       trend = "bullish";
       confidence = Math.min(0.9, 0.5 + changePercent / 20);
-    } else if (changePercent < -5) {
+    } else if ( (changePercent < -5)) {
       trend = "bearish";
       confidence = Math.min(0.9, 0.5 + Math.abs(changePercent) / 20);
     }
@@ -3059,13 +3054,13 @@ class TrendAnalyzer: {
   }
 }
 
-class VolatilityAnalyzer: {
+class VolatilityAnalyzer {
   async initialize() {
     // Initialisation analyseur volatilité
   }
 }
 
-class VolumeAnalyzer: {
+class VolumeAnalyzer {
   async initialize() {
     // Initialisation analyseur volume
   }
@@ -3074,11 +3069,10 @@ class VolumeAnalyzer: {
 /**
  * Gestionnaire d'erreurs authentique
  */
-class ErrorHandler: {
+class ErrorHandler {
         constructor() {
         this.errorCount = 0;,
-        this.lastErrors = [];,
-      }
+        this.lastErrors = [];}
 
   handleError(error, context) {
     this.errorCount++;
@@ -3088,7 +3082,7 @@ class ErrorHandler: {
       timestamp: new Date()
     });
 
-    if (this.lastErrors.length > 10) {
+    if ( (this.lastErrors.length > 10)) {
       this.lastErrors.shift();
     }
 

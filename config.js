@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import "dotenv/config";
 
 const OPENAI_KEY = process.env.OPENAI_API_KEY;
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;

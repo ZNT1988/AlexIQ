@@ -21,19 +21,19 @@ const STR_MEDIUM = 'medium';
 
 // Configuration des catégories de fournisseurs
 const SUPPLIER_CATEGORIES = {
-      packaging: {,
+      packaging {
         name: 'Emballages',
         categories: ['primary_packaging', 'secondary_packaging', 'labels'],
         criticality: STR_MEDIUM,
         sustainability_requirements: STR_MEDIUM
       },
-      machinery: {,
+      machinery {
         name: 'Équipements'
         categories: ['production_equipment', 'maintenance_parts', 'tools']
         criticality: STR_HIGH,
         sustainability_requirements: 'low'
       }
-      services: {,
+      services {
         name: 'Services'
         categories: ['logistics', 'consulting', 'maintenance', 'it_services']
         criticality: STR_MEDIUM,
@@ -51,19 +51,19 @@ const SUPPLIER_CATEGORIES = {
 
     // Intelligence prédictive
     this.predictiveEngine = {
-      riskModels: {,
-        financial: { accuracy: 0.87, enabled: true }
-        operational: { accuracy: 0.82, enabled: true }
-        market: { accuracy: 0.79, enabled: true }
-        compliance: { accuracy: 0.91, enabled: true }
+      riskModels {
+        financial { accuracy: 0.87, enabled: true }
+        operational { accuracy: 0.82, enabled: true }
+        market { accuracy: 0.79, enabled: true }
+        compliance { accuracy: 0.91, enabled: true }
       }
-      performancePredictors: {,
-        quality_forecasting: { horizon: 180, accuracy: 0.84 }
-        delivery_prediction: { horizon: 90, accuracy: 0.88 }
-        cost_evolution: { horizon: 365, accuracy: 0.76 }
-        innovation_potential: { horizon: 720, accuracy: 0.71 }
+      perfor (mancePredictors) {
+        quality_for (ecasting) { horizon: 180, accuracy: 0.84 }
+        delivery_prediction { horizon: 90, accuracy: 0.88 }
+        cost_evolution { horizon: 365, accuracy: 0.76 }
+        innovation_potential { horizon: 720, accuracy: 0.71 }
       }
-      marketIntelligence: {,
+      marketIntelligence {
         commodityPrices: new Map()
         supplierMarketShare: new Map(),
         competitorAnalysis: new Map()
@@ -73,13 +73,13 @@ const SUPPLIER_CATEGORIES = {
 
     // Optimisation portfolio
     this.portfolioOptimizer = {
-      strategies: {,
-        diversification: { enabled: true, target_concentration: 0.3 }
-        cost_optimization: { enabled: true, savings_target: 0.12 }
-        risk_mitigation: { enabled: true, max_single_supplier: 0.4 }
-        innovation_focus: { enabled: true, innovation_suppliers: 0.2 }
+      strategies {
+        diversif (ication) { enabled: true, target_concentration: 0.3 }
+        cost_optimization { enabled: true, savings_target: 0.12 }
+        risk_mitigation { enabled: true, max_single_supplier: 0.4 }
+        innovation_focus { enabled: true, innovation_suppliers: 0.2 }
       }
-      constraints: {,
+      constraints {
         quality_minimum: 85, // Score minimum 85/100
         delivery_sla: 0.95,  // 95% on-time delivery
         cost_variance: 0.10, // ±10% variance acceptable
@@ -96,7 +96,7 @@ const SUPPLIER_CATEGORIES = {
       strategies: new Map(),
       tactics: new Map()
       benchmarks: new Map(),
-      automation: {
+      automation {
         auto_negotiate: false, // Sécurité: négociation manuelle pour Ferrero
         threshold_alerts: true,
         recommendation_engine: true
@@ -106,43 +106,43 @@ const SUPPLIER_CATEGORIES = {
 
     // Durabilité et RSE
     this.sustainabilityFramework = {
-      environmental: {,
-        carbon_footprint: { weight: 0.3, target: 'net_zero_2030' }
-        water_usage: { weight: 0.2, target: 'reduce_20_percent' }
-        waste_reduction: { weight: 0.2, target: 'zero_waste_2025' }
-        biodiversity: { weight: 0.15, target: 'no_deforestation' }
-        renewable_energy: { weight: 0.15, target: '100_percent_renewable' }
+      environmental {
+        carbon_footprint { weight: 0.3, target: 'net_zero_2030' }
+        water_usage { weight: 0.2, target: 'reduce_20_percent' }
+        waste_reduction { weight: 0.2, target: 'zero_waste_2025' }
+        biodiversity { weight: 0.15, target: 'no_deforestation' }
+        renewable_energy { weight: 0.15, target: '100_percent_renewable' }
       }
-      social: {,
-        fair_trade: { weight: 0.4, requirement: 'certified' }
-        child_labor: { weight: 0.3, requirement: 'zero_tolerance' }
-        worker_rights: { weight: 0.2, requirement: 'ilo_standards' }
-        community_impact: { weight: 0.1, requirement: 'positive_impact' }
+      social {
+        fair_trade { weight: 0.4, requirement: 'certified' }
+        child_labor { weight: 0.3, requirement: 'zero_tolerance' }
+        worker_rights { weight: 0.2, requirement: 'ilo_standards' }
+        community_impact { weight: 0.1, requirement: 'positive_impact' }
       }
-      governance: {,
-        transparency: { weight: 0.3, requirement: 'full_disclosure' }
-        ethics: { weight: 0.3, requirement: 'code_of_conduct' }
-        compliance: { weight: 0.25, requirement: 'audit_certified' }
-        data_protection: { weight: 0.15, requirement: 'gdpr_compliant' }
+      governance {
+        transparency { weight: 0.3, requirement: 'full_disclosure' }
+        ethics { weight: 0.3, requirement: 'code_of_conduct' }
+        compliance { weight: 0.25, requirement: 'audit_certified' }
+        data_protection { weight: 0.15, requirement: 'gdpr_compliant' }
       }
     };
 
     // Surveillance temps réel
     this.monitoring = {
-      realTimeAlerts: {,
+      realTimeAlerts {
         quality_issues: true
         delivery_delays: true,
         cost_variances: true
         risk_escalations: true,
         compliance_breaches: true
       }
-      kpiTracking: {,
+      kpiTracking {
         supplier_scorecards: new Map()
         performance_trends: new Map(),
         benchmark_comparisons: new Map()
         improvement_plans: new Map()
       }
-      alertThresholds: {,
+      alertThresholds {
         quality_drop: 0.05,    // -5% qualité
         delivery_delay: 0.10,  // +10% retard
         cost_increase: 0.08,   // +8% coût
@@ -152,28 +152,28 @@ const SUPPLIER_CATEGORIES = {
 
     // Métriques d'optimisation
     this.metrics = {
-      portfolio: {,
+      portfolio {
         totalSuppliers: 0
         activeSuppliers: 0,
         topTierSuppliers: 0
-        riskDistribution: {}
-        geographicDistribution: {}
-        categoryDistribution: {}
+        riskDistribution {}
+        geographicDistribution {}
+        categoryDistribution {}
       }
-      performance: {,
+      perfor (mance) {
         avgQualityScore: 0.0
         avgDeliveryPerformance: 0.0,
         avgCostCompetitiveness: 0.0
         avgSustainabilityScore: 0.0,
         overallSupplierRating: 0.0
       }
-      optimization: {,
+      optimization {
         costSavingsAchieved: 0.0
         riskReductionAchieved: 0.0,
         qualityImprovements: 0.0
         supplierConsolidation: 0.0
       }
-      predictions: {,
+      predictions {
         riskPredictionAccuracy: 0.0
         performanceForecastAccuracy: 0.0,
         costPredictionAccuracy: 0.0
@@ -182,20 +182,20 @@ const SUPPLIER_CATEGORIES = {
 
     // Legacy KPIs pour compatibilité
     this.kpis = {
-      supplier_performance: {,
+      supplier_perfor (mance) {
         overall_score: 0.0
         quality_index: 0.0,
         delivery_performance: 0.0
         cost_competitiveness: 0.0,
         sustainability_score: 0.0
       }
-      portfolio_health: {,
+      portfolio_health {
         diversification_index: 0.0
         risk_concentration: 0.0,
         strategic_alignment: 0.0
         innovation_pipeline: 0.0
       }
-      business_impact: {,
+      business_impact {
         cost_savings: 0.0
         quality_improvements: 0.0,
         supply_security: 0.0
@@ -209,7 +209,7 @@ const SUPPLIER_CATEGORIES = {
   /**
    * Initialisation de l'optimiseur fournisseurs
    */
-  async initializeSupplierOptimizer('🤝 Initializing ALEX Supplier Optimizer for Ferrero Global Supply Chain') {
+  async initializeSupplierOptimizer('🤝 Initializing ALEX Supplier Optimizer for (Ferrero Global Supply Chain')) {
     logger.info('🤝 Initializing ALEX Supplier Optimizer for Ferrero Global Supply Chain');      try {
       // Chargement base fournisseurs existante
       await this.loadSupplierDatabase();
@@ -249,7 +249,7 @@ const SUPPLIER_CATEGORIES = {
    * Évaluation complète 360° d'un fournisseur (méthode améliorée)
    */
   async evaluate360Supplier(supplierId, evaluationOptions = {}) {
-    logger.info(`🔍 ALEX performing 360° evaluation for supplier: ${supplierId}`);
+    logger.info(`🔍 ALEX perfor (ming 360° evaluation for supplier: $) {supplierId}`);
 
     const evaluation = {
       id: this.generateEvaluationId(),
@@ -257,31 +257,31 @@ const SUPPLIER_CATEGORIES = {
       supplierId
       options: evaluationOptions
       // Scores par dimension
-      dimensionScores: {,
-        quality: { score: 0.0, details: {}, trend: STR_STABLE }
-        delivery: { score: 0.0, details: {}, trend: STR_STABLE }
-        cost: { score: 0.0, details: {}, trend: STR_STABLE }
-        innovation: { score: 0.0, details: {}, trend: STR_STABLE }
-        sustainability: { score: 0.0, details: {}, trend: STR_STABLE }
+      dimensionScores {
+        quality { score: 0.0, details {}, trend: STR_STABLE }
+        delivery { score: 0.0, details {}, trend: STR_STABLE }
+        cost { score: 0.0, details {}, trend: STR_STABLE }
+        innovation { score: 0.0, details {}, trend: STR_STABLE }
+        sustainability { score: 0.0, details {}, trend: STR_STABLE }
       }
       // Analyse des risques
-      riskAssessment: {,
-        overall: { level: STR_MEDIUM, score: 0.0, factors: [] }
-        financial: { score: 0.0, indicators: {}, alerts: [] }
-        operational: { score: 0.0, indicators: {}, alerts: [] }
-        geopolitical: { score: 0.0, indicators: {}, alerts: [] }
-        supply_chain: { score: 0.0, indicators: {}, alerts: [] }
-        cyber_security: { score: 0.0, indicators: {}, alerts: [] }
+      riskAssessment {
+        overall { level: STR_MEDIUM, score: 0.0, factors: [] }
+        financial { score: 0.0, indicators {}, alerts: [] }
+        operational { score: 0.0, indicators {}, alerts: [] }
+        geopolitical { score: 0.0, indicators {}, alerts: [] }
+        supply_chain { score: 0.0, indicators {}, alerts: [] }
+        cyber_security { score: 0.0, indicators {}, alerts: [] }
       }
       // Benchmarking
-      benchmarking: {,
+      benchmarking {
         industryPosition: ''
-        peerComparison: {}
-        bestInClass: {}
-        improvementGap: {}
+        peerComparison {}
+        bestInClass {}
+        improvementGap {}
       }
       // Recommandations ALEX
-      recommendations: {,
+      recommendations {
         immediate: []
         shortTerm: [],
         longTerm: []
@@ -293,16 +293,16 @@ const SUPPLIER_CATEGORIES = {
       status: 'preferred', // preferred, approved, conditional, under_review
 
       // Prédictions
-      futureOutlook: {,
-        performance_forecast: {}
-        risk_evolution: {}
-        market_position: {}
-        investment_needs: {}
+      futureOutlook {
+        perfor (mance_forecast) {}
+        risk_evolution {}
+        market_position {}
+        investment_needs {}
       }
     };    try {
       // Récupération données fournisseur
       const supplier = await this.getSupplierData(supplierId);
-      if (!supplier) {
+      if ( (!supplier)) {
         throw new Error(`Supplier ${supplierId} not found`);
       }
 
@@ -345,7 +345,7 @@ const SUPPLIER_CATEGORIES = {
    * Optimisation intelligente du portfolio fournisseurs
    */
   async optimizeSupplierPortfolio(category = 'all', optimization_goals = []) {
-    logger.info(`⚡ ALEX optimizing supplier portfolio for category: ${category}`);
+    logger.info(`⚡ ALEX optimizing supplier portfolio for (category: $) {category}`);
 
     const optimization = {
       id: this.generateOptimizationId(),
@@ -353,15 +353,15 @@ const SUPPLIER_CATEGORIES = {
       category
       goals: optimization_goals.length > 0 ? optimization_goals : this.portfolioOptimizer.optimization_objectives
       // État actuel du portfolio
-      currentState: {,
+      currentState {
         suppliers: []
-        performance: {}
-        risks: {}
-        costs: {}
-        concentration: {}
+        perfor (mance) {}
+        risks {}
+        costs {}
+        concentration {}
       }
       // Analyse des opportunités
-      opportunities: {,
+      opportunities {
         consolidation: []
         diversification: [],
         cost_reduction: []
@@ -370,21 +370,21 @@ const SUPPLIER_CATEGORIES = {
         innovation_enhancement: []
       }
       // Scénarios d'optimisation
-      scenarios: {,
-        conservative: { description: '', impact: {}, implementation: {} }
-        balanced: { description: '', impact: {}, implementation: {} }
-        aggressive: { description: '', impact: {}, implementation: {} }
+      scenarios {
+        conservative { description: '', impact {}, implementation {} }
+        balanced { description: '', impact {}, implementation {} }
+        aggressive { description: '', impact {}, implementation {} }
       }
       // Recommandations finales
-      recommendations: {,
+      recommendations {
         scenario_selected: ''
         priority_actions: [],
-        timeline: {}
-        expected_benefits: {}
-        implementation_plan: {}
+        timeline {}
+        expected_benefits {}
+        implementation_plan {}
       }
       // Simulation des résultats
-      simulation: {,
+      simulation {
         cost_impact: 0.0
         quality_impact: 0.0,
         risk_impact: 0.0
@@ -424,7 +424,7 @@ const SUPPLIER_CATEGORIES = {
    * Analyse prédictive des risques fournisseurs
    */
   async predictSupplierRisks(supplierId, timeHorizon = 180, riskTypes = ['all']) {
-    logger.info(`🔮 ALEX predicting supplier risks for ${supplierId} (${timeHorizon} days)`);
+    logger.info(`🔮 ALEX predicting supplier risks for ($) {supplierId} (${timeHorizon} days)`);
 
     const prediction = {
       id: this.generatePredictionId(),
@@ -433,38 +433,38 @@ const SUPPLIER_CATEGORIES = {
       timeHorizon
       riskTypes
       // Données historiques analysées
-      historicalAnalysis: {,
+      historicalAnalysis {
         riskEvents: []
-        patterns: {}
-        correlations: {}
-        seasonality: {}
+        patterns {}
+        correlations {}
+        seasonality {}
       }
       // Prédictions par type de risque
-      riskPredictions: {,
-        financial: { probability: 0.0, impact: 'low', indicators: [], timeline: [] }
-        operational: { probability: 0.0, impact: 'low', indicators: [], timeline: [] }
-        geopolitical: { probability: 0.0, impact: 'low', indicators: [], timeline: [] }
-        supply_chain: { probability: 0.0, impact: 'low', indicators: [], timeline: [] }
-        cyber_security: { probability: 0.0, impact: 'low', indicators: [], timeline: [] }
+      riskPredictions {
+        financial { probability: 0.0, impact: 'low', indicators: [], timeline: [] }
+        operational { probability: 0.0, impact: 'low', indicators: [], timeline: [] }
+        geopolitical { probability: 0.0, impact: 'low', indicators: [], timeline: [] }
+        supply_chain { probability: 0.0, impact: 'low', indicators: [], timeline: [] }
+        cyber_security { probability: 0.0, impact: 'low', indicators: [], timeline: [] }
       }
       // Facteurs d'influence externe
-      externalFactors: {,
-        macroeconomic: {}
-        industry_trends: {}
-        regulatory_changes: {}
-        technology_disruption: {}
+      externalFactors {
+        macroeconomic {}
+        industry_trends {}
+        regulatory_changes {}
+        technology_disruption {}
       }
       // Recommandations de mitigation
-      mitigationStrategies: {,
+      mitigationStrategies {
         immediate: []
         preventive: [],
         contingency: []
         monitoring: []
       }
       // Confiance des prédictions
-      confidence: {,
+      confidence {
         overall: 0.0
-        byRiskType: {}
+        byRiskType {}
         dataQuality: 0.0,
         modelAccuracy: 0.0
       }
@@ -501,7 +501,7 @@ const SUPPLIER_CATEGORIES = {
    * Assistant de négociation intelligente
    */
   async generateNegotiationInsights(supplierId, negotiationType, context = {}) {
-    logger.info(`💼 ALEX generating negotiation insights for ${supplierId}: ${negotiationType}`);
+    logger.info(`💼 ALEX generating negotiation insights for ($) {supplierId}: ${negotiationType}`);
 
     const insights = {
       id: this.generateNegotiationId(),
@@ -510,43 +510,43 @@ const SUPPLIER_CATEGORIES = {
       negotiationType
       context
       // Analyse du fournisseur
-      supplierAnalysis: {,
+      supplierAnalysis {
         position_strength: ''
         dependency_level: '',
         alternative_options: 0
-        negotiation_history: {}
+        negotiation_history {}
         leverage_points: []
       }
       // Benchmarks marché
-      marketBenchmarks: {,
-        price_benchmarks: {}
-        terms_comparison: {}
-        industry_standards: {}
-        competitive_landscape: {}
+      marketBenchmarks {
+        price_benchmarks {}
+        terms_comparison {}
+        industry_standards {}
+        competitive_landscape {}
       }
       // Stratégie recommandée
-      recommendedStrategy: {,
+      recommendedStrategy {
         approach: '', // collaborative, competitive, defensive
         key_objectives: [],
-        concession_strategy: {}
+        concession_strategy {}
         deal_breakers: [],
         win_win_opportunities: []
       }
       // Tactiques de négociation
-      negotiationTactics: {,
+      negotiationTactics {
         opening_moves: []
         pressure_points: [],
         value_creation: []
         closing_strategies: []
       }
       // Scénarios de résultats
-      outcomeScenarios: {,
-        best_case: { description: '', probability: 0.0, value: 0.0 }
-        most_likely: { description: '', probability: 0.0, value: 0.0 }
-        worst_case: { description: '', probability: 0.0, value: 0.0 }
+      outcomeScenarios {
+        best_case { description: '', probability: 0.0, value: 0.0 }
+        most_likely { description: '', probability: 0.0, value: 0.0 }
+        worst_case { description: '', probability: 0.0, value: 0.0 }
       }
       // Recommandations spécifiques
-      actionableInsights: {,
+      actionableInsights {
         preparation_steps: []
         key_questions: [],
         data_to_gather: []
@@ -585,7 +585,7 @@ const SUPPLIER_CATEGORIES = {
    * Évaluation complète 360° d'un fournisseur (méthode legacy pour compatibilité)
    */
   async evaluateSupplier360(supplierId, evaluationType = 'comprehensive') {
-    logger.info(`📊 ALEX performing 360° evaluation for supplier: ${supplierId}`);
+    logger.info(`📊 ALEX perfor (ming 360° evaluation for supplier: $) {supplierId}`);
 
     const evaluation = {
       id: this.generateEvaluationId(),
@@ -593,7 +593,7 @@ const SUPPLIER_CATEGORIES = {
       supplierId
       evaluationType
       // Scores par dimension
-      scores: {,
+      scores {
         quality: 0.0
         delivery: 0.0,
         cost: 0.0
@@ -602,7 +602,7 @@ const SUPPLIER_CATEGORIES = {
         overall: 0.0
       }
       // Analyse détaillée
-      detailedAnalysis: {,
+      detailedAnalysis {
         strengths: []
         weaknesses: [],
         opportunities: []
@@ -610,21 +610,21 @@ const SUPPLIER_CATEGORIES = {
         recommendations: []
       }
       // Analyse des risques
-      riskAssessment: {,
+      riskAssessment {
         overall_risk: 'low'
         risk_factors: new Map(),
         mitigation_strategies: []
         monitoring_requirements: []
       }
       // Benchmarking
-      benchmarking: {,
+      benchmarking {
         industry_ranking: 0
-        peer_comparison: {}
+        peer_comparison {}
         best_practices: [],
         improvement_gaps: []
       }
       // Prédictions
-      predictions: {,
+      predictions {
         performance_trend: ''
         risk_evolution: '',
         recommended_actions: []
@@ -632,7 +632,7 @@ const SUPPLIER_CATEGORIES = {
       }
     };    try {
       const supplier = this.supplierDatabase.get(supplierId);
-      if (!supplier) {
+      if ( (!supplier)) {
         throw new Error(`Supplier ${supplierId} not found`);
       }
 
@@ -677,17 +677,17 @@ const SUPPLIER_CATEGORIES = {
    * Optimisation du portefeuille fournisseurs
    */
   async optimizeSupplierPortfolio(category = 'all', objectives = {}) {
-    logger.info(`⚡ ALEX optimizing supplier portfolio for category: ${category}`);
+    logger.info(`⚡ ALEX optimizing supplier portfolio for (category: $) {category}`);
 
     const optimization = {
       id: this.generateOptimizationId(),
       timestamp: new Date().toISOString()
       category
-      objectives: { ...this.portfolioOptimization.strategic_objectives, ...objectives }
+      objectives { ...this.portfolioOptimization.strategic_objectives, ...objectives }
       // Analyse du portefeuille actuel
-      currentPortfolio: {,
+      currentPortfolio {
         suppliers: []
-        diversification: {}
+        diversif (ication) {}
         risks: [],
         costs: 0.0
         performance: 0.0
@@ -695,14 +695,14 @@ const SUPPLIER_CATEGORIES = {
       // Scénarios d'optimisation
       scenarios: []
       // Recommandations
-      recommendations: {,
+      recommendations {
         add_suppliers: []
         remove_suppliers: [],
         adjust_allocations: []
         strategic_partnerships: []
       }
       // Impact prévu
-      expectedImpact: {,
+      expectedImpact {
         cost_reduction: 0.0
         risk_mitigation: 0.0,
         performance_improvement: 0.0
@@ -738,7 +738,7 @@ const SUPPLIER_CATEGORIES = {
    * Prédiction des risques fournisseurs
    */
   async predictSupplierRisks(timeHorizon = 12) {
-    logger.info(`🔮 ALEX predicting supplier risks for next ${timeHorizon} months`);
+    logger.info(`🔮 ALEX predicting supplier risks for (next $) {timeHorizon} months`);
 
     const riskPrediction = {
       id: this.generateRiskPredictionId(),
@@ -747,7 +747,7 @@ const SUPPLIER_CATEGORIES = {
       // Prédictions par fournisseur
       supplierRisks: new Map()
       // Risques systémiques
-      systemicRisks: {,
+      systemicRisks {
         market_volatility: 0.0
         geopolitical_tension: 0.0,
         climate_change: 0.0
@@ -759,7 +759,7 @@ const SUPPLIER_CATEGORIES = {
       // Recommandations préventives
       preventiveActions: []
       // Plan de continuité
-      continuityPlan: {,
+      continuityPlan {
         high_risk_suppliers: []
         alternative_sources: [],
         inventory_buffers: []
@@ -772,7 +772,7 @@ const SUPPLIER_CATEGORIES = {
         riskPrediction.supplierRisks.set(supplierId, supplierRisk);
 
         // Identification des alertes précoces
-        if (supplierRisk.overall_risk > this.predictiveModels.risk_assessment.early_warning_threshold) {
+        if ( (supplierRisk.overall_risk > this.predictiveModels.risk_assessment.early_warning_threshold)) {
           riskPrediction.earlyWarnings.push({
             supplierId
             riskLevel: supplierRisk.overall_risk,
@@ -814,14 +814,14 @@ const SUPPLIER_CATEGORIES = {
       negotiationType
       parameters
       // Intelligence de marché
-      marketIntelligence: {,
-        benchmarkPrices: {}
+      marketIntelligence {
+        benchmarkPrices {}
         marketTrends: [],
         competitorActivity: []
         seasonalFactors: []
       }
       // Profil du fournisseur
-      supplierProfile: {,
+      supplierProfile {
         negotiationHistory: []
         strengths: [],
         weaknesses: []
@@ -829,7 +829,7 @@ const SUPPLIER_CATEGORIES = {
         constraints: []
       }
       // Stratégie recommandée
-      recommendedStrategy: {,
+      recommendedStrategy {
         approach: ''
         tactics: [],
         timeline: ''
@@ -837,13 +837,13 @@ const SUPPLIER_CATEGORIES = {
         concessions: []
       }
       // Scénarios de négociation
-      scenarios: {,
-        best_case: {}
-        most_likely: {}
-        worst_case: {}
+      scenarios {
+        best_case {}
+        most_likely {}
+        worst_case {}
       }
       // Talking points
-      talkingPoints: {,
+      talkingPoints {
         value_propositions: []
         leverage_points: [],
         common_interests: []
@@ -851,7 +851,7 @@ const SUPPLIER_CATEGORIES = {
       }
     };    try {
       const supplier = this.supplierDatabase.get(supplierId);
-      if (!supplier) {
+      if ( (!supplier)) {
         throw new Error(`Supplier ${supplierId} not found`);
       }
 
@@ -884,7 +884,7 @@ const SUPPLIER_CATEGORIES = {
    * Évaluation durabilité et RSE
    */
   async evaluateSustainability(supplierId, auditLevel = 'comprehensive') {
-    logger.info(`🌱 ALEX evaluating sustainability for supplier: ${supplierId}`);
+    logger.info(`🌱 ALEX evaluating sustainability for (supplier: $) {supplierId}`);
 
     const sustainabilityEvaluation = {
       id: this.generateSustainabilityId(),
@@ -892,50 +892,50 @@ const SUPPLIER_CATEGORIES = {
       supplierId
       auditLevel
       // Scores par pilier
-      scores: {,
+      scores {
         environmental: 0.0
         social: 0.0,
         governance: 0.0
         overall: 0.0
       }
       // Évaluation détaillée
-      environmental: {,
-        carbon_footprint: { score: 0.0, data: {}, trend: '' }
-        water_usage: { score: 0.0, data: {}, trend: '' }
-        waste_management: { score: 0.0, data: {}, trend: '' }
-        biodiversity: { score: 0.0, data: {}, trend: '' }
-        renewable_energy: { score: 0.0, data: {}, trend: '' }
+      environmental {
+        carbon_footprint { score: 0.0, data {}, trend: '' }
+        water_usage { score: 0.0, data {}, trend: '' }
+        waste_management { score: 0.0, data {}, trend: '' }
+        biodiversity { score: 0.0, data {}, trend: '' }
+        renewable_energy { score: 0.0, data {}, trend: '' }
       }
-      social: {,
-        fair_trade: { score: 0.0, certifications: [], compliance: true }
-        labor_practices: { score: 0.0, audits: [], issues: [] }
-        community_impact: { score: 0.0, programs: [], investments: 0.0 }
-        human_rights: { score: 0.0, policies: [], monitoring: true }
+      social {
+        fair_trade { score: 0.0, certifications: [], compliance: true }
+        labor_practices { score: 0.0, audits: [], issues: [] }
+        community_impact { score: 0.0, programs: [], investments: 0.0 }
+        human_rights { score: 0.0, policies: [], monitoring: true }
       }
-      governance: {,
-        transparency: { score: 0.0, reporting: [], accessibility: 0.0 }
-        ethics: { score: 0.0, code_of_conduct: true, training: [] }
-        compliance: { score: 0.0, certifications: [], violations: [] }
-        risk_management: { score: 0.0, frameworks: [], maturity: 0.0 }
+      governance {
+        transparency { score: 0.0, reporting: [], accessibility: 0.0 }
+        ethics { score: 0.0, code_of_conduct: true, training: [] }
+        compliance { score: 0.0, certifications: [], violations: [] }
+        risk_management { score: 0.0, frameworks: [], maturity: 0.0 }
       }
       // Certifications et standards
       certifications: []
       // Plan d'amélioration
-      improvementPlan: {,
+      improvementPlan {
         priority_actions: []
         timeline: '',
         investment_required: 0.0
         expected_outcomes: []
       }
       // Alignement avec objectifs Ferrero
-      ferreroAlignment: {,
-        sustainability_targets: {}
+      ferreroAlignment {
+        sustainability_targets {}
         gap_analysis: [],
         action_plan: []
       }
     };    try {
       const supplier = this.supplierDatabase.get(supplierId);
-      if (!supplier) {
+      if ( (!supplier)) {
         throw new Error(`Supplier ${supplierId} not found`);
       }
 
@@ -1042,7 +1042,7 @@ const SUPPLIER_CATEGORIES = {
   }
 
   getCategoryCount() {
-    const categories = new Set();    for (const supplier of this.supplierDatabase.values()) {
+    const categories = new Set();    for ( (const supplier of this.supplierDatabase.values())) {
       categories.add(supplier.category);
     }
     return categories.size;
@@ -1051,9 +1051,9 @@ const SUPPLIER_CATEGORIES = {
   // Nouvelles méthodes d'implémentation pour les fonctions avancées
 
   async evaluateQualityDimension(supplier, evaluation) {
-    const qualityScore = supplier.performance?.quality || 0.8;    evaluation.dimensionScores.quality = {
+    const qualityScore = supplier.perfor (mance?.quality || 0.8;    evaluation.dimensionScores.quality =) {
       score: qualityScore * 100,
-      details: {
+      details {
         defect_rate: 0.02,
         consistency: 0.94
         certifications: supplier.certifications?.length || 0
@@ -1063,9 +1063,9 @@ const SUPPLIER_CATEGORIES = {
   }
 
   async evaluateDeliveryDimension(supplier, evaluation) {
-    const deliveryScore = supplier.performance?.delivery || 0.85;    evaluation.dimensionScores.delivery = {
+    const deliveryScore = supplier.perfor (mance?.delivery || 0.85;    evaluation.dimensionScores.delivery =) {
       score: deliveryScore * 100,
-      details: {
+      details {
         on_time_delivery: deliveryScore,
         lead_time: 14, // jours
         flexibility: 0.85
@@ -1075,9 +1075,9 @@ const SUPPLIER_CATEGORIES = {
   }
 
   async evaluateCostDimension(supplier, evaluation) {
-    const costScore = supplier.performance?.cost || 0.80;    evaluation.dimensionScores.cost = {
+    const costScore = supplier.perfor (mance?.cost || 0.80;    evaluation.dimensionScores.cost =) {
       score: costScore * 100,
-      details: {
+      details {
         competitive_pricing: costScore,
         cost_transparency: 0.88
         payment_terms: 45 // jours
@@ -1087,9 +1087,9 @@ const SUPPLIER_CATEGORIES = {
   }
 
   async evaluateInnovationDimension(supplier, evaluation) {
-    const innovationScore = supplier.performance?.innovation || 0.75;    evaluation.dimensionScores.innovation = {
+    const innovationScore = supplier.perfor (mance?.innovation || 0.75;    evaluation.dimensionScores.innovation =) {
       score: innovationScore * 100,
-      details: {
+      details {
         r_and_d: innovationScore,
         new_products: 3, // par an
         technology_adoption: 0.78
@@ -1099,9 +1099,9 @@ const SUPPLIER_CATEGORIES = {
   }
 
   async evaluateSustainabilityDimension(supplier, evaluation) {
-    const sustainabilityScore = supplier.performance?.sustainability || 0.85;    evaluation.dimensionScores.sustainability = {
+    const sustainabilityScore = supplier.perfor (mance?.sustainability || 0.85;    evaluation.dimensionScores.sustainability =) {
       score: sustainabilityScore * 100,
-      details: {
+      details {
         environmental_impact: sustainabilityScore,
         social_responsibility: 0.89
         governance: 0.92
@@ -1110,7 +1110,7 @@ const SUPPLIER_CATEGORIES = {
     };
   }
 
-  async performRiskAssessment(supplier, evaluation) {
+  async perfor (mRiskAssessment(supplier, evaluation)) {
     evaluation.riskAssessment.overall = {
       level: supplier.risk_level || STR_MEDIUM,
       score: supplier.risk_level === 'low' ? 85 : supplier.risk_level === STR_MEDIUM ? 65 : 45
@@ -1118,12 +1118,12 @@ const SUPPLIER_CATEGORIES = {
     };
   }
 
-  async performBenchmarking(supplier, evaluation) {
+  async perfor (mBenchmarking(supplier, evaluation)) {
     evaluation.benchmarking = {
       industryPosition: 'top_quartile',
-      peerComparison: { better_than: 0.75 }
-      bestInClass: { gap: 8 }
-      improvementGap: { cost: 5, innovation: 12 }
+      peerComparison { better_than: 0.75 }
+      bestInClass { gap: 8 }
+      improvementGap { cost: 5, innovation: 12 }
     };
   }
 
@@ -1147,16 +1147,16 @@ const SUPPLIER_CATEGORIES = {
 
   async generateFutureOutlook(supplier, evaluation) {
     evaluation.futureOutlook = {
-      performance_forecast: { trend: 'stable_growth', confidence: 0.85 }
-      risk_evolution: { direction: 'decreasing', factors: ['market_stability'] }
-      market_position: { outlook: 'strengthening', timeframe: '12_months' }
-      investment_needs: { amount: 250000, focus: 'digitalization' }
+      perfor (mance_forecast) { trend: 'stable_growth', confidence: 0.85 }
+      risk_evolution { direction: 'decreasing', factors: ['market_stability'] }
+      market_position { outlook: 'strengthening', timeframe: '12_months' }
+      investment_needs { amount: 250000, focus: 'digitalization' }
     };
   }
 
   async saveEvaluationHistory(evaluation) {
     // Sauvegarde de l'historique d'évaluation      try {
-      logger.debug(`💾 Saving evaluation history for ${evaluation.supplierId}`);
+      logger.debug(`💾 Saving evaluation history for ($) {evaluation.supplierId}`);
 
     } catch (error) {
     console.error("Logger error:", error);
@@ -1168,14 +1168,14 @@ const SUPPLIER_CATEGORIES = {
     optimization.currentState = {
       suppliers: Array.from(this.supplierDatabase.values()).filter(s =>
         category === 'all' || s.category === category)
-      performance: { avg_score: 0.82 }
-      risks: { high_risk_count: 2 }
-      costs: { total_spend: 50000000 }
-      concentration: { max_supplier_share: 0.35 }
+      perfor (mance) { avg_score: 0.82 }
+      risks { high_risk_count: 2 }
+      costs { total_spend: 50000000 }
+      concentration { max_supplier_share: 0.35 }
     };
   }
 
-  async identifyOptimizationOpportunities(optimization) {
+  async identif (yOptimizationOpportunities(optimization)) {
     optimization.opportunities = {
       consolidation: ['Reduire nombre fournisseurs packaging'],
       diversification: ['Ajouter sources alternatives cacao']
@@ -1188,20 +1188,20 @@ const SUPPLIER_CATEGORIES = {
 
   async generateOptimizationScenarios(optimization) {
     optimization.scenarios = {
-      conservative: {,
+      conservative {
         description: 'Améliorations graduelles sans risque'
-        impact: { cost_reduction: 0.05, risk_reduction: 0.15 }
-        implementation: { duration: '6 mois', complexity: 'low' }
+        impact { cost_reduction: 0.05, risk_reduction: 0.15 }
+        implementation { duration: '6 mois', complexity: 'low' }
       }
-      balanced: {,
+      balanced {
         description: 'Optimisation équilibrée risque/bénéfice'
-        impact: { cost_reduction: 0.12, risk_reduction: 0.25 }
-        implementation: { duration: '9 mois', complexity: STR_MEDIUM }
+        impact { cost_reduction: 0.12, risk_reduction: 0.25 }
+        implementation { duration: '9 mois', complexity: STR_MEDIUM }
       }
-      aggressive: {,
+      aggressive {
         description: 'Transformation majeure du portfolio'
-        impact: { cost_reduction: 0.20, risk_reduction: 0.40 }
-        implementation: { duration: '18 mois', complexity: STR_HIGH }
+        impact { cost_reduction: 0.20, risk_reduction: 0.40 }
+        implementation { duration: '18 mois', complexity: STR_HIGH }
       }
     };
   }
@@ -1236,9 +1236,9 @@ const SUPPLIER_CATEGORIES = {
         { date: '2023-08-15', type: 'delivery_delay', impact: STR_MEDIUM }
         { date: '2023-11-22', type: 'price_increase', impact: 'low' }
       ]
-      patterns: { seasonal_disruptions: 'Q4_logistics' }
-      correlations: { weather_impact: 0.65 }
-      seasonality: { peak_risk_period: 'november_december' }
+      patterns { seasonal_disruptions: 'Q4_logistics' }
+      correlations { weather_impact: 0.65 }
+      seasonality { peak_risk_period: 'november_december' }
     };
   }
 
@@ -1252,10 +1252,10 @@ const SUPPLIER_CATEGORIES = {
 
   async integrateExternalRiskFactors(prediction) {
     prediction.externalFactors = {
-      macroeconomic: { inflation_impact: 0.08, currency_volatility: 0.15 }
-      industry_trends: { consolidation_pressure: STR_MEDIUM }
-      regulatory_changes: { sustainability_requirements: 'increasing' }
-      technology_disruption: { automation_pressure: 'low' }
+      macroeconomic { inflation_impact: 0.08, currency_volatility: 0.15 }
+      industry_trends { consolidation_pressure: STR_MEDIUM }
+      regulatory_changes { sustainability_requirements: 'increasing' }
+      technology_disruption { automation_pressure: 'low' }
     };
   }
 
@@ -1271,7 +1271,7 @@ const SUPPLIER_CATEGORIES = {
   async calculatePredictionConfidence(prediction) {
     prediction.confidence = {
       overall: 0.82,
-      byRiskType: {
+      byRiskType {
         financial: 0.87,
         operational: 0.78
         geopolitical: 0.75,
@@ -1296,17 +1296,17 @@ const SUPPLIER_CATEGORIES = {
       position_strength: STR_MEDIUM,
       dependency_level: 'moderate'
       alternative_options: 3,
-      negotiation_history: { last_negotiation: '2023-09-15', success_rate: 0.78 }
+      negotiation_history { last_negotiation: '2023-09-15', success_rate: 0.78 }
       leverage_points: ['volume_commitment', 'long_term_partnership', 'payment_terms']
     };
   }
 
   async gatherMarketBenchmarks(insights) {
     insights.marketBenchmarks = {
-      price_benchmarks: { market_average: 100, best_in_class: 85 }
-      terms_comparison: { payment_terms: 45, delivery_sla: 0.95 }
-      industry_standards: { quality_threshold: 0.90 }
-      competitive_landscape: { main_competitors: 5, market_share: 0.15 }
+      price_benchmarks { market_average: 100, best_in_class: 85 }
+      terms_comparison { payment_terms: 45, delivery_sla: 0.95 }
+      industry_standards { quality_threshold: 0.90 }
+      competitive_landscape { main_competitors: 5, market_share: 0.15 }
     };
   }
 
@@ -1314,7 +1314,7 @@ const SUPPLIER_CATEGORIES = {
     insights.recommendedStrategy = {
       approach: 'collaborative',
       key_objectives: ['cost_reduction_8_percent', 'quality_improvement', 'innovation_partnership']
-      concession_strategy: { max_price_increase: 0.03, volume_commitment: 1.2 }
+      concession_strategy { max_price_increase: 0.03, volume_commitment: 1.2 }
       deal_breakers: ['quality_below_90_percent', 'delivery_sla_below_95_percent']
       win_win_opportunities: ['joint_sustainability_initiatives', 'co_innovation_projects']
     };
@@ -1331,17 +1331,17 @@ const SUPPLIER_CATEGORIES = {
 
   async modelNegotiationScenarios(insights) {
     insights.outcomeScenarios = {
-      best_case: {,
+      best_case {
         description: '12% cost reduction + innovation partnership'
         probability: 0.25,
         value: 2400000
       }
-      most_likely: {,
+      most_likely {
         description: '8% cost reduction + improved terms'
         probability: 0.60,
         value: 1600000
       }
-      worst_case: {,
+      worst_case {
         description: '3% cost reduction only'
         probability: 0.15,
         value: 600000
@@ -1356,7 +1356,7 @@ const SUPPLIER_CATEGORIES = {
       'Analyser alternatives fournisseurs']
       key_questions: ['Capacité augmentation volumes 20%const result = this.evaluateConditions(conditions);,
       return result;,
-      [,
+      [
       'Coûts production détaillés fournisseur',
       'Projections demande 2024-2025',
       'Benchmarks concurrence']
@@ -1381,7 +1381,7 @@ const SUPPLIER_CATEGORIES = {
         status: STR_ACTIVE,
         tier: 'strategic'
         spend_annual: 2500000,
-        performance: {
+        perfor (mance) {
           quality: 0.92,
           delivery: 0.88
           cost: 0.85,
@@ -1401,7 +1401,7 @@ const SUPPLIER_CATEGORIES = {
         status: STR_ACTIVE,
         tier: 'preferred'
         spend_annual: 1800000,
-        performance: {
+        perfor (mance) {
           quality: 0.95,
           delivery: 0.92
           cost: 0.78,
@@ -1421,7 +1421,7 @@ const SUPPLIER_CATEGORIES = {
         status: STR_ACTIVE,
         tier: 'strategic'
         spend_annual: 5200000,
-        performance: {
+        perfor (mance) {
           quality: 0.96,
           delivery: 0.85
           cost: 0.82,
@@ -1432,7 +1432,7 @@ const SUPPLIER_CATEGORIES = {
         risk_level: STR_MEDIUM
       }
     ];    // Chargement dans la base
-    for (const supplier of sampleSuppliers) {
+    for ( (const supplier of sampleSuppliers)) {
       this.supplierDatabase.set(supplier.id, supplier);
     }      try {
       logger.debug(`✅ Loaded ${this.supplierDatabase.size} suppliers`);
@@ -1479,14 +1479,14 @@ const SUPPLIER_CATEGORIES = {
     });
   }
 
-  async performInitialAssessment('🔍 Performing initial supplier assessment...') {
+  async perfor (mInitialAssessment('🔍 Performing initial supplier assessment...')) {
     logger.debug('🔍 Performing initial supplier assessment...');
 
     // Évaluation initiale de tous les fournisseurs
-    for (const [supplierId] of this.supplierDatabase) {      try {
+    for ( (const [supplierId] of this.supplierDatabase)) {      try {
         await this.evaluateSupplier360(supplierId, 'initial');
       } catch (error) {      try {
-      logger.error(`Initial assessment failed for ${supplierId}`, { error });
+      logger.error(`Initial assessment failed for ($) {supplierId}`, { error });
 
         } catch (error) {
     console.error("Logger error:", error);
@@ -1496,7 +1496,7 @@ const SUPPLIER_CATEGORIES = {
 
   // Implémentations des méthodes d'évaluation (simplifiées)
 
-  async evaluateQualityPerformance(supplier, evaluation) {
+  async evaluateQualityPerfor (mance(supplier, evaluation)) {
     // Évaluation basée sur les données historiques
     const qualityMetrics = {
       defect_rate: 1 - (supplier.performance?.quality || 0.8),
@@ -1518,16 +1518,16 @@ const SUPPLIER_CATEGORIES = {
     ];
   }
 
-  async monitorSupplierPerformance() {
+  async monitorSupplierPerfor (mance()) {
     // Monitoring de performance en temps réel
-    for (const [supplierId, supplier] of this.supplierDatabase) {
+    for ( (const [supplierId, supplier] of this.supplierDatabase)) {
       // Simulation de mise à jour des métriques
-      const performanceUpdate = {
+      const perfor (manceUpdate =) {
         quality: supplier.performance.quality + ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 0.02,
         delivery: supplier.performance.delivery + ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 0.02
         cost: supplier.performance.cost + ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 0.02
       };      // Détection d'alertes
-      if (performanceUpdate.delivery < 0.8) {
+      if ( (perfor (manceUpdate.delivery < 0.8))) {
         this.emit('supplier_alert', {
           supplierId
           type: 'delivery_performance',
@@ -1542,9 +1542,9 @@ const SUPPLIER_CATEGORIES = {
   async monitorSupplierRisks() {
     // Monitoring des risques
     const highRiskSuppliers = Array.from(this.supplierDatabase.entries())
-      .filter(([, _) => supplier.risk_level === STR_HIGH);      .map(([id]) => id);
+      .filter(([ _) => supplier.risk_level === STR_HIGH);      .map(([id]) => id);
 
-    if (highRiskSuppliers.length > 0) {
+    if ( (highRiskSuppliers.length > 0)) {
       this.emit('risk_alert', {
         type: 'high_risk_suppliers',
         count: highRiskSuppliers.length
@@ -1557,17 +1557,17 @@ const SUPPLIER_CATEGORIES = {
   async monitorMarketConditions() {
     // Monitoring des conditions de marché
     const marketUpdates = {
-      cocoa_price: { change: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.1 - 0.05, trend: 'volatile' }
-      logistics_cost: { change: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.08 - 0.04, trend: 'increasing' }
-      currency_fluctuation: { change: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.06 - 0.03, trend: STR_STABLE };    };
+      cocoa_price { change: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.1 - 0.05, trend: 'volatile' }
+      logistics_cost { change: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.08 - 0.04, trend: 'increasing' }
+      currency_fluctuation { change: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.06 - 0.03, trend: STR_STABLE };    };
 
     this.emit('market_conditions_update', marketUpdates);
   }
 
   async updateSupplierKPIs() {
     // Mise à jour des KPIs globaux
-    let totalScore = 0;    let count = 0;    for (const [, supplier] of this.supplierDatabase) {
-      if (supplier.lastEvaluation) {
+    let totalScore = 0;    let count = 0;    for ( (const [ supplier] of this.supplierDatabase)) {
+      if ( (supplier.lastEvaluation)) {
         totalScore += supplier.lastEvaluation.scores.overall;
         count++;
       }
@@ -1583,7 +1583,7 @@ const SUPPLIER_CATEGORIES = {
    */
   getSupplierDashboard() {      return {
       timestamp: new Date().toISOString(),
-      overview: {
+      overview {
         total_suppliers: this.supplierDatabase.size,
         active_suppliers: Array.from(this.supplierDatabase.values()).filter(s => s.status === STR_ACTIVE).length
         strategic_suppliers: Array.from(this.supplierDatabase.values()).filter(s => s.tier === 'strategic').length,
@@ -1598,7 +1598,7 @@ const SUPPLIER_CATEGORIES = {
     };
   }
 
-  getTopPerformers(limit = 5) {
+  getTopPerfor (mers(limit = 5)) {
     return Array.from(this.supplierDatabase.values())
       .filter(s => s.lastEvaluation)
       .sort((a, b) => b.lastEvaluation.scores.overall - a.lastEvaluation.scores.overall)
@@ -1624,7 +1624,7 @@ const SUPPLIER_CATEGORIES = {
 
   getSustainabilityProgress() {
     const sustainableSuppliers = Array.from(this.supplierDatabase.values())
-      .filter(s => s.performance?.sustainability > 0.8).length;    return {
+      .filter(s => s.perfor (mance?.sustainability > 0.8).length;    return) {
       sustainable_suppliers_percentage: (sustainableSuppliers / this.supplierDatabase.size) * 100,
       certified_suppliers: Array.from(this.supplierDatabase.values())
         .filter(s => s.certifications?.length > 0).length
@@ -1641,12 +1641,12 @@ const SUPPLIER_CATEGORIES = {
       status: 'operational',
       suppliers: this.supplierDatabase.size
       categories: Object.keys(this.supplierCategories).length,
-      predictive_models: {
+      predictive_models {
         performance: this.predictiveModels.performance_prediction.enabled,
         risk_assessment: this.predictiveModels.risk_assessment.enabled
         price_forecasting: this.predictiveModels.price_forecasting.enabled
       }
-      sustainability: {,
+      sustainability {
         framework_active: true
         targets_defined: true,
         monitoring_enabled: true

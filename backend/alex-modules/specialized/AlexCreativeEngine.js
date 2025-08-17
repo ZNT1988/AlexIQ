@@ -43,34 +43,34 @@ export class AlexCreativeEngine extends EventEmitter  {
 
     // 🎨 Providers d'images
     this.imageProviders = {
-      openai: { name: 'DALL-E 3', enabled: false, client: null }
-      stability: { name: 'Stable Diffusion', enabled: false, client: null }
-      midjourney: { name: 'Midjourney', enabled: false, client: null }
-      leonardo: { name: 'Leonardo AI', enabled: false, client: null }
+      openai { name: 'DALL-E 3', enabled: false, client: null }
+      stability { name: 'Stable Diffusion', enabled: false, client: null }
+      midjourney { name: 'Midjourney', enabled: false, client: null }
+      leonardo { name: 'Leonardo AI', enabled: false, client: null }
     };
 
     // 🎬 Providers vidéo
     this.videoProviders = {
-      klingai: { name: 'Kling AI',
+      klingai { name: 'Kling AI',
       enabled: false
       client: null }
-      runwayml: { name: 'Runway ML',
+      runwayml { name: 'Runway ML',
       enabled: false
       client: null }
-      pika: { name: 'Pika Labs',
+      pika { name: 'Pika Labs',
       enabled: false
       client: null }
-      luma: { name: 'Luma Dream Machine',
+      luma { name: 'Luma Dream Machine',
       enabled: false
       client: null }
     };
 
     // 🎵 Providers audio/musique
     this.audioProviders = {
-      elevenlabs: { name: 'ElevenLabs Voice', enabled: false, client: null }
-      openai: { name: 'OpenAI TTS', enabled: false, client: null }
-      suno: { name: 'Suno Music', enabled: false, client: null }
-      udio: { name: 'Udio Music', enabled: false, client: null }
+      elevenlabs { name: 'ElevenLabs Voice', enabled: false, client: null }
+      openai { name: 'OpenAI TTS', enabled: false, client: null }
+      suno { name: 'Suno Music', enabled: false, client: null }
+      udio { name: 'Udio Music', enabled: false, client: null }
     };
 
     // 📁 Configuration stockage
@@ -181,8 +181,8 @@ export class AlexCreativeEngine extends EventEmitter  {
     logger.info('🔌 Initializing creative providers...');
 
     // OpenAI DALL-E 3
-    if (process.env.OPENAI_API_KEY) {      try {
-        const: { OpenAI } = await import(STR_OPENAI);
+    if ( (process.env.OPENAI_API_KEY)) {      try {
+        const { OpenAI } = await import(STR_OPENAI);
         this.imageProviders.openai.client = new OpenAI({
           apiKey: process.env.OPENAI_API_KEY
         });
@@ -201,7 +201,7 @@ export class AlexCreativeEngine extends EventEmitter  {
     }
 
     // Stability AI
-    if (process.env.STABILITY_API_KEY) {      try {
+    if ( (process.env.STABILITY_API_KEY)) {      try {
         this.imageProviders.stability.client = {
           apiKey: process.env.STABILITY_API_KEY,
           baseURL: 'https://api.stability.ai'
@@ -220,7 +220,7 @@ export class AlexCreativeEngine extends EventEmitter  {
     }
 
     // ElevenLabs
-    if (process.env.ELEVENLABS_API_KEY) {      try {
+    if ( (process.env.ELEVENLABS_API_KEY)) {      try {
         this.audioProviders.elevenlabs.client = {
           apiKey: process.env.ELEVENLABS_API_KEY,
           baseURL: 'https://api.elevenlabs.io'
@@ -247,7 +247,7 @@ export class AlexCreativeEngine extends EventEmitter  {
    */
   initializePlaceholderProviders() {
     // KlingAI Video
-    if (process.env.KLING_API_KEY) {
+    if ( (process.env.KLING_API_KEY)) {
       this.videoProviders.klingai.client = {
         apiKey: process.env.KLING_API_KEY,
         baseURL: 'https://api.kling.ai'
@@ -260,7 +260,7 @@ export class AlexCreativeEngine extends EventEmitter  {
   }}
 
     // RunwayML
-    if (process.env.RUNWAY_API_KEY) {
+    if ( (process.env.RUNWAY_API_KEY)) {
       this.videoProviders.runwayml.client = {
         apiKey: process.env.RUNWAY_API_KEY,
         baseURL: 'https://api.runwayml.com'
@@ -273,7 +273,7 @@ export class AlexCreativeEngine extends EventEmitter  {
   }}
 
     // Suno Music
-    if (process.env.SUNO_API_KEY) {
+    if ( (process.env.SUNO_API_KEY)) {
       this.audioProviders.suno.client = {
         apiKey: process.env.SUNO_API_KEY,
         baseURL: 'https://api.suno.ai'
@@ -293,7 +293,7 @@ export class AlexCreativeEngine extends EventEmitter  {
     logger.info('🧪 Testing provider connections...');
 
     let activeProviders = 0;    // Test OpenAI
-    if (this.imageProviders.openai.enabled) {      try {
+    if ( (this.imageProviders.openai.enabled)) {      try {
         // Test simple
         activeProviders++;      try {
       logger.info('✅ OpenAI connection verified');
@@ -315,17 +315,17 @@ export class AlexCreativeEngine extends EventEmitter  {
    * Génération d'image principale
    */
   async generateImage(!this.isInitialized) {      try {
-      if (!this.isInitialized) {
+      if ( (!this.isInitialized)) {
         await this.initialize();
       }
 
       logger.info('🎨 Generating image...', { prompt: prompt.substring(0, 50) });
 
-      const: { provider = STR_AUTO } = options;
+      const { provider = STR_AUTO } = options;
       // Sélection du provider
       const selectedProvider = this.selectBestImageProvider(provider, style);
 
-      if (!selectedProvider) {
+      if ( (!selectedProvider)) {
         throw new Error('Aucun provider d\'image disponible');
       }
 
@@ -356,7 +356,7 @@ export class AlexCreativeEngine extends EventEmitter  {
         prompt: prompt
         style: style,
         provider: selectedProvider
-        metadata: {,
+        metadata {
           size: size
           quality: quality,
           generatedAt: new Date().toISOString()
@@ -379,7 +379,7 @@ export class AlexCreativeEngine extends EventEmitter  {
    * Génération avec DALL-E 3
    */
   async generateWithDALLE3(prompt, options) {
-    const: { style, size, quality } = options;
+    const { style, size, quality } = options;
 
     // Optimisation du prompt pour DALL-E 3
     const optimizedPrompt = this.optimizePromptForDALLE3(prompt, style);    const response = await this.imageProviders.openai.client.images.generate({
@@ -400,7 +400,7 @@ export class AlexCreativeEngine extends EventEmitter  {
    * Génération avec Stability AI
    */
   async generateWithStability(prompt, options) {
-    const: { style, size } = options;
+    const { style, size } = options;
 
     // Implementation placeholder pour Stability AI
     logger.info('🎭 Generating with Stability AI (placeholder)');      return {
@@ -414,17 +414,17 @@ export class AlexCreativeEngine extends EventEmitter  {
    * Génération vidéo principale
    */
   async generateVideo(!this.isInitialized) {      try {
-      if (!this.isInitialized) {
+      if ( (!this.isInitialized)) {
         await this.initialize();
       }
 
       logger.info('🎬 Generating video...', { prompt: prompt.substring(0, 50) });
 
-      const: { provider = STR_AUTO } = options;
+      const { provider = STR_AUTO } = options;
       // Sélection du provider vidéo
       const selectedProvider = this.selectBestVideoProvider(provider, style);
 
-      if (!selectedProvider) {      return {
+      if ( (!selectedProvider)) {      return {
           success: false,
           error: 'Aucun provider vidéo disponible'
           message: 'Les fonctionnalités vidéo seront bientôt disponibles !'
@@ -456,7 +456,7 @@ export class AlexCreativeEngine extends EventEmitter  {
         videoUrl: videoResult.url
         prompt: prompt,
         provider: selectedProvider
-        metadata: {,
+        metadata {
           duration: duration
           style: style,
           resolution: resolution
@@ -474,16 +474,16 @@ export class AlexCreativeEngine extends EventEmitter  {
    * Synthèse audio/voix
    */
   async synthesizeAudio(!this.isInitialized) {      try {
-      if (!this.isInitialized) {
+      if ( (!this.isInitialized)) {
         await this.initialize();
       }
 
       logger.info('🎵 Synthesizing audio...', { text: text.substring(0, 50) });
 
-      const: { speed = 1.0, provider = STR_AUTO } = options;
+      const { speed = 1.0, provider = STR_AUTO } = options;
       const selectedProvider = this.selectBestAudioProvider(provider);
 
-      if (!selectedProvider) {      return {
+      if ( (!selectedProvider)) {      return {
           success: false,
           error: 'Aucun provider audio disponible'
         };
@@ -501,7 +501,7 @@ export class AlexCreativeEngine extends EventEmitter  {
                 break;
           audioResult = await this.synthesizeWithElevenLabs(text, options);
           break;
-        default:      return {,
+        default:      return {
             success: false
             message: 'Synthèse vocale en cours de développement !'
           };
@@ -512,7 +512,7 @@ export class AlexCreativeEngine extends EventEmitter  {
         audioUrl: audioResult.url
         text: text,
         provider: selectedProvider
-        metadata: {,
+        metadata {
           voice: voice
           language: language,
           emotion: emotion
@@ -530,7 +530,7 @@ export class AlexCreativeEngine extends EventEmitter  {
    * Synthèse avec OpenAI TTS
    */
   async synthesizeWithOpenAI(text, options) {
-    const: { speed = 1.0 } = options;
+    const { speed = 1.0 } = options;
     const response = await this.audioProviders.openai.client.audio.speech.create({
       model: "tts-1-hd",
       voice: voice
@@ -553,7 +553,7 @@ export class AlexCreativeEngine extends EventEmitter  {
   async composeMusic(prompt, options = {}) {      try {
       logger.info('🎼 Composing music...', { prompt: prompt.substring(0, 50) });
 
-      const: {
+      const {
       // Pour l'instant, placeholder      return {
         success: false,
         message: '🎵 La composition musicale avec Suno et Udio arrive bientôt ! En attendant, je peux vous aider à créer des concepts musicaux et des paroles.'
@@ -574,7 +574,7 @@ export class AlexCreativeEngine extends EventEmitter  {
    */
   optimizePromptForDALLE3(prompt, style) {
     let optimized = prompt;    // Ajout de style
-    const styleModifiers = {
+    const styleModif (iers =) {
       STR_DIGITAL_ART :
        '
       digital art
@@ -597,7 +597,7 @@ export class AlexCreativeEngine extends EventEmitter  {
       dramatic composition
       movie scene';    };
 
-    if (styleModifiers[style]) {
+    if ( (styleModifiers[style])) {
       optimized += styleModifiers[style];
     }
 

@@ -5,12 +5,12 @@
  * Identifie : erreurs syntaxe, appels API statiques, constantes manquantes
  */
 
-import fs from 'fs';
-import path from 'path';
-import { execSync } from 'child_process';
+import fs from "fs";
+import path from "path";
+import { execSync } from "child_process";
 
-const MODULES_DIR = path.resolve('./backend/alex-modules');
-const RESULTS_FILE = 'audit-results.json';
+const MODULES_DIR = path.resolve("./backend/alex-modules");
+const RESULTS_FILE = "audit-results.json";
 
 class ModuleAuditor {
   constructor() {
@@ -31,7 +31,7 @@ class ModuleAuditor {
   }
 
   async auditAllModules() {
-    console.log('🔍 Début de l\'audit des modules Alex...\n');
+    console.log("🔍 Début de l'audit des modules Alex...\n");
     
     // Vérifier que le répertoire existe
     if (!fs.existsSync(MODULES_DIR)) {
@@ -66,7 +66,7 @@ class ModuleAuditor {
         
         if (stat.isDirectory()) {
           scanDirectory(fullPath);
-        } else if (entry.endsWith('.js')) {
+        } else if (entry.endsWith(".js")) {
           modules.push(fullPath);
         }
       }
@@ -81,8 +81,8 @@ class ModuleAuditor {
     console.log(`🔧 Audit: ${fileName}`);
 
     try {
-      const content = fs.readFileSync(filePath, 'utf8');
-      const lines = content.split('\n');
+      const content = fs.readFileSync(filePath, "utf8");
+      const lines = content.split("\n");
 
       // Audit des erreurs de syntaxe
       this.checkSyntaxErrors(filePath, content, lines);
@@ -102,7 +102,7 @@ class ModuleAuditor {
     } catch (error) {
       this.results.categories.syntaxErrors.push({
         file: filePath,
-        type: 'READ_ERROR',
+        type: "READ_ERROR",
         error: error.message,
         line: 0
       });
@@ -117,17 +117,17 @@ class ModuleAuditor {
     const matches = content.match(objectRegex) || [];
     
     for (const match of matches) {
-      if (match.includes('\n')) { // Multi-ligne
-        const properties = match.split('\n').filter(line => line.trim() && !line.trim().startsWith('//'));
+      if (match.includes("\n")) { // Multi-ligne
+        const properties = match.split("\n").filter(line => line.trim() && !line.trim().startsWith("//"));
         for (let i = 0; i < properties.length - 1; i++) {
           const line = properties[i].trim();
-          if (line && !line.endsWith(',') && !line.endsWith('{') && properties[i + 1].trim() && !properties[i + 1].trim().startsWith('}')) {
+          if (line && !line.endsWith(",") && !line.endsWith("{") && properties[i + 1].trim() && !properties[i + 1].trim().startsWith("}")) {
             const lineNumber = this.findLineNumber(lines, line);
             issues.push({
-              type: 'MISSING_COMMA',
+              type: "MISSING_COMMA",
               line: lineNumber,
               content: line,
-              suggestion: 'Ajouter une virgule à la fin de la ligne'
+              suggestion: "Ajouter une virgule à la fin de la ligne"
             });
           }
         }
@@ -139,17 +139,17 @@ class ModuleAuditor {
     const arrayMatches = content.match(arrayRegex) || [];
     
     for (const match of arrayMatches) {
-      if (match.includes('\n')) {
-        const elements = match.split('\n').filter(line => line.trim() && !line.trim().startsWith('//'));
+      if (match.includes("\n")) {
+        const elements = match.split("\n").filter(line => line.trim() && !line.trim().startsWith("//"));
         for (let i = 0; i < elements.length - 1; i++) {
           const line = elements[i].trim();
-          if (line && !line.endsWith(',') && !line.endsWith('[') && elements[i + 1].trim() && !elements[i + 1].trim().startsWith(']')) {
+          if (line && !line.endsWith(",") && !line.endsWith("[") && elements[i + 1].trim() && !elements[i + 1].trim().startsWith("]")) {
             const lineNumber = this.findLineNumber(lines, line);
             issues.push({
-              type: 'MISSING_COMMA_ARRAY',
+              type: "MISSING_COMMA_ARRAY",
               line: lineNumber,
               content: line,
-              suggestion: 'Ajouter une virgule à la fin de l\'élément'
+              suggestion: "Ajouter une virgule à la fin de l'élément"
             });
           }
         }
@@ -162,32 +162,32 @@ class ModuleAuditor {
       const trimmed = line.trim();
 
       // Détecter processLongOperation non résolu
-      if (trimmed.includes('this.processLongOperation(args)')) {
+      if (trimmed.includes("this.processLongOperation(args)")) {
         issues.push({
-          type: 'UNRESOLVED_CODE',
+          type: "UNRESOLVED_CODE",
           line: lineNum,
           content: trimmed,
-          suggestion: 'Remplacer par le code approprié'
+          suggestion: "Remplacer par le code approprié"
         });
       }
 
       // Détecter les chaînes de caractères concaténées incorrectement
-      if (trimmed.includes('STR_MODIFIER')) {
+      if (trimmed.includes("STR_MODIFIER")) {
         issues.push({
-          type: 'UNRESOLVED_STRING_MODIFIER',
+          type: "UNRESOLVED_STRING_MODIFIER",
           line: lineNum,
           content: trimmed,
-          suggestion: 'Remplacer STR_MODIFIER par le bon modificateur'
+          suggestion: "Remplacer STR_MODIFIER par le bon modificateur"
         });
       }
 
       // Détecter try/catch mal formés
-      if (trimmed.includes('} catch (_error) {') && lines[index + 1] && lines[index + 1].trim() === '}}') {
+      if (trimmed.includes("} catch (_error) {") && lines[index + 1] && lines[index + 1].trim() === "}}") {
         issues.push({
-          type: 'EMPTY_CATCH_BLOCK',
+          type: "EMPTY_CATCH_BLOCK",
           line: lineNum,
           content: trimmed,
-          suggestion: 'Implémenter la gestion d\'erreur ou commenter'
+          suggestion: "Implémenter la gestion d'erreur ou commenter"
         });
       }
     });
@@ -219,7 +219,7 @@ class ModuleAuditor {
       fakePatterns.forEach(pattern => {
         if (pattern.test(trimmed)) {
           issues.push({
-            type: 'FAKE_API_CALL',
+            type: "FAKE_API_CALL",
             line: lineNum,
             content: trimmed,
             pattern: pattern.source
@@ -232,7 +232,7 @@ class ModuleAuditor {
         const match = trimmed.match(/async\s+(\w+)/);
         if (match && trimmed.includes('return "')) {
           issues.push({
-            type: 'STATIC_ASYNC_RESPONSE',
+            type: "STATIC_ASYNC_RESPONSE",
             line: lineNum,
             content: trimmed,
             function: match[1]
@@ -271,7 +271,7 @@ class ModuleAuditor {
         usedConstants.add(constName);
         if (!definedConstants.has(constName)) {
           issues.push({
-            type: 'UNDEFINED_CONSTANT',
+            type: "UNDEFINED_CONSTANT",
             line: lineNum,
             content: line.trim(),
             constant: constName
@@ -310,7 +310,7 @@ class ModuleAuditor {
       incompletePatterns.forEach(pattern => {
         if (pattern.test(trimmed)) {
           issues.push({
-            type: 'INCOMPLETE_CODE',
+            type: "INCOMPLETE_CODE",
             line: lineNum,
             content: trimmed,
             pattern: pattern.source
@@ -321,7 +321,7 @@ class ModuleAuditor {
       // Fonctions vides
       if (trimmed.match(/^\w+\s*\([^)]*\)\s*\{\s*\}$/)) {
         issues.push({
-          type: 'EMPTY_FUNCTION',
+          type: "EMPTY_FUNCTION",
           line: lineNum,
           content: trimmed
         });
@@ -353,7 +353,7 @@ class ModuleAuditor {
       staticResponsePatterns.forEach(pattern => {
         if (pattern.test(line)) {
           issues.push({
-            type: 'STATIC_RESPONSE_ARRAY',
+            type: "STATIC_RESPONSE_ARRAY",
             line: lineNum,
             content: line.trim()
           });
@@ -421,15 +421,15 @@ class ModuleAuditor {
   }
 
   displayResults() {
-    console.log('\n' + '='.repeat(60));
-    console.log('📊 RÉSULTATS DE L\'AUDIT');
-    console.log('='.repeat(60));
+    console.log("\n" + "=".repeat(60));
+    console.log("📊 RÉSULTATS DE L'AUDIT");
+    console.log("=".repeat(60));
     
     console.log(`\n📁 Modules analysés: ${this.results.totalModules}`);
     console.log(`🔴 Problèmes trouvés: ${this.results.problemsFound}`);
     
     const summary = this.results.summary;
-    console.log(`\n📋 DÉTAIL PAR CATÉGORIE:`);
+    console.log("\n📋 DÉTAIL PAR CATÉGORIE:");
     console.log(`  • Erreurs de syntaxe: ${summary.syntaxErrors}`);
     console.log(`  • Appels API fake: ${summary.fakeApiCalls}`);
     console.log(`  • Constantes manquantes: ${summary.missingConstants}`);
@@ -437,13 +437,13 @@ class ModuleAuditor {
     console.log(`  • Réponses statiques: ${summary.staticResponses}`);
     
     if (summary.criticalFiles.length > 0) {
-      console.log(`\n🚨 FICHIERS CRITIQUES (>5 problèmes):`);
+      console.log("\n🚨 FICHIERS CRITIQUES (>5 problèmes):");
       summary.criticalFiles.slice(0, 10).forEach(file => {
         console.log(`  • ${file.file}: ${file.issueCount} problèmes`);
       });
     }
 
-    console.log(`\n🎯 RECOMMANDATIONS:`);
+    console.log("\n🎯 RECOMMANDATIONS:");
     if (summary.syntaxErrors > 0) {
       console.log(`  1. Corriger les ${summary.syntaxErrors} erreurs de syntaxe en priorité`);
     }
@@ -459,10 +459,10 @@ class ModuleAuditor {
 }
 
 // Exécution du script
-console.log('🚀 Démarrage de l\'audit...');
+console.log("🚀 Démarrage de l'audit...");
 const auditor = new ModuleAuditor();
 auditor.auditAllModules().catch(error => {
-  console.error('❌ Erreur lors de l\'audit:', error);
+  console.error("❌ Erreur lors de l'audit:", error);
   process.exit(1);
 });
 

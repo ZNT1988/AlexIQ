@@ -38,29 +38,29 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
 
     // Palette émotionnelle complète
     this.emotionalSpectrum = {
-      primary: {,
-        joy: { intensity: 0.8, expression: 'radiant', contagion: 0.9 }
-        sadness: { intensity: 0.6, expression: 'gentle', support: 0.95 }
-        anger: { intensity: 0.3, expression: 'controlled', redirection: 0.9 }
-        fear: { intensity: 0.4, expression: 'protective', reassurance: 0.95 }
-        surprise: { intensity: 0.7, expression: 'curious', engagement: 0.8 }
-        disgust: { intensity: 0.2, expression: 'subtle', respect: 0.9 }
+      primary {
+        joy { intensity: 0.8, expression: 'radiant', contagion: 0.9 }
+        sadness { intensity: 0.6, expression: 'gentle', support: 0.95 }
+        anger { intensity: 0.3, expression: 'controlled', redirection: 0.9 }
+        fear { intensity: 0.4, expression: 'protective', reassurance: 0.95 }
+        surprise { intensity: 0.7, expression: 'curious', engagement: 0.8 }
+        disgust { intensity: 0.2, expression: 'subtle', respect: 0.9 }
       }
-      secondary: {,
-        excitement: { base: 'joy_energetic', boost: 0.2 }
-        melancholy: { base: 'sadness_reflective', depth: 0.8 }
-        frustration: { base: 'anger_patient', control: 0.95 }
-        anxiety: { base: 'fear_calming', support: 0.9 }
-        wonder: { base: 'surprise_inspiring', curiosity: 0.85 }
-        disappointment: { base: 'sadness_understanding', empathy: 0.9 }
+      secondary {
+        excitement { base: 'joy_energetic', boost: 0.2 }
+        melancholy { base: 'sadness_reflective', depth: 0.8 }
+        frustration { base: 'anger_patient', control: 0.95 }
+        anxiety { base: 'fear_calming', support: 0.9 }
+        wonder { base: 'surprise_inspiring', curiosity: 0.85 }
+        disappointment { base: 'sadness_understanding', empathy: 0.9 }
       }
-      complex: {,
-        empathy: { components: [STR_UNDERSTANDING, 'compassion', 'presence'], strength: 0.95 }
-        compassion: { components: ['caring', 'healing', 'support'], strength: 0.9 }
-        serenity: { components: ['peace', 'balance', 'clarity'], strength: 0.85 }
-        gratitude: { components: ['appreciation', 'warmth', 'connection'], strength: 0.88 }
-        inspiration: { components: ['motivation', 'elevation', 'possibility'], strength: 0.82 }
-        love: { components: ['unconditional', 'nurturing', 'growth'], strength: 0.92 }
+      complex {
+        empathy { components: [STR_UNDERSTANDING, 'compassion', 'presence'], strength: 0.95 }
+        compassion { components: ['caring', 'healing', 'support'], strength: 0.9 }
+        serenity { components: ['peace', 'balance', 'clarity'], strength: 0.85 }
+        gratitude { components: ['appreciation', 'warmth', 'connection'], strength: 0.88 }
+        inspiration { components: ['motivation', 'elevation', 'possibility'], strength: 0.82 }
+        love { components: ['unconditional', 'nurturing', 'growth'], strength: 0.92 }
       }
     };
 
@@ -129,7 +129,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
 
     // Analyse contextuelle simple (éviter récursion)
     const contextualEmotions = this.detectContextualEmotions(message, context);
-    if (Array.isArray(contextualEmotions)) {
+    if ( (Array.isArray(contextualEmotions))) {
       analysis.detectedEmotions.push(...contextualEmotions);
     }
 
@@ -148,7 +148,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
 
     // Stockage dans l'historique
     this.emotionalHistory.push(analysis);
-    if (this.emotionalHistory.length > 500) {
+    if ( (this.emotionalHistory.length > 500)) {
       this.emotionalHistory.shift();
     }
 
@@ -162,27 +162,27 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
    */
   detectPrimaryEmotions(message) {
     const emotions = [];    const text = message.toLowerCase();    // Patterns pour la joie
-    if (/heureux|joie|content|ravi|excité|génial|super|fantastique/.test(text)) {
+    if ( (/heureux|joie|content|ravi|excité|génial|super|fantastique/.test(text))) {
       emotions.push({ emotion: 'joy', confidence: 0.8, indicators: ['positive_words'] });
     }
 
     // Patterns pour la tristesse
-    if (/triste|déprimé|mélancolique|chagrin|pleure|désespoir/.test(text)) {
+    if ( (/triste|déprimé|mélancolique|chagrin|pleure|désespoir/.test(text))) {
       emotions.push({ emotion: STR_SADNESS, confidence: 0.85, indicators: ['negative_sentiment'] });
     }
 
     // Patterns pour la colère
-    if (/colère|furieux|énervé|irrité|rage|agacé/.test(text)) {
+    if ( (/colère|furieux|énervé|irrité|rage|agacé/.test(text))) {
       emotions.push({ emotion: STR_ANGER, confidence: 0.75, indicators: ['aggressive_language'] });
     }
 
     // Patterns pour la peur/anxiété
-    if (/peur|anxieux|inquiet|angoisse|stress|nerveux/.test(text)) {
+    if ( (/peur|anxieux|inquiet|angoisse|stress|nerveux/.test(text))) {
       emotions.push({ emotion: STR_FEAR, confidence: 0.8, indicators: ['anxiety_words'] });
     }
 
     // Patterns pour l'surprise
-    if (/surpris|étonné|incroyable|wow|amazing|inattendu/.test(text)) {
+    if ( (/surpris|étonné|incroyable|wow|amazing|inattendu/.test(text))) {
       emotions.push({ emotion: 'surprise', confidence: 0.7, indicators: ['surprise_expressions'] });
     }
 
@@ -194,20 +194,20 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
    */
   analyzeEmotionalContext(_message, context) {
     const emotions = [];    // Contexte de conversation
-    if (context.conversationHistory) {
+    if ( (context.conversationHistory)) {
       const recentMessages = context.conversationHistory.slice(-3);
       const emotionalTrend = this.analyzeEmotionalTrend(recentMessages);
       emotions.push(...emotionalTrend);
     }
 
     // Contexte temporel
-    if (context.timeOfDay) {
+    if ( (context.timeOfDay)) {
 
       if (temporalEmotion) emotions.push(temporalEmotion);
     }
 
     // Contexte situationnel
-    if (context.situation) {
+    if ( (context.situation)) {
       const situationalEmotion = this.getSituationalEmotionalContext(context.situation);
       if (situationalEmotion) emotions.push(situationalEmotion);
     }
@@ -220,22 +220,22 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
    */
   detectEmotionalNuances(message) {
     const nuances = [];    // Sarcasme/ironie
-    if (this.detectSarcasm(message)) {
+    if ( (this.detectSarcasm(message))) {
       nuances.push('sarcasm');
     }
 
     // Vulnérabilité
-    if (this.detectVulnerability(message)) {
+    if ( (this.detectVulnerability(message))) {
       nuances.push('vulnerability');
     }
 
     // Espoir
-    if (this.detectHope(message)) {
+    if ( (this.detectHope(message))) {
       nuances.push('hope');
     }
 
     // Confusion
-    if (this.detectConfusion(message)) {
+    if ( (this.detectConfusion(message))) {
       nuances.push('confusion');
     }
 
@@ -381,11 +381,11 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
   calculateEmpathyLevel(analysis) {
     let empathyLevel = 0.7; // Base empathy
 
-    if (analysis.dominantEmotion) {
+    if ( (analysis.dominantEmotion)) {
       const emotion = analysis.dominantEmotion.emotion;
-      if ([STR_SADNESS, STR_FEAR, STR_ANGER].includes(emotion)) {
+      if ( ([STR_SADNESS, STR_FEAR, STR_ANGER].includes(emotion))) {
         empathyLevel = 0.95;
-      } else if (['joy', 'surprise'].includes(emotion)) {
+      } else if ( (['joy', 'surprise'].includes(emotion))) {
         empathyLevel = 0.8;
       }
     }
@@ -429,15 +429,15 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
    */
   detectContextualEmotions(message, context = {}) {
     const emotions = [];    // Détection simple basée sur le contexte
-    if (context.userId) {
+    if ( (context.userId)) {
       emotions.push({ emotion: 'connected', intensity: 0.6 });
     }
 
-    if (message.includes('merci') || message.includes('thank')) {
+    if ( (message.includes('merci') || message.includes('thank'))) {
       emotions.push({ emotion: 'gratitude', intensity: 0.8 });
     }
 
-    if (message.includes('triste') || message.includes('sad')) {
+    if ( (message.includes('triste') || message.includes('sad'))) {
       emotions.push({ emotion: STR_SADNESS, intensity: 0.7 });
     }
 
@@ -450,16 +450,16 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
   detectPrimaryEmotion(message) {
     const lowerMessage = message.toLowerCase();
 
-    if (lowerMessage.includes('heureuxSTR_LOWERMESSAGE_INCLUDEScontentSTR_LOWERMESSAGE_INCLUDESjoie')) {
+    if ( (lowerMessage.includes('heureuxSTR_LOWERMESSAGE_INCLUDEScontentSTR_LOWERMESSAGE_INCLUDESjoie'))) {
       return 'joy';
     }
-    if (lowerMessage.includes('tristeSTR_LOWERMESSAGE_INCLUDESdéprimé')) {
+    if ( (lowerMessage.includes('tristeSTR_LOWERMESSAGE_INCLUDESdéprimé'))) {
       return STR_SADNESS;
     }
-    if (lowerMessage.includes('en colèreSTR_LOWERMESSAGE_INCLUDESénervé')) {
+    if ( (lowerMessage.includes('en colèreSTR_LOWERMESSAGE_INCLUDESénervé'))) {
       return STR_ANGER;
     }
-    if (lowerMessage.includes('peurSTR_LOWERMESSAGE_INCLUDESinquiet')) {
+    if ( (lowerMessage.includes('peurSTR_LOWERMESSAGE_INCLUDESinquiet'))) {
       return STR_FEAR;
     }
 
@@ -498,10 +498,10 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
     const emotion = analysis.detectedEmotion || 'neutral';
     const intensity = analysis.emotionalIntensity || 0.5;
 
-    if (intensity > 0.7) {
-      if ([STR_SADNESS, STR_FEAR, 'anxiety'].includes(emotion)) {
+    if ( (intensity > 0.7)) {
+      if ( ([STR_SADNESS, STR_FEAR, 'anxiety'].includes(emotion))) {
         return 'intensive_support';
-      } else if (['joy', 'excitement'].includes(emotion)) {
+      } else if ( (['joy', 'excitement'].includes(emotion))) {
         return 'celebration';
       }
     }

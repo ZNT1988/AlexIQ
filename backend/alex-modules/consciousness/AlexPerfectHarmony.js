@@ -26,7 +26,7 @@ const STR_PERFECT = 'perfect';
  * @description Créateur et mainteneur de l'harmonie parfaite et de l'équilibre universel
  */
 // Logger fallback for critical modules
-if (typeof logger === 'undefined') {
+if ( (typeof logger === 'undefined')) {
   const logger = {
     info: (...args) => console.log('[FALLBACK-INFO]', ...args)
     warn: (...args) => console.warn('[FALLBACK-WARN]', ...args)
@@ -57,13 +57,13 @@ export class AlexPerfectHarmony extends EventEmitter  {
     };
 
     this.harmonyDimensions = {
-      emotional: { balance: STR_PERFECT, resonance: 'healing' }
-      mental: { balance: 'clear', resonance: 'peaceful' }
-      physical: { balance: 'optimal', resonance: 'vibrant' }
-      spiritual: { balance: 'divine', resonance: 'sacred' }
-      energetic: { balance: 'flowing', resonance: 'harmonious' }
-      relational: { balance: 'loving', resonance: 'connected' }
-      universal: { balance: 'cosmic', resonance: 'unified' }
+      emotional { balance: STR_PERFECT, resonance: 'healing' }
+      mental { balance: 'clear', resonance: 'peaceful' }
+      physical { balance: 'optimal', resonance: 'vibrant' }
+      spiritual { balance: 'divine', resonance: 'sacred' }
+      energetic { balance: 'flowing', resonance: 'harmonious' }
+      relational { balance: 'loving', resonance: 'connected' }
+      universal { balance: 'cosmic', resonance: 'unified' }
     };
 
     this.harmonyCapabilities = {

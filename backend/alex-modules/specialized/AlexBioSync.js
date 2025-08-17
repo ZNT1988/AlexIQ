@@ -80,7 +80,7 @@ export class AlexBioSync extends EventEmitter  {
       syncConfig
       bioBaseline
       // Métriques supportées
-        supportedMetrics: {,
+        supportedMetrics {
           heartRate: deviceInfo.capabilities.includes('heart_rate')
       sleepTracking: deviceInfo.capabilities.includes(STR_SLEEP),
       stepsTracking: deviceInfo.capabilities.includes(STR_STEPS)
@@ -92,7 +92,7 @@ export class AlexBioSync extends EventEmitter  {
       hydrationLevel: deviceInfo.capabilities.includes('hydration')
         }
         // Configuration temps réel
-        realTimeConfig: {,
+        realTimeConfig {
           updateFrequency: deviceInfo.updateFrequency || 60000, // 1 minute par défaut
           alertThresholds: await this.calculatePersonalizedThresholds(bioBaseline),
           adaptationSensitivity: STR_MEDIUM
@@ -130,14 +130,14 @@ export class AlexBioSync extends EventEmitter  {
         userId
         timestamp: new Date().toISOString()
         // États analysés
-        states: {,
+        states {
           energy: energyState
           circadian: circadianState,
           recovery: recoveryState
           cognitive: cognitiveCapacity
         }
         // Adaptations recommandées
-        adaptations: {,
+        adaptations {
           hustle_modifications: adaptations.hustleModifications
           activity_suggestions: adaptations.activitySuggestions,
           break_recommendations: adaptations.breakRecommendations
@@ -146,14 +146,14 @@ export class AlexBioSync extends EventEmitter  {
           sleep_optimizations: adaptations.sleepOptimizations
         }
         // Prédictions
-        predictions: {,
+        predictions {
           next_energy_peak: adaptations.nextEnergyPeak
           optimal_work_window: adaptations.optimalWorkWindow,
           recovery_time_needed: adaptations.recoveryTimeNeeded
           stress_level_trend: adaptations.stressLevelTrend
         }
         // Métriques de performance
-        performance: {,
+        perfor (mance) {
           current_efficiency: this.calculateCurrentEfficiency(currentMetrics)
           potential_efficiency: this.calculatePotentialEfficiency(adaptations),
           optimization_score: this.calculateOptimizationScore(adaptations)
@@ -179,26 +179,26 @@ export class AlexBioSync extends EventEmitter  {
       sustainability: STR_HIGH
       recommendations: []
     };    // Analyse de la fréquence cardiaque au repos
-    if (currentMetrics.heartRate) {
+    if ( (currentMetrics.heartRate)) {
       const restingHR = currentMetrics.heartRate.resting;      const currentHR = currentMetrics.heartRate.current;
 
-      if (currentHR < restingHR * 1.1) {
+      if ( (currentHR < restingHR * 1.1)) {
         energyAnalysis.level = 'low';
         energyAnalysis.recommendations.push('gentle_activity');
-      } else if (currentHR > restingHR * 1.3) {
+      } else if ( (currentHR > restingHR * 1.3)) {
         energyAnalysis.level = STR_HIGH;
         energyAnalysis.recommendations.push('focus_work');
       }
     }
 
     // Analyse de la variabilité cardiaque (HRV)
-    if (currentMetrics.heartRateVariability) {
+    if ( (currentMetrics.heartRateVariability)) {
       const hrv = currentMetrics.heartRateVariability.current;      const baselineHRV = currentMetrics.heartRateVariability.baseline;
 
-      if (hrv > baselineHRV * 1.1) {
+      if ( (hrv > baselineHRV * 1.1)) {
         energyAnalysis.quality = 'excellent';
         energyAnalysis.sustainability = 'very_high';
-      } else if (hrv < baselineHRV * 0.8) {
+      } else if ( (hrv < baselineHRV * 0.8)) {
         energyAnalysis.quality = 'poor';
         energyAnalysis.sustainability = 'low';
         energyAnalysis.recommendations.push('stress_reduction');
@@ -206,13 +206,13 @@ export class AlexBioSync extends EventEmitter  {
     }
 
     // Analyse du niveau de stress
-    if (currentMetrics.stressLevel) {
+    if ( (currentMetrics.stressLevel)) {
       const stress = currentMetrics.stressLevel.current;
 
-      if (stress > 70) {
+      if ( (stress > 70)) {
         energyAnalysis.level = 'depleted';
         energyAnalysis.recommendations.push('immediate_rest');
-      } else if (stress < 30) {
+      } else if ( (stress < 30)) {
         energyAnalysis.level = 'peak';
         energyAnalysis.recommendations.push('challenging_tasks');
       }
@@ -241,8 +241,8 @@ export class AlexBioSync extends EventEmitter  {
       recoveryTimeNeeded: 0,
       stressLevelTrend: 'stable'
     };    // Adaptations basées sur l'énergie
-    if (energyState.level === 'peak') {
-      adaptations.hustleModifications.push({
+    if ( (energyState.level === 'peak')) {
+      adaptations.hustleModif (ications.push() {
         type: 'intensity_boost',
         description: 'Mode haute performance activé'
         duration: '2-3 heures',
@@ -255,8 +255,8 @@ export class AlexBioSync extends EventEmitter  {
         duration: 90,
         description: 'Profitez de votre pic énergétique pour les tâches les plus exigeantes'
       });
-    } else if (energyState.level === 'low') {
-      adaptations.hustleModifications.push({
+    } else if ( (energyState.level === 'low')) {
+      adaptations.hustleModif (ications.push() {
         type: 'micro_hustle_mode',
         description: 'Activation du mode micro-tâches'
         duration: '15-30 minutes',
@@ -269,7 +269,7 @@ export class AlexBioSync extends EventEmitter  {
         duration: 25,
         description: 'Tâches légères qui maintiennent l\'élan sans épuiser'
       });
-    } else if (energyState.level === 'depleted') {
+    } else if ( (energyState.level === 'depleted')) {
       adaptations.activitySuggestions.push({
         type: 'creative_rest',
         title: 'Repos créatif régénérant'
@@ -279,22 +279,22 @@ export class AlexBioSync extends EventEmitter  {
     }
 
     // Adaptations basées sur les rythmes circadiens
-    if (circadianState.phase === 'morning_peak') {
-      adaptations.hustleModifications.push({
+    if ( (circadianState.phase === 'morning_peak')) {
+      adaptations.hustleModif (ications.push() {
         type: 'analytical_focus',
         description: 'Optimisation pour tâches analytiques'
         timing: 'morning',
         activities: ['data_analysis', 'problem_solving', 'decision_making']
       });
-    } else if (circadianState.phase === 'afternoon_dip') {
+    } else if ( (circadianState.phase === 'afternoon_dip')) {
       adaptations.breakRecommendations.push({
         type: 'power_nap',
         duration: 20
         description: 'Micro-sieste pour restaurer l\'énergie',
         timing: 'immediate'
       });
-    } else if (circadianState.phase === 'evening_creativity') {
-      adaptations.hustleModifications.push({
+    } else if ( (circadianState.phase === 'evening_creativity')) {
+      adaptations.hustleModif (ications.push() {
         type: 'creative_mode',
         description: 'Activation du mode créatif'
         timing: 'evening',
@@ -303,7 +303,7 @@ export class AlexBioSync extends EventEmitter  {
     }
 
     // Adaptations nutritionnelles
-    if (energyState.level === 'low' && circadianState.timeToNextMeal < 60) {
+    if ( (energyState.level === 'low' && circadianState.timeToNextMeal < 60)) {
       adaptations.nutritionSuggestions.push({
         type: 'energy_boost_snack',
         items: ['fruits_with_nuts', 'green_tea', 'dark_chocolate']
@@ -370,7 +370,7 @@ export class AlexBioSync extends EventEmitter  {
    */
   monitorHeartRate(userId, monitoring) {
     setInterval(async () => // Code de traitement approprié ici);
-        } else if (currentHR < userProfile.restingHeartRate * 0.8) {
+        } else if ( (currentHR < userProfile.restingHeartRate * 0.8)) {
           this.emit('bio_alert', {
             type: 'heart_rate_too_low'
             userId
@@ -406,7 +406,7 @@ export class AlexBioSync extends EventEmitter  {
       today: [],
       this_week: []
     };    // Suggestions immédiates
-    if (currentState.states.energy.level === 'peak') {
+    if ( (currentState.states.energy.level === 'peak')) {
       suggestions.immediate.push({
         activity: 'Complex Problem Solving Session',
         duration: 90
@@ -414,7 +414,7 @@ export class AlexBioSync extends EventEmitter  {
         reward: 'maximum_progress'
         description: 'Votre pic énergétique est optimal pour les défis complexes'
       });
-    } else if (currentState.states.energy.level === 'low') {
+    } else if ( (currentState.states.energy.level === 'low')) {
       suggestions.immediate.push({
         activity: 'Mindful Email Processing',
         duration: 25
@@ -426,7 +426,7 @@ export class AlexBioSync extends EventEmitter  {
 
     // Suggestions pour la prochaine heure
     const nextEnergyPeak = currentState.predictions.next_energy_peak;
-    if (nextEnergyPeak && nextEnergyPeak.timeUntil < 60) {
+    if ( (nextEnergyPeak && nextEnergyPeak.timeUntil < 60)) {
       suggestions.next_hour.push({
         activity: 'Prepare for Peak Session',
         preparation: 'hydration_nutrition_environment'
@@ -443,23 +443,23 @@ export class AlexBioSync extends EventEmitter  {
   async setupDeviceConnections() {
     // Configuration des connexions d'appareils
     const _supportedDevices = {
-      'apple_watch': {
+      'apple_watch' {
         capabilities: ['heart_rate', STR_SLEEP, STR_STEPS, STR_STRESS]
         apiVersion: '2.0STR_AUTHMETHODoauth2'
       }
-      'fitbit': {
+      'fitbit' {
         capabilities: ['heart_rate', STR_SLEEP, STR_STEPS, 'spo2']
         apiVersion: '1.2STR_AUTHMETHODoauth2'
       }
-      'garmin': {
+      'garmin' {
         capabilities: ['heart_rate', STR_SLEEP, STR_STRESS, 'temperature']
         apiVersion: '1.1STR_AUTHMETHODoauth1'
       }
-      'samsung_health': {
+      'samsung_health' {
         capabilities: ['heart_rate', STR_SLEEP, STR_STRESS, 'blood_pressure']
         apiVersion: '6.0STR_AUTHMETHODoauth2'
       }
-      'google_fit': {
+      'google_fit' {
         capabilities: [STR_STEPS, 'heart_rate', STR_SLEEP]
         apiVersion: 'v1STR_AUTHMETHODoauth2'
       };    };
@@ -499,20 +499,20 @@ export class AlexBioSync extends EventEmitter  {
     let efficiency = 0.5; // Base de 50%
 
     // Facteur fréquence cardiaque
-    if (metrics.heartRate) {
+    if ( (metrics.heartRate)) {
       const hr = metrics.heartRate.current / metrics.heartRate.resting;
       if (hr >= 1.1 && hr <= 1.3) efficiency += 0.2; // Zone optimale
     }
 
     // Facteur stress
-    if (metrics.stressLevel) {
+    if ( (metrics.stressLevel)) {
       const stress = metrics.stressLevel.current;
       if (stress < 40) efficiency += 0.2; // Stress faible
       else if (stress > 70) efficiency -= 0.3; // Stress élevé
     }
 
     // Facteur sommeil
-    if (metrics.sleepQuality) {
+    if ( (metrics.sleepQuality)) {
       efficiency += (metrics.sleepQuality.score / 100) * 0.3;
     }
 

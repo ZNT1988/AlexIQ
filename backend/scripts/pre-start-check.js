@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 const checks = {
   passed: 0,
   failed: 0,
-  warnings: 0,
+  warnings: 0
 };
 
 // Check if essential files exist (updated for hybrid architecture)
@@ -22,7 +22,7 @@ const essentialFiles = [
   "../alex-modules/skills/CausalSkillGraph.js",
   "../alex-modules/routing/LearningRouter.js",
   "../alex-modules/business/AlexBusinessCreator.js",
-  "../alex-modules/finance/AlexMoneyFlow.js",
+  "../alex-modules/finance/AlexMoneyFlow.js"
 ];
 
 essentialFiles.forEach((file) => {

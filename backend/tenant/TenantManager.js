@@ -23,7 +23,7 @@ class TenantManager extends EventEmitter {
     const dbPath = this.config.get("database.path");
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        console.error('Database initialization error:', err.message);
+        console.error("Database initialization error:", err.message);
         return;
       }
       this.createTenantTables();
@@ -89,12 +89,12 @@ class TenantManager extends EventEmitter {
                 paid_at DATETIME,
                 metadata TEXT DEFAULT '{}',
                 FOREIGN KEY (tenant_id) REFERENCES tenants(id)
-            )`,
+            )`
     ];
 
     tables.forEach((sql) => {
       this.db.run(sql, (err) => {
-        if (err) console.error('Error creating tenant table:', err.message);
+        if (err) console.error("Error creating tenant table:", err.message);
       });
     });
 
@@ -107,7 +107,7 @@ class TenantManager extends EventEmitter {
       name: "Default Tenant",
       email: "system@alexlicorne.com",
       tier: "enterprise",
-      status: "active",
+      status: "active"
     };
 
     this.db.run(
@@ -120,8 +120,8 @@ class TenantManager extends EventEmitter {
         defaultTenant.name,
         defaultTenant.email,
         defaultTenant.tier,
-        defaultTenant.status,
-      ],
+        defaultTenant.status
+      ]
     );
   }
 
@@ -148,7 +148,7 @@ class TenantManager extends EventEmitter {
       tier: tenantData.tier || "free",
       status: "active",
       settings: JSON.stringify(tenantData.settings || {}),
-      metadata: JSON.stringify(tenantData.metadata || {}),
+      metadata: JSON.stringify(tenantData.metadata || {})
     };
 
     try {
@@ -160,14 +160,14 @@ class TenantManager extends EventEmitter {
         requests: 0,
         storage: 0,
         computeTime: 0,
-        bandwidth: 0,
+        bandwidth: 0
       });
 
       this.emit("tenantCreated", tenant);
 
       return tenant;
     } catch (error) {
-      console.error('Error creating tenant:', error.message);
+      console.error("Error creating tenant:", error.message);
       throw error;
     }
   }
@@ -188,12 +188,12 @@ class TenantManager extends EventEmitter {
           tenant.tier,
           tenant.status,
           tenant.settings,
-          tenant.metadata,
+          tenant.metadata
         ],
         function (err) {
           if (err) reject(err);
           else resolve(this.lastID);
-        },
+        }
       );
     });
   }
@@ -206,20 +206,20 @@ class TenantManager extends EventEmitter {
       {
         resource_type: "requests",
         quota_limit:
-          tierLimits.requests === -1 ? 999999999 : tierLimits.requests,
+          tierLimits.requests === -1 ? 999999999 : tierLimits.requests
       },
       {
         resource_type: "storage",
         quota_limit:
-          tierLimits.storage === -1 ? 999999999999 : tierLimits.storage,
-      },
+          tierLimits.storage === -1 ? 999999999999 : tierLimits.storage
+      }
     ];
 
     for (const quota of quotas) {
       await this.setTenantQuota(
         tenantId,
         quota.resource_type,
-        quota.quota_limit,
+        quota.quota_limit
       );
     }
   }
@@ -254,7 +254,7 @@ class TenantManager extends EventEmitter {
           const tenant = {
             ...row,
             settings: JSON.parse(row.settings || "{}"),
-            metadata: JSON.parse(row.metadata || "{}"),
+            metadata: JSON.parse(row.metadata || "{}")
           };
           this.tenants.set(tenantId, tenant);
           resolve(tenant);
@@ -286,7 +286,7 @@ class TenantManager extends EventEmitter {
       this.emit("tenantUpdated", updatedTenant);
       return updatedTenant;
     } catch (error) {
-      console.error('Error updating tenant:', error.message);
+      console.error("Error updating tenant:", error.message);
       throw error;
     }
   }
@@ -309,12 +309,12 @@ class TenantManager extends EventEmitter {
           tenant.status,
           tenant.settings,
           tenant.metadata,
-          tenantId,
+          tenantId
         ],
         function (err) {
           if (err) reject(err);
           else resolve(this.changes);
-        },
+        }
       );
     });
   }
@@ -329,19 +329,19 @@ class TenantManager extends EventEmitter {
       expires_at: expiresAt.toISOString(),
       ip_address: sessionData.ipAddress,
       user_agent: sessionData.userAgent,
-      metadata: JSON.stringify(sessionData.metadata || {}),
+      metadata: JSON.stringify(sessionData.metadata || {})
     };
 
     try {
       await this.insertSession(session);
       this.activeSessions.set(sessionToken, {
         ...session,
-        created_at: new Date(),
+        created_at: new Date()
       });
 
       return sessionToken;
     } catch (error) {
-      console.error('Error creating session:', error.message);
+      console.error("Error creating session:", error.message);
       throw error;
     }
   }
@@ -362,12 +362,12 @@ class TenantManager extends EventEmitter {
           session.expires_at,
           session.ip_address,
           session.user_agent,
-          session.metadata,
+          session.metadata
         ],
         function (err) {
           if (err) reject(err);
           else resolve(this.lastID);
-        },
+        }
       );
     });
   }
@@ -392,7 +392,7 @@ class TenantManager extends EventEmitter {
 
     if (this.db) {
       this.db.run("DELETE FROM tenant_sessions WHERE session_token = ?", [
-        sessionToken,
+        sessionToken
       ]);
     }
   }
@@ -416,7 +416,7 @@ class TenantManager extends EventEmitter {
         tenantId,
         usageType,
         current: usage[usageType],
-        limit: quota.quota_limit,
+        limit: quota.quota_limit
       });
     } else if (quota && usage[usageType] > quota.quota_limit * 0.8) {
       this.emit("quotaWarning", {
@@ -424,7 +424,7 @@ class TenantManager extends EventEmitter {
         usageType,
         current: usage[usageType],
         limit: quota.quota_limit,
-        percentage: (usage[usageType] / quota.quota_limit) * 100,
+        percentage: (usage[usageType] / quota.quota_limit) * 100
       });
     }
   }
@@ -434,7 +434,7 @@ class TenantManager extends EventEmitter {
       requests: "requests_count",
       storage: "storage_used",
       computeTime: "compute_time",
-      bandwidth: "bandwidth_used",
+      bandwidth: "bandwidth_used"
     };
 
     const column = columnMap[usageType];
@@ -451,11 +451,11 @@ class TenantManager extends EventEmitter {
       this.db.serialize(() => {
         this.db.run(
           "INSERT OR IGNORE INTO tenant_usage (tenant_id, date) VALUES (?, ?)",
-          [tenantId, date],
+          [tenantId, date]
         );
         this.db.run(
           `UPDATE tenant_usage SET ${column} = ${column} + ? WHERE tenant_id = ? AND date = ?`,
-          [amount, tenantId, date],
+          [amount, tenantId, date]
         );
       });
     }
@@ -480,17 +480,17 @@ class TenantManager extends EventEmitter {
       let dateFilter;
 
       switch (period) {
-        case "today":
-          dateFilter = "date = date('now')";
-          break;
-        case "current_month":
-          dateFilter = "date >= date('now', 'start of month')";
-          break;
-        case "last_30_days":
-          dateFilter = "date >= date('now', '-30 days')";
-          break;
-        default:
-          dateFilter = "date >= date('now', 'start of month')";
+      case "today":
+        dateFilter = "date = date('now')";
+        break;
+      case "current_month":
+        dateFilter = "date >= date('now', 'start of month')";
+        break;
+      case "last_30_days":
+        dateFilter = "date >= date('now', '-30 days')";
+        break;
+      default:
+        dateFilter = "date >= date('now', 'start of month')";
       }
 
       const sql = `
@@ -539,7 +539,7 @@ class TenantManager extends EventEmitter {
           const tenants = rows.map((row) => ({
             ...row,
             settings: JSON.parse(row.settings || "{}"),
-            metadata: JSON.parse(row.metadata || "{}"),
+            metadata: JSON.parse(row.metadata || "{}")
           }));
           resolve(tenants);
         }
@@ -565,7 +565,7 @@ class TenantManager extends EventEmitter {
 
       return true;
     } catch (error) {
-      console.error('Error deleting tenant:', error.message);
+      console.error("Error deleting tenant:", error.message);
       throw error;
     }
   }
@@ -574,14 +574,14 @@ class TenantManager extends EventEmitter {
     return new Promise((resolve, reject) => {
       this.db.serialize(() => {
         this.db.run("DELETE FROM tenant_sessions WHERE tenant_id = ?", [
-          tenantId,
+          tenantId
         ]);
         this.db.run("DELETE FROM tenant_usage WHERE tenant_id = ?", [tenantId]);
         this.db.run("DELETE FROM tenant_quotas WHERE tenant_id = ?", [
-          tenantId,
+          tenantId
         ]);
         this.db.run("DELETE FROM tenant_billing WHERE tenant_id = ?", [
-          tenantId,
+          tenantId
         ]);
         this.db.run(
           "DELETE FROM tenants WHERE id = ?",
@@ -589,7 +589,7 @@ class TenantManager extends EventEmitter {
           function (err) {
             if (err) reject(err);
             else resolve(this.changes);
-          },
+          }
         );
       });
     });
@@ -603,11 +603,11 @@ class TenantManager extends EventEmitter {
           requests: usage.total_requests || 0,
           storage: usage.total_storage || 0,
           computeTime: usage.total_compute || 0,
-          bandwidth: usage.total_bandwidth || 0,
+          bandwidth: usage.total_bandwidth || 0
         });
       }
     } catch (error) {
-      console.error('Error monitoring resource usage:', error.message);
+      console.error("Error monitoring resource usage:", error.message);
     }
   }
 
@@ -638,7 +638,7 @@ class TenantManager extends EventEmitter {
       totalTenants: this.tenants.size,
       activeSessions: this.activeSessions.size,
       tierDistribution: this.getTierDistribution(),
-      resourceUsage: this.getAggregatedUsage(),
+      resourceUsage: this.getAggregatedUsage()
     };
   }
 
@@ -655,7 +655,7 @@ class TenantManager extends EventEmitter {
       requests: 0,
       storage: 0,
       computeTime: 0,
-      bandwidth: 0,
+      bandwidth: 0
     };
 
     for (const [, usage] of this.usageTracking) {
@@ -671,7 +671,7 @@ class TenantManager extends EventEmitter {
   async shutdown() {
     if (this.db) {
       this.db.close((err) => {
-        if (err) console.error('Error closing database:', err.message);
+        if (err) console.error("Error closing database:", err.message);
       });
     }
   }

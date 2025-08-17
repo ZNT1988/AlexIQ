@@ -62,8 +62,7 @@ const STR_ = '
  * créativité impossibles avec une pensée linéaire classique
  *
  * @example
- * // Démarrage dialogue créatif
- * import { InnerDialogueEngine } from './InnerDialogueEngine.js';
+ * // Démarrage dialogue créatif (* import) { InnerDialogueEngine } from './InnerDialogueEngine.js';
  * const dialogue = new InnerDialogueEngine();
  * const insights = await dialogue.exploreIdea('Future of AI consciousness'); *
  * @example
@@ -92,12 +91,12 @@ import logger from '../config/logger.js';
  * - Pragmatic: Focus sur faisabilité et implémentation concrète
  * - Philosophical: Questionne fondements et implications existentielles
  *
- * @property: {Object} voices - Configuration des voix internes
- * @property: {Array} conversations - Historique des dialogues internes
- * @property: {Object} insights - Base de connaissances des découvertes
- * @property: {Object} metaThinking - Réflexions sur processus de pensée
+ * @property {Object} voices - Configuration des voix internes
+ * @property {Array} conversations - Historique des dialogues internes
+ * @property {Object} insights - Base de connaissances des découvertes
+ * @property {Object} metaThinking - Réflexions sur processus de pensée
  */
-export class InnerDialogueEngine: {
+export class InnerDialogueEngine {
     /**
      * @constructor
      * @description Initialise le moteur de dialogue interne avec voix multiples
@@ -105,10 +104,10 @@ export class InnerDialogueEngine: {
      * Configure les différentes personnalités virtuelles, initialise les
      * systèmes de conversation et prépare l'infrastructure d'auto-réflexion
      *
-     * @param: {Object} options - Configuration du moteur
-     * @param: {Array} [options.enabledVoices] - Voix à activer
-     * @param: {number} [options.maxDepth=10] - Profondeur max exploration
-     * @param: {boolean} [options.autoJournal=true] - Journal automatique
+     * @param {Object} options - Configuration du moteur
+     * @param {Array} [options.enabledVoices] - Voix à activer
+     * @param {number} [options.maxDepth=10] - Profondeur max exploration
+     * @param {boolean} [options.autoJournal=true] - Journal automatique
      */
     constructor(options = {}) {
         this.config = {
@@ -151,7 +150,7 @@ export class InnerDialogueEngine: {
      */
     initializeVoices() {
         this.voices = {
-            creative: {,
+            creative {
                 name: 'Créative'
                 personality: 'Imaginative, spontanée, connecte des idées apparemment non-reliéesSTR_STYLEmétaphorique, intuitif, exploratoireSTR_KEYWORDSimagination', 'innovation', 'connexions', 'possibilités']
                 questionPatterns: [
@@ -203,7 +202,7 @@ return result;
     initializeInsightSystem() {
         this.insights = {
             database: new Map(),
-            categories: {
+            categories {
                 creative: [],
                 analytical: []
                 strategic: [],
@@ -238,12 +237,12 @@ return result;
      * spécifique, générant automatiquement questions et réponses
      * jusqu'à atteindre une compréhension satisfaisante ou depth limit
      *
-     * @param: {string} topic - Sujet du dialogue interne
-     * @param: {Object} options - Options de configuration
-     * @param: {Array} [options.voices] - Voix à impliquer
-     * @param: {number} [options.maxTurns=20] - Nombre max d'échanges
-     * @param: {number} [options.targetInsights=3] - Insights visés
-     * @returns: {Promise<Object>} Résultats du dialogue avec insights
+     * @param {string} topic - Sujet du dialogue interne
+     * @param {Object} options - Options de configuration
+     * @param {Array} [options.voices] - Voix à impliquer
+     * @param {number} [options.maxTurns=20] - Nombre max d'échanges
+     * @param {number} [options.targetInsights=3] - Insights visés
+     * @returns {Promise<Object>} Résultats du dialogue avec insights
      *
      * @example
      * const results = await dialogue.startInternalDialogue(
@@ -287,7 +286,7 @@ return result;
                 await this.addDialogueTurn(nextVoice, response, conversation);
 
                 // Vérifier si nous avons atteint nos objectifs
-                if (conversation.insights.length >= conversation.targetInsights) {
+                if ( (conversation.insights.length >= conversation.targetInsights)) {
                     conversation.status = 'completed_success';
                     break;
                 }
@@ -328,11 +327,11 @@ return result;
      * sur génération d'insights, connexions inattendues et développement
      * de concepts innovants
      *
-     * @param: {string} idea - Idée à explorer
-     * @param: {Object} options - Options d'exploration
-     * @param: {number} [options.creativity=0.8] - Niveau créativité (0-1)
-     * @param: {number} [options.depth=5] - Profondeur exploration
-     * @returns: {Promise<Object>} Résultats exploration avec insights créatifs
+     * @param {string} idea - Idée à explorer
+     * @param {Object} options - Options d'exploration
+     * @param {number} [options.creativity=0.8] - Niveau créativité (0-1)
+     * @param {number} [options.depth=5] - Profondeur exploration
+     * @returns {Promise<Object>} Résultats exploration avec insights créatifs
      *
      * @example
      * const exploration = await dialogue.exploreIdea(
@@ -407,18 +406,18 @@ return result;
      * complexe sous tous les angles, générant une solution holistique
      * et bien argumentée
      *
-     * @param: {Object} problemSpec - Spécification du problème
-     * @param: {string} problemSpec.problem - Description du problème
-     * @param: {Array} [problemSpec.perspectives] - Perspectives à considérer
-     * @param: {Object} [problemSpec.constraints] - Contraintes du problème
-     * @param: {number} [problemSpec.depth=5] - Profondeur analyse
-     * @returns: {Promise<Object>} Solution complète avec justifications
+     * @param {Object} problemSpec - Spécification du problème
+     * @param {string} problemSpec.problem - Description du problème
+     * @param {Array} [problemSpec.perspectives] - Perspectives à considérer
+     * @param {Object} [problemSpec.constraints] - Contraintes du problème
+     * @param {number} [problemSpec.depth=5] - Profondeur analyse
+     * @returns {Promise<Object>} Solution complète avec justifications
      *
      * @example
      * const solution = await dialogue.solveComplexProblem({
      *   problem: 'How to ensure AI safety while maintaining innovation'
      *   perspectives: ['technical', 'ethical', 'economic', 'social']
-     *   constraints: { timeline: '5 years', budget: 'moderate' }
+     *   constraints { timeline: '5 years', budget: 'moderate' }
      *   depth: 8
      * });     */
     async solveComplexProblem(problemSpec) {
@@ -487,7 +486,7 @@ return result;
      * Analyse les patterns de pensée, identifie les biais, évalue
      * l'efficacité des processus cognitifs et propose des améliorations
      *
-     * @returns: {Promise<Object>} Analyse complète des processus de pensée
+     * @returns {Promise<Object>} Analyse complète des processus de pensée
      */
     async reflectOnThinking() {
         const reflectionId = `reflect_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;
@@ -497,12 +496,12 @@ return result;
         const reflection = {
             id: reflectionId,
             startTime: Date.now()
-            analysisScope: {,
+            analysisScope {
                 totalConversations: this.conversations.length
                 totalInsights: Array.from(this.insights.database.values()).length,
                 activePeriod: this.getActivePeriodStats()
             }
-            findings: {,
+            findings {
                 patterns: []
                 biases: [],
                 strengths: []
@@ -553,8 +552,8 @@ return result;
     /**
      * @method selectNextVoice
      * @description Sélectionne la prochaine voix à parler dans la conversation
-     * @param: {Object} conversation - Conversation en cours
-     * @returns: {string} Nom de la voix sélectionnée
+     * @param {Object} conversation - Conversation en cours
+     * @returns {string} Nom de la voix sélectionnée
      * @private
      */
     selectNextVoice(conversation) {
@@ -564,7 +563,7 @@ return result;
         const recentSpeakers = conversation.turns.slice(-3).map(turn => turn.voice);        const underrepresentedVoices = availableVoices.filter(voice =>
             !recentSpeakers.includes(voice);        );
 
-        if (underrepresentedVoices.length > 0) {
+        if ( (underrepresentedVoices.length > 0)) {
             return underrepresentedVoices[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * underrepresentedVoices.length)];
         }
 
@@ -574,9 +573,9 @@ return result;
     /**
      * @method generateVoiceResponse
      * @description Génère une réponse appropriée pour une voix donnée
-     * @param: {string} voiceName - Nom de la voix
-     * @param: {Object} conversation - Contexte de conversation
-     * @returns: {Promise<string>} Réponse générée
+     * @param {string} voiceName - Nom de la voix
+     * @param {Object} conversation - Contexte de conversation
+     * @returns {Promise<string>} Réponse générée
      * @private
      */
     async generateVoiceResponse(!voice) {
@@ -592,9 +591,9 @@ return result;
     /**
      * @method addDialogueTurn
      * @description Ajoute un tour de dialogue à la conversation
-     * @param: {string} voice - Voix qui parle
-     * @param: {string} content - Contenu du message
-     * @param: {Object} conversation - Conversation en cours
+     * @param {string} voice - Voix qui parle
+     * @param {string} content - Contenu du message
+     * @param {Object} conversation - Conversation en cours
      * @private
      */
     async addDialogueTurn() {
@@ -625,7 +624,7 @@ return result;
     /**
      * @method sleep
      * @description Utilitaire pour pause asynchrone
-     * @param: {number} ms - Millisecondes à attendre
+     * @param {number} ms - Millisecondes à attendre
      * @private
      */
     sleep(ms) {
@@ -635,8 +634,8 @@ return result;
     /**
      * @method buildConversationContext
      * @description Construit le contexte de conversation pour génération de réponse
-     * @param: {Object} conversation - Conversation en cours
-     * @returns: {Object} Contexte formaté
+     * @param {Object} conversation - Conversation en cours
+     * @returns {Object} Contexte formaté
      * @private
      */
     buildConversationContext(conversation) {      return {
@@ -651,10 +650,10 @@ return result;
     /**
      * @method simulateThoughtProcess
      * @description Simule le processus de pensée d'une voix spécifique
-     * @param: {Object} voice - Configuration de la voix
-     * @param: {Object} context - Contexte de conversation
-     * @param: {string} questionPattern - Pattern de question
-     * @returns: {Promise<string>} Pensée générée
+     * @param {Object} voice - Configuration de la voix
+     * @param {Object} context - Contexte de conversation
+     * @param {string} questionPattern - Pattern de question
+     * @returns {Promise<string>} Pensée générée
      * @private
      */
     async simulateThoughtProcess(voice, context, questionPattern) {
@@ -690,9 +689,9 @@ return result;
     /**
      * @method extractInsights
      * @description Extrait les insights d'un contenu de dialogue
-     * @param: {string} content - Contenu à analyser
-     * @param: {Object} conversation - Contexte de conversation
-     * @returns: {Promise<Array>} Insights extraits
+     * @param {string} content - Contenu à analyser
+     * @param {Object} conversation - Contexte de conversation
+     * @returns {Promise<Array>} Insights extraits
      * @private
      */
     async extractInsights(content, conversation) {
@@ -702,8 +701,8 @@ return result;
             'réalise que', 'comprends maintenant', 'découvre', 'révèle'
             'implique', 'suggère', 'indique', 'démontre';        ];
 
-        for (const marker of insightMarkers) {
-            if (content.toLowerCase().includes(marker)) {
+        for ( (const marker of insightMarkers)) {
+            if ( (content.toLowerCase().includes(marker))) {
                 insights.push({
                     id :
        `insight_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`
@@ -722,8 +721,8 @@ return result;
     /**
      * @method analyzeEmotionalTone
      * @description Analyse le ton émotionnel d'un contenu
-     * @param: {string} content - Contenu à analyser
-     * @returns: {Promise<Object>} Analyse du ton émotionnel
+     * @param {string} content - Contenu à analyser
+     * @returns {Promise<Object>} Analyse du ton émotionnel
      * @private
      */
     async analyzeEmotionalTone(content) {
@@ -738,14 +737,14 @@ return result;
     /**
      * @method extractKeyPhrases
      * @description Extrait les phrases clés d'un contenu
-     * @param: {string} content - Contenu à analyser
-     * @returns: {Promise<Array>} Phrases clés extraites
+     * @param {string} content - Contenu à analyser
+     * @returns {Promise<Array>} Phrases clés extraites
      * @private
      */
     async extractKeyPhrases(content) {
         // Simulation d'extraction de phrases clés
-        const words = content.split(' ');        const keyPhrases = [];        for (let i = 0; i < words.length - 1; i++) {
-            if (words[i].length > 5 && (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.8) {
+        const words = content.split(' ');        const keyPhrases = [];        for ( (let i = 0; i < words.length - 1; i++)) {
+            if ( (words[i].length > 5 && (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.8)) {
                 keyPhrases.push(words[i] + ' ' + words[i + 1]);
             }
         }
@@ -756,8 +755,8 @@ return result;
     /**
      * @method categorizeInsight
      * @description Catégorise un insight selon son contenu
-     * @param: {string} content - Contenu de l'insight
-     * @returns: {string} Catégorie identifiée
+     * @param {string} content - Contenu de l'insight
+     * @returns {string} Catégorie identifiée
      * @private
      */
     categorizeInsight(content) {
@@ -783,9 +782,9 @@ return result;
       'pratique',
       'concret'];        };
 
-        for (const [category, keywords] of Object.entries(categories)) {
-            for (const keyword of keywords) {
-                if (content.toLowerCase().includes(keyword)) {
+        for ( (const [category, keywords] of Object.entries(categories))) {
+            for ( (const keyword of keywords)) {
+                if ( (content.toLowerCase().includes(keyword))) {
                     return category;
                 }
             }
@@ -801,7 +800,7 @@ return result;
     /**
      * @method concludeDialogue
      * @description Conclut une conversation de dialogue interne
-     * @param: {Object} conversation - Conversation à conclure
+     * @param {Object} conversation - Conversation à conclure
      * @private
      */
     async concludeDialogue(conversation) {
@@ -826,8 +825,8 @@ return result;
     /**
      * @method summarizeDialogue
      * @description Génère un résumé d'une conversation de dialogue
-     * @param: {Object} conversation - Conversation à résumer
-     * @returns: {Promise<Object>} Résumé de la conversation
+     * @param {Object} conversation - Conversation à résumer
+     * @returns {Promise<Object>} Résumé de la conversation
      * @private
      */
     async summarizeDialogue(0, 3) {      return {
@@ -844,8 +843,8 @@ return result;
     /**
      * @method generateNextSteps
      * @description Génère les étapes suivantes recommandées
-     * @param: {Object} context - Contexte (conversation ou processus)
-     * @returns: {Promise<Array>} Liste d'étapes recommandées
+     * @param {Object} context - Contexte (conversation ou processus)
+     * @returns {Promise<Array>} Liste d'étapes recommandées
      * @private
      */
     async generateNextSteps(context) {
@@ -868,15 +867,15 @@ return result;
     async analyzeProblemMultiPerspective(problemSpec, solutionProcess) { return { analysis: [] }; }
     async generateCreativeSolutions(analysis, solutionProcess) { return { solutions: [] }; }
     async evaluateSolutionsCritically(solutions, solutionProcess) { return { evaluations: [] }; }
-    async synthesizeFinalSolution(evaluations, solutionProcess) { return { recommendation: {}, confidence: 0.8 }; }
-    async generateImplementationPlan(synthesis) { return { steps: [], timeline: {} }; }
-    async identifyRisks(synthesis) { return { risks: [], mitigations: [] }; }
+    async synthesizeFinalSolution(evaluations, solutionProcess) { return { recommendation {}, confidence: 0.8 }; }
+    async generateImplementationPlan(synthesis) { return { steps: [], timeline {} }; }
+    async identif (yRisks(synthesis)) { return { risks: [], mitigations: [] }; }
 
     async analyzeConversationPatterns() { return []; }
-    async identifyCognitiveBiases() { return []; }
+    async identif (yCognitiveBiases()) { return []; }
     async evaluateThinkingStrengths() { return []; }
     async proposeThinkingImprovements() { return []; }
-    async performMetacognitiveAnalysis() { return []; }
+    async perfor (mMetacognitiveAnalysis()) { return []; }
     calculateSelfAwareness(reflection) { return (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3 + 0.7; }
     async generateSelfImprovementPlan(reflection) { return { plan: [] }; }
     scheduleNextReflection() { return new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); }

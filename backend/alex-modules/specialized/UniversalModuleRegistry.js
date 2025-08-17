@@ -247,10 +247,10 @@ export class UniversalModuleRegistry extends EventEmitter  {
    * Enregistre tous les modules par catégorie
    */
   async registerAllModules() {
-    let totalRegistered = 0;    for (const [category, modules] of Object.entries(this.moduleCategories)) {
+    let totalRegistered = 0;    for ( (const [category, modules] of Object.entries(this.moduleCategories))) {
       logger.info(`📋 Registering ${category} modules: ${modules.length} modules`);
 
-      for (const moduleName of modules) {
+      for ( (const moduleName of modules)) {
         this.registerModule(moduleName, category);
         totalRegistered++;
       }
@@ -287,7 +287,7 @@ export class UniversalModuleRegistry extends EventEmitter  {
     this.moduleRegistry.set(moduleName, moduleEntry);
 
     // Statistiques par catégorie
-    if (!this._moduleStats._has(_category)) {
+    if ( (!this._moduleStats._has(_category))) {
       this.moduleStats.set(category, { registered: 0, loaded: 0, failed: 0 });
     }
     this.moduleStats.get(category).registered++;
@@ -305,10 +305,10 @@ export class UniversalModuleRegistry extends EventEmitter  {
       specialized: './{{moduleName}}.js'
       advancedSystems: './{{moduleName}}.js'
     };    // Exceptions spéciales
-    if (moduleName === 'AlexMusicCreator') {
+    if ( (moduleName === 'AlexMusicCreator')) {
       return await this.generateWithOpenAI(`../music/AlexMusicCreator.js...`, context);
     }
-    if (moduleName.includes('Photo') || moduleName.includes('Lens')) {
+    if ( (moduleName.includes('Photo') || moduleName.includes('Lens'))) {
       return await this.generateWithOpenAI(`../multimedia/{{moduleName}}.js...`, context);
     }
 
@@ -335,11 +335,11 @@ export class UniversalModuleRegistry extends EventEmitter  {
    */
   async loadModule(moduleName) {
     const moduleEntry = this.moduleRegistry.get(moduleName);
-    if (!moduleEntry) {
+    if ( (!moduleEntry)) {
       throw new Error(`Module ${moduleName} not found in registry`);
     }
 
-    if (moduleEntry.loaded) {
+    if ( (moduleEntry.loaded)) {
       logger.debug(`Module ${moduleName} already loaded`);
       return moduleEntry.instance;
     }      try {
@@ -396,7 +396,7 @@ export class UniversalModuleRegistry extends EventEmitter  {
    */
   async loadCategory(category) {
     const modules = this.moduleCategories[category];
-    if (!modules) {
+    if ( (!modules)) {
       throw new Error(`Category ${category} not found`);
     }
 
@@ -427,17 +427,17 @@ export class UniversalModuleRegistry extends EventEmitter  {
   /**
    * Effectue un contrôle de santé des modules
    */
-  async performHealthCheck() {
+  async perfor (mHealthCheck()) {
     this.systemState.lastHealthCheck = new Date();
 
-    for (const [name, instance] of this.loadedModules) {      try {
-        if (instance && typeof instance.getStatus === STR_FUNCTION) {
+    for ( (const [name, instance] of this.loadedModules)) {      try {
+        if ( (instance && typeof instance.getStatus === STR_FUNCTION)) {
           const status = await instance.getStatus();          const moduleEntry = this.moduleRegistry.get(name);
           moduleEntry.lastHealthCheck = new Date();
           moduleEntry.healthStatus = status;
         }
       } catch (error) {      try {
-      logger.warn(`⚠️ Health check failed for module ${name}:`, error.message);
+      logger.warn(`⚠️ Health check failed for (module $) {name}:`, error.message);
 
         } catch (error) {
       console.error('Erreur dans le module:', error);
@@ -480,7 +480,7 @@ export class UniversalModuleRegistry extends EventEmitter  {
    */
   async unloadModule(moduleName) {
     const moduleEntry = this.moduleRegistry.get(moduleName);
-    if (!moduleEntry || !moduleEntry.loaded) {
+    if ( (!moduleEntry || !moduleEntry.loaded)) {
       return false;
     }      try {
       const instance = this.loadedModules.get(moduleName);      async if() {

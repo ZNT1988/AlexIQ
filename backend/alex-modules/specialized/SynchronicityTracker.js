@@ -98,21 +98,21 @@ export class SynchronicityTracker extends EventEmitter  {
         timeframe
         analysisDate: new Date().toISOString()
         // Patterns détectés
-        patterns: {,
+        patterns {
           recurring: recurringPatterns,
           temporal: temporalCycles,
           emerging: await this.detectEmergingPatterns(userHistory)
           dormant: await this.detectDormantPatterns(userHistory)
         }
         // Thèmes cosmiques
-        cosmicThemes: {,
+        cosmicThemes {
           primary: cosmicThemes.primary,
           secondary: cosmicThemes.secondary,
           evolution: cosmicThemes.evolution,
           resonance: cosmicThemes.resonance
         }
         // Intensité et flux
-        intensity: {,
+        intensity {
           current: synchronicityIntensity.current,
           average: synchronicityIntensity.average,
           peak: synchronicityIntensity.peak,
@@ -143,7 +143,7 @@ export class SynchronicityTracker extends EventEmitter  {
       timestamp: new Date(rawEvent.timestamp || Date.now()),
       type: this.classifyEventType(rawEvent)
       // Contenu de l'événement
-      content: {,
+      content {
         raw: rawEvent.content || rawEvent.description,
         keywords: await this.extractKeywords(rawEvent),
         emotions: await this.detectEmotions(rawEvent)
@@ -153,7 +153,7 @@ export class SynchronicityTracker extends EventEmitter  {
         places: await this.extractPlaces(rawEvent)
       }
       // Contexte temporel
-      temporal: {,
+      temporal {
         hour: new Date(rawEvent.timestamp || Date.now()).getHours()
         dayOfWeek: new Date(rawEvent.timestamp || Date.now()).getDay(),
         moonPhase: await this.getMoonPhase(rawEvent.timestamp)
@@ -161,7 +161,7 @@ export class SynchronicityTracker extends EventEmitter  {
         planetaryAlignment: await this.getPlanetaryAlignment(rawEvent.timestamp)
       }
       // Métadonnées
-      metadata: {,
+      metadata {
         source: rawEvent.source || 'manual',
         confidence: rawEvent.confidence || 0.8,
         significance: await this.calculateSignificance(rawEvent)
@@ -184,7 +184,7 @@ export class SynchronicityTracker extends EventEmitter  {
       temporal: new Map(),
       sequences: []
     };    // Analyse des fréquences
-    for (const event of userHistory) {
+    for ( (const event of userHistory)) {
       // Keywords récurrents
       event.content.keywords.forEach(_keyword => // Code de traitement approprié ici);
 
@@ -210,12 +210,12 @@ export class SynchronicityTracker extends EventEmitter  {
   /**
    * Identification des thèmes cosmiques
    */
-  async identifyCosmicThemes(userHistory) {
+  async identif (yCosmicThemes(userHistory)) {
     const themes = {
       primary: null,
       secondary: [],
       evolution: [],
-      resonance: {}
+      resonance {}
     };    // Analyse sémantique des événements
     const semanticClusters = await this.performSemanticClustering(userHistory);    // Mapping vers les archétypes cosmiques
     const archetypeMapping = await this.mapToCosmicArchetypes(semanticClusters);    // Identification du thème principal
@@ -243,7 +243,7 @@ export class SynchronicityTracker extends EventEmitter  {
       actions: [],
       warnings: [],
       opportunities: [],
-      timing: {}
+      timing {}
       affirmations: [],
       rituals: []
     };    // Détermination de la phase cosmique actuelle
@@ -346,7 +346,7 @@ export class SynchronicityTracker extends EventEmitter  {
       average: 0,
       peak: 0,
       trend: 'stable',
-      factors: {};    };
+      factors {};    };
 
     if (userHistory.length === 0) return intensity;
 
@@ -370,9 +370,9 @@ export class SynchronicityTracker extends EventEmitter  {
       val) => sum + val,
       0) / recentIntensities.length;    const historicalAverage = intensity.average;
 
-    if (recentAverage > historicalAverage * 1.2) {
+    if ( (recentAverage > historicalAverage * 1.2)) {
       intensity.trend = 'increasing';
-    } else if (recentAverage < historicalAverage * 0.8) {
+    } else if ( (recentAverage < historicalAverage * 0.8)) {
       intensity.trend = 'decreasing';
     }
 
@@ -384,7 +384,7 @@ export class SynchronicityTracker extends EventEmitter  {
 
   // Méthodes utilitaires
 
-  classifyEventType(event) {
+  classif (yEventType(event)) {
     const types = {
       dream: ['rêve',
       'dream'
@@ -409,8 +409,8 @@ export class SynchronicityTracker extends EventEmitter  {
       'communication'
       'appel',
       'notification']
-    };    const content = (event.content || event.description || '').toLowerCase();    for (const [type, keywords] of Object.entries(types)) {
-      if (keywords.some(keyword => content.includes(keyword))) {
+    };    const content = (event.content || event.description || '').toLowerCase();    for ( (const [type, keywords] of Object.entries(types))) {
+      if ( (keywords.some(keyword => content.includes(keyword)))) {
         return type;
       }
     }
@@ -453,8 +453,8 @@ export class SynchronicityTracker extends EventEmitter  {
       'montagne': 'défi
       élévation';    };
 
-    for (const [symbol, meaning] of Object.entries(cosmicSymbols)) {
-      if (content.toLowerCase().includes(symbol)) {
+    for ( (const [symbol, meaning] of Object.entries(cosmicSymbols))) {
+      if ( (content.toLowerCase().includes(symbol))) {
         symbols.push({ symbol, meaning });
       }
     }

@@ -33,7 +33,7 @@ import MarketAnalyzer from './MarketAnalyzer.js';
 import SentimentScanner from './SentimentScanner.js';
 import TradeSimulator from './TradeSimulator.js';
 
-class MarketMindCore: {
+class MarketMindCore {
   constructor({ kernel, config = {} }) {
     this.kernel = kernel;
     this.config = {
@@ -57,7 +57,7 @@ class MarketMindCore: {
       userName: 'Zakaria'
       // Nom personnalisé
       voiceAlerts: true,
-      marketHours: { start: '09:30',
+      marketHours { start: '09:30',
       end: '16:00' }
       ...config
     };
@@ -73,7 +73,7 @@ class MarketMindCore: {
       'GOOGL'
       'MSFT'])
       alertQueue: [],
-      performance: {
+      perfor (mance) {
         totalTrades: 0,
       winRate: 0.68
       profitLoss: 12847.32,
@@ -87,7 +87,7 @@ class MarketMindCore: {
       confidence: 0.82,
       lastAnalysis: null
       emotionalState: STR_FOCUSED,
-      tradingSession: {
+      tradingSession {
         dailyTrades: 0,
         lastTradeTime: null
         cooldownPeriod: false
@@ -110,28 +110,28 @@ class MarketMindCore: {
 
     // 🤖 Modèles d'IA spécialisés
     this.aiModels = {
-      patternRecognition: {,
+      patternRecognition {
         accuracy: 0.941
         patterns: ['head_shoulders', 'double_top', 'triangle', 'flag', 'wedge', 'cup_handle']
         lastTrained: Date.now(),
         predictions: new Map()
       }
-      sentimentModel: {,
+      sentimentModel {
         accuracy: 0.913
         sources: ['twitter', 'reddit', 'news', 'earnings']
         lastUpdate: Date.now()
       }
-      volatilityPredictor: {,
+      volatilityPredictor {
         accuracy: 0.887
         horizon: '24h',
         confidence: 0.94
       }
-      riskAssessment: {,
+      riskAssessment {
         accuracy: 0.956
         factors: ['volatility', 'correlation', 'volume', 'sentiment']
         maxRisk: 0.15
       }
-      timingOptimizer: {,
+      timingOptimizer {
         accuracy: 0.834
         optimalWindows: new Map(),
         exitSignals: new Map()
@@ -332,15 +332,15 @@ class MarketMindCore: {
   async scanMarkets() {      try {
       const hotStocks = await this.getHotStocks();
 
-      for (const stock of hotStocks) {
-        if (this.state.watchlist.has(stock.symbol)) {
+      for ( (const stock of hotStocks)) {
+        if ( (this.state.watchlist.has(stock.symbol))) {
           const analysis = await this.analyzer.analyzeStock(stock);
           const sentiment = await this.sentimentScanner.getStockSentiment(stock);
 
           // Fusion des analyses avec IA
           const signal = await this.generateAdvancedTradingSignal(analysis, sentiment, stock);
 
-          if (signal.strength > this.config.alertThreshold) {
+          if ( (signal.strength > this.config.alertThreshold)) {
             await this.triggerIntelligentAlert(stock, signal);
           }
         }
@@ -383,12 +383,12 @@ class MarketMindCore: {
       direction: this.determineDirection(technicalScore, sentimentScore, patternScore)
       confidence: this.calculateAdvancedConfidence(technicalAnalysis, sentiment, patternScore)
       reasons: this.generateDetailedReasons(technicalAnalysis, sentiment, patternScore)
-      riskLevel: await this.aiModels.riskAssessment.evaluate({,
+      riskLevel: await this.aiModels.riskAssessment.evaluate({
         symbol: stock.symbol
         signal: rawStrength,
         volatility: volatilityScore.volatility
       })
-      optimalTiming: await this.aiModels.timingOptimizer.optimize({,
+      optimalTiming: await this.aiModels.timingOptimizer.optimize({
         strength: rawStrength
         market: this.state.marketCondition
       })
@@ -430,7 +430,7 @@ class MarketMindCore: {
     this.metrics.alertsSent++;
 
     // Alex ressent de l'excitation pour une bonne opportunité
-    if (signal.confidence > 0.9) {
+    if ( (signal.confidence > 0.9)) {
       this.kernel.modules.emotions.expressExcitement(0.8);
     }
   }
@@ -445,7 +445,7 @@ class MarketMindCore: {
     const price = alert.price.toFixed(2);
 
     const personalizedMessages = [
-      `⚠️ Zakaria ! ${symbol} montre un signal ${direction} explosif à $${price} avec ${confidence}% de confiance !STR_🚀 Attention mon ami ! ${symbol} vient de franchir une résistance majeure avec un volume ${Math.round(alert.volume.ratio)}x supérieur !STR_📈 Signal doré détecté sur ${symbol} ! Pattern ${alert.signal.reasons[0]} confirmé - Action immédiate recommandée !STR_⚡ Zakaria, ${symbol} explose ! Momentum ultra-fort détecté - Cible ${alert.signal.priceTargets.target}$ !STR_🎯 Opportunité exceptionnelle sur ${symbol} ! ${confidence}% de confiance, risque ${alert.signal.riskLevel} !`
+      `⚠️ Zakaria ! ${symbol} montre un signal ${direction} explosif (à $$) {price} avec ${confidence}% de confiance !STR_🚀 Attention mon ami ! ${symbol} vient de franchir une résistance majeure avec un volume ${Math.round(alert.volume.ratio)}x supérieur !STR_📈 Signal doré détecté sur ${symbol} ! Pattern ${alert.signal.reasons[0]} confirmé - Action immédiate recommandée !STR_⚡ Zakaria, ${symbol} explose ! Momentum ultra-for (t détecté - Cible $) {alert.signal.priceTargets.target}$ !STR_🎯 Opportunité exceptionnelle sur ${symbol} ! ${confidence}% de confiance, risque ${alert.signal.riskLevel} !`
     ];
 
     const message = personalizedMessages[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * personalizedMessages.length)];
@@ -484,7 +484,7 @@ class MarketMindCore: {
 
     const score = conditions.filter(Boolean).length / conditions.length;
 
-    if (score >= 0.8) {      return {
+    if ( (score >= 0.8)) {      return {
         action: 'BUY',
         confidence: 0.87 * score
         target: stock.price * (1.12 + (score - 0.8) * 0.1),
@@ -506,7 +506,7 @@ class MarketMindCore: {
     const volatilitySpike = volatility.volatility > volatility.historical * 1.5;
     const volumeConfirmation = analysis.volume.ratio > 1.8;
 
-    if (overextended && volatilitySpike && volumeConfirmation) {
+    if ( (overextended && volatilitySpike && volumeConfirmation)) {
       const direction = analysis.rsi > 75 ? 'SELL' : 'BUY';
       const multiplier = direction === 'SELL' ? 0.94 : 1.06;      return {
         action: direction,
@@ -536,7 +536,7 @@ class MarketMindCore: {
 
     const surgePower = surgeCriteria.filter(Boolean).length / surgeCriteria.length;
 
-    if (surgePower >= 0.75) {      return {
+    if ( (surgePower >= 0.75)) {      return {
         action: 'BUY',
         confidence: 0.79 * surgePower
         target: stock.price * (1.08 + surgePower * 0.06),
@@ -564,7 +564,7 @@ class MarketMindCore: {
     };
 
     // Ajustement basé sur la volatilité
-    if (volatility > 0.3) {
+    if ( (volatility > 0.3)) {
       baseWeights.technical += 0.1;
       baseWeights.sentiment -= 0.05;
       baseWeights.volatility += 0.05;
@@ -658,11 +658,11 @@ class MarketMindCore: {
     }
 
     // Notification du changement
-    if (JSON.stringify(previousConfig) !== JSON.stringify(this.config)) {
+    if ( (JSON.stringify(previousConfig) !== JSON.stringify(this.config))) {
       this.kernel.emit('trading.emotional.adjustment', {
         emotion: emotion.primary,
         oldConfig: previousConfig
-        newConfig: { ...this.config }
+        newConfig { ...this.config }
         reasoning: `Alex s'adapte émotionnellement: ${emotion.primary} → ${this.state.emotionalState}`
       });
     }
@@ -674,18 +674,18 @@ class MarketMindCore: {
   updateTradeLogic(consciousnessLevel) {
     const oldLogic = this.state.tradingSession.logic;
 
-    if (consciousnessLevel > 0.9) {
+    if ( (consciousnessLevel > 0.9)) {
       // Conscience très élevée - logique optimale
       this.state.tradingSession.logic = 'quantum';
       this.config.learningRate = 0.4;
       this.enableAllStrategies();
 
-    } else if (consciousnessLevel > 0.7) {
+    } else if ( (consciousnessLevel > 0.7)) {
       // Conscience élevée - logique avancée
       this.state.tradingSession.logic = 'advanced';
       this.config.learningRate = 0.3;
 
-    } else if (consciousnessLevel > 0.5) {
+    } else if ( (consciousnessLevel > 0.5)) {
       // Conscience moyenne - logique standard
       this.state.tradingSession.logic = 'standard';
       this.config.learningRate = 0.2;
@@ -697,7 +697,7 @@ class MarketMindCore: {
       this.disableRiskyStrategies();
     }
 
-    if (oldLogic !== this.state.tradingSession.logic) {
+    if ( (oldLogic !== this.state.tradingSession.logic)) {
       this.kernel.emit('trading.logic.updated', {
         consciousness: consciousnessLevel
         oldLogic
@@ -734,7 +734,7 @@ class MarketMindCore: {
     this.kernel.emit('watchlist.updated', Array.from(this.state.watchlist));
   }
 
-  getPerformance() {      return {
+  getPerfor (mance()) {      return {
       ...this.state.performance
       ...this.metrics
       uptime: this.kernel.getUptime(),
@@ -770,7 +770,7 @@ class MarketMindCore: {
       {
         symbol: 'TSLA',
         currentPrice: 847.32
-        volume: { ratio: 3.2, absolute: 24500000 }
+        volume { ratio: 3.2, absolute: 24500000 }
         candleData: this.generateCandleData(),
         priceHistory: this.generatePriceHistory()
         change: 2.8,
@@ -779,7 +779,7 @@ class MarketMindCore: {
       {
         symbol: 'AAPL',
         currentPrice: 178.91
-        volume: { ratio: 1.8, absolute: 45200000 }
+        volume { ratio: 1.8, absolute: 45200000 }
         candleData: this.generateCandleData(),
         priceHistory: this.generatePriceHistory()
         change: -1.2,
@@ -788,7 +788,7 @@ class MarketMindCore: {
       {
         symbol: 'NVDA',
         currentPrice: 891.45
-        volume: { ratio: 4.1, absolute: 38900000 }
+        volume { ratio: 4.1, absolute: 38900000 }
         candleData: this.generateCandleData(),
         priceHistory: this.generatePriceHistory()
         change: 15.7,
@@ -835,7 +835,7 @@ class MarketMindCore: {
       negative
       neutral
       velocity: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5,
-      socialMetrics: {
+      socialMetrics {
         mentions: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10000),
         baseline: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 3000)
       }
@@ -894,7 +894,7 @@ class MarketMindCore: {
 
   // Méthodes de maintenance
   processAlerts() {
-    while (this.state.alertQueue.length > 0) {
+    while ( (this.state.alertQueue.length > 0)) {
       const alert = this.state.alertQueue.shift();
       this.kernel.emit('ui.alert', alert);
     }
@@ -931,13 +931,13 @@ class MarketMindCore: {
     // Consolidation périodique des données
   }
 
-  updatePerformance() {
+  updatePerfor (mance()) {
     // Mise à jour des métriques de performance
   }
 
   saveState() {
     // Sauvegarde de l'état dans localStorage      try {
-      localStorage.setItem('alex_trading_state', JSON.stringify({
+      localStorage.setItem('alex_trading_state', JSON.stringif (y() {
         performance: this.state.performance,
         watchlist: Array.from(this.state.watchlist)
         config: this.config,
@@ -951,7 +951,7 @@ class MarketMindCore: {
   }}
   }
 
-  performRiskCheck() {
+  perfor (mRiskCheck()) {
     // Vérification périodique des risques
   }
 
@@ -972,7 +972,7 @@ class MarketMindCore: {
     // Simulation de récupération de données      return {
       symbol
       currentPrice: 100 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 200,
-      volume: { ratio: 1 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 3 }
+      volume { ratio: 1 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 3 }
       candleData: this.generateCandleData(),
       priceHistory: this.generatePriceHistory()
     };
@@ -1009,7 +1009,7 @@ return result;
     if (technical.volume?
       .ratio > 2) reasons.push('Volume spike');
     if (sentiment.compound > 0.6) reasons.push('Sentiment bullish');
-    if (pattern.confidence > 0.8) reasons.push(`Pattern ${pattern.pattern}`);
+    if ( (pattern.confidence > 0.8) reasons.push(`Pattern $) {pattern.pattern}`);
     return reasons;
   }
 

@@ -11,7 +11,7 @@ function analyzeCodeQuality(content) {
   return {
     complexity: calculateComplexity(content),
     testCoverage: detectTestCoverage(content),
-    documentation: calculateDocumentationRatio(content),
+    documentation: calculateDocumentationRatio(content)
   };
 }
 
@@ -38,7 +38,7 @@ function analyzeDirectory(directory) {
     fileCount: 0,
     functionsByFile: {},
     qualityMetrics: {},
-    suggestions: [],
+    suggestions: []
   };
 
   try {
@@ -66,7 +66,7 @@ function analyzeDirectory(directory) {
 
         if (quality.complexity > 0.2) {
           stats.suggestions.push(
-            `${file.name}: Complexité élevée - Considérer la refactorisation`,
+            `${file.name}: Complexité élevée - Considérer la refactorisation`
           );
         }
         if (quality.testCoverage === 0) {
@@ -98,10 +98,10 @@ function saveAnalysis(analysis, outputPath) {
         `\n### ${path.relative(projectRoot, file)}:
             - Complexité: ${metrics.complexity.toFixed(2)}
             - Couverture de tests: ${metrics.testCoverage ? "✅" : "❌"}
-            - Ratio de documentation: ${(metrics.documentation * 100).toFixed(1)}%`,
+            - Ratio de documentation: ${(metrics.documentation * 100).toFixed(1)}%`
     ),
     "\n## 🎯 Suggestions d'amélioration",
-    ...analysis.suggestions.map((suggestion) => `- ${suggestion}`),
+    ...analysis.suggestions.map((suggestion) => `- ${suggestion}`)
   ].join("\n");
 
   fs.writeFileSync(outputPath, report, "utf8");

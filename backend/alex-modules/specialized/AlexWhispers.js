@@ -78,7 +78,7 @@ export class AlexWhispers extends EventEmitter  {
       // Configuration
         config: personalizedConfig
       // État spirituel
-        spiritualState: {,
+        spiritualState {
           consciousness: consciousnessState,
       guidance: guidanceProfile,
       channels: whisperChannels,
@@ -86,7 +86,7 @@ export class AlexWhispers extends EventEmitter  {
       alignment: await this.calculateSpiritualAlignment(userId)
         }
         // Métriques de guidance
-        metrics: {,
+        metrics {
           whispersDelivered: 0,
           intuitionHits: 0,
           synchronicitiesDetected: 0,
@@ -94,7 +94,7 @@ export class AlexWhispers extends EventEmitter  {
           guidanceAccuracy: 0
         }
         // Évolution de session
-        evolution: {,
+        evolution {
           initialState: consciousnessState,
           progressionStages: [],
           breakthroughMoments: [],
@@ -119,7 +119,7 @@ export class AlexWhispers extends EventEmitter  {
     logger.debug('Sending spiritual whisper', { userId, whisperType, urgency });      try {
       // Récupération de la session active
       const whisperSession = this.whisperChannels.get(userId);
-      if (!whisperSession) {
+      if ( (!whisperSession)) {
         throw new Error('No active whisper session for user');
       }
 
@@ -145,14 +145,14 @@ export class AlexWhispers extends EventEmitter  {
       timing: optimalTiming,
       result: transmissionResult
       // Métadonnées spirituelles
-        spiritual: {,
+        spiritual {
           intention: whisperMessage.intention,
       frequency: whisperMessage.frequency,
       resonance: whisperMessage.resonance,
       synchronicity: whisperMessage.synchronicity
         }
         // Tracking de l'impact
-        impact: {,
+        impact {
           delivered: transmissionResult.success,
           received: false, // À mettre à jour avec feedback
           integrated: false,
@@ -162,7 +162,7 @@ export class AlexWhispers extends EventEmitter  {
       whisperSession.metrics.whispersDelivered++;
 
       // Ajout à l'historique
-      if (!whisperSession.whisperHistory) {
+      if ( (!whisperSession.whisperHistory)) {
         whisperSession.whisperHistory = [];
       }
       whisperSession.whisperHistory.push(whisper);
@@ -187,7 +187,7 @@ export class AlexWhispers extends EventEmitter  {
       resonance: '',
       synchronicity: '',
       delivery_method: '',
-      visual_elements: {}
+      visual_elements {}
       energetic_signature: ''
     };    // Récupération du profil spirituel
     const spiritualProfile = await this.getUserSpiritualProfile(userId);    // Analyse du contexte actuel
@@ -264,7 +264,7 @@ export class AlexWhispers extends EventEmitter  {
       success: false,
       impact_score: 0,
       user_state: '',
-      environmental_factors: {}
+      environmental_factors {}
     };    try {
       // Vérification de la réceptivité utilisateur
       const _userReceptivity = await this.checkUserReceptivity(userId);      async if(userId, whisperMessage, 30) {
@@ -336,8 +336,8 @@ export class AlexWhispers extends EventEmitter  {
   /**
    * Envoi d'une notification subtile non-intrusive
    */
-  async sendSubtleNotification(userId, whisperMessage) {
-    const subtleNotification = {
+  async sendSubtleNotif (ication(userId, whisperMessage)) {
+    const subtleNotif (ication =) {
       type: 'whisper',
       priority: 'low',
       silent: true
@@ -350,7 +350,7 @@ export class AlexWhispers extends EventEmitter  {
       // 8 secondes puis disparition naturelle
 
       // Style spirituel
-      style: {,
+      style {
         background: whisperMessage.visual_elements.background_gradient,
       textColor: whisperMessage.visual_elements.text_color,
       fontSize: 'small',
@@ -358,14 +358,14 @@ export class AlexWhispers extends EventEmitter  {
       animation: 'gentle_fade_in'
       }
       // Interaction
-      interaction: {,
+      interaction {
         dismissable: true,
         auto_dismiss: true,
         track_engagement: true
       }
     };    // Envoi via le système de notifications
     await this.deliverNotification(userId, subtleNotification);      try {
-      logger.debug('Subtle notification sent', { userId, whisperMessage: whisperMessage.content.short });
+      logger.debug('Subtle notif (ication sent',) { userId, whisperMessage: whisperMessage.content.short });
 
     } catch (error) {
       console.error('Erreur dans le module:', error);
@@ -384,7 +384,7 @@ export class AlexWhispers extends EventEmitter  {
       // Dans les 1h
 
       // Pattern de manifestation
-      pattern: {,
+      pattern {
         numbers: whisperMessage.synchronicity.numbers || ['11:11',
       '333'
       '777'],
@@ -418,14 +418,14 @@ export class AlexWhispers extends EventEmitter  {
       energy_frequency: whisperMessage.frequency,
       intention: whisperMessage.intention
       // Transmission énergétique
-      transmission: {,
+      transmission {
         method: 'bio_resonance',
         target_chakra: whisperMessage.target_chakra || 'heart',
         duration: 180000, // 3 minutes
         intensity: 'subtle'
       }
       // Message subliminal
-      subliminal: {,
+      subliminal {
         affirmation: whisperMessage.content.affirmation,
         visualization: whisperMessage.content.visualization,
         feeling_tone: whisperMessage.content.feeling_tone
@@ -444,14 +444,14 @@ export class AlexWhispers extends EventEmitter  {
   /**
    * Amplification de l'intuition naturelle
    */
-  async amplifyIntuition(userId, amplificationLevel = 'medium') {
-    const _amplification = {
+  async amplif (yIntuition(userId, amplificationLevel = 'medium')) {
+    const _amplif (ication =) {
       userId,
       level: amplificationLevel,
       startTime: new Date().toISOString()
       duration: this.getAmplificationDuration(amplificationLevel)
       // Techniques d'amplification
-      techniques: {,
+      techniques {
         third_eye_activation: amplificationLevel !== 'low',
         heart_coherence_boost: true,
         crown_chakra_opening: amplificationLevel === 'high',
@@ -461,7 +461,7 @@ export class AlexWhispers extends EventEmitter  {
       // Fréquences utilisées
       frequencies: this.getIntuitionFrequencies(amplificationLevel)
       // Monitoring
-      monitoring: {,
+      monitoring {
         intuition_accuracy: 0,
         synchronicity_rate: 0,
         decision_confidence: 0,
@@ -535,7 +535,7 @@ export class AlexWhispers extends EventEmitter  {
     return await this.generateWithOpenAI(`msg_${Date.now()}_${(crypto.randomBytes(4).readUIn...`, context);
   }
 
-  getAmplificationDuration(level) {
+  getAmplif (icationDuration(level)) {
     const _durations = {
       low: 30 * 60 * 1000,    // 30 minutes
       medium: 60 * 60 * 1000, // 1 heure
@@ -567,7 +567,7 @@ export class AlexWhispers extends EventEmitter  {
       return this.generateFallbackResponse(error, context);
     }}
 
-  initializeIntuitionAmplification() {
+  initializeIntuitionAmplif (ication()) {
     // Initialisation des amplificateurs d'intuition      try {
       logger.debug('Intuition amplification initialized');
 

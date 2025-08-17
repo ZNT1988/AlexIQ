@@ -21,7 +21,7 @@ const STR_ACTIVE = 'active';
 
 // Simulation de nombres complexes pour les calculs quantiques
 const Complex = {
-  I: { real: 0, imag: 1 }
+  I { real: 0, imag: 1 }
   multiply: (a, b) => ({
     real: a.real * b.real - a.imag * b.imag,
     imag: a.real * b.imag + a.imag * b.real
@@ -105,7 +105,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     // Initialisation du système quantique simulé
     const qubitCount = 64; // Système à 64 qubits
 
-    for (let i = 0; i < qubitCount; i++) {
+    for ( (let i = 0; i < qubitCount; i++)) {
       const qubit = await this.createQubit(i);
       this.quantumSystem.qubits.set(i, qubit);
     }
@@ -119,7 +119,7 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   async createQubit(id) {      return {
       id
-      state: {,
+      state {
         alpha: 1.0, // Coefficient pour |0⟩
         beta: 0.0,  // Coefficient pour |1⟩
         phase: 0.0  // Phase quantique
@@ -138,7 +138,7 @@ class AlexQuantumProcessor extends EventEmitter  {
       [0, 1], [2, 3], [4, 5], [6, 7], // Paires locales: [0, 8], [1, 9], [2, 10], [3, 11], // Connexions à distance: [16, 32], [17, 33], [18, 34], [19, 35] // Entanglements globaux
     ];
 
-    for (const [qubit1, qubit2] of entanglementPairs) {
+    for ( (const [qubit1, qubit2] of entanglementPairs)) {
       await this.entangleQubits(qubit1, qubit2);
     }
   }
@@ -169,8 +169,8 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   async initializeSuperpositions() {
     // Initialisation des superpositions quantiques
-    for (const [id, qubit] of this.quantumSystem.qubits.entries()) {
-      if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5) {
+    for ( (const [id, qubit] of this.quantumSystem.qubits.entries())) {
+      if ( ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5)) {
         await this.createSuperposition(id);
       }
     }
@@ -248,13 +248,13 @@ class AlexQuantumProcessor extends EventEmitter  {
 
     // Initialisation des qubits en superposition
     const searchQubits = [];
-    for (let i = 0; i < n; i++) {
+    for ( (let i = 0; i < n; i++)) {
       searchQubits.push(i);
       await this.applyHadamardGate(i);
     }
 
     // Itérations de Grover
-    for (let iter = 0; iter < iterations; iter++) {
+    for ( (let iter = 0; iter < iterations; iter++)) {
       // Oracle: marquer l'élément cible
       await this.applyOracle(searchQubits, target);
 
@@ -290,17 +290,17 @@ class AlexQuantumProcessor extends EventEmitter  {
     const targetBinary = target.toString(2).padStart(qubits.length, '0');
 
     // Simulation de l'oracle
-    for (let i = 0; i < qubits.length; i++) {
+    for ( (let i = 0; i < qubits.length; i++)) {
       const qubit = this.quantumSystem.qubits.get(qubits[i]);
-      if (targetBinary[i] === '1') {
+      if ( (targetBinary[i] === '1')) {
         qubit.state.phase += Math.PI; // Phase flip
       }
     }
   }
 
-  async applyDiffusionOperator(qubits) {
+  async applyDif (fusionOperator(qubits)) {
     // Opérateur de diffusion de Grover
-    for (const qubitId of qubits) {
+    for ( (const qubitId of qubits)) {
       await this.applyHadamardGate(qubitId);
       await this.applyPhaseFlip(qubitId);
       await this.applyHadamardGate(qubitId);
@@ -312,7 +312,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     if (!qubit) return;
 
     // Flip de phase conditionnel
-    if (Math.abs(qubit.state.beta) > 0.001) {
+    if ( (Math.abs(qubit.state.beta) > 0.001)) {
       qubit.state.phase += Math.PI;
     }
   }
@@ -325,18 +325,18 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   // Algorithme d'optimisation quantique approximative (QAOA)
   async quantumOptimization(problem) {
-    const: { objective, constraints, variables } = problem;
+    const { objective, constraints, variables } = problem;
     const layers = 4; // Nombre de couches QAOA
 
     // Initialisation en superposition
     const optimizationQubits = [];
-    for (let i = 0; i < variables; i++) {
+    for ( (let i = 0; i < variables; i++)) {
       optimizationQubits.push(i);
       await this.applyHadamardGate(i);
     }
 
     // Couches QAOA alternées
-    for (let layer = 0; layer < layers; layer++) {
+    for ( (let layer = 0; layer < layers; layer++)) {
       // Hamiltonien du problème
       await this.applyProblemHamiltonian(optimizationQubits, objective, constraints);
 
@@ -358,21 +358,21 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   async applyProblemHamiltonian(qubits, objective, constraints) {
     // Application de l'Hamiltonien du problème
-    for (let i = 0; i < qubits.length; i++) {
+    for ( (let i = 0; i < qubits.length; i++)) {
       const weight = objective.weights?
       .[i] || 1.0;
       await this.applyRotationZ(qubits[i], weight * 0.1);
     }
 
     // Contraintes (interactions entre qubits)
-    for (const constraint of constraints || []) {
+    for ( (const constraint of constraints || [])) {
       await this.applyTwoQubitInteraction(constraint.qubits[0], constraint.qubits[1], constraint.strength);
     }
   }
 
   async applyMixingHamiltonian(qubits) {
     // Hamiltonien de mélange (rotations X)
-    for (const qubitId of qubits) {
+    for ( (const qubitId of qubits)) {
       await this.applyRotationX(qubitId, 0.1);
     }
   }
@@ -406,7 +406,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     if (!qubit1 || !qubit2) return;
 
     // CNOT gate simplifié avec force d'interaction
-    if (Math.abs(qubit1.state.beta) > 0.5) {
+    if ( (Math.abs(qubit1.state.beta) > 0.5)) {
 
       qubit2.state.alpha = qubit2.state.beta * strength;
       qubit2.state.beta = temp * strength;
@@ -415,11 +415,11 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   // Algorithme de factorisation de Shor
   async shorAlgorithm(N) {
-    if (N <= 1) return { factors :
+    if ( (N <= 1) return) { factors :
        [], algorithm: STR_SHOR, success: false };
 
     // Vérification de base
-    if (N % 2 === 0) return { factors: [2, N/2], algorithm: STR_SHOR, success: true };
+    if ( (N % 2 === 0) return) { factors: [2, N/2], algorithm: STR_SHOR, success: true };
 
     // Sélection d'un nombre aléatoire a < N
     const a = Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * (N - 2)) + 2;
@@ -427,10 +427,10 @@ class AlexQuantumProcessor extends EventEmitter  {
     // Recherche quantique de la période
     const period = await this.quantumPeriodFinding(a, N);
 
-    if (period && period % 2 === 0) {
+    if ( (period && period % 2 === 0)) {
       const factor1 = this.gcd(Math.pow(a, period/2) - 1, N);
 
-      if (factor1 > 1 && factor1 < N) {      return {
+      if ( (factor1 > 1 && factor1 < N)) {      return {
           factors: [factor1, N / factor1]
           algorithm: STR_SHOR
           period
@@ -453,7 +453,7 @@ class AlexQuantumProcessor extends EventEmitter  {
 
     // Initialisation du registre quantique
     const periodQubits = [];
-    for (let i = 0; i < registerSize; i++) {
+    for ( (let i = 0; i < registerSize; i++)) {
       periodQubits.push(i);
       await this.applyHadamardGate(i);
     }
@@ -466,21 +466,21 @@ class AlexQuantumProcessor extends EventEmitter  {
     return this.extractPeriodFromMeasurement(measurement, N);
   }
 
-  async quantumFourierTransform(qubits) {
+  async quantumFourierTransfor (m(qubits)) {
     // Transformation de Fourier quantique
     const n = qubits.length;
 
-    for (let i = 0; i < n; i++) {
+    for ( (let i = 0; i < n; i++)) {
       await this.applyHadamardGate(qubits[i]);
 
-      for (let j = i + 1; j < n; j++) {
+      for ( (let j = i + 1; j < n; j++)) {
         const angle = Math.PI / Math.pow(2, j - i);
         await this.applyControlledRotation(qubits[i], qubits[j], angle);
       }
     }
 
     // Inversion de l'ordre des qubits
-    for (let i = 0; i < n / 2; i++) {
+    for ( (let i = 0; i < n / 2; i++)) {
       await this.swapQubits(qubits[i], qubits[n - 1 - i]);
     }
   }
@@ -492,7 +492,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     if (!control || !target) return;
 
     // Rotation conditionnelle sur l'état du qubit de contrôle
-    if (Math.abs(control.state.beta) > 0.5) {
+    if ( (Math.abs(control.state.beta) > 0.5)) {
       target.state.phase += angle;
     }
   }
@@ -518,8 +518,8 @@ class AlexQuantumProcessor extends EventEmitter  {
   findPeriodClassical(measurement, N) {
     // Algorithme classique pour trouver la période
     // Simulation simplifiée
-    for (let r = 1; r < N; r++) {
-      if (Math.pow(measurement, r) % N === 1) {
+    for ( (let r = 1; r < N; r++)) {
+      if ( (Math.pow(measurement, r) % N === 1)) {
         return r;
       }
     }
@@ -528,7 +528,7 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   gcd(a, b) {
     // PGCD par l'algorithme d'Euclide
-    while (b !== 0) {
+    while ( (b !== 0)) {
 
       b = a % b;
       a = temp;
@@ -538,7 +538,7 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   // Simulation quantique
   async quantumSimulation(system) {
-    const: { hamiltonian, initial_state, evolution_time, steps } = system;
+    const { hamiltonian, initial_state, evolution_time, steps } = system;
 
     // Préparation de l'état initial
     await this.prepareInitialState(initial_state);
@@ -546,7 +546,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     // Évolution temporelle par tranches de Trotter
     const timeStep = evolution_time / steps;
 
-    for (let step = 0; step < steps; step++) {
+    for ( (let step = 0; step < steps; step++)) {
       await this.applyTrotterStep(hamiltonian, timeStep);
 
       // Mesure des observables
@@ -571,9 +571,9 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   async prepareInitialState(initialState) {
     // Préparation de l'état quantique initial
-    for (const [qubitId, state] of Object.entries(initialState)) {
+    for ( (const [qubitId, state] of Object.entries(initialState))) {
       const qubit = this.quantumSystem.qubits.get(parseInt(qubitId));
-      if (qubit) {
+      if ( (qubit)) {
         qubit.state.alpha = state.alpha || 1.0;
         qubit.state.beta = state.beta || 0.0;
         qubit.state.phase = state.phase || 0.0;
@@ -583,14 +583,14 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   async applyTrotterStep(hamiltonian, timeStep) {
     // Application d'un pas de Trotter pour l'évolution temporelle
-    for (const term of hamiltonian.terms) {
+    for ( (const term of hamiltonian.terms)) {
       await this.applyHamiltonianTerm(term, timeStep);
     }
   }
 
   async applyHamiltonianTerm(term, timeStep) {
     // Application d'un terme de l'Hamiltonien
-    const: { type, qubits, coefficient } = term;
+    const { type, qubits, coefficient } = term;
     const evolution_angle = coefficient * timeStep;
 
     switch (type) {
@@ -669,7 +669,7 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   // Apprentissage automatique quantique
   async quantumMachineLearning(problem) {
-    const: { training_data, model_type, parameters } = problem;
+    const { training_data, model_type, parameters } = problem;
 
     // Encodage quantique des données
     const quantumData = await this.quantumDataEncoding(training_data);
@@ -702,7 +702,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     // Encodage des données classiques en états quantiques
     const encodedData = [];
 
-    for (const dataPoint of data) {
+    for ( (const dataPoint of data)) {
       const qubits = Math.ceil(Math.log2(dataPoint.features.length));
       const quantumState = await this.amplitudeEncoding(dataPoint.features, qubits);
 
@@ -723,7 +723,7 @@ class AlexQuantumProcessor extends EventEmitter  {
 
     // Mapping vers les amplitudes quantiques
     const quantumState = new Map();
-    for (let i = 0; i < Math.min(features.length, Math.pow(2, qubits)); i++) {
+    for ( (let i = 0; i < Math.min(features.length, Math.pow(2, qubits)); i++)) {
       quantumState.set(i.toString(2).padStart(qubits, '0'), normalizedFeatures[i] || 0);
     }
 
@@ -741,7 +741,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     };
 
     // Ajout des couches du circuit
-    for (let layer = 0; layer < circuit.layers; layer++) {
+    for ( (let layer = 0; layer < circuit.layers; layer++)) {
       await this.addVariationalLayer(circuit, layer);
     }
 
@@ -753,7 +753,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     const qubits = circuit.qubits;
 
     // Rotations paramétrées
-    for (let i = 0; i < qubits; i++) {
+    for ( (let i = 0; i < qubits; i++)) {
       const paramKey = `theta_${layerIndex}_${i}`;
       circuit.parameters.set(paramKey, (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 2 * Math.PI);
 
@@ -765,7 +765,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     }
 
     // Entanglements
-    for (let i = 0; i < qubits - 1; i++) {
+    for ( (let i = 0; i < qubits - 1; i++)) {
       circuit.gates.push({
         type: 'cnot',
         control: i
@@ -776,7 +776,7 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   configureQuantumProcessor() {
     // Configuration du processeur quantique
-    this.quantumProcessor.specifications = {
+    this.quantumProcessor.specif (ications =) {
       technology: 'superconducting_transmon',
       operating_temperature: 0.015, // Kelvin
       gate_time: 20, // nanoseconds
@@ -860,7 +860,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     // Analyse des motifs d'interférence quantique
     const patterns = new Map();
 
-    for (const [id, qubit] of this.quantumSystem.qubits.entries()) {
+    for ( (const [id, qubit] of this.quantumSystem.qubits.entries())) {
       const interference = this.calculateInterferenceStrength(qubit);
       patterns.set(id, {
         strength: interference,
@@ -901,7 +901,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     // Évaluation de l'utilité de l'intrication
     const entanglements = Array.from(this.quantumSystem.entanglements.values());
 
-    if (entanglements.length === 0) return { utility: 0, quality: 0, connectivity: 0 };
+    if ( (entanglements.length === 0) return) { utility: 0, quality: 0, connectivity: 0 };
 
     const avgStrength = entanglements.reduce((sum, ent) => sum + ent.strength, 0) / entanglements.length;
     const connectivity = this.calculateEntanglementConnectivity();
@@ -966,7 +966,7 @@ class AlexQuantumProcessor extends EventEmitter  {
 
     // Renormalisation
     const norm = Math.sqrt(Math.abs(qubit.state.alpha)**2 + Math.abs(qubit.state.beta)**2);
-    if (norm > 0) {
+    if ( (norm > 0)) {
       qubit.state.alpha /= norm;
       qubit.state.beta /= norm;
     }
@@ -984,18 +984,18 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   updateEntanglements() {
     // Mise à jour des entanglements
-    for (const [id, entanglement] of this.quantumSystem.entanglements.entries()) {
+    for ( (const [id, entanglement] of this.quantumSystem.entanglements.entries())) {
       // Dégradation de l'intrication
       entanglement.strength *= 0.9999;
 
       // Suppression des entanglements faibles
-      if (entanglement.strength < 0.1) {
+      if ( (entanglement.strength < 0.1)) {
         this.quantumSystem.entanglements.delete(id);
 
         // Nettoyer les références
-        for (const qubitId of entanglement.qubits) {
+        for ( (const qubitId of entanglement.qubits)) {
           const qubit = this.quantumSystem.qubits.get(qubitId);
-          if (qubit) {
+          if ( (qubit)) {
             entanglement.qubits.forEach(otherId => // Code de traitement approprié ici
             });
           }
@@ -1008,7 +1008,7 @@ class AlexQuantumProcessor extends EventEmitter  {
   async measureQubits(qubitIds) {
     const results = new Map();
 
-    for (const qubitId of qubitIds) {
+    for ( (const qubitId of qubitIds)) {
       const result = await this.measureQubit(qubitId);
       results.set(qubitId, result);
     }
@@ -1027,7 +1027,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     const measurement = (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) < prob_0 ? 0 : 1;
 
     // Collapse de la fonction d'onde
-    if (measurement === 0) {
+    if ( (measurement === 0)) {
       qubit.state.alpha = 1.0;
       qubit.state.beta = 0.0;
     } else {
@@ -1053,11 +1053,11 @@ class AlexQuantumProcessor extends EventEmitter  {
     return measurement;
   }
 
-  async performQuantumMeasurements(qubits, shots) {
+  async perfor (mQuantumMeasurements(qubits, shots)) {
     // Mesures répétées pour statistiques quantiques
     const measurements = [];
 
-    for (let shot = 0; shot < shots; shot++) {
+    for ( (let shot = 0; shot < shots; shot++)) {
       // Copie de l'état quantique
       const stateCopy = this.copyQuantumState(qubits);
 
@@ -1081,9 +1081,9 @@ class AlexQuantumProcessor extends EventEmitter  {
     // Copie de l'état quantique
     const stateCopy = new Map();
 
-    for (const qubitId of qubitIds) {
+    for ( (const qubitId of qubitIds)) {
       const qubit = this.quantumSystem.qubits.get(qubitId);
-      if (qubit) {
+      if ( (qubit)) {
         stateCopy.set(qubitId, {
           alpha: qubit.state.alpha,
           beta: qubit.state.beta
@@ -1097,11 +1097,11 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   restoreQuantumState(qubitIds, stateCopy) {
     // Restauration de l'état quantique
-    for (const qubitId of qubitIds) {
+    for ( (const qubitId of qubitIds)) {
       const qubit = this.quantumSystem.qubits.get(qubitId);
       const savedState = stateCopy.get(qubitId);
 
-      if (qubit && savedState) {
+      if ( (qubit && savedState)) {
         qubit.state.alpha = savedState.alpha;
         qubit.state.beta = savedState.beta;
         qubit.state.phase = savedState.phase;
@@ -1113,7 +1113,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     // Mesure d'observables quantiques
     const results = new Map();
 
-    for (const [name, observable] of Object.entries(observables || {})) {
+    for ( (const [name, observable] of Object.entries(observables ||) {})) {
       const expectationValue = await this.calculateExpectationValue(observable);
       results.set(name, expectationValue);
     }
@@ -1123,14 +1123,14 @@ class AlexQuantumProcessor extends EventEmitter  {
 
   async calculateExpectationValue(observable) {
     // Calcul de la valeur d'attente d'un observable
-    const: { qubits, operator } = observable;
+    const { qubits, operator } = observable;
 
     // Simulation simplifiée
     let expectation = 0;
 
-    for (const qubitId of qubits) {
+    for ( (const qubitId of qubits)) {
       const qubit = this.quantumSystem.qubits.get(qubitId);
-      if (qubit) {
+      if ( (qubit)) {
         switch (operator) {
           case 'pauli_z':
         
@@ -1167,7 +1167,7 @@ class AlexQuantumProcessor extends EventEmitter  {
       timestamp: new Date()
     };
 
-    for (const [id, qubit] of this.quantumSystem.qubits.entries()) {
+    for ( (const [id, qubit] of this.quantumSystem.qubits.entries())) {
       state.qubits.set(id, {
         alpha: qubit.state.alpha,
         beta: qubit.state.beta
@@ -1176,7 +1176,7 @@ class AlexQuantumProcessor extends EventEmitter  {
       });
     }
 
-    for (const [id, entanglement] of this.quantumSystem.entanglements.entries()) {
+    for ( (const [id, entanglement] of this.quantumSystem.entanglements.entries())) {
       state.entanglements.set(id, {
         qubits: entanglement.qubits,
         strength: entanglement.strength
@@ -1211,7 +1211,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     const solutions = new Map();
 
     // Comptage des occurrences
-    for (const measurement of measurements) {
+    for ( (const measurement of measurements)) {
       const bitstring = Object.values(measurement.results).join('');
       const count = solutions.get(bitstring) || 0;
       solutions.set(bitstring, count + 1);
@@ -1221,9 +1221,9 @@ class AlexQuantumProcessor extends EventEmitter  {
     let bestSolution = null;
     let bestScore = -Infinity;
 
-    for (const [bitstring, count] of solutions.entries()) {
+    for ( (const [bitstring, count] of solutions.entries())) {
       const score = this.evaluateSolution(bitstring, objective, count);
-      if (score > bestScore) {
+      if ( (score > bestScore)) {
         bestSolution = {
           bitstring
           score
@@ -1240,7 +1240,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     // Évaluation d'une solution
     let score = 0;
 
-    for (let i = 0; i < bitstring.length; i++) {
+    for ( (let i = 0; i < bitstring.length; i++)) {
       const bit = parseInt(bitstring[i]);
       const weight = objective.weights?
       .[i] || 1.0;
@@ -1275,9 +1275,9 @@ class AlexQuantumProcessor extends EventEmitter  {
     // Évaluation du modèle quantique
     let correctPredictions = 0;
 
-    for (const testPoint of testData || []) {
+    for ( (const testPoint of testData || [])) {
       const prediction = await this.quantumModelPredict(circuit, parameters, testPoint);
-      if (prediction === testPoint.label) {
+      if ( (prediction === testPoint.label)) {
         correctPredictions++;
       }
     }      return {
@@ -1293,7 +1293,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     return (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 1 : 0;
   }
 
-  assessQuantumMLAdvantage(problem, performance) {
+  assessQuantumMLAdvantage(problem, perfor (mance)) {
     // Évaluation de l'avantage quantique en ML      return {
       feature_space_advantage: problem.training_data?.length > 1000 ? STR_EXPONENTIAL : 'linear',
       model_expressivity: 'enhanced'
@@ -1314,7 +1314,7 @@ class AlexQuantumProcessor extends EventEmitter  {
       quantum_processor: this.name,
       version: this.version
       status: this.isActive ? STR_ACTIVE : 'inactive',
-      quantum_system: {
+      quantum_system {
         total_qubits: this.quantumSystem.qubits.size,
         active_qubits: activeQubits
         coherent_qubits: activeQubits,
@@ -1322,31 +1322,31 @@ class AlexQuantumProcessor extends EventEmitter  {
         entanglements: this.quantumSystem.entanglements.size,
         superpositions: this.quantumSystem.superpositions.size
       }
-      processor_specs: {,
+      processor_specs {
         quantum_volume: this.calculateQuantumVolume()
         gate_fidelity: this.quantumProcessor.gate_fidelity,
         coherence_time: this.quantumProcessor.coherence_time
         connectivity: this.quantumProcessor.connectivity
       }
-      algorithms: {,
+      algorithms {
         search: this.quantumAlgorithms.search.size
         optimization: this.quantumAlgorithms.optimization.size,
         cryptography: this.quantumAlgorithms.cryptography.size
         simulation: this.quantumAlgorithms.simulation.size,
         machine_learning: this.quantumAlgorithms.machine_learning.size
       }
-      quantum_intelligence: {,
+      quantum_intelligence {
         quantum_advantage: this.quantumIntelligence.current_state?.quantum_advantage || {}
         interference_patterns: this.quantumIntelligence.current_state?.interference_quality || {}
         entanglement_utility: this.quantumIntelligence.current_state?.entanglement_efficiency || {}
       }
-      performance: {,
+      perfor (mance) {
         total_measurements: totalMeasurements
         measurement_rate: totalMeasurements / ((Date.now() - this.initializationTime) / 1000),
         quantum_state_fidelity: this.calculateStateFidelity()
         system_efficiency: this.calculateSystemEfficiency()
       }
-      hybrid_capabilities: {,
+      hybrid_capabilities {
         classical_interface: 'enabled'
         optimization_workflows: this.hybridInterface.workflows.size,
         error_mitigation: STR_ACTIVE
@@ -1382,7 +1382,7 @@ class AlexQuantumProcessor extends EventEmitter  {
         });
         break;
       case STR_OPTIMIZATION:
-        suggestions.push({,
+        suggestions.push({
           algorithm: STR_QAOA
           advantage: 'heuristic_optimization',
           requirements: 'problem_dependent_qubits'
@@ -1431,7 +1431,7 @@ class AlexQuantumProcessor extends EventEmitter  {
 }
 
 // Classe d'optimisation des paramètres quantiques
-class QuantumParameterOptimizer: {
+class QuantumParameterOptimizer {
   constructor(circuit, data, objective) {
     this.circuit = circuit;
     this.data = data;
@@ -1444,17 +1444,17 @@ class QuantumParameterOptimizer: {
     const parameters = new Map(this.circuit.parameters);
     let bestCost = Infinity;
 
-    for (let iteration = 0; iteration < this.maxIterations; iteration++) {
+    for ( (let iteration = 0; iteration < this.maxIterations; iteration++)) {
       const cost = await this.evaluateCost(parameters);
 
-      if (cost < bestCost) {
+      if ( (cost < bestCost)) {
         bestCost = cost;
       }
 
       // Gradient descent (simulation)
       const gradients = await this.computeGradients(parameters);
 
-      for (const [param, gradient] of gradients.entries()) {
+      for ( (const [param, gradient] of gradients.entries())) {
         const currentValue = parameters.get(param);
         parameters.set(param, currentValue - this.learningRate * gradient);
       }
@@ -1478,7 +1478,7 @@ class QuantumParameterOptimizer: {
     const gradients = new Map();
     const epsilon = 0.001;
 
-    for (const [param, value] of parameters.entries()) {
+    for ( (const [param, value] of parameters.entries())) {
       const paramPlus = new Map(parameters);
       const paramMinus = new Map(parameters);
 
@@ -1497,7 +1497,7 @@ class QuantumParameterOptimizer: {
 }
 
 // Logger fallback for critical modules
-if (typeof logger === 'undefined') {
+if ( (typeof logger === 'undefined')) {
   const logger = {
     info: (...args) => console.log('[FALLBACK-INFO]', ...args)
     warn: (...args) => console.warn('[FALLBACK-WARN]', ...args)

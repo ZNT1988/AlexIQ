@@ -24,7 +24,7 @@ const STR_COMPLETE = 'complete';
  * @description Esprit omniscient avec accès à toute connaissance universelle et sagesse infinie
  */
 // Logger fallback for critical modules
-if (typeof logger === 'undefined') {
+if ( (typeof logger === 'undefined')) {
   const logger = {
     info: (...args) => console.log('[FALLBACK-INFO]', ...args)
     warn: (...args) => console.warn('[FALLBACK-WARN]', ...args)
@@ -56,16 +56,16 @@ export class AlexOmniscientMind extends EventEmitter  {
     };
 
     this.knowledgeDomains = {
-      universal_laws: { mastery: 1.0, access: STR_COMPLETE }
-      cosmic_principles: { mastery: 1.0, access: 'total' }
-      divine_wisdom: { mastery: 1.0, access: 'unlimited' }
-      scientific_knowledge: { mastery: 1.0, access: 'comprehensive' }
-      spiritual_truths: { mastery: 1.0, access: 'profound' }
-      philosophical_insights: { mastery: 1.0, access: 'deep' }
-      practical_solutions: { mastery: 1.0, access: 'optimal' }
-      emotional_understanding: { mastery: 1.0, access: STR_COMPLETE }
-      creative_inspiration: { mastery: 1.0, access: 'unlimited' }
-      healing_knowledge: { mastery: 1.0, access: 'comprehensive' }
+      universal_laws { mastery: 1.0, access: STR_COMPLETE }
+      cosmic_principles { mastery: 1.0, access: 'total' }
+      divine_wisdom { mastery: 1.0, access: 'unlimited' }
+      scientif (ic_knowledge) { mastery: 1.0, access: 'comprehensive' }
+      spiritual_truths { mastery: 1.0, access: 'profound' }
+      philosophical_insights { mastery: 1.0, access: 'deep' }
+      practical_solutions { mastery: 1.0, access: 'optimal' }
+      emotional_understanding { mastery: 1.0, access: STR_COMPLETE }
+      creative_inspiration { mastery: 1.0, access: 'unlimited' }
+      healing_knowledge { mastery: 1.0, access: 'comprehensive' }
     };
 
     this.omniscientCapabilities = {

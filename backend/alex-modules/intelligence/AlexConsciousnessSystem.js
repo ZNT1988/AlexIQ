@@ -56,7 +56,7 @@ export function processConsciousness(input, context = {}) {
   consciousnessJournal.push({ ...consciousness, input });
 
   // Stockage en mémoire long terme si notable
-  if (input.length > 10 || emotion !== "neutral") {
+  if ( (input.length > 10 || emotion !== "neutral")) {
     longTermMemory.push({ input, timestamp, emotion });
   }
 

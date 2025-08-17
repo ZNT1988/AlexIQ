@@ -13,7 +13,7 @@ class AlexLicorneConfig {
         version: "1.0.0-licorne",
         environment: process.env.NODE_ENV || "development",
         debug: process.env.DEBUG === "true",
-        timezone: "Europe/Paris",
+        timezone: "Europe/Paris"
       },
 
       server: {
@@ -21,12 +21,12 @@ class AlexLicorneConfig {
         host: process.env.HOST || "localhost",
         cors: {
           origin: process.env.FRONTEND_URL || "http://localhost:3000",
-          credentials: true,
+          credentials: true
         },
         rateLimit: {
           windowMs: 15 * 60 * 1000,
-          max: process.env.RATE_LIMIT_MAX || 1000,
-        },
+          max: process.env.RATE_LIMIT_MAX || 1000
+        }
       },
 
       database: {
@@ -36,8 +36,8 @@ class AlexLicorneConfig {
           enabled: true,
           interval: 24 * 60 * 60 * 1000,
           retention: 30,
-          path: "./db/backups",
-        },
+          path: "./db/backups"
+        }
       },
 
       orchestrator: {
@@ -49,29 +49,29 @@ class AlexLicorneConfig {
           consciousness: {
             enabled: true,
             priority: "high",
-            timeout: 15000,
+            timeout: 15000
           },
           intelligence: {
             enabled: true,
             priority: "high",
-            timeout: 10000,
+            timeout: 10000
           },
           creativity: {
             enabled: true,
             priority: "medium",
-            timeout: 20000,
+            timeout: 20000
           },
           specialized: {
             enabled: true,
             priority: "medium",
-            timeout: 15000,
+            timeout: 15000
           },
           core: {
             enabled: true,
             priority: "critical",
-            timeout: 5000,
-          },
-        },
+            timeout: 5000
+          }
+        }
       },
 
       monitoring: {
@@ -81,7 +81,7 @@ class AlexLicorneConfig {
           system: true,
           performance: true,
           business: true,
-          consciousness: true,
+          consciousness: true
         },
         alerts: {
           email: process.env.ALERT_EMAIL || null,
@@ -90,14 +90,14 @@ class AlexLicorneConfig {
             cpu: 80,
             memory: 85,
             responseTime: 2000,
-            errorRate: 5,
-          },
+            errorRate: 5
+          }
         },
         dashboard: {
           enabled: true,
           refreshInterval: 1000,
-          historicalData: 7 * 24 * 60 * 60 * 1000,
-        },
+          historicalData: 7 * 24 * 60 * 60 * 1000
+        }
       },
 
       multiTenant: {
@@ -108,19 +108,19 @@ class AlexLicorneConfig {
         resourceLimits: {
           maxRequestsPerHour: 10000,
           maxConcurrentConnections: 100,
-          maxDataStorage: 1024 * 1024 * 1024,
+          maxDataStorage: 1024 * 1024 * 1024
         },
         pricing: {
           tiers: {
             free: {
               requests: 1000,
               storage: 100 * 1024 * 1024,
-              features: ["basic_ai", "basic_monitoring"],
+              features: ["basic_ai", "basic_monitoring"]
             },
             pro: {
               requests: 50000,
               storage: 1024 * 1024 * 1024,
-              features: ["advanced_ai", "full_monitoring", "custom_modules"],
+              features: ["advanced_ai", "full_monitoring", "custom_modules"]
             },
             enterprise: {
               requests: -1,
@@ -128,11 +128,11 @@ class AlexLicorneConfig {
               features: [
                 "all_features",
                 "dedicated_support",
-                "custom_deployment",
-              ],
-            },
-          },
-        },
+                "custom_deployment"
+              ]
+            }
+          }
+        }
       },
 
       consciousness: {
@@ -141,23 +141,23 @@ class AlexLicorneConfig {
           awareness: {
             enabled: true,
             threshold: 0.7,
-            updateInterval: 1000,
+            updateInterval: 1000
           },
           selfReflection: {
             enabled: true,
             depth: 5,
-            frequency: 60000,
+            frequency: 60000
           },
           learning: {
             enabled: true,
             adaptationRate: 0.1,
-            memoryRetention: 0.9,
+            memoryRetention: 0.9
           },
           creativity: {
             enabled: true,
             randomness: 0.3,
-            noveltyThreshold: 0.8,
-          },
+            noveltyThreshold: 0.8
+          }
         },
         measurement: {
           enabled: true,
@@ -166,53 +166,53 @@ class AlexLicorneConfig {
             "creativity_index",
             "learning_rate",
             "decision_quality",
-            "emotional_intelligence",
+            "emotional_intelligence"
           ],
-          reportingInterval: 300000,
-        },
+          reportingInterval: 300000
+        }
       },
 
       security: {
         authentication: {
           enabled: true,
           jwtSecret: process.env.JWT_SECRET || "alex-licorne-secret-key",
-          expiresIn: "24h",
+          expiresIn: "24h"
         },
         encryption: {
           algorithm: "aes-256-gcm",
-          keyLength: 32,
+          keyLength: 32
         },
         rateLimit: {
           enabled: true,
           windowMs: 15 * 60 * 1000,
-          max: 1000,
+          max: 1000
         },
         cors: {
           enabled: true,
-          origins: ["http://localhost:3000"],
-        },
+          origins: ["http://localhost:3000"]
+        }
       },
 
       business: {
         analytics: {
           enabled: true,
           trackingLevel: "detailed",
-          retention: 90 * 24 * 60 * 60 * 1000,
+          retention: 90 * 24 * 60 * 60 * 1000
         },
         billing: {
           enabled: true,
           currency: "EUR",
           provider: "stripe",
-          webhookSecret: process.env.STRIPE_WEBHOOK_SECRET,
+          webhookSecret: process.env.STRIPE_WEBHOOK_SECRET
         },
         revenue: {
           tracking: true,
           reporting: {
             daily: true,
             weekly: true,
-            monthly: true,
-          },
-        },
+            monthly: true
+          }
+        }
       },
 
       performance: {
@@ -221,12 +221,12 @@ class AlexLicorneConfig {
           caching: {
             enabled: true,
             ttl: 300000,
-            maxSize: 1000,
+            maxSize: 1000
           },
           compression: {
             enabled: true,
-            level: 6,
-          },
+            level: 6
+          }
         },
         scaling: {
           enabled: true,
@@ -234,9 +234,9 @@ class AlexLicorneConfig {
             enabled: process.env.NODE_ENV === "production",
             minInstances: 1,
             maxInstances: 10,
-            scaleThreshold: 80,
-          },
-        },
+            scaleThreshold: 80
+          }
+        }
       },
 
       logging: {
@@ -247,13 +247,13 @@ class AlexLicorneConfig {
             type: "file",
             path: "./logs/alex-licorne.log",
             maxSize: 10 * 1024 * 1024,
-            maxFiles: 5,
+            maxFiles: 5
           },
           {
             type: "console",
-            enabled: true,
-          },
-        ],
+            enabled: true
+          }
+        ]
       },
 
       integrations: {
@@ -261,19 +261,19 @@ class AlexLicorneConfig {
           enabled: !!process.env.OPENAI_API_KEY,
           apiKey: process.env.OPENAI_API_KEY,
           model: "gpt-4",
-          maxTokens: 4000,
+          maxTokens: 4000
         },
         anthropic: {
           enabled: !!process.env.ANTHROPIC_API_KEY,
           apiKey: process.env.ANTHROPIC_API_KEY,
-          model: "claude-3-sonnet",
+          model: "claude-3-sonnet"
         },
         stripe: {
           enabled: !!process.env.STRIPE_SECRET_KEY,
           secretKey: process.env.STRIPE_SECRET_KEY,
-          publicKey: process.env.STRIPE_PUBLIC_KEY,
-        },
-      },
+          publicKey: process.env.STRIPE_PUBLIC_KEY
+        }
+      }
     };
   }
 
@@ -312,8 +312,8 @@ class AlexLicorneConfig {
 
   set(key, value) {
     // Prévenir la pollution de prototype
-    if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
-      throw new Error('Cannot set prototype polluting property');
+    if (key === "__proto__" || key === "constructor" || key === "prototype") {
+      throw new Error("Cannot set prototype polluting property");
     }
     
     const keys = key.split(".");
@@ -323,8 +323,8 @@ class AlexLicorneConfig {
       const k = keys[i];
       
       // Prévenir la pollution de prototype
-      if (k === '__proto__' || k === 'constructor' || k === 'prototype') {
-        throw new Error('Cannot set prototype polluting property');
+      if (k === "__proto__" || k === "constructor" || k === "prototype") {
+        throw new Error("Cannot set prototype polluting property");
       }
       
       if (!target[k] || typeof target[k] !== "object") {
@@ -335,8 +335,8 @@ class AlexLicorneConfig {
 
     const finalKey = keys[keys.length - 1];
     // Prévenir la pollution de prototype pour la clé finale
-    if (finalKey === '__proto__' || finalKey === 'constructor' || finalKey === 'prototype') {
-      throw new Error('Cannot set prototype polluting property');
+    if (finalKey === "__proto__" || finalKey === "constructor" || finalKey === "prototype") {
+      throw new Error("Cannot set prototype polluting property");
     }
     
     target[finalKey] = value;

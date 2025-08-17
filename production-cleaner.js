@@ -5,8 +5,8 @@
  * Supprime debug, console.log, et code non-production
  */
 
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
 class ProductionCleaner {
   constructor() {
@@ -21,11 +21,11 @@ class ProductionCleaner {
   }
 
   async cleanAllFiles() {
-    console.log('🧹 NETTOYAGE CODE PRODUCTION');
-    console.log('='.repeat(50));
+    console.log("🧹 NETTOYAGE CODE PRODUCTION");
+    console.log("=".repeat(50));
     
-    await this.cleanDirectory('./backend');
-    await this.cleanDirectory('./frontend/src');
+    await this.cleanDirectory("./backend");
+    await this.cleanDirectory("./frontend/src");
     
     this.displayResults();
     this.saveCleanReport();
@@ -40,7 +40,7 @@ class ProductionCleaner {
       const fullPath = path.join(dir, entry);
       const stat = fs.statSync(fullPath);
       
-      if (stat.isDirectory() && !['node_modules', '.git', 'dist'].includes(entry)) {
+      if (stat.isDirectory() && !["node_modules", ".git", "dist"].includes(entry)) {
         await this.cleanDirectory(fullPath);
       } else if (this.shouldCleanFile(fullPath)) {
         await this.cleanFile(fullPath);
@@ -49,11 +49,11 @@ class ProductionCleaner {
   }
 
   shouldCleanFile(filePath) {
-    return (filePath.endsWith('.js') || filePath.endsWith('.jsx')) &&
-           !filePath.includes('node_modules') &&
-           !filePath.includes('.git') &&
-           !filePath.includes('test') &&
-           !filePath.includes('spec');
+    return (filePath.endsWith(".js") || filePath.endsWith(".jsx")) &&
+           !filePath.includes("node_modules") &&
+           !filePath.includes(".git") &&
+           !filePath.includes("test") &&
+           !filePath.includes("spec");
   }
 
   async cleanFile(filePath) {
@@ -61,7 +61,7 @@ class ProductionCleaner {
     this.stats.totalFiles++;
     
     try {
-      const originalContent = fs.readFileSync(filePath, 'utf8');
+      const originalContent = fs.readFileSync(filePath, "utf8");
       let content = originalContent;
       let changes = 0;
 
@@ -97,7 +97,7 @@ class ProductionCleaner {
       }
 
       if (content !== originalContent) {
-        fs.writeFileSync(filePath, content, 'utf8');
+        fs.writeFileSync(filePath, content, "utf8");
         this.cleaned.push({
           file: fileName,
           path: filePath,
@@ -131,7 +131,7 @@ class ProductionCleaner {
     debugPatterns.forEach(pattern => {
       const matches = content.match(pattern);
       if (matches) {
-        content = content.replace(pattern, '');
+        content = content.replace(pattern, "");
         changed = true;
         count += matches.length;
       }
@@ -140,7 +140,7 @@ class ProductionCleaner {
     // Garder seulement les console.error critiques
     content = content.replace(
       /console\.log\(([^)]*error[^)]*)\)/g,
-      'console.error($1)'
+      "console.error($1)"
     );
 
     return { changed, content, count };
@@ -152,14 +152,14 @@ class ProductionCleaner {
 
     // Remplacer Math.random() par logique déterministe
     const randomUsage = content.match(/Math\.random\(\)/g);
-    if (randomUsage && !content.includes('test') && !content.includes('fallback')) {
+    if (randomUsage && !content.includes("test") && !content.includes("fallback")) {
       content = content.replace(
         /Math\.random\(\)/g,
-        'this.getDeterministicValue()'
+        "this.getDeterministicValue()"
       );
       
       // Ajouter la méthode déterministe si pas présente
-      if (!content.includes('getDeterministicValue')) {
+      if (!content.includes("getDeterministicValue")) {
         content += `\n\n  /**
    * Valeur déterministe remplaçant Math.random()
    */
@@ -188,13 +188,13 @@ class ProductionCleaner {
       const urlConstants = [];
       
       urls.forEach((url, index) => {
-        if (!url.includes('localhost') && !url.includes('127.0.0.1')) {
+        if (!url.includes("localhost") && !url.includes("127.0.0.1")) {
           const constName = `API_URL_${index + 1}`;
           urlConstants.push(`const ${constName} = '${url}';`);
           
           // Remplacer dans le code
           content = content.replace(
-            new RegExp(`['"]${url.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}['"]`, 'g'),
+            new RegExp(`['"]${url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}['"]`, "g"),
             constName
           );
           
@@ -205,7 +205,7 @@ class ProductionCleaner {
       
       // Ajouter les constantes au début du fichier
       if (urlConstants.length > 0) {
-        const constantsBlock = `\n// URLs externalisées\n${urlConstants.join('\n')}\n`;
+        const constantsBlock = `\n// URLs externalisées\n${urlConstants.join("\n")}\n`;
         content = content.replace(
           /(import.*\n)+/,
           `$&${constantsBlock}`
@@ -233,7 +233,7 @@ class ProductionCleaner {
     devCommentPatterns.forEach(pattern => {
       const matches = content.match(pattern);
       if (matches) {
-        content = content.replace(pattern, '');
+        content = content.replace(pattern, "");
         changed = true;
         count += matches.length;
       }
@@ -243,11 +243,11 @@ class ProductionCleaner {
   }
 
   displayResults() {
-    console.log('\n' + '='.repeat(50));
-    console.log('🎯 RÉSULTATS NETTOYAGE PRODUCTION');
-    console.log('='.repeat(50));
+    console.log("\n" + "=".repeat(50));
+    console.log("🎯 RÉSULTATS NETTOYAGE PRODUCTION");
+    console.log("=".repeat(50));
     
-    console.log(`\n📊 STATISTIQUES:`);
+    console.log("\n📊 STATISTIQUES:");
     console.log(`  • Fichiers analysés: ${this.stats.totalFiles}`);
     console.log(`  • Fichiers nettoyés: ${this.stats.filesCleaned}`);
     console.log(`  • Console.log supprimés: ${this.stats.debugRemoved}`);
@@ -255,7 +255,7 @@ class ProductionCleaner {
     console.log(`  • URLs externalisées: ${this.stats.urlsExternalized}`);
     
     if (this.cleaned.length > 0) {
-      console.log(`\n✅ FICHIERS AMÉLIORÉS:`);
+      console.log("\n✅ FICHIERS AMÉLIORÉS:");
       this.cleaned.slice(0, 10).forEach(clean => {
         console.log(`  • ${clean.file}: ${clean.changes} améliorations`);
       });
@@ -269,7 +269,7 @@ class ProductionCleaner {
     const qualityScore = Math.min(100, 70 + (this.stats.debugRemoved * 2));
     console.log(`\n🎯 SCORE QUALITÉ: ${qualityScore}/100`);
     
-    console.log('\n🎉 Code prêt pour la production!');
+    console.log("\n🎉 Code prêt pour la production!");
   }
 
   saveCleanReport() {
@@ -278,14 +278,14 @@ class ProductionCleaner {
       stats: this.stats,
       cleanedFiles: this.cleaned,
       qualityImprovement: {
-        before: 'Code avec debug et logique aléatoire',
-        after: 'Code optimisé pour production',
+        before: "Code avec debug et logique aléatoire",
+        after: "Code optimisé pour production",
         score: Math.min(100, 70 + (this.stats.debugRemoved * 2))
       }
     };
     
-    fs.writeFileSync('production-clean-report.json', JSON.stringify(report, null, 2));
-    console.log('\n💾 Rapport détaillé: production-clean-report.json');
+    fs.writeFileSync("production-clean-report.json", JSON.stringify(report, null, 2));
+    console.log("\n💾 Rapport détaillé: production-clean-report.json");
   }
 }
 

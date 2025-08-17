@@ -119,8 +119,8 @@ export class StrategicBlindspotDetector extends EventEmitter  {
 
     /**
      * Lance une analyse complète des angles morts stratégiques et cognitifs
-     * @param: {Object} detectionRequest - Paramètres de détection
-     * @returns: {Promise<Object>} Analyse complète avec recommandations
+     * @param {Object} detectionRequest - Paramètres de détection
+     * @returns {Promise<Object>} Analyse complète avec recommandations
      */
     async conductComprehensiveBlindspotDetection(detectionRequest) {
         const detectionId = `blindspot_detection_${Date.now()}`;
@@ -135,11 +135,11 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                 id: detectionId,
                 startTime: Date.now()
                 request: detectionRequest,
-                cognitiveBlindspots: {}
-                strategicBlindspots: {}
-                consciousnessGaps: {}
-                recommendations: {}
-                expansion: {}
+                cognitiveBlindspots {}
+                strategicBlindspots {}
+                consciousnessGaps {}
+                recommendations {}
+                expansion {}
             };
 
             this.activeDetections.set(detectionId, detectionSession);
@@ -202,7 +202,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                 success: true
                 detectionId
                 // Angles morts cognitifs
-                cognitiveBlindspots: {,
+                cognitiveBlindspots {
                     confirmatBias: cognitiveAnalysis.confirmationBias
                     anchoring: cognitiveAnalysis.anchoringBias,
                     availabilityHeuristic: cognitiveAnalysis.availability
@@ -211,7 +211,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     groupthink: cognitiveAnalysis.groupthink
                 }
                 // Angles morts stratégiques
-                strategicBlindspots: {,
+                strategicBlindspots {
                     competitiveThreats: strategicAnalysis.competitive
                     marketShifts: strategicAnalysis.market,
                     emergingOpportunities: strategicAnalysis.opportunities
@@ -220,7 +220,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     stakeholderNeeds: strategicAnalysis.stakeholders
                 }
                 // Gaps de conscience
-                consciousnessGaps: {,
+                consciousnessGaps {
                     perceptualLimitations: consciousnessAnalysis.perception
                     shadowElements: consciousnessAnalysis.shadow,
                     unconsciousPatterns: consciousnessAnalysis.unconscious
@@ -229,7 +229,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     transcendentPotential: consciousnessAnalysis.transcendent
                 }
                 // Angles morts collectifs
-                collectiveBlindspots: {,
+                collectiveBlindspots {
                     culturalAssumptions: collectiveAnalysis.cultural
                     industryGroupthink: collectiveAnalysis.industry,
                     organizationalBlindness: collectiveAnalysis.organizational
@@ -237,7 +237,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     generationalLimitations: collectiveAnalysis.generational
                 }
                 // Impact et criticité
-                impactAssessment: {,
+                impactAssessment {
                     criticalBlindspots: this.identifyCriticalBlindspots(detectionSession)
                     riskLevels: this.assessRiskLevels(detectionSession),
                     opportunityCosts: this.calculateOpportunityCosts(detectionSession)
@@ -245,7 +245,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     cascadingEffects: this.analyzeCascadingEffects(detectionSession)
                 }
                 // Stratégies d'expansion
-                expansionStrategies: {,
+                expansionStrategies {
                     awarenessExpansion: expansionStrategies.awareness
                     perspectiveDiversification: expansionStrategies.perspective,
                     cognitiveFLexibility: expansionStrategies.flexibility
@@ -253,7 +253,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     consciousnessEvolution: expansionStrategies.consciousness
                 }
                 // Outils et pratiques
-                tools: {,
+                tools {
                     biasInterruptors: this.generateBiasInterruptors(cognitiveAnalysis)
                     perspectiveExercises: this.createPerspectiveExercises(consciousnessAnalysis),
                     strategicCheckpoints: this.designStrategicCheckpoints(strategicAnalysis)
@@ -261,7 +261,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     monitoringSystems: this.createMonitoringSystems(implementationPlan)
                 }
                 // Plan d'implémentation
-                implementation: {,
+                implementation {
                     immediateActions: implementationPlan.immediate
                     shortTermInitiatives: implementationPlan.shortTerm,
                     longTermDevelopment: implementationPlan.longTerm
@@ -269,7 +269,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     systemicChanges: implementationPlan.systemic
                 }
                 // Métadonnées
-                metadata: {,
+                metadata {
                     detectionDepth: this.config.detectionDepth
                     blindspotsDetected: this.countTotalBlindspots(detectionSession),
                     consciousnessLevel: this.assessCurrentConsciousness(detectionRequest)
@@ -308,8 +308,8 @@ export class StrategicBlindspotDetector extends EventEmitter  {
 
     /**
      * Effectue une analyse en temps réel des biais de décision
-     * @param: {Object} decisionRequest - Paramètres de la décision
-     * @returns: {Promise<Object>} Analyse des biais en temps réel
+     * @param {Object} decisionRequest - Paramètres de la décision
+     * @returns {Promise<Object>} Analyse des biais en temps réel
      */
     async analyzeDecisionBiases(decisionRequest) {
         const analysisId = `decision_bias_${Date.now()}`;
@@ -349,7 +349,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                 success: true
                 analysisId
                 // Biais détectés
-                detectedBiases: {,
+                detectedBiases {
                     cognitive: activeBiases.cognitive
                     emotional: activeBiases.emotional,
                     social: activeBiases.social
@@ -357,7 +357,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     confirmational: activeBiases.confirmational
                 }
                 // Influence sur la décision
-                biasImpact: {,
+                biasImpact {
                     riskSkewing: biasInfluence.risk
                     optionFiltering: biasInfluence.options,
                     timeframeBias: biasInfluence.timeframe
@@ -365,7 +365,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     consequenceBlindness: biasInfluence.consequences
                 }
                 // Interruptions recommandées
-                interruptions: {,
+                interruptions {
                     pausePoints: biasInterruptions.pauses
                     questionPrompts: biasInterruptions.questions,
                     perspectiveShifts: biasInterruptions.shifts
@@ -373,7 +373,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     stakeholderConsultation: biasInterruptions.consultation
                 }
                 // Re-cadrage de la décision
-                reframing: {,
+                reframing {
                     alternativeFrames: reframingRecommendations.frames
                     expandedOptions: reframingRecommendations.options,
                     timeline: reframingRecommendations.timeline
@@ -381,7 +381,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     consequenceMapping: reframingRecommendations.consequences
                 }
                 // Plan de décision amélioré
-                improvedProcess: {,
+                improvedProcess {
                     structuredApproach: this.designStructuredDecisionProcess(activeBiases)
                     checklistItems: this.createDecisionChecklist(biasInfluence),
                     reviewMechanism: this.establishReviewMechanism(decisionRequest)
@@ -407,8 +407,8 @@ export class StrategicBlindspotDetector extends EventEmitter  {
 
     /**
      * Crée un système de surveillance continue des angles morts
-     * @param: {Object} monitoringRequest - Paramètres de surveillance
-     * @returns: {Promise<Object>} Système de monitoring complet
+     * @param {Object} monitoringRequest - Paramètres de surveillance
+     * @returns {Promise<Object>} Système de monitoring complet
      */
     async createBlindspotMonitoringSystem(monitoringRequest) {
         const systemId = `monitoring_system_${Date.now()}`;
@@ -447,7 +447,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                 success: true
                 systemId
                 // Configuration
-                configuration: {,
+                configuration {
                     monitoringScope: monitoringConfig.scope
                     detectionFrequency: monitoringConfig.frequency,
                     alertThresholds: monitoringConfig.thresholds
@@ -455,7 +455,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     privacySettings: monitoringConfig.privacy
                 }
                 // Détecteurs automatisés
-                detectors: {,
+                detectors {
                     cognitivePatterns: automatedDetectors.cognitive
                     strategicSignals: automatedDetectors.strategic,
                     marketIndicators: automatedDetectors.market
@@ -463,7 +463,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     performanceMetrics: automatedDetectors.performance
                 }
                 // Système d'alerte
-                alerts: {,
+                alerts {
                     realTimeNotifications: alertSystem.realTime
                     trendAlerts: alertSystem.trends,
                     patternRecognition: alertSystem.patterns
@@ -471,7 +471,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     feedbackLoop: alertSystem.feedback
                 }
                 // Dashboard et visualisation
-                dashboard: {,
+                dashboard {
                     blindspotMap: dashboard.map
                     trendVisualization: dashboard.trends,
                     impactAssessment: dashboard.impact
@@ -479,7 +479,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
                     collaborationTools: dashboard.collaboration
                 }
                 // Processus d'amélioration continue
-                continuousImprovement: {,
+                continuousImprovement {
                     learningAlgorithm: this.implementLearningAlgorithm()
                     patternEvolution: this.trackPatternEvolution(),
                     systemAdaptation: this.enableSystemAdaptation()
@@ -599,7 +599,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
       'Look for disconfirming evidence'];
     }
 
-    identifyCriticalBlindspots(session) {
+    identif (yCriticalBlindspots(session)) {
         return ['Strategic competitive threat underestimation',
       'Market disruption readiness gap',
       'Stakeholder needs misalignment'];
@@ -632,31 +632,31 @@ export class StrategicBlindspotDetector extends EventEmitter  {
 // MOTEURS SPÉCIALISÉS DE DÉTECTION
 // =======================================
 
-class CognitiveBiasDetector: {}
-class AssumptionAnalyzer: {}
-class PerspectiveScanner: {}
-class BlindspotMapper: {}
-class AwarenessExpander: {}
+class CognitiveBiasDetector {}
+class AssumptionAnalyzer {}
+class PerspectiveScanner {}
+class BlindspotMapper {}
+class AwarenessExpander {}
 
 // Scanners cognitifs
-class ThoughtPatternAnalyzer: {}
-class MentalModelDetector: {}
-class FramingAnalyzer: {}
-class ContextualBlindnessScanner: {}
-class IntuitionGapDetector: {}
+class ThoughtPatternAnalyzer {}
+class MentalModelDetector {}
+class FramingAnalyzer {}
+class ContextualBlindnessScanner {}
+class IntuitionGapDetector {}
 
 // Analyseurs stratégiques
-class CompetitiveBlindspotDetector: {}
-class MarketBlindnessScanner: {}
-class RiskBlindspotAnalyzer: {}
-class OpportunityMissDetector: {}
-class TimeHorizonAnalyzer: {}
+class CompetitiveBlindspotDetector {}
+class MarketBlindnessScanner {}
+class RiskBlindspotAnalyzer {}
+class OpportunityMissDetector {}
+class TimeHorizonAnalyzer {}
 
 // Mappeurs de conscience
-class CognitiveShadowAnalyzer: {}
-class UnconsciousPatternDetector: {}
-class CollectiveBlindspotScanner: {}
-class ArchetypeBlindnessDetector: {}
-class TranscendentViewActivator: {}
+class CognitiveShadowAnalyzer {}
+class UnconsciousPatternDetector {}
+class CollectiveBlindspotScanner {}
+class ArchetypeBlindnessDetector {}
+class TranscendentViewActivator {}
 
 export default StrategicBlindspotDetector;

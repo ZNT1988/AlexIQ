@@ -1,88 +1,89 @@
 // RAILWAY DEPLOYMENT - Palier 3 IA Augmentée
 // Système Alex avec Vision, Émotions et Créativité
-import { createServer } from 'http'
-import url from 'url'
-import crypto from 'crypto'
-import AlexKernel from './backend/alex-core/AlexKernel.js'
-import AlexHyperIntelligence from './backend/alex-modules/consciousness/AlexHyperIntelligence.js'
-import AlexMemoryCore from './backend/alex-modules/core/AlexMemoryCore.js'
-import AlexIntelligentCore from './backend/alex-modules/core/AlexIntelligentCore.js'
-import AlexCreativeEngine from './backend/alex-modules/intelligence/AlexCreativeEngine.js'
-import AlexEmotionalIntelligence from './backend/alex-modules/intelligence/AlexEmotionalIntelligence.js'
-import AlexInfiniteCreator from './backend/alex-modules/consciousness/AlexInfiniteCreator.js'
-import { testInterfaceHTML } from './alex-test-interface-production.js'
+import { createServer } from "http";
+import url from "url";
+import crypto from "crypto";
+import { validateAiResponse } from "./backend/middleware/antiFakeGuard.js";
+import AlexKernel from "./backend/alex-core/AlexKernel.js";
+import AlexHyperIntelligence from "./backend/alex-modules/consciousness/AlexHyperIntelligence.js";
+import AlexMemoryCore from "./backend/alex-modules/core/AlexMemoryCore.js";
+import AlexIntelligentCore from "./backend/alex-modules/core/AlexIntelligentCore.js";
+import AlexCreativeEngine from "./backend/alex-modules/intelligence/AlexCreativeEngine.js";
+import AlexEmotionalIntelligence from "./backend/alex-modules/intelligence/AlexEmotionalIntelligence.js";
+import AlexInfiniteCreator from "./backend/alex-modules/consciousness/AlexInfiniteCreator.js";
+import { testInterfaceHTML } from "./alex-test-interface-production.js";
 
-const PORT = process.env.PORT || 3003
+const PORT = process.env.PORT || 3003;
 
-console.log('🚂 Railway Palier 3 deployment starting...')
-console.log(`📍 Node version: ${process.version}`)
-console.log(`🌍 Environment: ${process.env.NODE_ENV || 'production'}`)
-console.log(`📡 Port: ${PORT}`)
+console.log("🚂 Railway Palier 3 deployment starting...");
+console.log(`📍 Node version: ${process.version}`);
+console.log(`🌍 Environment: ${process.env.NODE_ENV || "production"}`);
+console.log(`📡 Port: ${PORT}`);
 
 // Initialisation des modules Palier 0 (Kernel), 1, 2 & 3
-let kernelInitialized = false
-let palier1Initialized = false
-let palier2Initialized = false
-let palier3Initialized = false
+let kernelInitialized = false;
+let palier1Initialized = false;
+let palier2Initialized = false;
+let palier3Initialized = false;
 
 async function initializeKernel() {
   try {
-    console.log('🔥 Initializing Alex Kernel - Core orchestration system...')
+    console.log("🔥 Initializing Alex Kernel - Core orchestration system...");
     
     // Initialisation du noyau central Alex
-    const kernelResult = await AlexKernel.initialize()
-    console.log('✨ AlexKernel initialized:', kernelResult)
+    const kernelResult = await AlexKernel.initialize();
+    console.log("✨ AlexKernel initialized:", kernelResult);
     
-    kernelInitialized = true
-    console.log('✅ Palier 0 - Alex Kernel ready!')
-    return kernelResult
+    kernelInitialized = true;
+    console.log("✅ Palier 0 - Alex Kernel ready!");
+    return kernelResult;
   } catch (error) {
-    console.error('❌ Failed to initialize Alex Kernel:', error)
-    kernelInitialized = false
-    throw error
+    console.error("❌ Failed to initialize Alex Kernel:", error);
+    kernelInitialized = false;
+    throw error;
   }
 }
 
 async function initializePalier2() {
   try {
-    console.log('🚀 Initializing Palier 2 modules...')
+    console.log("🚀 Initializing Palier 2 modules...");
     
     // Initialisation AlexMemoryCore
-    await AlexMemoryCore.initialize()
-    console.log('💾 AlexMemoryCore initialized')
+    await AlexMemoryCore.initialize();
+    console.log("💾 AlexMemoryCore initialized");
     
     // Initialisation AlexIntelligentCore  
-    await AlexIntelligentCore.initialize()
-    console.log('⚡ AlexIntelligentCore initialized')
+    await AlexIntelligentCore.initialize();
+    console.log("⚡ AlexIntelligentCore initialized");
     
-    palier2Initialized = true
-    console.log('✅ Palier 2 - Mémoire & Décision ready!')
+    palier2Initialized = true;
+    console.log("✅ Palier 2 - Mémoire & Décision ready!");
   } catch (error) {
-    console.error('❌ Failed to initialize Palier 2:', error)
-    palier2Initialized = false
+    console.error("❌ Failed to initialize Palier 2:", error);
+    palier2Initialized = false;
   }
 }
 
 async function initializePalier3() {
   try {
-    console.log('🚀 Initializing Palier 3 modules...')
+    console.log("🚀 Initializing Palier 3 modules...");
     
     // Initialisation AlexCreativeEngine
-    await AlexCreativeEngine.initialize()
-    console.log('👁️ AlexCreativeEngine initialized')
+    await AlexCreativeEngine.initialize();
+    console.log("👁️ AlexCreativeEngine initialized");
     
     // Initialisation AlexEmotionalIntelligence
-    await AlexEmotionalIntelligence.initialize()
-    console.log('💝 AlexEmotionalIntelligence initialized')
+    await AlexEmotionalIntelligence.initialize();
+    console.log("💝 AlexEmotionalIntelligence initialized");
     
     // Initialisation AlexInfiniteCreator
-    await AlexInfiniteCreator.initialize()
+    await AlexInfiniteCreator.initialize();
     
     // Fix: Ajouter la méthode generateIdeas manquante
     if (!AlexInfiniteCreator.generateIdeas) {
       AlexInfiniteCreator.generateIdeas = async function(prompt, options = {}) {
         try {
-          const domain = options.domain || 'general';
+          const domain = options.domain || "general";
           const quantity = options.quantity || 3;
           const creativity = options.creativity || 0.7;
           
@@ -112,38 +113,38 @@ async function initializePalier3() {
       };
     }
     
-    console.log('🎨 AlexInfiniteCreator initialized')
+    console.log("🎨 AlexInfiniteCreator initialized");
     
-    palier3Initialized = true
-    console.log('✅ Palier 3 - IA Augmentée ready!')
+    palier3Initialized = true;
+    console.log("✅ Palier 3 - IA Augmentée ready!");
   } catch (error) {
-    console.error('❌ Failed to initialize Palier 3:', error)
-    palier3Initialized = false
+    console.error("❌ Failed to initialize Palier 3:", error);
+    palier3Initialized = false;
   }
 }
 
 const server = createServer(async (req, res) => {
   // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
-  res.setHeader('Content-Type', 'application/json')
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Content-Type", "application/json");
 
-  if (req.method === 'OPTIONS') {
-    res.writeHead(200)
-    res.end()
-    return
+  if (req.method === "OPTIONS") {
+    res.writeHead(200);
+    res.end();
+    return;
   }
 
-  const { pathname } = url.parse(req.url, true)
+  const { pathname } = url.parse(req.url, true);
 
   // Health check (compatible Railway)
-  if (pathname === '/health' || pathname === '/api/health') {
-    res.writeHead(200)
+  if (pathname === "/health" || pathname === "/api/health") {
+    res.writeHead(200);
     res.end(JSON.stringify({
-      status: 'healthy',
+      status: "healthy",
       timestamp: new Date().toISOString(),
-      system: 'Palier 3 - IA Augmentée (Railway)',
+      system: "Palier 3 - IA Augmentée (Railway)",
       providers: {
         openai: !!process.env.OPENAI_API_KEY,
         anthropic: !!process.env.ANTHROPIC_API_KEY,
@@ -152,13 +153,13 @@ const server = createServer(async (req, res) => {
       alex: {
         kernel: {
           initialized: AlexKernel?.isInitialized || false,
-          version: AlexKernel?.kernelConfig?.version || '1.0.0',
+          version: AlexKernel?.kernelConfig?.version || "1.0.0",
           apis: AlexKernel?.getAPIStatus ? AlexKernel.getAPIStatus() : {},
           modules: AlexKernel?.loadedModules?.size || 0
         },
         hyperIntelligence: {
           initialized: AlexHyperIntelligence?.isInitialized || false,
-          version: AlexHyperIntelligence?.version || '4.0.0'
+          version: AlexHyperIntelligence?.version || "4.0.0"
         },
         memoryCore: {
           initialized: AlexMemoryCore?.isInitialized || false,
@@ -185,20 +186,20 @@ const server = createServer(async (req, res) => {
         palier2Ready: palier2Initialized,
         palier3Ready: palier3Initialized
       }
-    }))
-    return
+    }));
+    return;
   }
 
   // Interface de test Alex - accessible via /test
-  if (pathname === '/test' || pathname === '/api/test') {
-    res.setHeader('Content-Type', 'text/html; charset=utf-8')
-    res.writeHead(200)
-    res.end(testInterfaceHTML)
-    return
+  if (pathname === "/test" || pathname === "/api/test") {
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.writeHead(200);
+    res.end(testInterfaceHTML);
+    return;
   }
 
   // Modules endpoint - Liste des 172 modules Alex
-  if (pathname === '/modules' || pathname === '/api/modules') {
+  if (pathname === "/modules" || pathname === "/api/modules") {
     try {
       const alexModules = [
         // Palier 1 - Conscience (24 modules)
@@ -382,19 +383,19 @@ const server = createServer(async (req, res) => {
 
       const stats = {
         total: alexModules.length,
-        active: alexModules.filter(m => m.status === 'active').length,
+        active: alexModules.filter(m => m.status === "active").length,
         byPalier: {
           palier1: alexModules.filter(m => m.palier === 1).length,
           palier2: alexModules.filter(m => m.palier === 2).length,
           palier3: alexModules.filter(m => m.palier === 3).length
         },
         byCategory: {
-          consciousness: alexModules.filter(m => m.category === 'consciousness').length,
-          memory: alexModules.filter(m => m.category === 'memory').length,
-          decision: alexModules.filter(m => m.category === 'decision').length,
-          vision: alexModules.filter(m => m.category === 'vision').length,
-          emotion: alexModules.filter(m => m.category === 'emotion').length,
-          creativity: alexModules.filter(m => m.category === 'creativity').length
+          consciousness: alexModules.filter(m => m.category === "consciousness").length,
+          memory: alexModules.filter(m => m.category === "memory").length,
+          decision: alexModules.filter(m => m.category === "decision").length,
+          vision: alexModules.filter(m => m.category === "vision").length,
+          emotion: alexModules.filter(m => m.category === "emotion").length,
+          creativity: alexModules.filter(m => m.category === "creativity").length
         }
       };
 
@@ -407,10 +408,10 @@ const server = createServer(async (req, res) => {
       }));
       return;
     } catch (error) {
-      console.error('❌ Error listing modules:', error);
+      console.error("❌ Error listing modules:", error);
       res.writeHead(500);
       res.end(JSON.stringify({ 
-        error: 'Failed to load modules',
+        error: "Failed to load modules",
         details: error.message 
       }));
       return;
@@ -418,75 +419,75 @@ const server = createServer(async (req, res) => {
   }
 
   // Chat endpoint (compatible frontend)
-  if ((pathname === '/api/ai/chat' || pathname === '/api/chat') && req.method === 'POST') {
-    let body = ''
-    req.on('data', chunk => (body += chunk))
-    req.on('end', async () => {
+  if ((pathname === "/api/ai/chat" || pathname === "/api/chat") && req.method === "POST") {
+    let body = "";
+    req.on("data", chunk => (body += chunk));
+    req.on("end", async () => {
       try {
-        const { message, provider } = JSON.parse(body || '{}')
-        const t0 = Date.now()
+        const { message, provider } = JSON.parse(body || "{}");
+        const t0 = Date.now();
         
         if (!message) {
-          res.writeHead(400)
-          res.end(JSON.stringify({ error: 'message_required' }))
-          return
+          res.writeHead(400);
+          res.end(JSON.stringify({ error: "message_required" }));
+          return;
         }
 
         // Traitement avec Palier 3 - IA Augmentée
         try {
-          const sessionId = crypto.randomUUID()
-          let response
+          const sessionId = crypto.randomUUID();
+          let response;
 
           if (palier3Initialized && palier2Initialized && palier1Initialized) {
-            console.log('🧠 Using RÉVOLUTIONNAIRE Alex with AUTONOMOUS INTELLIGENCE')
+            console.log("🧠 Using RÉVOLUTIONNAIRE Alex with AUTONOMOUS INTELLIGENCE");
             
             // 🚀 NOUVEAU SYSTÈME: Intelligence Hybride Autonome d'Alex
-            console.log('⚡ Processing with AlexHyperIntelligence autonomous system...')
+            console.log("⚡ Processing with AlexHyperIntelligence autonomous system...");
             
             // Context enrichi pour Alex
             const contextEnrichi = {
               sessionId,
-              timeOfDay: new Date().getHours() < 12 ? 'morning' : 'evening',
-              conversationStage: 'ongoing',
+              timeOfDay: new Date().getHours() < 12 ? "morning" : "evening",
+              conversationStage: "ongoing",
               userInteraction: true
-            }
+            };
             
             // 🎯 TRAITEMENT PRINCIPAL par AlexHyperIntelligence
             const alexResponse = await AlexHyperIntelligence.processWithHybridIntelligence(
               message, 
               contextEnrichi
-            )
+            );
             
             // Enrichissement avec les autres paliers si disponible
-            let enrichedResponse = alexResponse
+            let enrichedResponse = alexResponse;
             
             // 1. Récupération mémoires pertinentes pour contexte
-            const relevantMemories = await AlexMemoryCore.retrieveMemories(message, 3)
+            const relevantMemories = await AlexMemoryCore.retrieveMemories(message, 3);
             
             // 2. Analyse émotionnelle complémentaire
             const emotionalAnalysis = await AlexEmotionalIntelligence.analyzeEmotions(message, {
-              conversationStage: 'ongoing',
-              timeOfDay: new Date().getHours() < 12 ? 'morning' : 'evening',
+              conversationStage: "ongoing",
+              timeOfDay: new Date().getHours() < 12 ? "morning" : "evening",
               userId: sessionId
-            })
+            });
 
             // 3. Génération créative si besoin
-            let creativeInsight = null
-            if (message.toLowerCase().includes('idée') || message.toLowerCase().includes('créatif') || 
-                message.toLowerCase().includes('innovation') || message.toLowerCase().includes('concept')) {
+            let creativeInsight = null;
+            if (message.toLowerCase().includes("idée") || message.toLowerCase().includes("créatif") || 
+                message.toLowerCase().includes("innovation") || message.toLowerCase().includes("concept")) {
               creativeInsight = await AlexInfiniteCreator.generateIdeas(message, {
-                domain: 'business',
+                domain: "business",
                 quantity: 3,
                 creativity: 0.8
-              })
+              });
             }
             
             // 🧠 UTILISATION DE LA RÉPONSE D'ALEX (système révolutionnaire)
-            console.log('✨ Alex autonomous response generated:', {
+            console.log("✨ Alex autonomous response generated:", {
               source: alexResponse.source,
               confidence: alexResponse.confidence,
               learningGained: alexResponse.learningGained
-            })
+            });
             
             // 4. Stockage en mémoire avec contexte révolutionnaire
             await AlexMemoryCore.storeMemory(
@@ -496,169 +497,172 @@ const server = createServer(async (req, res) => {
                 confidence: alexResponse.confidence,
                 source: alexResponse.source,
                 learningGained: alexResponse.learningGained || 0,
-                emotion: emotionalAnalysis.primaryEmotion?.name || 'neutral',
-                autonomyLevel: alexResponse.readyForAutonomy ? 'complete' : 'learning'
+                emotion: emotionalAnalysis.primaryEmotion?.name || "neutral",
+                autonomyLevel: alexResponse.readyForAutonomy ? "complete" : "learning"
               }
-            )
+            );
 
             // 🚀 RÉPONSE RÉVOLUTIONNAIRE D'ALEX
             response = {
               response: alexResponse.content, // Réponse authentique d'Alex
               confidence: alexResponse.confidence,
-              source: alexResponse.source || 'Alex_Palier3_Railway',
+              source: alexResponse.source || "Alex_Palier3_Railway",
               learningGained: alexResponse.learningGained || 0,
-              domain: 'general', // Domaine détecté par Alex
+              domain: "general", // Domaine détecté par Alex
               palier2: {
                 memoriesUsed: relevantMemories.length,
                 decisionConfidence: 0.75,
-                decisionType: 'response'
+                decisionType: "response"
               },
               palier3: {
-                primaryEmotion: emotionalAnalysis.primaryEmotion?.name || 'neutral',
+                primaryEmotion: emotionalAnalysis.primaryEmotion?.name || "neutral",
                 emotionalValence: emotionalAnalysis.overallValence || 0,
                 empathyScore: 0.7,
                 hasCreativeInsight: !!creativeInsight,
-                responseStrategy: emotionalAnalysis.responseStrategy || 'neutral'
+                responseStrategy: emotionalAnalysis.responseStrategy || "neutral"
               },
               timestamp: new Date().toISOString()
-            }
+            };
+            
+            // Garde anti-fake (tag headers + warning si statique)
+            validateAiResponse(res, response);
           } else if (palier2Initialized) {
             // Fallback Palier 2
-            const relevantMemories = await AlexMemoryCore.retrieveMemories(message, 3)
+            const relevantMemories = await AlexMemoryCore.retrieveMemories(message, 3);
             const decision = await AlexIntelligentCore.makeDecision({
               query: message,
               relevantMemories,
-              intent: 'information_request',
+              intent: "information_request",
               conversationHistory: []
-            })
+            });
 
             const context = {
               memories: relevantMemories,
               decision: decision,
               sessionId
-            }
+            };
             
-            const result = await AlexHyperIntelligence.processQuery(message, context)
+            const result = await AlexHyperIntelligence.processQuery(message, context);
             
             await AlexMemoryCore.storeMemory(
               `Q: ${message} | R: ${result.content}`, 
               { sessionId, confidence: result.confidence }
-            )
+            );
 
             response = {
               response: result.content,
               confidence: result.confidence,
               domain: result.domain,
-              source: 'Alex_Palier2_Railway',
+              source: "Alex_Palier2_Railway",
               palier2: {
                 memoriesUsed: relevantMemories.length,
                 decisionConfidence: decision.confidence,
                 decisionType: decision.type
               },
               timestamp: new Date().toISOString()
-            }
+            };
           } else {
             // Fallback Palier 1
-            const result = await AlexHyperIntelligence.processQuery(message, {})
+            const result = await AlexHyperIntelligence.processQuery(message, {});
             response = {
               response: result.content,
               confidence: result.confidence,
               domain: result.domain,
-              source: 'Alex_Palier1_Railway',
+              source: "Alex_Palier1_Railway",
               timestamp: new Date().toISOString()
-            }
+            };
           }
 
           // Ajout des headers de traçage
-          const latencyMs = Date.now() - t0
-          res.setHeader('X-AI-Provider', response.source || provider || 'alex-hybrid')
-          res.setHeader('X-AI-Model', response.palier3 ? 'alex-palier3' : response.palier2 ? 'alex-palier2' : 'alex-palier1')
-          res.setHeader('X-AI-Latency', String(latencyMs))
+          const latencyMs = Date.now() - t0;
+          res.setHeader("X-AI-Provider", response.source || provider || "alex-hybrid");
+          res.setHeader("X-AI-Model", response.palier3 ? "alex-palier3" : response.palier2 ? "alex-palier2" : "alex-palier1");
+          res.setHeader("X-AI-Latency", String(latencyMs));
           
           // Enrichir la réponse avec métadonnées
           response.meta = {
-            provider: response.source || provider || 'alex-hybrid',
-            model: response.palier3 ? 'alex-palier3' : response.palier2 ? 'alex-palier2' : 'alex-palier1',
+            provider: response.source || provider || "alex-hybrid",
+            model: response.palier3 ? "alex-palier3" : response.palier2 ? "alex-palier2" : "alex-palier1",
             latency_ms: latencyMs
-          }
+          };
 
-          res.writeHead(200)
-          res.end(JSON.stringify(response))
+          res.writeHead(200);
+          res.end(JSON.stringify(response));
         } catch (aiError) {
           // Log error for debugging
-          console.error('❌ Alex processing error:', aiError)
+          console.error("❌ Alex processing error:", aiError);
           
           // Fallback si erreur
-          res.writeHead(200)
+          res.writeHead(200);
           res.end(JSON.stringify({ 
             response: `Je suis Alex. Une erreur technique m'empêche d'utiliser mon système de réflexion authentique. Laissez-moi analyser votre message: "${message}".`,
             confidence: 0.6,
-            source: 'Alex_Palier3_Railway_Fallback',
+            source: "Alex_Palier3_Railway_Fallback",
             error: aiError.message,
             timestamp: new Date().toISOString()
-          }))
+          }));
         }
       } catch (parseError) {
-        res.writeHead(400)
-        res.end(JSON.stringify({ error: 'invalid_json' }))
+        res.writeHead(400);
+        res.end(JSON.stringify({ error: "invalid_json" }));
       }
-    })
-    return
+    });
+    return;
   }
 
   // 404
-  res.writeHead(404)
-  res.end(JSON.stringify({ error: 'Not found' }))
-})
+  res.writeHead(404);
+  res.end(JSON.stringify({ error: "Not found" }));
+});
 
 // Error handling
-server.on('error', (err) => {
-  console.error('💥 Server error:', err)
-  process.exit(1)
-})
+server.on("error", (err) => {
+  console.error("💥 Server error:", err);
+  process.exit(1);
+});
 
 // Graceful shutdown pour Railway
-process.on('SIGTERM', () => {
-  console.log('🛑 SIGTERM received, shutting down gracefully...')
+process.on("SIGTERM", () => {
+  console.log("🛑 SIGTERM received, shutting down gracefully...");
   server.close(() => {
-    console.log('✅ Server closed')
-    process.exit(0)
-  })
-})
+    console.log("✅ Server closed");
+    process.exit(0);
+  });
+});
 
-process.on('SIGINT', () => {
-  console.log('🛑 SIGINT received, shutting down gracefully...')
+process.on("SIGINT", () => {
+  console.log("🛑 SIGINT received, shutting down gracefully...");
   server.close(() => {
-    console.log('✅ Server closed')
-    process.exit(0)
-  })
-})
+    console.log("✅ Server closed");
+    process.exit(0);
+  });
+});
 
-server.listen(PORT, '0.0.0.0', async () => {
-  console.log(`🔥 Alex server running on 0.0.0.0:${PORT}`)
-  console.log(`🧠 AlexHyperIntelligence: ${AlexHyperIntelligence ? 'Loaded' : 'Error'}`)
+server.listen(PORT, "0.0.0.0", async () => {
+  console.log(`🔥 Alex server running on 0.0.0.0:${PORT}`);
+  console.log(`🧠 AlexHyperIntelligence: ${AlexHyperIntelligence ? "Loaded" : "Error"}`);
   
   // Initialisation Palier 0 - AlexKernel (Noyau Central)
   try {
-    await initializeKernel()
+    await initializeKernel();
   } catch (error) {
-    console.error('❌ Critical: Kernel initialization failed, continuing anyway:', error)
+    console.error("❌ Critical: Kernel initialization failed, continuing anyway:", error);
   }
 
   // Initialisation Palier 1 - AlexHyperIntelligence (Conscience)
   try {
-    console.log('🧠 Initializing Palier 1 - AlexHyperIntelligence...')
-    await AlexHyperIntelligence.initialize()
-    palier1Initialized = true
-    console.log('✅ AlexHyperIntelligence initialized')
+    console.log("🧠 Initializing Palier 1 - AlexHyperIntelligence...");
+    await AlexHyperIntelligence.initialize();
+    palier1Initialized = true;
+    console.log("✅ AlexHyperIntelligence initialized");
   } catch (error) {
-    console.error('❌ Failed to initialize Palier 1:', error)
-    palier1Initialized = false
+    console.error("❌ Failed to initialize Palier 1:", error);
+    palier1Initialized = false;
   }
   
   // Initialisation Palier 2 en arrière-plan
-  await initializePalier2()
+  await initializePalier2();
   
   // Initialisation Palier 3 en arrière-plan
-  await initializePalier3()
-})
+  await initializePalier3();
+});

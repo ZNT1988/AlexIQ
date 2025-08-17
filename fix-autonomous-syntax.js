@@ -1,34 +1,34 @@
-import fs from 'fs';
+import fs from "fs";
 
-const filePath = 'backend/alex-modules/specialized/AlexAutonomousCore.js';
-let content = fs.readFileSync(filePath, 'utf8');
+const filePath = "backend/alex-modules/specialized/AlexAutonomousCore.js";
+let content = fs.readFileSync(filePath, "utf8");
 
-console.log('🔧 Fixing AlexAutonomousCore.js syntax errors...');
+console.log("🔧 Fixing AlexAutonomousCore.js syntax errors...");
 
 // Fix the malformed coreTraits object
-content = content.replace(/coreTraits:\s*\{\s*,/g, 'coreTraits: {');
+content = content.replace(/coreTraits:\s*\{\s*,/g, "coreTraits: {");
 
 // Fix missing commas after object properties
-content = content.replace(/(\w+):\s*([^,\n}]+)\n\s+(\w+):/g, '$1: $2,\n      $3:');
+content = content.replace(/(\w+):\s*([^,\n}]+)\n\s+(\w+):/g, "$1: $2,\n      $3:");
 
 // Fix specific malformed patterns
-content = content.replace(/new Map\(\)\n\s+(\w+):/g, 'new Map(),\n      $1:');
-content = content.replace(/\[\]\n\s+(\w+):/g, '[],\n      $1:');
-content = content.replace(/new Date\(\)\n\s+(\w+):/g, 'new Date(),\n      $1:');
+content = content.replace(/new Map\(\)\n\s+(\w+):/g, "new Map(),\n      $1:");
+content = content.replace(/\[\]\n\s+(\w+):/g, "[],\n      $1:");
+content = content.replace(/new Date\(\)\n\s+(\w+):/g, "new Date(),\n      $1:");
 
 // Fix object literal endings that are missing commas
-content = content.replace(/}\n\s+(\w+):/g, '},\n      $1:');
+content = content.replace(/}\n\s+(\w+):/g, "},\n      $1:");
 
 // Fix cognitiveBbreakthroughs typo
-content = content.replace(/cognitiveBbreakthroughs/g, 'cognitiveBreakthroughs');
+content = content.replace(/cognitiveBbreakthroughs/g, "cognitiveBreakthroughs");
 
 // Fix carriage return issues
-content = content.replace(/\r,/g, ',');
-content = content.replace(/\r;/g, ';');
+content = content.replace(/\r,/g, ",");
+content = content.replace(/\r;/g, ";");
 
 // Fix malformed string concatenations with STR_
 content = content.replace(/STR_([A-Z_]+)/g, (match, word) => {
-  return word.toLowerCase().replace(/_/g, '_');
+  return word.toLowerCase().replace(/_/g, "_");
 });
 
 // Fix specific broken lines
@@ -39,11 +39,11 @@ content = content.replace(/'analytical_thinkingSTR_creative_problem_solvingSTR_s
   "'analytical_thinking', 'creative_problem_solving', 'strategic_planning', 'empathic_understanding', 'visionary_synthesis'");
 
 // Fix async placement
-content = content.replace(/async if\(/g, 'if (');
+content = content.replace(/async if\(/g, "if (");
 
 // Fix incomplete method signatures
 content = content.replace(/async performCognitiveAnalysis\(\) \{[\s\S]*?const messageContent = message\.toLowerCase\(\);/g, 
-  'async performCognitiveAnalysis(message, userId, sessionContext) {\n    const messageContent = message.toLowerCase();');
+  "async performCognitiveAnalysis(message, userId, sessionContext) {\n    const messageContent = message.toLowerCase();");
 
 // Fix broken object declarations
 content = content.replace(/identifyPsychologicalNeeds\(emotionalProfile\) this\.buildComplexObject\(config\);[\s\S]*?return \{ tone: 'balanced'/g, 
@@ -103,7 +103,7 @@ content = content.replace(/const _insight = \{[\s\S]*?timestamp: new Date\(\)\r;
 
 // Fix broken methods and variable names
 content = content.replace(/const insightRatio = this\.autonomyMetrics\.selfGeneratedInsights \/[\s\S]*?Math\.max\(1, this\.autonomyMetrics\.learningIterations\);/g,
-  `const insightRatio = this.autonomyMetrics.selfGeneratedInsights / Math.max(1, this.autonomyMetrics.learningIterations);`);
+  "const insightRatio = this.autonomyMetrics.selfGeneratedInsights / Math.max(1, this.autonomyMetrics.learningIterations);");
 
 // Fix broken insight generation arrays
 content = content.replace(/const insights = \[[\s\S]*?"Ma conscience evolue à chaque interaction[\s\S]*?thoughts\[Math\.floor\(\(crypto\.randomBytes\(4\)\.readUInt32BE\(0\) \/ 0xFFFFFFFF\) \* thoughts\.length\)\];/g,
@@ -135,4 +135,4 @@ content = content.replace(/const insights = \[[\s\S]*?"Mon analyse autonome rév
     ];`);
 
 fs.writeFileSync(filePath, content);
-console.log('✅ Syntax errors fixed in AlexAutonomousCore.js');
+console.log("✅ Syntax errors fixed in AlexAutonomousCore.js");

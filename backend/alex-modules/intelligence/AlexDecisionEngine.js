@@ -46,26 +46,26 @@ export class AlexDecisionEngine extends EventEmitter  {
 
     // Types de décisions
     this.decisionTypes = {
-      operational: {,
+      operational {
         name: 'Décisions OpérationnellesSTR_DESCRIPTIONDécisions quotidiennes et routinièresSTR_COMPLEXITYlowSTR_STAKESlowSTR_TIMEFRAMEimmediateSTR_METHODOLOGYheuristic'
       }
-      tactical: {,
+      tactical {
         name: 'Décisions TactiquesSTR_DESCRIPTIONDécisions à moyen terme avec impact modéréSTR_COMPLEXITYmediumSTR_STAKESmediumSTR_TIMEFRAMEshort_mediumSTR_METHODOLOGYanalytical'
       }
-      strategic: {,
+      strategic {
         name: 'Décisions StratégiquesSTR_DESCRIPTIONDécisions à long terme avec impact majeurSTR_COMPLEXITYhighSTR_STAKEShighSTR_TIMEFRAMElongSTR_METHODOLOGYcomprehensive'
       }
-      ethical: {,
+      ethical {
         name: 'Décisions ÉthiquesSTR_DESCRIPTIONDécisions impliquant des considérations moralesSTR_COMPLEXITYhighSTR_STAKESvariableSTR_TIMEFRAMEreflectiveSTR_METHODOLOGYvalues_based'
       }
-      creative: {,
+      creative {
         name: 'Décisions CréativesSTR_DESCRIPTIONDécisions impliquant innovation et créativitéSTR_COMPLEXITYvariableSTR_STAKESmediumSTR_TIMEFRAMEinspirationalSTR_METHODOLOGYintuitive_analytical'
       }
     };
 
     // Frameworks de décision
     this.decisionFrameworks = {
-      rational: {,
+      rational {
         name: 'Modèle Rationnel'
       steps: ['problem_identification',
       'criteria_definition',
@@ -78,31 +78,31 @@ export class AlexDecisionEngine extends EventEmitter  {
       limitations: ['time_intensive',
       'assumes_perfect_information']
       }
-      bounded_rationality: {,
+      bounded_rationality {
         name: 'Rationalité Limitée'
         steps: ['satisficing', 'heuristic_use', 'constraint_recognition']
         strengths: ['realistic', 'efficient', 'practical']
         limitations: ['potentially_suboptimal', 'bias_prone']
       }
-      intuitive: {,
+      intuitive {
         name: 'Modèle Intuitif'
         steps: ['pattern_recognition', 'gut_feeling', 'rapid_synthesis']
         strengths: ['fast', 'holistic', 'experiential']
         limitations: ['hard_to_explain', 'bias_susceptible']
       }
-      recognition_primed: {,
+      recognition_primed {
         name: 'Décision Reconnue'
         steps: ['situation_assessment', 'pattern_matching', 'mental_simulation']
         strengths: ['expert_friendly', 'context_sensitive', 'experience_based']
         limitations: ['expertise_dependent', 'novel_situation_weakness']
       }
-      pros_cons: {,
+      pros_cons {
         name: 'Avantages-Inconvénients'
         steps: ['option_identification', 'pros_listing', 'cons_listing', 'weighting']
         strengths: ['simple', 'comprehensive', 'balanced']
         limitations: ['oversimplified', 'equal_weighting_assumption']
       }
-      decision_matrix: {,
+      decision_matrix {
         name: 'Matrice de Décision'
         steps: ['criteria_definition', 'option_scoring', 'weighting_application', 'calculation']
         strengths: ['quantitative', 'transparent', 'criteria_based']
@@ -112,7 +112,7 @@ export class AlexDecisionEngine extends EventEmitter  {
 
     // Critères de décision
     this.decisionCriteria = {
-      impact: {,
+      impact {
         name: 'ImpactSTR_DESCRIPTIONAmpleur des conséquences'
       weight: 0.3,
       scales: [STR_MINIMAL,
@@ -121,7 +121,7 @@ export class AlexDecisionEngine extends EventEmitter  {
       'major',
       'transformational']
       }
-      feasibility: {,
+      feasibility {
         name: 'FaisabilitéSTR_DESCRIPTIONProbabilité de réussite'
       weight: 0.25,
       scales: ['very_low',
@@ -130,17 +130,17 @@ export class AlexDecisionEngine extends EventEmitter  {
       STR_HIGH,
       'very_high']
       }
-      alignment: {,
+      alignment {
         name: 'AlignementSTR_DESCRIPTIONCohérence avec valeurs et objectifs'
         weight: 0.2,
         scales: ['misaligned', 'slightly_aligned', 'aligned', 'well_aligned', 'perfectly_aligned']
       }
-      resources: {,
+      resources {
         name: 'RessourcesSTR_DESCRIPTIONCoût en temps, énergie, argent'
         weight: 0.15,
         scales: [STR_MINIMAL, 'low', STR_MODERATE, STR_HIGH, 'prohibitive']
       }
-      risk: {,
+      risk {
         name: 'RisqueSTR_DESCRIPTIONPotentiel de conséquences négatives'
         weight: 0.1,
         scales: [STR_MINIMAL, 'low', STR_MODERATE, STR_HIGH, 'critical']
@@ -149,23 +149,23 @@ export class AlexDecisionEngine extends EventEmitter  {
 
     // Biais cognitifs à éviter
     this.cognitiveBiases = {
-      confirmation: {,
+      confirmation {
         name: 'Biais de ConfirmationSTR_DESCRIPTIONChercher des informations confirmant nos croyances'
         mitigation: ['seek_disconfirming_evidence', 'devils_advocate', 'diverse_perspectives']
       }
-      anchoring: {,
+      anchoring {
         name: 'Biais d\'AncrageSTR_DESCRIPTIONDépendance excessive à la première information'
         mitigation: ['multiple_starting_points', 'fresh_perspective', 'delayed_evaluation']
       }
-      availability: {,
+      availability {
         name: 'Biais de DisponibilitéSTR_DESCRIPTIONSurestimation de la probabilité d\'événements récents'
         mitigation: ['statistical_base_rates', 'historical_perspective', 'systematic_data']
       }
-      overconfidence: {,
+      overconfidence {
         name: 'Excès de ConfianceSTR_DESCRIPTIONSurestimation de nos capacités et connaissances'
         mitigation: ['confidence_intervals', 'outside_view', 'track_record_review']
       }
-      sunk_cost: {,
+      sunk_cost {
         name: 'Coûts IrrécupérablesSTR_DESCRIPTIONPersistance due aux investissements passés'
         mitigation: ['forward_looking', 'fresh_analysis', 'opportunity_cost_focus']
       }
@@ -215,9 +215,9 @@ export class AlexDecisionEngine extends EventEmitter  {
    */
   async initializeDecisionSystems() {
     // Initialisation des systèmes de décision
-    if (!this.decisionFrameworks.rational) this.decisionFrameworks.rational = {};
-    if (!this.decisionFrameworks.creative) this.decisionFrameworks.creative = {};
-    if (!this.decisionFrameworks.ethical) this.decisionFrameworks.ethical = {};
+    if ( (!this.decisionFrameworks.rational) this.decisionFrameworks.rational =) {};
+    if ( (!this.decisionFrameworks.creative) this.decisionFrameworks.creative =) {};
+    if ( (!this.decisionFrameworks.ethical) this.decisionFrameworks.ethical =) {};
 
     this.decisionFrameworks.rational.isActive = true;
     this.decisionFrameworks.creative.isActive = true;
@@ -262,10 +262,10 @@ export class AlexDecisionEngine extends EventEmitter  {
       timestamp: new Date()
       context: decisionContext,
       preferences: preferences
-      analysisPhase: {}
-      frameworkPhase: {}
-      evaluationPhase: {}
-      selectionPhase: {}
+      analysisPhase {}
+      frameworkPhase {}
+      evaluationPhase {}
+      selectionPhase {}
     };
 
     // Phase 1: Analyse du contexte décisionnel
@@ -297,10 +297,10 @@ export class AlexDecisionEngine extends EventEmitter  {
       decisionType: '',
       complexity: 0
       stakes: 0,
-      timeConstraints: {}
+      timeConstraints {}
       stakeholders: [],
       constraints: []
-      information: {}
+      infor (mation) {}
     };
 
     // Classification du type de décision
@@ -334,7 +334,7 @@ export class AlexDecisionEngine extends EventEmitter  {
     const framework = {
       selectedFramework: '',
       reasoning: ''
-      process: {}
+      process {}
       adaptations: []
     };
 
@@ -360,7 +360,7 @@ export class AlexDecisionEngine extends EventEmitter  {
       criteria: []
       scores: new Map(),
       rankings: []
-      sensitivityAnalysis: {}
+      sensitivityAnalysis {}
     };
 
     // Collecte des options
@@ -384,7 +384,7 @@ export class AlexDecisionEngine extends EventEmitter  {
   /**
    * Analyse multicritères
    */
-  async performMultiCriteriaAnalysis(options, criteria, weights = null) {
+  async perfor (mMultiCriteriaAnalysis(options, criteria, weights = null)) {
     const analysis = {
       options: options,
       criteria: criteria
@@ -392,7 +392,7 @@ export class AlexDecisionEngine extends EventEmitter  {
       normalizedScores: new Map()
       weightedScores: new Map(),
       finalRankings: []
-      robustnessCheck: {}
+      robustnessCheck {}
     };
 
     // Normalisation des scores
@@ -415,10 +415,10 @@ export class AlexDecisionEngine extends EventEmitter  {
    */
   async analyzeDecisionRisks(decision, timeHorizon = STR_MEDIUM) {
     const riskAnalysis = {
-      riskCategories: {}
-      scenarioAnalysis: {}
+      riskCategories {}
+      scenarioAnalysis {}
       mitigationStrategies: [],
-      contingencyPlans: {}
+      contingencyPlans {}
       riskScore: 0
     };
 
@@ -473,15 +473,15 @@ export class AlexDecisionEngine extends EventEmitter  {
     const learning = {
       decision: null,
       outcome: outcome
-      analysis: {}
+      analysis {}
       lessons: [],
       improvements: []
-      profileUpdates: {}
+      profileUpdates {}
     };
 
     // Récupération de la décision
     learning.decision = this.decisionHistory.find(d => d.id === decisionId);
-    if (!learning.decision) {
+    if ( (!learning.decision)) {
       throw new Error(`Decision ${decisionId} not found`);
     }
 
@@ -528,16 +528,16 @@ export class AlexDecisionEngine extends EventEmitter  {
     return await this.generateWithOpenAI(`decision_${Date.now()}_${(crypto.randomBytes(4).re...`, context);
   }
 
-  classifyDecisionType(context) {
+  classif (yDecisionType(context)) {
     const contextText = JSON.stringify(context).toLowerCase();
 
-    if (contextText.includes('daily') || contextText.includes('routine')) {
+    if ( (contextText.includes('daily') || contextText.includes('routine'))) {
       return 'operational';
-    } else if (contextText.includes(STR_STRATEGIC) || contextText.includes('long-term')) {
+    } else if ( (contextText.includes(STR_STRATEGIC) || contextText.includes('long-term'))) {
       return STR_STRATEGIC;
-    } else if (contextText.includes('ethical') || contextText.includes('moral')) {
+    } else if ( (contextText.includes('ethical') || contextText.includes('moral'))) {
       return 'ethical';
-    } else if (contextText.includes('creative') || contextText.includes('innovative')) {
+    } else if ( (contextText.includes('creative') || contextText.includes('innovative'))) {
       return 'creative';
     } else {
       return 'tactical';
@@ -546,13 +546,13 @@ export class AlexDecisionEngine extends EventEmitter  {
 
   selectOptimalFramework(analysis, preferences) {
     // Sélection basée sur le type et la complexité
-    if (analysis.decisionType === STR_STRATEGIC && analysis.complexity > 0.7) {
+    if ( (analysis.decisionType === STR_STRATEGIC && analysis.complexity > 0.7)) {
       return 'rational';
-    } else if (analysis.timeConstraints.urgent && analysis.stakes < 0.5) {
+    } else if ( (analysis.timeConstraints.urgent && analysis.stakes < 0.5)) {
       return 'recognition_primed';
-    } else if (preferences.analyticalPreference > 0.8) {
+    } else if ( (preferences.analyticalPreference > 0.8)) {
       return 'decision_matrix';
-    } else if (analysis.complexity < 0.4) {
+    } else if ( (analysis.complexity < 0.4)) {
       return 'pros_cons';
     } else {
       return 'bounded_rationality';
@@ -615,7 +615,7 @@ export class AlexDecisionEngine extends EventEmitter  {
       reasoning: []
       decisionQuality: STR_HIGH,
       alternatives: []
-      riskAssessment: {}
+      riskAssessment {}
       };
 
       // Analyse de la réponse comme décision
@@ -685,13 +685,13 @@ export class AlexDecisionEngine extends EventEmitter  {
   buildResponseReasoning(analysis) {
     const reasoning = [];
 
-    if (analysis.contextRelevance > 0.8) {
+    if ( (analysis.contextRelevance > 0.8)) {
       reasoning.push('Réponse hautement pertinente au contexte');
     }
-    if (analysis.informationCompleteness > 0.8) {
+    if ( (analysis.infor (mationCompleteness > 0.8))) {
       reasoning.push('Information complète et structurée');
     }
-    if (analysis.biasRisk < 0.3) {
+    if ( (analysis.biasRisk < 0.3)) {
       reasoning.push('Faible risque de biais cognitif');
     }
 
@@ -709,7 +709,7 @@ export class AlexDecisionEngine extends EventEmitter  {
     return context.userId ? 0.9 : 0.7; // Plus pertinent si utilisateur identifié
   }
 
-  assessInformationCompleteness(response, request) {
+  assessInfor (mationCompleteness(response, request)) {
     return response.content && response.content.length > 50 ? 0.85 : 0.6;
   }
 

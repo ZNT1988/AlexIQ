@@ -70,7 +70,7 @@ const customFormat = winston.format.combine(
   winston.format.errors({ stack: true }),
   winston.format.json(),
   winston.format.printf(({ timestamp, level, message, ...meta }) => {
-    return `${timestamp} [${level.toUpperCase()}]: ${message} ${Object.keys(meta).length ? JSON.stringify(meta, null, 2) : ''}`;
+    return `${timestamp} [${level.toUpperCase()}]: ${message} ${Object.keys(meta).length ? JSON.stringify(meta, null, 2) : ""}`;
   })
 );
 
@@ -90,8 +90,8 @@ const logger = winston.createLogger({
     new winston.transports.Console({
       format: winston.format.combine(
         winston.format.colorize(),
-        winston.format.simple(),
-      ),
+        winston.format.simple()
+      )
     }),
     /**
      * @transport ErrorFile
@@ -102,8 +102,8 @@ const logger = winston.createLogger({
       level: "error",
       format: winston.format.combine(
         winston.format.timestamp(),
-        winston.format.json(),
-      ),
+        winston.format.json()
+      )
     }),
     /**
      * @transport CombinedFile
@@ -113,10 +113,10 @@ const logger = winston.createLogger({
       filename: "logs/combined.log",
       format: winston.format.combine(
         winston.format.timestamp(),
-        winston.format.json(),
-      ),
-    }),
-  ],
+        winston.format.json()
+      )
+    })
+  ]
 });
 
 /**

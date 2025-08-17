@@ -1,19 +1,19 @@
 // Owner Identity - Stub pour démarrage
 // Imports AI Services
-import { AI_KEYS } from '../config/aiKeys.js';
+import { AI_KEYS } from "../config/aiKeys.js";
 
 export class OwnerIdentity {
   constructor() {
-    this.owner = 'HustleFinder User';
+    this.owner = "HustleFinder User";
   }
 
   static async initialize() {
     return new OwnerIdentity();
   }
 
-  getOwnerInfo() {      return {
+  getOwnerInfo() {    return {
       name: this.owner,
-      permissions: ['full_access']
+      permissions: ["full_access"]
     };
   }
 }

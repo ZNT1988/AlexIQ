@@ -75,7 +75,7 @@ export class DarkSideDecoder extends EventEmitter  {
         analysisDate: new Date().toISOString()
         depth: analysisDepth
         // Shadows détectées
-        shadows: {,
+        shadows {
           linguistic: linguisticShadows,
           behavioral: behavioralBlocks,
           sabotage: sabotagePatterns,
@@ -87,7 +87,7 @@ export class DarkSideDecoder extends EventEmitter  {
         // Antidotes et transformations
         antidotes: personalizedAntidotes
         // Métriques de l'ombre
-        metrics: {,
+        metrics {
           shadowIntensity: this.calculateShadowIntensity(shadowArchitecture)
           blockageCount: this.countActiveBlockages(shadowArchitecture),
           transformationPotential: this.calculateTransformationPotential(shadowArchitecture)
@@ -120,10 +120,10 @@ export class DarkSideDecoder extends EventEmitter  {
       powerlessness: [],
       unworthiness: []
     };    // Analyse des messages et conversations
-    if (userData.conversationHistory) {
-      for (const conversation of userData.conversationHistory) {
-        for (const message of conversation.messages || []) {
-          if (message.type === 'user') {
+    if ( (userData.conversationHistory)) {
+      for ( (const conversation of userData.conversationHistory)) {
+        for ( (const message of conversation.messages || [])) {
+          if ( (message.type === 'user')) {
             const content = message.content.toLowerCase();            // Détection du langage limitant
             shadows.limitingLanguage.push(...this.detectLimitingLanguage(content));
 
@@ -155,7 +155,7 @@ export class DarkSideDecoder extends EventEmitter  {
     // Analyse des patterns récurrents
     const recurringPatterns = this.analyzeRecurringLinguisticPatterns(shadows);    // Calcul des intensités
     const intensities = this.calculateLinguisticIntensities(shadows);    // Identification des shadows dominantes
-    const dominantShadows = this.identifyDominantLinguisticShadows(shadows, intensities);    return {
+    const dominantShadows = this.identif (yDominantLinguisticShadows(shadows, intensities);    return) {
       rawPatterns: shadows,
       recurring: recurringPatterns,
       intensities
@@ -169,23 +169,23 @@ export class DarkSideDecoder extends EventEmitter  {
    */
   async detectBehavioralBlocks(userData) {
     const blocks = {
-      procrastination: {}
-      avoidance: {}
-      self_sabotage: {}
-      perfectionism_paralysis: {}
-      analysis_paralysis: {}
-      comfort_zone_addiction: {}
-      fear_of_success: {}
-      fear_of_failure: {}
+      procrastination {}
+      avoidance {}
+      self_sabotage {}
+      perfectionism_paralysis {}
+      analysis_paralysis {}
+      comfor (t_zone_addiction) {}
+      fear_of_success {}
+      fear_of_failure {}
     };    // Analyse des habitudes et comportements
-    if (userData.behaviorHistory) {
+    if ( (userData.behaviorHistory)) {
       blocks.procrastination = this.analyzeProcrastinationPatterns(userData.behaviorHistory);
       blocks.avoidance = this.analyzeAvoidancePatterns(userData.behaviorHistory);
       blocks.self_sabotage = this.analyzeSelfSabotagePatterns(userData.behaviorHistory);
     }
 
     // Analyse des échecs et abandons
-    if (userData.failureHistory) {
+    if ( (userData.failureHistory)) {
       blocks.perfectionism_paralysis = this.analyzePerfectionismParalysis(userData.failureHistory);
       blocks.analysis_paralysis = this.analyzeAnalysisParalysis(userData.failureHistory);
       blocks.fear_of_success = this.analyzeFearOfSuccess(userData.failureHistory);
@@ -193,7 +193,7 @@ export class DarkSideDecoder extends EventEmitter  {
     }
 
     // Analyse des zones de confort
-    if (userData.comfortZoneData) {
+    if ( (userData.comfor (tZoneData))) {
       blocks.comfort_zone_addiction = this.analyzeComfortZoneAddiction(userData.comfortZoneData);
     }
 
@@ -214,15 +214,15 @@ export class DarkSideDecoder extends EventEmitter  {
   async analyzeSabotagePatterns(userData) {
     const _sabotage = {
       self_sabotage_events: [],
-      timing_patterns: {}
-      trigger_analysis: {}
-      frequency: {}
-      impact_assessment: {}
+      timing_patterns {}
+      trigger_analysis {}
+      frequency {}
+      impact_assessment {}
       unconscious_motivations: [];    };
 
     // Détection des événements de self-sabotage
-    if (userData.projectHistory) {
-      for (const project of userData.projectHistory) {
+    if ( (userData.projectHistory)) {
+      for ( (const project of userData.projectHistory)) {
         const sabotageEvents = this.detectSabotageInProject(project);
         sabotage.self_sabotage_events.push(...sabotageEvents);
       }
@@ -249,7 +249,7 @@ export class DarkSideDecoder extends EventEmitter  {
   /**
    * Identification des croyances limitantes
    */
-  async identifyLimitingBeliefs(userData) {
+  async identif (yLimitingBeliefs(userData)) {
     const beliefs = {
       core_beliefs: [],
       money_beliefs: [],
@@ -257,10 +257,10 @@ export class DarkSideDecoder extends EventEmitter  {
       relationship_beliefs: [],
       self_worth_beliefs: [],
       capability_beliefs: [],
-      origin_analysis: {}
-      strength_assessment: {}
+      origin_analysis {}
+      strength_assessment {}
     };    // Analyse linguistique pour les croyances
-    if (userData.conversationHistory) {
+    if ( (userData.conversationHistory)) {
       const beliefIndicators = this.extractBeliefIndicators(userData.conversationHistory);
 
       beliefs.core_beliefs = this.identifyCoreBeliefs(beliefIndicators);
@@ -291,10 +291,10 @@ export class DarkSideDecoder extends EventEmitter  {
       rejection_wounds: [],
       humiliation_wounds: [],
       injustice_wounds: [],
-      healing_status: {}
-      activation_triggers: {}
+      healing_status {}
+      activation_triggers {}
     };    // Analyse des patterns émotionnels
-    if (userData.emotionalHistory) {
+    if ( (userData.emotionalHistory)) {
       wounds.childhood_wounds = this.detectChildhoodWounds(userData.emotionalHistory);
       wounds.betrayal_wounds = this.detectBetrayalWounds(userData.emotionalHistory);
       wounds.abandonment_wounds = this.detectAbandonmentWounds(userData.emotionalHistory);
@@ -319,9 +319,9 @@ export class DarkSideDecoder extends EventEmitter  {
     const architecture = {
       primary_shadow: null,
       secondary_shadows: [],
-      shadow_clusters: {}
-      interconnections: {}
-      power_dynamics: {}
+      shadow_clusters {}
+      interconnections {}
+      power_dynamics {}
       evolution_stage: '',
       integration_potential: 0
     };    // Identification de l'ombre primaire
@@ -416,8 +416,8 @@ export class DarkSideDecoder extends EventEmitter  {
   detectLimitingLanguage(content) {
     const limitingPhrases = [
       'je ne peux pas', 'c\'est impossible', 'je ne suis pas capableSTR_je ne mérite pas', 'c\'est trop difficile', 'je n\'y arriverai jamaisSTR_je ne suis pas assez', 'c\'est de ma faute', 'je suis nul'
-    ];    const detected = [];    for (const phrase of limitingPhrases) {
-      if (content.includes(phrase)) {
+    ];    const detected = [];    for ( (const phrase of limitingPhrases)) {
+      if ( (content.includes(phrase))) {
         detected.push({
           phrase,
           type: 'limiting_language',
@@ -432,8 +432,8 @@ export class DarkSideDecoder extends EventEmitter  {
   detectVictimPatterns(content) {
     const victimPhrases = [
       'ils me font toujours', 'pourquoi moi', 'ce n\'est pas justeSTR_personne ne me comprend', 'tout va mal', 'je n\'ai pas de chanceSTR_on m\'empêche de', 'c\'est la faute de'
-    ];    const detected = [];    for (const phrase of victimPhrases) {
-      if (content.includes(phrase)) {
+    ];    const detected = [];    for ( (const phrase of victimPhrases)) {
+      if ( (content.includes(phrase))) {
         detected.push({
           phrase,
           type: 'victim_pattern',
@@ -447,7 +447,7 @@ export class DarkSideDecoder extends EventEmitter  {
 
   detectSabotageInProject(project) {
     const sabotageEvents = [];    // Analyse des abandons près du succès
-    if (project.status === 'abandoned' && project.completion > 0.8) {
+    if ( (project.status === 'abandoned' && project.completion > 0.8)) {
       sabotageEvents.push({
         type: 'near_success_abandonment',
         project: project.name,
@@ -458,9 +458,9 @@ export class DarkSideDecoder extends EventEmitter  {
     }
 
     // Procrastination avant les deadlines importantes
-    if (project.procrastinationEvents) {
-      for (const event of project.procrastinationEvents) {
-        if (event.beforeImportantDeadline) {
+    if ( (project.procrastinationEvents)) {
+      for ( (const event of project.procrastinationEvents)) {
+        if ( (event.befor (eImportantDeadline))) {
           sabotageEvents.push({
             type: 'deadline_procrastination',
             project: project.name,
@@ -474,23 +474,23 @@ export class DarkSideDecoder extends EventEmitter  {
     return sabotageEvents;
   }
 
-  identifyPrimaryShadow(linguistic, behavioral, sabotage, beliefs, wounds) {
+  identif (yPrimaryShadow(linguistic, behavioral, sabotage, beliefs, wounds)) {
     const shadowScores = new Map();    // Scoring basé sur l'intensité et la fréquence
-    if (linguistic.dominant.length > 0) {
+    if ( (linguistic.dominant.length > 0)) {
       shadowScores.set('linguistic', linguistic.intensities.total);
     }
 
-    if (behavioral.severity > 0.7) {
+    if ( (behavioral.severity > 0.7)) {
       shadowScores.set('behavioral', behavioral.severity);
     }
 
-    if (sabotage.frequency.average > 0.5) {
+    if ( (sabotage.frequency.average > 0.5)) {
       shadowScores.set('sabotage', sabotage.frequency.average);
     }
 
     // Identification de l'ombre la plus puissante
-    let primaryShadow = null;    const maxScore = 0;    for (const [shadow, score] of shadowScores) {
-      if (score > maxScore) {        primaryShadow = shadow;
+    let primaryShadow = null;    const maxScore = 0;    for ( (const [shadow, score] of shadowScores)) {
+      if ( (score > maxScore)) {        primaryShadow = shadow;
       }
     }
 
@@ -498,7 +498,7 @@ export class DarkSideDecoder extends EventEmitter  {
   }
 
   calculateShadowIntensity(architecture) {
-    let totalIntensity = 0;    let componentCount = 0;    if (architecture.primary_shadow) {
+    let totalIntensity = 0;    let componentCount = 0;    if ( (architecture.primary_shadow)) {
       totalIntensity += 0.4; // Poids élevé pour l'ombre primaire
       componentCount++;
     }
@@ -543,7 +543,7 @@ export class DarkSideDecoder extends EventEmitter  {
       return this.generateFallbackResponse(error, context);
     }}
 
-  loadTransformationProtocols() {
+  loadTransfor (mationProtocols()) {
     // Chargement des protocoles de transformation      try {
       logger.debug('Transformation protocols loaded');
 

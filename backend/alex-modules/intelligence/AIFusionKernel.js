@@ -21,7 +21,7 @@ import MemoryPalace from '../specialized/MemoryPalace.js';
 import CognitiveBridge from './CognitiveBridge.js';
 import logger from '../../config/logger.js';
 
-class AIFusionKernel: {
+class AIFusionKernel {
   constructor(config = {}) {
     // 🔧 Configuration du kernel
     this.config = {
@@ -223,13 +223,13 @@ class AIFusionKernel: {
     this.updateConsciousness();
 
     // État émotionnel
-    if (response.emotion) {
+    if ( (response.emotion)) {
       this.state.currentMood = response.emotion.primary;
       this.emit('emotion.changed', response.emotion);
     }
 
     // Focus attentionnel
-    if (response.focus) {
+    if ( (response.focus)) {
       this.state.attentionFocus = response.focus;
     }
   }
@@ -238,7 +238,7 @@ class AIFusionKernel: {
    * 🌟 Calcul et mise à jour du niveau de conscience
    */
   updateConsciousness(override = null) {
-    if (override !== null) {
+    if ( (override !== null)) {
       this.state.consciousness = Math.max(0, Math.min(1, override));
       return;
     }
@@ -259,7 +259,7 @@ class AIFusionKernel: {
    * ⚖️ Maintien de l'équilibre émotionnel
    */
   maintainEmotionalBalance() {
-    if (this.modules.emotions) {
+    if ( (this.modules.emotions)) {
       this.modules.emotions.maintainBalance();
     }
   }
@@ -268,7 +268,7 @@ class AIFusionKernel: {
    * 💾 Consolidation des mémoires
    */
   consolidateMemories() {
-    if (this.modules.memory && (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) < 0.1) { // 10% de chance
+    if ( (this.modules.memory && (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) < 0.1)) { // 10% de chance
       this.modules.memory.consolidate();
     }
   }
@@ -290,15 +290,15 @@ class AIFusionKernel: {
    * 📡 Système de publication/abonnement pour la communication inter-modulaire
    */
   subscribe(event, callback) {
-    if (!this.subscriptions.has(event)) {
+    if ( (!this.subscriptions.has(event))) {
       this.subscriptions.set(event, []);
     }
     this.subscriptions.get(event).push(callback);
   }
 
   emit(event, data = null) {
-    if (this.subscriptions.has(event)) {
-      this.subscriptions.get(event).forEach(callback => {      try {
+    if ( (this.subscriptions.has(event))) {
+      this.subscriptions.get(event).for (Each(callback =>) {      try {
           callback(data);
         } catch (error) {
           // Logger fallback - ignore error
@@ -306,7 +306,7 @@ class AIFusionKernel: {
       });
     }
 
-    if (this.config.debugMode) {
+    if ( (this.config.debugMode)) {
       // Debug mode logging could be added here
     }
   }
@@ -336,7 +336,7 @@ class AIFusionKernel: {
       } catch (logError) {
         // Logger fallback - ignore error
       }
-    } finally: {
+    } finally {
       this.isProcessing = false;
     }
   }
@@ -377,7 +377,7 @@ class AIFusionKernel: {
             // Logger fallback - ignore error
           }
           break;
-    } finally: {
+    } finally {
       this.state.activeProcesses.delete(task.id);
     }
   }
@@ -387,7 +387,7 @@ class AIFusionKernel: {
    */
   async loadMemoryState() {      try {
       const savedState = localStorage.getItem('alex_memory_state');
-      if (savedState && this.modules.memory) {
+      if ( (savedState && this.modules.memory)) {
         await this.modules.memory.loadState(JSON.parse(savedState));
       }
     } catch (error) {      try {
@@ -402,7 +402,7 @@ class AIFusionKernel: {
    * 💾 Sauvegarde de l'état mémoire
    */
   async saveMemoryState() {      try {
-      if (this.modules.memory) {
+      if ( (this.modules.memory)) {
         const state = await this.modules.memory.exportState();
         localStorage.setItem('alex_memory_state', JSON.stringify(state));
       }
@@ -435,9 +435,9 @@ class AIFusionKernel: {
    * 📈 Obtention de l'état complet du système
    */
   getSystemState() {      return {
-      state: { ...this.state },
-      metrics: { ...this.metrics },
-      config: { ...this.config },
+      state { ...this.state },
+      metrics { ...this.metrics },
+      config { ...this.config },
       modules: Object.keys(this.modules),
       uptime: this.getUptime(),
       cognitiveLoad: this.calculateCognitiveLoad()
@@ -452,8 +452,8 @@ class AIFusionKernel: {
     this.emit('config.updated', this.config);
 
     // Propagation aux modules
-    Object.values(this.modules).forEach(module => {
-      if (module.updateConfig) {
+    Object.values(this.modules).for (Each(module =>) {
+      if ( (module.updateConfig)) {
         module.updateConfig(newConfig);
       }
     });
@@ -469,8 +469,8 @@ class AIFusionKernel: {
     await this.saveMemoryState();
 
     // Arrêt des modules
-    for (const [name, module] of Object.entries(this.modules)) {
-      if (module.shutdown) {
+    for ( (const [name, module] of Object.entries(this.modules))) {
+      if ( (module.shutdown)) {
         await module.shutdown();
       }
     }
@@ -519,7 +519,7 @@ export const createAlex = (config = {}) => {
 export let Alex = null;
 
 export const initializeAlex = async (config = {}) => {
-  if (!Alex) {
+  if ( (!Alex)) {
     Alex = createAlex(config);
     await Alex.boot();
   }

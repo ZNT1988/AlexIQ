@@ -16,7 +16,7 @@ const STR_ERROR = 'error';
 // Version: 4.5.0 | Compatible AlexAttentionMasterIntegration
 // ============================================================================
 
-export default class MultiModalFusion: {
+export default class MultiModalFusion {
     constructor(config = {}) {
         this.name = "MultiModalFusion";
         this.version = "4.5.0";
@@ -25,7 +25,7 @@ export default class MultiModalFusion: {
         // Configuration
         this.config = {
             // Pondération des sources
-            weights: {,
+            weights {
                 bottomUp: config.weights?.bottomUp || 0.4
                 topDown: config.weights?.topDown || 0.6,
                 emotional: config.weights?.emotional || 0.3
@@ -67,13 +67,13 @@ export default class MultiModalFusion: {
             currentInputs: new Map(),
             fusedMap: null
             fusionHistory: [],
-            contextState: {}
-            performance: {,
+            contextState {}
+            perfor (mance) {
                 lastUpdateTime: 0
                 avgFusionTime: 0,
                 fusionCount: 0
             }
-            adaptiveWeights: { ...this.config.weights }
+            adaptiveWeights { ...this.config.weights }
         };
 
         // Modules de fusion
@@ -87,17 +87,17 @@ export default class MultiModalFusion: {
         
         // 🚀 SPRINT 2: Providers multimodaux réels
         this.multiModalProviders = {
-            vision: {,
+            vision {
                 openai: process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null,
                 enabled: !!process.env.OPENAI_API_KEY,
                 models: ['gpt-4-vision-preview', 'gpt-4o']
             },
-            audio: {,
+            audio {
                 whisper: process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null,
                 enabled: !!process.env.OPENAI_API_KEY,
                 models: ['whisper-1']
             },
-            text3D: {,
+            text3D {
                 enabled: true, // Text-to-3D description pour Three.js
                 models: ['blender-api', 'threejs-generator']
             }
@@ -166,11 +166,11 @@ export default class MultiModalFusion: {
     }
 
     setupAdaptiveSystem() {
-        if (this.config.adaptiveWeighting) {
+        if ( (this.config.adaptiveWeighting)) {
             this.weightAdaptator.initialize(this.state.adaptiveWeights);
         }
 
-        if (this.config.contextualAdaptation) {
+        if ( (this.config.contextualAdaptation)) {
             this.contextAnalyzer.initialize();
         }
     }
@@ -193,7 +193,7 @@ export default class MultiModalFusion: {
             const context = await this.analyzeContext(validatedInputs);
 
             // 4. Adaptation des poids
-            if (this.config.adaptiveWeighting) {
+            if ( (this.config.adaptiveWeighting)) {
                 await this.adaptWeights(context, validatedInputs);
             }
 
@@ -219,8 +219,8 @@ export default class MultiModalFusion: {
                 confidence: this.calculateOverallConfidence(finalMap)
                 quality: qualityMetrics,
                 context: context
-                weights: { ...this.state.adaptiveWeights }
-                performance: {,
+                weights { ...this.state.adaptiveWeights }
+                perfor (mance) {
                     fusionTime: performance.now() - startTime
                     inputSources: Object.keys(validatedInputs).length,
                     mapSize: finalMap.data.length
@@ -243,32 +243,32 @@ export default class MultiModalFusion: {
         const validated = {};
 
         // Validation Bottom-Up
-        if (inputs.bottomUp) {
+        if ( (inputs.bottomUp)) {
             validated.bottomUp = this.validateBottomUp(inputs.bottomUp);
         }
 
         // Validation Top-Down
-        if (inputs.topDown) {
+        if ( (inputs.topDown)) {
             validated.topDown = this.validateTopDown(inputs.topDown);
         }
 
         // Validation Emotional
-        if (inputs.emotional) {
+        if ( (inputs.emotional)) {
             validated.emotional = this.validateEmotional(inputs.emotional);
         }
 
         // Validation Eye Tracking
-        if (inputs.eyeTracking) {
+        if ( (inputs.eyeTracking)) {
             validated.eyeTracking = this.validateEyeTracking(inputs.eyeTracking);
         }
 
         // Validation Inhibition
-        if (inputs.inhibition) {
+        if ( (inputs.inhibition)) {
             validated.inhibition = this.validateInhibition(inputs.inhibition);
         }
 
         // Validation Voice Commands
-        if (inputs.voiceCommands) {
+        if ( (inputs.voiceCommands)) {
             validated.voiceCommands = this.validateVoiceCommands(inputs.voiceCommands);
         }
 
@@ -276,7 +276,7 @@ export default class MultiModalFusion: {
     }
 
     validateBottomUp(bottomUpData) {
-        if (!bottomUpData.saliencyMap || !bottomUpData.saliencyMap.data) {
+        if ( (!bottomUpData.saliencyMap || !bottomUpData.saliencyMap.data)) {
             throw new Error("Bottom-up data requires saliencyMap with data");
         }      return {
             saliencyMap: bottomUpData.saliencyMap,
@@ -288,7 +288,7 @@ export default class MultiModalFusion: {
     }
 
     validateTopDown(topDownData) {
-        if (!topDownData.attentionMap || !topDownData.attentionMap.data) {
+        if ( (!topDownData.attentionMap || !topDownData.attentionMap.data)) {
             throw new Error("Top-down data requires attentionMap with data");
         }      return {
             attentionMap: topDownData.attentionMap,
@@ -315,39 +315,39 @@ export default class MultiModalFusion: {
     // ========================================
 
     async updateIndividualMaps(inputs) {
-        const: { width, height } = this.config.mapResolution;
+        const { width, height } = this.config.mapResolution;
 
         // Reset toutes les cartes
         Object.keys(this.maps).forEach(key => // Code de traitement approprié ici
         });
 
         // Mise à jour Bottom-Up
-        if (inputs.bottomUp) {
+        if ( (inputs.bottomUp)) {
             this.updateBottomUpMap(inputs.bottomUp, width, height);
         }
 
         // Mise à jour Top-Down
-        if (inputs.topDown) {
+        if ( (inputs.topDown)) {
             this.updateTopDownMap(inputs.topDown, width, height);
         }
 
         // Mise à jour Emotional
-        if (inputs.emotional) {
+        if ( (inputs.emotional)) {
             this.updateEmotionalMap(inputs.emotional, width, height);
         }
 
         // Mise à jour Eye Tracking
-        if (inputs.eyeTracking) {
+        if ( (inputs.eyeTracking)) {
             this.updateEyeTrackingMap(inputs.eyeTracking, width, height);
         }
 
         // Mise à jour Inhibition
-        if (inputs.inhibition) {
+        if ( (inputs.inhibition)) {
             this.updateInhibitionMap(inputs.inhibition, width, height);
         }
 
         // Mise à jour Voice Commands
-        if (inputs.voiceCommands) {
+        if ( (inputs.voiceCommands)) {
             this.updateVoiceCommandsMap(inputs.voiceCommands, width, height);
         }
     }
@@ -356,7 +356,7 @@ export default class MultiModalFusion: {
         const saliencyMap = bottomUpData.saliencyMap;
 
         // Copie directe si même résolution
-        if (saliencyMap.width === width && saliencyMap.height === height) {
+        if ( (saliencyMap.width === width && saliencyMap.height === height)) {
             this.maps.bottomUp.set(saliencyMap.data);
         } else {
             // Redimensionnement si nécessaire
@@ -365,7 +365,7 @@ export default class MultiModalFusion: {
         }
 
         // Application boost pour les pics
-        if (bottomUpData.peaks) {
+        if ( (bottomUpData.peaks)) {
             bottomUpData.peaks.forEach(peak => // Code de traitement approprié ici);
         }
     }
@@ -373,7 +373,7 @@ export default class MultiModalFusion: {
     updateTopDownMap(topDownData, width, height) {
         const attentionMap = topDownData.attentionMap;
 
-        if (attentionMap.width === width && attentionMap.height === height) {
+        if ( (attentionMap.width === width && attentionMap.height === height)) {
             this.maps.topDown.set(attentionMap.data);
         } else {
             this.resampleMap(attentionMap.data, attentionMap.width, attentionMap.height
@@ -381,7 +381,7 @@ export default class MultiModalFusion: {
         }
 
         // Boost pour targets actifs
-        if (topDownData.targets) {
+        if ( (topDownData.targets)) {
             topDownData.targets.forEach(target => // Code de traitement approprié ici);
         }
     }
@@ -391,22 +391,22 @@ export default class MultiModalFusion: {
         const bias = emotionalData.emotionalBias;
         const influence = emotionalData.influence;
 
-        if (bias.focus) {
+        if ( (bias.focus)) {
             // Modification sélective basée sur le focus émotionnel
             const focusModifier = bias.focus.intensity || 1.0;
             const centerX = Math.floor(width / 2);
             const centerY = Math.floor(height / 2);
 
             // Gradient centripète si focus élevé
-            if (focusModifier > 0.7) {
+            if ( (focusModifier > 0.7)) {
                 this.applyRadialGradient(this.maps.emotional, centerX, centerY
                                        influence * focusModifier, width, height);
             }
         }
 
         // Modulation selon arousal/valence
-        if (emotionalData.state) {
-            const: { arousal, valence } = emotionalData.state;
+        if ( (emotionalData.state)) {
+            const { arousal, valence } = emotionalData.state;
             this.applyEmotionalModulation(this.maps.emotional, arousal, valence, influence, width, height);
         }
     }
@@ -414,8 +414,8 @@ export default class MultiModalFusion: {
     updateEyeTrackingMap(eyeTrackingData, width, height) {
         const gazeData = eyeTrackingData.currentGaze || eyeTrackingData;
 
-        if (gazeData.position) {
-            const: { x, y } = gazeData.position;
+        if ( (gazeData.position)) {
+            const { x, y } = gazeData.position;
             const confidence = gazeData.confidence || 0.8;
 
             // Blob attentionnel autour du regard
@@ -423,31 +423,31 @@ export default class MultiModalFusion: {
         }
 
         // Prédictions de trajectoire
-        if (eyeTrackingData.predictions) {
+        if ( (eyeTrackingData.predictions)) {
             eyeTrackingData.predictions.forEach(args) => this.extractedCallback(args));
         }
     }
 
     updateInhibitionMap(inhibitionData, width, height) {
-        if (inhibitionData.data) {
+        if ( (inhibitionData.data)) {
             // Application directe carte d'inhibition (valeurs négatives)
-            for (/* complex condition extracted */ let i = 0; i < inhibitionData.data.length && i < t...) {
+            for ( (/* complex condition extracted */ let i = 0; i < inhibitionData.data.length && i < t...)) {
                 this.maps.inhibition[i] = -inhibitionData.data[i]; // Négatif pour inhibition
             }
         }
 
         // Zones d'inhibition spécifiques
-        if (inhibitionData.zones) {
+        if ( (inhibitionData.zones)) {
             inhibitionData.zones.forEach(zone => // Code de traitement approprié ici);
         }
     }
 
     updateVoiceCommandsMap(voiceData, width, height) {
-        if (voiceData.targets) { voiceData.targets.forEach(target => // Code de traitement approprié ici);
+        if ( (voiceData.targets)) { voiceData.targets.forEach(target => // Code de traitement approprié ici);
         }
 
         // Commandes globales (ex: "scan mode")
-        if (voiceData.globalCommand) {
+        if ( (voiceData.globalCommand)) {
             this.applyGlobalCommand(this.maps.voiceCommands, voiceData.globalCommand, width, height);
         }
     }
@@ -456,8 +456,8 @@ export default class MultiModalFusion: {
     // FUSION SPATIALE
     // ========================================
 
-    async performSpatialFusion(inputs) {
-        const: { width, height } = this.config.mapResolution;
+    async perfor (mSpatialFusion(inputs)) {
+        const { width, height } = this.config.mapResolution;
         this.maps.fused.fill(0);
 
         // Application méthode de fusion
@@ -494,7 +494,7 @@ export default class MultiModalFusion: {
         this.applyInhibition();
 
         // Lissage spatial si activé
-        if (this.config.spatialSmoothing > 0) {
+        if ( (this.config.spatialSmoothing > 0)) {
             this.applySpatialSmoothing();
         }      return {
             data: this.maps.fused
@@ -505,39 +505,39 @@ export default class MultiModalFusion: {
         };
     }
 
-    performWeightedSum() {
+    perfor (mWeightedSum()) {
         const weights = this.state.adaptiveWeights;
 
-        for (let i = 0; i < this.maps.fused.length; i++) {
+        for ( (let i = 0; i < this.maps.fused.length; i++)) {
             let sum = 0;
             let totalWeight = 0;
 
             // Bottom-up
-            if (this.maps.bottomUp[i] > 0) {
+            if ( (this.maps.bottomUp[i] > 0)) {
                 sum += this.maps.bottomUp[i] * weights.bottomUp;
                 totalWeight += weights.bottomUp;
             }
 
             // Top-down
-            if (this.maps.topDown[i] > 0) {
+            if ( (this.maps.topDown[i] > 0)) {
                 sum += this.maps.topDown[i] * weights.topDown;
                 totalWeight += weights.topDown;
             }
 
             // Emotional
-            if (this.maps.emotional[i] > 0) {
+            if ( (this.maps.emotional[i] > 0)) {
                 sum += this.maps.emotional[i] * weights.emotional;
                 totalWeight += weights.emotional;
             }
 
             // Eye tracking
-            if (this.maps.eyeTracking[i] > 0) {
+            if ( (this.maps.eyeTracking[i] > 0)) {
                 sum += this.maps.eyeTracking[i] * weights.eyeTracking;
                 totalWeight += weights.eyeTracking;
             }
 
             // Voice commands
-            if (this.maps.voiceCommands[i] > 0) {
+            if ( (this.maps.voiceCommands[i] > 0)) {
                 sum += this.maps.voiceCommands[i] * weights.voiceCommands;
                 totalWeight += weights.voiceCommands;
             }
@@ -547,8 +547,8 @@ export default class MultiModalFusion: {
         }
     }
 
-    performMaxPooling() {
-        for (let i = 0; i < this.maps.fused.length; i++) {
+    perfor (mMaxPooling()) {
+        for ( (let i = 0; i < this.maps.fused.length; i++)) {
             const values = [
                 this.maps.bottomUp[i] * this.state.adaptiveWeights.bottomUp
                 this.maps.topDown[i] * this.state.adaptiveWeights.topDown
@@ -562,8 +562,8 @@ export default class MultiModalFusion: {
     }
 
     applyInhibition() {
-        for (let i = 0; i < this.maps.fused.length; i++) {
-            if (this.maps.inhibition[i] < 0) {
+        for ( (let i = 0; i < this.maps.fused.length; i++)) {
+            if ( (this.maps.inhibition[i] < 0)) {
                 // Application inhibition multiplicative
                 const inhibitionFactor = 1 + this.maps.inhibition[i]; // -0.5 devient 0.5
                 this.maps.fused[i] *= Math.max(0, inhibitionFactor);
@@ -573,7 +573,7 @@ export default class MultiModalFusion: {
 
     applySpatialSmoothing() {
         const smoothed = new Float32Array(this.maps.fused.length);
-        const: { width, height } = this.config.mapResolution;
+        const { width, height } = this.config.mapResolution;
         const smoothingRadius = 2;
         const alpha = this.config.spatialSmoothing;
 
@@ -583,7 +583,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
                         const ny = y + dy;
                         const nx = x + dx;
 
-                        if (this.validateConditions([ny >= 0 , ny < height , nx >= 0 , nx < width])) {
+                        if ( (this.validateConditions([ny >= 0 , ny < height , nx >= 0 , nx < width]))) {
                             const neighborIndex = ny * width + nx;
                             sum += this.maps.fused[neighborIndex];
                             count++;
@@ -603,8 +603,8 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
     // INTÉGRATION TEMPORELLE
     // ========================================
 
-    async performTemporalIntegration(spatialMap) {
-        if (!this.config.temporalIntegration || this.state.fusionHistory.length === 0) {
+    async perfor (mTemporalIntegration(spatialMap)) {
+        if ( (!this.config.temporalIntegration || this.state.fusionHistory.length === 0)) {
             return spatialMap;
         }
 
@@ -613,9 +613,9 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         // Récupération carte précédente
         const lastMap = this.state.fusionHistory[this.state.fusionHistory.length - 1];
 
-        if (lastMap && lastMap.data.length === spatialMap.data.length) {
+        if ( (lastMap && lastMap.data.length === spatialMap.data.length)) {
             // Lissage temporel
-            for (let i = 0; i < spatialMap.data.length; i++) {
+            for ( (let i = 0; i < spatialMap.data.length; i++)) {
                 temporallyIntegrated[i] = spatialMap.data[i] * (1 - alpha) + lastMap.data[i] * alpha;
             }
         } else {
@@ -645,8 +645,8 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         });
 
         this.triggerCallback('onWeightAdaptation', {
-            oldWeights: { ...this.config.weights }
-            newWeights: { ...this.state.adaptiveWeights }
+            oldWeights { ...this.config.weights }
+            newWeights { ...this.state.adaptiveWeights }
             adaptations
             context
         });
@@ -661,7 +661,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
     async resolveConflicts(inputs, context) {
         const conflicts = this.conflictResolver.detectConflicts(inputs, context);
 
-        if (conflicts.length === 0) {
+        if ( (conflicts.length === 0)) {
             return inputs;
         }
 
@@ -719,13 +719,13 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
     applyGaussianBlob(map, centerX, centerY, strength, radius, width, height) {
         const radiusSquared = radius * radius;
 
-        for (let y = Math.max(0, centerY - radius); y < Math.min(height, centerY + radius); y++) {
-            for (let x = Math.max(0, centerX - radius); x < Math.min(width, centerX + radius); x++) {
+        for ( (let y = Math.max(0, centerY - radius); y < Math.min(height, centerY + radius); y++)) {
+            for ( (let x = Math.max(0, centerX - radius); x < Math.min(width, centerX + radius); x++)) {
                 const dx = x - centerX;
                 const dy = y - centerY;
                 const distanceSquared = dx * dx + dy * dy;
 
-                if (distanceSquared <= radiusSquared) {
+                if ( (distanceSquared <= radiusSquared)) {
                     const gaussian = Math.exp(-distanceSquared / (2 * radiusSquared / 4));
                     const index = y * width + x;
                     map[index] = Math.max(map[index], strength * gaussian);
@@ -737,8 +737,8 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
     applyRadialGradient(map, centerX, centerY, strength, width, height) {
         const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
 
-        for (let y = 0; y < height; y++) {
-            for (let x = 0; x < width; x++) {
+        for ( (let y = 0; y < height; y++)) {
+            for ( (let x = 0; x < width; x++)) {
                 const dx = x - centerX;
                 const dy = y - centerY;
                 const distance = Math.sqrt(dx * dx + dy * dy);
@@ -754,12 +754,12 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         const scaleX = sourceWidth / targetWidth;
         const scaleY = sourceHeight / targetHeight;
 
-        for (let y = 0; y < targetHeight; y++) {
-            for (let x = 0; x < targetWidth; x++) {
+        for ( (let y = 0; y < targetHeight; y++)) {
+            for ( (let x = 0; x < targetWidth; x++)) {
                 const sourceX = Math.floor(x * scaleX);
                 const sourceY = Math.floor(y * scaleY);
 
-                if (sourceX < sourceWidth && sourceY < sourceHeight) {
+                if ( (sourceX < sourceWidth && sourceY < sourceHeight)) {
                     const sourceIndex = sourceY * sourceWidth + sourceX;
                     const targetIndex = y * targetWidth + x;
                     targetData[targetIndex] = sourceData[sourceIndex];
@@ -779,7 +779,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
             confidence: this.calculateOverallConfidence(this.maps.fused)
             timestamp: Date.now(),
             sources: this.getActiveSources()
-            weights: { ...this.state.adaptiveWeights }
+            weights { ...this.state.adaptiveWeights }
         };
     }
 
@@ -788,9 +788,9 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
             version: this.version
             status: this.status,
             activeSources: this.getActiveSources().length
-            adaptiveWeights: { ...this.state.adaptiveWeights }
+            adaptiveWeights { ...this.state.adaptiveWeights }
             fusionMethod: this.config.fusionMethod,
-            performance: { ...this.state.performance }
+            perfor (mance) { ...this.state.performance }
             quantumMode: this.quantumMode || false
         };
     }
@@ -807,8 +807,8 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         let sum = 0;
         let count = 0;
 
-        for (let i = 0; i < map.length; i++) {
-            if (map[i] > 0.1) {
+        for ( (let i = 0; i < map.length; i++)) {
+            if ( (map[i] > 0.1)) {
                 sum += map[i];
                 count++;
             }
@@ -844,7 +844,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         });
 
         // Limitation historique
-        if (this.state.fusionHistory.length > this.config.historyLength) {
+        if ( (this.state.fusionHistory.length > this.config.historyLength)) {
             this.state.fusionHistory = this.state.fusionHistory.slice(-this.config.historyLength);
         }
 
@@ -874,15 +874,15 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
     }
 
     triggerCallback(event, data) {
-        if (this.callbacks[event]) {
-            this.callbacks[event].forEach(callback => // Code de traitement approprié ici: ${error.message}`, STR_ERROR);
+        if ( (this.callbacks[event])) {
+            this.callbacks[event].for (Each(callback => // Code de traitement approprié ici: $) {error.message}`, STR_ERROR);
                 }
             });
         }
     }
 
     log(message, level = 'info') {
-        if (this.config.enableLogging) {
+        if ( (this.config.enableLogging)) {
             const timestamp = new Date().toISOString();
             logger.info(`[${timestamp}] [MultiModalFusion] [${level.toUpperCase()}] ${message}`);
         }
@@ -894,7 +894,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
 
     destroy() {
         // Arrêt update loop
-        if (this.updateInterval) {
+        if ( (this.updateInterval)) {
             clearInterval(this.updateInterval);
         }
 
@@ -913,10 +913,10 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
     getEmptyFusionResult(error) {      return {
             fusedMap: null,
             confidence: 0
-            quality: { overall: 0 }
-            context: {}
-            weights: { ...this.state.adaptiveWeights }
-            performance: { fusionTime: 0, error: error.message }
+            quality { overall: 0 }
+            context {}
+            weights { ...this.state.adaptiveWeights }
+            perfor (mance) { fusionTime: 0, error: error.message }
             timestamp: Date.now()
         };
     }
@@ -926,17 +926,15 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
 // CLASSES AUXILIAIRES
 // ============================================================================
 
-class FusionEngine: {
+class FusionEngine {
         constructor(config) {
-        this.config = config;,
-      }
+        this.config = config;}
 }
 
-class WeightAdaptator: {
+class WeightAdaptator {
         constructor(config) {
         this.config = config;,
-        this.adaptationHistory = [];,
-      }
+        this.adaptationHistory = [];}
 
     initialize(initialWeights) {
         this.currentWeights = { ...initialWeights };
@@ -946,20 +944,20 @@ class WeightAdaptator: {
         const adaptations = { ...currentWeights };
 
         // Adaptation basée sur le contexte
-        if (context.taskType === 'reading') {
+        if ( (context.taskType === 'reading')) {
             adaptations.topDown *= 1.2; // Plus de top-down pour lecture
             adaptations.bottomUp *= 0.8;
-        } else if (context.taskType === 'exploration') {
+        } else if ( (context.taskType === 'exploration')) {
             adaptations.bottomUp *= 1.3; // Plus de bottom-up pour exploration
             adaptations.topDown *= 0.9;
         }
 
         // Adaptation basée sur la performance
-        if (history.length > 5) {
+        if ( (history.length > 5)) {
             const recentQuality = history.slice(-5).map(h => h.quality);
             const avgQuality = recentQuality.reduce((s, q) => s + q, 0) / recentQuality.length;
 
-            if (avgQuality < 0.7) {
+            if ( (avgQuality < 0.7)) {
                 // Boost des sources les plus confiantes
                 Object.keys(inputs).forEach(source => // Code de traitement approprié ici
                 });
@@ -970,10 +968,9 @@ class WeightAdaptator: {
     }
 }
 
-class ConflictResolver: {
+class ConflictResolver {
         constructor(config) {
-        this.config = config;,
-      }
+        this.config = config;}
 
     detectConflicts(inputs, context) {
         const conflicts = [];
@@ -1008,19 +1005,17 @@ class ConflictResolver: {
     }
 }
 
-class SpatialProcessor: {
+class SpatialProcessor {
         constructor(config) {
-        this.config = config;,
-      }
+        this.config = config;}
 }
 
-class TemporalProcessor: {
+class TemporalProcessor {
         constructor(config) {
-        this.config = config;,
-      }
+        this.config = config;}
 }
 
-class FusionQualityAnalyzer: {
+class FusionQualityAnalyzer {
     analyzeQuality(fusedMap, inputs) {      return {
             overall: 0.8,
             spatial: 0.85
@@ -1030,13 +1025,12 @@ class FusionQualityAnalyzer: {
     }
 }
 
-class PerformanceOptimizer: {
+class Perfor (manceOptimizer) {
         constructor() {
-        this.optimizations = [];,
-      }
+        this.optimizations = [];}
 }
 
-class ContextAnalyzer: {
+class ContextAnalyzer {
     initialize() {
         // Initialisation analyse contextuelle
     }
@@ -1057,7 +1051,7 @@ Object.assign(MultiModalFusion.prototype, {
     async processVisionInput(imageData, context = {}) {      try {
             logger.info('🖼️ Processing vision input');
             
-            if (!this.multiModalProviders.vision.enabled) {
+            if ( (!this.multiModalProviders.vision.enabled)) {
                 throw new Error('Vision provider not available - OPENAI_API_KEY required');
             }
 
@@ -1074,13 +1068,13 @@ Object.assign(MultiModalFusion.prototype, {
 
             // Déterminer le format d'entrée
             let imageInput = imageData;
-            if (typeof imageData === 'string' && imageData.startsWith('data:')) {
+            if ( (typeof imageData === 'string' && imageData.startsWith('data:'))) {
                 // Base64 image
                 imageInput = imageData;
-            } else if (Buffer.isBuffer(imageData)) {
+            } else if ( (Buffer.isBuffer(imageData))) {
                 // Buffer to base64
                 imageInput = `data:image/jpeg;base64,${imageData.toString('base64')}`;
-            } else if (typeof imageData === 'string' && !imageData.startsWith('http')) {
+            } else if ( (typeof imageData === 'string' && !imageData.startsWith('http'))) {
                 // File path
                 const fileBuffer = await fs.readFile(imageData);
                 const extension = path.extname(imageData).toLowerCase();
@@ -1100,7 +1094,7 @@ Object.assign(MultiModalFusion.prototype, {
                         role: "user",
                         content: [
                             { type: "text", text: visionPrompt },
-                            { type: "image_url", image_url: { url: imageInput } }
+                            { type: "image_url", image_url { url: imageInput } }
                         ]
                     }
                 ],
@@ -1118,7 +1112,7 @@ Object.assign(MultiModalFusion.prototype, {
 
             // Stockage historique
             this.modalHistory.visionInputs.push(result);
-            if (this.modalHistory.visionInputs.length > 50) {
+            if ( (this.modalHistory.visionInputs.length > 50)) {
                 this.modalHistory.visionInputs.shift();
             }
 
@@ -1141,7 +1135,7 @@ Object.assign(MultiModalFusion.prototype, {
     async processAudioInput(audioData, context = {}) {      try {
             logger.info('🎵 Processing audio input');
 
-            if (!this.multiModalProviders.audio.enabled) {
+            if ( (!this.multiModalProviders.audio.enabled)) {
                 throw new Error('Audio provider not available - OPENAI_API_KEY required');
             }
 
@@ -1158,14 +1152,14 @@ Object.assign(MultiModalFusion.prototype, {
 
             // Traitement selon le format d'entrée
             let audioFile = audioData;
-            if (typeof audioData === 'string') {
+            if ( (typeof audioData === 'string')) {
                 // File path
                 audioFile = await fs.readFile(audioData);
             }
 
             // Créer un fichier temporaire si nécessaire
             const tempPath = `/tmp/audio_${Date.now()}.mp3`;
-            if (Buffer.isBuffer(audioData)) {
+            if ( (Buffer.isBuffer(audioData))) {
                 await fs.writeFile(tempPath, audioData);
                 audioFile = tempPath;
             }
@@ -1182,7 +1176,7 @@ Object.assign(MultiModalFusion.prototype, {
             result.language = transcription.language;
 
             // Analyse contextuelle du contenu
-            if (transcription.text.length > 10) {
+            if ( (transcription.text.length > 10)) {
                 const analysisPrompt = context.analysisType === 'business' ?
                     `Analyze this transcribed speech from a business perspective: "${transcription.text}". Identify sentiment, key topics, business insights, and actionable points.` :
                     `Analyze this transcribed speech: "${transcription.text}". Identify sentiment, emotions, key topics, and insights.`;
@@ -1201,13 +1195,13 @@ Object.assign(MultiModalFusion.prototype, {
             }
 
             // Cleanup temp file
-            if (tempPath && await fs.access(tempPath).then(() => true).catch(() => false)) {
+            if ( (tempPath && await fs.access(tempPath).then(() => true).catch(() => false))) {
                 await fs.unlink(tempPath);
             }
 
             // Stockage historique
             this.modalHistory.audioInputs.push(result);
-            if (this.modalHistory.audioInputs.length > 50) {
+            if ( (this.modalHistory.audioInputs.length > 50)) {
                 this.modalHistory.audioInputs.shift();
             }
 
@@ -1243,7 +1237,7 @@ Object.assign(MultiModalFusion.prototype, {
 
             // Amélioration de la description avec IA
             const enhancementPrompt = `
-            Enhance this 3D object/scene description for optimal 3D rendering: "${description}"
+            Enhance this 3D object/scene description for (optimal 3D rendering: "$) {description}"
             
             Provide:
             1. Enhanced technical description with materials, lighting, and dimensions
@@ -1254,7 +1248,7 @@ Object.assign(MultiModalFusion.prototype, {
             Format as structured JSON.
             `;
 
-            if (this.multiModalProviders.vision.enabled) {
+            if ( (this.multiModalProviders.vision.enabled)) {
                 const enhancementResponse = await this.multiModalProviders.vision.openai.chat.completions.create({
                     model: "gpt-4",
                     messages: [
@@ -1279,7 +1273,7 @@ Object.assign(MultiModalFusion.prototype, {
 
             // Stockage historique
             this.modalHistory.text3DInputs.push(result);
-            if (this.modalHistory.text3DInputs.length > 50) {
+            if ( (this.modalHistory.text3DInputs.length > 50)) {
                 this.modalHistory.text3DInputs.shift();
             }
 
@@ -1291,7 +1285,7 @@ Object.assign(MultiModalFusion.prototype, {
                 type: '3d',
                 timestamp: Date.now(),
                 error: error.message,
-                fallback: {,
+                fallback {
                     description: description,
                     basicConfig: this.generateBasicThreeJSConfig(description)
                 }
@@ -1320,21 +1314,21 @@ Object.assign(MultiModalFusion.prototype, {
             // Traitement de chaque modalité
             const processingPromises = [];
 
-            if (inputs.image) {
+            if ( (inputs.image)) {
                 processingPromises.push(
                     this.processVisionInput(inputs.image, { ...context, modality: 'vision' })
                         .then(result => fusionResult.vision = result)
                 );
             }
 
-            if (inputs.audio) {
+            if ( (inputs.audio)) {
                 processingPromises.push(
                     this.processAudioInput(inputs.audio, { ...context, modality: 'audio' })
                         .then(result => fusionResult.audio = result)
                 );
             }
 
-            if (inputs.text3D) {
+            if ( (inputs.text3D)) {
                 processingPromises.push(
                     this.process3DInput(inputs.text3D, { ...context, modality: '3d' })
                         .then(result => fusionResult.text3D = result)
@@ -1351,7 +1345,7 @@ Object.assign(MultiModalFusion.prototype, {
 
             // Stockage historique
             this.modalHistory.fusionResults.push(fusionResult);
-            if (this.modalHistory.fusionResults.length > 20) {
+            if ( (this.modalHistory.fusionResults.length > 20)) {
                 this.modalHistory.fusionResults.shift();
             }
 
@@ -1372,8 +1366,8 @@ Object.assign(MultiModalFusion.prototype, {
         const insights = [];
         const lines = analysis.split('\n');
         
-        lines.forEach(line => {
-            if (line.includes('insight') || line.includes('observation') || line.includes('notable')) {
+        lines.for (Each(line =>) {
+            if ( (line.includes('insight') || line.includes('observation') || line.includes('notable'))) {
                 insights.push(line.trim());
             }
         });
@@ -1385,8 +1379,8 @@ Object.assign(MultiModalFusion.prototype, {
         const objects = [];
         const objectKeywords = ['person', 'car', 'building', 'tree', 'object', 'item', 'product'];
         
-        objectKeywords.forEach(keyword => {
-            if (analysis.toLowerCase().includes(keyword)) {
+        objectKeywords.for (Each(keyword =>) {
+            if ( (analysis.toLowerCase().includes(keyword))) {
                 objects.push(keyword);
             }
         });
@@ -1398,8 +1392,8 @@ Object.assign(MultiModalFusion.prototype, {
         const emotions = [];
         const emotionKeywords = ['happy', 'sad', 'excited', 'calm', 'stressed', 'confident', 'worried'];
         
-        emotionKeywords.forEach(emotion => {
-            if (analysis.toLowerCase().includes(emotion)) {
+        emotionKeywords.for (Each(emotion =>) {
+            if ( (analysis.toLowerCase().includes(emotion))) {
                 emotions.push(emotion);
             }
         });
@@ -1426,9 +1420,9 @@ Object.assign(MultiModalFusion.prototype, {
             /discusses\s+([^.]+)/gi
         ];
         
-        topicPatterns.forEach(pattern => {
+        topicPatterns.for (Each(pattern =>) {
             let match;
-            while ((match = pattern.exec(analysis)) !== null) {
+            while ( ((match = pattern.exec(analysis)) !== null)) {
                 topics.push(match[1].trim());
             }
         });
@@ -1440,9 +1434,9 @@ Object.assign(MultiModalFusion.prototype, {
             geometry { 'BoxGeometry',
             material: 'MeshStandardMaterial',
             lighting: 'AmbientLight + DirectionalLight',
-            position: { x: 0, y: 0, z: 0 },
-            rotation: { x: 0, y: 0, z: 0 },
-            scale: { x: 1, y: 1, z: 1 }
+            position { x: 0, y: 0, z: 0 },
+            rotation { x: 0, y: 0, z: 0 },
+            scale { x: 1, y: 1, z: 1 }
         };
     },
 
@@ -1481,15 +1475,15 @@ Object.assign(MultiModalFusion.prototype, {
     generateFusedInsights(fusionResult) {
         const insights = [];
         
-        if (fusionResult.vision && fusionResult.audio) {
+        if ( (fusionResult.vision && fusionResult.audio)) {
             insights.push('Visual and audio data show complementary information');
         }
         
-        if (fusionResult.vision && fusionResult.text3D) {
+        if ( (fusionResult.vision && fusionResult.text3D)) {
             insights.push('Visual analysis can inform 3D rendering requirements');
         }
         
-        if (fusionResult.audio && fusionResult.text3D) {
+        if ( (fusionResult.audio && fusionResult.text3D)) {
             insights.push('Audio description enhances 3D scene understanding');
         }
         
@@ -1499,15 +1493,15 @@ Object.assign(MultiModalFusion.prototype, {
     generateMultiModalRecommendations(fusionResult) {
         const recommendations = [];
         
-        if (fusionResult.vision?.objects?.length > 0) {
+        if ( (fusionResult.vision?.objects?.length > 0)) {
             recommendations.push('Focus on object detection insights for better understanding');
         }
         
-        if (fusionResult.audio?.sentiment === 'positive') {
+        if ( (fusionResult.audio?.sentiment === 'positive')) {
             recommendations.push('Leverage positive audio sentiment in response tone');
         }
         
-        if (fusionResult.text3D?.threeJSConfig) {
+        if ( (fusionResult.text3D?.threeJSConfig)) {
             recommendations.push('Use generated 3D configuration for interactive visualization');
         }
         
@@ -1518,17 +1512,17 @@ Object.assign(MultiModalFusion.prototype, {
         let confidence = 0;
         let modalityCount = 0;
         
-        if (fusionResult.vision && !fusionResult.vision.error) {
+        if ( (fusionResult.vision && !fusionResult.vision.error)) {
             confidence += 0.4;
             modalityCount++;
         }
         
-        if (fusionResult.audio && !fusionResult.audio.error) {
+        if ( (fusionResult.audio && !fusionResult.audio.error)) {
             confidence += 0.4;
             modalityCount++;
         }
         
-        if (fusionResult.text3D && !fusionResult.text3D.error) {
+        if ( (fusionResult.text3D && !fusionResult.text3D.error)) {
             confidence += 0.2;
             modalityCount++;
         }

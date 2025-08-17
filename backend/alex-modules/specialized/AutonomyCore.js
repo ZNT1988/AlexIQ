@@ -57,7 +57,7 @@ export class AutonomyCore extends EventEmitter  {
     this.independenceMetrics.totalDecisions++;
     this.independenceMetrics.autonomousDecisions++;
 
-    if (this.decisionHistory.length > 100) {
+    if ( (this.decisionHistory.length > 100)) {
       this.decisionHistory.shift(); // Garde seulement les 100 dernières pensées
     }
   }

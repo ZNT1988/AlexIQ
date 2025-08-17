@@ -1,4 +1,4 @@
-import FallbackCache from './FallbackCache.js';
+import FallbackCache from "./FallbackCache.js";
 
 const cache = new FallbackCache();
 

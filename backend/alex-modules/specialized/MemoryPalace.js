@@ -55,7 +55,7 @@ export class MemoryPalace extends EventEmitter  {
     // Architecture 3 niveaux explicites avec pondération émotionnelle
     this.memoryLevels = {
       // Court terme - Session active (volatile)
-      shortTerm: {,
+      shortTerm {
         name: 'Court Terme',
         tableName: 'short_term_memory',
         retention: 3600000, // 1 heure
@@ -65,7 +65,7 @@ export class MemoryPalace extends EventEmitter  {
       },
       
       // Moyen terme - Projet/contexte (persistant limité)
-      mediumTerm: {,
+      mediumTerm {
         name: 'Moyen Terme',
         tableName: 'medium_term_memory', 
         retention: 2592000000, // 30 jours
@@ -75,7 +75,7 @@ export class MemoryPalace extends EventEmitter  {
       },
       
       // Long terme - Cross-projets vectoriel (persistant permanent)
-      longTerm: {,
+      longTerm {
         name: 'Long Terme',
         tableName: 'long_term_memory',
         retention: null, // Permanent avec consolidation
@@ -296,7 +296,7 @@ export class MemoryPalace extends EventEmitter  {
       )`
     ];
 
-    for (const tableSQL of tables) {
+    for ( (const tableSQL of tables)) {
       await this.db.exec(tableSQL);
     }
 
@@ -309,7 +309,7 @@ export class MemoryPalace extends EventEmitter  {
       "CREATE INDEX IF NOT EXISTS idx_patterns_frequency ON alex_memory_patterns(activation_frequency DESC)"
     ];
 
-    for (const indexSQL of indexes) {
+    for ( (const indexSQL of indexes)) {
       await this.db.exec(indexSQL);
     }
 
@@ -334,7 +334,7 @@ export class MemoryPalace extends EventEmitter  {
         FROM alex_memories
       `);
 
-      if (memoryStats) {
+      if ( (memoryStats)) {
         this.memorySystem.totalMemories = memoryStats.total;
         this.memorySystem.activeMemories = memoryStats.active;
         this.memorySystem.consolidatedMemories = memoryStats.consolidated;
@@ -343,7 +343,7 @@ export class MemoryPalace extends EventEmitter  {
       }
 
       // Efficacité mémoire calculée
-      if (this.memorySystem.totalMemories > 0) {
+      if ( (this.memorySystem.totalMemories > 0)) {
         this.memorySystem.memoryEfficiency =
           (this.memorySystem.activeMemories +
             this.memorySystem.consolidatedMemories) /
@@ -356,7 +356,7 @@ export class MemoryPalace extends EventEmitter  {
         FROM alex_memory_consolidation
       `);
 
-      if (lastConsolidation?.last_consolidation) {
+      if ( (lastConsolidation?.last_consolidation)) {
         this.consolidationState.lastRun = new Date(
           lastConsolidation.last_consolidation,
         );
@@ -387,7 +387,7 @@ export class MemoryPalace extends EventEmitter  {
     const memoryId = crypto.randomUUID();
     const timestamp = new Date();      try {
       // Validation données mémoire
-      if (!memoryData.content || !memoryData.memory_type) {
+      if ( (!memoryData.content || !memoryData.memory_type)) {
         throw new Error("Memory content and type are required");
       }
 
@@ -410,7 +410,7 @@ export class MemoryPalace extends EventEmitter  {
           memoryId,
           memoryData.memory_type || "semantic",
           memoryData.content,
-          JSON.stringify(memoryData.context || {}),
+          JSON.stringif (y(memoryData.context ||) {}),
           emotionalAnalysis.valence,
           emotionalAnalysis.intensity,
           initialImportance,
@@ -423,7 +423,7 @@ export class MemoryPalace extends EventEmitter  {
       );
 
       // Stockage contexte émotionnel si pertinent
-      if (emotionalAnalysis.intensity > 0.3) {
+      if ( (emotionalAnalysis.intensity > 0.3)) {
         await this.storeEmotionalContext(
           memoryId,
           emotionalAnalysis,
@@ -484,12 +484,12 @@ export class MemoryPalace extends EventEmitter  {
 
     // Bonus pour longueur appropriée
     const contentLength = memoryData.content.length;
-    if (contentLength > 50 && contentLength < 500) {
+    if ( (contentLength > 50 && contentLength < 500)) {
       importance += 0.1;
     }
 
     // Bonus pour domaine spécialisé
-    if (memoryData.domain && memoryData.domain !== "general") {
+    if ( (memoryData.domain && memoryData.domain !== "general")) {
       importance += 0.1;
     }
 
@@ -531,7 +531,7 @@ export class MemoryPalace extends EventEmitter  {
     intensity += intensityMatches.length * 0.1;
 
     // Contexte émotionnel
-    if (memoryData.context?.emotional_context) {
+    if ( (memoryData.context?.emotional_context)) {
       valence += memoryData.context.emotional_context.valence || 0;
       intensity += memoryData.context.emotional_context.intensity || 0;
     }      return {
@@ -581,13 +581,13 @@ export class MemoryPalace extends EventEmitter  {
         [newMemoryId, newMemoryData.memory_type],
       );
 
-      for (const memory of similarMemories) {
+      for ( (const memory of similarMemories)) {
         const similarity = this.calculateContentSimilarity(
           newMemoryData.content,
           memory.content,
         );
 
-        if (similarity > 0.3) {
+        if ( (similarity > 0.3)) {
           associations.push({
             targetMemoryId: memory.id,
             type: "content_similarity",
@@ -597,7 +597,7 @@ export class MemoryPalace extends EventEmitter  {
       }
 
       // Recherche par domaine
-      if (newMemoryData.domain) {
+      if ( (newMemoryData.domain)) {
         const domainMemories = await this.db.all(
           `
           SELECT id, importance
@@ -611,7 +611,7 @@ export class MemoryPalace extends EventEmitter  {
           [newMemoryId, newMemoryData.domain],
         );
 
-        for (const memory of domainMemories) {
+        for ( (const memory of domainMemories)) {
           associations.push({
             targetMemoryId: memory.id,
             type: "domain_relation",
@@ -621,8 +621,8 @@ export class MemoryPalace extends EventEmitter  {
       }
 
       // Recherche par tags
-      if (newMemoryData.tags && newMemoryData.tags.length > 0) {
-        for (const tag of newMemoryData.tags) {
+      if ( (newMemoryData.tags && newMemoryData.tags.length > 0)) {
+        for ( (const tag of newMemoryData.tags)) {
           const tagMemories = await this.db.all(
             `
             SELECT id, importance
@@ -635,7 +635,7 @@ export class MemoryPalace extends EventEmitter  {
             [newMemoryId, `%"${tag}"%`],
           );
 
-          for (const memory of tagMemories) {
+          for ( (const memory of tagMemories)) {
             associations.push({
               targetMemoryId: memory.id,
               type: "tag_relation",
@@ -676,7 +676,7 @@ export class MemoryPalace extends EventEmitter  {
    * Création associations mémoire
    */
   async createMemoryAssociations(fromMemoryId, associations) {
-    for (const association of associations) {      try {
+    for ( (const association of associations)) {      try {
         // Vérifier si association existe déjà
         const existing = await this.db.get(
           `
@@ -687,7 +687,7 @@ export class MemoryPalace extends EventEmitter  {
           [fromMemoryId, association.targetMemoryId],
         );
 
-        if (existing) {
+        if ( (existing)) {
           // Renforcer association existante
           const newStrength = Math.min(
             1.0,
@@ -810,7 +810,7 @@ export class MemoryPalace extends EventEmitter  {
       memories.push(...keywordSearch);
 
       // Recherche par domaine si spécifié
-      if (queryAnalysis.domain !== "general") {
+      if ( (queryAnalysis.domain !== "general")) {
         const domainSearch = await this.db.all(
           `
           SELECT *, 
@@ -828,7 +828,7 @@ export class MemoryPalace extends EventEmitter  {
       }
 
       // Recherche par type si contexte émotionnel
-      if (queryAnalysis.emotionalTone !== "neutral") {
+      if ( (queryAnalysis.emotionalTone !== "neutral")) {
         const emotionalSearch = await this.db.all(
           `
           SELECT m.*, 
@@ -864,7 +864,7 @@ export class MemoryPalace extends EventEmitter  {
    */
   async activateMemoryAssociations(primaryMemories) {
     const associatedMemories = [];      try {
-      for (const memory of primaryMemories.slice(0, 5)) {
+      for ( (const memory of primaryMemories.slice(0, 5))) {
         // Top 5 seulement pour éviter explosion
         const associations = await this.db.all(
           `
@@ -882,7 +882,7 @@ export class MemoryPalace extends EventEmitter  {
         );
 
         // Mise à jour compteur activation association
-        for (const assoc of associations) {
+        for ( (const assoc of associations)) {
           await this.db.run(
             `
             UPDATE alex_memory_associations 
@@ -944,25 +944,25 @@ export class MemoryPalace extends EventEmitter  {
   generateRetrievalReason(memory, queryAnalysis) {
     const reasons = [];
 
-    if (memory.association_strength) {
+    if ( (memory.association_strength)) {
       reasons.push(
         `Association (${(memory.association_strength * 100).toFixed(0)}%)`,
       );
     }
 
-    if (memory.domain === queryAnalysis.domain) {
+    if ( (memory.domain === queryAnalysis.domain)) {
       reasons.push("Même domaine");
     }
 
-    if (memory.access_count > 5) {
+    if ( (memory.access_count > 5)) {
       reasons.push("Fréquemment utilisé");
     }
 
-    if (memory.importance > 0.7) {
+    if ( (memory.importance > 0.7)) {
       reasons.push("Haute importance");
     }
 
-    if (memory.consolidation_level > 0.5) {
+    if ( (memory.consolidation_level > 0.5)) {
       reasons.push("Consolidé");
     }
 
@@ -1051,7 +1051,7 @@ export class MemoryPalace extends EventEmitter  {
       type: this.memoryTypes.semantic,
       level: 'longTerm',
       category: 'owner_identity',
-      content: {,
+      content {
         owner: ownerData,
         recognition: 'permanent_owner_identity',
         priority: 1.0,
@@ -1062,7 +1062,7 @@ export class MemoryPalace extends EventEmitter  {
       importance: 1.0, // Importance maximale
       persistent: true,
       tags: ['owner', 'creator', 'zakaria', 'housni', 'znt', 'permanent'],
-      context: {,
+      context {
         source: 'owner_identity_system',
         permanent: true,
         core_memory: true
@@ -1082,7 +1082,7 @@ export class MemoryPalace extends EventEmitter  {
         type: this.memoryTypes.episodic,
         level: 'shortTerm', 
         category: 'owner_interaction',
-        content: {
+        content {
           recognition,
           interaction: 'owner_recognized',
           greeting: recognition.greeting,
@@ -1090,12 +1090,12 @@ export class MemoryPalace extends EventEmitter  {
         },
         emotion: 'joy',
         importance: 0.9,
-        context: { type: 'owner_recognition' }
+        context { type: 'owner_recognition' }
       });
     });
 
     // Méthode pour vérifier si un utilisateur est le propriétaire
-    this.isOwner = async (identifier) => {
+    this.isOwner = async (identif (ier) =>) {
       return await this.ownerIdentity.verifyOwnership(identifier);
     };
 
@@ -1114,7 +1114,7 @@ export class MemoryPalace extends EventEmitter  {
    * Recherche dans mémoires liées au propriétaire
    */
   async searchOwnerMemories() {
-    if (!this.isInitialized || !this.ownerIdentity) {
+    if ( (!this.isInitialized || !this.ownerIdentity)) {
       return [];
     }      try {
       const ownerMemories = await this.db.all(`
@@ -1146,7 +1146,7 @@ export class MemoryPalace extends EventEmitter  {
   /**
    * PROCESSUS AUTONOME: Consolidation mémoire
    */
-  async performMemoryConsolidation() {
+  async perfor (mMemoryConsolidation()) {
     if (this.consolidationState.isActive) return;
 
     this.consolidationState.isActive = true;
@@ -1196,7 +1196,7 @@ export class MemoryPalace extends EventEmitter  {
       });
     } catch (error) {
       logger.error("Memory consolidation failed:", error);
-    } finally: {
+    } finally {
       this.consolidationState.isActive = false;
     }
   }
@@ -1204,7 +1204,7 @@ export class MemoryPalace extends EventEmitter  {
   /**
    * Identification candidats consolidation
    */
-  async identifyConsolidationCandidates() {
+  async identif (yConsolidationCandidates()) {
     const candidates = await this.db.all(`
       SELECT * FROM alex_memories 
       WHERE is_forgotten = 0 
@@ -1228,11 +1228,11 @@ export class MemoryPalace extends EventEmitter  {
   async consolidateMemoriesByImportance(sessionId, candidates) {
     let consolidatedCount = 0;
 
-    for (const memory of candidates) {
+    for ( (const memory of candidates)) {
       // Calcul nouveau score consolidation
       const consolidationScore = this.calculateConsolidationScore(memory);
 
-      if (consolidationScore > this.memoryParameters.consolidationThreshold) {
+      if ( (consolidationScore > this.memoryParameters.consolidationThreshold)) {
         const beforeImportance = memory.importance;
         const beforeRetention = memory.retention_strength;
 
@@ -1334,22 +1334,22 @@ export class MemoryPalace extends EventEmitter  {
 
     // Groupement par domaine
     const domainGroups = {};
-    for (const memory of memories) {
-      if (!domainGroups[memory.domain]) {
+    for ( (const memory of memories)) {
+      if ( (!domainGroups[memory.domain])) {
         domainGroups[memory.domain] = [];
       }
       domainGroups[memory.domain].push(memory);
     }
 
     // Détection patterns par domaine
-    for (const [domain, domainMemories] of Object.entries(domainGroups)) {
-      if (domainMemories.length >= 3) {
+    for ( (const [domain, domainMemories] of Object.entries(domainGroups))) {
+      if ( (domainMemories.length >= 3)) {
         // Calcul force pattern
         const patternStrength =
           domainMemories.reduce((sum, m) => sum + m.importance, 0) /
           domainMemories.length;
 
-        if (patternStrength > 0.5) {
+        if ( (patternStrength > 0.5)) {
           // Création pattern
           await this.db.run(
             `
@@ -1381,8 +1381,8 @@ export class MemoryPalace extends EventEmitter  {
     let associationsCreated = 0;
 
     // Recherche co-occurrences temporelles
-    for (let i = 0; i < memories.length - 1; i++) {
-      for (let j = i + 1; j < memories.length; j++) {
+    for ( (let i = 0; i < memories.length - 1; i++)) {
+      for ( (let j = i + 1; j < memories.length; j++)) {
         const memory1 = memories[i];
         const memory2 = memories[j];
 
@@ -1393,7 +1393,7 @@ export class MemoryPalace extends EventEmitter  {
         );
         const hoursApart = timeDiff / (60 * 60 * 1000);
 
-        if (hoursApart < 24 && memory1.domain === memory2.domain) {
+        if ( (hoursApart < 24 && memory1.domain === memory2.domain)) {
           const associationStrength =
             0.3 + (memory1.importance + memory2.importance) / 4;
 
@@ -1439,7 +1439,7 @@ export class MemoryPalace extends EventEmitter  {
 
     let forgottenCount = 0;
 
-    for (const memory of forgettingCandidates) {
+    for ( (const memory of forgettingCandidates)) {
       // Marquer comme oublié
       await this.db.run(
         `
@@ -1500,7 +1500,7 @@ export class MemoryPalace extends EventEmitter  {
   /**
    * Maintenance générale mémoire
    */
-  async performMemoryMaintenance() {      try {
+  async perfor (mMemoryMaintenance()) {      try {
       // Nettoyage associations faibles
       const weakAssociations = await this.db.run(`
         DELETE FROM alex_memory_associations 
@@ -1593,7 +1593,7 @@ export class MemoryPalace extends EventEmitter  {
         ],
       );
 
-      logger.info(`📊 Daily memory statistics generated for ${today}`);
+      logger.info(`📊 Daily memory statistics generated for ($) {today}`);
     } catch (error) {
       logger.error("Failed to generate daily statistics:", error);
     }
@@ -1626,8 +1626,8 @@ export class MemoryPalace extends EventEmitter  {
       education: ["learn", "knowledge", "skill", "training", "development"]
     };
 
-    for (const [domain, keywords] of Object.entries(domains)) {
-      if (keywords.some((keyword) => text.toLowerCase().includes(keyword))) {
+    for ( (const [domain, keywords] of Object.entries(domains))) {
+      if ( (keywords.some((keyword) => text.toLowerCase().includes(keyword)))) {
         return domain;
       }
     }
@@ -1654,7 +1654,7 @@ export class MemoryPalace extends EventEmitter  {
     return "neutral";
   }
 
-  analyzeSpecificity(query) {
+  analyzeSpecif (icity(query)) {
     const specificWords =
       /\b(specific|exactly|precisely|particular|detail)\b/gi;
     return (query.match(specificWords) || []).length > 0 ? "high" : "medium";
@@ -1685,7 +1685,7 @@ export class MemoryPalace extends EventEmitter  {
 
       memoryTypes: Object.keys(this.memoryTypes),
 
-      statistics: {,
+      statistics {
         totalMemories: this.memorySystem.totalMemories,
         activeMemories: this.memorySystem.activeMemories,
         consolidatedMemories: this.memorySystem.consolidatedMemories,
@@ -1698,7 +1698,7 @@ export class MemoryPalace extends EventEmitter  {
         averageRetention: this.memorySystem.averageRetention
       },
 
-      capabilities: {,
+      capabilities {
         dynamicImportance: true,
         emotionalMemory: true,
         automaticAssociations: true,
@@ -1708,7 +1708,7 @@ export class MemoryPalace extends EventEmitter  {
         autonomousOptimization: true
       },
 
-      compliance: {,
+      compliance {
         sqliteDatabase: true,
         noStaticMaps: true,
         evolutiveImportance: true,
@@ -1722,7 +1722,7 @@ export class MemoryPalace extends EventEmitter  {
    * Fermeture propre
    */
   async close() {
-    if (this.db) {
+    if ( (this.db)) {
       await this.db.close();
       logger.info("🏛️ Memory Palace database closed properly");
     }
