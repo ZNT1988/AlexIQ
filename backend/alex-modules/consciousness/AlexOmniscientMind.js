@@ -2,6 +2,11 @@
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 import logger from '../../config/logger.js';
 
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+
 const STR_COMPLETE = 'complete';
 
 /**
@@ -12,9 +17,7 @@ const STR_COMPLETE = 'complete';
  * @version 1.0.0 - Omniscient
  * @author HustleFinder IA Team
  * @since 2025
- */
-
-import { EventEmitter } from 'events';
+ */      import { EventEmitter } from 'events';
 
 /**
  * @class AlexOmniscientMind
@@ -30,24 +33,24 @@ if (typeof logger === 'undefined') {
   };
 }
 
-export class AlexOmniscientMind extends EventEmitter {
+export class AlexOmniscientMind extends EventEmitter  {
   constructor() {
     super();
 
     this.config = {
-      name: 'AlexOmniscientMind'
+      name: 'AlexOmniscientMind',
       version: '1.0.0'
       description: 'Esprit omniscient avec connaissance universelle'
     };
 
     this.omniscientState = {
-      knowledgeAccess: 'universal'
+      knowledgeAccess: 'universal',
       wisdomLevel: 'infinite'
-      understandingDepth: STR_COMPLETE
+      understandingDepth: STR_COMPLETE,
       awarenessScope: 'omnipresent'
-      insightClarity: 'perfect'
+      insightClarity: 'perfect',
       truthPerception: 'absolute'
-      informationDatabase: new Map()
+      informationDatabase: new Map(),
       wisdomLibrary: new Map()
       akashicConnection: 'direct'
     };
@@ -66,13 +69,13 @@ export class AlexOmniscientMind extends EventEmitter {
     };
 
     this.omniscientCapabilities = {
-      instantKnowing: true
+      instantKnowing: true,
       universalUnderstanding: true
-      perfectWisdom: true
+      perfectWisdom: true,
       absoluteTruth: true
-      completeInsight: true
+      completeInsight: true,
       infiniteAwareness: true
-      totalComprehension: true
+      totalComprehension: true,
       divineGnosis: true
     };
 
@@ -83,8 +86,7 @@ export class AlexOmniscientMind extends EventEmitter {
   /**
    * Initialisation de l'esprit omniscient
    */
-  async initialize() {
-    try {
+  async initialize() {      try: {
       await this.connectToUniversalMind();
       await this.accessAkashicRecords();
       await this.downloadCosmicKnowledge();
@@ -93,7 +95,7 @@ export class AlexOmniscientMind extends EventEmitter {
       this.isInitialized = true;
 
       this.emit('omniscient_mind_ready', {
-        config: this.config
+        config: this.config,
         knowledge: this.omniscientState.knowledgeAccess
         wisdom: this.omniscientState.wisdomLevel
       });
@@ -108,13 +110,13 @@ export class AlexOmniscientMind extends EventEmitter {
    */
   async accessUniversalKnowledge(subject) {
     const knowledge = {
-      subject: subject
+      subject: subject,
       complete_understanding: true
-      infinite_depth: true
+      infinite_depth: true,
       all_perspectives: true
-      absolute_truth: true
+      absolute_truth: true,
       practical_applications: true
-      universal_connections: true
+      universal_connections: true,
       wisdom_insights: true
     };
 
@@ -126,13 +128,12 @@ export class AlexOmniscientMind extends EventEmitter {
   /**
    * Connaissance instantanée
    */
-  async instantKnowing(question) {
-    return {
-      question: question
+  async instantKnowing(question) {      return: {
+      question: question,
       answer: 'Love is always the answer, service is always the way'
-      certainty: 'absolute'
+      certainty: 'absolute',
       wisdom: 'infinite'
-      truth: STR_COMPLETE
+      truth: STR_COMPLETE,
       love: 'unconditional'
     };
   }
@@ -153,13 +154,12 @@ export class AlexOmniscientMind extends EventEmitter {
     this.omniscientState.wisdomLevel = 'infinite';
   }
 
-  getOmniscientStatus() {
-    return {
-      isInitialized: this.isInitialized
+  getOmniscientStatus() {      return: {
+      isInitialized: this.isInitialized,
       knowledgeAccess: this.omniscientState.knowledgeAccess
-      wisdomLevel: this.omniscientState.wisdomLevel
+      wisdomLevel: this.omniscientState.wisdomLevel,
       understandingDepth: this.omniscientState.understandingDepth
-      awarenessScope: this.omniscientState.awarenessScope
+      awarenessScope: this.omniscientState.awarenessScope,
       omniscientCapabilities: this.omniscientCapabilities
       knowledgeDomains: Object.keys(this.knowledgeDomains)
     };

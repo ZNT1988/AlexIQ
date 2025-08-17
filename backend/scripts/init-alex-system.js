@@ -22,9 +22,8 @@ class AlexSystemInitializer {
   }
 
   async init() {
-    console.log("🦄 INITIALISATION SYSTÈME LICORNE ALEX");
-    console.log("======================================\n");
-
+    
+    
     try {
       await this.createDirectories();
       await this.initializeDatabase();
@@ -33,18 +32,17 @@ class AlexSystemInitializer {
       await this.performSystemBootstrap();
       await this.runHealthChecks();
 
-      console.log("\n✅ SYSTÈME ALEX LICORNE INITIALISÉ AVEC SUCCÈS");
-      console.log("🚀 Prêt pour déploiement production");
+      
+      
     } catch (error) {
-      console.error("❌ ERREUR INITIALISATION:", error.message);
+      
       await this.logError(error);
       process.exit(1);
     }
   }
 
   async createDirectories() {
-    console.log("📁 Création structure répertoires...");
-
+    
     const dirs = [
       "data",
       "config",
@@ -61,7 +59,7 @@ class AlexSystemInitializer {
       const dirPath = path.join(this.baseDir, dir);
       try {
         await fs.mkdir(dirPath, { recursive: true });
-        console.log(`   ✓ ${dir}/`);
+        
       } catch (error) {
         if (error.code !== "EEXIST") throw error;
         console.log(`   ~ ${dir}/ (existe)`);
@@ -70,8 +68,7 @@ class AlexSystemInitializer {
   }
 
   async initializeDatabase() {
-    console.log("\n🗄️ Initialisation base données SQLite...");
-
+    
     return new Promise((resolve, reject) => {
       const db = new sqlite3.Database(this.dbPath, (err) => {
         if (err) return reject(err);
@@ -135,7 +132,7 @@ class AlexSystemInitializer {
           db.run(sql, (err) => {
             if (err) return reject(err);
             completed++;
-            console.log(`   ✓ Table ${index + 1}/${tables.length} créée`);
+            
             if (completed === tables.length) {
               db.close();
               resolve();
@@ -147,8 +144,7 @@ class AlexSystemInitializer {
   }
 
   async createConfiguration() {
-    console.log("\n⚙️ Création configuration LICORNE...");
-
+    
     const config = {
       system: {
         name: "Alex HustleFinder LICORNE",
@@ -202,12 +198,11 @@ class AlexSystemInitializer {
     };
 
     await fs.writeFile(this.configPath, JSON.stringify(config, null, 2));
-    console.log("   ✓ Configuration LICORNE sauvegardée");
+    
   }
 
   async validateModules() {
-    console.log("\n🔍 Validation modules système...");
-
+    
     for (const modulePath of this.modules) {
       const fullPath = path.join(this.baseDir, modulePath);
       try {
@@ -228,9 +223,7 @@ class AlexSystemInitializer {
         console.log(`   ${status} ${path.basename(modulePath)}`);
 
         if (hasStaticLogic) {
-          console.log(
-            `      ⚠️  Logique statique détectée - nécessite transformation`,
-          );
+          
         }
       } catch (error) {
         console.log(`   ❌ ${path.basename(modulePath)} - MANQUANT`);
@@ -251,8 +244,7 @@ class AlexSystemInitializer {
   }
 
   async performSystemBootstrap() {
-    console.log("\n🚀 Bootstrap système Alex...");
-
+    
     const bootstrapTasks = [
       () => this.initializeHyperIntelligence(),
       () => this.initializeMemoryPalace(),
@@ -265,7 +257,7 @@ class AlexSystemInitializer {
       await task();
     }
 
-    console.log("   ✅ Bootstrap terminé");
+    
   }
 
   async initializeHyperIntelligence() {
@@ -381,8 +373,7 @@ setInterval(() => {
   }
 
   async runHealthChecks() {
-    console.log("\n🏥 Vérifications santé système...");
-
+    
     const checks = [
       () => this.checkDatabaseConnection(),
       () => this.checkConfigurationIntegrity(),
@@ -394,7 +385,7 @@ setInterval(() => {
       await check();
     }
 
-    console.log("   ✅ Tous les contrôles santé passés");
+    
   }
 
   async checkDatabaseConnection() {
@@ -402,7 +393,7 @@ setInterval(() => {
       const db = new sqlite3.Database(this.dbPath, (err) => {
         if (err) return reject(new Error("Base données inaccessible"));
         db.close();
-        console.log("   ✓ Connexion base données");
+        
         resolve();
       });
     });
@@ -412,14 +403,14 @@ setInterval(() => {
     try {
       const config = await fs.readFile(this.configPath, "utf8");
       JSON.parse(config);
-      console.log("   ✓ Configuration valide");
+      
     } catch (error) {
       throw new Error("Configuration corrompue");
     }
   }
 
   async checkModuleCompatibility() {
-    console.log("   ✓ Compatibilité modules");
+    
   }
 
   async checkResourceAvailability() {
@@ -431,7 +422,7 @@ setInterval(() => {
         "MB",
       );
     } else {
-      console.log("   ✓ Ressources système");
+      
     }
   }
 
@@ -449,7 +440,7 @@ setInterval(() => {
     try {
       await fs.appendFile(this.logPath, JSON.stringify(logEntry) + "\n");
     } catch (logError) {
-      console.error("Impossible d'écrire dans le log:", logError.message);
+      
     }
   }
 }

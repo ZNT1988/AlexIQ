@@ -26,7 +26,7 @@ class ExternalDataSources {
     this.cache = new Map();
     this.rateLimits = new Map();
     this.sources = {
-      wikipedia: { available: true, baseUrl: 'https://en.wikipedia.org/api/rest_v1' }
+      wikipedia: { available: true, baseUrl: API_URL_1 }
       openai: { available: !!process.env.OPENAI_API_KEY }
       anthropic: { available: !!process.env.ANTHROPIC_API_KEY }
       newsapi: { available: !!process.env.NEWS_API_KEY }
@@ -257,7 +257,7 @@ class ExternalDataSources {
     const systemPrompt = this.buildSystemPrompt(analysis);
     const messages = this.buildContextualMessages(query, context, systemPrompt);
 
-    const response = await fetch(process.env.API_BASE_OPENAI || 'https://api.openai.com/v1/chat/completions', {
+    const response = await fetch(process.env.API_BASE_OPENAI || API_URL_2, {
       method: STR_POST
       headers: {
         'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
@@ -308,7 +308,7 @@ class ExternalDataSources {
     const systemPrompt = this.buildSystemPrompt(analysis);
     const messages = this.buildAnthropicMessages(query, context);
 
-    const response = await fetch(process.env.API_BASE_ANTHROPIC || 'https://api.anthropic.com/v1/messages', {
+    const response = await fetch(process.env.API_BASE_ANTHROPIC || API_URL_3, {
       method: STR_POST
       headers: {
         'x-api-key': process.env.ANTHROPIC_API_KEY

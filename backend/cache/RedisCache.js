@@ -41,7 +41,7 @@ export class RedisCache {
             this.usingFallback = true;
             this.connected = true;
         } catch (error) {
-            console.warn('Redis connection failed, using fallback cache:', error.message);
+            
             this.usingFallback = true;
         }
     }

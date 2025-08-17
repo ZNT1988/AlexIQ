@@ -1,6 +1,10 @@
 import logger from '../config/logger.js';
 
 
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_ERROR = 'error';
 
@@ -11,7 +15,7 @@ const crypto = require('crypto');
 // Version: 4.5.0 | Compatible AlexAttentionMasterIntegration
 // ============================================================================
 
-export default class InhibitionReturn {
+export default class InhibitionReturn: {
     constructor(config = {}) {
         this.name = "InhibitionReturn";
         this.version = "4.5.0";
@@ -20,7 +24,7 @@ export default class InhibitionReturn {
         // Configuration
         this.config = {
             // Paramètres d'inhibition
-            inhibitionStrength: config.inhibitionStrength || 0.7
+            inhibitionStrength: config.inhibitionStrength || 0.7,
             inhibitionDuration: config.inhibitionDuration || 3000, // 3s par défaut
             maxInhibitionZones: config.maxInhibitionZones || 50
             // Fatigue attentionnelle
@@ -32,7 +36,7 @@ export default class InhibitionReturn {
             overlapThreshold: config.overlapThreshold || 0.5, // 50% overlap
 
             // Modulation émotionnelle
-            emotionalModulation: config.emotionalModulation || true
+            emotionalModulation: config.emotionalModulation || true,
             stressMultiplier: config.stressMultiplier || 1.5, // Stress = plus d'inhibition
             relaxationMultiplier: config.relaxationMultiplier || 0.7
             // Performance
@@ -41,17 +45,17 @@ export default class InhibitionReturn {
             spatialResolution: config.spatialResolution || 10, // pixels
 
             // Debug
-            enableLogging: config.enableLogging || false
+            enableLogging: config.enableLogging || false,
             visualizeZones: config.visualizeZones || false
         };
 
         // État interne
         this.state = {
-            inhibitionZones: new Map()
+            inhibitionZones: new Map(),
             fatigueMap: new Map()
-            visitHistory: []
+            visitHistory: [],
             emotionalState: { stress: 0, relaxation: 0, focus: 0.5 }
-            lastCleanup: Date.now()
+            lastCleanup: Date.now(),
             totalInhibitions: 0
         };
 
@@ -68,9 +72,9 @@ export default class InhibitionReturn {
 
         // Callbacks
         this.callbacks = {
-            onZoneInhibited: []
-            onZoneReleased: []
-            onFatigueDetected: []
+            onZoneInhibited: [],
+            onZoneReleased: [],
+            onFatigueDetected: [],
             onInhibitionTriggered: []
         };
 
@@ -88,7 +92,7 @@ export default class InhibitionReturn {
     }
 
     startUpdateLoop() {
-        this.updateInterval = setInterval(() => this.processLongOperation(args);
+        this.updateInterval = setInterval(() => // Code de traitement approprié ici;
     }
 
     // ========================================
@@ -96,9 +100,7 @@ export default class InhibitionReturn {
     // ========================================
 
     addIgnoreZone(area, options = {}) {
-        this.log(`🚫 Ajout zone d'inhibition: ${JSON.stringify(area)}`);
-
-        try {
+        this.log(`🚫 Ajout zone d'inhibition: ${JSON.stringify(area)}`);      try: {
             const zone = this.createInhibitionZone(area, options);
 
             // Vérification capacité
@@ -114,20 +116,17 @@ export default class InhibitionReturn {
             this.updateZoneFatigue(zone);
 
             this.triggerCallback('onZoneInhibited', zone);
-            this.state.totalInhibitions++;
-
-            return {
-                success: true
-                zoneId: zone.id
-                zone: zone
+            this.state.totalInhibitions++;      return: {
+                success: true,
+                zoneId: zone.id,
+                zone: zone,
                 message: "Zone d'inhibition créée"
             };
 
         } catch (error) {
       // Logger fallback - ignore error
-    }`, STR_ERROR);
-            return {
-                success: false
+    }`, STR_ERROR);      return: {
+                success: false,
                 error: error.message
             };
         }
@@ -135,17 +134,17 @@ export default class InhibitionReturn {
 
     createInhibitionZone(area, options) {
         const zone = {
-            id: this.generateZoneId()
+            id: this.generateZoneId(),
       area: this.normalizeArea(area)
-      strength: options.strength || this.config.inhibitionStrength
-      duration: options.duration || this.config.inhibitionDuration
-      created: Date.now()
+      strength: options.strength || this.config.inhibitionStrength,
+      duration: options.duration || this.config.inhibitionDuration,
+      created: Date.now(),
       lastVisit: options.lastVisit || Date.now()
-      visitCount: options.visitCount || 1
-      fatigueLevel: 0
-      type: options.type || 'manual'
-      priority: options.priority || 0.5
-      decayRate: options.decayRate || this.config.fatigueDecay
+      visitCount: options.visitCount || 1,
+      fatigueLevel: 0,
+      type: options.type || 'manual',
+      priority: options.priority || 0.5,
+      decayRate: options.decayRate || this.config.fatigueDecay,
       emotionalContext: { ...this.state.emotionalState }
         };
 
@@ -162,27 +161,21 @@ export default class InhibitionReturn {
             this.spatialIndex.removeZone(zone);
 
             this.log(`✅ Zone d'inhibition supprimée: ${zoneId}`);
-            this.triggerCallback('onZoneReleased', zone);
-
-            return { success: true, zone };
-        }
-
-        return { success: false, error: "Zone introuvable" };
+            this.triggerCallback('onZoneReleased', zone);      return: { success: true, zone };
+        }      return: { success: false, error: "Zone introuvable" };
     }
 
     clearAllZones() {
         const count = this.state.inhibitionZones.size;
 
-        this.state.inhibitionZones.forEach(zone => this.processLongOperation(args));
+        this.state.inhibitionZones.forEach(zone => // Code de traitement approprié ici);
 
         this.state.inhibitionZones.clear();
         this.state.fatigueMap.clear();
 
-        this.log(`🧹 ${count} zones d'inhibition supprimées`);
-
-        return {
-            success: true
-            clearedCount: count
+        this.log(`🧹 ${count} zones d'inhibition supprimées`);      return: {
+            success: true,
+            clearedCount: count,
             message: `${count} zones supprimées`
         };
     }
@@ -217,12 +210,10 @@ export default class InhibitionReturn {
 
         if (shouldIgnore && inhibitingZone) {
             this.registerInhibitionEvent(coordinates, inhibitingZone, maxInhibition);
-        }
-
-        return {
-            ignore: shouldIgnore
-            strength: maxInhibition
-            zone: inhibitingZone
+        }      return: {
+            ignore: shouldIgnore,
+            strength: maxInhibition,
+            zone: inhibitingZone,
             coordinates
         };
     }
@@ -231,7 +222,7 @@ export default class InhibitionReturn {
         const now = Date.now();
         const age = now - zone.created;
 
-        // Décroissance temporelle
+        // Décroissance temporelle
 
         // Force de base modifiée par fatigue
         let baseStrength = zone.strength * temporalDecay;
@@ -242,7 +233,7 @@ export default class InhibitionReturn {
 
         // Modulation émotionnelle
         const emotionalModifier = this.emotionalModulator.getInhibitionModifier(
-            this.state.emotionalState
+            this.state.emotionalState,
             zone.emotionalContext
         );
         baseStrength *= emotionalModifier;
@@ -266,7 +257,7 @@ export default class InhibitionReturn {
         const visit = {
             coordinates: { ...coordinates }
             timestamp: Date.now()
-            context
+            context,
             id: this.generateVisitId()
         };
 
@@ -288,7 +279,7 @@ export default class InhibitionReturn {
     }
 
     updateZonesFatigue(coordinates) {
-        this.state.inhibitionZones.forEach(zone => this.processLongOperation(args)
+        this.state.inhibitionZones.forEach(zone => // Code de traitement approprié ici
             }
         });
     }
@@ -327,22 +318,22 @@ export default class InhibitionReturn {
         const now = Date.now();
         const cutoff = now - timeWindow;
 
-        return this.state.visitHistory.filter(visit => this.processLongOperation(args));
+        return this.state.visitHistory.filter(visit => // Code de traitement approprié ici);
     }
 
     createAutoInhibitionZone(coordinates, visits) {
         const area = {
-            x: coordinates.x - this.config.defaultZoneSize.width / 2
-            y: coordinates.y - this.config.defaultZoneSize.height / 2
-            width: this.config.defaultZoneSize.width
+            x: coordinates.x - this.config.defaultZoneSize.width / 2,
+            y: coordinates.y - this.config.defaultZoneSize.height / 2,
+            width: this.config.defaultZoneSize.width,
             height: this.config.defaultZoneSize.height
         };
 
         const options = {
-            type: 'auto_fatigue'
+            type: 'auto_fatigue',
             strength: this.config.inhibitionStrength * 1.2, // Plus forte
             duration: this.config.inhibitionDuration * 2, // Plus longue
-            visitCount: visits.length
+            visitCount: visits.length,
             lastVisit: visits[visits.length - 1].timestamp
         };
 
@@ -356,10 +347,10 @@ export default class InhibitionReturn {
 
     updateEmotionalState(emotionalState) {
         this.state.emotionalState = {
-            stress: emotionalState.stress || 0
-            relaxation: emotionalState.relaxation || 0
-            focus: emotionalState.focus || 0.5
-            arousal: emotionalState.arousal || 0
+            stress: emotionalState.stress || 0,
+            relaxation: emotionalState.relaxation || 0,
+            focus: emotionalState.focus || 0.5,
+            arousal: emotionalState.arousal || 0,
             valence: emotionalState.valence || 0
         };
 
@@ -370,7 +361,7 @@ export default class InhibitionReturn {
     }
 
     adaptZonesToEmotion() {
-        this.state.inhibitionZones.forEach(zone => this.processLongOperation(args) = this.state.emotionalState;
+        this.state.inhibitionZones.forEach(zone => // Code de traitement approprié ici = this.state.emotionalState;
 
         let modifier = 1.0;
 
@@ -413,10 +404,10 @@ export default class InhibitionReturn {
         const now = Date.now();
         const expired = [];
 
-        this.state.inhibitionZones.forEach((zone, id) => this.processLongOperation(args)
+        this.state.inhibitionZones.forEach((zone, id) => // Code de traitement approprié ici
         });
 
-        expired.forEach(id => this.processLongOperation(args)
+        expired.forEach(id => // Code de traitement approprié ici
             }
         });
     }
@@ -467,11 +458,11 @@ export default class InhibitionReturn {
         const map = new Float32Array(width * height);
 
         // Application de chaque zone d'inhibition
-        this.state.inhibitionZones.forEach(zone => this.processLongOperation(args);
+        this.state.inhibitionZones.forEach(zone => // Code de traitement approprié ici;
     }
 
     applyZoneToMap(map, zone, width, height) {
-        const { area } = zone;
+        const: { area } = zone;
         const strength = this.calculateCurrentInhibition(zone);
 
         // Application avec gradient
@@ -500,15 +491,14 @@ export default class InhibitionReturn {
         }
     }
 
-    getStatus() {
-        return {
-            name: this.name
-            version: this.version
-            status: this.status
-            zones: this.state.inhibitionZones.size
-            totalInhibitions: this.state.totalInhibitions
+    getStatus() {      return: {
+            name: this.name,
+            version: this.version,
+            status: this.status,
+            zones: this.state.inhibitionZones.size,
+            totalInhibitions: this.state.totalInhibitions,
             avgFatigueLevel: this.calculateAvgFatigueLevel()
-            visitHistory: this.state.visitHistory.length
+            visitHistory: this.state.visitHistory.length,
             emotionalState: { ...this.state.emotionalState }
         };
     }
@@ -517,7 +507,7 @@ export default class InhibitionReturn {
         if (this.state.inhibitionZones.size === 0) return 0;
 
         let totalFatigue = 0;
-        this.state.inhibitionZones.forEach(zone => this.processLongOperation(args)
+        this.state.inhibitionZones.forEach(zone => // Code de traitement approprié ici
 
     // ========================================
     // CALLBACKS
@@ -537,7 +527,7 @@ export default class InhibitionReturn {
 
     triggerCallback(event, data) {
         if (this.callbacks[event]) {
-            this.callbacks[event].forEach(callback => this.processLongOperation(args): ${error.message}`, STR_ERROR);
+            this.callbacks[event].forEach(callback => // Code de traitement approprié ici: ${error.message}`, STR_ERROR);
                 }
             });
         }
@@ -548,15 +538,14 @@ export default class InhibitionReturn {
     // ========================================
 
     generateZoneId() {
-        return `inhibit_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 9)}`;
+        return await this.generateWithOpenAI(`inhibit_${Date.now()}_${(crypto.randomBytes(4).rea...`, context);
     }
 
     generateVisitId() {
-        return `visit_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;
+        return await this.generateWithOpenAI(`visit_${Date.now()}_${(crypto.randomBytes(4).readU...`, context);
     }
 
-    normalizeArea(area) {
-        return {
+    normalizeArea(area) {      return: {
             x: Math.max(0, area.x)
             y: Math.max(0, area.y)
             width: Math.max(10, area.width || this.config.defaultZoneSize.width)
@@ -566,9 +555,9 @@ export default class InhibitionReturn {
 
     registerInhibitionEvent(coordinates, zone, strength) {
         this.triggerCallback('onInhibitionTriggered', {
-            coordinates
+            coordinates,
             zone
-            strength
+            strength,
             timestamp: Date.now()
         });
     }
@@ -577,7 +566,7 @@ export default class InhibitionReturn {
         let oldestZone = null;
         let oldestTime = Date.now();
 
-        this.state.inhibitionZones.forEach((zone, _) => this.processLongOperation(args));
+        this.state.inhibitionZones.forEach((zone, _) => // Code de traitement approprié ici);
 
         if (oldestZone) {
             this.clearZone(oldestZone);
@@ -590,17 +579,15 @@ export default class InhibitionReturn {
             y: Math.min(zone1.area.y, zone2.area.y)
             width: Math.max(zone1.area.x + zone1.area.width, zone2.area.x + zone2.area.width) - Math.min(zone1.area.x, zone2.area.x)
             height: Math.max(zone1.area.y + zone1.area.height, zone2.area.y + zone2.area.height) - Math.min(zone1.area.y, zone2.area.y)
-        };
-
-        return {
-            id: this.generateZoneId()
-            area: mergedArea
+        };      return: {
+            id: this.generateZoneId(),
+            area: mergedArea,
             strength: Math.max(zone1.strength, zone2.strength)
             duration: Math.max(zone1.duration, zone2.duration)
-            created: Date.now()
-            visitCount: zone1.visitCount + zone2.visitCount
+            created: Date.now(),
+            visitCount: zone1.visitCount + zone2.visitCount,
             fatigueLevel: Math.max(zone1.fatigueLevel, zone2.fatigueLevel)
-            type: 'merged'
+            type: 'merged',
             priority: Math.max(zone1.priority, zone2.priority)
         };
     }
@@ -633,30 +620,28 @@ export default class InhibitionReturn {
         }
 
         // Nettoyage callbacks
-        Object.keys(this.callbacks).forEach(key => this.processLongOperation(args)
+        Object.keys(this.callbacks).forEach(key => // Code de traitement approprié ici
 }
 
 // ============================================================================
 // CLASSES AUXILIAIRES
 // ============================================================================
 
-class InhibitionZoneManager {
-    constructor(config) {
-        this.config = config;
-        this.zones = new Map();
-    }
+class InhibitionZoneManager: {
+        constructor(config) {
+        this.config = config;,
+        this.zones = new Map();,
+      }
 
     createZone(area, options) {
-        // Création et validation de zone
-        return {
-            id: this.generateId()
+        // Création et validation de zone      return: {
+            id: this.generateId(),
             area: this.validateArea(area)
             ...options
         };
     }
 
-    validateArea(area) {
-        return {
+    validateArea(area) {      return: {
             x: Math.max(0, area.x || 0)
             y: Math.max(0, area.y || 0)
             width: Math.max(1, area.width || 100)
@@ -665,22 +650,22 @@ class InhibitionZoneManager {
     }
 
     generateId() {
-        return `zone_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;
+        return await this.generateWithOpenAI(`zone_${Date.now()}_${(crypto.randomBytes(4).readUI...`, context);
     }
 }
 
-class FatigueTracker {
-    constructor(config) {
-        this.config = config;
-        this.fatigueData = new Map();
-    }
+class FatigueTracker: {
+        constructor(config) {
+        this.config = config;,
+        this.fatigueData = new Map();,
+      }
 
     trackFatigue(zoneId, visitCount, timeSpent) {
         const fatigueLevel = this.calculateFatigue(visitCount, timeSpent);
         this.fatigueData.set(zoneId, {
-            level: fatigueLevel
+            level: fatigueLevel,
             lastUpdate: Date.now()
-            visitCount
+            visitCount,
             timeSpent
         });
         return fatigueLevel;
@@ -695,28 +680,28 @@ class FatigueTracker {
     }
 
     decayFatigue() {
-        this.fatigueData.forEach((data, id) => this.processLongOperation(args)
+        this.fatigueData.forEach((data, id) => // Code de traitement approprié ici
         });
     }
 }
 
-class SpatialIndex {
-    constructor(config) {
-        this.config = config;
-        this.gridSize = config.spatialResolution || 100;
-        this.grid = new Map();
-    }
+class SpatialIndex: {
+        constructor(config) {
+        this.config = config;,
+        this.gridSize = config.spatialResolution || 100;,
+        this.grid = new Map();,
+      }
 
     addZone(zone) {
         const cells = this.getZoneCells(zone);
-        cells.forEach(cell => this.processLongOperation(args)
+        cells.forEach(cell => // Code de traitement approprié ici
             this.grid.get(cell).add(zone);
         });
     }
 
     removeZone(zone) {
         const cells = this.getZoneCells(zone);
-        cells.forEach(cell => this.processLongOperation(args)
+        cells.forEach(cell => // Code de traitement approprié ici
             }
         });
     }
@@ -754,9 +739,8 @@ class SpatialIndex {
         return cells;
     }
 
-    getPointCell(point) {
-        return {
-            x: Math.floor(point.x / this.gridSize)
+    getPointCell(point) {      return: {
+            x: Math.floor(point.x / this.gridSize),
             y: Math.floor(point.y / this.gridSize)
         };
     }
@@ -764,7 +748,7 @@ class SpatialIndex {
     defragment() {
         // Défragmentation de l'index spatial
         const newGrid = new Map();
-        this.grid.forEach((zones, cell) => this.processLongOperation(args));
+        this.grid.forEach((zones, cell) => // Code de traitement approprié ici);
         this.grid = newGrid;
     }
 
@@ -773,10 +757,10 @@ class SpatialIndex {
     }
 }
 
-class EmotionalInhibitionModulator {
-    constructor(config) {
-        this.config = config;
-    }
+class EmotionalInhibitionModulator: {
+        constructor(config) {
+        this.config = config;,
+      }
 
     getInhibitionModifier(currentState, zoneContext) {
         let modifier = 1.0;
@@ -800,7 +784,7 @@ class EmotionalInhibitionModulator {
     }
 }
 
-class InhibitionCalculator {
+class InhibitionCalculator: {
     calculateInhibition(zone, context) {
         // Calcul complexe d'inhibition
         let inhibition = zone.strength;
@@ -820,11 +804,11 @@ class InhibitionCalculator {
     }
 }
 
-class DecayManager {
-    constructor(config) {
-        this.config = config;
-        this.decayFunctions = new Map();
-    }
+class DecayManager: {
+        constructor(config) {
+        this.config = config;,
+        this.decayFunctions = new Map();,
+      }
 
     registerDecayFunction(type, func) {
         this.decayFunctions.set(type, func);
@@ -841,10 +825,10 @@ class DecayManager {
     }
 }
 
-class OverlapDetector {
-    constructor(config) {
-        this.config = config;
-    }
+class OverlapDetector: {
+        constructor(config) {
+        this.config = config;,
+      }
 
     calculateOverlap(zone1, zone2) {
         const area1 = zone1.area;
@@ -873,7 +857,7 @@ class OverlapDetector {
                 const overlap = this.calculateOverlap(zoneArray[i], zoneArray[j]);
                 if (overlap > this.config.overlapThreshold) {
                     overlaps.push({
-                        zone1: zoneArray[i]
+                        zone1: zoneArray[i],
                         zone2: zoneArray[j]
                         overlap
                     });

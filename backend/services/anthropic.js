@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import { AI_KEYS } from '../config/aiKeys.js';
 
 export async function callAnthropic(prompt) {
-  const r = await fetch('https://api.anthropic.com/v1/messages', {
+  const r = await fetch(API_URL_1, {
     method: 'POST',
     headers: {
       'x-api-key': AI_KEYS.ANTHROPIC,

@@ -23,10 +23,10 @@ class TenantManager extends EventEmitter {
     const dbPath = this.config.get("database.path");
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        console.error("❌ TenantManager DB connection failed:", err.message);
+        
         return;
       }
-      console.log("✅ TenantManager connecté à la base");
+      
       this.createTenantTables();
     });
   }
@@ -95,7 +95,7 @@ class TenantManager extends EventEmitter {
 
     tables.forEach((sql) => {
       this.db.run(sql, (err) => {
-        if (err) console.error("❌ TenantManager table error:", err.message);
+        if (err) 
       });
     });
 
@@ -169,7 +169,7 @@ class TenantManager extends EventEmitter {
       console.log(`✅ Tenant créé: ${tenant.name} (${tenantId})`);
       return tenant;
     } catch (error) {
-      console.error(`❌ Erreur création tenant:`, error.message);
+      
       throw error;
     }
   }
@@ -288,7 +288,7 @@ class TenantManager extends EventEmitter {
       this.emit("tenantUpdated", updatedTenant);
       return updatedTenant;
     } catch (error) {
-      console.error(`❌ Erreur mise à jour tenant ${tenantId}:`, error.message);
+      
       throw error;
     }
   }
@@ -343,7 +343,7 @@ class TenantManager extends EventEmitter {
 
       return sessionToken;
     } catch (error) {
-      console.error(`❌ Erreur création session:`, error.message);
+      
       throw error;
     }
   }
@@ -565,10 +565,10 @@ class TenantManager extends EventEmitter {
         }
       }
 
-      console.log(`✅ Tenant ${tenantId} supprimé`);
+      
       return true;
     } catch (error) {
-      console.error(`❌ Erreur suppression tenant ${tenantId}:`, error.message);
+      
       throw error;
     }
   }
@@ -610,7 +610,7 @@ class TenantManager extends EventEmitter {
         });
       }
     } catch (error) {
-      console.error("❌ Erreur monitoring ressources:", error.message);
+      
     }
   }
 
@@ -619,13 +619,11 @@ class TenantManager extends EventEmitter {
   }
 
   handleTenantUpdated(tenant) {
-    console.log(`🔄 Tenant mis à jour: ${tenant.name}`);
+    
   }
 
   handleUsageExceeded(data) {
-    console.warn(
-      `⚠️ Quota dépassé - Tenant: ${data.tenantId}, Type: ${data.usageType}, Usage: ${data.current}/${data.limit}`,
-    );
+    
   }
 
   handleQuotaWarning(data) {
@@ -678,16 +676,15 @@ class TenantManager extends EventEmitter {
   }
 
   async shutdown() {
-    console.log("🔄 Arrêt TenantManager...");
-
+    
     if (this.db) {
       this.db.close((err) => {
-        if (err) console.error("❌ Erreur fermeture DB tenant:", err.message);
-        else console.log("✅ Base tenant fermée");
+        if (err) 
+        else 
       });
     }
 
-    console.log("✅ TenantManager arrêté");
+    
   }
 }
 

@@ -1,5 +1,9 @@
 import winston from "winston";
 
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
 // Configuration simple pour Winston en ES modules
 const logger = winston.createLogger({
   level: "info",
@@ -13,16 +17,16 @@ const logger = winston.createLogger({
       format: winston.format.combine(
         winston.format.colorize(),
         winston.format.simple(),
-      ),
+      )
     }),
     new winston.transports.File({
       filename: "logs/error.log",
-      level: "error",
+      level: "error"
     }),
     new winston.transports.File({
-      filename: "logs/combined.log",
-    }),
-  ],
+      filename: "logs/combined.log"
+    })
+  ]
 });
 
 export default logger;

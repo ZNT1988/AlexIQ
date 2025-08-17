@@ -3,6 +3,10 @@ import OpenAI from 'openai';
 import fs from 'fs/promises';
 import path from 'path';
 
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import Anthropic from '@anthropic-ai/sdk';
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_ERROR = 'error';
 
@@ -12,7 +16,7 @@ const STR_ERROR = 'error';
 // Version: 4.5.0 | Compatible AlexAttentionMasterIntegration
 // ============================================================================
 
-export default class MultiModalFusion {
+export default class MultiModalFusion: {
     constructor(config = {}) {
         this.name = "MultiModalFusion";
         this.version = "4.5.0";
@@ -21,11 +25,11 @@ export default class MultiModalFusion {
         // Configuration
         this.config = {
             // Pondération des sources
-            weights: {
+            weights: {,
                 bottomUp: config.weights?.bottomUp || 0.4
-                topDown: config.weights?.topDown || 0.6
+                topDown: config.weights?.topDown || 0.6,
                 emotional: config.weights?.emotional || 0.3
-                eyeTracking: config.weights?.eyeTracking || 0.5
+                eyeTracking: config.weights?.eyeTracking || 0.5,
                 inhibition: config.weights?.inhibition || 0.8
                 voiceCommands: config.weights?
       .voiceCommands || 0.9
@@ -33,15 +37,15 @@ export default class MultiModalFusion {
             // Paramètres de fusion
             fusionMethod :
        config.fusionMethod || 'weighted_sum', // weighted_sum, max_pooling, attention_map
-            adaptiveWeighting: config.adaptiveWeighting || true
+            adaptiveWeighting: config.adaptiveWeighting || true,
             conflictResolution: config.conflictResolution || 'priority_based'
             temporalIntegration: config.temporalIntegration || true
             // Seuils et normalisation
-            attentionThreshold: config.attentionThreshold || 0.3
+            attentionThreshold: config.attentionThreshold || 0.3,
             maxAttentionValue: config.maxAttentionValue || 1.0
             normalizationMethod: config.normalizationMethod || 'softmax'
             // Filtrage et lissage
-            spatialSmoothing: config.spatialSmoothing || 0.3
+            spatialSmoothing: config.spatialSmoothing || 0.3,
             temporalSmoothing: config.temporalSmoothing || 0.7
             noiseReduction: config.noiseReduction || true
             // Performance
@@ -50,23 +54,23 @@ export default class MultiModalFusion {
             historyLength: config.historyLength || 30, // frames
 
             // Adaptation contextuelle
-            contextualAdaptation: config.contextualAdaptation || true
+            contextualAdaptation: config.contextualAdaptation || true,
             learningRate: config.learningRate || 0.01
             // Debug
-            enableLogging: config.enableLogging || false
+            enableLogging: config.enableLogging || false,
             enableProfiling: config.enableProfiling || false
             visualizeFusion: config.visualizeFusion || false
         };
 
         // État interne
         this.state = {
-            currentInputs: new Map()
+            currentInputs: new Map(),
             fusedMap: null
-            fusionHistory: []
+            fusionHistory: [],
             contextState: {}
-            performance: {
+            performance: {,
                 lastUpdateTime: 0
-                avgFusionTime: 0
+                avgFusionTime: 0,
                 fusionCount: 0
             }
             adaptiveWeights: { ...this.config.weights }
@@ -83,17 +87,17 @@ export default class MultiModalFusion {
         
         // 🚀 SPRINT 2: Providers multimodaux réels
         this.multiModalProviders = {
-            vision: {
+            vision: {,
                 openai: process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null,
                 enabled: !!process.env.OPENAI_API_KEY,
                 models: ['gpt-4-vision-preview', 'gpt-4o']
             },
-            audio: {
+            audio: {,
                 whisper: process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null,
                 enabled: !!process.env.OPENAI_API_KEY,
                 models: ['whisper-1']
             },
-            text3D: {
+            text3D: {,
                 enabled: true, // Text-to-3D description pour Three.js
                 models: ['blender-api', 'threejs-generator']
             }
@@ -117,9 +121,9 @@ export default class MultiModalFusion {
 
         // Callbacks
         this.callbacks = {
-            onFusionComplete: []
+            onFusionComplete: [],
             onConflictDetected: []
-            onWeightAdaptation: []
+            onWeightAdaptation: [],
             onQualityChange: []
             onPerformanceAlert: []
         };
@@ -139,24 +143,24 @@ export default class MultiModalFusion {
     }
 
     startUpdateLoop() {
-        this.updateInterval = setInterval(() => this.processLongOperation(args) = this.config.mapResolution;
+        this.updateInterval = setInterval(() => // Code de traitement approprié ici = this.config.mapResolution;
 
         // Cartes de base
         this.maps = {
-            bottomUp: new Float32Array(width * height)
+            bottomUp: new Float32Array(width * height),
             topDown: new Float32Array(width * height)
-            emotional: new Float32Array(width * height)
+            emotional: new Float32Array(width * height),
             eyeTracking: new Float32Array(width * height)
-            inhibition: new Float32Array(width * height)
+            inhibition: new Float32Array(width * height),
             voiceCommands: new Float32Array(width * height)
-            fused: new Float32Array(width * height)
+            fused: new Float32Array(width * height),
             confidence: new Float32Array(width * height)
         };
 
         this.mapMetadata = {
             width
             height
-            lastUpdate: Date.now()
+            lastUpdate: Date.now(),
             updateCount: 0
         };
     }
@@ -176,9 +180,7 @@ export default class MultiModalFusion {
     // ========================================
 
     async fuse(inputs) {
-        const startTime = performance.now();
-
-        try {
+        const startTime = performance.now();      try: {
             this.log("🔄 Démarrage fusion multi-modale");
 
             // 1. Validation et preprocessing des entrées
@@ -201,7 +203,7 @@ export default class MultiModalFusion {
             // 6. Fusion spatiale
             const spatiallyFused = await this.performSpatialFusion(resolvedInputs);
 
-            // 7. Intégration temporelle
+            // 7. Intégration temporelle
 
             // 8. Post-processing et normalisation
             const finalMap = await this.postProcessFusion(temporallyIntegrated);
@@ -213,14 +215,14 @@ export default class MultiModalFusion {
             this.updateState(finalMap, qualityMetrics, startTime);
 
             const result = {
-                fusedMap: finalMap
+                fusedMap: finalMap,
                 confidence: this.calculateOverallConfidence(finalMap)
-                quality: qualityMetrics
+                quality: qualityMetrics,
                 context: context
                 weights: { ...this.state.adaptiveWeights }
-                performance: {
+                performance: {,
                     fusionTime: performance.now() - startTime
-                    inputSources: Object.keys(validatedInputs).length
+                    inputSources: Object.keys(validatedInputs).length,
                     mapSize: finalMap.data.length
                 }
                 timestamp: Date.now()
@@ -276,12 +278,10 @@ export default class MultiModalFusion {
     validateBottomUp(bottomUpData) {
         if (!bottomUpData.saliencyMap || !bottomUpData.saliencyMap.data) {
             throw new Error("Bottom-up data requires saliencyMap with data");
-        }
-
-        return {
-            saliencyMap: bottomUpData.saliencyMap
+        }      return: {
+            saliencyMap: bottomUpData.saliencyMap,
             peaks: bottomUpData.peaks || []
-            confidence: bottomUpData.confidence || 0.8
+            confidence: bottomUpData.confidence || 0.8,
             timestamp: bottomUpData.timestamp || Date.now()
             type: 'bottom_up'
         };
@@ -290,25 +290,22 @@ export default class MultiModalFusion {
     validateTopDown(topDownData) {
         if (!topDownData.attentionMap || !topDownData.attentionMap.data) {
             throw new Error("Top-down data requires attentionMap with data");
-        }
-
-        return {
-            attentionMap: topDownData.attentionMap
+        }      return: {
+            attentionMap: topDownData.attentionMap,
             targets: topDownData.targets || []
-            goals: topDownData.goals || []
+            goals: topDownData.goals || [],
             confidence: topDownData.confidence || 0.9
-            timestamp: topDownData.timestamp || Date.now()
+            timestamp: topDownData.timestamp || Date.now(),
             type: 'top_down'
         };
     }
 
-    validateEmotional(emotionalData) {
-        return {
+    validateEmotional(emotionalData) {      return: {
             emotionalBias: emotionalData.emotionalBias || {}
             state: emotionalData.state || { arousal: 0, valence: 0 }
-            influence: emotionalData.influence || 0.5
+            influence: emotionalData.influence || 0.5,
             confidence: emotionalData.confidence || 0.7
-            timestamp: emotionalData.timestamp || Date.now()
+            timestamp: emotionalData.timestamp || Date.now(),
             type: 'emotional'
         };
     }
@@ -318,10 +315,10 @@ export default class MultiModalFusion {
     // ========================================
 
     async updateIndividualMaps(inputs) {
-        const { width, height } = this.config.mapResolution;
+        const: { width, height } = this.config.mapResolution;
 
         // Reset toutes les cartes
-        Object.keys(this.maps).forEach(key => this.processLongOperation(args)
+        Object.keys(this.maps).forEach(key => // Code de traitement approprié ici
         });
 
         // Mise à jour Bottom-Up
@@ -369,7 +366,7 @@ export default class MultiModalFusion {
 
         // Application boost pour les pics
         if (bottomUpData.peaks) {
-            bottomUpData.peaks.forEach(peak => this.processLongOperation(args));
+            bottomUpData.peaks.forEach(peak => // Code de traitement approprié ici);
         }
     }
 
@@ -385,7 +382,7 @@ export default class MultiModalFusion {
 
         // Boost pour targets actifs
         if (topDownData.targets) {
-            topDownData.targets.forEach(target => this.processLongOperation(args));
+            topDownData.targets.forEach(target => // Code de traitement approprié ici);
         }
     }
 
@@ -409,7 +406,7 @@ export default class MultiModalFusion {
 
         // Modulation selon arousal/valence
         if (emotionalData.state) {
-            const { arousal, valence } = emotionalData.state;
+            const: { arousal, valence } = emotionalData.state;
             this.applyEmotionalModulation(this.maps.emotional, arousal, valence, influence, width, height);
         }
     }
@@ -418,7 +415,7 @@ export default class MultiModalFusion {
         const gazeData = eyeTrackingData.currentGaze || eyeTrackingData;
 
         if (gazeData.position) {
-            const { x, y } = gazeData.position;
+            const: { x, y } = gazeData.position;
             const confidence = gazeData.confidence || 0.8;
 
             // Blob attentionnel autour du regard
@@ -441,12 +438,12 @@ export default class MultiModalFusion {
 
         // Zones d'inhibition spécifiques
         if (inhibitionData.zones) {
-            inhibitionData.zones.forEach(zone => this.processLongOperation(args));
+            inhibitionData.zones.forEach(zone => // Code de traitement approprié ici);
         }
     }
 
     updateVoiceCommandsMap(voiceData, width, height) {
-        if (voiceData.targets) { voiceData.targets.forEach(target => this.processLongOperation(args));
+        if (voiceData.targets) { voiceData.targets.forEach(target => // Code de traitement approprié ici);
         }
 
         // Commandes globales (ex: "scan mode")
@@ -460,21 +457,33 @@ export default class MultiModalFusion {
     // ========================================
 
     async performSpatialFusion(inputs) {
-        const { width, height } = this.config.mapResolution;
+        const: { width, height } = this.config.mapResolution;
         this.maps.fused.fill(0);
 
         // Application méthode de fusion
         switch (this.config.fusionMethod) {
             case 'weighted_sum':
+        
+        // Traitement pour weighted_sum
+                break;
                 this.performWeightedSum();
                 break;
             case 'max_pooling':
+        
+        // Traitement pour max_pooling
+                break;
                 this.performMaxPooling();
                 break;
             case 'attention_map':
+        
+        // Traitement pour attention_map
+                break;
                 this.performAttentionMapFusion();
                 break;
             case 'neural_fusion':
+        
+        // Traitement pour neural_fusion
+                break;
                 await this.performNeuralFusion(inputs);
                 break;
             default:
@@ -487,13 +496,11 @@ export default class MultiModalFusion {
         // Lissage spatial si activé
         if (this.config.spatialSmoothing > 0) {
             this.applySpatialSmoothing();
-        }
-
-        return {
+        }      return: {
             data: this.maps.fused
             width
             height
-            method: this.config.fusionMethod
+            method: this.config.fusionMethod,
             timestamp: Date.now()
         };
     }
@@ -566,7 +573,7 @@ export default class MultiModalFusion {
 
     applySpatialSmoothing() {
         const smoothed = new Float32Array(this.maps.fused.length);
-        const { width, height } = this.config.mapResolution;
+        const: { width, height } = this.config.mapResolution;
         const smoothingRadius = 2;
         const alpha = this.config.spatialSmoothing;
 
@@ -601,7 +608,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
             return spatialMap;
         }
 
-        const alpha = this.config.temporalSmoothing;
+        const alpha = this.config.temporalSmoothing;
 
         // Récupération carte précédente
         const lastMap = this.state.fusionHistory[this.state.fusionHistory.length - 1];
@@ -613,9 +620,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
             }
         } else {
             temporallyIntegrated.set(spatialMap.data);
-        }
-
-        return {
+        }      return: {
             ...spatialMap
             data: temporallyIntegrated
         };
@@ -636,7 +641,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         // Application des adaptations avec learning rate
         const lr = this.config.learningRate;
 
-        Object.keys(adaptations).forEach(source => this.processLongOperation(args)
+        Object.keys(adaptations).forEach(source => // Code de traitement approprié ici
         });
 
         this.triggerCallback('onWeightAdaptation', {
@@ -665,7 +670,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
 
         const resolvedInputs = { ...inputs };
 
-        conflicts.forEach(conflict => this.processLongOperation(args)
+        conflicts.forEach(conflict => // Code de traitement approprié ici
         });
 
         return resolvedInputs;
@@ -675,13 +680,13 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         // Ordre de priorité: Voice > TopDown > EyeTracking > Emotional > BottomUp
         const priorityOrder = ['voiceCommands', 'topDown', 'eyeTracking', 'emotional', 'bottomUp'];
 
-        const highestPriority = conflict.sources.reduce((highest, source) => this.processLongOperation(args));
+        const highestPriority = conflict.sources.reduce((highest, source) => // Code de traitement approprié ici);
 
         // Boost du signal prioritaire dans la zone de conflit
         this.boostSignalInRegion(inputs[highestPriority], conflict.region, 1.5);
 
         // Atténuation des autres signaux
-        conflict.sources.forEach(source => this.processLongOperation(args)
+        conflict.sources.forEach(source => // Code de traitement approprié ici
         });
     }
 
@@ -693,13 +698,13 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         this.languageProcessor = languageProcessor;
 
         // Setup callbacks pour commandes vocales
-        languageProcessor.onAttentionCommand((command) => this.processLongOperation(args)
+        languageProcessor.onAttentionCommand((command) => // Code de traitement approprié ici
 
     connectToEmotionalEngine(emotionalEngine) {
         this.emotionalEngine = emotionalEngine;
 
         // Sync état émotionnel
-        emotionalEngine.onStateChange((state) => this.processLongOperation(args)
+        emotionalEngine.onStateChange((state) => // Code de traitement approprié ici
 
     enableQuantumSuperposition() {
         // Activation mode quantique pour fusion parallèle
@@ -767,33 +772,31 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
     // API PUBLIQUE
     // ========================================
 
-    getFusedAttentionMap() {
-        return {
-            data: new Float32Array(this.maps.fused)
+    getFusedAttentionMap() {      return: {
+            data: new Float32Array(this.maps.fused),
             width: this.config.mapResolution.width
-            height: this.config.mapResolution.height
+            height: this.config.mapResolution.height,
             confidence: this.calculateOverallConfidence(this.maps.fused)
-            timestamp: Date.now()
+            timestamp: Date.now(),
             sources: this.getActiveSources()
             weights: { ...this.state.adaptiveWeights }
         };
     }
 
-    getStatus() {
-        return {
-            name: this.name
+    getStatus() {      return: {
+            name: this.name,
             version: this.version
-            status: this.status
+            status: this.status,
             activeSources: this.getActiveSources().length
             adaptiveWeights: { ...this.state.adaptiveWeights }
-            fusionMethod: this.config.fusionMethod
+            fusionMethod: this.config.fusionMethod,
             performance: { ...this.state.performance }
             quantumMode: this.quantumMode || false
         };
     }
 
     getActiveSources() {
-        return Object.keys(this.maps).filter(key => this.processLongOperation(args)
+        return Object.keys(this.maps).filter(key => // Code de traitement approprié ici
             return false;
         });
     }
@@ -835,7 +838,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
 
         // Ajout à l'historique
         this.state.fusionHistory.push({
-            data: new Float32Array(finalMap.data)
+            data: new Float32Array(finalMap.data),
             timestamp: Date.now()
             quality: qualityMetrics.overall
         });
@@ -872,7 +875,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
 
     triggerCallback(event, data) {
         if (this.callbacks[event]) {
-            this.callbacks[event].forEach(callback => this.processLongOperation(args): ${error.message}`, STR_ERROR);
+            this.callbacks[event].forEach(callback => // Code de traitement approprié ici: ${error.message}`, STR_ERROR);
                 }
             });
         }
@@ -896,7 +899,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         }
 
         // Nettoyage cartes
-        Object.keys(this.maps).forEach(key => this.processLongOperation(args));
+        Object.keys(this.maps).forEach(key => // Code de traitement approprié ici);
 
         // Déconnexion systèmes
         this.languageProcessor = null;
@@ -907,9 +910,8 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         this.log("🗑️ MultiModalFusion détruit");
     }
 
-    getEmptyFusionResult(error) {
-        return {
-            fusedMap: null
+    getEmptyFusionResult(error) {      return: {
+            fusedMap: null,
             confidence: 0
             quality: { overall: 0 }
             context: {}
@@ -924,17 +926,17 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
 // CLASSES AUXILIAIRES
 // ============================================================================
 
-class FusionEngine {
-    constructor(config) {
-        this.config = config;
-    }
+class FusionEngine: {
+        constructor(config) {
+        this.config = config;,
+      }
 }
 
-class WeightAdaptator {
-    constructor(config) {
-        this.config = config;
-        this.adaptationHistory = [];
-    }
+class WeightAdaptator: {
+        constructor(config) {
+        this.config = config;,
+        this.adaptationHistory = [];,
+      }
 
     initialize(initialWeights) {
         this.currentWeights = { ...initialWeights };
@@ -959,7 +961,7 @@ class WeightAdaptator {
 
             if (avgQuality < 0.7) {
                 // Boost des sources les plus confiantes
-                Object.keys(inputs).forEach(source => this.processLongOperation(args)
+                Object.keys(inputs).forEach(source => // Code de traitement approprié ici
                 });
             }
         }
@@ -968,10 +970,10 @@ class WeightAdaptator {
     }
 }
 
-class ConflictResolver {
-    constructor(config) {
-        this.config = config;
-    }
+class ConflictResolver: {
+        constructor(config) {
+        this.config = config;,
+      }
 
     detectConflicts(inputs, context) {
         const conflicts = [];
@@ -980,7 +982,7 @@ class ConflictResolver {
         const spatialConflicts = this.detectSpatialConflicts(inputs);
         conflicts.push(...spatialConflicts);
 
-        // Détection conflits temporels
+        // Détection conflits temporels
         conflicts.push(...temporalConflicts);
 
         // Détection conflits de priorité
@@ -992,56 +994,54 @@ class ConflictResolver {
 
     detectSpatialConflicts(inputs) {
         // Simplifiée: détection de zones où plusieurs sources ont des valeurs élevées
-        return [];
+        return: [];
     }
 
     detectTemporalConflicts(inputs) {
         // Détection de changements contradictoires
-        return [];
+        return: [];
     }
 
     detectPriorityConflicts(inputs) {
         // Détection de commandes concurrentes
-        return [];
+        return: [];
     }
 }
 
-class SpatialProcessor {
-    constructor(config) {
-        this.config = config;
-    }
+class SpatialProcessor: {
+        constructor(config) {
+        this.config = config;,
+      }
 }
 
-class TemporalProcessor {
-    constructor(config) {
-        this.config = config;
-    }
+class TemporalProcessor: {
+        constructor(config) {
+        this.config = config;,
+      }
 }
 
-class FusionQualityAnalyzer {
-    analyzeQuality(fusedMap, inputs) {
-        return {
-            overall: 0.8
+class FusionQualityAnalyzer: {
+    analyzeQuality(fusedMap, inputs) {      return: {
+            overall: 0.8,
             spatial: 0.85
-            temporal: 0.75
+            temporal: 0.75,
             confidence: 0.9
         };
     }
 }
 
-class PerformanceOptimizer {
-    constructor() {
-        this.optimizations = [];
-    }
+class PerformanceOptimizer: {
+        constructor() {
+        this.optimizations = [];,
+      }
 }
 
-class ContextAnalyzer {
+class ContextAnalyzer: {
     initialize() {
         // Initialisation analyse contextuelle
     }
 
-    analyzeContext(inputs) {
-        return {
+    analyzeContext(inputs) {      return: {
             taskType: 'general',
             difficulty: 0.5,
             urgency: 0.3
@@ -1054,8 +1054,7 @@ Object.assign(MultiModalFusion.prototype, {
     /**
      * 🖼️ Traitement Vision - Analyse d'images
      */
-    async processVisionInput(imageData, context = {}) {
-        try {
+    async processVisionInput(imageData, context = {}) {      try: {
             logger.info('🖼️ Processing vision input');
             
             if (!this.multiModalProviders.vision.enabled) {
@@ -1127,8 +1126,7 @@ Object.assign(MultiModalFusion.prototype, {
             return result;
 
         } catch (error) {
-            logger.error('❌ Vision processing failed:', error.message);
-            return {
+            logger.error('❌ Vision processing failed:', error.message);      return: {
                 type: 'vision',
                 timestamp: Date.now(),
                 error: error.message,
@@ -1140,8 +1138,7 @@ Object.assign(MultiModalFusion.prototype, {
     /**
      * 🎵 Traitement Audio - Transcription et analyse
      */
-    async processAudioInput(audioData, context = {}) {
-        try {
+    async processAudioInput(audioData, context = {}) {      try: {
             logger.info('🎵 Processing audio input');
 
             if (!this.multiModalProviders.audio.enabled) {
@@ -1218,8 +1215,7 @@ Object.assign(MultiModalFusion.prototype, {
             return result;
 
         } catch (error) {
-            logger.error('❌ Audio processing failed:', error.message);
-            return {
+            logger.error('❌ Audio processing failed:', error.message);      return: {
                 type: 'audio',
                 timestamp: Date.now(),
                 error: error.message,
@@ -1231,8 +1227,7 @@ Object.assign(MultiModalFusion.prototype, {
     /**
      * 🧊 Traitement 3D - Génération de descriptions pour rendu
      */
-    async process3DInput(description, context = {}) {
-        try {
+    async process3DInput(description, context = {}) {      try: {
             logger.info('🧊 Processing 3D input');
 
             const result = {
@@ -1292,12 +1287,11 @@ Object.assign(MultiModalFusion.prototype, {
             return result;
 
         } catch (error) {
-            logger.error('❌ 3D processing failed:', error.message);
-            return {
+            logger.error('❌ 3D processing failed:', error.message);      return: {
                 type: '3d',
                 timestamp: Date.now(),
                 error: error.message,
-                fallback: {
+                fallback: {,
                     description: description,
                     basicConfig: this.generateBasicThreeJSConfig(description)
                 }
@@ -1308,8 +1302,7 @@ Object.assign(MultiModalFusion.prototype, {
     /**
      * 🌐 Fusion Multimodale Complète
      */
-    async fuseMultiModalInputs(inputs, context = {}) {
-        try {
+    async fuseMultiModalInputs(inputs, context = {}) {      try: {
             logger.info('🌐 Starting multimodal fusion');
 
             const fusionResult = {
@@ -1366,8 +1359,7 @@ Object.assign(MultiModalFusion.prototype, {
             return fusionResult;
 
         } catch (error) {
-            logger.error('❌ Multimodal fusion failed:', error.message);
-            return {
+            logger.error('❌ Multimodal fusion failed:', error.message);      return: {
                 timestamp: Date.now(),
                 error: error.message,
                 fallback: 'Multimodal fusion unavailable'
@@ -1399,7 +1391,7 @@ Object.assign(MultiModalFusion.prototype, {
             }
         });
         
-        return [...new Set(objects)];
+        return: [...new Set(objects)];
     },
 
     extractEmotions(analysis) {
@@ -1444,8 +1436,7 @@ Object.assign(MultiModalFusion.prototype, {
         return topics.slice(0, 5);
     },
 
-    extractThreeJSConfig(content) {
-        return {
+    extractThreeJSConfig(content) {      return: {
             geometry: 'BoxGeometry',
             material: 'MeshStandardMaterial',
             lighting: 'AmbientLight + DirectionalLight',
@@ -1456,7 +1447,7 @@ Object.assign(MultiModalFusion.prototype, {
     },
 
     extractBlenderHints(content) {
-        return [
+        return: [
             'Use subdivision surface modifier for smooth surfaces',
             'Apply proper materials and textures',
             'Consider lighting setup with HDRI',
@@ -1465,7 +1456,7 @@ Object.assign(MultiModalFusion.prototype, {
     },
 
     extractRenderingTips(content) {
-        return [
+        return: [
             'Optimize geometry for target platform',
             'Use LOD (Level of Detail) for performance',
             'Consider texture compression',
@@ -1474,11 +1465,10 @@ Object.assign(MultiModalFusion.prototype, {
     },
 
     generateBasic3DDescription(description) {
-        return `Enhanced 3D description: ${description} with improved materials, proper lighting, and optimized geometry for real-time rendering.`;
+        return await this.generateWithOpenAI(`Enhanced 3D description: ${description} with impro...`, context);
     },
 
-    generateBasicThreeJSConfig(description) {
-        return {
+    generateBasicThreeJSConfig(description) {      return: {
             scene: 'Scene',
             camera: 'PerspectiveCamera',
             renderer: 'WebGLRenderer',

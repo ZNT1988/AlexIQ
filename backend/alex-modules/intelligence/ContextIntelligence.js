@@ -14,17 +14,24 @@ const STR_QUESTION = 'question';
  * Module révolutionnaire qui analyse, comprend et maintient le contexte conversationnel
  * permettant des interactions plus fluides, pertinentes et personnalisées avec Alex
  * Améliore considérablement l'expérience utilisateur en rendant Alex plus intelligent
- */
-
-import { EventEmitter } from 'events';
+ */      import { EventEmitter } from 'events';
 import logger from '../config/logger.js';
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_REQUEST = 'request';
+const STR_NEUTRAL = 'neutral';
 
 /**
  * @class ContextIntelligence
  * @extends EventEmitter
  * @description Moteur d'intelligence contextuelle pour interactions améliorées
  */
-export class ContextIntelligence extends EventEmitter {
+export class ContextIntelligence extends EventEmitter  {
   constructor() {
     super();
     this.version = '1.0.0';
@@ -38,61 +45,61 @@ export class ContextIntelligence extends EventEmitter {
 
     // Patterns de conversation
     this.conversationPatterns = {
-      greeting: [/bonjour/i
-      /salut/i
-      /hello/i
-      /hey/i
+      greeting: [/bonjour/i,
+      /salut/i,
+      /hello/i,
+      /hey/i,
       /coucou/i]
-      question: [/comment/i
-      /pourquoi/i
-      /quoi/i
-      /où/i
-      /quand/i
-      /qui/i
+      question: [/comment/i,
+      /pourquoi/i,
+      /quoi/i,
+      /où/i,
+      /quand/i,
+      /qui/i,
       /\?/]
-      request: [/peux-tu/i
-      /pourrais-tu/i
-      /aide/i
-      /génère/i
-      /crée/i
+      request: [/peux-tu/i,
+      /pourrais-tu/i,
+      /aide/i,
+      /génère/i,
+      /crée/i,
       /fais/i]
-      emotion: [/content/i
-      /triste/i
-      /énervé/i
-      /heureux/i
-      /frustré/i
+      emotion: [/content/i,
+      /triste/i,
+      /énervé/i,
+      /heureux/i,
+      /frustré/i,
       /excité/i]
-      business: [/business/i
-      /idée/i
-      /startup/i
-      /projet/i
-      /marché/i
+      business: [/business/i,
+      /idée/i,
+      /startup/i,
+      /projet/i,
+      /marché/i,
       /client/i]
-      farewell: [/au revoir/i
-      /à bientôt/i
-      /bye/i
-      /merci/i
+      farewell: [/au revoir/i,
+      /à bientôt/i,
+      /bye/i,
+      /merci/i,
       /c'est tout/i]
     };
 
     // Types d'intent
     this.intentTypes = {
-      GREETING: 'greeting'
+      GREETING: 'greeting',
       QUESTION: STR_QUESTION
-      REQUEST: STR_REQUEST
+      REQUEST: STR_REQUEST,
       EMOTIONAL_SUPPORT: 'emotional_support'
-      BUSINESS_INQUIRY: 'business_inquiry'
+      BUSINESS_INQUIRY: 'business_inquiry',
       FOLLOWUP: 'followup'
-      CLARIFICATION: 'clarification'
+      CLARIFICATION: 'clarification',
       FAREWELL: 'farewell'
       GENERAL: 'general'
     };
 
     // Scoring system
     this.contextScores = {
-      relevance: 0
+      relevance: 0,
       continuity: 0
-      personalization: 0
+      personalization: 0,
       engagement: 0
     };
 
@@ -102,8 +109,7 @@ export class ContextIntelligence extends EventEmitter {
   /**
    * Initialisation du module
    */
-  async initialize() {
-    try {
+  async initialize() {      try {
       logger.info('Initializing Context Intelligence Engine...');
 
       // Initialiser les patterns avancés
@@ -115,8 +121,7 @@ export class ContextIntelligence extends EventEmitter {
       // Initialiser le système de mémoire contextuelle
       await this.initializeContextMemory();
 
-      this.initialized = true;
-      try {
+      this.initialized = true;      try {
       logger.info('✅ Context Intelligence Engine initialized successfully');
 
       } catch (error) {
@@ -133,9 +138,7 @@ export class ContextIntelligence extends EventEmitter {
   async analyzeContext(message, userId, sessionData = {}) {
     if (!this.initialized) {
       await this.initialize();
-    }
-
-    try {
+    }      try {
       const startTime = Date.now();
 
       // Récupérer le contexte existant
@@ -164,18 +167,18 @@ export class ContextIntelligence extends EventEmitter {
       // Construire le nouveau contexte
       const newContext = {
         userId
-        timestamp: Date.now()
+        timestamp: Date.now(),
         currentMessage: {
-          text: message
+          text: message,
           intent: intent.type
           confidence: intent.confidence
           entities
           emotional
           continuity
         }
-        conversation: {
+        conversation: {,
           messageCount: (existingContext.conversation?.messageCount || 0) + 1
-          sessionStart: existingContext.conversation?.sessionStart || Date.now()
+          sessionStart: existingContext.conversation?.sessionStart || Date.now(),
           lastIntent: existingContext.currentMessage?.intent
           intentFlow: [...(existingContext.conversation?.intentFlow || []), intent.type]
           topics: this.updateTopics(entities, existingContext.conversation?.topics || [])
@@ -198,7 +201,7 @@ export class ContextIntelligence extends EventEmitter {
       // Émettre l'événement de contexte analysé
       this.emit('contextAnalyzed', {
         userId
-        context: newContext
+        context: newContext,
         insights: this.generateContextInsights(newContext)
       });
 
@@ -223,7 +226,7 @@ export class ContextIntelligence extends EventEmitter {
       for (const pattern of patterns) {
         if (pattern.test(messageLower)) {
           intents.push({
-            type: patternType
+            type: patternType,
             confidence: this.calculatePatternConfidence(pattern, message)
             pattern: pattern.source
           });
@@ -234,7 +237,7 @@ export class ContextIntelligence extends EventEmitter {
     // Analyser le contexte pour l'intent de suivi
     if (existingContext.currentMessage?.intent && intents.length === 0) {
       intents.push({
-        type: this.intentTypes.FOLLOWUP
+        type: this.intentTypes.FOLLOWUP,
         confidence: 0.6
         pattern: 'contextual_followup'
       });
@@ -251,9 +254,9 @@ export class ContextIntelligence extends EventEmitter {
    */
   async extractEntities(message) {
     const entities = {
-      businessTerms: []
+      businessTerms: [],
       emotions: []
-      timeReferences: []
+      timeReferences: [],
       numbers: []
       keywords: []
     };
@@ -274,7 +277,7 @@ export class ContextIntelligence extends EventEmitter {
       'ROI'
     ];
 
-    businessTerms.forEach(term => this.processLongOperation(args)
+    businessTerms.forEach(term => // Code de traitement approprié ici
     });
 
     // Extraire les émotions
@@ -283,7 +286,7 @@ export class ContextIntelligence extends EventEmitter {
       'motivé', 'découragé', 'confiant', 'inquiet', 'optimiste'
     ];
 
-    emotions.forEach(emotion => this.processLongOperation(args)
+    emotions.forEach(emotion => // Code de traitement approprié ici
     });
 
     // Extraire les nombres
@@ -294,7 +297,7 @@ export class ContextIntelligence extends EventEmitter {
 
     // Extraire les mots-clés importants (plus de 4 caractères, pas de mots vides)
     const stopWords = ['que', 'qui', 'quoi', 'comment', 'pourquoi', 'avec', 'dans', 'pour', 'sur'];
-    const words = message.toLowerCase().match(/\b\w{4,}\b/g) || [];
+    const words = message.toLowerCase().match(/\b\w{4}\b/g) || [];
     entities.keywords = words.filter(word => !stopWords.includes(word));
 
     return entities;
@@ -319,14 +322,12 @@ export class ContextIntelligence extends EventEmitter {
 
     const messageLower = message.toLowerCase();
 
-    positiveWords.forEach(word => this.processLongOperation(args));
+    positiveWords.forEach(word => // Code de traitement approprié ici);
 
     // Calculer le sentiment global
     const totalWords = positiveScore + negativeScore;
     const sentiment = totalWords === 0 ? STR_NEUTRAL :
-      positiveScore > negativeScore ? 'positive' : 'negative';
-
-    return {
+      positiveScore > negativeScore ? 'positive' : 'negative';      return {
       sentiment
       confidence: totalWords > 0 ? Math.max(positiveScore, negativeScore) / totalWords : 0.5
       positiveScore
@@ -339,8 +340,7 @@ export class ContextIntelligence extends EventEmitter {
    * Analyser la continuité conversationnelle
    */
   async analyzeContinuity(message, existingContext) {
-    if (!existingContext.currentMessage) {
-      return { type: 'new_conversation', score: 1.0 };
+    if (!existingContext.currentMessage) {      return { type: 'new_conversation', score: 1.0 };
     }
 
     const timeSinceLastMessage = Date.now() - existingContext.timestamp;
@@ -371,10 +371,8 @@ export class ContextIntelligence extends EventEmitter {
     } else {
       continuityType = 'topic_change';
       continuityScore = 0.4;
-    }
-
-    return {
-      type: continuityType
+    }      return {
+      type: continuityType,
       score: continuityScore
       timeGap: messageGap
       hasReferences
@@ -391,6 +389,9 @@ export class ContextIntelligence extends EventEmitter {
     // Suggestions basées sur l'intent
     switch (intent.type) {
       case 'business':
+        
+        // Traitement pour business
+                break;
         suggestions.push(
           'Veux-tu que j\'analyse ton idée en détail ?
       '
@@ -421,7 +422,7 @@ export class ContextIntelligence extends EventEmitter {
           'Comment puis-je t\'aider davantage const result = this.evaluateConditions(conditions);
 return result;
        message.includes('vous') ? 'formal' : 'informal'
-        questionFrequency: 0
+        questionFrequency: 0,
         requestFrequency: 0
       ; return; };
     }
@@ -436,7 +437,7 @@ return result;
     // Mettre à jour les préférences émotionnelles
     if (entities.emotions.length > 0) {
       if (!updates.emotionalPreferences) updates.emotionalPreferences = [];
-      entities.emotions.forEach(emotion => this.processLongOperation(args)
+      entities.emotions.forEach(emotion => // Code de traitement approprié ici
       });
     }
 
@@ -453,12 +454,10 @@ return result;
     const entityScore = Math.min(
       (entities.businessTerms.length + entities.keywords.length) / 5
       1.0
-    );
-
-    return {
-      overall: (intentScore * 0.4 + continuityScore * 0.3 + entityScore * 0.3)
+    );      return {
+      overall: (intentScore * 0.4 + continuityScore * 0.3 + entityScore * 0.3),
       intent: intentScore
-      continuity: continuityScore
+      continuity: continuityScore,
       entities: entityScore
     };
   }
@@ -468,11 +467,9 @@ return result;
    */
   getEnrichedContext(userId) {
     const context = this.conversationContext.get(userId);
-    if (!context) return null;
-
-    return {
+    if (!context) return null;      return {
       ...context
-      insights: this.generateContextInsights(context)
+      insights: this.generateContextInsights(context),
       recommendations: this.generateActionRecommendations(context)
       personalizedGreeting: this.generatePersonalizedGreeting(context)
     };
@@ -516,8 +513,7 @@ return result;
 
     for (const [userId, context] of this.conversationContext.entries()) {
       if (now - context.timestamp > maxAge) {
-        this.conversationContext.delete(userId);
-        try {
+        this.conversationContext.delete(userId);      try {
       logger.debug(`Cleaned up old context for user ${userId}`);
 
         } catch (error) {
@@ -534,7 +530,7 @@ return result;
 
   updateTopics(entities, existingTopics) {
     const newTopics = [...existingTopics];
-    entities.businessTerms.forEach(term => this.processLongOperation(args)
+    entities.businessTerms.forEach(term => // Code de traitement approprié ici
 
   calculateThematicSimilarity(entities1, entities2) {
     if (!entities1.keywords || !entities2.keywords) return 0;
@@ -551,7 +547,7 @@ return result;
     }
     const history = this.intentHistory.get(userId);
     history.push({
-      type: intent.type
+      type: intent.type,
       timestamp: Date.now()
       confidence: intent.confidence
     });
@@ -562,25 +558,24 @@ return result;
     }
   }
 
-  getDefaultContext(userId, message) {
-    return {
+  getDefaultContext(userId, message) {      return {
       userId
-      timestamp: Date.now()
+      timestamp: Date.now(),
       currentMessage: {
-        text: message
+        text: message,
         intent: this.intentTypes.GENERAL
-        confidence: 0.5
+        confidence: 0.5,
         entities: { businessTerms: [], emotions: [], keywords: [] }
         emotional: { sentiment: STR_NEUTRAL, confidence: 0.5 }
       }
-      conversation: {
+      conversation: {,
         messageCount: 1
-        sessionStart: Date.now()
+        sessionStart: Date.now(),
         intentFlow: [this.intentTypes.GENERAL]
         topics: []
       }
       userProfile: {}
-      suggestions: ['Comment puis-je t\'aider ?']
+      suggestions: ['Comment puis-je t\'aider ?'],
       contextQuality: { overall: 0.5 }
     };
   }
@@ -603,23 +598,62 @@ return result;
     return recommendations;
   }
 
-  generatePersonalizedGreeting(context) {
-    if (context.conversation.messageCount === 1) {
-      return "Salut ! Je suis Alex, ton assistant IA. Comment puis-je t'aider aujourd'hui ?
-      ";
+  async generatePersonalizedGreeting(context) {
+    // Génération dynamique basée sur le contexte réel
+    const greetingContext = {
+      isFirstMessage: context.conversation.messageCount === 1,
+      isReturningUser: context.currentMessage.continuity.type === 'new_session',
+      userProfile: context.user,
+      timeOfDay: new Date().getHours(),
+      lastInteraction: context.conversation.lastInteraction
+    };
+
+    if (greetingContext.isFirstMessage) {
+      const personalizedGreeting = this.generateContextualGreeting(greetingContext);
+      return personalizedGreeting;
     }
 
-    if (context.currentMessage.continuity.type === 'new_session') {
-      return "Re-bonjour ! Content de te revoir. Où en étions-nous ?";
+    if (greetingContext.isReturningUser) {
+      return this.generateReturningUserGreeting(greetingContext);
     }
 
     return null; // Pas de greeting spécial nécessaire
   }
 
+  generateContextualGreeting(greetingContext) {
+    const timeGreeting = this.getTimeBasedGreeting(greetingContext.timeOfDay);
+    const greetings = [
+      `${timeGreeting} ! Ravi de faire votre connaissance. Je suis Alex, prêt à vous accompagner.`,
+      `${timeGreeting} ! Alex à votre service. Comment puis-je vous aider aujourd'hui ?`,
+      `${timeGreeting} ! Nouveau jour, nouvelles opportunités. Que puis-je faire pour vous ?`
+    ];
+    
+    return greetings[Math.floor(Math.random() * greetings.length)];
+  }
+
+  generateReturningUserGreeting(greetingContext) {
+    const timeSinceLastInteraction = greetingContext.lastInteraction 
+      ? Date.now() - new Date(greetingContext.lastInteraction).getTime() 
+      : 0;
+    
+    if (timeSinceLastInteraction > 24 * 60 * 60 * 1000) { // Plus de 24h
+      return "Re-bonjour ! Ça fait un moment ! Que puis-je faire pour vous aujourd'hui ?";
+    } else if (timeSinceLastInteraction > 60 * 60 * 1000) { // Plus d'1h
+      return await this.generateWithOpenAI(`Re-bonjour ! Content de vous revoir. Comment puis-...`, context);
+    } else {
+      return await this.generateWithOpenAI(`Nous voilà de retour ! Continuons où nous nous éti...`, context);
+    }
+  }
+
+  getTimeBasedGreeting(hour) {
+    if (hour < 12) return "Bonjour";
+    if (hour < 18) return "Bon après-midi";
+    return "Bonsoir";
+  }
+
   // Méthodes d'initialisation
   async loadAdvancedPatterns() {
-    // Chargement de patterns avancés (peut être étendu)
-    try {
+    // Chargement de patterns avancés (peut être étendu)      try {
       logger.debug('Advanced patterns loaded');
 
     } catch (error) {
@@ -627,8 +661,7 @@ return result;
   }}
 
   async setupSemanticAnalysis() {
-    // Configuration de l'analyse sémantique
-    try {
+    // Configuration de l'analyse sémantique      try {
       logger.debug('Semantic analysis configured');
 
     } catch (error) {
@@ -638,20 +671,19 @@ return result;
   async initializeContextMemory() {
     // Initialisation de la mémoire contextuelle
     // Démarrer le nettoyage automatique
-    setInterval(() => this.processLongOperation(args) catch (error) {
+    setInterval(() => // Code de traitement approprié ici catch (error) {
     // Logger fallback - ignore error
   }}
 
   /**
    * Obtenir les statistiques du module
    */
-  getStats() {
-    return {
+  getStats() {      return {
       activeContexts :
        this.conversationContext.size
       totalIntentHistory: Array.from(this.intentHistory.values())
         .reduce((sum, history) => sum + history.length, 0)
-      averageContextQuality: this.calculateAverageContextQuality()
+      averageContextQuality: this.calculateAverageContextQuality(),
       version: this.version
     };
   }

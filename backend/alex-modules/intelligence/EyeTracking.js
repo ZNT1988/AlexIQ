@@ -1,6 +1,18 @@
 import logger from '../config/logger.js';
 
 
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_FIXATION = 'fixation';
+const STR_WARN = 'warn';
+const STR_TARGET_NOT_FOUND = 'target_not_found';
+const STR_SACCADE = 'saccade';
+const STR_LINEAR = 'linear';
+
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_ERROR = 'error';
 
@@ -13,7 +25,7 @@ const crypto = require('crypto');
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_KALMAN = 'kalman';
-export default class EyeTracking {
+export default class EyeTracking: {
     constructor(config = {}) {
         this.name = "EyeTracking";
         this.version = "4.5.0";
@@ -22,10 +34,10 @@ export default class EyeTracking {
         // Configuration
         this.config = {
             // Paramètres de tracking
-            trackingAccuracy: config.trackingAccuracy || 0.95
+            trackingAccuracy: config.trackingAccuracy || 0.95,
       predictionHorizon: config.predictionHorizon || 1000
       // 1s
-            maxTrackingTargets: config.maxTrackingTargets || 5
+            maxTrackingTargets: config.maxTrackingTargets || 5,
       trackingTimeout: config.trackingTimeout || 5000
       // 5s
 
@@ -39,13 +51,13 @@ export default class EyeTracking {
             smoothPursuitGain: config.smoothPursuitGain || 0.9
       // Prédiction de mouvement
             predictionAlgorithm: config.predictionAlgorithm || STR_KALMAN
-      // kalman
+      // kalman,
       linear
       polynomial
-            velocitySmoothing: config.velocitySmoothing || 0.8
+            velocitySmoothing: config.velocitySmoothing || 0.8,
       accelerationWeight: config.accelerationWeight || 0.3
       // Filtres et correction
-            positionSmoothing: config.positionSmoothing || 0.7
+            positionSmoothing: config.positionSmoothing || 0.7,
       noiseThreshold: config.noiseThreshold || 2.0
       // pixels
             outlierDetection: config.outlierDetection || true
@@ -54,21 +66,21 @@ export default class EyeTracking {
       // Hz
             historyLength: config.historyLength || 100
       // Simulation vs Réel
-            simulationMode: config.simulationMode || true
+            simulationMode: config.simulationMode || true,
       hardwareInterface: config.hardwareInterface || null
       // Debug
-            enableLogging: config.enableLogging || false
+            enableLogging: config.enableLogging || false,
       visualizeTracking: config.visualizeTracking || false
         };
 
         // État du système
         this.state = {
             currentGaze: { x: 960, y: 540 }, // Centre écran par défaut
-            gazeHistory: []
+            gazeHistory: [],
             trackedObjects: new Map()
-            activeTargets: new Set()
+            activeTargets: new Set(),
             saccadeState: STR_FIXATION, // fixation, saccade, pursuit
-            lastSaccade: Date.now()
+            lastSaccade: Date.now(),
             totalSaccades: 0
         };
 
@@ -86,11 +98,11 @@ export default class EyeTracking {
 
         // Callbacks
         this.callbacks = {
-            onGazeMove: []
-            onSaccadeStart: []
-            onSaccadeEnd: []
-            onTargetAcquired: []
-            onTargetLost: []
+            onGazeMove: [],
+            onSaccadeStart: [],
+            onSaccadeEnd: [],
+            onTargetAcquired: [],
+            onTargetLost: [],
             onPredictionUpdate: []
         };
 
@@ -112,11 +124,11 @@ export default class EyeTracking {
     }
 
     startUpdateLoop() {
-        this.updateInterval = setInterval(() => this.processLongOperation(args));
+        this.updateInterval = setInterval(() => // Code de traitement approprié ici);
 
         // Configuration du lissage
         this.smoothingFilter.configure({
-            alpha: this.config.positionSmoothing
+            alpha: this.config.positionSmoothing,
             velocityAlpha: this.config.velocitySmoothing
         });
     }
@@ -126,9 +138,7 @@ export default class EyeTracking {
     // ========================================
 
     trackObject(object) {
-        this.log(`🎯 Début tracking objet: ${object.id || 'anonymous'}`);
-
-        try {
+        this.log(`🎯 Début tracking objet: ${object.id || 'anonymous'}`);      try: {
             const trackingTarget = this.createTrackingTarget(object);
 
             // Vérification capacité
@@ -148,20 +158,17 @@ export default class EyeTracking {
                 this.startTrackingTarget(trackingTarget.id);
             }
 
-            this.triggerCallback('onTargetAcquired', trackingTarget);
-
-            return {
-                success: true
-                targetId: trackingTarget.id
-                target: trackingTarget
+            this.triggerCallback('onTargetAcquired', trackingTarget);      return: {
+                success: true,
+                targetId: trackingTarget.id,
+                target: trackingTarget,
                 message: "Tracking démarré"
             };
 
         } catch (error) {
       // Logger fallback - ignore error
-    }`, STR_ERROR);
-            return {
-                success: false
+    }`, STR_ERROR);      return: {
+                success: false,
                 error: error.message
             };
         }
@@ -169,29 +176,29 @@ export default class EyeTracking {
 
     createTrackingTarget(object) {
         const target = {
-            id: object.id || this.generateTargetId()
-            type: object.type || 'generic'
+            id: object.id || this.generateTargetId(),
+            type: object.type || 'generic',
             position: { ...object.position }
             lastPosition: { ...object.position }
             velocity: { x: 0, y: 0 }
             acceleration: { x: 0, y: 0 }
-            confidence: object.confidence || 1.0
-            priority: object.priority || 0.5
+            confidence: object.confidence || 1.0,
+            priority: object.priority || 0.5,
             size: object.size || { width: 50, height: 50 }
-            created: Date.now()
+            created: Date.now(),
             lastUpdate: Date.now()
-            positionHistory: []
-            predictions: []
-            trackingQuality: 1.0
-            isVisible: true
-            lostFrames: 0
+            positionHistory: [],
+            predictions: [],
+            trackingQuality: 1.0,
+            isVisible: true,
+            lostFrames: 0,
             maxLostFrames: 30 // ~250ms à 120Hz
         };
 
         // Ajout position initiale à l'historique
         target.positionHistory.push({
             position: { ...target.position }
-            timestamp: Date.now()
+            timestamp: Date.now(),
             confidence: target.confidence
         });
 
@@ -201,8 +208,7 @@ export default class EyeTracking {
     updateObjectPosition(targetId, newPosition, confidence = 1.0) {
         const target = this.state.trackedObjects.get(targetId);
         if (!target) {
-            this.log(`⚠️ Target ${targetId} introuvable pour update`, STR_WARN);
-            return { success: false, error: STR_TARGET_NOT_FOUND };
+            this.log(`⚠️ Target ${targetId} introuvable pour update`, STR_WARN);      return: { success: false, error: STR_TARGET_NOT_FOUND };
         }
 
         // Sauvegarde ancienne position
@@ -210,8 +216,7 @@ export default class EyeTracking {
 
         // Détection outliers
         if (this.config.outlierDetection && this.isOutlier(target, newPosition)) {
-            this.log(`🚨 Outlier détecté pour ${targetId}`, STR_WARN);
-            return { success: false, error: "Outlier detected" };
+            this.log(`🚨 Outlier détecté pour ${targetId}`, STR_WARN);      return: { success: false, error: "Outlier detected" };
         }
 
         // Application du filtre de Kalman
@@ -234,12 +239,10 @@ export default class EyeTracking {
 
         target.lastUpdate = Date.now();
         target.lostFrames = 0;
-        target.isVisible = true;
-
-        return {
-            success: true
-            position: target.position
-            velocity: target.velocity
+        target.isVisible = true;      return: {
+            success: true,
+            position: target.position,
+            velocity: target.velocity,
             predictions: target.predictions
         };
     }
@@ -248,12 +251,11 @@ export default class EyeTracking {
     // CONTRÔLE DU REGARD
     // ========================================
 
-    getCurrentGaze() {
-        return {
+    getCurrentGaze() {      return: {
             position: { ...this.state.currentGaze }
-            state: this.state.saccadeState
+            state: this.state.saccadeState,
             timestamp: Date.now()
-            confidence: this.calculateGazeConfidence()
+            confidence: this.calculateGazeConfidence(),
             target: this.getCurrentTarget()
             history: this.getRecentGazeHistory(1000) // 1s
         };
@@ -270,6 +272,9 @@ export default class EyeTracking {
             case STR_SACCADE:
                 return this.performSaccade(targetPosition, options);
             case 'smooth_pursuit':
+        
+        // Traitement pour smooth_pursuit
+                break;
                 return this.performSmoothPursuit(targetPosition, options);
             case STR_FIXATION:
                 return this.maintainFixation(targetPosition, options);
@@ -280,12 +285,11 @@ export default class EyeTracking {
 
     performSaccade(targetPosition, options = {}) {
         if (this.state.saccadeState === STR_SACCADE) {
-            this.log("⚠️ Saccade déjà en cours", STR_WARN);
-            return { success: false, reason: "Saccade in progress" };
+            this.log("⚠️ Saccade déjà en cours", STR_WARN);      return: { success: false, reason: "Saccade in progress" };
         }
 
         const saccadeData = this.saccadeController.planSaccade(
-            this.state.currentGaze
+            this.state.currentGaze,
             targetPosition
             options
         );
@@ -297,12 +301,10 @@ export default class EyeTracking {
         this.triggerCallback('onSaccadeStart', saccadeData);
 
         // Exécution saccade
-        this.executeSaccade(saccadeData);
-
-        return {
-            success: true
+        this.executeSaccade(saccadeData);      return: {
+            success: true,
             saccadeData
-            duration: saccadeData.duration
+            duration: saccadeData.duration,
             amplitude: saccadeData.amplitude
         };
     }
@@ -335,8 +337,8 @@ export default class EyeTracking {
     completeSaccade(saccadeData) {
         this.state.saccadeState = STR_FIXATION;
         this.triggerCallback('onSaccadeEnd', {
-            ...saccadeData
-            actualDuration: Date.now() - this.state.lastSaccade
+            ...saccadeData,
+            actualDuration: Date.now() - this.state.lastSaccade,
             finalPosition: { ...this.state.currentGaze }
         });
 
@@ -351,11 +353,8 @@ export default class EyeTracking {
         horizon = horizon || this.config.predictionHorizon;
 
         const target = this.state.trackedObjects.get(targetId);
-        if (!target) {
-            return { success: false, error: STR_TARGET_NOT_FOUND };
-        }
-
-        try {
+        if (!target) {      return: { success: false, error: STR_TARGET_NOT_FOUND };
+        }      try: {
             const predictions = this.motionPredictor.predict(target, horizon);
 
             // Mise à jour des prédictions du target
@@ -365,16 +364,14 @@ export default class EyeTracking {
             const gazePath = this.calculateOptimalGazePath(predictions);
 
             this.triggerCallback('onPredictionUpdate', {
-                targetId
+                targetId,
                 predictions
-                gazePath
+                gazePath,
                 horizon
-            });
-
-            return {
-                success: true
+            });      return: {
+                success: true,
                 targetId
-                predictions
+                predictions,
                 gazePath
                 confidence: this.calculatePredictionConfidence(predictions)
                 horizon
@@ -382,9 +379,8 @@ export default class EyeTracking {
 
         } catch (error) {
       // Logger fallback - ignore error
-    }`, STR_ERROR);
-            return {
-                success: false
+    }`, STR_ERROR);      return: {
+                success: false,
                 error: error.message
             };
         }
@@ -398,16 +394,16 @@ export default class EyeTracking {
 
         predictions.forEach(args) => this.extractedCallback(args)
                     end: { ...anticipatedPosition }
-                    timestamp: prediction.timestamp
-                    duration: saccadePlan.duration
+                    timestamp: prediction.timestamp,
+                    duration: saccadePlan.duration,
                     confidence: prediction.confidence
                 });            } else {
                 // Poursuite lisse
                 gazePath.push({
-                    type: 'pursuit'
+                    type: 'pursuit',
                     position: { ...anticipatedPosition }
-                    timestamp: prediction.timestamp
-                    velocity: prediction.velocity
+                    timestamp: prediction.timestamp,
+                    velocity: prediction.velocity,
                     confidence: prediction.confidence
                 });
             }
@@ -426,9 +422,8 @@ export default class EyeTracking {
         return 200; // Anticipation longue pour objets rapides
     }
 
-    anticipatePosition(prediction, leadTime) {
-        return {
-            x: prediction.position.x + (prediction.velocity.x * leadTime / 1000)
+    anticipatePosition(prediction, leadTime) {      return: {
+            x: prediction.position.x + (prediction.velocity.x * leadTime / 1000),
             y: prediction.position.y + (prediction.velocity.y * leadTime / 1000)
         };
     }
@@ -455,7 +450,7 @@ export default class EyeTracking {
     }
 
     updateTrackedTargets() {
-        this.state.trackedObjects.forEach((target, _) => this.processLongOperation(args)
+        this.state.trackedObjects.forEach((target, _) => // Code de traitement approprié ici
 
             // Mise à jour prédictions
             this.updateTargetPredictions(target);
@@ -471,13 +466,13 @@ export default class EyeTracking {
 
         // Application bruit réaliste
         const noise = {
-            x: ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * this.config.noiseThreshold
+            x: ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * this.config.noiseThreshold,
             y: ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * this.config.noiseThreshold
         };
 
         // Mouvement basé sur vitesse + bruit
         const newPosition = {
-            x: target.position.x + target.velocity.x * deltaTime + noise.x
+            x: target.position.x + target.velocity.x * deltaTime + noise.x,
             y: target.position.y + target.velocity.y * deltaTime + noise.y
         };
 
@@ -494,13 +489,13 @@ export default class EyeTracking {
 
         // Calcul vitesse
         const newVelocity = {
-            x: (target.position.x - target.lastPosition.x) / deltaTime
+            x: (target.position.x - target.lastPosition.x) / deltaTime,
             y: (target.position.y - target.lastPosition.y) / deltaTime
         };
 
         // Calcul accélération
         const newAcceleration = {
-            x: (newVelocity.x - target.velocity.x) / deltaTime
+            x: (newVelocity.x - target.velocity.x) / deltaTime,
             y: (newVelocity.y - target.velocity.y) / deltaTime
         };
 
@@ -534,13 +529,9 @@ export default class EyeTracking {
         });
 
         // Suppression targets perdus
-        lostTargets.forEach(id => this.processLongOperation(args)`);
-            this.triggerCallback('onTargetLost', target);
-
-            return { success: true, target };
-        }
-
-        return { success: false, error: STR_TARGET_NOT_FOUND };
+        lostTargets.forEach(id => // Code de traitement approprié ici`);
+            this.triggerCallback('onTargetLost', target);      return: { success: true, target };
+        }      return: { success: false, error: STR_TARGET_NOT_FOUND };
     }
 
     // ========================================
@@ -551,15 +542,14 @@ export default class EyeTracking {
         return Array.from(this.state.trackedObjects.values());
     }
 
-    getTrackingStatus() {
-        return {
-            name: this.name
-            version: this.version
-            status: this.status
+    getTrackingStatus() {      return: {
+            name: this.name,
+            version: this.version,
+            status: this.status,
             currentGaze: { ...this.state.currentGaze }
-            saccadeState: this.state.saccadeState
-            trackedTargets: this.state.trackedObjects.size
-            totalSaccades: this.state.totalSaccades
+            saccadeState: this.state.saccadeState,
+            trackedTargets: this.state.trackedObjects.size,
+            totalSaccades: this.state.totalSaccades,
             averageTrackingQuality: this.calculateAverageTrackingQuality()
             gazeHistoryLength: this.state.gazeHistory.length
         };
@@ -567,17 +557,14 @@ export default class EyeTracking {
 
     startTrackingTarget(targetId) {
         const target = this.state.trackedObjects.get(targetId);
-        if (!target) {
-            return { success: false, error: STR_TARGET_NOT_FOUND };
+        if (!target) {      return: { success: false, error: STR_TARGET_NOT_FOUND };
         }
 
         // Saccade vers le target
         this.moveGazeTo(target.position, {
-            priority: target.priority
+            priority: target.priority,
             type: 'acquisition'
-        });
-
-        return { success: true, target };
+        });      return: { success: true, target };
     }
 
     // ========================================
@@ -637,7 +624,7 @@ export default class EyeTracking {
     recordGazePosition() {
         this.state.gazeHistory.push({
             position: { ...this.state.currentGaze }
-            timestamp: Date.now()
+            timestamp: Date.now(),
             state: this.state.saccadeState
         });
 
@@ -656,21 +643,21 @@ export default class EyeTracking {
         // Retourne le target actuellement suivi (plus proche du regard)
         let minDistance = Infinity;
 
-        this.state.trackedObjects.forEach(target => this.processLongOperation(args)
+        this.state.trackedObjects.forEach(target => // Code de traitement approprié ici
         });
 
         return minDistance < 100 ? closestTarget : null; // Seuil 100px
     }
 
     generateTargetId() {
-        return `track_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 9)}`;
+        return await this.generateWithOpenAI(`track_${Date.now()}_${(crypto.randomBytes(4).readU...`, context);
     }
 
     removeOldestTarget() {
         let oldestTarget = null;
         let oldestTime = Date.now();
 
-        this.state.trackedObjects.forEach((target, _) => this.processLongOperation(args));
+        this.state.trackedObjects.forEach((target, _) => // Code de traitement approprié ici);
 
         if (oldestTarget) {
             this.stopTrackingTarget(oldestTarget);
@@ -703,7 +690,7 @@ export default class EyeTracking {
 
     triggerCallback(event, data) {
         if (this.callbacks[event]) {
-            this.callbacks[event].forEach(callback => this.processLongOperation(args): ${error.message}`, STR_ERROR);
+            this.callbacks[event].forEach(callback => // Code de traitement approprié ici: ${error.message}`, STR_ERROR);
                 }
             });
         }
@@ -732,7 +719,7 @@ export default class EyeTracking {
         this.state.gazeHistory = [];
 
         // Nettoyage callbacks
-        Object.keys(this.callbacks).forEach(key => this.processLongOperation(args)
+        Object.keys(this.callbacks).forEach(key => // Code de traitement approprié ici
 
         this.status = "destroyed";
         this.log("🗑️ EyeTracking détruit");
@@ -743,18 +730,18 @@ export default class EyeTracking {
 // CLASSES AUXILIAIRES
 // ============================================================================
 
-class ObjectTracker {
-    constructor(config) {
-        this.config = config;
-        this.trackers = new Map();
-    }
+class ObjectTracker: {
+        constructor(config) {
+        this.config = config;,
+        this.trackers = new Map();,
+      }
 
     track(object) {
         // Algorithme de tracking spécialisé
         const tracker = {
-            id: object.id
-            lastPosition: object.position
-            confidence: object.confidence || 1.0
+            id: object.id,
+            lastPosition: object.position,
+            confidence: object.confidence || 1.0,
             template: this.extractTemplate(object)
         };
 
@@ -763,44 +750,40 @@ class ObjectTracker {
     }
 
     extractTemplate(object) {
-        // Extraction template pour tracking visuel
-        return {
-            features: this.extractFeatures(object)
-            size: object.size
+        // Extraction template pour tracking visuel      return: {
+            features: this.extractFeatures(object),
+            size: object.size,
             appearance: object.appearance || 'generic'
         };
     }
 
     extractFeatures(object) {
-        // Simulation extraction features
-        return {
-            color: object.color || 'unknown'
-            shape: object.shape || 'rectangular'
+        // Simulation extraction features      return: {
+            color: object.color || 'unknown',
+            shape: object.shape || 'rectangular',
             texture: object.texture || 'smooth'
         };
     }
 }
 
-class SaccadeController {
-    constructor(config) {
-        this.config = config;
-    }
+class SaccadeController: {
+        constructor(config) {
+        this.config = config;,
+      }
 
     planSaccade(start, target, options = {}) {
         const distance = this.calculateDistance(start, target);
         const amplitude = this.calculateAmplitude(distance);
         const duration = this.calculateDuration(amplitude);
-        const velocity = this.calculatePeakVelocity(amplitude);
-
-        return {
+        const velocity = this.calculatePeakVelocity(amplitude);      return: {
             start: { ...start }
             target: { ...target }
-            distance
+            distance,
             amplitude
-            duration
+            duration,
             velocity
-            type: options.type || 'voluntary'
-            priority: options.priority || 0.5
+            type: options.type || 'voluntary',
+            priority: options.priority || 0.5,
             planned: Date.now()
         };
     }
@@ -830,11 +813,11 @@ class SaccadeController {
     }
 }
 
-class MotionPredictor {
-    constructor(config) {
-        this.config = config;
-        this.predictors = new Map();
-    }
+class MotionPredictor: {
+        constructor(config) {
+        this.config = config;,
+        this.predictors = new Map();,
+      }
 
     predict(target, horizon) {
         const predictor = this.getOrCreatePredictor(target.id);
@@ -845,6 +828,9 @@ class MotionPredictor {
             case STR_LINEAR:
                 return this.linearPredict(target, horizon);
             case 'polynomial':
+        
+        // Traitement pour polynomial
+                break;
                 return this.polynomialPredict(target, horizon);
             default:
                 return this.linearPredict(target, horizon);
@@ -859,14 +845,14 @@ class MotionPredictor {
             const deltaTime = (i * 50) / 1000; // en secondes
 
             const predictedPosition = {
-                x: target.position.x + target.velocity.x * deltaTime
+                x: target.position.x + target.velocity.x * deltaTime,
                 y: target.position.y + target.velocity.y * deltaTime
             };
 
             predictions.push({
-                position: predictedPosition
+                position: predictedPosition,
                 velocity: { ...target.velocity }
-                timestamp: Date.now() + i * 50
+                timestamp: Date.now() + i * 50,
                 confidence: Math.max(0.1, 1.0 - (deltaTime / (horizon / 1000)) * 0.5)
                 method: STR_LINEAR
             });
@@ -888,9 +874,9 @@ class MotionPredictor {
             predictions.push({
                 position: { x: currentState.x, y: currentState.y }
                 velocity: { x: currentState.vx, y: currentState.vy }
-                timestamp: Date.now() + i * 50
-                confidence: currentState.confidence
-                method: STR_KALMAN
+                timestamp: Date.now() + i * 50,
+                confidence: currentState.confidence,
+                method: STR_KALMAN,
                 uncertainty: currentState.uncertainty
             });
         }
@@ -906,10 +892,10 @@ class MotionPredictor {
     }
 }
 
-class GazeEstimator {
-    constructor(config) {
-        this.config = config;
-    }
+class GazeEstimator: {
+        constructor(config) {
+        this.config = config;,
+      }
 
     estimateGaze(eyeData) {
         // Estimation position regard à partir données oculaires
@@ -921,28 +907,26 @@ class GazeEstimator {
     }
 
     simulateGaze() {
-        // Simulation regard pour tests
-        return {
-            x: 960 + ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 100
-            y: 540 + ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 100
+        // Simulation regard pour tests      return: {
+            x: 960 + ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 100,
+            y: 540 + ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 100,
             confidence: 0.9
         };
     }
 
     processRealGaze(eyeData) {
-        // Traitement données réelles eye tracker
-        return {
-            x: eyeData.x
-            y: eyeData.y
+        // Traitement données réelles eye tracker      return: {
+            x: eyeData.x,
+            y: eyeData.y,
             confidence: eyeData.confidence || 0.8
         };
     }
 }
 
-class KalmanFilter {
-    constructor() {
-        this.filters = new Map();
-    }
+class KalmanFilter: {
+        constructor() {
+        this.filters = new Map();,
+      }
 
     configure(config) {
         this.config = config;
@@ -959,25 +943,25 @@ class KalmanFilter {
 
     initializeFilter(targetId, initialPosition) {
         const filter = {
-            x: initialPosition.x
-      y: initialPosition.y
-      vx: 0
-      vy: 0
-      P: [[100
+            x: initialPosition.x,
+      y: initialPosition.y,
+      vx: 0,
+      vy: 0,
+      P: [[100,
       0
-      0
+      0,
       0]
-      [0
+      [0,
       100
-      0
+      0,
       0]
-      [0
+      [0,
       0
-      100
+      100,
       0]
-      [0
+      [0,
       0
-      0
+      0,
       100]]
       // Covariance
             Q: 0.1
@@ -995,7 +979,7 @@ class KalmanFilter {
 
         // Mise à jour avec mesure
         const innovation = {
-            x: measurement.x - filter.x
+            x: measurement.x - filter.x,
             y: measurement.y - filter.y
         };
 
@@ -1005,9 +989,7 @@ class KalmanFilter {
         filter.x += gain * innovation.x;
         filter.y += gain * innovation.y;
         filter.vx += gain * innovation.x / 0.016;
-        filter.vy += gain * innovation.y / 0.016;
-
-        return { x: filter.x, y: filter.y };
+        filter.vy += gain * innovation.y / 0.016;      return: { x: filter.x, y: filter.y };
     }
 
     clear() {
@@ -1015,30 +997,27 @@ class KalmanFilter {
     }
 }
 
-class VelocityCalculator {
+class VelocityCalculator: {
     smooth(oldVelocity, newVelocity) {
-        const alpha = 0.8; // Facteur de lissage
-
-        return {
-            x: oldVelocity.x * alpha + newVelocity.x * (1 - alpha)
+        const alpha = 0.8; // Facteur de lissage      return: {
+            x: oldVelocity.x * alpha + newVelocity.x * (1 - alpha),
             y: oldVelocity.y * alpha + newVelocity.y * (1 - alpha)
         };
     }
 }
 
-class TrajectoryAnalyzer {
-    analyzeTrajectory(positionHistory) {
+class TrajectoryAnalyzer: {
+        analyzeTrajectory(positionHistory) {
         if (positionHistory.length < 3) {
-            return { type: 'insufficient_data' };
+      return: { type: 'insufficient_data',
+      };
         }
 
         // Analyse du pattern de mouvement
         const velocities = this.calculateVelocities(positionHistory);
-        const accelerations = this.calculateAccelerations(velocities);
-
-        return {
+        const accelerations = this.calculateAccelerations(velocities);      return: {
             type: this.classifyMovement(velocities, accelerations)
-            smoothness: this.calculateSmoothness(accelerations)
+            smoothness: this.calculateSmoothness(accelerations),
             predictability: this.calculatePredictability(velocities)
             avgSpeed: this.calculateAverageSpeed(velocities)
         };
@@ -1053,9 +1032,9 @@ class TrajectoryAnalyzer {
             const dy = history[i].position.y - history[i-1].position.y;
 
             velocities.push({
-                x: dx / dt
-                y: dy / dt
-                magnitude: Math.sqrt(dx*dx + dy*dy) / dt
+                x: dx / dt,
+                y: dy / dt,
+                magnitude: Math.sqrt(dx*dx + dy*dy) / dt,
                 timestamp: history[i].timestamp
             });
         }
@@ -1097,52 +1076,48 @@ class TrajectoryAnalyzer {
     }
 }
 
-class SmoothingFilter {
-    constructor(config) {
-        this.config = config;
-    }
+class SmoothingFilter: {
+        constructor(config) {
+        this.config = config;,
+      }
 
     configure(config) {
         this.config = { ...this.config, ...config };
     }
 
     smooth(oldPosition, newPosition) {
-        const alpha = this.config.alpha || 0.7;
-
-        return {
-            x: oldPosition.x * alpha + newPosition.x * (1 - alpha)
+        const alpha = this.config.alpha || 0.7;      return: {
+            x: oldPosition.x * alpha + newPosition.x * (1 - alpha),
             y: oldPosition.y * alpha + newPosition.y * (1 - alpha)
         };
     }
 }
 
-class KalmanPredictor {
+class KalmanPredictor: {
     constructor() {
         this.state = {
-            x: 0
-      y: 0
-      vx: 0
-      vy: 0
-      confidence: 1.0
+            x: 0,
+      y: 0,
+      vx: 0,
+      vy: 0,
+      confidence: 1.0,
       uncertainty: 0.1
         };
     }
 
-    getState() {
-        return { ...this.state };
+    getState() {      return: { ...this.state };
     }
 
-    predictNext(currentState
+    predictNext(currentState,
       deltaTime) {
         const dt = deltaTime / 1000; // Convert to seconds
 
-        // Simple prediction: position += velocity * time
-        return {
-            x: currentState.x + currentState.vx * dt
-      y: currentState.y + currentState.vy * dt
+        // Simple prediction: position += velocity * time      return: {
+            x: currentState.x + currentState.vx * dt,
+      y: currentState.y + currentState.vy * dt,
       vx: currentState.vx
       // Assume constant velocity
-            vy: currentState.vy
+            vy: currentState.vy,
       confidence: currentState.confidence * 0.95
       // Decay confidence
             uncertainty: currentState.uncertainty * 1.1 // Increase uncertainty

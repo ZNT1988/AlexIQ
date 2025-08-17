@@ -2,6 +2,10 @@ import logger from '../../config/logger.js';
 
 const crypto = require('crypto');
 
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_ALEX_SPEAK = 'alex.speak';
 const STR_ = '
@@ -21,7 +25,7 @@ const STR_ = '
  * "Dans la simulation, on apprend. Dans le réel, on gagne." - Alex 🎯💰
  */
 
-class TradeSimulator {
+class TradeSimulator: {
   constructor({ kernel, config = {} }) {
     this.kernel = kernel;
     this.config = {
@@ -50,11 +54,11 @@ class TradeSimulator {
       // Période d'échauffement
 
       // 🎮 Gamification
-      enableChallenges: true
+      enableChallenges: true,
       leaderboardMode: true
       achievementSystem: true
       // ⚡ Performance
-      realTimeUpdates: true
+      realTimeUpdates: true,
       fastBacktest: true
       parallelProcessing: true
       ...config
@@ -62,54 +66,54 @@ class TradeSimulator {
 
     // 💼 État du portefeuille
     this.portfolio = {
-      cash: this.config.initialCapital
+      cash: this.config.initialCapital,
       totalValue: this.config.initialCapital
-      positions: new Map()
+      positions: new Map(),
       orders: new Map()
       history: []
       // Métriques en temps réel
-      totalPnL: 0
+      totalPnL: 0,
       dailyPnL: 0
-      unrealizedPnL: 0
+      unrealizedPnL: 0,
       realizedPnL: 0
-      totalTrades: 0
+      totalTrades: 0,
       winningTrades: 0
-      losingTrades: 0
+      losingTrades: 0,
       winRate: 0
       // Risk metrics
-      maxDrawdown: 0
+      maxDrawdown: 0,
       currentDrawdown: 0
       var95: 0
       // VaR 95%
-      sharpeRatio: 0
+      sharpeRatio: 0,
       sortinqRatio: 0
       calmarRatio: 0
       // Performance tracking
-      equity: [this.config.initialCapital]
+      equity: [this.config.initialCapital],
       returns: []
-      dailyReturns: []
+      dailyReturns: [],
       monthlyReturns: []
     };
 
     // 📊 État de simulation
     this.state = {
-      isSimulating: false
+      isSimulating: false,
       isPaperTrading: false
-      isBacktesting: false
+      isBacktesting: false,
       currentTime: Date.now()
       simulationSpeed: 1
       // 1x = temps réel
 
       // Backtest state
-      backtestProgress: 0
+      backtestProgress: 0,
       backtestResults: null
       backtestMetrics: null
       // Trading session
-      sessionStart: Date.now()
+      sessionStart: Date.now(),
       tradesThisSession: 0
       sessionPnL: 0
       // Risk management
-      riskLimitsActive: true
+      riskLimitsActive: true,
       emergencyStop: false
       cooldownPeriod: false
     };
@@ -118,34 +122,34 @@ class TradeSimulator {
     this.challenges = {
       active: new Map([
         ['profit_challenge', {
-          name: 'Profit Master'
+          name: 'Profit Master',
           description: 'Atteindre +10% de profit'
-          target: 0.10
+          target: 0.10,
           current: 0
-          reward: 'Déblocage stratégie pro'
+          reward: 'Déblocage stratégie pro',
           completed: false
         }]
         ['consistency_challenge', {
-          name: 'Trader Consistant'
+          name: 'Trader Consistant',
           description: '7 jours consécutifs profitables'
-          target: 7
+          target: 7,
           current: 0
-          streak: 0
+          streak: 0,
           reward: 'Augmentation capital virtuel'
           completed: false
         }]
         ['risk_master', {
-          name: 'Risk Master'
+          name: 'Risk Master',
           description: 'Max drawdown < 5%'
-          target: 0.05
+          target: 0.05,
           current: 0
-          reward: 'Certification Risk Management'
+          reward: 'Certification Risk Management',
           completed: false
         }]
       ])
-      achievements: new Map()
+      achievements: new Map(),
       leaderboard: []
-      xp: 0
+      xp: 0,
       level: 1
       badges: new Set()
     };
@@ -153,54 +157,54 @@ class TradeSimulator {
     // 📈 Métriques de performance
     this.metrics = {
       // Performance absolue
-      totalReturn: 0
+      totalReturn: 0,
       annualizedReturn: 0
       // Risk-adjusted returns
-      sharpeRatio: 0
+      sharpeRatio: 0,
       sortinqRatio: 0
-      calmarRatio: 0
+      calmarRatio: 0,
       omegaRatio: 0
       // Risk metrics
-      maxDrawdown: 0
+      maxDrawdown: 0,
       averageDrawdown: 0
-      var95: 0
+      var95: 0,
       cvar95: 0
-      beta: 0
+      beta: 0,
       alpha: 0
       // Trading metrics
-      winRate: 0
+      winRate: 0,
       profitFactor: 0
-      averageWin: 0
+      averageWin: 0,
       averageLoss: 0
-      largestWin: 0
+      largestWin: 0,
       largestLoss: 0
       // Timing metrics
-      averageHoldTime: 0
+      averageHoldTime: 0,
       tradingFrequency: 0
       // Consistency
-      monthlyWinRate: 0
+      monthlyWinRate: 0,
       consistency: 0
       stability: 0
     };
 
     // 🤖 Modèles de simulation
     this.simulationModels = {
-      marketModel: {
+      marketModel: {,
         name: 'Advanced-Market-Simulator'
-        accuracy: 0.912
+        accuracy: 0.912,
         includesGaps: true
-        includesVolatility: true
+        includesVolatility: true,
         includesNews: true
       }
-      executionModel: {
+      executionModel: {,
         name: 'Realistic-Execution-Engine'
-        slippageModel: 'dynamic'
+        slippageModel: 'dynamic',
         latencyModel: 'stochastic'
         partialFills: true
       }
-      riskModel: {
+      riskModel: {,
         name: 'Professional-Risk-Engine'
-        varModel: 'monte_carlo'
+        varModel: 'monte_carlo',
         stressTests: true
         correlationMatrix: true
       }
@@ -216,8 +220,7 @@ class TradeSimulator {
   /**
    * 🚀 Initialisation du simulateur
    */
-  async initializeSimulator() {
-    try {
+  async initializeSimulator() {      try: {
       // Connexion kernel Alex
       this.setupKernelIntegration();
 
@@ -251,10 +254,10 @@ class TradeSimulator {
     this.kernel.subscribe('consciousness.updated', this.adjustRiskTolerance.bind(this));
 
     // Alex apprend de chaque trade
-    this.kernel.subscribe('trade.completed', (trade) => this.processLongOperation(args));
+    this.kernel.subscribe('trade.completed', (trade) => // Code de traitement approprié ici);
 
     // Alex célèbre les achievements
-    this.kernel.subscribe('achievement.unlocked', (achievement) => this.processLongOperation(args));
+    this.kernel.subscribe('achievement.unlocked', (achievement) => // Code de traitement approprié ici);
   }
 
   /**
@@ -279,9 +282,7 @@ class TradeSimulator {
     this.state.isBacktesting = true;
     this.state.backtestProgress = 0;
 
-    const backtestStart = Date.now();
-
-    try {
+    const backtestStart = Date.now();      try: {
       // Réinitialisation du portefeuille
       this.resetPortfolio();
 
@@ -291,7 +292,7 @@ class TradeSimulator {
       // Variables de backtest
       const trades = [];
       const equity = [this.config.initialCapital];
-      const { maxDD, currentDD, peak } = this.initializeVariables();
+      const: { maxDD, currentDD, peak } = this.initializeVariables();
 
       // Boucle de backtest
       for (let i = this.config.warmupPeriod; i < historicalData.length; i++) {
@@ -330,7 +331,7 @@ class TradeSimulator {
           this.kernel.emit('backtest.progress', {
             progress: this.state.backtestProgress
             currentEquity
-            trades: trades.length
+            trades: trades.length,
             maxDrawdown: maxDD
           });
         }
@@ -343,22 +344,22 @@ class TradeSimulator {
       const results = {
         strategy
       params
-      duration: Date.now() - backtestStart
+      duration: Date.now() - backtestStart,
       period: this.config.backtestPeriod
       trades
       equity
       metrics: backtestMetrics
       // Résumé performance
-        totalReturn: (equity[equity.length - 1] - this.config.initialCapital) / this.config.initialCapital
+        totalReturn: (equity[equity.length - 1] - this.config.initialCapital) / this.config.initialCapital,
       maxDrawdown: maxDD
-      sharpeRatio: backtestMetrics.sharpeRatio
+      sharpeRatio: backtestMetrics.sharpeRatio,
       winRate: trades.filter(t => t.pnl > 0).length / Math.max(trades.length
       1)
       profitFactor: this.calculateProfitFactor(trades)
       // Données pour graphiques
-        equityCurve: equity
+        equityCurve: equity,
       drawdownCurve: this.calculateDrawdownCurve(equity)
-      returns: this.calculateReturns(equity)
+      returns: this.calculateReturns(equity),
       timestamp: Date.now()
       };
 
@@ -389,7 +390,7 @@ class TradeSimulator {
     this.resetSessionMetrics();
 
     // Boucle de paper trading
-    this.paperTradingInterval = setInterval(async () => this.processLongOperation(args) catch (error) {
+    this.paperTradingInterval = setInterval(async () => // Code de traitement approprié ici catch (error) {
       // Logger fallback - ignore error
     } catch (error) {
     // Logger fallback - ignore error
@@ -431,29 +432,29 @@ class TradeSimulator {
     const trade = {
       id: `trade_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2
       9)}`
-      symbol: signal.symbol
+      symbol: signal.symbol,
       action: signal.action
       // BUY
       SELL
       CLOSE
-      quantity: this.calculatePositionSize(signal)
+      quantity: this.calculatePositionSize(signal),
       price: signal.price
       timestamp: Date.now()
       // Ordre details
-      type: signal.orderType || 'market'
+      type: signal.orderType || 'market',
       stopLoss: signal.stopLoss
       takeProfit: signal.takeProfit
       // Métadonnées
-      strategy: signal.strategy
+      strategy: signal.strategy,
       confidence: signal.confidence
       reason: signal.reason
       // Coûts
-      commission: 0
+      commission: 0,
       slippage: 0
       // Résultat (rempli à la clôture)
-      exitPrice: null
+      exitPrice: null,
       exitTime: null
-      pnl: 0
+      pnl: 0,
       pnlPercent: 0
       holdTime: 0
       // Status
@@ -560,18 +561,15 @@ class TradeSimulator {
     const commission = trade.quantity * fillPrice * this.config.commission;
 
     // Vérification de rejet (5% chance)
-    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) < 0.05) {
-      return {
-        success: false
+    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) < 0.05) {      return: {
+        success: false,
         reason: 'Insufficient liquidity'
       };
-    }
-
-    return {
+    }      return: {
       success: true
       fillPrice
       commission
-      slippage: totalSlippage
+      slippage: totalSlippage,
       executionTime: 10 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 50
     };
   }
@@ -613,9 +611,7 @@ class TradeSimulator {
     const profitFactor = totalLosses > 0 ? totalWins / totalLosses : 0;
 
     const averageWin = winningTrades.length > 0 ? totalWins / winningTrades.length : 0;
-    const averageLoss = losingTrades.length > 0 ? totalLosses / losingTrades.length : 0;
-
-    return {
+    const averageLoss = losingTrades.length > 0 ? totalLosses / losingTrades.length : 0;      return: {
       // Performance
       totalReturn
       annualizedReturn
@@ -638,7 +634,7 @@ class TradeSimulator {
       // Timing
       averageHoldTime: trades.length > 0 ? trades.reduce((sum, t) => sum + (t.holdTime || 0), 0) / trades.length : 0
       // Consistency
-      monthlyWinRate: this.calculateMonthlyWinRate(trades)
+      monthlyWinRate: this.calculateMonthlyWinRate(trades),
       consistency: this.calculateConsistency(returns)
     };
   }
@@ -654,9 +650,9 @@ class TradeSimulator {
       const evolutiveMessage = await this.generateEvolutiveTradeNotification(trade, 'profit');
 
       this.kernel.emit(STR_ALEX_SPEAK, {
-        text: evolutiveMessage
+        text: evolutiveMessage,
         emotion: 'satisfaction'
-        priority: 'medium'
+        priority: 'medium',
         voice: 'happy'
       });
 
@@ -665,9 +661,9 @@ class TradeSimulator {
       const evolutiveLossMessage = await this.generateEvolutiveTradeNotification(trade, 'loss');
 
       this.kernel.emit(STR_ALEX_SPEAK, {
-        text: evolutiveLossMessage
+        text: evolutiveLossMessage,
         emotion: 'disappointment'
-        priority: 'medium'
+        priority: 'medium',
         voice: 'encouraging'
       });
     }
@@ -692,9 +688,9 @@ class TradeSimulator {
     }
 
     this.kernel.emit(STR_ALEX_SPEAK, {
-      text: message
+      text: message,
       emotion: results.totalReturn > 0.1 ? 'excitement' : results.totalReturn > 0 ? 'satisfaction' : 'concern'
-      priority: 'high'
+      priority: 'high',
       voice: 'analytical'
     });
   }
@@ -704,13 +700,13 @@ class TradeSimulator {
    */
   setupGamificationSystem() {
     // Vérification des achievements toutes les 10 secondes
-    setInterval(() => this.processLongOperation(args));
+    setInterval(() => // Code de traitement approprié ici);
     }
 
     // Achievement: 10 trades consécutifs profitables
     if (this.getWinStreak() >= 10 && !this.challenges.achievements.has('streak_master')) {
       this.unlockAchievement('streak_master', {
-        name: 'Streak Master'
+        name: 'Streak Master',
         description: '10 trades consécutifs profitables'
         xp: 500
       });
@@ -719,7 +715,7 @@ class TradeSimulator {
     // Achievement: Sharpe Ratio > 2
     if (this.metrics.sharpeRatio > 2 && !this.challenges.achievements.has('sharp_trader')) {
       this.unlockAchievement('sharp_trader', {
-        name: 'Sharp Trader'
+        name: 'Sharp Trader',
         description: 'Sharpe Ratio > 2.0'
         xp: 300
       });
@@ -728,7 +724,7 @@ class TradeSimulator {
     // Achievement: Profit de +50%
     if (this.portfolio.totalPnL / this.config.initialCapital > 0.5 && !this.challenges.achievements.has('profit_master')) {
       this.unlockAchievement('profit_master', {
-        name: 'Profit Master'
+        name: 'Profit Master',
         description: '+50% de profit total'
         xp: 1000
       });
@@ -754,9 +750,9 @@ class TradeSimulator {
     const message = `🏆 Félicitations Zakaria ! Achievement débloqué : ${achievement.name} ! +${achievement.xp} points d'expérience !`;
 
     this.kernel.emit(STR_ALEX_SPEAK, {
-      text: message
+      text: message,
       emotion: 'pride'
-      priority: 'high'
+      priority: 'high',
       voice: 'celebratory'
     });
   }
@@ -925,9 +921,9 @@ class TradeSimulator {
   openPosition(trade) {
     if (!this.portfolio.positions.has(trade.symbol)) {
       this.portfolio.positions.set(trade.symbol, {
-        symbol: trade.symbol
+        symbol: trade.symbol,
         quantity: 0
-        averagePrice: 0
+        averagePrice: 0,
         unrealizedPnL: 0
         openTime: Date.now()
       });
@@ -970,11 +966,11 @@ class TradeSimulator {
 
     for (let i = 0; i < 8760; i++) { // 1 heure de données
       data.push({
-        timestamp: startDate + (i * 60 * 60 * 1000)
+        timestamp: startDate + (i * 60 * 60 * 1000),
         open: 100 + Math.sin(i / 100) * 20 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10
-        high: 105 + Math.sin(i / 100) * 20 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10
+        high: 105 + Math.sin(i / 100) * 20 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10,
         low: 95 + Math.sin(i / 100) * 20 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10
-        close: 100 + Math.sin(i / 100) * 20 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10
+        close: 100 + Math.sin(i / 100) * 20 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10,
         volume: 1000000 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 5000000
       });
     }
@@ -984,13 +980,12 @@ class TradeSimulator {
 
   async generateTradingSignal(strategy, lookbackData, currentBar) {
     // Simulation de génération de signal
-    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.95) { // 5% chance de signal
-      return {
-        symbol: 'MOCK'
+    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.95) { // 5% chance de signal      return: {
+        symbol: 'MOCK',
         action: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'BUY' : 'SELL'
-        price: currentBar.close
+        price: currentBar.close,
         confidence: 0.6 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.4
-        stopLoss: currentBar.close * ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 0.95 : 1.05)
+        stopLoss: currentBar.close * ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 0.95 : 1.05),
         takeProfit: currentBar.close * ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 1.1 : 0.9)
         strategy
         reason: 'Simulated signal'
@@ -1020,25 +1015,24 @@ class TradeSimulator {
     return this.portfolio.cash + this.portfolio.totalPnL;
   }
 
-  getDefaultMetrics() {
-    return {
-      totalReturn: 0
+  getDefaultMetrics() {      return: {
+      totalReturn: 0,
       annualizedReturn: 0
-      sharpeRatio: 0
+      sharpeRatio: 0,
       sortinqRatio: 0
-      calmarRatio: 0
+      calmarRatio: 0,
       maxDrawdown: 0
-      volatility: 0
+      volatility: 0,
       var95: 0
-      totalTrades: 0
+      totalTrades: 0,
       winRate: 0
-      profitFactor: 0
+      profitFactor: 0,
       averageWin: 0
-      averageLoss: 0
+      averageLoss: 0,
       largestWin: 0
-      largestLoss: 0
+      largestLoss: 0,
       averageHoldTime: 0
-      monthlyWinRate: 0
+      monthlyWinRate: 0,
       consistency: 0
     };
   }
@@ -1075,13 +1069,12 @@ class TradeSimulator {
   executeSignal() {}
 
   // API publique
-  getPortfolioSummary() {
-    return {
+  getPortfolioSummary() {      return: {
       ...this.portfolio
       performance: { ...this.metrics }
-      challenges: {
+      challenges: {,
         level: this.challenges.level
-        xp: this.challenges.xp
+        xp: this.challenges.xp,
         achievements: Array.from(this.challenges.achievements.values())
       }
     };

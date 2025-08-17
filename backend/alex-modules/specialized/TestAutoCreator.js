@@ -1,5 +1,14 @@
 import crypto from 'crypto';
 
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_INTEGRATION = 'integration';
+const STR_JEST = 'jest';
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_UNIT = 'unit';/**
  * @fileoverview TestAutoCreator - Générateur Automatique de Tests Révolutionnaire
@@ -92,13 +101,13 @@ import path from 'path';
  * - Détecte dépendances et les isole
  * - Optimise performance suite de tests
  *
- * @property {Object} codeAnalyzer - Analyseur code source avancé
- * @property {Object} testGenerators - Générateurs spécialisés par type
- * @property {Object} testDatabase - Base données tests générés
- * @property {Object} executionEngine - Moteur exécution tests
- * @property {Object} optimizationEngine - Optimiseur performance tests
+ * @property: {Object} codeAnalyzer - Analyseur code source avancé
+ * @property: {Object} testGenerators - Générateurs spécialisés par type
+ * @property: {Object} testDatabase - Base données tests générés
+ * @property: {Object} executionEngine - Moteur exécution tests
+ * @property: {Object} optimizationEngine - Optimiseur performance tests
  */
-export class TestAutoCreator {
+export class TestAutoCreator: {
     /**
      * @constructor
      * @description Initialise le générateur automatique de tests
@@ -106,12 +115,12 @@ export class TestAutoCreator {
      * Configure analyseurs de code, générateurs spécialisés et
      * infrastructure d'exécution pour création tests autonome
      *
-     * @param {Object} options - Configuration du générateur
-     * @param {Array} [options.frameworks] - Frameworks de test supportés
-     * @param {number} [options.targetCoverage=0.95] - Couverture cible
-     * @param {Array} [options.testTypes] - Types de tests à générer
-     * @param {boolean} [options.generateMocks=true] - Génération mocks auto
-     * @param {number} [options.maxTestsPerFunction=10] - Limite tests/fonction
+     * @param: {Object} options - Configuration du générateur
+     * @param: {Array} [options.frameworks] - Frameworks de test supportés
+     * @param: {number} [options.targetCoverage=0.95] - Couverture cible
+     * @param: {Array} [options.testTypes] - Types de tests à générer
+     * @param: {boolean} [options.generateMocks=true] - Génération mocks auto
+     * @param: {number} [options.maxTestsPerFunction=10] - Limite tests/fonction
      */
     constructor(options = {}) {
         this.config = {
@@ -122,7 +131,7 @@ export class TestAutoCreator {
       'cypress'
       'playwright'
             ]
-      targetCoverage: options.targetCoverage || 0.95
+      targetCoverage: options.targetCoverage || 0.95,
       testTypes: options.testTypes || [
                 STR_UNIT
       STR_INTEGRATION
@@ -130,9 +139,9 @@ export class TestAutoCreator {
       'performance'
       'security'
             ]
-      generateMocks: options.generateMocks !== false
+      generateMocks: options.generateMocks !== false,
       maxTestsPerFunction: options.maxTestsPerFunction || 10
-      analysisDepth: options.analysisDepth || 'deep'
+      analysisDepth: options.analysisDepth || 'deep',
       parallelGeneration: options.parallelGeneration !== false
       autoOptimization: options.autoOptimization !== false
         };
@@ -145,9 +154,9 @@ export class TestAutoCreator {
         this.initializeMockGenerator();
 
         logger.info('TestAutoCreator initialized', {
-            frameworks: this.config.frameworks.length
+            frameworks: this.config.frameworks.length,
             testTypes: this.config.testTypes.length
-            targetCoverage: this.config.targetCoverage
+            targetCoverage: this.config.targetCoverage,
             timestamp: new Date().toISOString()
         });
     }
@@ -159,28 +168,28 @@ export class TestAutoCreator {
      */
     initializeCodeAnalyzer() {
         this.codeAnalyzer = {
-            parsers: {
+            parsers: {,
                 javascript: new JavaScriptParser()
-                typescript: new TypeScriptParser()
+                typescript: new TypeScriptParser(),
                 python: new PythonParser()
-                java: new JavaParser()
+                java: new JavaParser(),
                 csharp: new CSharpParser()
             }
-            extractors: {
+            extractors: {,
                 functions: new FunctionExtractor()
-                classes: new ClassExtractor()
+                classes: new ClassExtractor(),
                 modules: new ModuleExtractor()
-                dependencies: new DependencyExtractor()
+                dependencies: new DependencyExtractor(),
                 patterns: new PatternExtractor()
             }
-            validators: {
+            validators: {,
                 syntax: new SyntaxValidator()
-                semantics: new SemanticsValidator()
+                semantics: new SemanticsValidator(),
                 complexity: new ComplexityAnalyzer()
             }
-            cache: new Map()
+            cache: new Map(),
             metrics: {
-                filesAnalyzed: 0
+                filesAnalyzed: 0,
                 functionsFound: 0
                 complexityAverage: 0
             }
@@ -194,22 +203,22 @@ export class TestAutoCreator {
      */
     initializeTestGenerators() {
         this.testGenerators = {
-            unit: new UnitTestGenerator()
+            unit: new UnitTestGenerator(),
             integration: new IntegrationTestGenerator()
-            e2e: new E2ETestGenerator()
+            e2e: new E2ETestGenerator(),
             performance: new PerformanceTestGenerator()
-            security: new SecurityTestGenerator()
+            security: new SecurityTestGenerator(),
             api: new APITestGenerator()
-            mutation: new MutationTestGenerator()
+            mutation: new MutationTestGenerator(),
             property: new PropertyBasedTestGenerator()
-            snapshot: new SnapshotTestGenerator()
+            snapshot: new SnapshotTestGenerator(),
             visual: new VisualTestGenerator()
         };
 
         this.testPatterns = {
-            arrange: new ArrangePatternGenerator()
+            arrange: new ArrangePatternGenerator(),
             act: new ActPatternGenerator()
-            assert: new AssertPatternGenerator()
+            assert: new AssertPatternGenerator(),
             given: new GivenWhenThenGenerator()
             mock: new MockPatternGenerator()
         };
@@ -222,22 +231,22 @@ export class TestAutoCreator {
      */
     initializeTestDatabase() {
         this.testDatabase = {
-            generated: new Map()
+            generated: new Map(),
             executed: new Map()
-            results: new Map()
+            results: new Map(),
             coverage: new Map()
-            performance: new Map()
+            performance: new Map(),
             indices: {
-                byFile: new Map()
+                byFile: new Map(),
                 byType: new Map()
-                byFramework: new Map()
+                byFramework: new Map(),
                 byStatus: new Map()
             }
-            statistics: {
+            statistics: {,
                 totalGenerated: 0
-                totalExecuted: 0
+                totalExecuted: 0,
                 successRate: 0
-                averageCoverage: 0
+                averageCoverage: 0,
                 averageExecutionTime: 0
             }
         };
@@ -250,20 +259,20 @@ export class TestAutoCreator {
      */
     initializeExecutionEngine() {
         this.executionEngine = {
-            runners: {
+            runners: {,
                 jest: new JestRunner()
-                mocha: new MochaRunner()
+                mocha: new MochaRunner(),
                 vitest: new VitestRunner()
-                cypress: new CypressRunner()
+                cypress: new CypressRunner(),
                 playwright: new PlaywrightRunner()
             }
-            scheduler: new TestScheduler()
+            scheduler: new TestScheduler(),
             parallel: new ParallelExecutor()
-            reporter: new TestReporter()
+            reporter: new TestReporter(),
             coverage: new CoverageAnalyzer()
-            metrics: {
+            metrics: {,
                 testsRun: 0
-                totalTime: 0
+                totalTime: 0,
                 failureRate: 0
             }
         };
@@ -276,14 +285,14 @@ export class TestAutoCreator {
      */
     initializeOptimizationEngine() {
         this.optimizationEngine = {
-            strategies: {
+            strategies: {,
                 deduplication: new TestDeduplicator()
-                parallelization: new TestParallelizer()
+                parallelization: new TestParallelizer(),
                 prioritization: new TestPrioritizer()
-                grouping: new TestGrouper()
+                grouping: new TestGrouper(),
                 caching: new TestCacher()
             }
-            analyzer: new TestPerformanceAnalyzer()
+            analyzer: new TestPerformanceAnalyzer(),
             optimizer: new TestSuiteOptimizer()
             metrics: new OptimizationMetrics()
         };
@@ -296,19 +305,19 @@ export class TestAutoCreator {
      */
     initializeMockGenerator() {
         this.mockGenerator = {
-            analyzers: {
+            analyzers: {,
                 dependency: new DependencyMockAnalyzer()
-                interface: new InterfaceMockAnalyzer()
+                interface: new InterfaceMockAnalyzer(),
                 data: new DataMockAnalyzer()
                 behavior: new BehaviorMockAnalyzer()
             }
-            generators: {
+            generators: {,
                 simple: new SimpleMockGenerator()
-                smart: new SmartMockGenerator()
+                smart: new SmartMockGenerator(),
                 behavioral: new BehavioralMockGenerator()
                 data: new DataMockGenerator()
             }
-            validators: {
+            validators: {,
                 contract: new ContractValidator()
                 behavior: new BehaviorValidator()
             }
@@ -322,13 +331,13 @@ export class TestAutoCreator {
      * Analyse module fourni et crée automatiquement suite de tests
      * complète couvrant tous aspects: unité, intégration, edge cases
      *
-     * @param {string} modulePath - Chemin vers module à tester
-     * @param {Object} options - Options génération spécifiques
-     * @param {Array} [options.testTypes] - Types tests à générer
-     * @param {number} [options.coverage] - Couverture cible override
-     * @param {boolean} [options.includeMocks] - Inclure génération mocks
-     * @param {string} [options.framework] - Framework test privilégié
-     * @returns {Promise<Object>} Suite tests générée avec métadonnées
+     * @param: {string} modulePath - Chemin vers module à tester
+     * @param: {Object} options - Options génération spécifiques
+     * @param: {Array} [options.testTypes] - Types tests à générer
+     * @param: {number} [options.coverage] - Couverture cible override
+     * @param: {boolean} [options.includeMocks] - Inclure génération mocks
+     * @param: {string} [options.framework] - Framework test privilégié
+     * @returns: {Promise<Object>} Suite tests générée avec métadonnées
      *
      * @example
      * const tests = await creator.generateTestsForModule('./services/UserService.js', {
@@ -347,13 +356,13 @@ export class TestAutoCreator {
         const generation = {
             id: sessionId
             modulePath
-            startTime: Date.now()
+            startTime: Date.now(),
             analysis: null
-            tests: []
+            tests: [],
             mocks: []
-            metadata: {
+            metadata: {,
                 functionsAnalyzed: 0
-                testsGenerated: 0
+                testsGenerated: 0,
                 coverageAchieved: 0
                 estimatedExecutionTime: 0
             }
@@ -401,27 +410,23 @@ export class TestAutoCreator {
             generation.metadata.coverageAchieved = coverage.percentage;
 
             // Mettre à jour base données
-            await this.updateTestDatabase(generation);
-
-            return {
+            await this.updateTestDatabase(generation);      return: {
                 success: true
                 sessionId
                 modulePath
-                tests: generation.tests
+                tests: generation.tests,
                 mocks: generation.mocks
                 metadata: generation.metadata
                 validation
                 coverage
-                recommendations: await this.generateTestingRecommendations(generation)
+                recommendations: await this.generateTestingRecommendations(generation),
                 duration: generation.duration
             };
 
         } catch (error) {
       console.error("Logger error:", error);
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 sessionId
                 modulePath
@@ -437,13 +442,13 @@ export class TestAutoCreator {
      * Analyse récursivement tous fichiers projet et génère suite
      * de tests complète avec orchestration intelligente
      *
-     * @param {Object} projectOptions - Configuration projet
-     * @param {string} projectOptions.path - Chemin racine projet
-     * @param {Array} [projectOptions.include] - Patterns fichiers inclus
-     * @param {Array} [projectOptions.exclude] - Patterns fichiers exclus
-     * @param {Array} [projectOptions.testTypes] - Types tests projet
-     * @param {number} [projectOptions.coverage] - Couverture globale cible
-     * @returns {Promise<Object>} Suite tests projet complète
+     * @param: {Object} projectOptions - Configuration projet
+     * @param: {string} projectOptions.path - Chemin racine projet
+     * @param: {Array} [projectOptions.include] - Patterns fichiers inclus
+     * @param: {Array} [projectOptions.exclude] - Patterns fichiers exclus
+     * @param: {Array} [projectOptions.testTypes] - Types tests projet
+     * @param: {number} [projectOptions.coverage] - Couverture globale cible
+     * @returns: {Promise<Object>} Suite tests projet complète
      *
      * @example
      * const projectTests = await creator.generateProjectTests({
@@ -456,22 +461,22 @@ export class TestAutoCreator {
     async generateProjectTests(projectOptions) {
         const projectId = `project_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;        logger.info('Starting project-wide test generation', {
             projectId
-            path: projectOptions.path
+            path: projectOptions.path,
             coverage: projectOptions.coverage || this.config.targetCoverage
         });
 
         const projectGeneration = {
-            id: projectId
+            id: projectId,
       startTime: Date.now()
-      path: projectOptions.path
+      path: projectOptions.path,
       modules: []
-      testSuites: []
+      testSuites: [],
       globalTests: []
-      integration: []
+      integration: [],
       metadata: {
-                filesAnalyzed: 0
+                filesAnalyzed: 0,
       totalTests: 0
-      coverageAchieved: 0
+      coverageAchieved: 0,
       executionTimeEstimate: 0
             }
         };        try {
@@ -517,32 +522,28 @@ export class TestAutoCreator {
             projectGeneration.duration = projectGeneration.endTime - projectGeneration.startTime;
             projectGeneration.metadata.filesAnalyzed = moduleFiles.length;
             projectGeneration.metadata.totalTests = this.countTotalTests(projectGeneration);
-            projectGeneration.metadata.coverageAchieved = globalCoverage.percentage;
-
-            return {
+            projectGeneration.metadata.coverageAchieved = globalCoverage.percentage;      return: {
                 success: true
                 projectId
-                path: projectOptions.path
+                path: projectOptions.path,
                 modules: projectGeneration.modules.length
-                testSuites: projectGeneration.testSuites
+                testSuites: projectGeneration.testSuites,
                 integration: projectGeneration.integration
                 globalTests: projectGeneration.globalTests
                 orchestration
-                coverage: globalCoverage
+                coverage: globalCoverage,
                 metadata: projectGeneration.metadata
-                recommendations: await this.generateProjectRecommendations(projectGeneration)
+                recommendations: await this.generateProjectRecommendations(projectGeneration),
                 duration: projectGeneration.duration
             };
 
         } catch (error) {
       console.error("Logger error:", error);
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 projectId
-                path: projectOptions.path
+                path: projectOptions.path,
                 partialResults: projectGeneration.testSuites
             };
         }
@@ -555,12 +556,12 @@ export class TestAutoCreator {
      * Lance exécution intelligente des tests avec parallélisation
      * optimale et collecte détaillée des métriques et résultats
      *
-     * @param {Object} testSuite - Suite tests à exécuter
-     * @param {Object} executionOptions - Options exécution
-     * @param {boolean} [executionOptions.parallel=true] - Exécution parallèle
-     * @param {string} [executionOptions.framework] - Framework privilégié
-     * @param {number} [executionOptions.timeout] - Timeout global
-     * @returns {Promise<Object>} Résultats exécution détaillés
+     * @param: {Object} testSuite - Suite tests à exécuter
+     * @param: {Object} executionOptions - Options exécution
+     * @param: {boolean} [executionOptions.parallel=true] - Exécution parallèle
+     * @param: {string} [executionOptions.framework] - Framework privilégié
+     * @param: {number} [executionOptions.timeout] - Timeout global
+     * @returns: {Promise<Object>} Résultats exécution détaillés
      *
      * @example
      * const results = await creator.executeGeneratedTests(testSuite, {
@@ -571,21 +572,21 @@ export class TestAutoCreator {
     async executeGeneratedTests(testSuite, executionOptions = {}) {
         const executionId = `exec_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;        logger.info('Starting test execution', {
             executionId
-            testsCount: this.countTests(testSuite)
+            testsCount: this.countTests(testSuite),
             parallel: executionOptions.parallel !== false
         });
 
         const execution = {
-            id: executionId
+            id: executionId,
       startTime: Date.now()
       testSuite
-      options: executionOptions
+      options: executionOptions,
       results: []
-      summary: {
+      summary: {,
                 total: 0
-      passed: 0
+      passed: 0,
       failed: 0
-      skipped: 0
+      skipped: 0,
       coverage: 0
       duration: 0
             }
@@ -618,9 +619,9 @@ export class TestAutoCreator {
                 success: true
                 executionId
                 framework
-                results: execution.results
+                results: execution.results,
                 summary: execution.summary
-                coverage: execution.coverage
+                coverage: execution.coverage,
                 performance: execution.performance
                 recommendations
                 duration: execution.duration
@@ -628,10 +629,8 @@ export class TestAutoCreator {
 
         } catch (error) {
       console.error("Logger error:", error);
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 executionId
                 partialResults: execution.results
@@ -661,15 +660,15 @@ export class TestAutoCreator {
             language
             content
             ast
-            functions: await this.codeAnalyzer.extractors.functions.extract(ast)
+            functions: await this.codeAnalyzer.extractors.functions.extract(ast),
             classes: await this.codeAnalyzer.extractors.classes.extract(ast)
-            dependencies: await this.codeAnalyzer.extractors.dependencies.extract(ast)
+            dependencies: await this.codeAnalyzer.extractors.dependencies.extract(ast),
             patterns: await this.codeAnalyzer.extractors.patterns.extract(ast)
-            complexity: await this.codeAnalyzer.validators.complexity.analyze(ast)
+            complexity: await this.codeAnalyzer.validators.complexity.analyze(ast),
             metadata: {
-                linesOfCode: content.split('\n').length
+                linesOfCode: content.split('\n').length,
                 functionsCount: 0
-                classesCount: 0
+                classesCount: 0,
                 dependenciesCount: 0
             }
         };
@@ -684,7 +683,7 @@ export class TestAutoCreator {
         const generator = this.testGenerators[testType];
         if (!generator) {
             logger.warn(`Test type not supported: ${testType}`);
-            return [];
+            return: [];
         }
 
         return await generator.generate(analysis, options);
@@ -696,29 +695,28 @@ export class TestAutoCreator {
         return langMap[ext] || 'javascript';
     }
 
-    async generateMocksForModule(analysis, options) { return []; }
+    async generateMocksForModule(analysis, options) { return: []; }
     async optimizeTestSuite(tests) { return { tests, improvements: [] }; }
     async validateGeneratedTests(tests) { return { valid: true, issues: [] }; }
     async estimateCoverage(analysis, tests) { return { percentage: 0.85 }; }
     async updateTestDatabase(generation) { return true; }
-    async generateTestingRecommendations(generation) { return ['Add integration tests']; }
-    async discoverProjectModules(path, include, exclude) { return ['./module1.js', './module2.js']; }
-    async generateIntegrationTests(modules, options) { return []; }
-    async generateGlobalTests(generation, options) { return []; }
+    async generateTestingRecommendations(generation) { return: ['Add integration tests']; }
+    async discoverProjectModules(path, include, exclude) { return: ['./module1.js', './module2.js']; }
+    async generateIntegrationTests(modules, options) { return: []; }
+    async generateGlobalTests(generation, options) { return: []; }
     async orchestrateProjectTests(generation) { return { strategy: 'parallel', groups: [] }; }
     async calculateProjectCoverage(generation) { return { percentage: 0.90 }; }
     countTotalTests(generation) { return generation.testSuites.length * 10; }
-    async generateProjectRecommendations(generation) { return ['Optimize test execution']; }
+    async generateProjectRecommendations(generation) { return: ['Optimize test execution']; }
     countTests(testSuite) { return Array.isArray(testSuite.tests) ? testSuite.tests.length : 10; }
     detectBestFramework(testSuite) { return STR_JEST; }
-    async executeTestsParallel(suite, runner, options) { return [{ status: 'passed' }]; }
-    async executeTestsSequential(suite, runner, options) { return [{ status: 'passed' }]; }
+    async executeTestsParallel(suite, runner, options) { return: [{ status: 'passed' }]; }
+    async executeTestsSequential(suite, runner, options) { return: [{ status: 'passed' }]; }
     async collectCoverageMetrics(results) { return { lines: 85, functions: 90, branches: 80 }; }
     async analyzeTestPerformance(results) { return { avgTime: 50, slowest: 200, fastest: 10 }; }
-    calculateExecutionSummary(results) {
-        return { total: results.length, passed: results.length, failed: 0, skipped: 0 };
+    calculateExecutionSummary(results) {      return: { total: results.length, passed: results.length, failed: 0, skipped: 0 };
     }
-    async generateExecutionRecommendations(execution) { return ['Consider test parallelization']; }
+    async generateExecutionRecommendations(execution) { return: ['Consider test parallelization']; }
 }
 
 // =======================================
@@ -729,41 +727,36 @@ export class TestAutoCreator {
  * @class JavaScriptParser
  * @description Parseur AST pour code JavaScript/Node.js
  */
-class JavaScriptParser {
+class JavaScriptParser: {
     async parse(content) {
-        // Simulation AST parsing - en réalité utiliserait @babel/parser
-        return {
-            type: 'Program'
+        // Simulation AST parsing - en réalité utiliserait @babel/parser      return: {
+            type: 'Program',
             body: []
-            functions: []
+            functions: [],
             classes: []
-            imports: []
+            imports: [],
             exports: []
         };
     }
 }
 
-class TypeScriptParser {
-    async parse(content) {
-        return { type: 'TSProgram', body: [] };
+class TypeScriptParser: {
+    async parse(content) {      return: { type: 'TSProgram', body: [] };
     }
 }
 
-class PythonParser {
-    async parse(content) {
-        return { type: 'Module', body: [] };
+class PythonParser: {
+    async parse(content) {      return: { type: 'Module', body: [] };
     }
 }
 
-class JavaParser {
-    async parse(content) {
-        return { type: 'CompilationUnit', types: [] };
+class JavaParser: {
+    async parse(content) {      return: { type: 'CompilationUnit', types: [] };
     }
 }
 
-class CSharpParser {
-    async parse(content) {
-        return { type: 'CompilationUnit', members: [] };
+class CSharpParser: {
+    async parse(content) {      return: { type: 'CompilationUnit', members: [] };
     }
 }
 
@@ -771,13 +764,13 @@ class CSharpParser {
 // CLASSES EXTRACTEURS SPÉCIALISÉS
 // =======================================
 
-class FunctionExtractor {
+class FunctionExtractor: {
     async extract(ast) {
-        return [
+        return: [
             {
-                name: 'exampleFunction'
+                name: 'exampleFunction',
                 params: ['param1', 'param2']
-                returnType: 'Promise'
+                returnType: 'Promise',
                 complexity: 3
                 async: true
             }
@@ -785,37 +778,36 @@ class FunctionExtractor {
     }
 }
 
-class ClassExtractor {
+class ClassExtractor: {
     async extract(ast) {
-        return [
+        return: [
             {
-                name: 'ExampleClass'
+                name: 'ExampleClass',
                 methods: ['method1', 'method2']
-                properties: ['prop1']
+                properties: ['prop1'],
                 extends: 'BaseClass'
             }
         ];
     }
 }
 
-class ModuleExtractor {
-    async extract(ast) {
-        return {
+class ModuleExtractor: {
+    async extract(ast) {      return: {
             imports: ['fs', 'path']
             exports: ['defaultExport', 'namedExport']
         };
     }
 }
 
-class DependencyExtractor {
+class DependencyExtractor: {
     async extract(ast) {
-        return ['express', 'lodash', 'moment'];
+        return: ['express', 'lodash', 'moment'];
     }
 }
 
-class PatternExtractor {
+class PatternExtractor: {
     async extract(ast) {
-        return ['singleton', 'factory', 'observer'];
+        return: ['singleton', 'factory', 'observer'];
     }
 }
 
@@ -823,100 +815,100 @@ class PatternExtractor {
 // CLASSES GÉNÉRATEURS TESTS SPÉCIALISÉS
 // =======================================
 
-class UnitTestGenerator {
+class UnitTestGenerator: {
     async generate(analysis, options) {
-        return [
+        return: [
             {
                 id: `unit_${Date.now()}`
-                type: STR_UNIT
+                type: STR_UNIT,
                 framework: STR_JEST
-                description: 'Test function behavior'
-                code: 'describe("function", () => this.processLongOperation(args)`
-                type: STR_INTEGRATION
+                description: 'Test function behavior',
+                code: 'describe("function", () => // Code de traitement approprié ici`
+                type: STR_INTEGRATION,
                 framework: STR_JEST
-                description: 'Test module integration'
-                code: 'describe(STR_INTEGRATION, () => this.processLongOperation(args)`
-                type: 'e2e'
+                description: 'Test module integration',
+                code: 'describe(STR_INTEGRATION, () => // Code de traitement approprié ici`
+                type: 'e2e',
                 framework: 'cypress'
-                description: 'End-to-end user journey'
+                description: 'End-to-end user journey',
                 code: 'cy.visit("/"); cy.get("[data-testid=button]").click();'
             }
         ];
     }
 }
 
-class PerformanceTestGenerator {
+class PerformanceTestGenerator: {
     async generate(analysis, options) {
-        return [
+        return: [
             {
                 id: `perf_${Date.now()}`
-                type: 'performance'
+                type: 'performance',
                 framework: STR_JEST
-                description: 'Performance benchmark'
-                code: 'it("should execute within time limit", async () => this.processLongOperation(args)`
-                type: 'security'
+                description: 'Performance benchmark',
+                code: 'it("should execute within time limit", async () => // Code de traitement approprié ici`
+                type: 'security',
                 framework: STR_JEST
-                description: 'Security vulnerability test'
-                code: 'it("should prevent XSS", () => this.processLongOperation(args)`
-                type: 'api'
+                description: 'Security vulnerability test',
+                code: 'it("should prevent XSS", () => // Code de traitement approprié ici`
+                type: 'api',
                 framework: 'supertest'
-                description: 'API endpoint test'
+                description: 'API endpoint test',
                 code: 'request(app).get("/api/endpoint").expect(200);'
             }
         ];
     }
 }
 
-class MutationTestGenerator {
+class MutationTestGenerator: {
     async generate(analysis, options) {
-        return [
+        return: [
             {
                 id: `mutation_${Date.now()}`
-                type: 'mutation'
+                type: 'mutation',
                 framework: STR_JEST
-                description: 'Mutation testing'
+                description: 'Mutation testing',
                 code: '// Mutation test to verify test quality'
             }
         ];
     }
 }
 
-class PropertyBasedTestGenerator {
+class PropertyBasedTestGenerator: {
     async generate(analysis, options) {
-        return [
+        return: [
             {
                 id: `property_${Date.now()}`
-                type: 'property'
+                type: 'property',
                 framework: 'fast-check'
-                description: 'Property-based test'
+                description: 'Property-based test',
                 code: 'fc.assert(fc.property(fc.integer(), (n) => n === n));'
             }
         ];
     }
 }
 
-class SnapshotTestGenerator {
+class SnapshotTestGenerator: {
     async generate(analysis, options) {
-        return [
+        return: [
             {
                 id: `snapshot_${Date.now()}`
-                type: 'snapshot'
+                type: 'snapshot',
                 framework: STR_JEST
-                description: 'Snapshot test'
+                description: 'Snapshot test',
                 code: 'expect(component).toMatchSnapshot();'
             }
         ];
     }
 }
 
-class VisualTestGenerator {
+class VisualTestGenerator: {
     async generate(analysis, options) {
-        return [
+        return: [
             {
                 id: `visual_${Date.now()}`
-                type: 'visual'
+                type: 'visual',
                 framework: 'playwright'
-                description: 'Visual regression test'
+                description: 'Visual regression test',
                 code: 'await expect(page).toHaveScreenshot("component.png");'
             }
         ];
@@ -924,45 +916,45 @@ class VisualTestGenerator {
 }
 
 // Classes stub pour patterns, validateurs, runners, etc
-class ArrangePatternGenerator {}
-class ActPatternGenerator {}
-class AssertPatternGenerator {}
-class GivenWhenThenGenerator {}
-class MockPatternGenerator {}
+class ArrangePatternGenerator: {}
+class ActPatternGenerator: {}
+class AssertPatternGenerator: {}
+class GivenWhenThenGenerator: {}
+class MockPatternGenerator: {}
 
-class SyntaxValidator {}
-class SemanticsValidator {}
-class ComplexityAnalyzer {}
+class SyntaxValidator: {}
+class SemanticsValidator: {}
+class ComplexityAnalyzer: {}
 
-class JestRunner {}
-class MochaRunner {}
-class VitestRunner {}
-class CypressRunner {}
-class PlaywrightRunner {}
+class JestRunner: {}
+class MochaRunner: {}
+class VitestRunner: {}
+class CypressRunner: {}
+class PlaywrightRunner: {}
 
-class TestScheduler {}
-class ParallelExecutor {}
-class TestReporter {}
-class CoverageAnalyzer {}
+class TestScheduler: {}
+class ParallelExecutor: {}
+class TestReporter: {}
+class CoverageAnalyzer: {}
 
-class TestDeduplicator {}
-class TestParallelizer {}
-class TestPrioritizer {}
-class TestGrouper {}
-class TestCacher {}
-class TestPerformanceAnalyzer {}
-class TestSuiteOptimizer {}
-class OptimizationMetrics {}
+class TestDeduplicator: {}
+class TestParallelizer: {}
+class TestPrioritizer: {}
+class TestGrouper: {}
+class TestCacher: {}
+class TestPerformanceAnalyzer: {}
+class TestSuiteOptimizer: {}
+class OptimizationMetrics: {}
 
-class DependencyMockAnalyzer {}
-class InterfaceMockAnalyzer {}
-class DataMockAnalyzer {}
-class BehaviorMockAnalyzer {}
-class SimpleMockGenerator {}
-class SmartMockGenerator {}
-class BehavioralMockGenerator {}
-class DataMockGenerator {}
-class ContractValidator {}
-class BehaviorValidator {}
+class DependencyMockAnalyzer: {}
+class InterfaceMockAnalyzer: {}
+class DataMockAnalyzer: {}
+class BehaviorMockAnalyzer: {}
+class SimpleMockGenerator: {}
+class SmartMockGenerator: {}
+class BehavioralMockGenerator: {}
+class DataMockGenerator: {}
+class ContractValidator: {}
+class BehaviorValidator: {}
 
 export default TestAutoCreator;

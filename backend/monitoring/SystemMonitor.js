@@ -54,10 +54,10 @@ class SystemMonitor extends EventEmitter {
     const dbPath = this.config.get("database.path");
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        console.error("❌ SystemMonitor DB connection failed:", err.message);
+        
         return;
       }
-      console.log("✅ SystemMonitor connecté à la base");
+      
       this.createMonitoringTables();
     });
   }
@@ -109,7 +109,7 @@ class SystemMonitor extends EventEmitter {
 
     tables.forEach((sql) => {
       this.db.run(sql, (err) => {
-        if (err) console.error("❌ SystemMonitor table error:", err.message);
+        if (err) 
       });
     });
   }
@@ -123,8 +123,7 @@ class SystemMonitor extends EventEmitter {
   async start() {
     if (this.isMonitoring) return;
 
-    console.log("🔍 Démarrage SystemMonitor...");
-
+    
     this.isMonitoring = true;
     const interval = this.config.get("monitoring.interval", 5000);
 
@@ -133,16 +132,14 @@ class SystemMonitor extends EventEmitter {
     }, interval);
 
     await this.collectInitialMetrics();
-    console.log("✅ SystemMonitor démarré");
-
+    
     this.emit("monitoringStarted");
   }
 
   async stop() {
     if (!this.isMonitoring) return;
 
-    console.log("🔄 Arrêt SystemMonitor...");
-
+    
     this.isMonitoring = false;
 
     if (this.monitoringInterval) {
@@ -152,12 +149,12 @@ class SystemMonitor extends EventEmitter {
 
     if (this.db) {
       this.db.close((err) => {
-        if (err) console.error("❌ Erreur fermeture DB monitor:", err.message);
-        else console.log("✅ Base monitor fermée");
+        if (err) 
+        else 
       });
     }
 
-    console.log("✅ SystemMonitor arrêté");
+    
     this.emit("monitoringStopped");
   }
 
@@ -176,7 +173,7 @@ class SystemMonitor extends EventEmitter {
 
       this.emit("metricsCollected", this.metrics);
     } catch (error) {
-      console.error("❌ Erreur collecte métriques:", error.message);
+      
       this.emit("alert", {
         type: "monitoring_error",
         severity: "warning",
@@ -247,7 +244,7 @@ class SystemMonitor extends EventEmitter {
         this.recordMetric("business", key, value);
       });
     } catch (error) {
-      console.error("❌ Erreur métriques business:", error.message);
+      
     }
   }
 
@@ -316,7 +313,7 @@ class SystemMonitor extends EventEmitter {
   }
 
   calculateCreativityIndex() {
-    const randomFactor = Math.random() * 0.2;
+    const randomFactor = this.getDeterministicValue() * 0.2;
     const baseCreativity = 0.6;
     const systemHealth = 1 - this.metrics.system.cpu.current / 100;
 
@@ -490,7 +487,7 @@ class SystemMonitor extends EventEmitter {
 
   handleAlert(alert) {
     alert.timestamp = Date.now();
-    alert.id = `alert-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    alert.id = `alert-${Date.now()}-${this.getDeterministicValue().toString(36).substr(2, 9)}`;
 
     this.alerts.push(alert);
 
@@ -514,7 +511,7 @@ class SystemMonitor extends EventEmitter {
       ]);
     }
 
-    console.log(`🚨 Alerte ${alert.severity}: ${alert.message}`);
+    
   }
 
   handleThresholdAlert(thresholdData) {
@@ -530,7 +527,7 @@ class SystemMonitor extends EventEmitter {
   }
 
   handleHealthChange(healthData) {
-    console.log(`🔄 Changement santé système:`, healthData);
+    
   }
 
   async collectInitialMetrics() {
@@ -586,7 +583,7 @@ class SystemMonitor extends EventEmitter {
 
   clearAlerts() {
     this.alerts = [];
-    console.log("🧹 Alertes effacées");
+    
   }
 }
 

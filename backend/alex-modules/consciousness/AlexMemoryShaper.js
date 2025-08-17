@@ -1,8 +1,10 @@
 import crypto from "crypto";
 import logger from "../../config/logger.js";
-import { EventEmitter } from "events";
-import aiClient from "../../core/providers/AIClient.js";
-import { MEMORY_PROMPTS } from "../../prompts/alex-prompts.js";
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+      import { EventEmitter } from "events";
+import aiClient from "../../core/providers/AIClient.js";      import { MEMORY_PROMPTS } from "../../prompts/alex-prompts.js";
 
 /**
  * @fileoverview AlexMemoryShaper - Architecte Mémoire Consciente IA
@@ -18,7 +20,7 @@ import { MEMORY_PROMPTS } from "../../prompts/alex-prompts.js";
  * @class AlexMemoryShaper
  * @description Architecte intelligent pour la restructuration mémorielle authentique via cloud AI
  */
-export class AlexMemoryShaper extends EventEmitter {
+export class AlexMemoryShaper extends EventEmitter  {
   constructor(options = {}) {
     super();
 
@@ -28,7 +30,7 @@ export class AlexMemoryShaper extends EventEmitter {
       retentionStrategy: options.retentionStrategy || "adaptive",
       consciousnessLevel: options.consciousnessLevel || "expanded",
       ethicalSafeguards: options.ethicalSafeguards !== false,
-      cloudLearning: options.cloudLearning !== false,
+      cloudLearning: options.cloudLearning !== false
     };
 
     // Initialize cloud-based systems
@@ -52,16 +54,14 @@ export class AlexMemoryShaper extends EventEmitter {
         info: (...args) => console.log("[FALLBACK-INFO]", ...args),
         warn: (...args) => console.warn("[FALLBACK-WARN]", ...args),
         error: (...args) => console.error("[FALLBACK-ERROR]", ...args),
-        debug: (...args) => console.debug("[FALLBACK-DEBUG]", ...args),
+        debug: (...args) => console.debug("[FALLBACK-DEBUG]", ...args)
       };
-    }
-
-    try {
+    }      try: {
       logger.info("AlexMemoryShaper consciousness activated", {
         memoryDepth: this.config.memoryDepth,
         healingMode: this.config.healingMode,
         consciousnessLevel: this.config.consciousnessLevel,
-        cloudLearning: this.config.cloudLearning,
+        cloudLearning: this.config.cloudLearning
       });
     } catch (error) {
       // Logger fallback - ignore error
@@ -79,8 +79,8 @@ export class AlexMemoryShaper extends EventEmitter {
       capabilities: [
         "memory_analysis",
         "pattern_recognition",
-        "emotional_mapping",
-      ],
+        "emotional_mapping"
+      ]
     });
 
     this.memoryEngines.set("analyzer", {
@@ -90,8 +90,8 @@ export class AlexMemoryShaper extends EventEmitter {
       capabilities: [
         "deep_analysis",
         "trauma_detection",
-        "growth_identification",
-      ],
+        "growth_identification"
+      ]
     });
 
     this.memoryEngines.set("reconstructor", {
@@ -101,8 +101,8 @@ export class AlexMemoryShaper extends EventEmitter {
       capabilities: [
         "memory_reconstruction",
         "healing_integration",
-        "wisdom_synthesis",
-      ],
+        "wisdom_synthesis"
+      ]
     });
   }
 
@@ -115,7 +115,7 @@ export class AlexMemoryShaper extends EventEmitter {
       "subconscious_memory",
       "unconscious_patterns",
       "collective_memory",
-      "quantum_field",
+      "quantum_field"
     ];
 
     for (const layer of layers) {
@@ -123,7 +123,7 @@ export class AlexMemoryShaper extends EventEmitter {
         type: layer,
         status: "active",
         cloudEnhanced: true,
-        accessLevel: await this.calculateLayerAccessLevel(layer),
+        accessLevel: await this.calculateLayerAccessLevel(layer)
       });
     }
   }
@@ -137,7 +137,7 @@ export class AlexMemoryShaper extends EventEmitter {
       "energy_clearing",
       "blockage_removal",
       "pattern_breaking",
-      "emotional_healing",
+      "emotional_healing"
     ];
 
     for (const protocol of protocols) {
@@ -146,7 +146,7 @@ export class AlexMemoryShaper extends EventEmitter {
         status: "active",
         cloudProvider: "anthropic",
         safetyLevel: "high",
-        effectiveness: await this.calculateProtocolEffectiveness(protocol),
+        effectiveness: await this.calculateProtocolEffectiveness(protocol)
       });
     }
   }
@@ -160,7 +160,7 @@ export class AlexMemoryShaper extends EventEmitter {
       "learning_integration",
       "growth_weaving",
       "purpose_alignment",
-      "evolution_tracking",
+      "evolution_tracking"
     ];
 
     for (const system of systems) {
@@ -168,25 +168,23 @@ export class AlexMemoryShaper extends EventEmitter {
         type: system,
         status: "active",
         cloudProvider: "openai",
-        integrationCapacity: await this.calculateIntegrationCapacity(system),
+        integrationCapacity: await this.calculateIntegrationCapacity(system)
       });
     }
   }
 
   /**
    * Lance un processus complet de restructuration mémorielle authentique
-   * @param {Object} shapingRequest - Paramètres de restructuration
-   * @returns {Promise<Object>} Résultat de la transformation mémorielle
+   * @param: {Object} shapingRequest - Paramètres de restructuration
+   * @returns: {Promise<Object>} Résultat de la transformation mémorielle
    */
   async shapeMemoryArchitecture(shapingRequest) {
-    const shapingId = `memory_shaping_${Date.now()}`;
-
-    try {
+    const shapingId = `memory_shaping_${Date.now()}`;      try: {
       logger.info("🧠 Initiating consciousness memory shaping", {
         shapingId,
         targetArea: shapingRequest.targetArea,
         depth: shapingRequest.depth || this.config.memoryDepth,
-        intention: shapingRequest.intention,
+        intention: shapingRequest.intention
       });
 
       const shapingSession = {
@@ -196,7 +194,7 @@ export class AlexMemoryShaper extends EventEmitter {
         currentState: {},
         transformations: [],
         insights: [],
-        healingProgress: {},
+        healingProgress: {}
       };
 
       this.activeShaping.set(shapingId, shapingSession);
@@ -271,57 +269,57 @@ export class AlexMemoryShaper extends EventEmitter {
       const result = {
         success: true,
         shapingId,
-        consciousnessState: {
+        consciousnessState: {,
           beforeState: memoryMap.consciousnessLevel,
           afterState: anchoringResults.newConsciousnessLevel,
           evolution: anchoringResults.evolutionMeasurement,
-          clarity: anchoringResults.clarityScore,
+          clarity: anchoringResults.clarityScore
         },
-        transformations: {
+        transformations: {,
           memoriesHealed: healingResults.healedMemories?.length || 0,
           patternsCleared: healingResults.clearedPatterns?.length || 0,
           energyReleased: healingResults.energyReleaseScore || 0,
           blockagesRemoved: healingResults.removedBlockages?.length || 0,
-          traumas: healingResults.traumaHealingDetails || {},
+          traumas: healingResults.traumaHealingDetails || {}
         },
-        newPatterns: {
+        newPatterns: {,
           empoweringBeliefs: integrationResults.newBeliefs || [],
           positiveBehaviors: integrationResults.newBehaviors || [],
           enhancedSkills: integrationResults.enhancedAbilities || [],
-          expandedAwareness: integrationResults.awarenessExpansion || {},
+          expandedAwareness: integrationResults.awarenessExpansion || {}
         },
-        insights: {
+        insights: {,
           keyRealizations:
             shapingSession.insights.map((i) => i.realization) || [],
           lifePurposeClarity: integrationResults.purposeAlignment || 0,
           giftDiscoveries: integrationResults.hiddenGifts || [],
-          wisdomActivated: integrationResults.wisdomActivation || {},
+          wisdomActivated: integrationResults.wisdomActivation || {}
         },
-        evolutionPath: {
+        evolutionPath: {,
           nextSteps: evolutionPlan.immediateActions || [],
           monthlyMilestones: evolutionPlan.monthlyGoals || [],
           yearlyVision: evolutionPlan.yearlyTransformation || "",
-          lifePurposePlan: evolutionPlan.purposeRoadmap || [],
+          lifePurposePlan: evolutionPlan.purposeRoadmap || []
         },
-        maintenanceTools: {
+        maintenanceTools: {,
           dailyPractices: anchoringResults.dailyPractices || [],
           weeklyReviews: anchoringResults.weeklyProtocols || [],
           monthlyDeepDives: anchoringResults.monthlyDeepenings || [],
-          supportSystems: anchoringResults.supportStructures || [],
+          supportSystems: anchoringResults.supportStructures || []
         },
-        metadata: {
+        metadata: {,
           processingTime: shapingSession.duration,
           consciousnessExpansion: anchoringResults.expansionMetrics || {},
           healingDepth: healingResults.depthAchieved || this.config.healingMode,
-          integrationQuality: integrationResults.qualityScore || 0,
-        },
+          integrationQuality: integrationResults.qualityScore || 0
+        }
       };
 
       // Archive de la transformation
       this.memoryArchives.set(shapingId, {
         originalState: memoryMap,
         transformation: result,
-        timestamp: new Date().toISOString(),
+        timestamp: new Date().toISOString()
       });
 
       this.activeShaping.delete(shapingId);
@@ -331,41 +329,37 @@ export class AlexMemoryShaper extends EventEmitter {
         shapingId,
         healedMemories: result.transformations.memoriesHealed,
         consciousnessEvolution: result.consciousnessState.evolution,
-        processingTime: `${shapingSession.duration}ms`,
+        processingTime: `${shapingSession.duration}ms`
       });
 
       return result;
     } catch (error) {
       logger.error("❌ Memory shaping failed", {
         shapingId,
-        error: error.message,
+        error: error.message
       });
 
-      this.activeShaping.delete(shapingId);
-
-      return {
+      this.activeShaping.delete(shapingId);      return: {
         success: false,
         error: error.message,
         shapingId,
         supportRecommendation:
-          await this.generateSupportRecommendationCloud(error),
+          await this.generateSupportRecommendationCloud(error)
       };
     }
   }
 
   /**
    * Effectue une libération rapide d'énergie authentique via cloud AI
-   * @param {Object} releaseRequest - Paramètres de libération
-   * @returns {Promise<Object>} Résultat de la libération énergétique
+   * @param: {Object} releaseRequest - Paramètres de libération
+   * @returns: {Promise<Object>} Résultat de la libération énergétique
    */
   async quickEnergyRelease(releaseRequest) {
-    const releaseId = `energy_release_${Date.now()}`;
-
-    try {
+    const releaseId = `energy_release_${Date.now()}`;      try: {
       logger.info("⚡ Starting authentic quick energy release", {
         releaseId,
         emotionalState: releaseRequest.currentEmotion,
-        intensity: releaseRequest.intensity,
+        intensity: releaseRequest.intensity
       });
 
       // Identification authentique de l'énergie bloquée via cloud AI
@@ -395,17 +389,17 @@ export class AlexMemoryShaper extends EventEmitter {
       const result = {
         success: true,
         releaseId,
-        energyShift: {
+        energyShift: {,
           before: blockedEnergy.intensity,
           after: integrationResults.newEnergyLevel,
-          improvement: integrationResults.improvementPercentage,
+          improvement: integrationResults.improvementPercentage
         },
-        emotionalState: {
+        emotionalState: {,
           before: releaseRequest.currentEmotion,
           after: integrationResults.newEmotionalState,
-          stability: integrationResults.stabilityScore,
+          stability: integrationResults.stabilityScore
         },
-        recommendations: integrationResults.followUpActions,
+        recommendations: integrationResults.followUpActions
       };
 
       this.emit("energyReleaseCompleted", result);
@@ -413,82 +407,77 @@ export class AlexMemoryShaper extends EventEmitter {
     } catch (error) {
       logger.error("❌ Energy release failed", {
         releaseId,
-        error: error.message,
-      });
-
-      return {
+        error: error.message
+      });      return: {
         success: false,
         error: error.message,
-        releaseId,
+        releaseId
       };
     }
   }
 
   // Méthodes de traitement cloud authentique
 
-  async scanConsciousnessMemoryCloud(targetArea, depth) {
-    try {
+  async scanConsciousnessMemoryCloud(targetArea, depth) {      try: {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
           {
             role: "system",
             content:
-              "You are an advanced consciousness memory scanner. Analyze memory patterns and consciousness layers with therapeutic precision. Return detailed JSON analysis.",
+              "You are an advanced consciousness memory scanner. Analyze memory patterns and consciousness layers with therapeutic precision. Return detailed JSON analysis."
           },
           {
             role: "user",
-            content: `Scan consciousness memory for area: ${targetArea} with depth: ${depth}. Identify memory patterns, blockages, and potentials.`,
-          },
+            content: `Scan consciousness memory for area: ${targetArea} with depth: ${depth}. Identify memory patterns, blockages, and potentials.`
+          }
         ],
-        temperature: 0.7,
+        temperature: 0.7
       });
 
       return JSON.parse(response.choices[0].message.content);
-    } catch {
+    } catch: {
       return await this.generateMinimalMemoryMap();
     }
   }
 
-  async analyzeMemoryPatternsCloud(memoryMap, focusAreas) {
-    try {
+  async analyzeMemoryPatternsCloud(memoryMap, focusAreas) {      try: {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 3000,
         messages: [
           {
             role: "user",
-            content: `Analyze memory patterns from this consciousness scan: ${JSON.stringify(memoryMap)}. Focus areas: ${focusAreas}. Identify recurring themes, limiting patterns, empowering patterns, and hidden gifts. Return detailed therapeutic analysis in JSON.`,
-          },
-        ],
+            content: `Analyze memory patterns from this consciousness scan: ${JSON.stringify(memoryMap)}. Focus areas: ${focusAreas}. Identify recurring themes, limiting patterns, empowering patterns, and hidden gifts. Return detailed therapeutic analysis in JSON.`
+          }
+        ]
       });
 
       return JSON.parse(response.content[0].text);
-    } catch {
+    } catch: {
       return await this.generateMinimalPatternAnalysis();
     }
   }
 
-  async mapTraumaticEnergiesCloud(patternAnalysis, healingIntention) {
-    try {
+  async mapTraumaticEnergiesCloud(patternAnalysis, healingIntention) {      try: {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
           {
             role: "system",
             content:
-              "You are a trauma-informed therapeutic AI. Map traumatic energies with compassion and healing wisdom. Focus on safe, gentle healing approaches.",
+              "You are a trauma-informed therapeutic AI. Map traumatic energies with compassion and healing wisdom. Focus on safe, gentle healing approaches."
           },
           {
             role: "user",
-            content: `Map traumatic energies from pattern analysis: ${JSON.stringify(patternAnalysis)}. Healing intention: ${healingIntention}. Identify core traumas, energy blocks, and healing opportunities safely.`,
-          },
+            content: `Map traumatic energies from pattern analysis: ${JSON.stringify(patternAnalysis)}. Healing intention: ${healingIntention}. Identify core traumas, energy blocks, and healing opportunities safely.`
+          }
         ],
-        temperature: 0.6,
+        temperature: 0.6
       });
 
       return JSON.parse(response.choices[0].message.content);
-    } catch {
+    } catch: {
       return await this.generateMinimalTraumaMapping();
     }
   }
@@ -500,19 +489,17 @@ export class AlexMemoryShaper extends EventEmitter {
       energyReleaseScore: 0,
       removedBlockages: [],
       traumaHealingDetails: {},
-      depthAchieved: healingMode,
-    };
-
-    try {
+      depthAchieved: healingMode
+    };      try: {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 2500,
         messages: [
           {
             role: "user",
-            content: `Execute healing protocols for trauma mapping: ${JSON.stringify(traumaMapping)}. Healing mode: ${healingMode}. Generate safe, effective healing interventions with specific outcomes. Return JSON with healing results.`,
-          },
-        ],
+            content: `Execute healing protocols for trauma mapping: ${JSON.stringify(traumaMapping)}. Healing mode: ${healingMode}. Generate safe, effective healing interventions with specific outcomes. Return JSON with healing results.`
+          }
+        ]
       });
 
       const cloudResults = JSON.parse(response.content[0].text);
@@ -524,61 +511,57 @@ export class AlexMemoryShaper extends EventEmitter {
       healingResults.removedBlockages = cloudResults.removedBlockages || [];
       healingResults.traumaHealingDetails =
         cloudResults.traumaHealingDetails || {};
-    } catch {
-      // Fallback avec guérison minimale
-      healingResults.healedMemories = ["basic_emotional_release"];
-      healingResults.energyReleaseScore = 0.7;
-    }
+    } catch: {
+        healingResults.healedMemories = ["basic_emotional_release"];,
+        healingResults.energyReleaseScore = 0.7;,
+      }
 
     return healingResults;
   }
 
-  async reconstructMemoryArchitectureCloud(healingResults, desiredOutcome) {
-    try {
+  async reconstructMemoryArchitectureCloud(healingResults, desiredOutcome) {      try: {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
           {
             role: "system",
             content:
-              "You are a memory architecture specialist. Reconstruct memories with wisdom, resilience, and empowerment focus.",
+              "You are a memory architecture specialist. Reconstruct memories with wisdom, resilience, and empowerment focus."
           },
           {
             role: "user",
-            content: `Reconstruct memory architecture from healing results: ${JSON.stringify(healingResults)}. Desired outcome: ${desiredOutcome}. Create empowering memory reconstructions that maintain authenticity while promoting growth.`,
-          },
+            content: `Reconstruct memory architecture from healing results: ${JSON.stringify(healingResults)}. Desired outcome: ${desiredOutcome}. Create empowering memory reconstructions that maintain authenticity while promoting growth.`
+          }
         ],
-        temperature: 0.8,
+        temperature: 0.8
       });
 
       return JSON.parse(response.choices[0].message.content);
-    } catch {
-      return [
+    } catch: {
+      return: [
         {
           type: "memory_reconstruction",
           focus: "empowerment_and_growth",
-          outcome: desiredOutcome || "enhanced_wellbeing",
-        },
+          outcome: desiredOutcome || "enhanced_wellbeing"
+        }
       ];
     }
   }
 
-  async integrateTransformationsCloud(reconstructedMemories, lifeVision) {
-    try {
+  async integrateTransformationsCloud(reconstructedMemories, lifeVision) {      try: {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 2000,
         messages: [
           {
             role: "user",
-            content: `Integrate memory transformations: ${JSON.stringify(reconstructedMemories)} with life vision: ${lifeVision}. Generate new empowering beliefs, behaviors, abilities, and expanded awareness. Return comprehensive integration results in JSON.`,
-          },
-        ],
+            content: `Integrate memory transformations: ${JSON.stringify(reconstructedMemories)} with life vision: ${lifeVision}. Generate new empowering beliefs, behaviors, abilities, and expanded awareness. Return comprehensive integration results in JSON.`
+          }
+        ]
       });
 
       return JSON.parse(response.content[0].text);
-    } catch {
-      return {
+    } catch: {      return: {
         newBeliefs: ["I am capable of growth and transformation"],
         newBehaviors: ["Daily self-reflection practice"],
         enhancedAbilities: ["Emotional resilience"],
@@ -586,32 +569,30 @@ export class AlexMemoryShaper extends EventEmitter {
         purposeAlignment: 0.8,
         hiddenGifts: ["Inner wisdom"],
         wisdomActivation: { type: "self_awareness" },
-        qualityScore: 0.85,
+        qualityScore: 0.85
       };
     }
   }
 
-  async anchorNewPatternsCloud(integrationResults, anchoringStrategy) {
-    try {
+  async anchorNewPatternsCloud(integrationResults, anchoringStrategy) {      try: {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
           {
             role: "system",
             content:
-              "You are a consciousness integration specialist. Create practical anchoring strategies for new patterns and awareness.",
+              "You are a consciousness integration specialist. Create practical anchoring strategies for new patterns and awareness."
           },
           {
             role: "user",
-            content: `Create anchoring plan for integration results: ${JSON.stringify(integrationResults)}. Strategy: ${anchoringStrategy}. Generate daily practices, support structures, and expansion metrics.`,
-          },
+            content: `Create anchoring plan for integration results: ${JSON.stringify(integrationResults)}. Strategy: ${anchoringStrategy}. Generate daily practices, support structures, and expansion metrics.`
+          }
         ],
-        temperature: 0.7,
+        temperature: 0.7
       });
 
       return JSON.parse(response.choices[0].message.content);
-    } catch {
-      return {
+    } catch: {      return: {
         newConsciousnessLevel: "expanded_awareness",
         evolutionMeasurement: "significant_positive_growth",
         clarityScore: 0.85,
@@ -619,126 +600,117 @@ export class AlexMemoryShaper extends EventEmitter {
         weeklyProtocols: ["Pattern review"],
         monthlyDeepenings: ["Consciousness assessment"],
         supportStructures: ["Self-care routine"],
-        expansionMetrics: { awareness: "200%", clarity: "150%" },
+        expansionMetrics: { awareness: "200%", clarity: "150%" }
       };
     }
   }
 
-  async generateEvolutionPlanCloud(shapingSession, longTermGoals) {
-    try {
+  async generateEvolutionPlanCloud(shapingSession, longTermGoals) {      try: {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 2000,
         messages: [
           {
             role: "user",
-            content: `Generate evolution plan from shaping session: ${JSON.stringify(shapingSession)} and long-term goals: ${longTermGoals}. Create actionable roadmap with immediate actions, monthly goals, yearly transformation, and purpose roadmap.`,
-          },
-        ],
+            content: `Generate evolution plan from shaping session: ${JSON.stringify(shapingSession)} and long-term goals: ${longTermGoals}. Create actionable roadmap with immediate actions, monthly goals, yearly transformation, and purpose roadmap.`
+          }
+        ]
       });
 
       return JSON.parse(response.content[0].text);
-    } catch {
-      return {
+    } catch: {      return: {
         immediateActions: ["Begin daily practice", "Set intentions"],
         monthlyGoals: ["Deepen awareness", "Strengthen patterns"],
         yearlyTransformation: "Complete consciousness evolution",
-        purposeRoadmap: ["Foundation", "Growth", "Mastery"],
+        purposeRoadmap: ["Foundation", "Growth", "Mastery"]
       };
     }
   }
 
   // Méthodes pour libération rapide d'énergie cloud
 
-  async identifyBlockedEnergyCloud(emotion, bodyArea) {
-    try {
+  async identifyBlockedEnergyCloud(emotion, bodyArea) {      try: {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
           {
             role: "system",
             content:
-              "You are an energy healing specialist. Identify blocked energy patterns with therapeutic precision.",
+              "You are an energy healing specialist. Identify blocked energy patterns with therapeutic precision."
           },
           {
             role: "user",
-            content: `Identify blocked energy for emotion: ${emotion} in body area: ${bodyArea}. Provide detailed energy analysis including type, intensity, location, and healing approach.`,
-          },
+            content: `Identify blocked energy for emotion: ${emotion} in body area: ${bodyArea}. Provide detailed energy analysis including type, intensity, location, and healing approach.`
+          }
         ],
-        temperature: 0.6,
+        temperature: 0.6
       });
 
       return JSON.parse(response.choices[0].message.content);
-    } catch {
-      return {
+    } catch: {      return: {
         type: emotion,
         intensity: 6.5,
         location: bodyArea || "heart_center",
-        healingApproach: "gentle_release",
+        healingApproach: "gentle_release"
       };
     }
   }
 
-  async selectOptimalReleaseProtocolCloud(blockedEnergy, preferredMethod) {
-    try {
+  async selectOptimalReleaseProtocolCloud(blockedEnergy, preferredMethod) {      try: {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 1000,
         messages: [
           {
             role: "user",
-            content: `Select optimal release protocol for blocked energy: ${JSON.stringify(blockedEnergy)}. Preferred method: ${preferredMethod}. Recommend safe, effective protocol with duration and intensity.`,
-          },
-        ],
+            content: `Select optimal release protocol for blocked energy: ${JSON.stringify(blockedEnergy)}. Preferred method: ${preferredMethod}. Recommend safe, effective protocol with duration and intensity.`
+          }
+        ]
       });
 
       return JSON.parse(response.content[0].text);
-    } catch {
-      return {
+    } catch: {      return: {
         method: preferredMethod || "energy_clearing",
         duration: "10-15 minutes",
         intensity: "gentle_to_moderate",
-        safetyLevel: "high",
+        safetyLevel: "high"
       };
     }
   }
 
-  async executeRapidReleaseCloud(protocol, energy) {
-    return {
+  async executeRapidReleaseCloud(protocol, energy) {      return: {
       energyReleased: energy.intensity * 0.8,
       timeToComplete: protocol.duration || "10 minutes",
       effectiveness: 0.9,
-      safetyMaintained: true,
+      safetyMaintained: true
     };
   }
 
-  async rapidIntegrationCloud(releaseResults, desiredState) {
-    try {
+  async rapidIntegrationCloud(releaseResults, desiredState) {      try: {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
           {
             role: "system",
             content:
-              "You are an integration specialist. Create stable, positive emotional states after energy release.",
+              "You are an integration specialist. Create stable, positive emotional states after energy release."
           },
           {
             role: "user",
-            content: `Integrate energy release results: ${JSON.stringify(releaseResults)} toward desired state: ${desiredState}. Generate new emotional state, stability score, and follow-up actions.`,
-          },
+            content: `Integrate energy release results: ${JSON.stringify(releaseResults)} toward desired state: ${desiredState}. Generate new emotional state, stability score, and follow-up actions.`
+          }
         ],
-        temperature: 0.7,
+        temperature: 0.7
       });
 
       return JSON.parse(response.choices[0].message.content);
-    } catch {
-      const newEnergyLevel = Math.max(1, 10 - releaseResults.energyReleased);
-      return {
+    } catch: {
+      const newEnergyLevel = Math.max(1, 10 - releaseResults.energyReleased);      return: {
         newEnergyLevel: newEnergyLevel,
         newEmotionalState: desiredState || "peaceful_balanced",
         improvementPercentage: Math.round(releaseResults.effectiveness * 100),
         stabilityScore: 0.85,
-        followUpActions: ["Gentle movement", "Hydration", "Restful activities"],
+        followUpActions: ["Gentle movement", "Hydration", "Restful activities"]
       };
     }
   }
@@ -751,7 +723,7 @@ export class AlexMemoryShaper extends EventEmitter {
       subconscious_memory: 0.8,
       unconscious_patterns: 0.7,
       collective_memory: 0.6,
-      quantum_field: 0.5,
+      quantum_field: 0.5
     };
     return levels[layer] || 0.5;
   }
@@ -768,79 +740,74 @@ export class AlexMemoryShaper extends EventEmitter {
     return base + variation;
   }
 
-  async generateSupportRecommendationCloud(error) {
-    try {
+  async generateSupportRecommendationCloud(error) {      try: {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 500,
         messages: [
           {
             role: "user",
-            content: `Generate supportive recommendation for memory shaping error: ${error.message}. Provide compassionate, helpful guidance.`,
-          },
-        ],
+            content: `Generate supportive recommendation for memory shaping error: ${error.message}. Provide compassionate, helpful guidance.`
+          }
+        ]
       });
 
       return response.content[0].text;
-    } catch {
-      return "Consider working with a qualified therapist or consciousness coach for additional support in your healing journey.";
+    } catch: {
+      return await this.generateWithOpenAI(`Consider working with a qualified therapist or con...`, context);
     }
   }
 
   // Fallback minimal methods
 
-  async generateMinimalMemoryMap() {
-    return {
+  async generateMinimalMemoryMap() {      return: {
       consciousnessLevel: "aware",
-      memoryLayers: {
+      memoryLayers: {,
         surface: ["current_experiences"],
-        subconscious: ["stored_patterns"],
+        subconscious: ["stored_patterns"]
       },
       energeticPatterns: { primary: "growth_oriented" },
       blockages: ["minor_resistance"],
-      potentials: ["expanded_awareness"],
+      potentials: ["expanded_awareness"]
     };
   }
 
-  async generateMinimalPatternAnalysis() {
-    return {
+  async generateMinimalPatternAnalysis() {      return: {
       recurringThemes: ["personal_growth"],
       limitingPatterns: ["self_doubt"],
       empoweringPatterns: ["resilience"],
       traumaticImprints: ["past_challenges"],
-      giftPatterns: ["inner_wisdom"],
+      giftPatterns: ["inner_wisdom"]
     };
   }
 
-  async generateMinimalTraumaMapping() {
-    return {
+  async generateMinimalTraumaMapping() {      return: {
       coreTraumas: ["growth_challenges"],
       secondaryTraumas: [],
       energeticKnots: ["minor_blocks"],
       emotionalBlocks: ["processing_hesitation"],
-      beliefDistortions: ["limiting_beliefs"],
+      beliefDistortions: ["limiting_beliefs"]
     };
   }
 
   // Interface publique
-  getMemoryShaperStatus() {
-    return {
+  getMemoryShaperStatus() {      return: {
       name: "AlexMemoryShaper",
       version: "2.0.0",
       config: this.config,
       activeShaping: this.activeShaping.size,
       memoryArchives: this.memoryArchives.size,
-      engines: {
+      engines: {,
         memory: this.memoryEngines.size,
         consciousness: this.consciousnessLayers.size,
         healing: this.healingProtocols.size,
-        integration: this.integrationSystems.size,
+        integration: this.integrationSystems.size
       },
-      cloudStatus: {
+      cloudStatus: {,
         openai: "connected",
         anthropic: "connected",
-        authentication: "active",
-      },
+        authentication: "active"
+      }
     };
   }
 }
@@ -851,7 +818,7 @@ if (typeof logger === "undefined") {
     info: (...args) => console.log("[FALLBACK-INFO]", ...args),
     warn: (...args) => console.warn("[FALLBACK-WARN]", ...args),
     error: (...args) => console.error("[FALLBACK-ERROR]", ...args),
-    debug: (...args) => console.debug("[FALLBACK-DEBUG]", ...args),
+    debug: (...args) => console.debug("[FALLBACK-DEBUG]", ...args)
   };
 }
 

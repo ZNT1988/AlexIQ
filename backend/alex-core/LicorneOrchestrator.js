@@ -32,10 +32,10 @@ class LicorneOrchestrator extends EventEmitter {
     const dbPath = this.config.get("database.path");
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        console.error("❌ Orchestrator DB connection failed:", err.message);
+        
         return;
       }
-      console.log("✅ Orchestrator connecté à la base");
+      
       this.createOrchestratorTables();
     });
   }
@@ -76,7 +76,7 @@ class LicorneOrchestrator extends EventEmitter {
 
     tables.forEach((sql) => {
       this.db.run(sql, (err) => {
-        if (err) console.error("❌ Orchestrator table error:", err.message);
+        if (err) 
       });
     });
   }
@@ -92,18 +92,16 @@ class LicorneOrchestrator extends EventEmitter {
     if (this.isInitialized) return;
 
     try {
-      console.log("🚀 Initialisation LicorneOrchestrator...");
-
+      
       await this.loadModuleRegistry();
       await this.initializeModules();
       await this.setupTaskProcessing();
 
       this.isInitialized = true;
-      console.log("✅ LicorneOrchestrator initialisé avec succès");
-
+      
       this.emit("orchestratorReady");
     } catch (error) {
-      console.error("❌ Erreur initialisation orchestrateur:", error.message);
+      
       throw error;
     }
   }
@@ -113,9 +111,9 @@ class LicorneOrchestrator extends EventEmitter {
       const UniversalModuleRegistry = require("./UniversalModuleRegistry");
       this.moduleRegistry = new UniversalModuleRegistry();
       await this.moduleRegistry.initialize();
-      console.log("✅ Module Registry chargé");
+      
     } catch (error) {
-      console.error("❌ Erreur chargement Module Registry:", error.message);
+      
       throw error;
     }
   }
@@ -129,7 +127,7 @@ class LicorneOrchestrator extends EventEmitter {
       }
     }
 
-    console.log(`✅ ${this.modules.size} modules chargés`);
+    
   }
 
   async loadModuleCategory(category, settings) {
@@ -163,12 +161,9 @@ class LicorneOrchestrator extends EventEmitter {
       const loadTime = Date.now() - startTime;
       this.stats.moduleLoadTime[category] = loadTime;
 
-      console.log(`✅ Catégorie ${category} chargée en ${loadTime}ms`);
+      
     } catch (error) {
-      console.error(
-        `❌ Erreur chargement catégorie ${category}:`,
-        error.message,
-      );
+      
     }
   }
 
@@ -189,10 +184,7 @@ class LicorneOrchestrator extends EventEmitter {
 
       return instance;
     } catch (error) {
-      console.error(
-        `❌ Erreur chargement module ${moduleInfo.name}:`,
-        error.message,
-      );
+      
       return null;
     }
   }
@@ -202,7 +194,7 @@ class LicorneOrchestrator extends EventEmitter {
       this.processTaskQueue();
     }, 100);
 
-    console.log("✅ Traitement des tâches configuré");
+    
   }
 
   async processRequest(input, context = {}) {
@@ -270,7 +262,7 @@ class LicorneOrchestrator extends EventEmitter {
           const moduleTime = Date.now() - moduleStartTime;
           this.updateModuleStats(moduleName, true, moduleTime);
         } catch (moduleError) {
-          console.error(`❌ Erreur module ${moduleName}:`, moduleError.message);
+          
           this.updateModuleStats(
             moduleName,
             false,
@@ -546,13 +538,11 @@ class LicorneOrchestrator extends EventEmitter {
   }
 
   handleTaskCompleted(task) {
-    console.log(
-      `✅ Tâche ${task.id} terminée en ${task.completedAt - task.timestamp}ms`,
-    );
+    
   }
 
   handleTaskFailed(task, error) {
-    console.error(`❌ Tâche ${task.id} échouée:`, error.message);
+    
   }
 
   handleModuleLoaded(moduleInfo) {
@@ -562,11 +552,11 @@ class LicorneOrchestrator extends EventEmitter {
   }
 
   handleSystemAlert(alert) {
-    console.warn(`⚠️ Alerte système:`, alert);
+    
   }
 
   generateTaskId() {
-    return `task-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    return `task-${Date.now()}-${this.getDeterministicValue().toString(36).substr(2, 9)}`;
   }
 
   getStats() {
@@ -603,21 +593,20 @@ class LicorneOrchestrator extends EventEmitter {
   }
 
   async shutdown() {
-    console.log("🔄 Arrêt LicorneOrchestrator...");
-
+    
     for (const [, task] of this.activeTasks) {
-      console.log(`⏳ Attente tâche ${task.id}...`);
+      
     }
 
     if (this.db) {
       this.db.close((err) => {
         if (err)
-          console.error("❌ Erreur fermeture DB orchestrateur:", err.message);
-        else console.log("✅ Base orchestrateur fermée");
+          
+        else 
       });
     }
 
-    console.log("✅ LicorneOrchestrator arrêté");
+    
   }
 }
 

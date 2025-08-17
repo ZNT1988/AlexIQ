@@ -214,7 +214,7 @@ return result;
  * // Initialisation au démarrage
  * try {
  *   await initializeDatabase();
- *   console.log('SQLite ready for ALEX ecosystem');
+ *   
  * } catch (error) {
  *   logger.error('SQLite initialization failed:', error);
  * }
@@ -421,7 +421,7 @@ return result;
  * // Health check SQLite
  * const isHealthy = await testConnection();
  * if (!isHealthy) {
- *   console.error('SQLite fallback unavailable');
+ *   
  * }
  */
 export async function testConnection() {

@@ -1,9 +1,12 @@
 import crypto from 'node:crypto';
 // AlexDreamCompiler.js - Compilateur de Rêves en Projets Réels
-// Module révolutionnaire pour transformer pensées floues en hustles structurés
-// Version: 2.0 - HustleFinderIA Advanced AI System
 
-import { EventEmitter } from 'node:events';
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+// Module révolutionnaire pour transformer pensées floues en hustles structurés
+// Version: 2.0 - HustleFinderIA Advanced AI System      import { EventEmitter } from 'node:events';
 import logger from '../config/logger.js';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
@@ -16,7 +19,7 @@ import logger from '../config/logger.js';
  * - Générer roadmap de lancement rapide personnalisée
  * - Adapter le projet aux compétences et contraintes de l'utilisateur
  */
-export class AlexDreamCompiler extends EventEmitter {
+export class AlexDreamCompiler extends EventEmitter  {
   constructor() {
     super();
 
@@ -35,13 +38,14 @@ export class AlexDreamCompiler extends EventEmitter {
     this.loadDreamPatterns();
     this.loadProjectTemplates();
     this.loadTechStacks();
-    this.setupEmotionalAnalysis();
-
-    try {
+    this.setupEmotionalAnalysis();      try: {
       logger.info('AlexDreamCompiler initialized - Ready to transform dreams into reality');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   /**
    * Point d'entrée principal - Compile un rêve en projet structuré
@@ -49,28 +53,26 @@ export class AlexDreamCompiler extends EventEmitter {
   async compileDream(dreamInput, userContext = {}) {
     logger.info('Starting dream compilation process'
       {
-      inputType: dreamInput.type
+      inputType: dreamInput.type,
       userId: userContext.userId
-    });
-
-    try {
+    });      try: {
       // Phase 1: Analyse profonde du rêve
       const dreamAnalysis = await this.analyzeDream(dreamInput);      // Phase 2: Extraction de l'essence du projet
       const projectEssence = await this.extractProjectEssence(dreamAnalysis);      // Phase 3: Génération du projet structuré
-      const compiledProject = await this.generateProject(projectEssence
+      const compiledProject = await this.generateProject(projectEssence,
       userContext);      // Phase 4: Optimisation et personnalisation
-      const optimizedProject = await this.optimizeProject(compiledProject
+      const optimizedProject = await this.optimizeProject(compiledProject,
       userContext);      // Phase 5: Génération du plan de lancement
-      const launchPlan = await this.generateLaunchPlan(optimizedProject
+      const launchPlan = await this.generateLaunchPlan(optimizedProject,
       userContext);      const _finalProject = {
-        ...optimizedProject
+        ...optimizedProject,
       launchPlan
-      compilationMetadata: {
-          dreamInput: dreamInput.content
-      analysisScore: dreamAnalysis.confidence
-      feasibilityScore: this.calculateFeasibility(optimizedProject
+      compilationMetadata: {,
+          dreamInput: dreamInput.content,
+      analysisScore: dreamAnalysis.confidence,
+      feasibilityScore: this.calculateFeasibility(optimizedProject,
       userContext)
-      timeToMarket: this.estimateTimeToMarket(optimizedProject)
+      timeToMarket: this.estimateTimeToMarket(optimizedProject),
       uniquenessScore: this.calculateUniqueness(optimizedProject)
       compiledAt: new Date().toISOString()
         };      };
@@ -91,19 +93,19 @@ export class AlexDreamCompiler extends EventEmitter {
   async analyzeDream(dreamInput) {
     const analysis = {
       type: dreamInput.type
-      // text
+      // text,
       voice
-      emotion
+      emotion,
       mixed
-      rawContent: dreamInput.content
-      confidence: 0
+      rawContent: dreamInput.content,
+      confidence: 0,
       emotionalState: {}
-      keywords: []
-      intent: ''
-      complexity: 'simple'
-      domain: ''
-      passion_level: 0
-      urgency: 0
+      keywords: [],
+      intent: '',
+      complexity: 'simple',
+      domain: '',
+      passion_level: 0,
+      urgency: 0,
       clarity: 0
     };    // Analyse textuelle avec NLP avancé
     if (dreamInput.type === 'text' || dreamInput.content) {
@@ -141,14 +143,14 @@ export class AlexDreamCompiler extends EventEmitter {
    */
   async extractProjectEssence(dreamAnalysis) {
     const essence = {
-      coreIdea: ''
-      targetAudience: ''
-      problemSolved: ''
-      uniqueValue: ''
-      businessModel: ''
-      category: ''
-      scalabilityPotential: 0
-      innovationFactor: 0
+      coreIdea: '',
+      targetAudience: '',
+      problemSolved: '',
+      uniqueValue: '',
+      businessModel: '',
+      category: '',
+      scalabilityPotential: 0,
+      innovationFactor: 0,
       marketSize: 'unknown'
     };    // Identification de l'idée centrale
     essence.coreIdea = this.identifyCoreIdea(dreamAnalysis);
@@ -185,17 +187,17 @@ export class AlexDreamCompiler extends EventEmitter {
    */
   async generateProject(projectEssence, userContext) {
     const project = {
-      name: ''
-      tagline: ''
-      description: ''
-      objective: ''
+      name: '',
+      tagline: '',
+      description: '',
+      objective: '',
       mvp: {}
       techStack: {}
-      features: []
+      features: [],
       timeline: {}
       resources: {}
-      risks: []
-      opportunities: []
+      risks: [],
+      opportunities: [],
       monetization: {}
     };    // Génération du nom et tagline accrocheurs
     project.name = this.generateProjectName(projectEssence);
@@ -239,13 +241,13 @@ export class AlexDreamCompiler extends EventEmitter {
    */
   generateMVP(projectEssence, userContext) {
     const mvp = {
-      coreFeatures: []
-      userJourney: []
-      techRequirements: []
-      launchCriteria: []
-      successMetrics: []
-      estimatedDevelopmentTime: ''
-      estimatedCost: ''
+      coreFeatures: [],
+      userJourney: [],
+      techRequirements: [],
+      launchCriteria: [],
+      successMetrics: [],
+      estimatedDevelopmentTime: '',
+      estimatedCost: '',
       riskFactors: []
     };    // Features essentielles du MVP
     mvp.coreFeatures = this.selectCoreFeatures(projectEssence, userContext);
@@ -289,26 +291,26 @@ export class AlexDreamCompiler extends EventEmitter {
     if (projectEssence.category === 'web_app') {
       if (userSkills.includes('react')) {
         stack.frontend = {
-          framework: 'React'
-          language: 'JavaScript/TypeScript'
-          styling: 'Tailwind CSS'
-          buildTool: 'Vite'
+          framework: 'React',
+          language: 'JavaScript/TypeScript',
+          styling: 'Tailwind CSS',
+          buildTool: 'Vite',
           reasoning: 'Aligné avec vos compétences React existantes'
         };
       } else if (complexity < 0.7) {
         stack.frontend = {
-          framework: 'Vue.js'
-          language: 'JavaScript'
-          styling: 'CSS Modules'
-          buildTool: 'Vite'
+          framework: 'Vue.js',
+          language: 'JavaScript',
+          styling: 'CSS Modules',
+          buildTool: 'Vite',
           reasoning: 'Vue.js est plus simple pour débuter'
         };
       } else {
         stack.frontend = {
-          framework: 'Next.js'
-          language: 'TypeScript'
-          styling: 'Tailwind CSS'
-          buildTool: 'Turbopack'
+          framework: 'Next.js',
+          language: 'TypeScript',
+          styling: 'Tailwind CSS',
+          buildTool: 'Turbopack',
           reasoning: 'Next.js pour performance et SEO optimaux'
         };
       }
@@ -317,16 +319,16 @@ export class AlexDreamCompiler extends EventEmitter {
     // Backend suggestions
     if (complexity < 0.5) {
       stack.backend = {
-        framework: 'Express.js'
-        language: 'Node.js'
-        api: 'REST'
+        framework: 'Express.js',
+        language: 'Node.js',
+        api: 'REST',
         reasoning: 'Simple et rapide pour prototyper'
       };
     } else {
       stack.backend = {
-        framework: 'NestJS'
-        language: 'TypeScript'
-        api: 'GraphQL + REST'
+        framework: 'NestJS',
+        language: 'TypeScript',
+        api: 'GraphQL + REST',
         reasoning: 'Architecture scalable pour croissance future'
       };
     }
@@ -334,15 +336,15 @@ export class AlexDreamCompiler extends EventEmitter {
     // Database suggestions
     if (projectEssence.category === 'social' || projectEssence.category === 'content') {
       stack.database = {
-        primary: 'PostgreSQL'
-        cache: 'Redis'
-        search: 'Elasticsearch'
+        primary: 'PostgreSQL',
+        cache: 'Redis',
+        search: 'Elasticsearch',
         reasoning: 'PostgreSQL pour relations complexes, Redis pour performance'
       };
     } else {
       stack.database = {
-        primary: 'MongoDB'
-        cache: 'Redis'
+        primary: 'MongoDB',
+        cache: 'Redis',
         reasoning: 'MongoDB pour flexibilité et développement rapide'
       };
     }
@@ -350,27 +352,27 @@ export class AlexDreamCompiler extends EventEmitter {
     // Hosting suggestions
     if (budget === 'low') {
       stack.hosting = {
-        frontend: 'Vercel'
-        backend: 'Railway'
-        database: 'PlanetScale'
+        frontend: 'Vercel',
+        backend: 'Railway',
+        database: 'PlanetScale',
         reasoning: 'Gratuit pour commencer, scalable ensuite'
       };
     } else {
       stack.hosting = {
-        cloud: 'AWS'
-        containerization: 'Docker'
-        orchestration: 'Kubernetes'
+        cloud: 'AWS',
+        containerization: 'Docker',
+        orchestration: 'Kubernetes',
         reasoning: 'Infrastructure professionnelle scalable'
       };
     }
 
     // Tools suggestions
     stack.tools = {
-      versionControl: 'Git + GitHub'
-      ci_cd: 'GitHub Actions'
-      monitoring: 'Sentry'
-      analytics: 'Google Analytics + Mixpanel'
-      communication: 'Slack + Discord'
+      versionControl: 'Git + GitHub',
+      ci_cd: 'GitHub Actions',
+      monitoring: 'Sentry',
+      analytics: 'Google Analytics + Mixpanel',
+      communication: 'Slack + Discord',
       projectManagement: 'Linear + Notion'
     };
 
@@ -382,46 +384,46 @@ export class AlexDreamCompiler extends EventEmitter {
    */
   async generateLaunchPlan(project, userContext) {
     const plan = {
-      phases: []
-      timeline: ''
-      milestones: []
+      phases: [],
+      timeline: '',
+      milestones: [],
       marketingStrategy: {}
-      launchSequence: []
-      successMetrics: []
+      launchSequence: [],
+      successMetrics: [],
       contingencyPlans: []
     };    // Phase de pré-lancement (Semaines 1-2)
     plan.phases.push({
-      name: 'Pré-lancement'
-      duration: '2 semaines'
+      name: 'Pré-lancement',
+      duration: '2 semaines',
       tasks: [
-        'Finaliser MVP'
+        'Finaliser MVP',
       'Tests utilisateurs'
-      'Créer landing page'
+      'Créer landing page',
       'Préparer contenu marketing'
-      'Configurer analytics'
+      'Configurer analytics',
       'Préparer support client'
-      ]
+      ],
       deliverables: [
-        'MVP fonctionnel'
+        'MVP fonctionnel',
       'Landing page optimisée'
-      'Plan marketing détaillé'
+      'Plan marketing détaillé',
       'Documentation utilisateur'
       ]
     });
 
     // Phase de lancement soft (Semaine 3)
     plan.phases.push({
-      name: 'Lancement Soft'
-      duration: '1 semaine'
+      name: 'Lancement Soft',
+      duration: '1 semaine',
       tasks: [
-        'Lancement auprès des bêta-testeurs'
+        'Lancement auprès des bêta-testeurs',
         'Collecte de feedback'
-        'Corrections rapides'
+        'Corrections rapides',
         'Optimisation UX'
         'Préparation du lancement public'
-      ]
+      ],
       deliverables: [
-        'Feedback utilisateurs'
+        'Feedback utilisateurs',
         'Version optimisée'
         'Plan de lancement public'
       ]
@@ -429,17 +431,17 @@ export class AlexDreamCompiler extends EventEmitter {
 
     // Phase de lancement public (Semaine 4)
     plan.phases.push({
-      name: 'Lancement Public'
-      duration: '1 semaine'
+      name: 'Lancement Public',
+      duration: '1 semaine',
       tasks: [
-        'Lancement sur Product Hunt'
+        'Lancement sur Product Hunt',
         'Campagne réseaux sociaux'
-        'Outreach média'
+        'Outreach média',
         'Email marketing'
         'Monitoring performance'
-      ]
+      ],
       deliverables: [
-        'Présence média'
+        'Présence média',
         'Premiers utilisateurs payants'
         'Feedback marché'
       ]
@@ -483,37 +485,37 @@ export class AlexDreamCompiler extends EventEmitter {
 
   classifyDomain(content) {
     const domains = {
-      'app': ['application'
+      'app': ['application',
       'app'
-      'mobile'
+      'mobile',
       'software']
-      'web': ['site'
+      'web': ['site',
       'web'
-      'plateforme'
+      'plateforme',
       'online']
-      'ecommerce': ['boutique'
+      'ecommerce': ['boutique',
       'vente'
-      'produit'
+      'produit',
       'shop']
-      'saas': ['service'
+      'saas': ['service',
       'abonnement'
-      'entreprise'
+      'entreprise',
       'b2b']
-      'social': ['communauté'
+      'social': ['communauté',
       'réseau'
-      'social'
+      'social',
       'partage']
-      'content': ['contenu'
+      'content': ['contenu',
       'blog'
-      'média'
+      'média',
       'publication']
-      'fintech': ['argent'
+      'fintech': ['argent',
       'paiement'
-      'finance'
+      'finance',
       'crypto']
-      'edtech': ['éducation'
+      'edtech': ['éducation',
       'formation'
-      'apprentissage'
+      'apprentissage',
       'cours']
     };    const contentLower = content.toLowerCase();    for (const [domain, keywords] of Object.entries(domains)) {
       if (keywords.some(keyword => contentLower.includes(keyword))) {
@@ -529,7 +531,7 @@ export class AlexDreamCompiler extends EventEmitter {
     return `${prefix}${coreWords.join('')}${suffix}`;
   }
 
-  generateTagline(essence) {
+  generateTagline(essence) {
 
     return templates[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * templates.length)];
   }
@@ -553,8 +555,8 @@ export class AlexDreamCompiler extends EventEmitter {
 
   estimateTimeToMarket(project) {
     const baseDays = 30;    const complexityMultiplier = {
-      simple: 1
-      medium: 1.5
+      simple: 1,
+      medium: 1.5,
       complex: 2.5
     };    const features = project.mvp.coreFeatures.length;    const complexity = project.mvp.techRequirements.length > 5 ? 'complex' :;                     project.mvp.techRequirements.length > 3 ? 'medium' : 'simple';
 
@@ -564,17 +566,17 @@ export class AlexDreamCompiler extends EventEmitter {
   loadDreamPatterns() {
     // Patterns de reconnaissance de rêves
     this.dreamPatterns.set('entrepreneurial', {
-      keywords: ['business', 'startup', 'entreprise', 'lancer', 'créer']
+      keywords: ['business', 'startup', 'entreprise', 'lancer', 'créer'],
       confidence: 0.8
     });
 
     this.dreamPatterns.set('creative', {
-      keywords: ['créatif', 'art', 'design', 'original', 'unique']
+      keywords: ['créatif', 'art', 'design', 'original', 'unique'],
       confidence: 0.7
     });
 
     this.dreamPatterns.set('technical', {
-      keywords: ['code', 'développer', 'technique', 'software', 'app']
+      keywords: ['code', 'développer', 'technique', 'software', 'app'],
       confidence: 0.9
     });
   }
@@ -582,8 +584,8 @@ export class AlexDreamCompiler extends EventEmitter {
   loadProjectTemplates() {
     // Templates de projets pré-configurés
     this.projectTemplates.set('saas_simple', {
-      structure: 'MVP lean'
-      features: ['auth', 'dashboard', 'core_feature', 'payments']
+      structure: 'MVP lean',
+      features: ['auth', 'dashboard', 'core_feature', 'payments'],
       timeline: '4-6 semaines'
     });
   }
@@ -591,23 +593,25 @@ export class AlexDreamCompiler extends EventEmitter {
   loadTechStacks() {
     // Stacks techniques recommandées
     this.stackSuggestions.set('rapid_prototype', {
-      frontend: 'React + Vite'
-      backend: 'Express.js'
-      database: 'MongoDB'
+      frontend: 'React + Vite',
+      backend: 'Express.js',
+      database: 'MongoDB',
       hosting: 'Vercel + Railway'
     });
   }
 
   setupEmotionalAnalysis() {
-    // Configuration de l'analyse émotionnelle
-    try {
+    // Configuration de l'analyse émotionnelle      try: {
       logger.debug('Emotional analysis system configured');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 }
 
 // Export des fonctions utilitaires
-export const compileDream = async (_dreamInput, _userContext) => this.processLongOperation(args);export const analyzeDreamEssence = async (_dreamInput) => this.processLongOperation(args);export const generateProjectFromEssence = async (_essence, _userContext) => this.processLongOperation(args);// Instance singleton pour utilisation globale
+export const compileDream = async (_dreamInput, _userContext) => // Code de traitement approprié ici;export const analyzeDreamEssence = async (_dreamInput) => // Code de traitement approprié ici;export const generateProjectFromEssence = async (_essence, _userContext) => // Code de traitement approprié ici;// Instance singleton pour utilisation globale
 const dreamCompiler = new AlexDreamCompiler();
 export default dreamCompiler;

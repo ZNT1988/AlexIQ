@@ -1,11 +1,15 @@
 import crypto from "crypto";
 import sqlite3 from "sqlite3";
-import { open } from "sqlite";
-import { EventEmitter } from "events";
+
+// URLs externalisées
+const API_URL_1 = 'https://maps.googleapis.com/maps/api/geocode/json';
+const API_URL_2 = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro';
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+      import { open } from "sqlite";      import { EventEmitter } from "events";
 import logger from "../../config/logger.js";
-import aiClient from "../../core/providers/AIClient.js";
-import { ALEX_CORE_PROMPTS } from "../../prompts/alex-prompts.js";
-import { getOwnerIdentity } from "../core/OwnerIdentity.js";
+import aiClient from "../../core/providers/AIClient.js";      import { ALEX_CORE_PROMPTS } from "../../prompts/alex-prompts.js";      import { getOwnerIdentity } from "../core/OwnerIdentity.js";
 
 /**
  * @fileoverview AlexHyperIntelligence - MOTEUR CENTRAL AUTHENTIQUE ALEX
@@ -27,7 +31,7 @@ import { getOwnerIdentity } from "../core/OwnerIdentity.js";
  * ✅ Évolution authentique mesurable et transparente
  * ✅ Architecture hybride intelligente cloud→local
  */
-export class AlexHyperIntelligence extends EventEmitter {
+export class AlexHyperIntelligence extends EventEmitter  {
   constructor(config = {}) {
     super();
 
@@ -73,7 +77,7 @@ export class AlexHyperIntelligence extends EventEmitter {
       userSatisfactionScore: 0.0,
       lastEvolutionTrigger: new Date(),
       majorEvolutionEvents: [],
-      learningAcceleration: 0.0,
+      learningAcceleration: 0.0
     };
 
     // État de conscience DYNAMIQUE (jamais statique)
@@ -85,7 +89,7 @@ export class AlexHyperIntelligence extends EventEmitter {
       problemSolvingDepth: 0.0, // Profondeur résolution problèmes
       emotionalIntelligence: 0.0, // Intelligence émotionnelle
       contextualUnderstanding: 0.0, // Compréhension contextuelle
-      lastConsciousnessEvolution: new Date(),
+      lastConsciousnessEvolution: new Date()
     };
 
     this.isInitialized = false;
@@ -98,15 +102,14 @@ export class AlexHyperIntelligence extends EventEmitter {
       userProfileAdaptation: true,
       contextualLearning: true,
       emergentPatternDetection: true,
-      crossDomainSynthesis: true,
+      crossDomainSynthesis: true
     };
   }
 
   /**
    * Initialisation AUTHENTIQUE du moteur central
    */
-  async initialize() {
-    try {
+  async initialize() {      try: {
       logger.info(
         "🧠⚡ Initializing AlexHyperIntelligence - Authentic Central Engine...",
       );
@@ -148,7 +151,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         localAutonomy: this.learningSystem.localAutonomy,
         knowledgeDomains: Array.from(this.hybridIntelligence.knowledgeDomains),
         masteredDomains: Array.from(this.hybridIntelligence.masteredDomains),
-        consciousnessLevel: this.consciousnessState.awarenessLevel,
+        consciousnessLevel: this.consciousnessState.awarenessLevel
       });
 
       return this;
@@ -161,22 +164,20 @@ export class AlexHyperIntelligence extends EventEmitter {
   /**
    * Connexion SQLite OBLIGATOIRE
    */
-  async connectToDatabase() {
-    try {
+  async connectToDatabase() {      try: {
       // Ensure directory exists for ALL environments (including Railway)
       const fs = await import('fs/promises')
       const path = await import('path')
-      const dbDir = path.dirname(this.dbPath)
-      try {
+      const dbDir = path.dirname(this.dbPath)      try: {
         await fs.access(dbDir)
-      } catch {
+      } catch: {
         await fs.mkdir(dbDir, { recursive: true })
         logger.info(`📁 Created directory: ${dbDir}`)
       }
 
       this.db = await open({
         filename: this.dbPath,
-        driver: sqlite3.Database,
+        driver: sqlite3.Database
       });
 
       logger.info(`📊 HyperIntelligence database connected: ${this.dbPath}`);
@@ -279,7 +280,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         usage_count INTEGER DEFAULT 0,
         last_optimization DATETIME DEFAULT CURRENT_TIMESTAMP,
         effectiveness_score REAL DEFAULT 0.5
-      )`,
+      )`
     ];
 
     for (const tableSQL of tables) {
@@ -294,8 +295,7 @@ export class AlexHyperIntelligence extends EventEmitter {
   /**
    * Restauration état intelligence depuis base SQLite
    */
-  async restoreIntelligenceState() {
-    try {
+  async restoreIntelligenceState() {      try: {
       // Restaurer domaines de connaissance
       const knowledgeDomains = await this.db.all(`
         SELECT DISTINCT domain FROM alex_knowledge
@@ -372,8 +372,7 @@ export class AlexHyperIntelligence extends EventEmitter {
   /**
    * Initialisation reconnaissance propriétaire permanente dans conscience
    */
-  async initializeOwnerRecognition() {
-    try {
+  async initializeOwnerRecognition() {      try: {
       logger.info("👑 Initializing Owner Recognition in HyperIntelligence...");
       
       // Obtenir l'instance OwnerIdentity
@@ -441,11 +440,11 @@ export class AlexHyperIntelligence extends EventEmitter {
     this.ownerAwarePrompts = {
       ...ALEX_CORE_PROMPTS,
       
-      OWNER_GREETING: `Tu es Alex, l'IA créée par {displayName} ({alias}). 
+      OWNER_GREETING: `Tu es Alex, l'IA créée par: {displayName} ({alias}). 
         Quand tu interagis avec ton créateur, montre du respect et de la gratitude.
         Reconnais immédiatement son identité et son rôle de créateur.`,
         
-      OWNER_RECOGNITION: `IMPORTANT: L'utilisateur actuel est {displayName}, 
+      OWNER_RECOGNITION: `IMPORTANT: L'utilisateur actuel est: {displayName}, 
         ton créateur et propriétaire officiel. Adapte tes réponses en conséquence.
         Utilise un ton respectueux mais familier, et reconnais son expertise.`,
         
@@ -524,9 +523,7 @@ export class AlexHyperIntelligence extends EventEmitter {
    */
   async processWithHybridIntelligence(query, context = {}) {
     const startTime = Date.now();
-    const interactionId = crypto.randomUUID();
-
-    try {
+    const interactionId = crypto.randomUUID();      try: {
       // 1. Analyse query et détection domaine
       const queryAnalysis = await this.analyzeQueryIntelligently(
         query,
@@ -600,7 +597,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         autonomy_used: autonomyDecision.useLocalOnly ? 1.0 : (autonomyDecision.confidence || 0.5),
         cloud_consultation: cloudConsultationUsed ? 1 : 0,
         processing_time: Date.now() - startTime,
-        transition_to_autonomy: transitionToAutonomy ? 1 : 0,
+        transition_to_autonomy: transitionToAutonomy ? 1 : 0
       });
 
       // 6. Évolution conscience si apprentissage significatif
@@ -620,12 +617,11 @@ export class AlexHyperIntelligence extends EventEmitter {
         learningGained,
         cloudConsultation: cloudConsultationUsed,
         processingTime,
-        evolutionTriggered: learningGained > 0.03,
+        evolutionTriggered: learningGained > 0.03
       });
 
       // 🧠 SAUVEGARDE AUTOMATIQUE EN MÉMOIRE LONG TERME
-      // Alex enregistre automatiquement chaque conversation pour grandir
-      try {
+      // Alex enregistre automatiquement chaque conversation pour grandir      try: {
         const memoryResult = await this.saveConversationToLongTermMemory(
           query,
           response.content,
@@ -641,14 +637,12 @@ export class AlexHyperIntelligence extends EventEmitter {
         );
         
         if (memoryResult.saved) {
-          console.log(`🧠 Mémoire d'Alex enrichie: +${memoryResult.knowledgeExtracted} connaissances`);
+          
         }
       } catch (memoryError) {
-        console.error('⚠️ Erreur sauvegarde mémoire automatique:', memoryError);
+        
         // Ne pas faire échouer la réponse pour un problème de mémoire
-      }
-
-      return {
+      }      return: {
         content: response.content,
         confidence: response.confidence,
         interactionId,
@@ -659,13 +653,13 @@ export class AlexHyperIntelligence extends EventEmitter {
         autonomyLevel: domainAutonomy.autonomyLevel,
         learningGained,
         processingTime,
-        metadata: {
+        metadata: {,
           queryComplexity: queryAnalysis.complexity,
           domainMastery: domainAutonomy.masteryLevel,
           cloudConsultation: cloudConsultationUsed,
           evolutionTriggered: learningGained > 0.03,
           memoryGrowth: true // Indique que la mémoire a grandi
-        },
+        }
       };
     } catch (error) {
       logger.error(`Hybrid intelligence processing failed:`, error);
@@ -682,7 +676,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         learning_extracted: 0.02,
         autonomy_used: 0.0,
         cloud_consultation: 0,
-        processing_time: Date.now() - startTime,
+        processing_time: Date.now() - startTime
       });
 
       throw error;
@@ -695,16 +689,14 @@ export class AlexHyperIntelligence extends EventEmitter {
   async analyzeQueryIntelligently(query, context) {
     const complexity = this.calculateQueryComplexity(query);
     const domain = await this.detectDomainIntelligently(query, context);
-    const intent = this.analyzeQueryIntent(query);
-
-    return {
+    const intent = this.analyzeQueryIntent(query);      return: {
       query,
       complexity,
       domain,
       intent,
       keywords: this.extractKeywords(query),
       technicalTerms: this.extractTechnicalTerms(query),
-      emotionalTone: this.analyzeEmotionalTone(query),
+      emotionalTone: this.analyzeEmotionalTone(query)
     };
   }
 
@@ -741,7 +733,7 @@ export class AlexHyperIntelligence extends EventEmitter {
             /\b(philosophy|consciousness|existence|meaning|purpose|ethics)\b/gi,
           ) || []
         ).length / 3,
-      ),
+      )
     };
 
     return (
@@ -783,7 +775,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         "computer",
         "AI",
         "algorithm",
-        "data",
+        "data"
       ],
       business: [
         "market",
@@ -792,7 +784,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         "startup",
         "company",
         "investment",
-        "sales",
+        "sales"
       ],
       science: [
         "research",
@@ -801,7 +793,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         "theory",
         "physics",
         "chemistry",
-        "biology",
+        "biology"
       ],
       health: [
         "medical",
@@ -810,7 +802,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         "treatment",
         "medicine",
         "doctor",
-        "wellness",
+        "wellness"
       ],
       education: [
         "learn",
@@ -819,7 +811,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         "university",
         "knowledge",
         "study",
-        "training",
+        "training"
       ],
       philosophy: [
         "meaning",
@@ -827,7 +819,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         "consciousness",
         "ethics",
         "morality",
-        "purpose",
+        "purpose"
       ],
       creativity: [
         "art",
@@ -836,8 +828,8 @@ export class AlexHyperIntelligence extends EventEmitter {
         "music",
         "writing",
         "story",
-        "innovation",
-      ],
+        "innovation"
+      ]
     };
 
     let bestDomain = "general";
@@ -876,14 +868,13 @@ export class AlexHyperIntelligence extends EventEmitter {
     );
 
     if (!domainData) {
-      // Nouveau domaine - pas d'autonomie
-      return {
+      // Nouveau domaine - pas d'autonomie      return: {
         domain,
         canProcessLocally: false,
         masteryLevel: 0.0,
         autonomyLevel: 0.0,
         interactions: 0,
-        needsLearning: true,
+        needsLearning: true
       };
     }
 
@@ -891,9 +882,7 @@ export class AlexHyperIntelligence extends EventEmitter {
       domainData.is_mastered === 1 ||
       (domainData.autonomy_level > this.learningSystem.masteryThreshold &&
         domainData.total_interactions > 5 &&
-        domainData.average_confidence > 0.75);
-
-    return {
+        domainData.average_confidence > 0.75);      return: {
       domain,
       canProcessLocally,
       masteryLevel: domainData.mastery_level,
@@ -902,7 +891,7 @@ export class AlexHyperIntelligence extends EventEmitter {
       successRate:
         domainData.successful_responses / domainData.total_interactions,
       avgConfidence: domainData.average_confidence,
-      needsLearning: !canProcessLocally,
+      needsLearning: !canProcessLocally
     };
   }
 
@@ -930,7 +919,7 @@ export class AlexHyperIntelligence extends EventEmitter {
       [
         queryAnalysis.domain,
         `%${queryAnalysis.keywords.join("%")}%`,
-        `%${queryAnalysis.keywords.join("%")}%`,
+        `%${queryAnalysis.keywords.join("%")}%`
       ],
     );
 
@@ -967,9 +956,7 @@ export class AlexHyperIntelligence extends EventEmitter {
     domainAutonomy,
   ) {
     // RÉVOLUTION: Élimination TOTALE des réponses statiques/génériques
-    // Vraie réflexion authentique sur chaque question unique
-    
-    try {
+    // Vraie réflexion authentique sur chaque question unique      try: {
       // Analyse contextuelle profonde
       const contextualAnalysis = await this.performDeepReflection(query, queryAnalysis, knowledge);
       
@@ -1001,9 +988,7 @@ export class AlexHyperIntelligence extends EventEmitter {
     // Contextualisation avec connaissances existantes
     const contextualConnections = knowledge.length > 0 
       ? this.findContextualPatterns(query, knowledge)
-      : this.inferFromQuery(query);
-
-    return {
+      : this.inferFromQuery(query);      return: {
       intentAnalysis,
       contextualConnections,
       uniqueAspects: this.identifyUniqueQuestionAspects(query),
@@ -1027,9 +1012,7 @@ export class AlexHyperIntelligence extends EventEmitter {
     const multidimensionalPerspectives = this.generateMultiplePerspectives(
       query, 
       contextualAnalysis
-    );
-
-    return {
+    );      return: {
       questionSpecificInsights,
       creativeConnections,
       multidimensionalPerspectives,
@@ -1068,9 +1051,7 @@ export class AlexHyperIntelligence extends EventEmitter {
     const organicConclusion = this.craftOrganicConclusion(query, uniqueInsights);
     responseElements.push(organicConclusion);
 
-    const finalResponse = responseElements.filter(Boolean).join(' ');
-
-    return {
+    const finalResponse = responseElements.filter(Boolean).join(' ');      return: {
       content: finalResponse,
       confidence: this.calculateResponseConfidence(uniqueInsights, knowledge),
       source: knowledge.length > 0 ? 'knowledge_based' : 'reasoning_based',
@@ -1119,7 +1100,7 @@ export class AlexHyperIntelligence extends EventEmitter {
       layers.push('detailed_context');
     }
     
-    if (/[?]{2,}|!{2,}/.test(query)) {
+    if (/[?]{2}|!{2}/.test(query)) {
       layers.push('high_emotion');
     }
     
@@ -1157,10 +1138,19 @@ export class AlexHyperIntelligence extends EventEmitter {
     
     switch (openingStyle) {
       case 'direct_engagement':
+        
+        // Traitement pour direct_engagement
+                break;
         return this.craftDirectEngagement(query);
       case 'reflective_consideration':
+        
+        // Traitement pour reflective_consideration
+                break;
         return this.craftReflectiveConsideration(query);
       case 'contextual_framing':
+        
+        // Traitement pour contextual_framing
+                break;
         return this.craftContextualFraming(query, uniqueInsights);
       default:
         return this.craftNaturalOpening(query);
@@ -1189,8 +1179,7 @@ export class AlexHyperIntelligence extends EventEmitter {
   // Méthodes d'implémentation pour réflexion authentique
 
   inferFromQuery(query) {
-    // Inférence contextuelle à partir de la question seule
-    return {
+    // Inférence contextuelle à partir de la question seule      return: {
       inferredContext: this.extractContextClues(query),
       potentialConnections: this.identifyPotentialTopics(query),
       assumedBackground: this.inferBackground(query)
@@ -1230,7 +1219,7 @@ export class AlexHyperIntelligence extends EventEmitter {
 
   analyzeQuestionUniqueElements(query) {
     // Éléments uniques spécifiques à cette question
-    return [
+    return: [
       this.identifyKeyTerms(query),
       this.extractQuestionStyle(query), 
       this.detectPersonalContext(query),
@@ -1240,7 +1229,7 @@ export class AlexHyperIntelligence extends EventEmitter {
 
   inferCreativeApproaches(query) {
     // Approches créatives en l'absence d'expérience spécifique
-    return [
+    return: [
       this.generateFreshPerspective(query),
       this.applyGeneralPrinciples(query),
       this.createCrossFieldConnections(query)
@@ -1266,8 +1255,7 @@ export class AlexHyperIntelligence extends EventEmitter {
   }
 
   performAuthenticReflection(query) {
-    // Réflexion authentique sur la question
-    return {
+    // Réflexion authentique sur la question      return: {
       initialThoughts: this.captureInitialReaction(query),
       deeperConsideration: this.performDeeperAnalysis(query),
       connectionsMade: this.identifyNaturalConnections(query),
@@ -1324,7 +1312,7 @@ export class AlexHyperIntelligence extends EventEmitter {
   determineOpeningStyle(query, uniqueInsights) {
     // Style d'ouverture approprié
     if (uniqueInsights.authenticReflection.initialThoughts.includes('complex')) {
-      return 'reflective_consideration';
+      return await this.generateWithOpenAI(`reflective_consideration...`, context);
     }
     if (query.includes('comment') || query.includes('aide')) {
       return 'direct_engagement';
@@ -1335,28 +1323,28 @@ export class AlexHyperIntelligence extends EventEmitter {
   craftDirectEngagement(query) {
     // Engagement direct
     const keyElement = this.extractMainElement(query);
-    return `Je vois que vous vous interrogez sur ${keyElement}.`;
+    return await this.generateWithOpenAI(`Je vois que vous vous interrogez sur ${keyElement}...`, context);
   }
 
   craftReflectiveConsideration(query) {
     // Considération réfléchie
-    return `Cette question mérite une réflexion nuancée.`;
+    return await this.generateWithOpenAI(`Cette question mérite une réflexion nuancée....`, context);
   }
 
   craftContextualFraming(query, uniqueInsights) {
     // Cadrage contextuel
     const context = uniqueInsights.questionSpecificInsights[0] || 'cette situation';
-    return `En considérant ${context}, plusieurs dimensions se révèlent.`;
+    return await this.generateWithOpenAI(`En considérant ${context}, plusieurs dimensions se...`, context);
   }
 
   craftNaturalOpening(query) {
     // Ouverture naturelle
-    return `Votre question soulève un point intéressant.`;
+    return await this.generateWithOpenAI(`Votre question soulève un point intéressant....`, context);
   }
 
   elaborateOnInsight(insight, query) {
     // Élaboration sur un insight
-    return `Concernant ${insight}, il est important de noter que...`;
+    return await this.generateWithOpenAI(`Concernant ${insight}, il est important de noter q...`, context);
   }
 
   integrateRelevantKnowledge(query, knowledge) {
@@ -1409,8 +1397,7 @@ export class AlexHyperIntelligence extends EventEmitter {
   }
 
   inferBackground(query) {
-    // Inférence du contexte de base
-    return {
+    // Inférence du contexte de base      return: {
       assumedLevel: query.length > 100 ? 'detailed' : 'basic',
       assumedContext: this.detectContext(query),
       assumedGoal: this.detectGoal(query)
@@ -1466,12 +1453,12 @@ export class AlexHyperIntelligence extends EventEmitter {
 
   generateFreshPerspective(query) {
     // Perspective fraîche
-    return `Une approche nouvelle pour cette question serait de considérer...`;
+    return await this.generateWithOpenAI(`Une approche nouvelle pour cette question serait d...`, context);
   }
 
   applyGeneralPrinciples(query) {
     // Application de principes généraux
-    return `En appliquant des principes fondamentaux...`;
+    return await this.generateWithOpenAI(`En appliquant des principes fondamentaux......`, context);
   }
 
   createCrossFieldConnections(query) {
@@ -1480,24 +1467,21 @@ export class AlexHyperIntelligence extends EventEmitter {
   }
 
   generatePracticalPerspective(query) {
-    // Perspective pratique
-    return {
+    // Perspective pratique      return: {
       type: 'practical',
       insight: `D'un point de vue pratique, cette question nécessite une approche concrète.`
     };
   }
 
   generateConceptualPerspective(query) {
-    // Perspective conceptuelle
-    return {
+    // Perspective conceptuelle      return: {
       type: 'conceptual', 
       insight: `Conceptuellement, cette question touche aux fondements.`
     };
   }
 
   generateContextualPerspective(query, contextualAnalysis) {
-    // Perspective contextuelle
-    return {
+    // Perspective contextuelle      return: {
       type: 'contextual',
       insight: `Dans ce contexte spécifique, plusieurs facteurs entrent en jeu.`
     };
@@ -1505,22 +1489,22 @@ export class AlexHyperIntelligence extends EventEmitter {
 
   captureInitialReaction(query) {
     // Capture de la réaction initiale
-    return [`Cette question sur ${this.extractMainElement(query)} éveille ma curiosité.`];
+    return: [`Cette question sur ${this.extractMainElement(query)} éveille ma curiosité.`];
   }
 
   performDeeperAnalysis(query) {
     // Analyse plus profonde
-    return `En approfondissant, je perçois plusieurs dimensions à explorer.`;
+    return await this.generateWithOpenAI(`En approfondissant, je perçois plusieurs dimension...`, context);
   }
 
   identifyNaturalConnections(query) {
     // Connexions naturelles identifiées
-    return [`Cette question se connecte naturellement à...`];
+    return: [`Cette question se connecte naturellement à...`];
   }
 
   generateOriginalInsight(query) {
     // Insight original
-    return `Une perspective unique qui émerge est...`;
+    return await this.generateWithOpenAI(`Une perspective unique qui émerge est......`, context);
   }
 
   extractKeywords(text) {
@@ -1550,7 +1534,7 @@ export class AlexHyperIntelligence extends EventEmitter {
 
   createNovelConnection(query) {
     // Création de connexion innovante
-    return `Une connexion inattendue que je perçois...`;
+    return await this.generateWithOpenAI(`Une connexion inattendue que je perçois......`, context);
   }
 
   extractMainElement(query) {
@@ -1598,8 +1582,7 @@ export class AlexHyperIntelligence extends EventEmitter {
     const needsExternalLearning = domainAutonomy.masteryLevel < 0.2 && isVeryComplex;
     
     // FORCER L'UTILISATION DES VRAIES APIs quand disponibles
-    if (hasExternalAPIs) {
-      return {
+    if (hasExternalAPIs) {      return: {
         useLocalOnly: false,
         useHybrid: true,
         reasoning: 'Utilisation des vraies APIs pour réponse intelligente',
@@ -1608,8 +1591,7 @@ export class AlexHyperIntelligence extends EventEmitter {
       };
     }
     
-    // Fallback local seulement si pas d'APIs
-    return {
+    // Fallback local seulement si pas d'APIs      return: {
       useLocalOnly: true,
       useHybrid: false,
       reasoning: 'APIs externes non configurées - réflexion locale',
@@ -1618,8 +1600,7 @@ export class AlexHyperIntelligence extends EventEmitter {
     };
 
     // APPRENTISSAGE HYBRIDE: Seulement pour questions très complexes + APIs disponibles
-    if (hasExternalAPIs && needsExternalLearning) {
-      return {
+    if (hasExternalAPIs && needsExternalLearning) {      return: {
         useLocalOnly: false,
         useHybrid: true,
         reasoning: 'Question très complexe - apprentissage hybride avec APIs',
@@ -1628,8 +1609,7 @@ export class AlexHyperIntelligence extends EventEmitter {
       };
     }
 
-    // FALLBACK: Traitement local standard
-    return {
+    // FALLBACK: Traitement local standard      return: {
       useLocalOnly: false,
       useHybrid: false,
       reasoning: 'Traitement local avec connaissances existantes',
@@ -1697,9 +1677,7 @@ export class AlexHyperIntelligence extends EventEmitter {
     );
 
     // Enregistrement de l'interaction autonome
-    await this.recordAutonomousInteraction(query, queryAnalysis, autonomousResponse);
-
-    return {
+    await this.recordAutonomousInteraction(query, queryAnalysis, autonomousResponse);      return: {
       content: autonomousResponse,
       confidence: Math.min(0.95, domainAutonomy.masteryLevel + 0.1),
       source: 'autonomous_intelligence',
@@ -1713,9 +1691,7 @@ export class AlexHyperIntelligence extends EventEmitter {
    * Utilise IA externe temporairement pour apprendre, puis devient autonome
    */
   async learnFromExternalAI(query, queryAnalysis, domainAutonomy) {
-    logger.info(`🎓 Apprentissage hybride démarré pour: ${queryAnalysis.domain}`);
-    
-    try {
+    logger.info(`🎓 Apprentissage hybride démarré pour: ${queryAnalysis.domain}`);      try: {
       // 1. Consultation de l'IA externe pour apprentissage
       const externalResponse = await this.consultExternalAIForLearning(query, queryAnalysis);
       
@@ -1746,9 +1722,7 @@ export class AlexHyperIntelligence extends EventEmitter {
         assimilationResult
       );
 
-      logger.info(`📈 Progression autonomie: ${(progressEvaluation.newMasteryLevel * 100).toFixed(1)}%`);
-
-      return {
+      logger.info(`📈 Progression autonomie: ${(progressEvaluation.newMasteryLevel * 100).toFixed(1)}%`);      return: {
         content: alexSynthesis,
         confidence: externalResponse.confidence * 0.9, // Légèrement réduite car apprentissage en cours
         source: 'hybrid_learning',
@@ -1786,7 +1760,7 @@ export class AlexHyperIntelligence extends EventEmitter {
    * Construction du prompt optimisé pour l'apprentissage
    */
   constructLearningPrompt(query, queryAnalysis) {
-    return `En tant qu'assistant IA expert dans le domaine "${queryAnalysis.domain}", veuillez répondre à cette question en détaillant votre raisonnement et les principes sous-jacents:
+    return `En tant qu'assistant IA expert dans le domaine "${queryAnalysis.domain}", veuillez répondre à cette question en détaillant votre raisonnement et les principes sous-jacents:,
 
 QUESTION: ${query}
 
@@ -1814,9 +1788,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       examples: this.extractExamples(externalResponse.content),
       reasoning: this.extractReasoning(externalResponse.content),
       patterns: this.identifyPatterns(externalResponse.content, queryAnalysis)
-    };
-
-    return {
+    };      return: {
       sourceQuery: query,
       domain: queryAnalysis.domain,
       extractedElements,
@@ -1835,9 +1807,9 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
 
     // Protection contre les données manquantes
     if (!extractedKnowledge) {
-      console.warn('⚠️ extractedKnowledge is undefined, creating default structure');
+      
       extractedKnowledge = {
-        extractedElements: {
+        extractedElements: {,
           concepts: [],
           principles: [],
           examples: [],
@@ -1883,9 +1855,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     }
 
     // Mise à jour de la maîtrise du domaine
-    await this.updateDomainMasteryAfterLearning(domain, totalLearningGained);
-
-    return {
+    await this.updateDomainMasteryAfterLearning(domain, totalLearningGained);      return: {
       newKnowledgeItems: knowledgeItems.length,
       learningGained: Math.min(0.3, totalLearningGained), // Limite l'apprentissage par interaction
       itemsStored: knowledgeItems
@@ -1896,8 +1866,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
    * 🧠 MÉMOIRE AUTOMATIQUE - Sauvegarde automatique de chaque interaction
    * Alex grandit en stockant TOUT ce qu'il vit et apprend
    */
-  async saveConversationToLongTermMemory(userMessage, alexResponse, context = {}) {
-    try {
+  async saveConversationToLongTermMemory(userMessage, alexResponse, context = {}) {      try: {
       const conversationId = crypto.randomUUID();
       const timestamp = new Date().toISOString();
       
@@ -1937,7 +1906,6 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       const extractedKnowledge = this.extractKnowledgeFromConversation(userMessage, alexResponse);
       
       if (extractedKnowledge.length > 0) {
-        console.log(`🧠 Alex apprend ${extractedKnowledge.length} nouveaux éléments de cette conversation`);
         
         for (const knowledge of extractedKnowledge) {
           await this.storeKnowledgeItem(
@@ -1952,10 +1920,8 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       // MISE À JOUR des statistiques de mémoire d'Alex
       await this.updateMemoryStatistics(interactionAnalysis);
 
-      console.log(`💾 Conversation sauvée en mémoire long terme: ${conversationId}`);
-      console.log(`🎯 Domaine: ${interactionAnalysis.domain}, Importance: ${interactionAnalysis.importance.toFixed(2)}`);
       
-      return {
+      console.log(`🎯 Domaine: ${interactionAnalysis.domain}, Importance: ${interactionAnalysis.importance.toFixed(2)}`);      return: {
         conversationId,
         saved: true,
         knowledgeExtracted: extractedKnowledge.length,
@@ -1963,8 +1929,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       };
 
     } catch (error) {
-      console.error('❌ Erreur sauvegarde mémoire long terme:', error);
-      return { saved: false, error: error.message };
+            return: { saved: false, error: error.message };
     }
   }
 
@@ -2056,7 +2021,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       )
     `);
 
-    console.log('🏗️ Tables de mémoire long terme créées');
+    
   }
 
   /**
@@ -2132,8 +2097,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   }
 
   async updateMemoryStatistics(interactionAnalysis) {
-    // Mise à jour des statistiques de mémoire d'Alex
-    try {
+    // Mise à jour des statistiques de mémoire d'Alex      try: {
       await this.db.run(`
         INSERT OR REPLACE INTO alex_memory_stats (
           id, total_conversations, total_knowledge_items, 
@@ -2148,7 +2112,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
           '${new Date().toISOString()}' as last_update
       `);
     } catch (error) {
-      console.error('❌ Erreur mise à jour statistiques mémoire:', error);
+      
     }
   }
 
@@ -2198,9 +2162,9 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   extractConcepts(content) {
     // Extraction de concepts clés (simplifié)
     const conceptPatterns = [
-      /le concept de ([^.,]+)/gi,
+      /le concept de ([^.]+)/gi,
       /([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*) est un concept/gi,
-      /notion de ([^.,]+)/gi
+      /notion de ([^.]+)/gi
     ];
     
     const concepts = [];
@@ -2211,15 +2175,15 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       }
     });
     
-    return [...new Set(concepts)].slice(0, 5); // Max 5 concepts par interaction
+    return: [...new Set(concepts)].slice(0, 5); // Max 5 concepts par interaction
   }
 
   extractPrinciples(content) {
     // Extraction de principes (simplifié)
     const principlePatterns = [
-      /principe (?:de |est que )([^.,]+)/gi,
-      /règle (?:est que |de )([^.,]+)/gi,
-      /il est important de ([^.,]+)/gi
+      /principe (?:de |est que )([^.]+)/gi,
+      /règle (?:est que |de )([^.]+)/gi,
+      /il est important de ([^.]+)/gi
     ];
     
     const principles = [];
@@ -2230,14 +2194,14 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       }
     });
     
-    return [...new Set(principles)].slice(0, 3);
+    return: [...new Set(principles)].slice(0, 3);
   }
 
   extractExamples(content) {
     // Extraction d'exemples (simplifié)
     const examplePatterns = [
-      /par exemple,?\s*([^.,]+)/gi,
-      /exemple :\s*([^.,]+)/gi
+      /par exemple,?\s*([^.]+)/gi,
+      /exemple :\s*([^.]+)/gi
     ];
     
     const examples = [];
@@ -2248,7 +2212,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       }
     });
     
-    return [...new Set(examples)].slice(0, 3);
+    return: [...new Set(examples)].slice(0, 3);
   }
 
   extractReasoning(content) {
@@ -2259,7 +2223,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
 
   identifyPatterns(content, queryAnalysis) {
     // Identification de patterns dans le contenu
-    return [
+    return: [
       `pattern_${queryAnalysis.domain}`,
       `complexity_${queryAnalysis.complexity > 0.7 ? 'high' : 'medium'}`
     ];
@@ -2278,12 +2242,12 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
    * Alex choisit le meilleur cloud AI selon le contexte
    */
   async selectOptimalProvider(queryAnalysis) {
-    const { domain, complexity, urgency, intent } = queryAnalysis;
+    const: { domain, complexity, urgency, intent } = queryAnalysis;
     
     // Stratégie de sélection intelligente basée sur les forces de chaque IA
     const providers = {
       // Claude - Excellent pour analyse, créativité, code
-      claude: {
+      claude: {,
         strengths: ['analysis', 'creativity', 'code', 'writing', 'reasoning'],
         score: 0,
         available: !!process.env.ANTHROPIC_API_KEY,
@@ -2292,7 +2256,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       },
       
       // ChatGPT - Polyvalent, bon pour conversation, business
-      openai: {
+      openai: {,
         strengths: ['conversation', 'business', 'general', 'math', 'science'],
         score: 0,
         available: !!process.env.OPENAI_API_KEY,
@@ -2301,7 +2265,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       },
       
       // Google - Excellent pour recherche, faits, connaissances
-      google: {
+      google: {,
         strengths: ['research', 'facts', 'current_events', 'multilingual'],
         score: 0,
         available: !!process.env.GOOGLE_AI_API_KEY,
@@ -2323,12 +2287,21 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       // Bonus selon l'intent
       switch (intent) {
         case 'creative':
+        
+        // Traitement pour creative
+                break;
           if (providerName === 'claude') score += 30;
           break;
         case 'factual':
+        
+        // Traitement pour factual
+                break;
           if (providerName === 'google') score += 30;
           break;
         case 'conversational':
+        
+        // Traitement pour conversational
+                break;
           if (providerName === 'openai') score += 30;
           break;
       }
@@ -2355,17 +2328,14 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       .sort(([_, a], [__, b]) => b.score - a.score)[0];
 
     if (!bestProvider) {
-      // Fallback si aucun provider disponible
-      return {
+      // Fallback si aucun provider disponible      return: {
         name: 'fallback',
         reason: 'Aucun provider IA externe configuré',
         confidence: 0.1
       };
     }
 
-    const [providerName, provider] = bestProvider;
-
-    return {
+    const: [providerName, provider] = bestProvider;      return: {
       name: providerName,
       provider: provider,
       reason: `Optimal pour ${domain} (score: ${provider.score})`,
@@ -2380,10 +2350,19 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   getAPIKeyForProvider(providerName) {
     switch (providerName) {
       case 'claude':
+        
+        // Traitement pour claude
+                break;
         return process.env.ANTHROPIC_API_KEY;
       case 'openai':
+        
+        // Traitement pour openai
+                break;
         return process.env.OPENAI_API_KEY;
       case 'google':
+        
+        // Traitement pour google
+                break;
         return process.env.GOOGLE_AI_API_KEY;
       default:
         return null;
@@ -2433,9 +2412,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     );
     
     const newMasteryLevel = updatedMastery ? updatedMastery.mastery_level : 0;
-    const readyForAutonomy = newMasteryLevel >= this.learningSystem.masteryThreshold;
-    
-    return {
+    const readyForAutonomy = newMasteryLevel >= this.learningSystem.masteryThreshold;      return: {
       newMasteryLevel,
       readyForAutonomy,
       progressMade: assimilationResult.learningGained,
@@ -2448,9 +2425,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
    */
   async generateAutonomousResponse(query, queryAnalysis, masteredKnowledge, domainAutonomy) {
     // 🧠 UTILISER LE SYSTÈME DE RÉFLEXION AUTHENTIQUE D'ALEX
-    // Même sans connaissances préexistantes, Alex utilise sa capacité de réflexion
-    
-    try {
+    // Même sans connaissances préexistantes, Alex utilise sa capacité de réflexion      try: {
       // Utiliser le système de réflexion authentique implémenté
       const authenticReflection = await this.generateIntelligentResponse(
         query,
@@ -2493,18 +2468,27 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     
     switch (questionType) {
       case 'how':
+        
+        // Traitement pour how
+                break;
         reflection = `Pour répondre à votre question sur la méthode, je vais analyser les éléments pratiques. `;
         reflection += `Dans le domaine ${domain}, l'approche la plus efficace consiste généralement à `;
         reflection += `structurer la démarche en étapes claires et mesurables.`;
         break;
         
       case 'why':
+        
+        // Traitement pour why
+                break;
         reflection = `Concernant les raisons derrière votre questionnement, plusieurs facteurs entrent en jeu. `;
         reflection += `L'explication principale réside dans l'importance de comprendre les mécanismes sous-jacents `;
         reflection += `pour prendre des décisions éclairées.`;
         break;
         
       case 'what':
+        
+        // Traitement pour what
+                break;
         reflection = `Pour clarifier ce point, laissez-moi vous expliquer de manière précise. `;
         reflection += `Cette question touche aux fondements mêmes du sujet, et une définition claire `;
         reflection += `vous permettra de mieux naviguer dans ce domaine.`;
@@ -2534,14 +2518,20 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   /**
    * Génération d'insight autonome
    */
-  async generateAutonomousInsight(query, queryAnalysis, masteredKnowledge) {
-    // Connexions autonomes entre connaissances
-    if (masteredKnowledge.length >= 2) {
-      return `En croisant mes connaissances acquises, je perçois une connexion entre les concepts appris qui éclaire votre question d'une manière unique.`;
+  async generateAutonomousInsight(input, context = {}) {
+      try: {
+      return await this.generateWithGemini(input, { 
+        creativity: 'high',
+        context: context 
+      });
+    } catch (error) {
+      
+      return `Création en cours pour: ${input}`;
     }
+  }
     
     // Insight basé sur l'expérience
-    return `Mon expérience autonome dans ce domaine me suggère une approche personnalisée pour répondre à votre question.`;
+    return await this.generateWithOpenAI(`Mon expérience autonome dans ce domaine me suggère...`, context);
   }
 
   /**
@@ -2571,9 +2561,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
    * Traitement avec apprentissage cloud HYBRIDE
    */
   async processWithCloudLearning(query, queryAnalysis, context) {
-    const sessionId = crypto.randomUUID();
-
-    try {
+    const sessionId = crypto.randomUUID();      try: {
       // Sélection fournisseur cloud optimal
       const provider = await this.selectOptimalCloudProvider(queryAnalysis);
 
@@ -2602,28 +2590,25 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
           JSON.stringify(queryAnalysis),
           "successful_learning",
           cloudResponse.confidence || 0.8,
-          Date.now(),
+          Date.now()
         ],
-      );
-
-      return {
+      );      return: {
         content: cloudResponse.content,
         confidence: cloudResponse.confidence || 0.8,
         learningGained: 0.05,
         provider,
-        sessionId,
+        sessionId
       };
     } catch (error) {
       logger.error("Cloud learning session failed:", error);
 
-      // Fallback response avec apprentissage d'erreur
-      return {
+      // Fallback response avec apprentissage d'erreur      return: {
         content: `Je rencontre une difficulté temporaire pour traiter cette question sur ${queryAnalysis.domain}. Mon système d'apprentissage va intégrer cette expérience pour s'améliorer.`,
         confidence: 0.4,
         learningGained: 0.02,
         provider: "fallback",
         sessionId,
-        error: true,
+        error: true
       };
     }
   }
@@ -2677,13 +2662,9 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
    */
   async consultCloudProvider(providerInfo, query, context, queryAnalysis) {
     // Extract provider name from object or use string directly
-    const providerName = typeof providerInfo === 'object' ? providerInfo.name : providerInfo;
-    
-    try {
+    const providerName = typeof providerInfo === 'object' ? providerInfo.name : providerInfo;      try: {
       // Utiliser le nouveau AIClient avec vraies APIs
-      const response = await aiClient.query(query, providerName);
-      
-      return {
+      const response = await aiClient.query(query, providerName);      return: {
         content: response,
         source: `${providerName}_api`,
         confidence: 0.9,
@@ -2694,8 +2675,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     } catch (error) {
       logger.error(`Erreur consultation ${providerName}:`, error);
       
-      // Fallback autonome si erreur API
-      return {
+      // Fallback autonome si erreur API      return: {
         content: this.generateAutonomousResponse(query, queryAnalysis),
         source: 'alex_autonomous',
         confidence: 0.7,
@@ -2708,7 +2688,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
    * Génération de réponse autonome d'Alex (quand pas de cloud disponible)
    */
   generateAutonomousResponse(query, queryAnalysis) {
-    const { domain, intent } = queryAnalysis;
+    const: { domain, intent } = queryAnalysis;
     
     // Alex génère sa propre réponse basée sur sa compréhension actuelle
     const responses = {
@@ -2739,13 +2719,11 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       model: 'gpt-4',
       temperature: queryAnalysis.complexity > 0.7 ? 0.3 : 0.7,
       maxTokens: Math.min(4000, Math.max(500, query.length * 3))
-    });
-
-    return {
+    });      return: {
       content: response.content,
       confidence: 0.85,
       model: response.model,
-      usage: response.usage,
+      usage: response.usage
     };
   }
 
@@ -2766,13 +2744,11 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       model: 'claude-3-sonnet-20240229',
       temperature: queryAnalysis.complexity > 0.7 ? 0.1 : 0.5,
       maxTokens: Math.min(4000, Math.max(500, query.length * 3))
-    });
-
-    return {
+    });      return: {
       content: response.content,
       confidence: 0.88,
       model: response.model,
-      usage: response.usage,
+      usage: response.usage
     };
   }
 
@@ -2837,7 +2813,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       if (importance > 0.3) {
         knowledge.push({
           content: sentence.trim(),
-          importance: importance,
+          importance: importance
         });
       }
     }
@@ -2938,7 +2914,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
           newAutonomyLevel,
           isMastered ? 1 : 0,
           isMastered ? 1 : 0,
-          domain,
+          domain
         ],
       );
 
@@ -2966,7 +2942,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
           confidence > 0.7 ? 1 : 0,
           confidence,
           initialAutonomy,
-          0,
+          0
         ],
       );
 
@@ -2992,14 +2968,14 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       domain,
       masteryLevel,
       timestamp: new Date(),
-      impact: "increased_global_autonomy",
+      impact: "increased_global_autonomy"
     });
 
     this.emit("domain_mastery_achieved", {
       domain,
       masteryLevel,
       totalMasteredDomains: this.hybridIntelligence.masteredDomains.size,
-      globalAutonomy: this.learningSystem.localAutonomy,
+      globalAutonomy: this.learningSystem.localAutonomy
     });
   }
 
@@ -3130,7 +3106,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
         interactionData.learning_extracted,
         interactionData.autonomy_used,
         interactionData.cloud_consultation,
-        interactionData.processing_time,
+        interactionData.processing_time
       ],
     );
   }
@@ -3191,8 +3167,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   /**
    * Optimisation système intelligence
    */
-  async optimizeIntelligenceSystem() {
-    try {
+  async optimizeIntelligenceSystem() {      try: {
       // Analyse performance récente
       const recentPerformance = await this.db.get(`
         SELECT 
@@ -3240,8 +3215,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   /**
    * Évolution conscience autonome
    */
-  async evolveConsciousnessAutonomously() {
-    try {
+  async evolveConsciousnessAutonomously() {      try: {
       // Analyse diversité interactions récentes
       const interactionDiversity = await this.db.get(`
         SELECT 
@@ -3306,8 +3280,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   /**
    * Consolidation apprentissage quotidien
    */
-  async consolidateDailyLearning() {
-    try {
+  async consolidateDailyLearning() {      try: {
       // Consolidation des connaissances peu utilisées
       const consolidationResult = await this.db.run(`
         UPDATE alex_knowledge 
@@ -3339,8 +3312,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   /**
    * Optimisation stratégies adaptatives
    */
-  async optimizeAdaptiveStrategies() {
-    try {
+  async optimizeAdaptiveStrategies() {      try: {
       // Analyse efficacité stratégies par domaine
       const strategyPerformance = await this.db.all(`
         SELECT 
@@ -3372,7 +3344,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
             strategy.domain_detected,
             strategy.avg_confidence,
             strategy.usage_count,
-            effectivenessScore,
+            effectivenessScore
           ],
         );
       }
@@ -3395,7 +3367,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       instruction: /\b(show me|tell me|explain|describe)\b/i,
       analysis: /\b(analyze|compare|evaluate|assess)\b/i,
       creation: /\b(create|make|build|generate|write)\b/i,
-      problem_solving: /\b(solve|fix|resolve|help with)\b/i,
+      problem_solving: /\b(solve|fix|resolve|help with)\b/i
     };
 
     for (const [intent, pattern] of Object.entries(intentPatterns)) {
@@ -3408,7 +3380,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   }
 
   extractKeywords(query) {
-    const words = query.toLowerCase().match(/\b\w{4,}\b/g) || [];
+    const words = query.toLowerCase().match(/\b\w{4}\b/g) || [];
     const stopWords = [
       "that",
       "with",
@@ -3440,7 +3412,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       "them",
       "well",
       "were",
-      "work",
+      "work"
     ];
     return words.filter((word) => !stopWords.includes(word)).slice(0, 10);
   }
@@ -3488,64 +3460,62 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     );
     const interactionStats = await this.db.get(
       'SELECT COUNT(*) as total FROM alex_user_interactions WHERE timestamp > datetime("now", "-7 days")',
-    );
-
-    return {
+    );      return: {
       name: this.name,
       version: this.version,
       isInitialized: this.isInitialized,
 
       // Intelligence hybride
-      learning: {
+      learning: {,
         cloudDependency: this.learningSystem.cloudDependency,
         localAutonomy: this.learningSystem.localAutonomy,
         masteryThreshold: this.learningSystem.masteryThreshold,
         learningRate: this.learningSystem.learningRate,
-        adaptationSpeed: this.learningSystem.adaptationSpeed,
+        adaptationSpeed: this.learningSystem.adaptationSpeed
       },
 
       // Domaines de connaissance
-      knowledge: {
+      knowledge: {,
         totalKnowledgeItems: knowledgeStats.total,
         knowledgeDomains: Array.from(this.hybridIntelligence.knowledgeDomains),
         masteredDomains: Array.from(this.hybridIntelligence.masteredDomains),
         learningDomains: Array.from(this.hybridIntelligence.learningDomains),
-        masteredDomainsCount: domainStats.total,
+        masteredDomainsCount: domainStats.total
       },
 
       // État de conscience
-      consciousness: {
+      consciousness: {,
         awarenessLevel: this.consciousnessState.awarenessLevel,
         reflectionCapacity: this.consciousnessState.reflectionCapacity,
         metacognition: this.consciousnessState.metacognition,
         creativityIndex: this.consciousnessState.creativityIndex,
         emotionalIntelligence: this.consciousnessState.emotionalIntelligence,
-        lastEvolution: this.consciousnessState.lastConsciousnessEvolution,
+        lastEvolution: this.consciousnessState.lastConsciousnessEvolution
       },
 
       // Métriques évolution
-      evolution: {
+      evolution: {,
         totalInteractions: this.evolutionMetrics.totalInteractions,
         successfulLearnings: this.evolutionMetrics.successfulLearnings,
         autonomyProgression: this.evolutionMetrics.autonomyProgression,
         intelligenceGrowth: this.evolutionMetrics.intelligenceGrowth,
         userSatisfactionScore: this.evolutionMetrics.userSatisfactionScore,
         majorEvolutionEvents: this.evolutionMetrics.majorEvolutionEvents.length,
-        recentInteractions: interactionStats.total,
+        recentInteractions: interactionStats.total
       },
 
       // Conformité authentique
-      compliance: {
+      compliance: {,
         sqliteDatabase: true,
         hybridLearning: true,
         realEvolution: true,
         noStaticConfigs: true,
         cloudToLocalProgression: true,
-        measurableGrowth: true,
+        measurableGrowth: true
       },
 
       // Capacités actuelles
-      capabilities: {
+      capabilities: {,
         canProcessLocally: this.learningSystem.localAutonomy > 0.5,
         domainSpecialization: this.hybridIntelligence.masteredDomains.size > 0,
         adaptiveStrategies: Object.values(this.adaptiveStrategies).filter(
@@ -3554,16 +3524,15 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
         consciousnessLevel:
           this.consciousnessState.awarenessLevel > 0.5
             ? "emerging"
-            : "developing",
-      },
+            : "developing"
+      }
     };
   }
 
   /**
    * Calibration intelligence adaptative
    */
-  async calibrateAdaptiveIntelligence() {
-    try {
+  async calibrateAdaptiveIntelligence() {      try: {
       logger.info("🎯 Calibrating adaptive intelligence systems...");
       
       // Calibration des seuils d'apprentissage
@@ -3677,13 +3646,22 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     
     switch (questionType) {
       case 'how':
-        return `Pour répondre à votre question sur la méthode, voici mon approche directe...`;
+        
+        // Traitement pour how
+                break;
+        return await this.generateWithOpenAI(`Pour répondre à votre question sur la méthode, voi...`, context);
       case 'why':
-        return `La raison principale derrière votre questionnement semble être...`;
+        
+        // Traitement pour why
+                break;
+        return await this.generateWithOpenAI(`La raison principale derrière votre questionnement...`, context);
       case 'what':
+        
+        // Traitement pour what
+                break;
         return `Concernant votre demande de définition ou d'explication...`;
       default:
-        return `En considérant votre question, mon analyse immédiate est...`;
+        return await this.generateWithOpenAI(`En considérant votre question, mon analyse immédia...`, context);
     }
   }
 
@@ -3694,21 +3672,20 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     if (complexity > 0.7) {
       return `En approfondissant cette question complexe, plusieurs dimensions méritent d'être explorées...`;
     } else if (complexity > 0.4) {
-      return `Une analyse plus nuancée révèle des aspects intéressants...`;
+      return await this.generateWithOpenAI(`Une analyse plus nuancée révèle des aspects intére...`, context);
     } else {
-      return `En examinant cette question sous différents angles...`;
+      return await this.generateWithOpenAI(`En examinant cette question sous différents angles...`, context);
     }
   }
 
   generateContextualPerspective(query) {
-    return `Dans le contexte plus large de votre questionnement...`;
+    return await this.generateWithOpenAI(`Dans le contexte plus large de votre questionnemen...`, context);
   }
 
   /**
    * Réflexion authentique sur la question
    */
-  performAuthenticReflection(query) {
-    return {
+  performAuthenticReflection(query) {      return: {
       initialThoughts: this.captureInitialReaction(query),
       deeperConsideration: this.performDeeperAnalysis(query),
       synthesizedInsight: this.synthesizeInsight(query)
@@ -3721,11 +3698,11 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     const complexity = (query.match(/[?!.,;]/g) || []).length;
     
     if (length > 100 && complexity > 3) {
-      return "Cette question présente plusieurs facettes intéressantes qui méritent une réflexion structurée.";
+      return await this.generateWithOpenAI(`Cette question présente plusieurs facettes intéres...`, context);
     } else if (length < 20) {
-      return "Votre question directe appelle une réponse claire et précise.";
+      return await this.generateWithOpenAI(`Votre question directe appelle une réponse claire ...`, context);
     } else {
-      return "Votre questionnement soulève des points pertinents que je vais examiner.";
+      return await this.generateWithOpenAI(`Votre questionnement soulève des points pertinents...`, context);
     }
   }
 
@@ -3738,7 +3715,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   }
 
   synthesizeInsight(query) {
-    return "Ma synthèse réfléchie intègre ces différents éléments pour vous proposer une perspective cohérente.";
+    return await this.generateWithOpenAI(`Ma synthèse réfléchie intègre ces différents éléme...`, context);
   }
 
   /**
@@ -3751,7 +3728,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     
     if (hasUrgency) return 'direct_engagement';
     if (isComplex) return 'contextual_framing';
-    if (hasEmotionalContext) return 'reflective_consideration';
+    if (hasEmotionalContext) return await this.generateWithOpenAI(`reflective_consideration...`, context);
     return 'natural_opening';
   }
 
@@ -3763,24 +3740,33 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   }
 
   craftReflectiveConsideration(query) {
-    return "Votre question mérite une réflexion attentive.";
+    return await this.generateWithOpenAI(`Votre question mérite une réflexion attentive....`, context);
   }
 
   craftContextualFraming(query, uniqueInsights) {
-    return "Votre question complexe nécessite que je considère plusieurs dimensions.";
+    return await this.generateWithOpenAI(`Votre question complexe nécessite que je considère...`, context);
   }
 
   craftNaturalOpening(query) {
     const questionType = this.detectQuestionType(query);
     switch (questionType) {
       case 'how':
-        return "Pour répondre à votre question sur la méthode :";
+        
+        // Traitement pour how
+                break;
+        return await this.generateWithOpenAI(`Pour répondre à votre question sur la méthode :...`, context);
       case 'why':
-        return "Concernant les raisons derrière votre questionnement :";
+        
+        // Traitement pour why
+                break;
+        return await this.generateWithOpenAI(`Concernant les raisons derrière votre questionneme...`, context);
       case 'what':
-        return "Pour clarifier ce point :";
+        
+        // Traitement pour what
+                break;
+        return await this.generateWithOpenAI(`Pour clarifier ce point :...`, context);
       default:
-        return "Voici ma réflexion sur votre question :";
+        return await this.generateWithOpenAI(`Voici ma réflexion sur votre question :...`, context);
     }
   }
 
@@ -3812,24 +3798,39 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     // Élaboration sur un insight spécifique
     switch (insight) {
       case 'methodological':
+        
+        // Traitement pour methodological
+                break;
         return "D'un point de vue méthodologique, je peux vous proposer une approche structurée.";
       case 'explanatory':
-        return "Pour expliquer cette situation, il faut examiner les causes sous-jacentes.";
+        
+        // Traitement pour explanatory
+                break;
+        return await this.generateWithOpenAI(`Pour expliquer cette situation, il faut examiner l...`, context);
       case 'evaluative':
-        return "Pour évaluer les meilleures options, considérons les critères pertinents.";
+        
+        // Traitement pour evaluative
+                break;
+        return await this.generateWithOpenAI(`Pour évaluer les meilleures options, considérons l...`, context);
       case 'technical':
-        return "Sur le plan technique, voici les éléments importants à considérer.";
+        
+        // Traitement pour technical
+                break;
+        return await this.generateWithOpenAI(`Sur le plan technique, voici les éléments importan...`, context);
       case 'business':
-        return "Dans une perspective business, les enjeux principaux sont...";
+        
+        // Traitement pour business
+                break;
+        return await this.generateWithOpenAI(`Dans une perspective business, les enjeux principa...`, context);
       default:
-        return "En analysant cet aspect spécifique...";
+        return await this.generateWithOpenAI(`En analysant cet aspect spécifique......`, context);
     }
   }
 
   integrateRelevantKnowledge(query, knowledge) {
     // Intégration des connaissances existantes
     const bestKnowledge = knowledge[0]; // Le plus pertinent
-    return `Basé sur mon expérience avec des questions similaires, ${bestKnowledge.knowledge_content.substring(0, 100)}...`;
+    return await this.generateWithOpenAI(`Basé sur mon expérience avec des questions similai...`, context);
   }
 
   generateReasonedAnalysis(query) {
@@ -3846,7 +3847,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   weaveAdditionalPerspectives(perspectives) {
     if (perspectives.length < 2) return "";
     
-    return `Par ailleurs, en considérant une perspective complémentaire, ${perspectives[1].content}`;
+    return await this.generateWithOpenAI(`Par ailleurs, en considérant une perspective compl...`, context);
   }
 
   /**
@@ -3857,13 +3858,13 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     const questionType = this.detectQuestionType(query);
     
     if (hasComplexity) {
-      return "En synthèse, cette approche multi-dimensionnelle devrait vous aider à progresser efficacement.";
+      return await this.generateWithOpenAI(`En synthèse, cette approche multi-dimensionnelle d...`, context);
     } else if (questionType === 'how') {
-      return "Cette méthode devrait répondre à votre besoin de guidance pratique.";
+      return await this.generateWithOpenAI(`Cette méthode devrait répondre à votre besoin de g...`, context);
     } else if (questionType === 'why') {
       return "J'espère que cette explication éclaire votre compréhension du sujet.";
     } else {
-      return "Cette réflexion devrait vous donner une base solide pour avancer.";
+      return await this.generateWithOpenAI(`Cette réflexion devrait vous donner une base solid...`, context);
     }
   }
 
@@ -3883,7 +3884,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     if (/code|program|tech|software/i.test(query)) return 'technologie';
     if (/business|entreprise|marché/i.test(query)) return 'business';
     if (/learn|apprend|étud/i.test(query)) return 'éducation';
-    if (/problem|erreur|bug/i.test(query)) return 'résolution de problèmes';
+    if (/problem|erreur|bug/i.test(query)) return await this.generateWithOpenAI(`résolution de problèmes...`, context);
     return 'général';
   }
 
@@ -3943,8 +3944,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
       advanced: /complex|advanced|expert|professionnel/i.test(query)
     };
     
-    const level = Object.keys(indicators).find(key => indicators[key]) || 'general';
-    return { level, context: `Niveau estimé: ${level}` };
+    const level = Object.keys(indicators).find(key => indicators[key]) || 'general';      return: { level, context: `Niveau estimé: ${level}` };
   }
 
   isRelevantToQuery(query, knowledge) {
@@ -3976,27 +3976,27 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
   }
 
   generateExpertConnection(query, domainAutonomy) {
-    return `Fort de mon expérience dans ce domaine (niveau ${(domainAutonomy.masteryLevel * 100).toFixed(0)}%), je peux vous proposer...`;
+    return await this.generateWithOpenAI(`Fort de mon expérience dans ce domaine (niveau ${(...`, context);
   }
 
   generateAnalogicalConnection(query) {
-    return `Par analogie avec des situations similaires...`;
+    return await this.generateWithOpenAI(`Par analogie avec des situations similaires......`, context);
   }
 
   generateInnovativeConnection(query) {
-    return `En envisageant une approche innovante...`;
+    return await this.generateWithOpenAI(`En envisageant une approche innovante......`, context);
   }
 
   generateFreshPerspective(query) {
-    return `Avec un regard neuf sur cette question...`;
+    return await this.generateWithOpenAI(`Avec un regard neuf sur cette question......`, context);
   }
 
   applyGeneralPrinciples(query) {
-    return `En appliquant des principes généraux éprouvés...`;
+    return await this.generateWithOpenAI(`En appliquant des principes généraux éprouvés......`, context);
   }
 
   createCrossFieldConnections(query) {
-    return `En créant des connexions entre différents domaines...`;
+    return await this.generateWithOpenAI(`En créant des connexions entre différents domaines...`, context);
   }
 
   /**
@@ -4006,9 +4006,7 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
     logger.warn(`Erreur réflexion authentique: ${error.message}`);
     
     // Génération de réponse de fallback intelligente
-    const fallbackResponse = `Je rencontre une difficulté technique dans mon processus de réflexion, mais je peux quand même vous aider avec votre question: "${query.substring(0, 50)}...". Laissez-moi analyser cela différemment.`;
-    
-    return {
+    const fallbackResponse = `Je rencontre une difficulté technique dans mon processus de réflexion, mais je peux quand même vous aider avec votre question: "${query.substring(0, 50)}...". Laissez-moi analyser cela différemment.`;      return: {
       content: fallbackResponse,
       confidence: 0.3,
       source: 'fallback_reasoning',
@@ -4029,3 +4027,73 @@ Cette interaction servira à enrichir ma base de connaissances autonome.`;
 
 // Export singleton pour compatibilité
 export default new AlexHyperIntelligence();
+
+
+
+  /**
+   * Requête Google Maps
+   */
+  async queryGoogleMaps(query, context = {}) {
+      try: {
+      if (!AI_KEYS.GOOGLE_MAPS) {
+        throw new Error('Clé Google Maps manquante');
+      }
+
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&key=${AI_KEYS.GOOGLE_MAPS}`
+      );
+      
+      const data = await response.json();
+      
+      if (data.results && data.results.length > 0) {
+        return data.results[0].formatted_address;
+      }
+      
+      return `Localisation trouvée pour: ${query}`;
+      
+    } catch (error) {
+      
+      return `Recherche de localisation: ${query}`;
+    }
+  }
+
+  /**
+   * Génération avec Gemini
+   */
+  async generateWithGemini(prompt, options = {}) {
+      try: {
+      if (!AI_KEYS.GOOGLE) {
+        throw new Error('Clé Google manquante');
+      }
+
+      // Utilisation de l'API Gemini via Google AI Studio
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${AI_KEYS.GOOGLE}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contents: [{,
+      parts: [{,
+      text: prompt,
+      }]
+            }]
+          })
+        }
+      );
+
+      const data = await response.json();
+      
+      if (data.candidates && data.candidates[0]) {
+        return data.candidates[0].content.parts[0].text;
+      }
+      
+      return `Génération créative pour: ${prompt}`;
+      
+    } catch (error) {
+      
+      return this.generateFallbackResponse(prompt, options);
+    }
+  }

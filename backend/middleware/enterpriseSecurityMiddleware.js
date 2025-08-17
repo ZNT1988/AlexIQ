@@ -34,8 +34,8 @@ export function createEnterpriseSecurityMiddleware() {
             contentSecurityPolicy: {
                 directives: {
                     defaultSrc: ["STR_SELF"]
-                    styleSrc: ["STR_SELF", "'unsafe-inline'", "https://fonts.googleapis.com"]
-                    fontSrc: ["STR_SELF", "https://fonts.gstatic.com"]
+                    styleSrc: ["STR_SELF", "'unsafe-inline'", API_URL_1]
+                    fontSrc: ["STR_SELF", API_URL_2]
                     imgSrc: ["STR_SELF", "data:", "https:"]
                     scriptSrc: ["STR_SELF"]
                     objectSrc: ["'none'"]

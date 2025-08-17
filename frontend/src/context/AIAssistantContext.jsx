@@ -55,27 +55,24 @@ export const AIAssistantProvider = ({ children }) => {
   };
 
   const processInput = async (input) => {
-    console.log('🚀 ProcessInput called with:', input);
+    
     setLoading(true);
     try {
       // Ajouter l'input à l'historique
       const newHistoryEntry = { content: input, timestamp: new Date().toISOString(), type: 'user' };
       const updatedHistory = [...chatHistory, newHistoryEntry];
       setChatHistory(updatedHistory);
-      console.log('📝 Added to history:', newHistoryEntry);
-
+      
       // Appel API simplifié (mode réfléchi désactivé temporairement)
       let finalResponse;
       {
         // Mode standard
         const apiUrl = import.meta.env.VITE_API_BASE_URL || '/api';
-        console.log('🌐 API URL:', `${apiUrl}/ai/chat`);
         
         const requestBody = {
           message: input,
           provider: 'anthropic'
         };
-        console.log('📤 Request body:', requestBody);
         
         const response = await fetch(`${apiUrl}/chat`, {
           method: STR_POST,
@@ -85,16 +82,15 @@ export const AIAssistantProvider = ({ children }) => {
           body: JSON.stringify(requestBody)
         });
         
-        console.log('📥 Response status:', response.status, response.statusText);
-
+        
         if (!response.ok) {
           throw new Error(`API Error: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log('📦 Response data:', data);
+        
         finalResponse = data.response || 'Réponse IA non disponible';
-        console.log('✅ Final response:', finalResponse);
+        
       }
 
       // Ajouter la réponse à l'historique

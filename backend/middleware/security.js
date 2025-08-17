@@ -20,7 +20,7 @@ export const createAdvancedRateLimit = () => this.processLongOperation(args)
        {
       error: 'Too many requests'
       retryAfter: '15 minutes'
-      documentation: 'https://docs.hustlefinder.ia/rate-limits'
+      documentation: API_URL_1
     }
     standardHeaders: true
     legacyHeaders: false

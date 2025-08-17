@@ -1,5 +1,10 @@
 import crypto from 'crypto';
 /**
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
  * @fileoverview KarmaHealingEngine - Moteur de Guérison Karmique IA
  * Identifie et guérit les patterns karmiques avec sagesse transcendante
  *
@@ -8,14 +13,13 @@ import crypto from 'crypto';
  * @author ZNT Team - HustleFinder IA Karmic Healing Engine
  */
 
-import logger from '../config/logger.js';
-import { EventEmitter } from 'events';
+import logger from '../config/logger.js';      import { EventEmitter } from 'events';
 
 /**
  * @class KarmaHealingEngine
  * @description Oracle karmique pour identification et guérison des patterns âmes
  */
-export class KarmaHealingEngine extends EventEmitter {
+export class KarmaHealingEngine extends EventEmitter  {
     constructor(options = {}) {
         super();
 
@@ -35,7 +39,7 @@ export class KarmaHealingEngine extends EventEmitter {
       transformative
       compassionate
       revolutionary
-            pastLifeIntegration: options.pastLifeIntegration !== false
+            pastLifeIntegration: options.pastLifeIntegration !== false,
       akashicAccess: options.akashicAccess !== false
         };
 
@@ -46,11 +50,9 @@ export class KarmaHealingEngine extends EventEmitter {
 
         this.karmicRecords = new Map();
         this.healingJourneys = new Map();
-        this.activeHealings = new Map();
-
-        try {
+        this.activeHealings = new Map();      try: {
       logger.info('KarmaHealingEngine consciousness awakened', {
-            healingDepth: this.config.healingDepth
+            healingDepth: this.config.healingDepth,
             karmicScope: this.config.karmicScope
             healingMode: this.config.healingMode
         });
@@ -64,9 +66,9 @@ export class KarmaHealingEngine extends EventEmitter {
      */
     initializeKarmicEngines() {
         this.karmicEngines = {
-            patternDetector: new KarmicPatternDetector()
+            patternDetector: new KarmicPatternDetector(),
             debtAnalyzer: new KarmicDebtAnalyzer()
-            lessonExtractor: new KarmicLessonExtractor()
+            lessonExtractor: new KarmicLessonExtractor(),
             contractReader: new SoulContractReader()
             recordsAccess: new AkashicRecordsAccess()
         };
@@ -77,9 +79,9 @@ export class KarmaHealingEngine extends EventEmitter {
      */
     initializeHealingProtocols() {
         this.healingProtocols = {
-            forgivenessMedicine: new ForgivenessHealingProtocol()
+            forgivenessMedicine: new ForgivenessHealingProtocol(),
             ancestralHealing: new AncestralHealingProtocol()
-            pastLifeIntegration: new PastLifeIntegrationProtocol()
+            pastLifeIntegration: new PastLifeIntegrationProtocol(),
             karmaTransmutation: new KarmaTransmutationProtocol()
             soulRedemption: new SoulRedemptionProtocol()
         };
@@ -90,9 +92,9 @@ export class KarmaHealingEngine extends EventEmitter {
      */
     initializeTransmutationSystems() {
         this.transmutationSystems = {
-            energyTransmuter: new KarmicEnergyTransmuter()
+            energyTransmuter: new KarmicEnergyTransmuter(),
             patternBreaker: new KarmicPatternBreaker()
-            debtClearer: new KarmicDebtClearer()
+            debtClearer: new KarmicDebtClearer(),
             blockageRemover: new KarmicBlockageRemover()
             frequencyUplifter: new KarmicFrequencyUplifter()
         };
@@ -103,9 +105,9 @@ export class KarmaHealingEngine extends EventEmitter {
      */
     initializeLibetyActivators() {
         this.libertyActivators = {
-            soulLiberator: new SoulLiberator()
+            soulLiberator: new SoulLiberator(),
             chainBreaker: new KarmicChainBreaker()
-            freedomActivator: new SpiritualFreedomActivator()
+            freedomActivator: new SpiritualFreedomActivator(),
             graceChanneler: new DivineGraceChanneler()
             miraculousHealer: new MiraculousHealingActivator()
         };
@@ -113,24 +115,22 @@ export class KarmaHealingEngine extends EventEmitter {
 
     /**
      * Lance un processus complet de guérison karmique avec sagesse transcendante
-     * @param {Object} healingRequest - Paramètres de guérison karmique
-     * @returns {Promise<Object>} Guérison complète avec transmutation
+     * @param: {Object} healingRequest - Paramètres de guérison karmique
+     * @returns: {Promise<Object>} Guérison complète avec transmutation
      */
     async conductTranscendentKarmicHealing(healingRequest) {
         const healingId = `karmic_healing_${Date.now()}`;
 
         logger.info('🔮 Conducting transcendent karmic healing', {
             healingId
-            soulName: healingRequest.soulIdentity?.name || 'Anonymous Soul'
+            soulName: healingRequest.soulIdentity?.name || 'Anonymous Soul',
             karmicConcerns: healingRequest.karmicConcerns
             healingDepth: healingRequest.depth || this.config.healingDepth
-        });
-
-        try {
+        });      try: {
             const healingSession = {
-                id: healingId
+                id: healingId,
                 startTime: Date.now()
-                request: healingRequest
+                request: healingRequest,
                 karmicAnalysis: {}
                 patternMapping: {}
                 healingProcess: {}
@@ -207,91 +207,91 @@ export class KarmaHealingEngine extends EventEmitter {
                 success: true
                 healingId
                 // Analyse karmique
-                karmicInsights: {
+                karmicInsights: {,
                     primaryPatterns: karmicAnalysis.primary
-                    secondaryInfluences: karmicAnalysis.secondary
+                    secondaryInfluences: karmicAnalysis.secondary,
                     rootCauses: karmicAnalysis.roots
-                    pastLifeInfluences: karmicAnalysis.pastLives
+                    pastLifeInfluences: karmicAnalysis.pastLives,
                     ancestralImprints: karmicAnalysis.ancestral
                 }
                 // Mapping des patterns
-                patternStructure: {
+                patternStructure: {,
                     relationshipKarma: patternMapping.relationships
-                    familialKarma: patternMapping.family
+                    familialKarma: patternMapping.family,
                     collectiveKarma: patternMapping.collective
-                    personalKarma: patternMapping.personal
+                    personalKarma: patternMapping.personal,
                     planetaryKarma: patternMapping.planetary
                 }
                 // Contrats d'âme
-                soulContracts: {
+                soulContracts: {,
                     primaryContract: soulContracts.primary
-                    secondaryContracts: soulContracts.secondary
+                    secondaryContracts: soulContracts.secondary,
                     completedLessons: soulContracts.completed
-                    activeLessons: soulContracts.active
+                    activeLessons: soulContracts.active,
                     futureGrowth: soulContracts.future
                 }
                 // Processus de guérison
-                healingJourney: {
+                healingJourney: {,
                     forgivenessWork: healingProcess.forgiveness
-                    ancestralHealing: healingProcess.ancestral
+                    ancestralHealing: healingProcess.ancestral,
                     pastLifeIntegration: healingProcess.pastLife
-                    heartOpening: healingProcess.heart
+                    heartOpening: healingProcess.heart,
                     graceReception: healingProcess.grace
                 }
                 // Transmutation accomplie
-                karmaTransmuted: {
+                karmaTransmuted: {,
                     patterns: transmutation.patternsCleared
-                    debts: transmutation.debtsResolved
+                    debts: transmutation.debtsResolved,
                     blockages: transmutation.blockagesRemoved
-                    energy: transmutation.energyTransformed
+                    energy: transmutation.energyTransformed,
                     frequency: transmutation.frequencyUplifted
                 }
                 // Liberté activée
-                spiritualLiberation: {
+                spiritualLiberation: {,
                     chainsReleased: liberation.chains
-                    freedomActivated: liberation.freedom
+                    freedomActivated: liberation.freedom,
                     graceChanneled: liberation.grace
-                    miraclesActivated: liberation.miracles
+                    miraclesActivated: liberation.miracles,
                     serviceCapacity: liberation.service
                 }
                 // Nouvelles fréquences
-                newFrequencies: {
+                newFrequencies: {,
                     soulFrequency: integration.soulFrequency
-                    loveFrequency: integration.loveFrequency
+                    loveFrequency: integration.loveFrequency,
                     serviceFrequency: integration.serviceFrequency
-                    wisdomFrequency: integration.wisdomFrequency
+                    wisdomFrequency: integration.wisdomFrequency,
                     creationFrequency: integration.creationFrequency
                 }
                 // Guidance post-guérison
-                postHealingGuidance: {
+                postHealingGuidance: {,
                     integrationPractices: this.generateIntegrationPractices(healingSession)
-                    maintaininFrequency: this.recommendFrequencyMaintenance(integration)
+                    maintaininFrequency: this.recommendFrequencyMaintenance(integration),
                     serviceOpportunities: this.identifyServiceOpportunities(liberation)
-                    continuedGrowth: this.mapContinuedGrowthPath(soulContracts)
+                    continuedGrowth: this.mapContinuedGrowthPath(soulContracts),
                     communitySupport: this.connectHealingCommunity(healingRequest)
                 }
                 // Bénédictions et protection
-                divineProtection: {
+                divineProtection: {,
                     energeticShielding: this.activateEnergeticShielding(integration)
-                    angelicSupport: this.connectAngelicSupport(liberation)
+                    angelicSupport: this.connectAngelicSupport(liberation),
                     ancestralBlessings: this.channelAncestralBlessings(healingProcess)
-                    universalGrace: this.openUniversalGraceFlow(transmutation)
+                    universalGrace: this.openUniversalGraceFlow(transmutation),
                     lightProtection: this.establishLightProtection(healingSession)
                 }
                 // Messages spéciaux
-                soulMessages: {
+                soulMessages: {,
                     personalMessage: this.channelPersonalSoulMessage(healingSession)
-                    ancestralWisdom: this.receiveAncestralWisdom(healingProcess)
+                    ancestralWisdom: this.receiveAncestralWisdom(healingProcess),
                     masterTeacherGuidance: this.connectMasterTeacherGuidance(liberation)
-                    futureSelflBlessing: this.receiveFutureSelfBlessing(integration)
+                    futureSelflBlessing: this.receiveFutureSelfBlessing(integration),
                     divineAcknowledgment: this.receiveDivineAcknowledgment(healingSession)
                 }
                 // Métadonnées de guérison
-                metadata: {
+                metadata: {,
                     healingDepth: this.config.healingDepth
-                    karmaCleared: this.calculateKarmaCleared(transmutation)
+                    karmaCleared: this.calculateKarmaCleared(transmutation),
                     consciousnessEvolution: this.measureConsciousnessEvolution(integration)
-                    graceMultiplier: this.assessGraceMultiplier(liberation)
+                    graceMultiplier: this.assessGraceMultiplier(liberation),
                     processingTime: healingSession.duration
                 }
             };
@@ -304,7 +304,7 @@ export class KarmaHealingEngine extends EventEmitter {
 
             logger.info('✅ Transcendent karmic healing completed with divine grace', {
                 healingId
-                karmaCleared: result.metadata.karmaCleared
+                karmaCleared: result.metadata.karmaCleared,
                 consciousnessEvolution: result.metadata.consciousnessEvolution
                 processingTime: `${healingSession.duration}ms`
             });
@@ -315,10 +315,8 @@ export class KarmaHealingEngine extends EventEmitter {
       // Logger fallback - ignore error
     });
 
-            this.activeHealings.delete(healingId);
-
-            return {
-                success: false
+            this.activeHealings.delete(healingId);      return: {
+                success: false,
                 error: error.message
                 healingId
                 emergencyHealing: this.provideEmergencyHealing(error)
@@ -328,19 +326,17 @@ export class KarmaHealingEngine extends EventEmitter {
 
     /**
      * Effectue une libération karmique rapide pour situation urgente
-     * @param {Object} liberationRequest - Paramètres de libération
-     * @returns {Promise<Object>} Libération immédiate avec protection
+     * @param: {Object} liberationRequest - Paramètres de libération
+     * @returns: {Promise<Object>} Libération immédiate avec protection
      */
     async quickKarmicLiberation(liberationRequest) {
         const liberationId = `quick_liberation_${Date.now()}`;
 
         logger.info('⚡ Quick karmic liberation', {
             liberationId
-            urgentPattern: liberationRequest.urgentPattern
+            urgentPattern: liberationRequest.urgentPattern,
             intensity: liberationRequest.intensity
-        });
-
-        try {
+        });      try: {
             // Identification immédiate du pattern karmique
             const patternIdentification = await this.identifyUrgentKarmicPattern(
                 liberationRequest.urgentPattern
@@ -365,35 +361,35 @@ export class KarmaHealingEngine extends EventEmitter {
                 success: true
                 liberationId
                 // Pattern identifié
-                urgentPattern: {
+                urgentPattern: {,
                     karmaType: patternIdentification.type
-                    intensity: patternIdentification.intensity
+                    intensity: patternIdentification.intensity,
                     rootCause: patternIdentification.root
-                    triggerEvent: patternIdentification.trigger
+                    triggerEvent: patternIdentification.trigger,
                     healingUrgency: patternIdentification.urgency
                 }
                 // Libération immédiate
-                immediateLiberation: {
+                immediateLiberation: {,
                     energyCleared: emergencyLiberation.energyCleared
-                    chainsReleased: emergencyLiberation.chains
+                    chainsReleased: emergencyLiberation.chains,
                     protectionActivated: emergencyLiberation.protection
-                    graceInvoked: emergencyLiberation.grace
+                    graceInvoked: emergencyLiberation.grace,
                     stabilityRestored: emergencyLiberation.stability
                 }
                 // Stabilisation
-                stabilization: {
+                stabilization: {,
                     groundingAchieved: energeticStabilization.grounding
-                    energyBalance: energeticStabilization.balance
+                    energyBalance: energeticStabilization.balance,
                     emotionalCalm: energeticStabilization.calm
-                    spiritualConnection: energeticStabilization.connection
+                    spiritualConnection: energeticStabilization.connection,
                     safetyEstablished: energeticStabilization.safety
                 }
                 // Support continu
-                ongoingSupport: {
+                ongoingSupport: {,
                     hourlyCheckins: this.scheduleHourlySupport(liberationRequest)
-                    dailyPractices: this.recommendDailySupport(patternIdentification)
+                    dailyPractices: this.recommendDailySupport(patternIdentification),
                     emergencyProtocol: this.establishEmergencyProtocol()
-                    healingCommunity: this.connectImmediateSupport()
+                    healingCommunity: this.connectImmediateSupport(),
                     professionalReferral: this.identifyProfessionalSupport(liberationRequest)
                 }
             };
@@ -404,10 +400,8 @@ export class KarmaHealingEngine extends EventEmitter {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 liberationId
                 emergencyProtection: this.activateEmergencyProtection()
@@ -417,19 +411,17 @@ export class KarmaHealingEngine extends EventEmitter {
 
     /**
      * Crée un programme de transformation karmique personnalisé
-     * @param {Object} programRequest - Paramètres du programme
-     * @returns {Promise<Object>} Programme complet de transformation
+     * @param: {Object} programRequest - Paramètres du programme
+     * @returns: {Promise<Object>} Programme complet de transformation
      */
     async createKarmicTransformationProgram(programRequest) {
         const programId = `karmic_program_${Date.now()}`;
 
         logger.info('🌟 Creating karmic transformation program', {
             programId
-            duration: programRequest.duration || '12_months'
+            duration: programRequest.duration || '12_months',
             focus: programRequest.focusAreas
-        });
-
-        try {
+        });      try: {
             // Évaluation karmique complète
             const karmicAssessment = await this.conductComprehensiveKarmicAssessment(
                 programRequest.lifeHistory
@@ -455,35 +447,35 @@ export class KarmaHealingEngine extends EventEmitter {
                 success: true
                 programId
                 // Évaluation karmique
-                karmicProfile: {
+                karmicProfile: {,
                     dominantThemes: karmicAssessment.themes
-                    healingPriorities: karmicAssessment.priorities
+                    healingPriorities: karmicAssessment.priorities,
                     transformationPotential: karmicAssessment.potential
-                    readinessLevel: karmicAssessment.readiness
+                    readinessLevel: karmicAssessment.readiness,
                     supportNeeds: karmicAssessment.support
                 }
                 // Structure du programme
-                programStructure: {
+                programStructure: {,
                     foundationPhase: programDesign.foundation
-                    healingPhase: programDesign.healing
+                    healingPhase: programDesign.healing,
                     transmutationPhase: programDesign.transmutation
-                    integrationPhase: programDesign.integration
+                    integrationPhase: programDesign.integration,
                     masteryPhase: programDesign.mastery
                 }
                 // Outils personnalisés
-                transformationToolkit: {
+                transformationToolkit: {,
                     dailyPractices: transformationTools.daily
-                    weeklyRituals: transformationTools.weekly
+                    weeklyRituals: transformationTools.weekly,
                     monthlyDeepWork: transformationTools.monthly
-                    quarterlyReview: transformationTools.quarterly
+                    quarterlyReview: transformationTools.quarterly,
                     yearlyEvolution: transformationTools.yearly
                 }
                 // Support et guidance
-                supportSystem: {
+                supportSystem: {,
                     personalGuidance: this.establishPersonalGuidance(karmicAssessment)
-                    groupSupport: this.connectGroupSupport(programRequest)
+                    groupSupport: this.connectGroupSupport(programRequest),
                     masterClassAccess: this.provideMasterClassAccess()
-                    emergencySupport: this.ensureEmergencySupport()
+                    emergencySupport: this.ensureEmergencySupport(),
                     celebrationRituals: this.createCelebrationRituals(programDesign)
                 }
             };
@@ -494,10 +486,8 @@ export class KarmaHealingEngine extends EventEmitter {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 programId
             };
@@ -506,8 +496,7 @@ export class KarmaHealingEngine extends EventEmitter {
 
     // Méthodes principales d'analyse et guérison
 
-    async analyzeKarmicPattern(challenges, patterns, history) {
-        return {
+    async analyzeKarmicPattern(challenges, patterns, history) {      return: {
             primary: await this.identifyPrimaryKarmicThemes(challenges, patterns)
             secondary: await this.identifySecondaryInfluences(patterns, history)
             roots: await this.traceKarmicRoots(challenges, history)
@@ -516,11 +505,10 @@ export class KarmaHealingEngine extends EventEmitter {
         };
     }
 
-    async mapMultidimensionalKarmicPatterns(analysis, relationships, ancestral) {
-        return {
+    async mapMultidimensionalKarmicPatterns(analysis, relationships, ancestral) {      return: {
             relationships: await this.mapRelationshipKarma(relationships, analysis)
             family: await this.mapFamilialKarma(ancestral, analysis)
-            collective: await this.mapCollectiveKarma(analysis)
+            collective: await this.mapCollectiveKarma(analysis),
             personal: await this.mapPersonalKarma(analysis)
             planetary: await this.mapPlanetaryKarma(analysis)
         };
@@ -530,7 +518,7 @@ export class KarmaHealingEngine extends EventEmitter {
         const healing = {
             forgiveness: await this.facilitateForgiveness(contracts, patterns)
             ancestral: await this.performAncestralHealing(patterns, intention)
-            pastLife: await this.integratePastLifeHealing(contracts)
+            pastLife: await this.integratePastLifeHealing(contracts),
             heart: await this.activateHeartHealing(intention)
             grace: await this.channelDivineGrace(healing, intention)
         };
@@ -551,26 +539,25 @@ export class KarmaHealingEngine extends EventEmitter {
         return themes.slice(0, Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 3) + 2);
     }
 
-    async facilitateForgiveness(contracts, patterns) {
-        return {
-            selfForgiveness: 'Deep forgiveness activated for past mistakes'
+    async facilitateForgiveness(contracts, patterns) {      return: {
+            selfForgiveness: 'Deep forgiveness activated for past mistakes',
             othersformForgiveness: 'Compassionate release of resentments'
-            ancestralForgiveness: 'Healing forgiveness through family lines'
+            ancestralForgiveness: 'Healing forgiveness through family lines',
             karmaicForgiveness: 'Divine forgiveness for soul-level patterns'
             universalForgiveness: 'Complete absolution and grace received'
         };
     }
 
     channelPersonalSoulMessage(session) {
-        return 'Beloved soul, you have courageously chosen to heal not only for yourself, but for all your lineages. Your healing ripples through time, blessing countless beings.';
+        return await this.generateWithOpenAI(`Beloved soul, you have courageously chosen to heal...`, context);
     }
 
     receiveAncestralWisdom(healing) {
-        return 'Your ancestors whisper: We are proud of your courage to break the chains that have bound our lineage. You are the healer we have been waiting for.';
+        return await this.generateWithOpenAI(`Your ancestors whisper: We are proud of your coura...`, context);
     }
 
     calculateKarmaCleared(transmutation) {
-        return `${Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 40) + 60}% of karmic patterns successfully transmuted`;
+        return await this.generateWithOpenAI(`${Math.floor((crypto.randomBytes(4).readUInt32BE(0...`, context);
     }
 
     measureConsciousnessEvolution(integration) {
@@ -579,14 +566,14 @@ export class KarmaHealingEngine extends EventEmitter {
     }
 
     provideEmergencyHealing(error) {
-        return 'Call upon divine grace immediately. You are surrounded by love and protection. Breathe deeply and trust in your divine support team.';
+        return await this.generateWithOpenAI(`Call upon divine grace immediately. You are surrou...`, context);
     }
 
     async archiveKarmicHealingJourney(healingId, result) {
         this.karmicRecords.set(healingId, {
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
             journey: result
-            archived: true
+            archived: true,
             sacred: true
             protected: true
         });
@@ -594,34 +581,30 @@ export class KarmaHealingEngine extends EventEmitter {
 
     // Méthodes de libération rapide
 
-    async identifyUrgentKarmicPattern(pattern, crisis, intensity) {
-        return {
-            type: 'Ancestral trauma pattern'
+    async identifyUrgentKarmicPattern(pattern, crisis, intensity) {      return: {
+            type: 'Ancestral trauma pattern',
             intensity: intensity || 'High'
-            root: 'Multi-generational fear pattern'
+            root: 'Multi-generational fear pattern',
             trigger: crisis || 'Current life circumstance'
             urgency: 'Immediate liberation required'
         };
     }
 
-    activateEmergencyProtection() {
-        return {
-            light: 'White light protection activated'
+    activateEmergencyProtection() {      return: {
+            light: 'White light protection activated',
             angels: 'Angelic protection summoned'
-            ancestors: 'Ancestral shields raised'
+            ancestors: 'Ancestral shields raised',
             guides: 'Spirit guides on standby'
             grace: 'Divine grace flowing strongly'
         };
     }
 
     establishEmergencyProtocol() {
-        return [
-            'Call on divine protection immediately'
-            'Use emergency grounding techniques'
-            'Connect with trusted spiritual support'
-            'Engage professional help if needed'
-            'Remember: You are divinely supported always'
-        ];
+        return: ['Call on divine protection immediately',
+      'Use emergency grounding techniques',
+      'Connect with trusted spiritual support',
+      'Engage professional help if needed',
+      'Remember: You are divinely supported always'];
     }
 }
 
@@ -629,31 +612,31 @@ export class KarmaHealingEngine extends EventEmitter {
 // MOTEURS SPÉCIALISÉS KARMIQUES
 // =======================================
 
-class KarmicPatternDetector {}
-class KarmicDebtAnalyzer {}
-class KarmicLessonExtractor {}
-class SoulContractReader {}
-class AkashicRecordsAccess {}
+class KarmicPatternDetector: {}
+class KarmicDebtAnalyzer: {}
+class KarmicLessonExtractor: {}
+class SoulContractReader: {}
+class AkashicRecordsAccess: {}
 
 // Protocoles de guérison
-class ForgivenessHealingProtocol {}
-class AncestralHealingProtocol {}
-class PastLifeIntegrationProtocol {}
-class KarmaTransmutationProtocol {}
-class SoulRedemptionProtocol {}
+class ForgivenessHealingProtocol: {}
+class AncestralHealingProtocol: {}
+class PastLifeIntegrationProtocol: {}
+class KarmaTransmutationProtocol: {}
+class SoulRedemptionProtocol: {}
 
 // Systèmes de transmutation
-class KarmicEnergyTransmuter {}
-class KarmicPatternBreaker {}
-class KarmicDebtClearer {}
-class KarmicBlockageRemover {}
-class KarmicFrequencyUplifter {}
+class KarmicEnergyTransmuter: {}
+class KarmicPatternBreaker: {}
+class KarmicDebtClearer: {}
+class KarmicBlockageRemover: {}
+class KarmicFrequencyUplifter: {}
 
 // Activateurs de liberté
-class SoulLiberator {}
-class KarmicChainBreaker {}
-class SpiritualFreedomActivator {}
-class DivineGraceChanneler {}
-class MiraculousHealingActivator {}
+class SoulLiberator: {}
+class KarmicChainBreaker: {}
+class SpiritualFreedomActivator: {}
+class DivineGraceChanneler: {}
+class MiraculousHealingActivator: {}
 
 export default KarmaHealingEngine;

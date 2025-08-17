@@ -360,6 +360,11 @@ export class CalendarIntegrationManager extends EventEmitter {
         return {
           ...baseEvent
           importance: event.importance
+
+// URLs externalisées
+const API_URL_1 = 'https://www.googleapis.com/calendar/v3';
+const API_URL_2 = 'https://calendar.google.com/event';
+const API_URL_3 = 'https://graph.microsoft.com/v1.0';
           sensitivity: event.sensitivity
         };
       default:
@@ -466,7 +471,7 @@ export class CalendarIntegrationManager extends EventEmitter {
 class GoogleCalendarIntegration {
   constructor() {
     this.supportsWebhooks = true;
-    this.apiUrl = 'https://www.googleapis.com/calendar/v3';
+    this.apiUrl = API_URL_1;
   }
 
   async authenticate(credentials) {
@@ -546,7 +551,7 @@ class GoogleCalendarIntegration {
 class MicrosoftOutlookIntegration {
   constructor() {
     this.supportsWebhooks = true;
-    this.apiUrl = 'https://graph.microsoft.com/v1.0';
+    this.apiUrl = API_URL_3;
   }
 
   async authenticate(credentials) {

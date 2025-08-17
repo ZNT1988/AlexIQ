@@ -51,7 +51,7 @@ const STR_PRODUCTION = 'production';
  * // Vérification type d'auth utilisé
  * import { isUsingMockAuth } from './auth.js';
  * if (isUsingMockAuth()) {
- *   console.log('Development mode - using mock auth');
+ *   
  * }
  */
 

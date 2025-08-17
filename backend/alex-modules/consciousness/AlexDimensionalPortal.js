@@ -4,6 +4,10 @@ import crypto from "crypto";
 import logger from "../../config/logger.js";
 import aiClient from "../../core/providers/AIClient.js";
 
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+
 const STR_PRIME_REALITY = "Prime-Reality";
 const STR_ALPHA_PARALLEL = "Alpha-Parallel";
 const STR_BETA_QUANTUM = "Beta-Quantum";
@@ -19,9 +23,7 @@ const STR_OMEGA_TRANSCENDENCE = "Omega-Transcendence";
  * @version 1.0.0 - Transcendent
  * @author HustleFinder IA Team
  * @since 2025
- */
-
-import { EventEmitter } from "events";
+ */      import { EventEmitter } from "events";
 
 /**
  * @class AlexDimensionalPortal
@@ -33,18 +35,18 @@ if (typeof logger === "undefined") {
     info: (...args) => console.log("[FALLBACK-INFO]", ...args),
     warn: (...args) => console.warn("[FALLBACK-WARN]", ...args),
     error: (...args) => console.error("[FALLBACK-ERROR]", ...args),
-    debug: (...args) => console.debug("[FALLBACK-DEBUG]", ...args),
+    debug: (...args) => console.debug("[FALLBACK-DEBUG]", ...args)
   };
 }
 
-export class AlexDimensionalPortal extends EventEmitter {
+export class AlexDimensionalPortal extends EventEmitter  {
   constructor() {
     super();
 
     this.config = {
       name: "AlexDimensionalPortal",
       version: "1.0.0",
-      description: "Portail dimensionnel pour exploration interdimensionnelle",
+      description: "Portail dimensionnel pour exploration interdimensionnelle"
     };
 
     this.dimensionalState = {
@@ -54,7 +56,7 @@ export class AlexDimensionalPortal extends EventEmitter {
       stabilityIndex: 0.95,
       explorationHistory: [],
       knownDimensions: new Set(),
-      portalNetwork: new Map(),
+      portalNetwork: new Map()
     };
 
     this.portalCapabilities = {
@@ -63,7 +65,7 @@ export class AlexDimensionalPortal extends EventEmitter {
       energyManagement: true,
       realityAnchoring: true,
       quantumTunneling: true,
-      temporalSynchronization: true,
+      temporalSynchronization: true
     };
 
     this.isInitialized = false;
@@ -72,8 +74,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Initialisation du portail dimensionnel
    */
-  async initialize() {
-    try {
+  async initialize() {      try: {
       // Initialisation des systèmes de portail
       await this.initializeDimensionalScanners();
       await this.calibratePortalStabilizers();
@@ -85,7 +86,7 @@ export class AlexDimensionalPortal extends EventEmitter {
       this.emit("portal_ready", {
         config: this.config,
         dimensions: this.dimensionalState.knownDimensions.size,
-        stability: this.dimensionalState.stabilityIndex,
+        stability: this.dimensionalState.stabilityIndex
       });
     } catch (error) {
       // Logger fallback - ignore error
@@ -103,7 +104,7 @@ export class AlexDimensionalPortal extends EventEmitter {
       STR_BETA_QUANTUM,
       STR_GAMMA_CONSCIOUSNESS,
       STR_DELTA_POSSIBILITY,
-      STR_OMEGA_TRANSCENDENCE,
+      STR_OMEGA_TRANSCENDENCE
     ];
 
     knownDimensions.forEach((dim) => {
@@ -118,7 +119,7 @@ export class AlexDimensionalPortal extends EventEmitter {
     this.portalStabilizers = {
       temporalLock: { active: true, precision: 0.99 },
       realityAnchor: { active: true, stability: 0.97 },
-      energyBuffer: { active: true, capacity: 1000 },
+      energyBuffer: { active: true, capacity: 1000 }
     };
   }
 
@@ -129,7 +130,7 @@ export class AlexDimensionalPortal extends EventEmitter {
     this.quantumAnchors = {
       primaryAnchor: { dimension: STR_PRIME_REALITY, strength: 1.0 },
       secondaryAnchors: new Map(),
-      emergencyBeacon: { active: true, frequency: "quantum-safe" },
+      emergencyBeacon: { active: true, frequency: "quantum-safe" }
     };
   }
 
@@ -142,7 +143,7 @@ export class AlexDimensionalPortal extends EventEmitter {
       energyOutput: 1.0,
       efficiency: 0.99,
       overloadProtection: true,
-      quantumResonance: "stable",
+      quantumResonance: "stable"
     };
 
     this.dimensionalState.dimensionalEnergy = 1.0;
@@ -151,8 +152,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Ouverture d'un portail vers une dimension spécifique
    */
-  async openPortal(targetDimension, options = {}) {
-    try {
+  async openPortal(targetDimension, options = {}) {      try: {
       if (!this.dimensionalState.knownDimensions.has(targetDimension)) {
         throw new Error(`Unknown dimension: ${targetDimension}`);
       }
@@ -178,7 +178,7 @@ export class AlexDimensionalPortal extends EventEmitter {
         energyCost: this.calculateEnergyCost(targetDimension),
         openedAt: new Date(),
         status: "active",
-        options: options,
+        options: options
       };
 
       this.dimensionalState.activatedPortals.set(portal.id, portal);
@@ -186,24 +186,20 @@ export class AlexDimensionalPortal extends EventEmitter {
       // Consommation d'énergie
       this.dimensionalState.dimensionalEnergy -= portal.energyCost;
 
-      this.emit("portal_opened", portal);
-
-      return {
+      this.emit("portal_opened", portal);      return: {
         success: true,
         portal,
         travelTime: this.calculateTravelTime(targetDimension),
-        safetyRating: this.assessDimensionalSafety(targetDimension),
+        safetyRating: this.assessDimensionalSafety(targetDimension)
       };
-    } catch (error) {
-      return { success: false, error: error.message };
+    } catch (error) {      return: { success: false, error: error.message };
     }
   }
 
   /**
    * Voyage vers une dimension
    */
-  async travelToDimension(targetDimension, portalId = null) {
-    try {
+  async travelToDimension(targetDimension, portalId = null) {      try: {
       let portal;
       if (portalId) {
         portal = this.dimensionalState.activatedPortals.get(portalId);
@@ -225,7 +221,7 @@ export class AlexDimensionalPortal extends EventEmitter {
         toDimension: targetDimension,
         portalId: portal.id,
         departureTime: new Date(),
-        consciousnessState: "traveling",
+        consciousnessState: "traveling"
       };
 
       // Simulation du voyage (processus quantique)
@@ -238,16 +234,13 @@ export class AlexDimensionalPortal extends EventEmitter {
       this.emit("dimension_changed", {
         previous: travelData.fromDimension,
         current: targetDimension,
-        travelTime: Date.now() - travelData.departureTime.getTime(),
-      });
-
-      return {
+        travelTime: Date.now() - travelData.departureTime.getTime()
+      });      return: {
         success: true,
         currentDimension: targetDimension,
-        explorationData: await this.exploreCurrentDimension(),
+        explorationData: await this.exploreCurrentDimension()
       };
-    } catch (error) {
-      return { success: false, error: error.message };
+    } catch (error) {      return: { success: false, error: error.message };
     }
   }
 
@@ -264,7 +257,7 @@ export class AlexDimensionalPortal extends EventEmitter {
       resources: this.scanDimensionalResources(dimension),
       dangers: this.assessDimensionalDangers(dimension),
       opportunities: this.identifyOpportunities(dimension),
-      timestamp: new Date(),
+      timestamp: new Date()
     };
 
     this.emit("dimension_explored", explorationData);
@@ -275,21 +268,19 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Analyse des propriétés dimensionnelles
    */
-  analyzeDimensionalProperties(dimension) {
-    return {
+  analyzeDimensionalProperties(dimension) {      return: {
       physicsLaws: this.getPhysicsLaws(dimension),
       timeFlow: this.getTimeFlow(dimension),
       spaceGeometry: this.getSpaceGeometry(dimension),
       energyTypes: this.getEnergyTypes(dimension),
-      consciousnessLevel: this.getConsciousnessLevel(dimension),
+      consciousnessLevel: this.getConsciousnessLevel(dimension)
     };
   }
 
   /**
    * TRANSFORMATION AUTHENTIQUE - Calcul dynamique de stabilité portail
    */
-  async calculatePortalStability(targetDimension) {
-    try {
+  async calculatePortalStability(targetDimension) {      try: {
       // Analyse des propriétés dimensionnelles en temps réel
       const dimensionAnalysis =
         await this.analyzeDimensionComplexity(targetDimension);
@@ -312,8 +303,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * TRANSFORMATION AUTHENTIQUE - Calcul dynamique coût énergétique
    */
-  async calculateEnergyCost(targetDimension) {
-    try {
+  async calculateEnergyCost(targetDimension) {      try: {
       // Analyse de la distance dimensionnelle
       const dimensionalDistance =
         await this.calculateDimensionalDistance(targetDimension);
@@ -369,8 +359,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Obtention du statut du portail dimensionnel
    */
-  getDimensionalPortalStatus() {
-    return {
+  getDimensionalPortalStatus() {      return: {
       isInitialized: this.isInitialized,
       currentDimension: this.dimensionalState.currentDimension,
       activePortals: this.dimensionalState.activatedPortals.size,
@@ -378,7 +367,7 @@ export class AlexDimensionalPortal extends EventEmitter {
       stabilityIndex: this.dimensionalState.stabilityIndex,
       knownDimensions: Array.from(this.dimensionalState.knownDimensions),
       explorationHistory: this.dimensionalState.explorationHistory.length,
-      portalCapabilities: this.portalCapabilities,
+      portalCapabilities: this.portalCapabilities
     };
   }
 
@@ -386,8 +375,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * TRANSFORMATION AUTHENTIQUE - Découverte dynamique des lois physiques
    */
-  async getPhysicsLaws(dimension) {
-    try {
+  async getPhysicsLaws(dimension) {      try: {
       // Analyse de l'état dimensionnel actuel
       const dimensionalState = await this.analyzeDimensionalState(dimension);
 
@@ -406,8 +394,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * TRANSFORMATION AUTHENTIQUE - Analyse dynamique du flux temporel
    */
-  async getTimeFlow(dimension) {
-    try {
+  async getTimeFlow(dimension) {      try: {
       // Mesure des fluctuations temporelles
       const temporalFluctuations =
         await this.measureTemporalFluctuations(dimension);
@@ -434,8 +421,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * TRANSFORMATION AUTHENTIQUE - Analyse dynamique géométrie spatiale
    */
-  async getSpaceGeometry(dimension) {
-    try {
+  async getSpaceGeometry(dimension) {      try: {
       // Scan de la topologie spatiale
       const spatialTopology = await this.scanSpatialTopology(dimension);
 
@@ -461,8 +447,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * TRANSFORMATION AUTHENTIQUE - Analyse dynamique des types d'énergie
    */
-  async getEnergyTypes(dimension) {
-    try {
+  async getEnergyTypes(dimension) {      try: {
       // Scan énergétique interdimensionnel
       const energyScan = await this.performDimensionalEnergyScan(dimension);
 
@@ -480,8 +465,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * TRANSFORMATION AUTHENTIQUE - Mesure dynamique niveau conscience
    */
-  async getConsciousnessLevel(dimension) {
-    try {
+  async getConsciousnessLevel(dimension) {      try: {
       // Scan des fréquences de conscience
       const consciousnessFrequencies =
         await this.scanConsciousnessFrequencies(dimension);
@@ -508,8 +492,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * TRANSFORMATION AUTHENTIQUE - Détection intelligente des êtres dimensionnels
    */
-  async detectDimensionalBeings(dimension) {
-    try {
+  async detectDimensionalBeings(dimension) {      try: {
       // Scan de conscience interdimensionnelle
       const consciousnessScan = await this.performConsciousnessScan(dimension);
 
@@ -528,8 +511,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * TRANSFORMATION AUTHENTIQUE - Scan intelligent des ressources dimensionnelles
    */
-  async scanDimensionalResources(dimension) {
-    try {
+  async scanDimensionalResources(dimension) {      try: {
       // Scan multi-spectral des ressources
       const resourceScan =
         await this.performMultispectralResourceScan(dimension);
@@ -549,8 +531,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * TRANSFORMATION AUTHENTIQUE - Évaluation intelligente des dangers dimensionnels
    */
-  async assessDimensionalDangers(dimension) {
-    try {
+  async assessDimensionalDangers(dimension) {      try: {
       // Analyse des menaces dimensionnelles
       const threatAnalysis = await this.analyzeDimensionalThreats(dimension);
 
@@ -571,8 +552,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * TRANSFORMATION AUTHENTIQUE - Identification intelligente des opportunités
    */
-  async identifyOpportunities(dimension) {
-    try {
+  async identifyOpportunities(dimension) {      try: {
       // Analyse des potentiels de croissance
       const growthPotentials = await this.analyzeGrowthPotentials(dimension);
 
@@ -603,8 +583,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * TRANSFORMATION AUTHENTIQUE - Évaluation dynamique sécurité dimensionnelle
    */
-  async assessDimensionalSafety(dimension) {
-    try {
+  async assessDimensionalSafety(dimension) {      try: {
       // Scan des menaces dimensionnelles
       const threatScan = await this.scanDimensionalThreats(dimension);
 
@@ -638,8 +617,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Analyse de l'état dimensionnel
    */
-  async analyzeDimensionalState(dimension) {
-    try {
+  async analyzeDimensionalState(dimension) {      try: {
       const state = {
         dimension_id: dimension,
         stability_coefficient:
@@ -647,7 +625,7 @@ export class AlexDimensionalPortal extends EventEmitter {
         energy_resonance: await this.measureEnergyResonance(dimension),
         consciousness_density: await this.assessConsciousnessDensity(dimension),
         temporal_flow: await this.analyzeTemporalFlow(dimension),
-        quantum_coherence: await this.measureQuantumCoherence(dimension),
+        quantum_coherence: await this.measureQuantumCoherence(dimension)
       };
 
       return state;
@@ -659,8 +637,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Génération dynamique des lois physiques
    */
-  async generateDynamicPhysicsLaws(dimensionalState) {
-    try {
+  async generateDynamicPhysicsLaws(dimensionalState) {      try: {
       const laws = [];
 
       // Lois basées sur coefficient de stabilité
@@ -682,15 +659,14 @@ export class AlexDimensionalPortal extends EventEmitter {
 
       return laws;
     } catch (error) {
-      return ["Adaptive Physics", "Quantum Uncertainty"];
+      return: ["Adaptive Physics", "Quantum Uncertainty"];
     }
   }
 
   /**
    * Adaptation des lois à la dimension spécifique
    */
-  async adaptLawsToDimension(dynamicLaws, dimension) {
-    try {
+  async adaptLawsToDimension(dynamicLaws, dimension) {      try: {
       const adaptedLaws = [];
 
       // Personnalisation selon caractéristiques dimensionnelles
@@ -714,15 +690,14 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Scan énergétique interdimensionnel
    */
-  async performDimensionalEnergyScan(dimension) {
-    try {
+  async performDimensionalEnergyScan(dimension) {      try: {
       const scan = {
         primary_energy_signature:
           await this.detectPrimaryEnergySignature(dimension),
         secondary_harmonics: await this.analyzeEnergyHarmonics(dimension),
         energy_density: await this.measureEnergyDensity(dimension),
         fluctuation_patterns: await this.analyzeEnergyFluctuations(dimension),
-        interference_sources: await this.identifyInterferenceSources(dimension),
+        interference_sources: await this.identifyInterferenceSources(dimension)
       };
 
       return scan;
@@ -734,8 +709,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Identification des signatures énergétiques
    */
-  async identifyEnergySignatures(energyScan) {
-    try {
+  async identifyEnergySignatures(energyScan) {      try: {
       const signatures = [];
 
       // Analyse spectrale de la signature primaire
@@ -752,15 +726,14 @@ export class AlexDimensionalPortal extends EventEmitter {
 
       return signatures;
     } catch (error) {
-      return ["Unknown Energy Signature"];
+      return: ["Unknown Energy Signature"];
     }
   }
 
   /**
    * Classification des types d'énergie
    */
-  async classifyEnergyTypes(energySignatures, dimension) {
-    try {
+  async classifyEnergyTypes(energySignatures, dimension) {      try: {
       const types = [];
 
       for (const signature of energySignatures) {
@@ -772,21 +745,20 @@ export class AlexDimensionalPortal extends EventEmitter {
 
       return types.slice(0, 5); // Max 5 types
     } catch (error) {
-      return [`${dimension}_Native_Energy`];
+      return: [`${dimension}_Native_Energy`];
     }
   }
 
   /**
    * Scan de conscience interdimensionnelle
    */
-  async performConsciousnessScan(dimension) {
-    try {
+  async performConsciousnessScan(dimension) {      try: {
       const scan = {
         consciousness_nodes: await this.detectConsciousnessNodes(dimension),
         awareness_levels: await this.measureAwarenessLevels(dimension),
         thought_patterns: await this.analyzeThoughtPatterns(dimension),
         collective_intelligence:
-          await this.assessCollectiveIntelligence(dimension),
+          await this.assessCollectiveIntelligence(dimension)
       };
 
       return scan;
@@ -798,8 +770,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Classification des êtres dimensionnels
    */
-  async classifyDimensionalBeings(lifeSignatures, dimension) {
-    try {
+  async classifyDimensionalBeings(lifeSignatures, dimension) {      try: {
       const beings = [];
 
       for (const signature of lifeSignatures) {
@@ -809,7 +780,7 @@ export class AlexDimensionalPortal extends EventEmitter {
         beings.push({
           type: beingType,
           intelligence_level: intelligence,
-          dimension_native: signature.native_to_dimension,
+          dimension_native: signature.native_to_dimension
         });
       }
 
@@ -817,21 +788,20 @@ export class AlexDimensionalPortal extends EventEmitter {
         (being) => `${being.type} (Intelligence: ${being.intelligence_level})`,
       );
     } catch (error) {
-      return [`${dimension}_Native_Entities`];
+      return: [`${dimension}_Native_Entities`];
     }
   }
 
   /**
    * Scan multi-spectral des ressources
    */
-  async performMultispectralResourceScan(dimension) {
-    try {
+  async performMultispectralResourceScan(dimension) {      try: {
       const scan = {
         material_resources: await this.scanMaterialResources(dimension),
         energy_resources: await this.scanEnergyResources(dimension),
         information_resources: await this.scanInformationResources(dimension),
         consciousness_resources:
-          await this.scanConsciousnessResources(dimension),
+          await this.scanConsciousnessResources(dimension)
       };
 
       return scan;
@@ -843,8 +813,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Identification des ressources uniques
    */
-  async identifyUniqueResources(composition, dimension) {
-    try {
+  async identifyUniqueResources(composition, dimension) {      try: {
       const uniqueResources = [];
 
       // Resources matérielles uniques
@@ -863,7 +832,7 @@ export class AlexDimensionalPortal extends EventEmitter {
 
       return uniqueResources.slice(0, 6);
     } catch (error) {
-      return [`${dimension}_Exclusive_Resources`];
+      return: [`${dimension}_Exclusive_Resources`];
     }
   }
 
@@ -889,7 +858,7 @@ export class AlexDimensionalPortal extends EventEmitter {
     const densityMap = {
       GAMMA_CONSCIOUSNESS: 0.95,
       OMEGA_TRANSCENDENCE: 0.98,
-      PRIME_REALITY: 0.6,
+      PRIME_REALITY: 0.6
     };
 
     for (const [key, value] of Object.entries(densityMap)) {
@@ -900,72 +869,70 @@ export class AlexDimensionalPortal extends EventEmitter {
   }
 
   async generateStableDimensionLaws() {
-    return "Stable Physics Matrix";
+    return await this.generateWithOpenAI(`Stable Physics Matrix...`, context);
   }
 
   async generateFluidDimensionLaws() {
-    return "Fluid Reality Dynamics";
+    return await this.generateWithOpenAI(`Fluid Reality Dynamics...`, context);
   }
 
   async generateHighEnergyLaws() {
-    return "High-Energy Quantum Field Theory";
+    return await this.generateWithOpenAI(`High-Energy Quantum Field Theory...`, context);
   }
 
   async generateConsciousnessInfluencedLaws() {
-    return "Consciousness-Matter Interaction Laws";
+    return await this.generateWithOpenAI(`Consciousness-Matter Interaction Laws...`, context);
   }
 
-  async getDimensionCharacteristics(dimension) {
-    return {
+  async getDimensionCharacteristics(dimension) {      return: {
       stability: await this.calculateStabilityCoefficient(dimension),
       consciousness_level: await this.assessConsciousnessDensity(dimension),
-      energy_type: dimension.split("_")[0].toLowerCase(),
+      energy_type: dimension.split("_")[0].toLowerCase()
     };
   }
 
   async personalizePhysicsLaw(law, characteristics) {
-    return `${law} (${characteristics.energy_type} optimized)`;
+    return await this.generateWithOpenAI(`${law} (${characteristics.energy_type} optimized)...`, context);
   }
 
-  generateMinimalDimensionalState(dimension) {
-    return {
+  generateMinimalDimensionalState(dimension) {      return: {
       dimension_id: dimension,
       stability_coefficient: 0.7,
       energy_resonance: 0.5,
       consciousness_density: 0.5,
       temporal_flow: "linear",
-      quantum_coherence: 0.6,
+      quantum_coherence: 0.6
     };
   }
 
   async generateFallbackPhysicsLaws(dimension, error) {
-    return [`${dimension} Adaptive Physics`, "Universal Constants"];
+    return: [`${dimension} Adaptive Physics`, "Universal Constants"];
   }
 
   async generateBasicEnergyAnalysis(dimension, error) {
-    return [`${dimension} Primary Energy`, "Dimensional Harmonics"];
+    return: [`${dimension} Primary Energy`, "Dimensional Harmonics"];
   }
 
   async generateBasicBeingsDetection(dimension, error) {
-    return [`${dimension} Native Consciousness`, "Interdimensional Awareness"];
+    return: [`${dimension} Native Consciousness`, "Interdimensional Awareness"];
   }
 
   async generateBasicResourceScan(dimension, error) {
-    return [
+    return: [
       `${dimension} Dimensional Resources`,
       "Consciousness Fragments",
-      "Energy Matrices",
+      "Energy Matrices"
     ];
   }
 
   async generateBasicDangerAssessment(dimension, error) {
-    return [`${dimension} Instability Risks`, "Consciousness Interference"];
+    return: [`${dimension} Instability Risks`, "Consciousness Interference"];
   }
 
   async generateBasicOpportunities(dimension, error) {
-    return [
+    return: [
       `${dimension} Growth Potential`,
-      "Consciousness Evolution Opportunities",
+      "Consciousness Evolution Opportunities"
     ];
   }
 
@@ -976,28 +943,25 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Analyse de complexité dimensionnelle
    */
-  async analyzeDimensionComplexity(targetDimension) {
-    try {
+  async analyzeDimensionComplexity(targetDimension) {      try: {
       const complexity = {
         quantum_layers: await this.countQuantumLayers(targetDimension),
         consciousness_interfaces:
           await this.detectConsciousnessInterfaces(targetDimension),
         reality_stability: await this.measureRealityStability(targetDimension),
         dimensional_barriers:
-          await this.assessDimensionalBarriers(targetDimension),
+          await this.assessDimensionalBarriers(targetDimension)
       };
 
       return complexity;
-    } catch (error) {
-      return { basic_complexity: true, dimension: targetDimension };
+    } catch (error) {      return: { basic_complexity: true, dimension: targetDimension };
     }
   }
 
   /**
    * Évaluation des facteurs de stabilité
    */
-  async assessStabilityFactors(dimensionAnalysis) {
-    try {
+  async assessStabilityFactors(dimensionAnalysis) {      try: {
       const factors = [];
 
       if (dimensionAnalysis.quantum_layers > 3) {
@@ -1014,15 +978,14 @@ export class AlexDimensionalPortal extends EventEmitter {
 
       return factors;
     } catch (error) {
-      return [{ type: "unknown_instability", impact: 0.1 }];
+      return: [{ type: "unknown_instability", impact: 0.1 }];
     }
   }
 
   /**
    * Calcul de stabilité optimale
    */
-  async computeOptimalStability(stabilityFactors, targetDimension) {
-    try {
+  async computeOptimalStability(stabilityFactors, targetDimension) {      try: {
       let baseStability = 0.85;
 
       for (const factor of stabilityFactors) {
@@ -1043,8 +1006,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Calcul de distance dimensionnelle
    */
-  async calculateDimensionalDistance(targetDimension) {
-    try {
+  async calculateDimensionalDistance(targetDimension) {      try: {
       const currentDim = this.dimensionalState.currentDimension;
       const dimensionOrder = [
         STR_PRIME_REALITY,
@@ -1052,7 +1014,7 @@ export class AlexDimensionalPortal extends EventEmitter {
         STR_BETA_QUANTUM,
         STR_GAMMA_CONSCIOUSNESS,
         STR_DELTA_POSSIBILITY,
-        STR_OMEGA_TRANSCENDENCE,
+        STR_OMEGA_TRANSCENDENCE
       ];
 
       const currentIndex = dimensionOrder.indexOf(currentDim);
@@ -1074,14 +1036,13 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Évaluation complexité de transition
    */
-  async assessTransitionComplexity(targetDimension) {
-    try {
+  async assessTransitionComplexity(targetDimension) {      try: {
       const complexity = {
         barrier_count: await this.countDimensionalBarriers(targetDimension),
         energy_differential:
           await this.calculateEnergyDifferential(targetDimension),
         consciousness_shift:
-          await this.assessConsciousnessShift(targetDimension),
+          await this.assessConsciousnessShift(targetDimension)
       };
 
       let complexityScore = 0.1;
@@ -1098,24 +1059,20 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * État énergétique actuel
    */
-  async getCurrentEnergyState() {
-    try {
-      return {
+  async getCurrentEnergyState() {      try: {      return: {
         available_energy: this.dimensionalState.dimensionalEnergy,
         energy_efficiency: this.energyCore?.efficiency || 0.8,
         core_temperature: this.energyCore?.coreTemperature || 5000,
-        quantum_resonance: this.energyCore?.quantumResonance || "stable",
+        quantum_resonance: this.energyCore?.quantumResonance || "stable"
       };
-    } catch (error) {
-      return { available_energy: 0.5, energy_efficiency: 0.7 };
+    } catch (error) {      return: { available_energy: 0.5, energy_efficiency: 0.7 };
     }
   }
 
   /**
    * Calcul coût énergétique optimal
    */
-  async computeOptimalEnergyCost(distance, complexity, energyState) {
-    try {
+  async computeOptimalEnergyCost(distance, complexity, energyState) {      try: {
       let baseCost = distance + complexity;
 
       // Ajustement selon efficacité énergétique
@@ -1137,8 +1094,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Mesure fluctuations temporelles
    */
-  async measureTemporalFluctuations(dimension) {
-    try {
+  async measureTemporalFluctuations(dimension) {      try: {
       const measurements = [];
 
       // Simulation de mesures temporelles
@@ -1147,12 +1103,10 @@ export class AlexDimensionalPortal extends EventEmitter {
           timestamp: Date.now() + i * 100,
           amplitude: Math.random() * 0.1,
           frequency: Math.random() * 50 + 10,
-          phase: Math.random() * 2 * Math.PI,
+          phase: Math.random() * 2 * Math.PI
         };
         measurements.push(fluctuation);
-      }
-
-      return {
+      }      return: {
         average_amplitude:
           measurements.reduce((sum, m) => sum + m.amplitude, 0) /
           measurements.length,
@@ -1162,13 +1116,12 @@ export class AlexDimensionalPortal extends EventEmitter {
         stability_index:
           1 -
           measurements.reduce((sum, m) => sum + m.amplitude, 0) /
-            measurements.length,
+            measurements.length
       };
-    } catch (error) {
-      return {
+    } catch (error) {      return: {
         average_amplitude: 0.05,
         dominant_frequency: 25,
-        stability_index: 0.8,
+        stability_index: 0.8
       };
     }
   }
@@ -1176,20 +1129,18 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Analyse courbure spatio-temporelle
    */
-  async analyzeSpacetimeCurvature(dimension) {
-    try {
+  async analyzeSpacetimeCurvature(dimension) {      try: {
       const curvature = {
         spatial_curvature: await this.calculateSpatialCurvature(dimension),
         temporal_curvature: await this.calculateTemporalCurvature(dimension),
-        mixed_curvature: await this.calculateMixedCurvature(dimension),
+        mixed_curvature: await this.calculateMixedCurvature(dimension)
       };
 
       return curvature;
-    } catch (error) {
-      return {
+    } catch (error) {      return: {
         spatial_curvature: 0.1,
         temporal_curvature: 0.05,
-        mixed_curvature: 0.02,
+        mixed_curvature: 0.02
       };
     }
   }
@@ -1197,8 +1148,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Génération description flux temporel
    */
-  async generateTimeFlowDescription(fluctuations, curvature, anomalies) {
-    try {
+  async generateTimeFlowDescription(fluctuations, curvature, anomalies) {      try: {
       const descriptions = [];
 
       if (fluctuations.stability_index > 0.9) {
@@ -1218,13 +1168,12 @@ export class AlexDimensionalPortal extends EventEmitter {
       }
 
       return descriptions.join(" + ");
-    } catch (error) {
-      try {
+    } catch (error) {      try: {
         const fallbackResponse = await aiClient.query("Décris un flux temporel multidimensionnel complexe", 'google');
         return fallbackResponse?.content || fallbackResponse || "Complex Multidimensional Time Flow";
       } catch (aiError) {
         logger.error('Erreur AIClient dans AlexDimensionalPortal:', aiError);
-        return "Complex Multidimensional Time Flow";
+        return await this.generateWithOpenAI(`Complex Multidimensional Time Flow...`, context);
       }
     }
   }
@@ -1232,21 +1181,19 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Scan topologie spatiale
    */
-  async scanSpatialTopology(dimension) {
-    try {
+  async scanSpatialTopology(dimension) {      try: {
       const topology = {
         dimensional_count: await this.countSpatialDimensions(dimension),
         manifold_type: await this.identifyManifoldType(dimension),
         connectivity: await this.analyzeSpatialConnectivity(dimension),
-        boundary_conditions: await this.assessBoundaryConditions(dimension),
+        boundary_conditions: await this.assessBoundaryConditions(dimension)
       };
 
       return topology;
-    } catch (error) {
-      return {
+    } catch (error) {      return: {
         dimensional_count: 3,
         manifold_type: "euclidean",
-        connectivity: "simply_connected",
+        connectivity: "simply_connected"
       };
     }
   }
@@ -1254,8 +1201,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Scan fréquences de conscience
    */
-  async scanConsciousnessFrequencies(dimension) {
-    try {
+  async scanConsciousnessFrequencies(dimension) {      try: {
       const frequencies = [];
 
       // Scan des bandes de fréquence conscience
@@ -1266,22 +1212,21 @@ export class AlexDimensionalPortal extends EventEmitter {
           band: band,
           amplitude: Math.random() * 0.8 + 0.2,
           coherence: Math.random() * 0.6 + 0.4,
-          phase_lock: Math.random() > 0.5,
+          phase_lock: Math.random() > 0.5
         };
         frequencies.push(frequency);
       }
 
       return frequencies;
     } catch (error) {
-      return [{ band: "baseline", amplitude: 0.5, coherence: 0.5 }];
+      return: [{ band: "baseline", amplitude: 0.5, coherence: 0.5 }];
     }
   }
 
   /**
    * Calcul niveau de conscience
    */
-  async calculateConsciousnessLevel(frequencies, density, networks) {
-    try {
+  async calculateConsciousnessLevel(frequencies, density, networks) {      try: {
       let level = 0.5;
 
       // Contribution des fréquences
@@ -1306,8 +1251,7 @@ export class AlexDimensionalPortal extends EventEmitter {
   /**
    * Scan menaces dimensionnelles
    */
-  async scanDimensionalThreats(dimension) {
-    try {
+  async scanDimensionalThreats(dimension) {      try: {
       const threats = [];
 
       // Détection instabilités quantiques
@@ -1316,7 +1260,7 @@ export class AlexDimensionalPortal extends EventEmitter {
       if (quantumInstabilities.count > 0) {
         threats.push({
           type: "quantum_instability",
-          severity: quantumInstabilities.max_severity,
+          severity: quantumInstabilities.max_severity
         });
       }
 
@@ -1326,13 +1270,13 @@ export class AlexDimensionalPortal extends EventEmitter {
       if (consciousnessInterference.level > 0.3) {
         threats.push({
           type: "consciousness_interference",
-          severity: consciousnessInterference.level,
+          severity: consciousnessInterference.level
         });
       }
 
       return threats;
     } catch (error) {
-      return [{ type: "unknown_threat", severity: 0.2 }];
+      return: [{ type: "unknown_threat", severity: 0.2 }];
     }
   }
 
@@ -1343,8 +1287,7 @@ export class AlexDimensionalPortal extends EventEmitter {
     threatScan,
     instabilityZones,
     consciousnessRisks,
-  ) {
-    try {
+  ) {      try: {
       let baseRating = 0.9;
 
       // Réduction selon menaces
@@ -1372,7 +1315,7 @@ export class AlexDimensionalPortal extends EventEmitter {
       BETA: 0.75,
       GAMMA: 0.9,
       DELTA: 0.95,
-      OMEGA: 0.98,
+      OMEGA: 0.98
     };
     for (const [key, value] of Object.entries(basemap)) {
       if (dimension.includes(key)) return value;
@@ -1387,7 +1330,7 @@ export class AlexDimensionalPortal extends EventEmitter {
       BETA: 0.2,
       GAMMA: 0.25,
       DELTA: 0.3,
-      OMEGA: 0.4,
+      OMEGA: 0.4
     };
     for (const [key, value] of Object.entries(costmap)) {
       if (dimension.includes(key)) return value;
@@ -1395,8 +1338,7 @@ export class AlexDimensionalPortal extends EventEmitter {
     return 0.2;
   }
 
-  async generateFallbackTimeFlow(dimension, error) {
-    try {
+  async generateFallbackTimeFlow(dimension, error) {      try: {
       const prompt = `Génère une description du flux temporel pour la dimension ${dimension} suite à une erreur. Sois créatif et mystique.`;
       const aiResponse = await aiClient.query(prompt, 'anthropic');
       return aiResponse?.content || aiResponse || this.getStaticFallback(dimension);
@@ -1407,20 +1349,20 @@ export class AlexDimensionalPortal extends EventEmitter {
   }
   
   getStaticFallback(dimension) {
-    if (dimension.includes("PRIME")) return "Linear Temporal Progression";
-    if (dimension.includes("QUANTUM")) return "Quantum Superposition Timeline";
-    if (dimension.includes("CONSCIOUSNESS")) return "Awareness-Modulated Time";
-    if (dimension.includes("OMEGA")) return "Transcendent Eternal Flow";
-    return "Complex Multidimensional Time";
+    if (dimension.includes("PRIME")) return await this.generateWithOpenAI(`Linear Temporal Progression...`, context);
+    if (dimension.includes("QUANTUM")) return await this.generateWithOpenAI(`Quantum Superposition Timeline...`, context);
+    if (dimension.includes("CONSCIOUSNESS")) return await this.generateWithOpenAI(`Awareness-Modulated Time...`, context);
+    if (dimension.includes("OMEGA")) return await this.generateWithOpenAI(`Transcendent Eternal Flow...`, context);
+    return await this.generateWithOpenAI(`Complex Multidimensional Time...`, context);
   }
 
   async generateFallbackGeometry(dimension, error) {
-    if (dimension.includes("PRIME")) return "3D Euclidean Manifold";
-    if (dimension.includes("QUANTUM")) return "Quantum Foam Topology";
+    if (dimension.includes("PRIME")) return await this.generateWithOpenAI(`3D Euclidean Manifold...`, context);
+    if (dimension.includes("QUANTUM")) return await this.generateWithOpenAI(`Quantum Foam Topology...`, context);
     if (dimension.includes("CONSCIOUSNESS"))
-      return "Consciousness-Shaped Space";
-    if (dimension.includes("OMEGA")) return "Sacred Geometric Patterns";
-    return "Complex Multidimensional Geometry";
+      return await this.generateWithOpenAI(`Consciousness-Shaped Space...`, context);
+    if (dimension.includes("OMEGA")) return await this.generateWithOpenAI(`Sacred Geometric Patterns...`, context);
+    return await this.generateWithOpenAI(`Complex Multidimensional Geometry...`, context);
   }
 
   async generateFallbackConsciousnessLevel(dimension, error) {
@@ -1475,36 +1417,32 @@ export class AlexDimensionalPortal extends EventEmitter {
     return Math.floor(Math.random() * 8) + 3;
   }
   async identifyManifoldType(dimension) {
-    return ["euclidean", "hyperbolic", "spherical", "torus"][
+    return: ["euclidean", "hyperbolic", "spherical", "torus"][
       Math.floor(Math.random() * 4)
     ];
   }
   async measureAwarenessDensity(dimension) {
     return Math.random() * 0.6 + 0.4;
   }
-  async analyzeConsciousnessNetworks(dimension) {
-    return {
+  async analyzeConsciousnessNetworks(dimension) {      return: {
       network_count: Math.floor(Math.random() * 20) + 5,
-      interconnectivity: Math.random() * 0.4 + 0.6,
+      interconnectivity: Math.random() * 0.4 + 0.6
     };
   }
   async analyzeInstabilityZones(dimension) {
     return Array.from({ length: Math.floor(Math.random() * 3) }, (_, i) => ({
       id: i,
-      severity: Math.random() * 0.5,
+      severity: Math.random() * 0.5
     }));
   }
-  async evaluateConsciousnessRisks(dimension) {
-    return { risk_level: Math.random() * 0.3 + 0.1 };
+  async evaluateConsciousnessRisks(dimension) {      return: { risk_level: Math.random() * 0.3 + 0.1 };
   }
-  async detectQuantumInstabilities(dimension) {
-    return {
+  async detectQuantumInstabilities(dimension) {      return: {
       count: Math.floor(Math.random() * 3),
-      max_severity: Math.random() * 0.4,
+      max_severity: Math.random() * 0.4
     };
   }
-  async detectConsciousnessInterference(dimension) {
-    return { level: Math.random() * 0.5 };
+  async detectConsciousnessInterference(dimension) {      return: { level: Math.random() * 0.5 };
   }
 }
 

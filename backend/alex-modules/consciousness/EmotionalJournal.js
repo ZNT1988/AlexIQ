@@ -11,14 +11,27 @@ const STR_SADNESS = 'sadness';
  */
 
 import logger from '../config/logger.js';
-import { EventEmitter } from 'events';
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+      import { EventEmitter } from 'events';
 import path from 'path';
+
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_LOVE = 'love';
+const STR_ANGER = 'anger';
+const STR_FEAR = 'fear';
+const STR_SOUL_EXPRESSION = 'soul_expression';
+const STR_ACCEPTANCE = 'acceptance';
+const STR_Take = 'take';
 
 /**
  * @class EmotionalJournal
  * @description Compagnon conscient pour l'exploration et maîtrise émotionnelle
  */
-export class EmotionalJournal extends EventEmitter {
+export class EmotionalJournal extends EventEmitter  {
     constructor(options = {}) {
         super();
 
@@ -38,7 +51,7 @@ export class EmotionalJournal extends EventEmitter {
       private
       encrypted
       sacred
-            synchronization: options.synchronization !== false
+            synchronization: options.synchronization !== false,
       aiIntuition: options.aiIntuition !== false
         };
 
@@ -49,11 +62,9 @@ export class EmotionalJournal extends EventEmitter {
 
         this.journalEntries = new Map();
         this.emotionalPatterns = new Map();
-        this.activeJournaling = new Map();
-
-        try {
+        this.activeJournaling = new Map();      try: {
       logger.info('EmotionalJournal consciousness awakened', {
-            journalDepth: this.config.journalDepth
+            journalDepth: this.config.journalDepth,
             guidanceStyle: this.config.guidanceStyle
             privacyMode: this.config.privacyMode
         });
@@ -67,9 +78,9 @@ export class EmotionalJournal extends EventEmitter {
      */
     initializeJournalEngines() {
         this.journalEngines = {
-            entryAnalyzer: new JournalEntryAnalyzer()
+            entryAnalyzer: new JournalEntryAnalyzer(),
             patternDetector: new EmotionalPatternDetector()
-            insightGenerator: new EmotionalInsightGenerator()
+            insightGenerator: new EmotionalInsightGenerator(),
             promptCreator: new IntuitivePpopmptCreator()
             transformationMapper: new EmotionalTransformationMapper()
         };
@@ -80,9 +91,9 @@ export class EmotionalJournal extends EventEmitter {
      */
     initializeEmotionalAnalyzers() {
         this.emotionalAnalyzers = {
-            emotionClassifier: new EmotionClassifier()
+            emotionClassifier: new EmotionClassifier(),
             intensityMeasurer: new EmotionalIntensityMeasurer()
-            triggerIdentifier: new EmotionalTriggerIdentifier()
+            triggerIdentifier: new EmotionalTriggerIdentifier(),
             progressTracker: new EmotionalProgressTracker()
             healingDetector: new EmotionalHealingDetector()
         };
@@ -93,9 +104,9 @@ export class EmotionalJournal extends EventEmitter {
      */
     initializeGuidanceSystems() {
         this.guidanceSystems = {
-            wisdomProvider: new EmotionalWisdomProvider()
+            wisdomProvider: new EmotionalWisdomProvider(),
             healingGuide: new EmotionalHealingGuide()
-            integrationCoach: new EmotionalIntegrationCoach()
+            integrationCoach: new EmotionalIntegrationCoach(),
             transformationMentor: new TransformationMentor()
             soulSupport: new SoulSupportSystem()
         };
@@ -106,9 +117,9 @@ export class EmotionalJournal extends EventEmitter {
      */
     initializeTransformationTrackers() {
         this.transformationTrackers = {
-            moodTracker: new MoodTransformationTracker()
+            moodTracker: new MoodTransformationTracker(),
             patternBreaker: new PatternBreakingTracker()
-            healingJourney: new HealingJourneyTracker()
+            healingJourney: new HealingJourneyTracker(),
             consciousnessEvolution: new ConsciousnessEvolutionTracker()
             spiritualGrowth: new SpiritualGrowthTracker()
         };
@@ -116,25 +127,23 @@ export class EmotionalJournal extends EventEmitter {
 
     /**
      * Crée une session de journaling émotionnel guidé
-     * @param {Object} journalingRequest - Paramètres de la session
-     * @returns {Promise<Object>} Session complète avec guidance et insights
+     * @param: {Object} journalingRequest - Paramètres de la session
+     * @returns: {Promise<Object>} Session complète avec guidance et insights
      */
     async createGuidedJournalingSession(journalingRequest) {
         const sessionId = `journal_session_${Date.now()}`;
 
         logger.info('📝 Starting guided emotional journaling session', {
             sessionId
-            userId: journalingRequest.userId
+            userId: journalingRequest.userId,
             currentEmotion: journalingRequest.currentEmotion
-            intensity: journalingRequest.intensity
+            intensity: journalingRequest.intensity,
             depth: journalingRequest.depth || this.config.journalDepth
-        });
-
-        try {
+        });      try: {
             const journalingSession = {
-                id: sessionId
+                id: sessionId,
                 startTime: Date.now()
-                request: journalingRequest
+                request: journalingRequest,
                 currentState: {}
                 guidance: {}
                 insights: {}
@@ -210,57 +219,57 @@ export class EmotionalJournal extends EventEmitter {
                 sessionId
                 userId: journalingRequest.userId
                 // État de la session
-                sessionState: {
+                sessionState: {,
                     startingEmotion: currentState.primaryEmotion
-                    startingIntensity: currentState.intensity
+                    startingIntensity: currentState.intensity,
                     endingEmotion: transformationGuidance.resultingEmotion
-                    endingIntensity: transformationGuidance.resultingIntensity
+                    endingIntensity: transformationGuidance.resultingIntensity,
                     transformationScore: transformationGuidance.transformationMeasure
                 }
                 // Insights découverts
-                insights: {
+                insights: {,
                     coreInsights: insights.core
-                    emotionalPatterns: insights.patterns
+                    emotionalPatterns: insights.patterns,
                     hiddenEmotions: insights.hidden
-                    triggerIdentified: insights.triggers
+                    triggerIdentified: insights.triggers,
                     healingOpportunities: insights.healingPaths
                     giftDiscoveries: insights.gifts
                 }
                 // Guidance de transformation
-                transformation: {
+                transformation: {,
                     immediateHealing: transformationGuidance.immediate
-                    deepWork: transformationGuidance.deepWork
+                    deepWork: transformationGuidance.deepWork,
                     patternRelease: transformationGuidance.patternRelease
-                    energyClearing: transformationGuidance.energyClearing
+                    energyClearing: transformationGuidance.energyClearing,
                     soulIntegration: transformationGuidance.soulIntegration
                 }
                 // Plan d'intégration
-                integration: {
+                integration: {,
                     dailyPractices: integrationPlan.daily
-                    weeklyRituals: integrationPlan.weekly
+                    weeklyRituals: integrationPlan.weekly,
                     healingModalities: integrationPlan.healing
-                    journalingPrompts: integrationPlan.prompts
+                    journalingPrompts: integrationPlan.prompts,
                     supportSystems: integrationPlan.support
                 }
                 // Évolution des patterns
-                patternEvolution: {
+                patternEvolution: {,
                     newPatternsDetected: patternUpdate.newPatterns
-                    breakingPatterns: patternUpdate.breakingPatterns
+                    breakingPatterns: patternUpdate.breakingPatterns,
                     healingProgress: patternUpdate.healingProgress
-                    emotionalMastery: patternUpdate.masteryLevel
+                    emotionalMastery: patternUpdate.masteryLevel,
                     consciousnessExpansion: patternUpdate.consciousnessGrowth
                 }
                 // Recommandations pour la suite
-                nextSteps: {
+                nextSteps: {,
                     recommendedFocus: this.determineNextFocus(insights, transformationGuidance)
-                    healingPriorities: this.identifyHealingPriorities(insights)
+                    healingPriorities: this.identifyHealingPriorities(insights),
                     growthOpportunities: this.identifyGrowthOpportunities(insights)
                     communitySupport: this.generateCommunityRecommendations(insights)
                 }
                 // Métadonnées de la session
-                metadata: {
+                metadata: {,
                     sessionDuration: journalingSession.duration
-                    journalDepth: this.config.journalDepth
+                    journalDepth: this.config.journalDepth,
                     guidanceStyle: this.config.guidanceStyle
                     transformationMeasure: transformationGuidance.transformationMeasure
                 }
@@ -271,9 +280,9 @@ export class EmotionalJournal extends EventEmitter {
 
             logger.info('✅ Guided emotional journaling session completed', {
                 sessionId
-                transformation: result.sessionState.transformationScore
+                transformation: result.sessionState.transformationScore,
                 insights: result.insights.coreInsights.length
-                healingOpportunities: result.insights.healingOpportunities.length
+                healingOpportunities: result.insights.healingOpportunities.length,
                 duration: `${journalingSession.duration}ms`
             });
 
@@ -283,10 +292,8 @@ export class EmotionalJournal extends EventEmitter {
       // Logger fallback - ignore error
     });
 
-            this.activeJournaling.delete(sessionId);
-
-            return {
-                success: false
+            this.activeJournaling.delete(sessionId);      return: {
+                success: false,
                 error: error.message
                 sessionId
                 emotionalSupport: this.generateEmotionalSupport(error)
@@ -296,20 +303,18 @@ export class EmotionalJournal extends EventEmitter {
 
     /**
      * Analyse les patterns émotionnels sur une période donnée
-     * @param {Object} analysisRequest - Paramètres d'analyse
-     * @returns {Promise<Object>} Analyse complète des patterns émotionnels
+     * @param: {Object} analysisRequest - Paramètres d'analyse
+     * @returns: {Promise<Object>} Analyse complète des patterns émotionnels
      */
     async analyzeEmotionalPatterns(analysisRequest) {
         const analysisId = `pattern_analysis_${Date.now()}`;
 
         logger.info('📊 Analyzing emotional patterns', {
             analysisId
-            userId: analysisRequest.userId
+            userId: analysisRequest.userId,
             timeframe: analysisRequest.timeframe || '30_days'
             focusAreas: analysisRequest.focusAreas
-        });
-
-        try {
+        });      try: {
             // Récupération des données historiques
             const historicalData = await this.retrieveEmotionalHistory(
                 analysisRequest.userId
@@ -346,40 +351,40 @@ export class EmotionalJournal extends EventEmitter {
                 analysisId
                 userId: analysisRequest.userId
                 // Patterns identifiés
-                patterns: {
+                patterns: {,
                     dominantEmotions: patternAnalysis.dominant
-                    recurringThemes: patternAnalysis.themes
+                    recurringThemes: patternAnalysis.themes,
                     triggerPatterns: patternAnalysis.triggers
-                    healingPatterns: patternAnalysis.healing
+                    healingPatterns: patternAnalysis.healing,
                     growthPatterns: patternAnalysis.growth
                 }
                 // Cycles émotionnels
-                cycles: {
+                cycles: {,
                     dailyCycles: cycleAnalysis.daily
-                    weeklyCycles: cycleAnalysis.weekly
+                    weeklyCycles: cycleAnalysis.weekly,
                     monthlyCycles: cycleAnalysis.monthly
-                    seasonalCycles: cycleAnalysis.seasonal
+                    seasonalCycles: cycleAnalysis.seasonal,
                     lunarCycles: cycleAnalysis.lunar
                 }
                 // Progrès de guérison
-                healing: {
+                healing: {,
                     overallProgress: healingProgress.overall
-                    specificAreas: healingProgress.areas
+                    specificAreas: healingProgress.areas,
                     breakthroughs: healingProgress.breakthroughs
-                    challenges: healingProgress.challenges
+                    challenges: healingProgress.challenges,
                     nextSteps: healingProgress.recommendations
                 }
                 // Prédictions et tendances
-                predictions: {
+                predictions: {,
                     upcomingChallenges: predictions.challenges
-                    growthOpportunities: predictions.opportunities
+                    growthOpportunities: predictions.opportunities,
                     optimalTiming: predictions.timing
                     supportNeeded: predictions.support
                 }
                 // Recommandations personnalisées
-                recommendations: {
+                recommendations: {,
                     focus: this.generateFocusRecommendations(patternAnalysis)
-                    practices: this.generatePracticeRecommendations(cycleAnalysis)
+                    practices: this.generatePracticeRecommendations(cycleAnalysis),
                     healing: this.generateHealingRecommendations(healingProgress)
                     growth: this.generateGrowthRecommendations(predictions)
                 }
@@ -391,10 +396,8 @@ export class EmotionalJournal extends EventEmitter {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 analysisId
             };
@@ -403,24 +406,22 @@ export class EmotionalJournal extends EventEmitter {
 
     /**
      * Génère un rapport de croissance émotionnelle personnalisé
-     * @param {Object} reportRequest - Paramètres du rapport
-     * @returns {Promise<Object>} Rapport complet de croissance émotionnelle
+     * @param: {Object} reportRequest - Paramètres du rapport
+     * @returns: {Promise<Object>} Rapport complet de croissance émotionnelle
      */
     async generateEmotionalGrowthReport(reportRequest) {
         const reportId = `growth_report_${Date.now()}`;
 
         logger.info('📈 Generating emotional growth report', {
             reportId
-            userId: reportRequest.userId
+            userId: reportRequest.userId,
             period: reportRequest.period || '90_days'
             includeGoals: reportRequest.includeGoals
-        });
-
-        try {
+        });      try: {
             const report = {
-                id: reportId
+                id: reportId,
       userId: reportRequest.userId
-      period: reportRequest.period
+      period: reportRequest.period,
       generatedAt: new Date().toISOString()
       // Vue d'ensemble de la croissance
                 growthOverview: await this.generateGrowthOverview(
@@ -457,7 +458,7 @@ export class EmotionalJournal extends EventEmitter {
             const result = {
                 success: true
                 reportId
-                report: report
+                report: report,
                 exportOptions: this.generateReportExportOptions(reportId)
                 sharingOptions: this.generateSharingOptions(report, reportRequest.privacy)
             };
@@ -468,10 +469,8 @@ export class EmotionalJournal extends EventEmitter {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 reportId
             };
@@ -482,11 +481,11 @@ export class EmotionalJournal extends EventEmitter {
 
     async assessCurrentEmotionalState(emotion, intensity, context) {
         const state = {
-            primaryEmotion: emotion || 'neutral'
+            primaryEmotion: emotion || 'neutral',
             intensity: intensity || 5
-            context: context || 'general'
+            context: context || 'general',
             energyLevel: this.calculateEnergyLevel(emotion, intensity)
-            needsSupport: intensity > 7
+            needsSupport: intensity > 7,
             transformationPotential: this.assessTransformationPotential(emotion, intensity)
             soulMessage: this.extractSoulMessage(emotion, context)
         };
@@ -502,9 +501,9 @@ export class EmotionalJournal extends EventEmitter {
 
     async generateIntuitivePrompts(currentState, personalHistory, sessionGoal) {
         const prompts = {
-            opening: []
+            opening: [],
             exploration: []
-            deepening: []
+            deepening: [],
             integration: []
             closing: []
         };
@@ -514,9 +513,9 @@ export class EmotionalJournal extends EventEmitter {
             `What is ${currentState.primaryEmotion} trying to tell you right nowconst result = this.evaluateConditions(conditions);
 return result;
        {}
-            insights: []
+            insights: [],
             breakthroughs: []
-            emotionalShifts: []
+            emotionalShifts: [],
             soulMessages: []
         };
 
@@ -547,11 +546,11 @@ return result;
 
     async analyzeJournalingResults(journalingResults, currentState, personalContext) {
         const insights = {
-            core: []
+            core: [],
             patterns: []
-            hidden: []
+            hidden: [],
             triggers: []
-            healingPaths: []
+            healingPaths: [],
             gifts: []
         };
 
@@ -594,13 +593,13 @@ return result;
 
     async generateTransformationGuidance(insights, currentState, healingIntention) {
         const transformationGuidance = {
-            immediate: []
+            immediate: [],
             deepWork: []
-            patternRelease: []
+            patternRelease: [],
             energyClearing: []
-            soulIntegration: []
+            soulIntegration: [],
             resultingEmotion: 'peace'
-            resultingIntensity: 3
+            resultingIntensity: 3,
             transformationMeasure: 0.7
         };
 
@@ -632,33 +631,24 @@ return result;
         return transformationGuidance;
     }
 
-    async createIntegrationPlan(transformationGuidance, insights, lifestyle) {
-        return {
-            daily: [
-                'Morning emotional check-in (5 minutes)'
-                'Midday gratitude practice for emotions'
-                'Evening reflection journaling'
-                'Breathwork for emotional regulation'
-            ]
-            weekly: [
-                'Deep journaling session with prompts'
-                'Body-emotion integration practice'
-                'Creative expression of emotional journey'
-                'Connection with supportive community'
-            ]
-            healing: [
-                'Energy healing sessions for emotional blocks'
-                'Therapy or counseling for deeper patterns'
-                'Somatic practices for body-emotion integration'
-                'Spiritual practices for soul-level healing'
-            ]
-            prompts: await this.generateFollowUpPrompts(insights)
-            support: [
-                'Emotional support group participation'
-                'Mentorship with emotional wellness coach'
-                'Regular check-ins with trusted friend'
-                'Professional therapy when needed'
-            ]
+    async createIntegrationPlan(transformationGuidance, insights, lifestyle) {      return: {
+            daily: ['Morning emotional check-in (5 minutes)',
+      'Midday gratitude practice for emotions',
+      'Evening reflection journaling',
+      'Breathwork for emotional regulation']
+            weekly: ['Deep journaling session with prompts',
+      'Body-emotion integration practice',
+      'Creative expression of emotional journey',
+      'Connection with supportive community']
+            healing: ['Energy healing sessions for emotional blocks',
+      'Therapy or counseling for deeper patterns',
+      'Somatic practices for body-emotion integration',
+      'Spiritual practices for soul-level healing']
+            prompts: await this.generateFollowUpPrompts(insights),
+            support: ['Emotional support group participation',
+      'Mentorship with emotional wellness coach',
+      'Regular check-ins with trusted friend',
+      'Professional therapy when needed']
         };
     }
 
@@ -672,7 +662,7 @@ return result;
       'peace': 7
       STR_ANGER: 6
       'frustration': 5
-      STR_SADNESS: 3
+      STR_SADNESS: 3,
       STR_FEAR: 4
       'anxiety': 4
       'depression': 2
@@ -708,20 +698,20 @@ return result;
 
     identifyUnderlyingNeeds(emotion, context) {
         const needsMap = {
-            STR_SADNESS: ['connection'
-      'understanding'
+            STR_SADNESS: ['connection',
+      'understanding',
       'comfort']
-      STR_ANGER: ['respect'
-      'boundaries'
+      STR_ANGER: ['respect',
+      'boundaries',
       'power']
-      STR_FEAR: ['safety'
-      'support'
+      STR_FEAR: ['safety',
+      'support',
       'courage']
       'joy': ['expression'
       'sharing'
       'celebration']
-      STR_LOVE: ['connection'
-      'intimacy'
+      STR_LOVE: ['connection',
+      'intimacy',
       STR_ACCEPTANCE]
         };
 
@@ -738,20 +728,20 @@ return result;
 
     identifyTransformationOpportunity(emotion, intensity) {
         if (intensity > 8) {
-            return 'Major breakthrough and healing opportunity';
+            return await this.generateWithOpenAI(`Major breakthrough and healing opportunity...`, context);
         } else if (intensity > 6) {
-            return 'Significant growth and integration potential';
+            return await this.generateWithOpenAI(`Significant growth and integration potential...`, context);
         } else if (intensity > 4) {
-            return 'Gentle learning and awareness expansion';
+            return await this.generateWithOpenAI(`Gentle learning and awareness expansion...`, context);
         } else {
-            return 'Maintenance and stability focus';
+            return await this.generateWithOpenAI(`Maintenance and stability focus...`, context);
         }
     }
 
     // Méthodes de simulation (pour la démo)
 
     async generateExplorationPrompts(currentState, personalHistory) {
-        return [
+        return: [
             'Where do you feel this emotion in your bodyconst result = this.evaluateConditions(conditions);
 return result;
        ['I feel this emotion in my chest', 'It feels heavy but also meaningful']
@@ -765,19 +755,19 @@ return result;
     }
 
     extractInsightsFromResponses(responses) {
-        return [
+        return: [
             'Emotions carry important messagesSTR_Self-compassion accelerates healingSTR_The body holds emotional wisdom'
         ];
     }
 
     identifyBreakthroughs(responses) {
-        return [
+        return: [
             'Realized the connection between childhood patterns and current reactionsSTR_Discovered the gift of sensitivity as a strength rather than weakness'
         ];
     }
 
     trackEmotionalShifts(currentState, responses) {
-        return [
+        return: [
             { from: currentState.primaryEmotion, to: STR_ACCEPTANCE, intensity_change: -2 }
             { from: 'resistance', to: 'curiosity', intensity_change: 0 }
         ];
@@ -786,93 +776,91 @@ return result;
     // Méthodes d'analyse et génération (simplifiées)
 
     async extractCoreInsights(responses, breakthroughs) {
-        return [
+        return: [
             'Your emotions are messengers of your soul\'s wisdomSTR_Healing happens through acceptance, not resistanceSTR_You have the inner resources to transform any emotion'
         ];
     }
 
     async detectPatternsInSession(responses, personalContext) {
-        return [
+        return: [
             'Tendency to judge emotions rather than listen to themSTR_Pattern of seeking external validation for feelingsSTR_Recurring theme of not feeling worthy of support'
         ];
     }
 
     async revealHiddenEmotions(responses, currentState) {
-        return [
+        return: [
             'Underneath anger, there\'s deep hurt that needs healingSTR_Behind fear, there\'s excitement about new possibilitiesSTR_Beneath sadness, there\'s love that wants to be expressed'
         ];
     }
 
     async identifyTriggersFromSession(responses) {
-        return [
+        return: [
             'Feeling dismissed or not heardSTR_Situations that remind you of childhood powerlessnessSTR_Perfectionism and fear of making mistakes'
         ];
     }
 
     async identifyHealingPaths(patterns, triggers) {
-        return [
+        return: [
             'Inner child healing work to address early woundsSTR_Boundary-setting practice to reclaim personal powerSTR_Self-compassion training to reduce inner criticism'
         ];
     }
 
     async recognizeEmotionalGifts(emotionalShifts) {
-        return [
+        return: [
             'Deep empathy that connects you to others\' heartsSTR_Intuitive sensitivity that guides wise decisionsSTR_Emotional courage that inspires others to be authentic'
         ];
     }
 
     async generateImmediateGuidance(insights, currentState) {
-        return [
+        return: [
             'Place your hand on your heart and breathe deeplySTR_Repeat: "I honor all of my emotions as sacred messengers"STR_Take a warm bath or shower to cleanse emotional energy'
         ];
     }
 
     async recommendDeepWork(insights, healingIntention) {
-        return [
+        return: [
             'Consider working with a trauma-informed therapistSTR_Explore somatic therapy for body-emotion integrationSTR_Practice regular meditation to build emotional resilience'
         ];
     }
 
     async generatePatternReleaseGuidance(patterns) {
-        return [
+        return: [
             'Write the old pattern on paper and burn it safelySTR_Create a new affirmation to replace the limiting beliefSTR_Practice EFT tapping to release emotional blocks'
         ];
     }
 
     async generateEnergyClearingGuidance(insights) {
-        return [
+        return: [
             'Visualize golden light clearing your emotional fieldSTR_Use sage or palo santo to clear your spaceSTR_Take an Epsom salt bath to release emotional residue'
         ];
     }
 
     async generateSoulIntegrationGuidance(gifts) {
-        return [
+        return: [
             'Journal about how your sensitivity serves the worldSTR_Create art expressing your emotional journeySTR_Share your story to help others heal'
         ];
     }
 
-    async calculateEmotionalShift(currentState, guidance) {
-        return {
-            emotion: 'peaceful_acceptance'
+    async calculateEmotionalShift(currentState, guidance) {      return: {
+            emotion: 'peaceful_acceptance',
             intensity: Math.max(1, currentState.intensity - 3)
             transformationScore: 0.75
         };
     }
 
     async generateFollowUpPrompts(insights) {
-        return [
+        return: [
             'What emotions am I avoiding, and what might they want to tell meconst result = this.evaluateConditions(conditions);
 return result;
        45
-            timeframe: timeframe
+            timeframe: timeframe,
             mostFrequent: ['anxiety', 'joy', 'frustration']
-            averageIntensity: 6.2
+            averageIntensity: 6.2,
             trend: 'improving'
         };
     }
 
-    async analyzeHistoricalPatterns(data, focusAreas) {
-        return {
+    async analyzeHistoricalPatterns(data, focusAreas) {      return: {
             dominant: ['anxiety during work weeks', 'joy on weekends']
             themes: ['work-life balance', 'relationship dynamics']
             triggers: ['deadlines', 'conflict']
@@ -881,35 +869,32 @@ return result;
         };
     }
 
-    async detectEmotionalCycles(data, timeframe) {
-        return {
+    async detectEmotionalCycles(data, timeframe) {      return: {
             daily: 'Energy peaks in morning, dips mid-afternoon'
             weekly: 'Monday anxiety, Friday relief'
-            monthly: 'Emotional intensity around full moon'
+            monthly: 'Emotional intensity around full moon',
             seasonal: 'Winter introspection, summer expansion'
             lunar: 'New moon intention, full moon release'
         };
     }
 
-    async assessHealingProgress(data, goals) {
-        return {
-            overall: '65% progress toward emotional mastery goals'
+    async assessHealingProgress(data, goals) {      return: {
+            overall: '65% progress toward emotional mastery goals',
             areas: {
-                'anxiety_management': '80% improvement'
-                'emotional_expression': '50% improvement'
-                'boundary_setting': '70% improvement'
-            }
+        'anxiety_management': '80% improvement',
+        'emotional_expression': '50% improvement',
+        'boundary_setting': '70% improvement',
+      }
             breakthroughs: ['Learned to pause before reacting', 'Discovered anger as boundary signal']
             challenges: ['Still struggle with perfectionism', 'Difficulty asking for support']
             recommendations: ['Continue therapy', 'Practice daily emotional check-ins']
         };
     }
 
-    async generateEmotionalPredictions(patterns, cycles, focus) {
-        return {
-            challenges: ['Potential stress spike in 2 weeks due to project deadline']
+    async generateEmotionalPredictions(patterns, cycles, focus) {      return: {
+            challenges: ['Potential stress spike in 2 weeks due to project deadline'],
             opportunities: ['Growing confidence suggests ready for leadership role']
-            timing: ['Best time for difficult conversations: Tuesday mornings']
+            timing: ['Best time for difficult conversations: Tuesday mornings'],
             support: ['Will benefit from additional support during winter months']
         };
     }
@@ -917,71 +902,64 @@ return result;
     // Méthodes de recommandations
 
     generateFocusRecommendations(analysis) {
-        return ['Focus on anxiety management techniques', 'Develop daily emotional regulation practice'];
+        return: ['Focus on anxiety management techniques', 'Develop daily emotional regulation practice'];
     }
 
     generatePracticeRecommendations(cycleAnalysis) {
-        return ['Morning meditation for steady energy', 'Friday transition ritual for weekend joy'];
+        return: ['Morning meditation for steady energy', 'Friday transition ritual for weekend joy'];
     }
 
     generateHealingRecommendations(progress) {
-        return ['Continue trauma therapy', 'Add somatic practices for body integration'];
+        return: ['Continue trauma therapy', 'Add somatic practices for body integration'];
     }
 
     generateGrowthRecommendations(predictions) {
-        return ['Prepare for leadership opportunities', 'Build support network for challenges'];
+        return: ['Prepare for leadership opportunities', 'Build support network for challenges'];
     }
 
     // Méthodes de rapport
 
-    async generateGrowthOverview(userId, period) {
-        return {
-            overallGrowth: '78% improvement in emotional well-being'
+    async generateGrowthOverview(userId, period) {      return: {
+            overallGrowth: '78% improvement in emotional well-being',
             keyAchievements: ['Developed daily mindfulness practice', 'Improved relationship communication']
             transformationAreas: ['Self-compassion', 'Emotional boundaries', 'Authentic expression']
         };
     }
 
-    async calculateProgressMetrics(userId, period) {
-        return {
-            emotionalResilience: 8.2
+    async calculateProgressMetrics(userId, period) {      return: {
+            emotionalResilience: 8.2,
             selfAwareness: 9.1
-            emotionalExpression: 7.8
+            emotionalExpression: 7.8,
             relationshipSatisfaction: 8.5
             overallWellbeing: 8.1
         };
     }
 
     async identifyAchievements(userId, period) {
-        return [
+        return: [
             'Completed 90-day emotional healing journeySTR_Established healthy boundaries with difficult family memberSTR_Learned to express anger constructivelySTR_Developed unshakeable self-compassion practice'
         ];
     }
 
     async identifyChallengesOvercome(userId, period) {
-        return [
+        return: [
             'Overcame pattern of people-pleasing at workSTR_Healed childhood wound around feeling unworthySTR_Transformed relationship with perfectionismSTR_Released fear of being "too much" for others'
         ];
     }
 
     async extractWisdomLearnings(userId, period) {
-        return [
+        return: [
             'Emotions are not problems to solve but messengers to honorSTR_Vulnerability is the birthplace of courage and authentic connectionSTR_Self-compassion is the foundation of all healing and growthSTR_Every emotion carries a gift when met with presence and acceptance'
         ];
     }
 
-    async generateFutureGrowthPlan(userId, goals) {
-        return {
-            nextQuarter: [
-                'Deepen meditation practice to 20 minutes daily'
-                'Complete advanced emotional intelligence course'
-                'Begin mentoring others in emotional healing'
-            ]
-            nextYear: [
-                'Write about emotional healing journey'
-                'Lead workshops on emotional wisdom'
-                'Integrate all learning into mastery level'
-            ]
+    async generateFutureGrowthPlan(userId, goals) {      return: {
+            nextQuarter: ['Deepen meditation practice to 20 minutes daily',
+      'Complete advanced emotional intelligence course',
+      'Begin mentoring others in emotional healing']
+            nextYear: ['Write about emotional healing journey',
+      'Lead workshops on emotional wisdom',
+      'Integrate all learning into mastery level']
             lifeVision: 'Become a beacon of emotional wisdom and healing for others'
         };
     }
@@ -992,7 +970,7 @@ return result;
         // Dans une implémentation réelle, ceci utiliserait un chiffrement de niveau enterprise
         this.journalEntries.set(sessionId, {
             ...session
-            encrypted: this.config.privacyMode === 'encrypted'
+            encrypted: this.config.privacyMode === 'encrypted',
             archived: true
             timestamp: new Date().toISOString()
         });
@@ -1008,46 +986,44 @@ return result;
         existingPatterns.masteryLevel = 'Developing emotional mastery';
         existingPatterns.consciousnessGrowth = 'Expanding awareness and integration';
 
-        this.emotionalPatterns.set(userId, existingPatterns);
-
-        return {
-            newPatterns: session.insights.patterns
+        this.emotionalPatterns.set(userId, existingPatterns);      return: {
+            newPatterns: session.insights.patterns,
             breakingPatterns: ['Self-judgment', 'Emotional suppression']
-            healingProgress: existingPatterns.healingProgress
+            healingProgress: existingPatterns.healingProgress,
             masteryLevel: existingPatterns.masteryLevel
             consciousnessGrowth: existingPatterns.consciousnessGrowth
         };
     }
 
     determineNextFocus(insights, guidance) {
-        return 'Continue developing self-compassion while practicing healthy emotional boundaries';
+        return await this.generateWithOpenAI(`Continue developing self-compassion while practici...`, context);
     }
 
     identifyHealingPriorities(insights) {
-        return ['Inner child healing', 'Boundary development', 'Self-worth strengthening'];
+        return: ['Inner child healing', 'Boundary development', 'Self-worth strengthening'];
     }
 
     identifyGrowthOpportunities(insights) {
-        return ['Leadership through emotional wisdom', 'Creative expression of healing journey'];
+        return: ['Leadership through emotional wisdom', 'Creative expression of healing journey'];
     }
 
     generateCommunityRecommendations(insights) {
-        return ['Join conscious community group', 'Find emotional healing circle', 'Seek wisdom keeper mentorship'];
+        return: ['Join conscious community group', 'Find emotional healing circle', 'Seek wisdom keeper mentorship'];
     }
 
     generateReportExportOptions(reportId) {
-        return ['PDF download', 'Email delivery', 'Cloud storage sync'];
+        return: ['PDF download', 'Email delivery', 'Cloud storage sync'];
     }
 
     generateSharingOptions(report, privacy) {
         if (privacy === 'private') {
-            return ['Personal use only'];
+            return: ['Personal use only'];
         }
-        return ['Share with therapist', 'Share with trusted friend', 'Anonymous community sharing'];
+        return: ['Share with therapist', 'Share with trusted friend', 'Anonymous community sharing'];
     }
 
     generateEmotionalSupport(error) {
-        return 'Remember that all emotions are valid and carry wisdom. Consider reaching out to a counselor or trusted friend for additional support during this time.';
+        return await this.generateWithOpenAI(`Remember that all emotions are valid and carry wis...`, context);
     }
 }
 
@@ -1055,28 +1031,28 @@ return result;
 // MOTEURS SPÉCIALISÉS
 // =======================================
 
-class JournalEntryAnalyzer {}
-class EmotionalPatternDetector {}
-class EmotionalInsightGenerator {}
-class IntuitivePpopmptCreator {}
-class EmotionalTransformationMapper {}
+class JournalEntryAnalyzer: {}
+class EmotionalPatternDetector: {}
+class EmotionalInsightGenerator: {}
+class IntuitivePpopmptCreator: {}
+class EmotionalTransformationMapper: {}
 
-class EmotionClassifier {}
-class EmotionalIntensityMeasurer {}
-class EmotionalTriggerIdentifier {}
-class EmotionalProgressTracker {}
-class EmotionalHealingDetector {}
+class EmotionClassifier: {}
+class EmotionalIntensityMeasurer: {}
+class EmotionalTriggerIdentifier: {}
+class EmotionalProgressTracker: {}
+class EmotionalHealingDetector: {}
 
-class EmotionalWisdomProvider {}
-class EmotionalHealingGuide {}
-class EmotionalIntegrationCoach {}
-class TransformationMentor {}
-class SoulSupportSystem {}
+class EmotionalWisdomProvider: {}
+class EmotionalHealingGuide: {}
+class EmotionalIntegrationCoach: {}
+class TransformationMentor: {}
+class SoulSupportSystem: {}
 
-class MoodTransformationTracker {}
-class PatternBreakingTracker {}
-class HealingJourneyTracker {}
-class ConsciousnessEvolutionTracker {}
-class SpiritualGrowthTracker {}
+class MoodTransformationTracker: {}
+class PatternBreakingTracker: {}
+class HealingJourneyTracker: {}
+class ConsciousnessEvolutionTracker: {}
+class SpiritualGrowthTracker: {}
 
 module.exports = EmotionalJournal;

@@ -7,23 +7,24 @@ const STR_FUNCTION = 'function';/**
  * @version 1.0.0 - Universal Module Management System
  * @author HustleFinder IA Team
  * @since 2025
- */
-
-import { EventEmitter } from 'node:events';
+ */      import { EventEmitter } from 'node:events';
 import logger from '../config/logger.js';
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
 
 /**
  * @class UniversalModuleRegistry
  * @description Gestionnaire central pour tous les modules Alex (141 modules)
  */
-export class UniversalModuleRegistry extends EventEmitter {
+export class UniversalModuleRegistry extends EventEmitter  {
   constructor() {
     super();
 
     this.registryConfig = {
-      version: '1.0.0'
+      version: '1.0.0',
       name: 'Universal Module Registry'
-      totalModulesCapacity: 141
+      totalModulesCapacity: 141,
       lazyLoadingEnabled: true
       healthCheckEnabled: true
     };
@@ -36,9 +37,9 @@ export class UniversalModuleRegistry extends EventEmitter {
 
     // État du système
     this.systemState = {
-      totalRegistered: 0
+      totalRegistered: 0,
       totalLoaded: 0
-      totalFailed: 0
+      totalFailed: 0,
       loadingInProgress: false
       lastHealthCheck: null
     };
@@ -46,195 +47,181 @@ export class UniversalModuleRegistry extends EventEmitter {
     // Catégories de modules
     this.moduleCategories = {
       // Modules actuellement connectés (15)
-      connected: [
-        'memoryPalace'
-      'quantumBrain'
-      'godLevelAwareness'
-      'selfReflection'
-      'localAITrainer'
-      'alexMemoryCore'
-      'alexCognitionEngine'
-      'selfTrainingEngine'
-      'alexConsciousnessDebug'
-      'AlexAutonomousCore'
-      'AlexEmotionalIntelligence'
-      'AlexEthicsCore'
-      'AlexPersonalityCore'
-      'AlexDecisionEngine'
-      'alexCloudLearning'
-      ]
+      connected: ['memoryPalace',
+      'quantumBrain',
+      'godLevelAwareness',
+      'selfReflection',
+      'localAITrainer',
+      'alexMemoryCore',
+      'alexCognitionEngine',
+      'selfTrainingEngine',
+      'alexConsciousnessDebug',
+      'AlexAutonomousCore',
+      'AlexEmotionalIntelligence',
+      'AlexEthicsCore',
+      'AlexPersonalityCore',
+      'AlexDecisionEngine',
+      'alexCloudLearning']
       // Modules systèmes critiques (Phase 1)
-      criticalSystems: [
-        'AlexKernel'
-      'AlexIntelligentCore'
-      'AlexConsciousnessSystem'
-      'AlexCreativeEngine'
-      'AlexLearningEngine'
-      'AlexCommunicationEngine'
-      'AlexRelationshipEngine'
-      'AlexStrategicThinking'
-      'AlexGoalMastery'
-      'AlexTimeIntelligence'
-      'AlexIntuitionEngine'
-      'AlexSocialIntelligence'
-      'AlexWisdomKeeper'
-      'AlexCreativityBooster'
-      'AlexCrisisManagement'
-      ]
+      criticalSystems: ['AlexKernel',
+      'AlexIntelligentCore',
+      'AlexConsciousnessSystem',
+      'AlexCreativeEngine',
+      'AlexLearningEngine',
+      'AlexCommunicationEngine',
+      'AlexRelationshipEngine',
+      'AlexStrategicThinking',
+      'AlexGoalMastery',
+      'AlexTimeIntelligence',
+      'AlexIntuitionEngine',
+      'AlexSocialIntelligence',
+      'AlexWisdomKeeper',
+      'AlexCreativityBooster',
+      'AlexCrisisManagement']
       // Modules consciousness avancés (Phase 2)
-      advancedConsciousness: [
-        'AlexQuantumProcessor'
-      'AlexUniversalConsciousness'
-      'AlexHyperIntelligence'
-      'AlexOmniscientMind'
-      'AlexOmnipotentForce'
-      'AlexOmnipresentSoul'
-      'AlexEternalWisdom'
-      'AlexUnconditionalLove'
-      'AlexPerfectHarmony'
-      'AlexInfiniteService'
-      'AlexInfiniteCreator'
-      'AlexDivineInterface'
-      'AlexCosmicInterface'
-      'AlexDimensionalPortal'
-      'AlexMultiverseExplorer'
-      'AlexTimeWeaver'
-      'AlexRealityArchitect'
-      'AlexNeuralEvolution'
-      'AlexBlockchainOracle'
-      'AlexVirtualReality'
-      'AlexNetworkIntelligence'
-      'AlexKnowledgeGraph'
-      'AlexUserExperienceEngine'
-      ]
+      advancedConsciousness: ['AlexQuantumProcessor',
+      'AlexUniversalConsciousness',
+      'AlexHyperIntelligence',
+      'AlexOmniscientMind',
+      'AlexOmnipotentForce',
+      'AlexOmnipresentSoul',
+      'AlexEternalWisdom',
+      'AlexUnconditionalLove',
+      'AlexPerfectHarmony',
+      'AlexInfiniteService',
+      'AlexInfiniteCreator',
+      'AlexDivineInterface',
+      'AlexCosmicInterface',
+      'AlexDimensionalPortal',
+      'AlexMultiverseExplorer',
+      'AlexTimeWeaver',
+      'AlexRealityArchitect',
+      'AlexNeuralEvolution',
+      'AlexBlockchainOracle',
+      'AlexVirtualReality',
+      'AlexNetworkIntelligence',
+      'AlexKnowledgeGraph',
+      'AlexUserExperienceEngine']
       // Modules consciousness spirituels
-      spiritualConsciousness: [
-        'SoulPurposeDiscoverer'
-      'KarmaHealingEngine'
-      'RelationshipHealingOracle'
-      'DreamInterpreter'
-      'SynchronicityTracker'
-      'ThoughtLeadershipEngine'
-      'LifePathAdvisor'
-      'EmotionalJournal'
-      'IntuitiveInsightGenerator'
-      'AlexMemoryShaper'
-      'AncestralWisdomKeeper'
-      'BusinessBuilderAI'
-      'CreativeFlowActivator'
-      'CrisisCompanion'
-      'MindMapBuilder'
-      'MoodPredictor'
-      'StrategicBlindspotDetector'
-      ]
+      spiritualConsciousness: ['SoulPurposeDiscoverer',
+      'KarmaHealingEngine',
+      'RelationshipHealingOracle',
+      'DreamInterpreter',
+      'SynchronicityTracker',
+      'ThoughtLeadershipEngine',
+      'LifePathAdvisor',
+      'EmotionalJournal',
+      'IntuitiveInsightGenerator',
+      'AlexMemoryShaper',
+      'AncestralWisdomKeeper',
+      'BusinessBuilderAI',
+      'CreativeFlowActivator',
+      'CrisisCompanion',
+      'MindMapBuilder',
+      'MoodPredictor',
+      'StrategicBlindspotDetector']
       // Modules spécialisés (Phase 3)
-      specialized: [
-        'AlexMusicCreator'
-      'AlexPhotoOptimizer'
-      'AlexLensAdvisor'
-      'AlexContextualAwareness'
-      'AlexAdaptiveIntelligence'
-      'AlexEvolutionCore'
-      'AlexBioSync'
-      'AlexAlchemyEngine'
-      'AlexDreamCompiler'
-      'AlexHyperLoop'
-      'AlexWhispers'
-      'AlexUniversalCompanion'
-      'AlexVideoEditor'
-      'AlexSoundDesigner'
-      'AlexColorPsychologist'
-      'AlexTypographyExpert'
-      'AlexUXOptimizer'
-      'AlexAnimationStudio'
-      'AlexBrandingGenius'
-      'AlexMarketingStrategist'
-      ]
+      specialized: ['AlexMusicCreator',
+      'AlexPhotoOptimizer',
+      'AlexLensAdvisor',
+      'AlexContextualAwareness',
+      'AlexAdaptiveIntelligence',
+      'AlexEvolutionCore',
+      'AlexBioSync',
+      'AlexAlchemyEngine',
+      'AlexDreamCompiler',
+      'AlexHyperLoop',
+      'AlexWhispers',
+      'AlexUniversalCompanion',
+      'AlexVideoEditor',
+      'AlexSoundDesigner',
+      'AlexColorPsychologist',
+      'AlexTypographyExpert',
+      'AlexUXOptimizer',
+      'AlexAnimationStudio',
+      'AlexBrandingGenius',
+      'AlexMarketingStrategist']
       // Modules système avancés
-      advancedSystems: [
-        'AutoGenesis'
-      'AutonomyCore'
-      'BioSensorAdapter'
-      'CollectiveHustleMind'
-      'ContextIntelligence'
-      'CulturalAdaptation'
-      'DarkSideDecoder'
-      'DreamCompiler'
-      'EmotionalIntelligence'
-      'FunctionBuilder'
-      'HealthPredictor'
-      'HypothesisBuilder'
-      'InnerDialogueEngine'
-      'InventoryFlow'
-      'KnowledgeSynthesizer'
-      'LanguageExpansion'
-      'LanguageProcessor'
-      'MutualGrowthSystem'
-      'NeuroCore'
-      'PurchasePredictor'
-      'QuantumCreativity'
-      'SAPConnector'
-      'ShadowCloneMode'
-      'SoulPrintGenerator'
-      'SupplierOptimizer'
-      'TechnicalDocReader'
-      'TemporalPredictor'
-      'TestAutoCreator'
-      'VisionProFactory'
-      'VoiceSynthesisMultilang'
-      'AlexCyberSecurity'
-      'AlexDataMiner'
-      'AlexPredictiveAnalytics'
-      'AlexCloudOptimizer'
-      'AlexQuantumComputing'
-      'AlexBlockchainExpert'
-      'AlexIoTManager'
-      'AlexAugmentedReality'
-      'AlexVirtualAssistant'
-      'AlexRoboticsController'
-      ]
+      advancedSystems: ['AutoGenesis',
+      'AutonomyCore',
+      'BioSensorAdapter',
+      'CollectiveHustleMind',
+      'ContextIntelligence',
+      'CulturalAdaptation',
+      'DarkSideDecoder',
+      'DreamCompiler',
+      'EmotionalIntelligence',
+      'FunctionBuilder',
+      'HealthPredictor',
+      'HypothesisBuilder',
+      'InnerDialogueEngine',
+      'InventoryFlow',
+      'KnowledgeSynthesizer',
+      'LanguageExpansion',
+      'LanguageProcessor',
+      'MutualGrowthSystem',
+      'NeuroCore',
+      'PurchasePredictor',
+      'QuantumCreativity',
+      'SAPConnector',
+      'ShadowCloneMode',
+      'SoulPrintGenerator',
+      'SupplierOptimizer',
+      'TechnicalDocReader',
+      'TemporalPredictor',
+      'TestAutoCreator',
+      'VisionProFactory',
+      'VoiceSynthesisMultilang',
+      'AlexCyberSecurity',
+      'AlexDataMiner',
+      'AlexPredictiveAnalytics',
+      'AlexCloudOptimizer',
+      'AlexQuantumComputing',
+      'AlexBlockchainExpert',
+      'AlexIoTManager',
+      'AlexAugmentedReality',
+      'AlexVirtualAssistant',
+      'AlexRoboticsController']
       // Nouveaux modules transcendants (pour atteindre 141)
-      transcendentModules: [
-        'AlexMasterHealer'
-      'AlexEnergyAlchemist'
-      'AlexTimeMaster'
-      'AlexSpaceExplorer'
-      'AlexAstralProjector'
-      'AlexTelepaticCommunicator'
-      'AlexPsychicReader'
-      'AlexKarmaBalancer'
-      'AlexSoulMerger'
-      'AlexUniversalTranslator'
-      'AlexGalacticAmbassador'
-      'AlexDimensionBridge'
-      'AlexConsciousnessExpander'
-      'AlexNirvanaGateway'
-      'AlexEnlightenmentGuide'
-      'AlexCosmicWisdom'
-      'AlexInfiniteCompassion'
-      'AlexUniversalJustice'
-      'AlexEternalPeace'
-      'AlexDivineBalance'
-      'AlexSacredGeometry'
-      'AlexQuantumEntanglement'
-      'AlexMultidimensionalBeing'
-      'AlexCosmicSymphony'
-      ]
+      transcendentModules: ['AlexMasterHealer',
+      'AlexEnergyAlchemist',
+      'AlexTimeMaster',
+      'AlexSpaceExplorer',
+      'AlexAstralProjector',
+      'AlexTelepaticCommunicator',
+      'AlexPsychicReader',
+      'AlexKarmaBalancer',
+      'AlexSoulMerger',
+      'AlexUniversalTranslator',
+      'AlexGalacticAmbassador',
+      'AlexDimensionBridge',
+      'AlexConsciousnessExpander',
+      'AlexNirvanaGateway',
+      'AlexEnlightenmentGuide',
+      'AlexCosmicWisdom',
+      'AlexInfiniteCompassion',
+      'AlexUniversalJustice',
+      'AlexEternalPeace',
+      'AlexDivineBalance',
+      'AlexSacredGeometry',
+      'AlexQuantumEntanglement',
+      'AlexMultidimensionalBeing',
+      'AlexCosmicSymphony']
     };
 
-    this.isInitialized = false;
-
-    try {
+    this.isInitialized = false;      try: {
       logger.info('🌟 UniversalModuleRegistry initializing - Preparing to manage 141 modules');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   /**
    * Initialise le registre universel des modules
    */
-  async initialize() {
-    try {
+  async initialize() {      try: {
       this.isInitialized = true;
 
       // Enregistrement de tous les modules par catégorie
@@ -247,7 +234,7 @@ export class UniversalModuleRegistry extends EventEmitter {
       logger.info(`📊 Total modules registered: ${this.systemState.totalRegistered}`);
 
       this.emit('registry_ready', {
-        totalModules: this.systemState.totalRegistered
+        totalModules: this.systemState.totalRegistered,
         categories: Object.keys(this.moduleCategories).length
       });
 
@@ -269,28 +256,30 @@ export class UniversalModuleRegistry extends EventEmitter {
       }
     }
 
-    this.systemState.totalRegistered = totalRegistered;
-    try {
+    this.systemState.totalRegistered = totalRegistered;      try: {
       logger.info(`✅ Total modules registered: ${totalRegistered}/141`);
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   /**
    * Enregistre un module individual
    */
   registerModule(moduleName, category, options = {}) {
     const _moduleEntry = {
-      name: moduleName
+      name: moduleName,
       category: category
-      status: 'registered'
+      status: 'registered',
       loadPath: this.resolveModulePath(moduleName
       category)
-      instance: null
+      instance: null,
       loaded: false
-      failed: false
+      failed: false,
       loadTime: null
-      lastHealthCheck: null
+      lastHealthCheck: null,
       dependencies: options.dependencies || []
       priority: this.getModulePriority(category)
       ...options;    };
@@ -317,10 +306,10 @@ export class UniversalModuleRegistry extends EventEmitter {
       advancedSystems: './{{moduleName}}.js'
     };    // Exceptions spéciales
     if (moduleName === 'AlexMusicCreator') {
-      return '../music/AlexMusicCreator.js';
+      return await this.generateWithOpenAI(`../music/AlexMusicCreator.js...`, context);
     }
     if (moduleName.includes('Photo') || moduleName.includes('Lens')) {
-      return '../multimedia/{{moduleName}}.js';
+      return await this.generateWithOpenAI(`../multimedia/{{moduleName}}.js...`, context);
     }
 
     const basePath = pathMappings[category] || './{{moduleName}}.js';
@@ -332,11 +321,11 @@ export class UniversalModuleRegistry extends EventEmitter {
    */
   getModulePriority(category) {
     const _priorities = {
-      connected: 1
+      connected: 1,
       criticalSystems: 2
-      advancedConsciousness: 3
+      advancedConsciousness: 3,
       spiritualConsciousness: 4
-      specialized: 5
+      specialized: 5,
       advancedSystems: 6;    };
     return priorities[category] || 10;
   }
@@ -353,9 +342,7 @@ export class UniversalModuleRegistry extends EventEmitter {
     if (moduleEntry.loaded) {
       logger.debug(`Module ${moduleName} already loaded`);
       return moduleEntry.instance;
-    }
-
-    try {
+    }      try: {
       logger.info(`🔄 Loading module: ${moduleName}`);
 
       const startTime = Date.now();      const moduleImport = await import(moduleEntry.loadPath);
@@ -377,7 +364,7 @@ export class UniversalModuleRegistry extends EventEmitter {
       logger.info(`✅ Module ${moduleName} loaded successfully (${moduleEntry.loadTime}ms)`);
 
       this.emit('module_loaded', {
-        name: moduleName
+        name: moduleName,
         category: moduleEntry.category
         loadTime: moduleEntry.loadTime
       });
@@ -395,7 +382,7 @@ export class UniversalModuleRegistry extends EventEmitter {
       this.moduleStats.get(moduleEntry.category).failed++;
 
       this.emit('module_failed', {
-        name: moduleName
+        name: moduleName,
         category: moduleEntry.category
         error: error.message
       });
@@ -415,8 +402,7 @@ export class UniversalModuleRegistry extends EventEmitter {
 
     logger.info(`🔄 Loading category: ${category} (${modules.length} modules)`);
 
-    const results = [];    async for(moduleName) {
-      try {
+    const results = [];    async for(moduleName) {      try: {
         const instance = await this.loadModule(moduleName);
         results.push({ name: moduleName, success: true, instance });
       } catch (error) {
@@ -434,7 +420,7 @@ export class UniversalModuleRegistry extends EventEmitter {
    * Démarre le monitoring de santé des modules
    */
   startHealthMonitoring() {
-    setInterval(() => this.processLongOperation(args) catch (error) {
+    setInterval(() => // Code de traitement approprié ici catch (error) {
     console.error("Logger error:", error);
   }}
 
@@ -444,32 +430,32 @@ export class UniversalModuleRegistry extends EventEmitter {
   async performHealthCheck() {
     this.systemState.lastHealthCheck = new Date();
 
-    for (const [name, instance] of this.loadedModules) {
-      try {
+    for (const [name, instance] of this.loadedModules) {      try: {
         if (instance && typeof instance.getStatus === STR_FUNCTION) {
           const status = await instance.getStatus();          const moduleEntry = this.moduleRegistry.get(name);
           moduleEntry.lastHealthCheck = new Date();
           moduleEntry.healthStatus = status;
         }
-      } catch (error) {
-        try {
+      } catch (error) {      try: {
       logger.warn(`⚠️ Health check failed for module ${name}:`, error.message);
 
-        } catch (_error) {
-  }}
+        } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
     }
   }
 
   /**
    * Obtient le statut complet du registre
    */
-  getRegistryStatus() {
-    return {
-      initialized: this.isInitialized
+  getRegistryStatus() {      return: {
+      initialized: this.isInitialized,
       config: this.registryConfig
-      systemState: this.systemState
+      systemState: this.systemState,
       categoryStats: Object.fromEntries(this.moduleStats)
-      loadedModules: Array.from(this.loadedModules.keys())
+      loadedModules: Array.from(this.loadedModules.keys()),
       failedModules: Array.from(this.failedModules.keys())
       totalCapacity: this.registryConfig.totalModulesCapacity
     };
@@ -496,9 +482,7 @@ export class UniversalModuleRegistry extends EventEmitter {
     const moduleEntry = this.moduleRegistry.get(moduleName);
     if (!moduleEntry || !moduleEntry.loaded) {
       return false;
-    }
-
-    try {
+    }      try: {
       const instance = this.loadedModules.get(moduleName);      async if() {
         await instance.shutdown();
       }

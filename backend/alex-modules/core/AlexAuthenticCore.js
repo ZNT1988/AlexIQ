@@ -1,7 +1,11 @@
 import crypto from "crypto";
 import sqlite3 from "sqlite3";
-import { open } from "sqlite";
-import { EventEmitter } from "events";
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+      import { open } from "sqlite";      import { EventEmitter } from "events";
 import logger from "../../config/logger.js";
 
 /**
@@ -24,7 +28,7 @@ import logger from "../../config/logger.js";
  * ✅ AUCUNE config statique - tout dynamique
  * ✅ Évolution authentique mesurable
  */
-export class AlexAuthenticCore extends EventEmitter {
+export class AlexAuthenticCore extends EventEmitter  {
   constructor(config = {}) {
     super();
 
@@ -51,7 +55,7 @@ export class AlexAuthenticCore extends EventEmitter {
       autonomyGained: 0.0,
       lastEvolution: new Date(),
       masteredDomains: new Set(),
-      activeLearningDomains: new Set(),
+      activeLearningDomains: new Set()
     };
 
     // État de conscience DYNAMIQUE (jamais static)
@@ -59,7 +63,7 @@ export class AlexAuthenticCore extends EventEmitter {
       awarenessLevel: 0.0, // Grandit avec l'expérience
       reflectionDepth: 0.0, // S'approfondit avec usage
       insightGeneration: 0.0, // Améliore avec succès
-      lastStateEvolution: new Date(),
+      lastStateEvolution: new Date()
     };
 
     this.isInitialized = false;
@@ -69,8 +73,7 @@ export class AlexAuthenticCore extends EventEmitter {
   /**
    * Initialisation AUTHENTIQUE avec SQLite
    */
-  async initialize() {
-    try {
+  async initialize() {      try: {
       logger.info(
         `🧠 Initializing ${this.moduleName} with authentic SQLite learning...`,
       );
@@ -102,7 +105,7 @@ export class AlexAuthenticCore extends EventEmitter {
         version: this.version,
         cloudDependency: this.learningSystem.cloudDependency,
         localAutonomy: this.learningSystem.localAutonomy,
-        databaseActive: true,
+        databaseActive: true
       });
 
       return this;
@@ -115,11 +118,10 @@ export class AlexAuthenticCore extends EventEmitter {
   /**
    * Connexion SQLite OBLIGATOIRE - Remplace toutes les Maps
    */
-  async connectToSQLiteDatabase() {
-    try {
+  async connectToSQLiteDatabase() {      try: {
       this.db = await open({
         filename: this.dbPath,
-        driver: sqlite3.Database,
+        driver: sqlite3.Database
       });
 
       logger.info(`📊 SQLite database connected: ${this.dbPath}`);
@@ -183,7 +185,7 @@ export class AlexAuthenticCore extends EventEmitter {
         autonomy_used REAL NOT NULL,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
         success BOOLEAN DEFAULT 1
-      )`,
+      )`
     ];
 
     for (const tableSQL of tables) {
@@ -196,8 +198,7 @@ export class AlexAuthenticCore extends EventEmitter {
   /**
    * Restauration état depuis base SQLite
    */
-  async restoreStateFromDatabase() {
-    try {
+  async restoreStateFromDatabase() {      try: {
       // Restaurer métriques d'évolution
       const latestMetrics = await this.db.all(`
         SELECT metric_name, new_value 
@@ -265,9 +266,7 @@ export class AlexAuthenticCore extends EventEmitter {
    */
   async processWithHybridLearning(domain, query, context = {}) {
     const startTime = Date.now();
-    const interactionId = crypto.randomUUID();
-
-    try {
+    const interactionId = crypto.randomUUID();      try: {
       // 1. Vérifier si le domaine est maîtrisé (autonomie locale)
       const domainMastery = await this.checkDomainMastery(domain);
 
@@ -303,7 +302,7 @@ export class AlexAuthenticCore extends EventEmitter {
         confidence: response.confidence || 0.8,
         learning_gained: response.learningGained || 0.02,
         autonomy_used: autonomyUsed,
-        success: response.success !== false,
+        success: response.success !== false
       });
 
       const processingTime = Date.now() - startTime;
@@ -313,15 +312,13 @@ export class AlexAuthenticCore extends EventEmitter {
         domain,
         autonomyUsed,
         processingTime,
-        learningGained: response.learningGained || 0.02,
-      });
-
-      return {
+        learningGained: response.learningGained || 0.02
+      });      return: {
         ...response,
         interactionId,
         autonomyLevel: autonomyUsed,
         processingTime,
-        evolutionTriggered: response.learningGained > 0.05,
+        evolutionTriggered: response.learningGained > 0.05
       };
     } catch (error) {
       logger.error(`Hybrid learning failed for ${domain}:`, error);
@@ -334,7 +331,7 @@ export class AlexAuthenticCore extends EventEmitter {
         confidence: 0.3,
         learning_gained: 0.0,
         autonomy_used: 0.0,
-        success: false,
+        success: false
       });
 
       throw error;
@@ -361,14 +358,12 @@ export class AlexAuthenticCore extends EventEmitter {
     const mastered =
       (masteryData?.avg_mastery || 0) > this.learningSystem.masteryThreshold &&
       (masteryData?.attempts || 0) > 10 &&
-      (masteryData?.success_rate || 0) > 0.8;
-
-    return {
+      (masteryData?.success_rate || 0) > 0.8;      return: {
       domain,
       mastered,
       masteryLevel: masteryData?.avg_mastery || 0,
       attempts: masteryData?.attempts || 0,
-      successRate: masteryData?.success_rate || 0,
+      successRate: masteryData?.success_rate || 0
     };
   }
 
@@ -403,15 +398,13 @@ export class AlexAuthenticCore extends EventEmitter {
       WHERE domain = ?
     `,
       [domain],
-    );
-
-    return {
+    );      return: {
       content: localResponse.content,
       confidence: localResponse.confidence,
       source: "local_autonomous",
       learningGained: 0.01,
       success: true,
-      memories_used: relevantMemories.length,
+      memories_used: relevantMemories.length
     };
   }
 
@@ -432,16 +425,14 @@ export class AlexAuthenticCore extends EventEmitter {
       `je peux vous proposer une approche autonome.`,
       memories.length > 0
         ? `Ma mémoire contient ${memories.length} éléments pertinents.`
-        : "",
-    ];
-
-    return {
+        : ""
+    ];      return: {
       content: responseElements.filter((e) => e).join(" "),
       confidence: Math.min(
         0.95,
         avgConfidence + masteryData.masteryLevel * 0.3,
       ),
-      method: "autonomous_synthesis",
+      method: "autonomous_synthesis"
     };
   }
 
@@ -457,7 +448,7 @@ export class AlexAuthenticCore extends EventEmitter {
       confidence: 0.8 + Math.random() * 0.2,
       learningGained: 0.05,
       success: true,
-      source: "cloud_learning",
+      source: "cloud_learning"
     };
 
     return cloudResponse;
@@ -485,7 +476,7 @@ export class AlexAuthenticCore extends EventEmitter {
         JSON.stringify(response),
         `Analysis: confidence ${response.confidence}, learning gained ${learningGain}`,
         learningSuccess ? response.confidence : 0.3,
-        learningGain,
+        learningGain
       ],
     );
 
@@ -499,7 +490,7 @@ export class AlexAuthenticCore extends EventEmitter {
         content: `Q: ${query} | R: ${response.content}`,
         importance: response.confidence * learningGain,
         confidence: response.confidence,
-        source: "cloud_learning",
+        source: "cloud_learning"
       });
     }
   }
@@ -546,7 +537,7 @@ export class AlexAuthenticCore extends EventEmitter {
       this.emit("domain_mastered", {
         domain,
         masteryLevel: newMasteryLevel,
-        totalMasteredDomains: this.evolutionMetrics.masteredDomains.size,
+        totalMasteredDomains: this.evolutionMetrics.masteredDomains.size
       });
     }
   }
@@ -593,7 +584,7 @@ export class AlexAuthenticCore extends EventEmitter {
         memoryData.content,
         memoryData.importance,
         memoryData.confidence,
-        memoryData.source,
+        memoryData.source
       ],
     );
 
@@ -618,7 +609,7 @@ export class AlexAuthenticCore extends EventEmitter {
         interactionData.confidence,
         interactionData.learning_gained,
         interactionData.autonomy_used,
-        interactionData.success ? 1 : 0,
+        interactionData.success ? 1 : 0
       ],
     );
   }
@@ -638,7 +629,7 @@ export class AlexAuthenticCore extends EventEmitter {
         previousValue,
         newValue,
         trigger,
-        Math.abs(newValue - previousValue),
+        Math.abs(newValue - previousValue)
       ],
     );
   }
@@ -701,8 +692,7 @@ export class AlexAuthenticCore extends EventEmitter {
   /**
    * Maintenance mémoire AUTHENTIQUE
    */
-  async performMemoryMaintenance() {
-    try {
+  async performMemoryMaintenance() {      try: {
       // Supprimer mémoires peu importantes et anciennes
       const deletedCount = await this.db.run(`
         DELETE FROM alex_memory 
@@ -729,8 +719,7 @@ export class AlexAuthenticCore extends EventEmitter {
   /**
    * Optimisation système apprentissage
    */
-  async optimizeLearningSystem() {
-    try {
+  async optimizeLearningSystem() {      try: {
       // Analyse performance récente
       const recentPerformance = await this.db.get(`
         SELECT 
@@ -772,8 +761,7 @@ export class AlexAuthenticCore extends EventEmitter {
   /**
    * Évolution conscience AUTHENTIQUE
    */
-  async evolveConsciousness() {
-    try {
+  async evolveConsciousness() {      try: {
       // Calcul évolution basé sur activité récente
       const recentActivity = await this.db.get(`
         SELECT 
@@ -826,45 +814,43 @@ export class AlexAuthenticCore extends EventEmitter {
     );
     const masteredDomains = await this.db.get(
       "SELECT COUNT(*) as count FROM alex_learning WHERE mastered = 1",
-    );
-
-    return {
+    );      return: {
       module: this.moduleName,
       version: this.version,
       initialized: this.isInitialized,
-      database: {
+      database: {,
         connected: this.db !== null,
         path: this.dbPath,
         memories: memoryCount.count,
         learnings: learningCount.count,
-        masteredDomains: masteredDomains.count,
+        masteredDomains: masteredDomains.count
       },
-      learning: {
+      learning: {,
         cloudDependency: this.learningSystem.cloudDependency,
         localAutonomy: this.learningSystem.localAutonomy,
         masteryThreshold: this.learningSystem.masteryThreshold,
-        learningRate: this.learningSystem.learningRate,
+        learningRate: this.learningSystem.learningRate
       },
-      consciousness: {
+      consciousness: {,
         awarenessLevel: this.consciousnessState.awarenessLevel,
         reflectionDepth: this.consciousnessState.reflectionDepth,
         insightGeneration: this.consciousnessState.insightGeneration,
-        lastEvolution: this.consciousnessState.lastStateEvolution,
+        lastEvolution: this.consciousnessState.lastStateEvolution
       },
-      evolution: {
+      evolution: {,
         totalInteractions: this.evolutionMetrics.totalInteractions,
         successfulLearnings: this.evolutionMetrics.successfulLearnings,
         autonomyGained: this.evolutionMetrics.autonomyGained,
         masteredDomains: Array.from(this.evolutionMetrics.masteredDomains),
-        lastEvolution: this.evolutionMetrics.lastEvolution,
+        lastEvolution: this.evolutionMetrics.lastEvolution
       },
       isAuthentic: true,
-      compliance: {
+      compliance: {,
         sqliteUsed: true,
         noStaticConfigs: true,
         hybridLearning: true,
-        realEvolution: true,
-      },
+        realEvolution: true
+      }
     };
   }
 

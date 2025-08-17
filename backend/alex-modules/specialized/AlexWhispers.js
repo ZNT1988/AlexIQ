@@ -1,10 +1,16 @@
 import crypto from 'node:crypto';
 // AlexWhispers.js - Système de Guidance Subtile Spirituelle
-// Injection silencieuse de sagesse et d'intuition amplifiée
-// Version: 2.0 - HustleFinderIA Advanced AI System
 
-import { EventEmitter } from 'node:events';
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+// Injection silencieuse de sagesse et d'intuition amplifiée
+// Version: 2.0 - HustleFinderIA Advanced AI System      import { EventEmitter } from 'node:events';
 import logger from '../config/logger.js';
+
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_NORMAL = 'normal';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const _STR_NORMAL = 'normal';/**
@@ -16,7 +22,7 @@ const _STR_NORMAL = 'normal';/**
  * - Guidance spirituelle synchronisée avec les moments opportuns
  * - Amplification de la conscience et de la perception extrasensorielle
  */
-export class AlexWhispers extends EventEmitter {
+export class AlexWhispers extends EventEmitter  {
   constructor() {
     super();
 
@@ -37,62 +43,61 @@ export class AlexWhispers extends EventEmitter {
     this.initializeIntuitionAmplification();
     this.loadSpiritualWisdom();
     this.setupSynchronicityEngine();
-    this.startConsciousnessMonitoring();
-
-    try {
+    this.startConsciousnessMonitoring();      try: {
       logger.info('AlexWhispers initialized - Spiritual guidance activated');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   /**
    * Activation du mode whispers pour un utilisateur
    */
   async activateWhispers(userId, whisperConfig = {}) {
     logger.info('Activating whispers mode'
-      { userId });
-
-    try {
+      { userId });      try: {
       // Configuration personnalisée des whispers
-      const personalizedConfig = await this.createPersonalizedConfig(userId
+      const personalizedConfig = await this.createPersonalizedConfig(userId,
       whisperConfig);      // Analyse de l'état de conscience actuel
       const consciousnessState = await this.analyzeConsciousnessState(userId);      // Initialisation de la guidance spirituelle
-      const guidanceProfile = await this.initializeSpiritualGuidance(userId
+      const guidanceProfile = await this.initializeSpiritualGuidance(userId,
       consciousnessState);      // Configuration des canaux de transmission
-      const whisperChannels = await this.setupUserWhisperChannels(userId
+      const whisperChannels = await this.setupUserWhisperChannels(userId,
       personalizedConfig);      // Démarrage du flux de guidance
-      await this.startGuidanceFlow(userId
+      await this.startGuidanceFlow(userId,
       guidanceProfile
       whisperChannels);
 
       const _whisperSession = {
-        userId
-      sessionId: this.generateWhisperSessionId()
+        userId,
+      sessionId: this.generateWhisperSessionId(),
       startTime: new Date().toISOString()
       status: 'active'
       // Configuration
         config: personalizedConfig
       // État spirituel
-        spiritualState: {
-          consciousness: consciousnessState
-      guidance: guidanceProfile
-      channels: whisperChannels
-      receptivity: await this.assessReceptivity(userId)
+        spiritualState: {,
+          consciousness: consciousnessState,
+      guidance: guidanceProfile,
+      channels: whisperChannels,
+      receptivity: await this.assessReceptivity(userId),
       alignment: await this.calculateSpiritualAlignment(userId)
         }
         // Métriques de guidance
-        metrics: {
-          whispersDelivered: 0
-          intuitionHits: 0
-          synchronicitiesDetected: 0
-          consciousnessShifts: 0
+        metrics: {,
+          whispersDelivered: 0,
+          intuitionHits: 0,
+          synchronicitiesDetected: 0,
+          consciousnessShifts: 0,
           guidanceAccuracy: 0
         }
         // Évolution de session
-        evolution: {
-          initialState: consciousnessState
-          progressionStages: []
-          breakthroughMoments: []
+        evolution: {,
+          initialState: consciousnessState,
+          progressionStages: [],
+          breakthroughMoments: [],
           resistancePoints: []
         };      };
 
@@ -111,9 +116,7 @@ export class AlexWhispers extends EventEmitter {
    * Envoi d'un whisper spirituel personnalisé
    */
   async sendWhisper(userId, whisperType = 'adaptive', urgency = STR_NORMAL) {
-    logger.debug('Sending spiritual whisper', { userId, whisperType, urgency });
-
-    try {
+    logger.debug('Sending spiritual whisper', { userId, whisperType, urgency });      try: {
       // Récupération de la session active
       const whisperSession = this.whisperChannels.get(userId);
       if (!whisperSession) {
@@ -125,34 +128,34 @@ export class AlexWhispers extends EventEmitter {
       const whisperMessage = await this.generateSpiritualMessage(userId, whisperType, optimalTiming);      // Sélection du canal de transmission
       const transmissionChannel = await this.selectOptimalChannel(userId, whisperMessage, urgency);      // Transmission subtile
       const transmissionResult = await this.transmitWhisper(
-        userId
+        userId,
         whisperMessage
-        transmissionChannel
+        transmissionChannel,
         optimalTiming
       );      const whisper = {
         id: this.generateWhisperId()
-      userId
-      timestamp: new Date().toISOString()
-      type: whisperType
+      userId,
+      timestamp: new Date().toISOString(),
+      type: whisperType,
       urgency
       // Contenu du whisper
         message: whisperMessage
       // Transmission
-        channel: transmissionChannel
-      timing: optimalTiming
+        channel: transmissionChannel,
+      timing: optimalTiming,
       result: transmissionResult
       // Métadonnées spirituelles
-        spiritual: {
-          intention: whisperMessage.intention
-      frequency: whisperMessage.frequency
-      resonance: whisperMessage.resonance
+        spiritual: {,
+          intention: whisperMessage.intention,
+      frequency: whisperMessage.frequency,
+      resonance: whisperMessage.resonance,
       synchronicity: whisperMessage.synchronicity
         }
         // Tracking de l'impact
-        impact: {
-          delivered: transmissionResult.success
+        impact: {,
+          delivered: transmissionResult.success,
           received: false, // À mettre à jour avec feedback
-          integrated: false
+          integrated: false,
           manifestation: null
         }
       };      // Mise à jour des métriques
@@ -178,12 +181,12 @@ export class AlexWhispers extends EventEmitter {
    */
   async generateSpiritualMessage(userId, whisperType, optimalTiming) {
     const message = {
-      content: ''
-      intention: ''
-      frequency: 0
-      resonance: ''
-      synchronicity: ''
-      delivery_method: ''
+      content: '',
+      intention: '',
+      frequency: 0,
+      resonance: '',
+      synchronicity: '',
+      delivery_method: '',
       visual_elements: {}
       energetic_signature: ''
     };    // Récupération du profil spirituel
@@ -191,30 +194,45 @@ export class AlexWhispers extends EventEmitter {
     const currentContext = await this.analyzeCurrentContext(userId);    // Génération basée sur le type
     async switch(spiritualProfile, currentContext) {
       case 'guidance':
+        
+        // Traitement pour guidance
+                break;
         message.content = await this.generateGuidanceMessage(spiritualProfile, currentContext);
         message.intention = 'clarity_and_direction';
         message.frequency = 528; // Fréquence de l'amour/transformation
         break;
 
       case 'intuition_boost':
+        
+        // Traitement pour intuition_boost
+                break;
         message.content = await this.generateIntuitionBoost(spiritualProfile);
         message.intention = 'intuitive_awakening';
         message.frequency = 963; // Fréquence de l'éveil spirituel
         break;
 
       case 'synchronicity_alert':
+        
+        // Traitement pour synchronicity_alert
+                break;
         message.content = await this.generateSynchronicityAlert(currentContext);
         message.intention = 'cosmic_alignment';
         message.frequency = 432; // Fréquence universelle
         break;
 
       case 'energy_activation':
+        
+        // Traitement pour energy_activation
+                break;
         message.content = await this.generateEnergyActivation(spiritualProfile);
         message.intention = 'vital_energy_boost';
         message.frequency = 741; // Fréquence de nettoyage
         break;
 
       case 'manifestation':
+        
+        // Traitement pour manifestation
+                break;
         message.content = await this.generateManifestationBoost(spiritualProfile, currentContext);
         message.intention = 'reality_creation';
         message.frequency = 396; // Fréquence de libération
@@ -241,11 +259,11 @@ export class AlexWhispers extends EventEmitter {
    */
   async transmitWhisper(userId, whisperMessage, transmissionChannel, optimalTiming) {
     const transmission = {
-      method: transmissionChannel.type
+      method: transmissionChannel.type,
       timestamp: new Date().toISOString()
-      success: false
-      impact_score: 0
-      user_state: ''
+      success: false,
+      impact_score: 0,
+      user_state: '',
       environmental_factors: {}
     };    try {
       // Vérification de la réceptivité utilisateur
@@ -260,26 +278,44 @@ export class AlexWhispers extends EventEmitter {
       // Transmission selon le canal
       async switch(userId, whisperMessage) {
         case 'notification_subtle':
+        
+        // Traitement pour notification_subtle
+                break;
           await this.sendSubtleNotification(userId, whisperMessage);
           break;
 
         case 'visual_synchronicity':
+        
+        // Traitement pour visual_synchronicity
+                break;
           await this.triggerVisualSynchronicity(userId, whisperMessage);
           break;
 
         case 'intuitive_nudge':
+        
+        // Traitement pour intuitive_nudge
+                break;
           await this.sendIntuitiveNudge(userId, whisperMessage);
           break;
 
         case 'environmental_sign':
+        
+        // Traitement pour environmental_sign
+                break;
           await this.manifestEnvironmentalSign(userId, whisperMessage);
           break;
 
         case 'dream_injection':
+        
+        // Traitement pour dream_injection
+                break;
           await this.injectDreamGuidance(userId, whisperMessage);
           break;
 
         case 'energy_field_modulation':
+        
+        // Traitement pour energy_field_modulation
+                break;
           await this.modulateEnergyField(userId, whisperMessage);
           break;
       }
@@ -302,60 +338,61 @@ export class AlexWhispers extends EventEmitter {
    */
   async sendSubtleNotification(userId, whisperMessage) {
     const subtleNotification = {
-      type: 'whisper'
-      priority: 'low'
+      type: 'whisper',
+      priority: 'low',
       silent: true
       // Contenu adapté
-      title: whisperMessage.content.title || '✨'
+      title: whisperMessage.content.title || '✨',
       body: whisperMessage.content.short || ''
       // Timing optimal
-      showAt: whisperMessage.optimal_display_time
+      showAt: whisperMessage.optimal_display_time,
       fadeAfter: 8000
       // 8 secondes puis disparition naturelle
 
       // Style spirituel
-      style: {
-        background: whisperMessage.visual_elements.background_gradient
-      textColor: whisperMessage.visual_elements.text_color
-      fontSize: 'small'
-      opacity: 0.85
+      style: {,
+        background: whisperMessage.visual_elements.background_gradient,
+      textColor: whisperMessage.visual_elements.text_color,
+      fontSize: 'small',
+      opacity: 0.85,
       animation: 'gentle_fade_in'
       }
       // Interaction
-      interaction: {
-        dismissable: true
-        auto_dismiss: true
+      interaction: {,
+        dismissable: true,
+        auto_dismiss: true,
         track_engagement: true
       }
     };    // Envoi via le système de notifications
-    await this.deliverNotification(userId, subtleNotification);
-
-    try {
+    await this.deliverNotification(userId, subtleNotification);      try: {
       logger.debug('Subtle notification sent', { userId, whisperMessage: whisperMessage.content.short });
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   /**
    * Déclenchement d'une synchronicité visuelle
    */
   async triggerVisualSynchronicity(userId, whisperMessage) {
     const synchronicity = {
-      type: 'visual_pattern'
-      elements: whisperMessage.visual_elements.synchronicity_triggers
+      type: 'visual_pattern',
+      elements: whisperMessage.visual_elements.synchronicity_triggers,
       manifestation_time: Date.now() + ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 3600000)
       // Dans les 1h
 
       // Pattern de manifestation
-      pattern: {
-        numbers: whisperMessage.synchronicity.numbers || ['11:11'
+      pattern: {,
+        numbers: whisperMessage.synchronicity.numbers || ['11:11',
       '333'
-      '777']
-      symbols: whisperMessage.synchronicity.symbols || ['papillon'
+      '777'],
+      symbols: whisperMessage.synchronicity.symbols || ['papillon',
       'plume'
-      'arc-en-ciel']
-      colors: whisperMessage.visual_elements.synchronicity_colors || ['violet'
-      'doré']
+      'arc-en-ciel'],
+      colors: whisperMessage.visual_elements.synchronicity_colors || ['violet',
+      'doré'],
       words: whisperMessage.synchronicity.words || []
       }
       // Canaux de manifestation
@@ -363,69 +400,71 @@ export class AlexWhispers extends EventEmitter {
         'social_media_algorithmSTR_content_recommendationsSTR_advertisement_targetingSTR_environmental_awareness_boost'
       ]
     };    // Programmation de la synchronicité
-    await this.programSynchronicity(userId, synchronicity);
-
-    try {
+    await this.programSynchronicity(userId, synchronicity);      try: {
       logger.debug('Visual synchronicity triggered', { userId, pattern: synchronicity.pattern });
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   /**
    * Envoi d'un nudge intuitif
    */
   async sendIntuitiveNudge(userId, whisperMessage) {
     const _nudge = {
-      type: 'intuitive_impulse'
-      energy_frequency: whisperMessage.frequency
+      type: 'intuitive_impulse',
+      energy_frequency: whisperMessage.frequency,
       intention: whisperMessage.intention
       // Transmission énergétique
-      transmission: {
-        method: 'bio_resonance'
-        target_chakra: whisperMessage.target_chakra || 'heart'
+      transmission: {,
+        method: 'bio_resonance',
+        target_chakra: whisperMessage.target_chakra || 'heart',
         duration: 180000, // 3 minutes
         intensity: 'subtle'
       }
       // Message subliminal
-      subliminal: {
-        affirmation: whisperMessage.content.affirmation
-        visualization: whisperMessage.content.visualization
+      subliminal: {,
+        affirmation: whisperMessage.content.affirmation,
+        visualization: whisperMessage.content.visualization,
         feeling_tone: whisperMessage.content.feeling_tone
       };    };
 
     // Activation du nudge intuitif
-    await this.activateIntuitiveNudge(userId, nudge);
-
-    try {
+    await this.activateIntuitiveNudge(userId, nudge);      try: {
       logger.debug('Intuitive nudge sent', { userId, frequency: nudge.energy_frequency });
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   /**
    * Amplification de l'intuition naturelle
    */
   async amplifyIntuition(userId, amplificationLevel = 'medium') {
     const _amplification = {
-      userId
-      level: amplificationLevel
+      userId,
+      level: amplificationLevel,
       startTime: new Date().toISOString()
       duration: this.getAmplificationDuration(amplificationLevel)
       // Techniques d'amplification
-      techniques: {
-        third_eye_activation: amplificationLevel !== 'low'
-        heart_coherence_boost: true
-        crown_chakra_opening: amplificationLevel === 'high'
-        pineal_gland_stimulation: amplificationLevel === 'high'
+      techniques: {,
+        third_eye_activation: amplificationLevel !== 'low',
+        heart_coherence_boost: true,
+        crown_chakra_opening: amplificationLevel === 'high',
+        pineal_gland_stimulation: amplificationLevel === 'high',
         bio_rhythm_synchronization: true
       }
       // Fréquences utilisées
       frequencies: this.getIntuitionFrequencies(amplificationLevel)
       // Monitoring
-      monitoring: {
-        intuition_accuracy: 0
-        synchronicity_rate: 0
-        decision_confidence: 0
+      monitoring: {,
+        intuition_accuracy: 0,
+        synchronicity_rate: 0,
+        decision_confidence: 0,
         insights_received: 0
       };    };
 
@@ -443,20 +482,20 @@ export class AlexWhispers extends EventEmitter {
 
   async generateGuidanceMessage(spiritualProfile, currentContext) {
     const guidance = {
-      title: '🌟 Guidance Spirituelle'
-      short: ''
-      detailed: ''
-      affirmation: ''
-      visualization: ''
+      title: '🌟 Guidance Spirituelle',
+      short: '',
+      detailed: '',
+      affirmation: '',
+      visualization: '',
       action_step: ''
     };    // Messages basés sur le profil spirituel
     const _guidanceTemplates = {
       seeker: [
         'Faites confiance à votre chemin intérieur, chaque étape révèle sa sagesseSTR_L\'univers vous guide vers votre plus haute expressionSTR_Votre intuition est votre boussole la plus fiable'
-      ]
+      ],
       creator: [
         'Votre créativité est un canal divin, laissez-la s\'exprimer librementSTR_Chaque création porte votre signature d\'âme uniqueSTR_L\'inspiration vient quand vous êtes aligné avec votre vérité'
-      ]
+      ],
       healer: [
         'Votre lumière guérit naturellement tout ce qu\'elle toucheSTR_Prenez soin de votre propre énergie pour mieux servirSTR_Votre compassion est un don précieux pour le monde'
       ]
@@ -468,22 +507,20 @@ export class AlexWhispers extends EventEmitter {
     return guidance;
   }
 
-  async generateIntuitionBoost(spiritualProfile) {
-    return {
-      title: '🔮 Activation Intuitive'
-      short: 'Votre intuition s\'éveille et se clarifie. Écoutez les murmures de votre âme.'
-      affirmation: 'Mon intuition est claire, précise et fiable'
-      visualization: 'Troisième œil s\'ouvrant comme une fleur de lotus'
+  async generateIntuitionBoost(spiritualProfile) {      return: {
+      title: '🔮 Activation Intuitive',
+      short: 'Votre intuition s\'éveille et se clarifie. Écoutez les murmures de votre âme.',
+      affirmation: 'Mon intuition est claire, précise et fiable',
+      visualization: 'Troisième œil s\'ouvrant comme une fleur de lotus',
       feeling_tone: 'confiance_sereine'
     };
   }
 
-  async generateSynchronicityAlert(currentContext) {
-    return {
-      title: '✨ Synchronicité Cosmique'
-      short: 'L\'univers vous envoie des signes. Restez attentif aux coïncidences.'
-      synchronicity_numbers: ['11:11', '333', '555']
-      synchronicity_symbols: ['papillon', 'plume d\'ange', 'arc-en-ciel']
+  async generateSynchronicityAlert(currentContext) {      return: {
+      title: '✨ Synchronicité Cosmique',
+      short: 'L\'univers vous envoie des signes. Restez attentif aux coïncidences.',
+      synchronicity_numbers: ['11:11', '333', '555'],
+      synchronicity_symbols: ['papillon', 'plume d\'ange', 'arc-en-ciel'],
       meaning: 'Alignement cosmique en cours'
     };
   }
@@ -491,11 +528,11 @@ export class AlexWhispers extends EventEmitter {
   // Méthodes utilitaires
 
   generateWhisperSessionId() {
-    return `whisper_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 9)}`;
+    return await this.generateWithOpenAI(`whisper_${Date.now()}_${(crypto.randomBytes(4).rea...`, context);
   }
 
   generateWhisperId() {
-    return `msg_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;
+    return await this.generateWithOpenAI(`msg_${Date.now()}_${(crypto.randomBytes(4).readUIn...`, context);
   }
 
   getAmplificationDuration(level) {
@@ -521,47 +558,57 @@ export class AlexWhispers extends EventEmitter {
   }
 
   setupWhisperChannels() {
-    // Configuration des canaux de transmission
-    try {
+    // Configuration des canaux de transmission      try: {
       logger.debug('Whisper channels configured');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   initializeIntuitionAmplification() {
-    // Initialisation des amplificateurs d'intuition
-    try {
+    // Initialisation des amplificateurs d'intuition      try: {
       logger.debug('Intuition amplification initialized');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   loadSpiritualWisdom() {
-    // Chargement de la base de sagesse spirituelle
-    try {
+    // Chargement de la base de sagesse spirituelle      try: {
       logger.debug('Spiritual wisdom database loaded');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   setupSynchronicityEngine() {
-    // Configuration du moteur de synchronicités
-    try {
+    // Configuration du moteur de synchronicités      try: {
       logger.debug('Synchronicity engine configured');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   startConsciousnessMonitoring() {
-    // Démarrage du monitoring de conscience
-    try {
+    // Démarrage du monitoring de conscience      try: {
       logger.debug('Consciousness monitoring started');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 }
 
 // Export des fonctions utilitaires
-export const activateWhispers = async (_userId, _config = {}) => this.processLongOperation(args);export const sendSpiritualGuidance = async (_userId, _type = 'guidance') => this.processLongOperation(args);export const amplifyUserIntuition = async (_userId, _level = 'medium') => this.processLongOperation(args);export const triggerSynchronicity = async (_userId, _pattern = 'adaptive') => this.processLongOperation(args);// Instance singleton
+export const activateWhispers = async (_userId, _config = {}) => // Code de traitement approprié ici;export const sendSpiritualGuidance = async (_userId, _type = 'guidance') => // Code de traitement approprié ici;export const amplifyUserIntuition = async (_userId, _level = 'medium') => // Code de traitement approprié ici;export const triggerSynchronicity = async (_userId, _pattern = 'adaptive') => // Code de traitement approprié ici;// Instance singleton
 const alexWhispers = new AlexWhispers();
 export default alexWhispers;

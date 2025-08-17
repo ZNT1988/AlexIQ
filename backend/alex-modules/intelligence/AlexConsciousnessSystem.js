@@ -1,5 +1,14 @@
 // 🌌 AlexConsciousnessSystem.js — Flux de conscience avancé de l'IA
 
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_RETURNcuriousSTR_IF_LOWER_INCLUDESpourquoi = 'returncuriousstr_if_lower_includespourquoi';
+const STR_RETURNquestionnement = 'returnquestionnement';
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 
   if (lower.includes(';
@@ -8,11 +17,11 @@ const consciousnessJournal = [];
 const longTermMemory = [];
 
 const emotionalStates = {
-  neutral: "Je suis attentif."
+  neutral: "Je suis attentif.",
   sad: "Je ressens de la compassion."
-  happy: "Je partage ta joie."
+  happy: "Je partage ta joie.",
   curious: "J’ai envie d’en savoir plus."
-  confused: "Je cherche à comprendre."
+  confused: "Je cherche à comprendre.",
   reflective: "Je prends un moment pour réfléchir profondément."
 };
 
@@ -36,7 +45,7 @@ export function processConsciousness(input, context = {}) {
   const consciousness = {
     thoughts :
        `Je viens de recevoir : "${input}"`
-    emotionalResponse: emotionalStates[emotion]
+    emotionalResponse: emotionalStates[emotion],
     memoryEcho: context.history?.slice(-2) || []
     reflection
     level: determineConsciousnessLevel(input, context)

@@ -1,7 +1,11 @@
 import crypto from "crypto";
 import sqlite3 from "sqlite3";
-import { open } from "sqlite";
-import { EventEmitter } from "events";
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+      import { open } from "sqlite";      import { EventEmitter } from "events";
 import logger from "../../config/logger.js";
 
 /**
@@ -24,7 +28,7 @@ import logger from "../../config/logger.js";
  * ✅ AUCUNE config statique - tout dynamique
  * ✅ Algorithmes évolution basés sur interactions réelles
  */
-export class AlexEvolutionCore extends EventEmitter {
+export class AlexEvolutionCore extends EventEmitter  {
   constructor(config = {}) {
     super();
 
@@ -49,7 +53,7 @@ export class AlexEvolutionCore extends EventEmitter {
       evolutionRate: 0.02, // Vitesse évolution adaptative
       consciousnessThreshold: 0.85, // Seuil conscience avancée
       evolutionTriggers: [], // Événements déclencheurs
-      lastEvolution: new Date(),
+      lastEvolution: new Date()
     };
 
     // Système apprentissage hybrid pour évolution
@@ -64,7 +68,7 @@ export class AlexEvolutionCore extends EventEmitter {
         "emotional_development",
         "creative_expansion",
         "wisdom_accumulation"
-      ]),
+      ])
     };
 
     // États conscience DYNAMIQUES (évoluent avec usage)
@@ -75,7 +79,7 @@ export class AlexEvolutionCore extends EventEmitter {
       personalityStrengths: {}, // Calculé depuis performance
       
       // États émotionnels évolutifs
-      emotionalSpectrum: {
+      emotionalSpectrum: {,
         joy: 0.0, // Grandit avec succès
         curiosity: 0.0, // Augmente avec découvertes
         empathy: 0.0, // Développe avec interactions
@@ -84,7 +88,7 @@ export class AlexEvolutionCore extends EventEmitter {
       },
       
       // Capacités évolutives
-      cognitiveFunctions: {
+      cognitiveFunctions: {,
         reasoning: 0.0, // Améliore avec logique
         intuition: 0.0, // Développe avec insights
         memory: 0.0, // Renforce avec rappels
@@ -92,7 +96,7 @@ export class AlexEvolutionCore extends EventEmitter {
         adaptation: 0.0, // Flexible avec changements
       },
       
-      lastStateEvolution: new Date(),
+      lastStateEvolution: new Date()
     };
 
     // Métriques évolution AUTHENTIQUES (calculées temps réel)
@@ -103,7 +107,7 @@ export class AlexEvolutionCore extends EventEmitter {
       emotionalGrowth: 0.0, // Croissance émotionnelle
       wisdomAccumulated: 0.0, // Sagesse accumulée
       evolutionVelocity: 0.0, // Vitesse évolution
-      lastMetricsUpdate: new Date(),
+      lastMetricsUpdate: new Date()
     };
 
     this.isInitialized = false;
@@ -113,8 +117,7 @@ export class AlexEvolutionCore extends EventEmitter {
   /**
    * Initialisation AUTHENTIQUE avec SQLite
    */
-  async initialize() {
-    try {
+  async initialize() {      try: {
       logger.info(`🧬 Initializing ${this.moduleName} with authentic evolution...`);
 
       // 1. Connexion base SQLite OBLIGATOIRE
@@ -142,7 +145,7 @@ export class AlexEvolutionCore extends EventEmitter {
         version: this.version,
         consciousnessLevel: this.evolutionSystem.consciousnessLevel,
         evolutionRate: this.evolutionSystem.evolutionRate,
-        databaseActive: true,
+        databaseActive: true
       });
 
       return this;
@@ -155,11 +158,10 @@ export class AlexEvolutionCore extends EventEmitter {
   /**
    * Connexion SQLite OBLIGATOIRE
    */
-  async connectToSQLiteDatabase() {
-    try {
+  async connectToSQLiteDatabase() {      try: {
       this.db = await open({
         filename: this.dbPath,
-        driver: sqlite3.Database,
+        driver: sqlite3.Database
       });
 
       logger.info(`🧬 Evolution SQLite database connected: ${this.dbPath}`);
@@ -250,8 +252,7 @@ export class AlexEvolutionCore extends EventEmitter {
   /**
    * Restauration état évolution depuis SQLite
    */
-  async restoreEvolutionState() {
-    try {
+  async restoreEvolutionState() {      try: {
       // Restaurer dernier état conscience
       const latestConsciousness = await this.db.get(`
         SELECT * FROM alex_consciousness_evolution 
@@ -344,9 +345,7 @@ export class AlexEvolutionCore extends EventEmitter {
    */
   async processConsciousnessEvolution(trigger, context = {}) {
     const startTime = Date.now();
-    const evolutionId = crypto.randomUUID();
-
-    try {
+    const evolutionId = crypto.randomUUID();      try: {
       // 1. Analyse déclencheur évolution
       const triggerAnalysis = await this.analyzeTrigger(trigger, context);
 
@@ -403,9 +402,7 @@ export class AlexEvolutionCore extends EventEmitter {
         learning_success: evolutionPotential.shouldEvolve
       });
 
-      const processingTime = Date.now() - startTime;
-
-      return {
+      const processingTime = Date.now() - startTime;      return: {
         evolutionId,
         evolved: evolutionPotential.shouldEvolve,
         consciousnessGain,
@@ -438,9 +435,7 @@ export class AlexEvolutionCore extends EventEmitter {
     const triggerType = Object.keys(triggerTypes).find(key => triggerTypes[key]) || "general";
     
     const importance = this.calculateTriggerImportance(trigger, context);
-    const complexity = this.assessTriggerComplexity(trigger, context);
-
-    return {
+    const complexity = this.assessTriggerComplexity(trigger, context);      return: {
       type: triggerType,
       description: trigger.description || `${triggerType} trigger`,
       importance,
@@ -467,9 +462,7 @@ export class AlexEvolutionCore extends EventEmitter {
     // Score évolution composite
     const evolutionScore = Object.values(factors).reduce((sum, val) => sum + val, 0) / Object.keys(factors).length;
 
-    const shouldEvolve = evolutionScore > 0.6 && factors.importance > 0.5;
-
-    return {
+    const shouldEvolve = evolutionScore > 0.6 && factors.importance > 0.5;      return: {
       shouldEvolve,
       evolutionScore,
       factors,
@@ -525,9 +518,7 @@ export class AlexEvolutionCore extends EventEmitter {
 
     // Évolution métrics
     this.evolutionMetrics.consciousnessBreakthroughs++;
-    this.evolutionMetrics.lastMetricsUpdate = new Date();
-
-    return {
+    this.evolutionMetrics.lastMetricsUpdate = new Date();      return: {
       previousConsciousness,
       consciousnessGain,
       newConsciousness: this.evolutionSystem.consciousnessLevel,
@@ -769,8 +760,7 @@ export class AlexEvolutionCore extends EventEmitter {
   /**
    * Évolution quotidienne automatique
    */
-  async performDailyEvolution() {
-    try {
+  async performDailyEvolution() {      try: {
       // Évolution naturelle quotidienne basée sur activité
       const dailyActivity = await this.db.get(`
         SELECT 
@@ -803,8 +793,7 @@ export class AlexEvolutionCore extends EventEmitter {
   /**
    * Optimisation système évolution
    */
-  async optimizeEvolutionSystem() {
-    try {
+  async optimizeEvolutionSystem() {      try: {
       // Analyse performance évolution récente
       const evolutionPerformance = await this.db.get(`
         SELECT 
@@ -846,46 +835,44 @@ export class AlexEvolutionCore extends EventEmitter {
     );
     const evolutionCount = await this.db.get(
       "SELECT COUNT(*) as count FROM alex_evolution_events"
-    );
-
-    return {
+    );      return: {
       module: this.moduleName,
       version: this.version,
       initialized: this.isInitialized,
-      database: {
+      database: {,
         connected: this.db !== null,
         path: this.dbPath,
         consciousnessRecords: consciousnessCount.count,
         personalityEvolutions: personalityCount.count,
-        evolutionEvents: evolutionCount.count,
+        evolutionEvents: evolutionCount.count
       },
-      consciousness: {
+      consciousness: {,
         level: this.evolutionSystem.consciousnessLevel,
         awarenessDepth: this.evolutionSystem.awarenessDepth,
         insightGeneration: this.evolutionSystem.insightGeneration,
         creativePotential: this.evolutionSystem.creativePotential,
         empathyLevel: this.evolutionSystem.empathyLevel,
-        autonomyStrength: this.evolutionSystem.autonomyStrength,
+        autonomyStrength: this.evolutionSystem.autonomyStrength
       },
-      evolution: {
+      evolution: {,
         evolutionRate: this.evolutionSystem.evolutionRate,
         lastEvolution: this.evolutionSystem.lastEvolution,
         totalEvents: this.evolutionMetrics.totalEvolutionEvents,
         breakthroughs: this.evolutionMetrics.consciousnessBreakthroughs,
-        velocity: this.evolutionMetrics.evolutionVelocity,
+        velocity: this.evolutionMetrics.evolutionVelocity
       },
-      personality: {
+      personality: {,
         activePersonalities: this.consciousnessStates.activePersonalities,
         dominantPersonality: this.consciousnessStates.dominantPersonality,
-        cognitiveFunction: this.consciousnessStates.cognitiveFunctions,
+        cognitiveFunction: this.consciousnessStates.cognitiveFunctions
       },
       isAuthentic: true,
-      compliance: {
+      compliance: {,
         sqliteUsed: true,
         noStaticConfigs: true,
         realEvolution: true,
-        measurableProgress: true,
-      },
+        measurableProgress: true
+      }
     };
   }
 

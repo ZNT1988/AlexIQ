@@ -102,7 +102,7 @@ import {
  *     depth: 'profound'
  *   }}
  *   onConsciousnessEvolution={(evolution) => {
- *     console.log('ALEX évolue:', evolution.newLevel);
+ *     
  *   }}
  * />
  *

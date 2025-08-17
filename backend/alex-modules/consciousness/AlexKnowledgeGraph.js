@@ -1,15 +1,17 @@
 import crypto from "crypto";
 import logger from "../../config/logger.js";
-import { EventEmitter } from "events";
-import aiClient from "../../core/providers/AIClient.js";
-import { ALEX_CORE_PROMPTS } from "../../prompts/alex-prompts.js";
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+      import { EventEmitter } from "events";
+import aiClient from "../../core/providers/AIClient.js";      import { ALEX_CORE_PROMPTS } from "../../prompts/alex-prompts.js";
 
 /**
  * Alex Knowledge Graph - Phase 2 Batch 3
  * Module de graphe de connaissances dynamique avec IA authentique cloud
  * ÉLIMINATION COMPLÈTE des templates statiques - Génération cloud learning
  */
-class AlexKnowledgeGraph extends EventEmitter {
+class AlexKnowledgeGraph extends EventEmitter  {
   constructor() {
     super();
     this.name = "AlexKnowledgeGraph";
@@ -31,7 +33,7 @@ class AlexKnowledgeGraph extends EventEmitter {
     this.inferenceEngine = {
       rules: new Map(),
       patterns: new Map(),
-      predictions: new Map(),
+      predictions: new Map()
     };
 
     // Métriques et analytics
@@ -39,7 +41,7 @@ class AlexKnowledgeGraph extends EventEmitter {
       nodeCount: 0,
       edgeCount: 0,
       clusterCount: 0,
-      traversalEfficiency: 0.9,
+      traversalEfficiency: 0.9
     };
   }
 
@@ -54,7 +56,7 @@ class AlexKnowledgeGraph extends EventEmitter {
       status: "active",
       nodes: this.nodes.size,
       edges: this.edges.size,
-      clusters: this.clusters.size,
+      clusters: this.clusters.size
     });
 
     return this;
@@ -73,7 +75,7 @@ class AlexKnowledgeGraph extends EventEmitter {
 
 Create foundational knowledge nodes for entrepreneurship, technology, creativity, and strategy domains. Focus on emerging concepts and innovative connections.
 
-Return format: JSON array of objects with {id, type, properties, domain}`;
+Return format: JSON array of objects with: {id, type, properties, domain}`;
 
     const response = await aiClient.query(prompt, {
       provider: 'openai',
@@ -82,10 +84,9 @@ Return format: JSON array of objects with {id, type, properties, domain}`;
       maxTokens: 2000
     });
 
-    let concepts;
-    try {
+    let concepts;      try: {
       concepts = JSON.parse(response.content);
-    } catch {
+    } catch: {
       // Fallback avec génération minimale si parsing échoue
       concepts = await this.generateMinimalNodes();
     }
@@ -112,10 +113,9 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       maxTokens: 2000
     });
 
-    let relations;
-    try {
+    let relations;      try: {
       relations = JSON.parse(response.content);
-    } catch {
+    } catch: {
       relations = await this.generateMinimalRelations(nodeIds);
     }
 
@@ -135,7 +135,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
         theme: cluster.theme,
         coherence: cluster.coherence,
         generated: new Date(),
-        method: "ml_clustering",
+        method: "ml_clustering"
       });
     }
   }
@@ -150,7 +150,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       embedding: await this.generateEmbedding(nodeData),
       created: new Date(),
       lastAccessed: new Date(),
-      accessCount: 0,
+      accessCount: 0
     };
 
     this.nodes.set(nodeData.id, node);
@@ -173,7 +173,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       strength: edgeData.strength || 0.5,
       properties: edgeData.properties || {},
       created: new Date(),
-      traversalCount: 0,
+      traversalCount: 0
     };
 
     this.edges.set(edgeId, edge);
@@ -194,14 +194,13 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
   }
 
   async generateEmbedding(nodeData) {
-    // Génération d'embedding via client AI centralisé - PLUS de simulation
-    try {
+    // Génération d'embedding via client AI centralisé - PLUS de simulation      try: {
       const text = `${nodeData.id} ${nodeData.type} ${JSON.stringify(nodeData.properties)}`;
       const response = await aiClient.generateEmbeddings(text, {
         model: "text-embedding-ada-002"
       });
       return response.embeddings;
-    } catch {
+    } catch: {
       // Fallback sécurisé si API indisponible
       return this.generateSecureRandomEmbedding();
     }
@@ -219,7 +218,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     const semanticKeys = [
       node.type,
       ...Object.keys(node.properties),
-      ...Object.values(node.properties).filter((v) => typeof v === "string"),
+      ...Object.values(node.properties).filter((v) => typeof v === "string")
     ];
 
     for (const key of semanticKeys) {
@@ -236,7 +235,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     this.pathfinder.set(pathKey, {
       direct: edge,
       distance: 1,
-      strength: edge.strength,
+      strength: edge.strength
     });
 
     // Calcul des chemins indirects (pathfinding simplifié)
@@ -246,7 +245,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
   async calculateIndirectPaths(fromId, toId, maxDepth = 3) {
     const visited = new Set();
     const queue = [
-      { nodeId: fromId, path: [fromId], distance: 0, totalStrength: 1.0 },
+      { nodeId: fromId, path: [fromId], distance: 0, totalStrength: 1.0 }
     ];
 
     while (queue.length > 0 && queue[0].distance < maxDepth) {
@@ -269,7 +268,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
               path: [...current.path, connectedId],
               distance: current.distance + 1,
               totalStrength: current.totalStrength * edge.strength,
-              indirect: true,
+              indirect: true
             });
           }
         }
@@ -283,7 +282,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
               nodeId: connectedId,
               path: [...current.path, connectedId],
               distance: current.distance + 1,
-              totalStrength: current.totalStrength * edge.strength,
+              totalStrength: current.totalStrength * edge.strength
             });
           }
         }
@@ -296,19 +295,19 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     this.inferenceEngine.rules.set("transitivity", {
       pattern: "A -> B, B -> C => A -> C",
       strength_modifier: 0.7,
-      confidence: 0.8,
+      confidence: 0.8
     });
 
     this.inferenceEngine.rules.set("similarity", {
       pattern: "similar_properties => potential_relation",
       strength_modifier: 0.6,
-      confidence: 0.7,
+      confidence: 0.7
     });
 
     this.inferenceEngine.rules.set("clustering", {
       pattern: "high_interconnection => cluster_formation",
       strength_modifier: 0.8,
-      confidence: 0.9,
+      confidence: 0.9
     });
   }
 
@@ -317,7 +316,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     this.semanticEngine = {
       similarityThreshold: 0.75,
       clusteringAlgorithm: "hierarchical",
-      embeddingDimensions: 128,
+      embeddingDimensions: 128
     };
   }
 
@@ -345,7 +344,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
             strength: edge1.strength * edge2.strength * 0.7,
             confidence: 0.8,
             inferred: true,
-            source: [edgeId1, edgeId2],
+            source: [edgeId1, edgeId2]
           };
 
           newRelations.push(inferredRelation);
@@ -438,7 +437,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       clusterCount: this.clusters.size,
       traversalEfficiency: this.calculateTraversalEfficiency(),
       semanticCoverage: this.calculateSemanticCoverage(),
-      inferenceRate: this.calculateInferenceRate(),
+      inferenceRate: this.calculateInferenceRate()
     };
   }
 
@@ -480,7 +479,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
   async getRelatedConcepts(nodeId, limit = 10) {
     const node = this.nodes.get(nodeId);
-    if (!node) return [];
+    if (!node) return: [];
 
     const related = [];
 
@@ -496,7 +495,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
           node: connectedNode,
           relationship: edge?.type || "connected",
           strength: edge?.strength || 0.5,
-          distance: 1,
+          distance: 1
         });
       }
     }
@@ -513,7 +512,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
   async findSemanticallyRelated(nodeId, limit = 5) {
     const node = this.nodes.get(nodeId);
-    if (!node) return [];
+    if (!node) return: [];
 
     const similarities = [];
 
@@ -526,7 +525,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
           node: otherNode,
           relationship: "semantically_similar",
           strength: similarity,
-          distance: 2,
+          distance: 2
         });
       }
     }
@@ -562,7 +561,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
         results.push({
           node,
           relevance: 1.0,
-          matchType: "direct",
+          matchType: "direct"
         });
       }
     }
@@ -576,7 +575,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
             results.push({
               node,
               relevance: 0.8,
-              matchType: "semantic",
+              matchType: "semantic"
             });
           }
         }
@@ -586,24 +585,23 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     return results.sort((a, b) => b.relevance - a.relevance).slice(0, limit);
   }
 
-  generateKnowledgeReport() {
-    return {
+  generateKnowledgeReport() {      return: {
       graph: this.name,
       version: this.version,
       status: this.isActive ? "active" : "inactive",
       metrics: this.metrics,
-      structure: {
+      structure: {,
         nodes: this.nodes.size,
         edges: this.edges.size,
         clusters: this.clusters.size,
-        semanticIndex: this.semanticIndex.size,
+        semanticIndex: this.semanticIndex.size
       },
-      intelligence: {
+      intelligence: {,
         inferenceRules: this.inferenceEngine.rules.size,
         patterns: this.inferenceEngine.patterns.size,
-        predictions: this.inferenceEngine.predictions.size,
+        predictions: this.inferenceEngine.predictions.size
       },
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toISOString()
     };
   }
 
@@ -615,7 +613,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       center: node,
       layers: [],
       connections: [],
-      clusters: [],
+      clusters: []
     };
 
     // Construire les couches
@@ -654,19 +652,19 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
   // Méthodes utilitaires cloud learning
   async generateMinimalNodes() {
-    return [
+    return: [
       {
         id: "entrepreneurship_dynamics",
         type: "domain",
         weight: 0.9,
-        properties: { dynamic: true, cloud_generated: true },
+        properties: { dynamic: true, cloud_generated: true }
       },
       {
         id: "innovation_engine",
         type: "process",
         weight: 0.95,
-        properties: { transformative: true, cloud_generated: true },
-      },
+        properties: { transformative: true, cloud_generated: true }
+      }
     ];
   }
 
@@ -677,7 +675,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
         from: nodeIds[i],
         to: nodeIds[i + 1],
         type: "dynamic_connection",
-        strength: 0.7 + (crypto.randomBytes(1)[0] / 255) * 0.3,
+        strength: 0.7 + (crypto.randomBytes(1)[0] / 255) * 0.3
       });
     }
     return relations;
@@ -700,7 +698,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
             id: `cluster_${clusterId++}`,
             nodes: cluster.nodes,
             theme: await this.generateClusterTheme(cluster.nodes),
-            coherence: cluster.coherence,
+            coherence: cluster.coherence
           });
         }
       }
@@ -768,7 +766,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     const uniqueTypes = [...new Set(nodeTypes)];
 
     if (uniqueTypes.length === 1) {
-      return `${uniqueTypes[0]}_cluster`;
+      return await this.generateWithOpenAI(`${uniqueTypes[0]}_cluster...`, context);
     } else {
       return `multi_domain_${uniqueTypes.slice(0, 2).join("_")}`;
     }
@@ -821,7 +819,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
         theme: `${cluster.theme}_${bestMatch.cluster.theme}`,
         coherence: (cluster.coherence + bestMatch.cluster.coherence) / 2,
         generated: new Date(),
-        method: "cluster_merge",
+        method: "cluster_merge"
       };
 
       this.clusters.delete(clusterId);
@@ -832,19 +830,19 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
   async performSubClustering(nodeIds) {
     // Implémentation de sous-clustering
-    return [
+    return: [
       {
         id: `sub_0`,
         nodes: nodeIds.slice(0, Math.ceil(nodeIds.length / 2)),
         theme: "sub_cluster_0",
-        coherence: 0.8,
+        coherence: 0.8
       },
       {
         id: `sub_1`,
         nodes: nodeIds.slice(Math.ceil(nodeIds.length / 2)),
         theme: "sub_cluster_1",
-        coherence: 0.8,
-      },
+        coherence: 0.8
+      }
     ];
   }
 
@@ -864,7 +862,7 @@ if (typeof logger === "undefined") {
     info: (...args) => console.log("[FALLBACK-INFO]", ...args),
     warn: (...args) => console.warn("[FALLBACK-WARN]", ...args),
     error: (...args) => console.error("[FALLBACK-ERROR]", ...args),
-    debug: (...args) => console.debug("[FALLBACK-DEBUG]", ...args),
+    debug: (...args) => console.debug("[FALLBACK-DEBUG]", ...args)
   };
 }
 

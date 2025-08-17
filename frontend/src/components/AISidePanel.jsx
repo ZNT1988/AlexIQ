@@ -107,10 +107,10 @@ import '../index.css';
  *     defaultFocus: 'motivation'
  *   }}
  *   setPreferences={(newPrefs) => {
- *     console.log('Nouvelles préférences:', newPrefs);
+ *     
  *   }}
  *   clearMemory={() => {
- *     console.log('Mémoire IA effacée');
+ *     
  *   }}
  * />
  *

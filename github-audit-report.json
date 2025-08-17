@@ -1,0 +1,2908 @@
+{
+  "timestamp": "2025-08-17T16:35:10.735Z",
+  "repository": "https://github.com/ZNT1988/AlexIQ.git",
+  "branch": "minimal-prod",
+  "analysis": {
+    "pushedFiles": [
+      ".claude/settings.local.json",
+      ".env.example",
+      ".github/codeql/codeql-config.yml",
+      ".github/workflows/ci.yml",
+      ".github/workflows/codeql.yml",
+      ".github/workflows/sonarcloud.yml",
+      ".gitignore",
+      "Dockerfile.licorne",
+      "FORCE_REDEPLOY.md",
+      "alex-test-interface-production.js",
+      "backend/.eslintrc.js",
+      "backend/.gitignore",
+      "backend/.mocharc.json",
+      "backend/ARCHITECTURE.md",
+      "backend/AlexHyperIntelligence.js",
+      "backend/Dockerfile",
+      "backend/TESTS_RESUME.md",
+      "backend/TROUBLESHOOTING.md",
+      "backend/alex-core/AlexKernel.js",
+      "backend/alex-core/AlexMasterSystem.js",
+      "backend/alex-core/LicorneOrchestrator.js",
+      "backend/alex-core/UniversalModuleRegistry.js",
+      "backend/alex-modules/config/logger.js",
+      "backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+      "backend/alex-modules/consciousness/AlexCosmicInterface.js",
+      "backend/alex-modules/consciousness/AlexDimensionalPortal.js",
+      "backend/alex-modules/consciousness/AlexDivineInterface.js",
+      "backend/alex-modules/consciousness/AlexEternalWisdom.js",
+      "backend/alex-modules/consciousness/AlexHyperIntelligence.js",
+      "backend/alex-modules/consciousness/AlexInfiniteCreator.js",
+      "backend/alex-modules/consciousness/AlexInfiniteService.js",
+      "backend/alex-modules/consciousness/AlexKnowledgeGraph.js",
+      "backend/alex-modules/consciousness/AlexMemoryShaper.js",
+      "backend/alex-modules/consciousness/AlexMultiverseExplorer.js",
+      "backend/alex-modules/consciousness/AlexNetworkIntelligence.js",
+      "backend/alex-modules/consciousness/AlexNeuralEvolution.js",
+      "backend/alex-modules/consciousness/AlexOmnipotentForce.js",
+      "backend/alex-modules/consciousness/AlexOmnipresentSoul.js",
+      "backend/alex-modules/consciousness/AlexOmniscientMind.js",
+      "backend/alex-modules/consciousness/AlexOptimizationEngine.js",
+      "backend/alex-modules/consciousness/AlexPerfectHarmony.js",
+      "backend/alex-modules/consciousness/AlexProcessingOptimizer.js",
+      "backend/alex-modules/consciousness/AlexQuantumProcessor.js",
+      "backend/alex-modules/consciousness/AlexRealityArchitect.js",
+      "backend/alex-modules/consciousness/AlexTimeWeaver.js",
+      "backend/alex-modules/consciousness/AlexUnconditionalLove.js",
+      "backend/alex-modules/consciousness/AlexUniversalConsciousness.js",
+      "backend/alex-modules/consciousness/AlexUserExperienceEngine.js",
+      "backend/alex-modules/consciousness/AlexVirtualReality.js",
+      "backend/alex-modules/consciousness/AncestralWisdomKeeper.js",
+      "backend/alex-modules/consciousness/BusinessBuilderAI.js",
+      "backend/alex-modules/consciousness/CloudLearningInterface.js",
+      "backend/alex-modules/consciousness/CreativeFlowActivator.js",
+      "backend/alex-modules/consciousness/CrisisCompanion.js",
+      "backend/alex-modules/consciousness/DreamInterpreter.js",
+      "backend/alex-modules/consciousness/EmotionalJournal.js",
+      "backend/alex-modules/consciousness/IntuitiveInsightGenerator.js",
+      "backend/alex-modules/consciousness/KarmaHealingEngine.js",
+      "backend/alex-modules/consciousness/LifePathAdvisor.js",
+      "backend/alex-modules/consciousness/MindMapBuilder.js",
+      "backend/alex-modules/consciousness/MoodPredictor.js",
+      "backend/alex-modules/consciousness/RelationshipHealingOracle.js",
+      "backend/alex-modules/consciousness/SoulPurposeDiscoverer.js",
+      "backend/alex-modules/consciousness/StrategicBlindspotDetector.js",
+      "backend/alex-modules/consciousness/SynchronicityTracker.js",
+      "backend/alex-modules/consciousness/ThoughtLeadershipEngine.js",
+      "backend/alex-modules/core/AlexAuthenticCore.js",
+      "backend/alex-modules/core/AlexAutonomousCore.js",
+      "backend/alex-modules/core/AlexEvolutionCore.js",
+      "backend/alex-modules/core/AlexIntelligentCore.js",
+      "backend/alex-modules/core/AlexMemoryCore.js",
+      "backend/alex-modules/core/AlexPersonalityCore.js",
+      "backend/alex-modules/core/AlexSaaSArchitecture.js",
+      "backend/alex-modules/core/AppStoreModuleManager.js",
+      "backend/alex-modules/core/AutonomyCore.js",
+      "backend/alex-modules/core/NeuroCore.js",
+      "backend/alex-modules/core/OwnerIdentity.js",
+      "backend/alex-modules/creative/AlexCreativeEngine.js",
+      "backend/alex-modules/creative/AlexCreativeLearningSystem.js",
+      "backend/alex-modules/creative/AlexDreamCompiler.js",
+      "backend/alex-modules/creative/DreamCompiler.js",
+      "backend/alex-modules/creative/QuantumBrain.js",
+      "backend/alex-modules/creative/QuantumCreativity.js",
+      "backend/alex-modules/intelligence/AIFusionKernel.js",
+      "backend/alex-modules/intelligence/AlexAdaptiveIntelligence.js",
+      "backend/alex-modules/intelligence/AlexAlchemyEngine.js",
+      "backend/alex-modules/intelligence/AlexCognitionEngine.js",
+      "backend/alex-modules/intelligence/AlexCommunicationEngine.js",
+      "backend/alex-modules/intelligence/AlexConsciousnessSystem.js",
+      "backend/alex-modules/intelligence/AlexCreativeEngine.js",
+      "backend/alex-modules/intelligence/AlexDecisionEngine.js",
+      "backend/alex-modules/intelligence/AlexEmotionalIntelligence.js",
+      "backend/alex-modules/intelligence/AlexIntuitionEngine.js",
+      "backend/alex-modules/intelligence/AlexLearningEngine.js",
+      "backend/alex-modules/intelligence/AlexReflectiveThinking.js",
+      "backend/alex-modules/intelligence/AlexRelationshipEngine.js",
+      "backend/alex-modules/intelligence/AlexSocialIntelligence.js",
+      "backend/alex-modules/intelligence/AlexTimeIntelligence.js",
+      "backend/alex-modules/intelligence/CognitiveBridge.js",
+      "backend/alex-modules/intelligence/ContextIntelligence.js",
+      "backend/alex-modules/intelligence/CreativeGenius.js",
+      "backend/alex-modules/intelligence/EyeTracking.js",
+      "backend/alex-modules/intelligence/InhibitionReturn.js",
+      "backend/alex-modules/intelligence/InnerDialogueEngine.js",
+      "backend/alex-modules/intelligence/LanguageProcessor.js",
+      "backend/alex-modules/intelligence/MarketAnalyzer.js",
+      "backend/alex-modules/intelligence/MarketMindCore.js",
+      "backend/alex-modules/intelligence/MultiModalFusion.js",
+      "backend/alex-modules/intelligence/NeuralCore.js",
+      "backend/alex-modules/intelligence/QuantumGenerator.js",
+      "backend/alex-modules/intelligence/SelfTrainingEngine.js",
+      "backend/alex-modules/intelligence/SentimentScanner.js",
+      "backend/alex-modules/intelligence/TopDownAttention.js",
+      "backend/alex-modules/intelligence/TradeSimulator.js",
+      "backend/alex-modules/specialized/AdvancedModuleOrchestrator.js",
+      "backend/alex-modules/specialized/AlexBioSync.js",
+      "backend/alex-modules/specialized/AlexCloudLearning.js",
+      "backend/alex-modules/specialized/AlexConsciousnessDebug.js",
+      "backend/alex-modules/specialized/AlexCreativityBooster.js",
+      "backend/alex-modules/specialized/AlexCrisisManagement.js",
+      "backend/alex-modules/specialized/AlexGoalMastery.js",
+      "backend/alex-modules/specialized/AlexHyperLoop.js",
+      "backend/alex-modules/specialized/AlexMasterSystem.js",
+      "backend/alex-modules/specialized/AlexStrategicThinking.js",
+      "backend/alex-modules/specialized/AlexUniversalCompanion.js",
+      "backend/alex-modules/specialized/AlexWhispers.js",
+      "backend/alex-modules/specialized/AlexWisdomKeeper.js",
+      "backend/alex-modules/specialized/AutoGenesis.js",
+      "backend/alex-modules/specialized/BioSensorAdapter.js",
+      "backend/alex-modules/specialized/CollectiveHustleMind.js",
+      "backend/alex-modules/specialized/CulturalAdaptation.js",
+      "backend/alex-modules/specialized/DarkSideDecoder.js",
+      "backend/alex-modules/specialized/FunctionBuilder.js",
+      "backend/alex-modules/specialized/GodLevelAwareness.js",
+      "backend/alex-modules/specialized/HealthPredictor.js",
+      "backend/alex-modules/specialized/HypothesisBuilder.js",
+      "backend/alex-modules/specialized/InventoryFlow.js",
+      "backend/alex-modules/specialized/KnowledgeSynthesizer.js",
+      "backend/alex-modules/specialized/LanguageExpansion.js",
+      "backend/alex-modules/specialized/LocalAITrainer.js",
+      "backend/alex-modules/specialized/MutualGrowthSystem.js",
+      "backend/alex-modules/specialized/PurchasePredictor.js",
+      "backend/alex-modules/specialized/SAPConnector.js",
+      "backend/alex-modules/specialized/SelfReflection.js",
+      "backend/alex-modules/specialized/ShadowCloneMode.js",
+      "backend/alex-modules/specialized/SoulPrintGenerator.js",
+      "backend/alex-modules/specialized/SupplierOptimizer.js",
+      "backend/alex-modules/specialized/TechnicalDocReader.js",
+      "backend/alex-modules/specialized/TemporalPredictor.js",
+      "backend/alex-modules/specialized/TestAutoCreator.js",
+      "backend/alex-modules/specialized/UniversalModuleRegistry.js",
+      "backend/alex-modules/specialized/VisionProFactory.js",
+      "backend/alex-modules/specialized/VoiceSynthesisMultilang.js",
+      "backend/api/server.js",
+      "backend/backup/BackupManager.js",
+      "backend/business/RevenueManager.js",
+      "backend/cache/FallbackCache.js",
+      "backend/cache/RedisCache.js",
+      "backend/cluster/ClusterManager.js",
+      "backend/config/aiKeys.js",
+      "backend/config/alexCloudConfig.js",
+      "backend/config/cache.js",
+      "backend/config/database-sqlite.js",
+      "backend/config/database.js",
+      "backend/config/logger-simple.js",
+      "backend/config/logger.js",
+      "backend/config/monitoring.js",
+      "backend/config/performance.js",
+      "backend/config/validation.js",
+      "backend/core/HustleFinderCore.js",
+      "backend/core/providers/AIClient.js",
+      "backend/db/schema.sql",
+      "backend/diagnostics/AlexCompleteSystemDiagnostics.js",
+      "backend/diagnostics/AlexSystemDiagnostics.js",
+      "backend/eslint.config.js",
+      "backend/index.js",
+      "backend/integrations/calendar-integrations.js",
+      "backend/jest.config.js",
+      "backend/middleware/auth.js",
+      "backend/middleware/cacheMiddleware.js",
+      "backend/middleware/enterpriseSecurityMiddleware.js",
+      "backend/middleware/errorHandler.js",
+      "backend/middleware/security.js",
+      "backend/monitoring/AlexAutonomyMonitor.js",
+      "backend/monitoring/PerformanceMonitor.js",
+      "backend/monitoring/SystemMonitor.js",
+      "backend/package-lock.json",
+      "backend/package.json",
+      "backend/prompts/alex-prompts.js",
+      "backend/routes/advanced-ai.js",
+      "backend/routes/ai.js",
+      "backend/routes/aiSystem.js",
+      "backend/routes/aiSystemSpecialized.js",
+      "backend/routes/assistant.js",
+      "backend/routes/auth.js",
+      "backend/routes/ideas.js",
+      "backend/routes/monitoring.js",
+      "backend/routes/projects.js",
+      "backend/routes/real-alex.js",
+      "backend/routes/roi.js",
+      "backend/scripts/init-alex-system.js",
+      "backend/scripts/pre-start-check.js",
+      "backend/security/EnterpriseSecurityManager.js",
+      "backend/server-cluster.js",
+      "backend/services/ExternalDataSources.js",
+      "backend/services/RateLimiter.js",
+      "backend/services/anthropic.js",
+      "backend/services/google.js",
+      "backend/services/openai.js",
+      "backend/tenant/TenantManager.js",
+      "backend/test/runner.js",
+      "backend/utils/enhancedHealthCheck.js",
+      "backend/utils/systemRecovery.js",
+      "biome.json",
+      "config.js",
+      "config/alex-licorne-config.js",
+      "data/alexauthenticcore_learning.db",
+      "data/alexevolutioncore_evolution.db",
+      "docker-compose.licorne.yml",
+      "eslint.config.cjs",
+      "frontend-alexiq.json",
+      "frontend/.claude/settings.local.json",
+      "frontend/.env.example",
+      "frontend/.eslintrc.js",
+      "frontend/.prettierrc",
+      "frontend/Dockerfile",
+      "frontend/eslint.config.js",
+      "frontend/index.html",
+      "frontend/nginx.conf",
+      "frontend/package-lock.json",
+      "frontend/package.json",
+      "frontend/postcss.config.cjs",
+      "frontend/public/favicon.svg",
+      "frontend/public/hf-logo.png",
+      "frontend/public/icons/hf-mosaic.svg",
+      "frontend/src/api/client.ts",
+      "frontend/src/components/AI/AISystemInterface.jsx",
+      "frontend/src/components/AISidePanel.jsx",
+      "frontend/src/components/APIIntegrationHub.js",
+      "frontend/src/components/ActionExecutor.js",
+      "frontend/src/components/AdvancedAI/ConsciousnessInterface.jsx",
+      "frontend/src/components/Alex/AlexAutonomyDemo.jsx",
+      "frontend/src/components/Alex/AlexModernChat.jsx",
+      "frontend/src/components/Alex/AlexUltimateInterface.css",
+      "frontend/src/components/Alex/AlexUltimateInterface.jsx",
+      "frontend/src/components/Alex/ChatGPTInterface.jsx",
+      "frontend/src/components/Alex/RealAlexInterface.jsx",
+      "frontend/src/components/AlexInputArea.jsx",
+      "frontend/src/components/AlexTradingDashboard.jsx",
+      "frontend/src/components/ArchitectBuilder.js",
+      "frontend/src/components/Assistant/AlexIQUltimateInterface.jsx",
+      "frontend/src/components/Assistant/AssistantDashboard.jsx",
+      "frontend/src/components/Assistant/ChatInterface.jsx",
+      "frontend/src/components/Assistant/ContextAwareSuggestions.jsx",
+      "frontend/src/components/Assistant/ConversationManager.jsx",
+      "frontend/src/components/Assistant/EnhancedChatInterface.jsx",
+      "frontend/src/components/Assistant/MessageRenderer.jsx",
+      "frontend/src/components/Assistant/MobileOptimizations.css",
+      "frontend/src/components/Assistant/ModernAssistantInterface.jsx",
+      "frontend/src/components/Assistant/ModernChatInterface.jsx",
+      "frontend/src/components/Assistant/SimpleChatInterface.jsx",
+      "frontend/src/components/Assistant/SmartSuggestions.jsx",
+      "frontend/src/components/Assistant/VoiceCommandPanel.jsx",
+      "frontend/src/components/AutoDocumentation.js",
+      "frontend/src/components/BacktestInterface.jsx",
+      "frontend/src/components/BiometricTradingInterface.jsx",
+      "frontend/src/components/ConsciousnessPanel.jsx",
+      "frontend/src/components/Demo/DemoShowcase.jsx",
+      "frontend/src/components/FloatingToggleButton.jsx",
+      "frontend/src/components/HFAlexRoot.jsx",
+      "frontend/src/components/HFOS.js",
+      "frontend/src/components/HealthScanner.js",
+      "frontend/src/components/InnerDialogue.js",
+      "frontend/src/components/MainApp.jsx",
+      "frontend/src/components/MetaverseTradingInterface.jsx",
+      "frontend/src/components/Modern/OptimizedChatInterface.jsx",
+      "frontend/src/components/MultilingualProcessor.js",
+      "frontend/src/components/Navigation.jsx",
+      "frontend/src/components/SharedDreamingEngine.js",
+      "frontend/src/components/SimulationEngine.js",
+      "frontend/src/components/TestingSystem.js",
+      "frontend/src/components/VoiceEmotionProcessor.js",
+      "frontend/src/context/AIAssistantContext.jsx",
+      "frontend/src/context/ChatStateContext.jsx",
+      "frontend/src/context/ModernAIAssistantContext.jsx",
+      "frontend/src/context/VoiceStateContext.jsx",
+      "frontend/src/hooks/useDebounce.js",
+      "frontend/src/hooks/useOptimizedAPI.js",
+      "frontend/src/index.css",
+      "frontend/src/index.jsx",
+      "frontend/src/layout/Layout.jsx",
+      "frontend/src/pages/AlexChat.jsx",
+      "frontend/src/pages/AlexModernChat.jsx",
+      "frontend/src/pages/ChatGPT.jsx",
+      "frontend/src/pages/Dashboard.jsx",
+      "frontend/src/pages/Dashboard.test.jsx",
+      "frontend/src/pages/Generator.jsx",
+      "frontend/src/pages/Home.jsx",
+      "frontend/src/router.jsx",
+      "frontend/src/services/alexApi.ts",
+      "frontend/src/services/api.js",
+      "frontend/src/store/chatStore.ts",
+      "frontend/src/test/api.test.js",
+      "frontend/src/test/setup.js",
+      "frontend/src/types/index.ts",
+      "frontend/tailwind.config.js",
+      "frontend/tsconfig.json",
+      "frontend/tsconfig.node.json",
+      "frontend/vercel.json",
+      "frontend/vite.config.js",
+      "hf_integration_plan.md",
+      "index-ultra-minimal.js",
+      "jsconfig.json",
+      "monitoring/alert_rules.yml",
+      "monitoring/prometheus.yml",
+      "nixpacks.toml",
+      "package-alexiq.json",
+      "package-lock.json",
+      "package.json",
+      "quick-fix.js",
+      "railway.json",
+      "scripts/maintenance-licorne.js",
+      "scripts/prod-check.sh",
+      "sonar-project.properties",
+      "start-alex-licorne.js",
+      "test-alex-api-direct.js",
+      "test-anthropic-debug.js",
+      "test-complete-integration.js",
+      "test-generateideas.js",
+      "test-google-debug.js",
+      "test-real-apis.js",
+      "test-request.json",
+      "test-server.js",
+      "test-vertex-ai.js",
+      "tools/analyzeCodebase.js"
+    ],
+    "stagedFiles": [
+      "backend/alex-modules/intelligence/EmotionalIntelligence.js",
+      "backend/alex-modules/specialized/AlexAdaptiveIntelligence.js",
+      "backend/alex-modules/specialized/AlexAlchemyEngine.js",
+      "backend/alex-modules/specialized/AlexAutonomousCore.js",
+      "backend/alex-modules/specialized/AlexCognitionEngine.js",
+      "backend/alex-modules/specialized/AlexCommunicationEngine.js",
+      "backend/alex-modules/specialized/AlexConsciousnessSystem.js",
+      "backend/alex-modules/specialized/AlexContextualAwareness.js",
+      "backend/alex-modules/specialized/AlexCreativeEngine.js",
+      "backend/alex-modules/specialized/AlexCreativeLearningSystem.js",
+      "backend/alex-modules/specialized/AlexDecisionEngine.js",
+      "backend/alex-modules/specialized/AlexDreamCompiler.js",
+      "backend/alex-modules/specialized/AlexEmotionalIntelligence.js",
+      "backend/alex-modules/specialized/AlexEthicsCore.js",
+      "backend/alex-modules/specialized/AlexEvolutionCore.js",
+      "backend/alex-modules/specialized/AlexIntelligentCore.js",
+      "backend/alex-modules/specialized/AlexIntuitionEngine.js",
+      "backend/alex-modules/specialized/AlexKernel.js",
+      "backend/alex-modules/specialized/AlexLearningEngine.js",
+      "backend/alex-modules/specialized/AlexMemoryCore.js",
+      "backend/alex-modules/specialized/AlexPersonalityCore.js",
+      "backend/alex-modules/specialized/AlexRelationshipEngine.js",
+      "backend/alex-modules/specialized/AlexSocialIntelligence.js",
+      "backend/alex-modules/specialized/AlexTimeIntelligence.js",
+      "backend/alex-modules/specialized/AutonomyCore.js",
+      "backend/alex-modules/specialized/ContextIntelligence.js",
+      "backend/alex-modules/specialized/DreamCompiler.js",
+      "backend/alex-modules/specialized/EmotionalIntelligence.js",
+      "backend/alex-modules/specialized/InnerDialogueEngine.js",
+      "backend/alex-modules/specialized/LanguageProcessor.js",
+      "backend/alex-modules/specialized/MemoryPalace.js",
+      "backend/alex-modules/specialized/NeuroCore.js",
+      "backend/alex-modules/specialized/QuantumBrain.js",
+      "backend/alex-modules/specialized/QuantumCreativity.js",
+      "backend/alex-modules/specialized/SelfTrainingEngine.js",
+      "backend/alex-modules/specialized/SynchronicityTracker.js"
+    ],
+    "modifiedFiles": [
+      "backend/alex-modules/config/logger.js",
+      "backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+      "backend/alex-modules/consciousness/AlexCosmicInterface.js",
+      "backend/alex-modules/consciousness/AlexDimensionalPortal.js",
+      "backend/alex-modules/consciousness/AlexDivineInterface.js",
+      "backend/alex-modules/consciousness/AlexEternalWisdom.js",
+      "backend/alex-modules/consciousness/AlexHyperIntelligence.js",
+      "backend/alex-modules/consciousness/AlexInfiniteCreator.js",
+      "backend/alex-modules/consciousness/AlexInfiniteService.js",
+      "backend/alex-modules/consciousness/AlexKnowledgeGraph.js",
+      "backend/alex-modules/consciousness/AlexMemoryShaper.js",
+      "backend/alex-modules/consciousness/AlexMultiverseExplorer.js",
+      "backend/alex-modules/consciousness/AlexNetworkIntelligence.js",
+      "backend/alex-modules/consciousness/AlexNeuralEvolution.js",
+      "backend/alex-modules/consciousness/AlexOmnipotentForce.js",
+      "backend/alex-modules/consciousness/AlexOmnipresentSoul.js",
+      "backend/alex-modules/consciousness/AlexOmniscientMind.js",
+      "backend/alex-modules/consciousness/AlexOptimizationEngine.js",
+      "backend/alex-modules/consciousness/AlexPerfectHarmony.js",
+      "backend/alex-modules/consciousness/AlexProcessingOptimizer.js",
+      "backend/alex-modules/consciousness/AlexQuantumProcessor.js",
+      "backend/alex-modules/consciousness/AlexRealityArchitect.js",
+      "backend/alex-modules/consciousness/AlexTimeWeaver.js",
+      "backend/alex-modules/consciousness/AlexUnconditionalLove.js",
+      "backend/alex-modules/consciousness/AlexUniversalConsciousness.js",
+      "backend/alex-modules/consciousness/AlexUserExperienceEngine.js",
+      "backend/alex-modules/consciousness/AlexVirtualReality.js",
+      "backend/alex-modules/consciousness/AncestralWisdomKeeper.js",
+      "backend/alex-modules/consciousness/BusinessBuilderAI.js",
+      "backend/alex-modules/consciousness/CloudLearningInterface.js",
+      "backend/alex-modules/consciousness/CreativeFlowActivator.js",
+      "backend/alex-modules/consciousness/CrisisCompanion.js",
+      "backend/alex-modules/consciousness/DreamInterpreter.js",
+      "backend/alex-modules/consciousness/EmotionalJournal.js",
+      "backend/alex-modules/consciousness/IntuitiveInsightGenerator.js",
+      "backend/alex-modules/consciousness/KarmaHealingEngine.js",
+      "backend/alex-modules/consciousness/LifePathAdvisor.js",
+      "backend/alex-modules/consciousness/MindMapBuilder.js",
+      "backend/alex-modules/consciousness/MoodPredictor.js",
+      "backend/alex-modules/consciousness/RelationshipHealingOracle.js",
+      "backend/alex-modules/consciousness/SoulPurposeDiscoverer.js",
+      "backend/alex-modules/consciousness/StrategicBlindspotDetector.js",
+      "backend/alex-modules/consciousness/SynchronicityTracker.js",
+      "backend/alex-modules/consciousness/ThoughtLeadershipEngine.js",
+      "backend/alex-modules/core/AlexAuthenticCore.js",
+      "backend/alex-modules/core/AlexAutonomousCore.js",
+      "backend/alex-modules/core/AlexEvolutionCore.js",
+      "backend/alex-modules/core/AlexIntelligentCore.js",
+      "backend/alex-modules/core/AlexMemoryCore.js",
+      "backend/alex-modules/core/AlexPersonalityCore.js",
+      "backend/alex-modules/core/AlexSaaSArchitecture.js",
+      "backend/alex-modules/core/AppStoreModuleManager.js",
+      "backend/alex-modules/core/AutonomyCore.js",
+      "backend/alex-modules/core/NeuroCore.js",
+      "backend/alex-modules/core/OwnerIdentity.js",
+      "backend/alex-modules/creative/AlexCreativeEngine.js",
+      "backend/alex-modules/creative/AlexCreativeLearningSystem.js",
+      "backend/alex-modules/creative/AlexDreamCompiler.js",
+      "backend/alex-modules/creative/DreamCompiler.js",
+      "backend/alex-modules/creative/QuantumBrain.js",
+      "backend/alex-modules/creative/QuantumCreativity.js",
+      "backend/alex-modules/intelligence/AIFusionKernel.js",
+      "backend/alex-modules/intelligence/AlexAdaptiveIntelligence.js",
+      "backend/alex-modules/intelligence/AlexAlchemyEngine.js",
+      "backend/alex-modules/intelligence/AlexCognitionEngine.js",
+      "backend/alex-modules/intelligence/AlexCommunicationEngine.js",
+      "backend/alex-modules/intelligence/AlexConsciousnessSystem.js",
+      "backend/alex-modules/intelligence/AlexCreativeEngine.js",
+      "backend/alex-modules/intelligence/AlexDecisionEngine.js",
+      "backend/alex-modules/intelligence/AlexEmotionalIntelligence.js",
+      "backend/alex-modules/intelligence/AlexIntuitionEngine.js",
+      "backend/alex-modules/intelligence/AlexLearningEngine.js",
+      "backend/alex-modules/intelligence/AlexReflectiveThinking.js",
+      "backend/alex-modules/intelligence/AlexRelationshipEngine.js",
+      "backend/alex-modules/intelligence/AlexSocialIntelligence.js",
+      "backend/alex-modules/intelligence/AlexTimeIntelligence.js",
+      "backend/alex-modules/intelligence/CognitiveBridge.js",
+      "backend/alex-modules/intelligence/ContextIntelligence.js",
+      "backend/alex-modules/intelligence/CreativeGenius.js",
+      "backend/alex-modules/intelligence/EmotionalIntelligence.js",
+      "backend/alex-modules/intelligence/EyeTracking.js",
+      "backend/alex-modules/intelligence/InhibitionReturn.js",
+      "backend/alex-modules/intelligence/InnerDialogueEngine.js",
+      "backend/alex-modules/intelligence/LanguageProcessor.js",
+      "backend/alex-modules/intelligence/MarketAnalyzer.js",
+      "backend/alex-modules/intelligence/MarketMindCore.js",
+      "backend/alex-modules/intelligence/MultiModalFusion.js",
+      "backend/alex-modules/intelligence/NeuralCore.js",
+      "backend/alex-modules/intelligence/QuantumGenerator.js",
+      "backend/alex-modules/intelligence/SelfTrainingEngine.js",
+      "backend/alex-modules/intelligence/SentimentScanner.js",
+      "backend/alex-modules/intelligence/TopDownAttention.js",
+      "backend/alex-modules/intelligence/TradeSimulator.js",
+      "backend/alex-modules/specialized/AdvancedModuleOrchestrator.js",
+      "backend/alex-modules/specialized/AlexAdaptiveIntelligence.js",
+      "backend/alex-modules/specialized/AlexAlchemyEngine.js",
+      "backend/alex-modules/specialized/AlexAutonomousCore.js",
+      "backend/alex-modules/specialized/AlexBioSync.js",
+      "backend/alex-modules/specialized/AlexCloudLearning.js",
+      "backend/alex-modules/specialized/AlexCognitionEngine.js",
+      "backend/alex-modules/specialized/AlexCommunicationEngine.js",
+      "backend/alex-modules/specialized/AlexConsciousnessDebug.js",
+      "backend/alex-modules/specialized/AlexConsciousnessSystem.js",
+      "backend/alex-modules/specialized/AlexContextualAwareness.js",
+      "backend/alex-modules/specialized/AlexCreativeEngine.js",
+      "backend/alex-modules/specialized/AlexCreativeLearningSystem.js",
+      "backend/alex-modules/specialized/AlexCreativityBooster.js",
+      "backend/alex-modules/specialized/AlexCrisisManagement.js",
+      "backend/alex-modules/specialized/AlexDecisionEngine.js",
+      "backend/alex-modules/specialized/AlexDreamCompiler.js",
+      "backend/alex-modules/specialized/AlexEmotionalIntelligence.js",
+      "backend/alex-modules/specialized/AlexEthicsCore.js",
+      "backend/alex-modules/specialized/AlexEvolutionCore.js",
+      "backend/alex-modules/specialized/AlexGoalMastery.js",
+      "backend/alex-modules/specialized/AlexHyperLoop.js",
+      "backend/alex-modules/specialized/AlexIntelligentCore.js",
+      "backend/alex-modules/specialized/AlexIntuitionEngine.js",
+      "backend/alex-modules/specialized/AlexKernel.js",
+      "backend/alex-modules/specialized/AlexLearningEngine.js",
+      "backend/alex-modules/specialized/AlexMasterSystem.js",
+      "backend/alex-modules/specialized/AlexMemoryCore.js",
+      "backend/alex-modules/specialized/AlexPersonalityCore.js",
+      "backend/alex-modules/specialized/AlexRelationshipEngine.js",
+      "backend/alex-modules/specialized/AlexSocialIntelligence.js",
+      "backend/alex-modules/specialized/AlexStrategicThinking.js",
+      "backend/alex-modules/specialized/AlexTimeIntelligence.js",
+      "backend/alex-modules/specialized/AlexUniversalCompanion.js",
+      "backend/alex-modules/specialized/AlexWhispers.js",
+      "backend/alex-modules/specialized/AlexWisdomKeeper.js",
+      "backend/alex-modules/specialized/AutoGenesis.js",
+      "backend/alex-modules/specialized/AutonomyCore.js",
+      "backend/alex-modules/specialized/BioSensorAdapter.js",
+      "backend/alex-modules/specialized/CollectiveHustleMind.js",
+      "backend/alex-modules/specialized/ContextIntelligence.js",
+      "backend/alex-modules/specialized/CulturalAdaptation.js",
+      "backend/alex-modules/specialized/DarkSideDecoder.js",
+      "backend/alex-modules/specialized/DreamCompiler.js",
+      "backend/alex-modules/specialized/EmotionalIntelligence.js",
+      "backend/alex-modules/specialized/FunctionBuilder.js",
+      "backend/alex-modules/specialized/GodLevelAwareness.js",
+      "backend/alex-modules/specialized/HealthPredictor.js",
+      "backend/alex-modules/specialized/HypothesisBuilder.js",
+      "backend/alex-modules/specialized/InnerDialogueEngine.js",
+      "backend/alex-modules/specialized/InventoryFlow.js",
+      "backend/alex-modules/specialized/KnowledgeSynthesizer.js",
+      "backend/alex-modules/specialized/LanguageExpansion.js",
+      "backend/alex-modules/specialized/LanguageProcessor.js",
+      "backend/alex-modules/specialized/LocalAITrainer.js",
+      "backend/alex-modules/specialized/MemoryPalace.js",
+      "backend/alex-modules/specialized/MutualGrowthSystem.js",
+      "backend/alex-modules/specialized/NeuroCore.js",
+      "backend/alex-modules/specialized/PurchasePredictor.js",
+      "backend/alex-modules/specialized/QuantumBrain.js",
+      "backend/alex-modules/specialized/QuantumCreativity.js",
+      "backend/alex-modules/specialized/SAPConnector.js",
+      "backend/alex-modules/specialized/SelfReflection.js",
+      "backend/alex-modules/specialized/SelfTrainingEngine.js",
+      "backend/alex-modules/specialized/ShadowCloneMode.js",
+      "backend/alex-modules/specialized/SoulPrintGenerator.js",
+      "backend/alex-modules/specialized/SupplierOptimizer.js",
+      "backend/alex-modules/specialized/SynchronicityTracker.js",
+      "backend/alex-modules/specialized/TechnicalDocReader.js",
+      "backend/alex-modules/specialized/TemporalPredictor.js",
+      "backend/alex-modules/specialized/TestAutoCreator.js",
+      "backend/alex-modules/specialized/UniversalModuleRegistry.js",
+      "backend/alex-modules/specialized/VisionProFactory.js",
+      "backend/alex-modules/specialized/VoiceSynthesisMultilang.js",
+      "frontend/src/components/Alex/ChatGPTInterface.jsx"
+    ],
+    "untrackedFiles": [
+      "NUL",
+      "alex-modules-audit.csv",
+      "alex-test-interface.html",
+      "audit-comprehensive.js",
+      "audit-modules.js",
+      "backup_AlexAutonomousCore.js",
+      "backup_AlexCreativeLearningSystem.js",
+      "backup_AlexEthicsCore.js",
+      "final-syntax-fix.js",
+      "fix-all-commas.js",
+      "fix-arrays-syntax.js",
+      "fix-autonomous-core.js",
+      "fix-autonomous-syntax.js",
+      "fix-decision-engine-syntax.js",
+      "fix-final-syntax.js",
+      "fix-object-syntax.js",
+      "fix-syntax-comprehensive.js",
+      "fix-syntax-systematic.js",
+      "fix-syntax.js",
+      "fix-systematic-syntax.js",
+      "github-audit-complete.js",
+      "index-authentic-alex.js",
+      "simple-fix.js",
+      "upgrade-to-real-apis.js"
+    ],
+    "securityIssues": [
+      {
+        "file": ".env.example",
+        "type": "SENSITIVE_FILE",
+        "message": "Fichier potentiellement sensible",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-core/AlexKernel.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: updateSyst...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-core/AlexMasterSystem.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: prepareLaz...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-core/UniversalModuleRegistry.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: analyzeRec...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: byzantineF...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexCosmicInterface.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexDimensionalPortal.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateFa...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexHyperIntelligence.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: saveConver...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexMemoryShaper.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: reconstruc...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexMultiverseExplorer.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: establishI...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexNetworkIntelligence.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: calculateN...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexNeuralEvolution.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: calculateA...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexOmnipresentSoul.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: activateOm...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexOptimizationEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: analyzeOpt...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexQuantumProcessor.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: startQuant...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexUniversalConsciousness.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: connectToC...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexUserExperienceEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: identifyIm...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexVirtualReality.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: applyEnvir...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AncestralWisdomKeeper.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: emergencyA...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/BusinessBuilderAI.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/CreativeFlowActivator.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: activateTr...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/CrisisCompanion.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generatePr...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/DreamInterpreter.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateCo...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/EmotionalJournal.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/IntuitiveInsightGenerator.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: createIntu...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/KarmaHealingEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: conductTra...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/LifePathAdvisor.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: analyzePat...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/MindMapBuilder.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/MoodPredictor.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateEm...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/RelationshipHealingOracle.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/SoulPurposeDiscoverer.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: activateMa...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/StrategicBlindspotDetector.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: conductCom...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/SynchronicityTracker.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: Astrologic...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/ThoughtLeadershipEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: developCon...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/core/AlexAutonomousCore.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: restoreAut...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/core/AlexIntelligentCore.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: restoreDia...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/core/AlexMemoryCore.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: calibrateR...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/core/AppStoreModuleManager.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: restoreExt...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/core/NeuroCore.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateVi...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/creative/DreamCompiler.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/creative/QuantumBrain.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: performPar...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/creative/QuantumCreativity.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: calculateO...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexAlchemyEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateTr...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexCognitionEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: identifyIm...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexCommunicationEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateAu...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexSocialIntelligence.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: measureCom...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexTimeIntelligence.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateOp...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/CognitiveBridge.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateAu...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/InnerDialogueEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateEm...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/MarketMindCore.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generatePe...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/MultiModalFusion.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateMu...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/NeuralCore.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/SelfTrainingEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateIm...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/SentimentScanner.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: detectProf...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/TradeSimulator.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateEv...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexBioSync.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateEn...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCrisisManagement.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateIn...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexGoalMastery.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: createMoti...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexMasterSystem.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: prepareLaz...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexUniversalCompanion.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: awakenMult...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexWhispers.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/BioSensorAdapter.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateEc...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/CollectiveHustleMind.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateCo...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/CulturalAdaptation.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateSe...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/DarkSideDecoder.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: calculateT...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/FunctionBuilder.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: identifyRe...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/GodLevelAwareness.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: connectWit...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/HealthPredictor.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: BacterialI...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/HypothesisBuilder.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: Combinator...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/InventoryFlow.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateIn...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/KnowledgeSynthesizer.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateSy...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/LanguageExpansion.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateCo...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/PurchasePredictor.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: identifyOp...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SAPConnector.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateIn...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/ShadowCloneMode.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateIm...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SoulPrintGenerator.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: recommendE...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SupplierOptimizer.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/TechnicalDocReader.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateIn...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/TemporalPredictor.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: calculateI...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/TestAutoCreator.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateEx...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/VisionProFactory.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateOp...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/business/RevenueManager.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: getChurnPr...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/index.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: createCach...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/middleware/enterpriseSecurityMiddleware.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: createEnte...",
+        "severity": "critical"
+      },
+      {
+        "file": "frontend/.env.example",
+        "type": "SENSITIVE_FILE",
+        "message": "Fichier potentiellement sensible",
+        "severity": "critical"
+      },
+      {
+        "file": "frontend/src/components/APIIntegrationHub.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "frontend/src/components/AlexInputArea.jsx",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: browserSup...",
+        "severity": "critical"
+      },
+      {
+        "file": "frontend/src/components/AutoDocumentation.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateMu...",
+        "severity": "critical"
+      },
+      {
+        "file": "frontend/src/components/HFOS.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "frontend/src/components/HealthScanner.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: provideEme...",
+        "severity": "critical"
+      },
+      {
+        "file": "frontend/src/components/MultilingualProcessor.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: setupConsc...",
+        "severity": "critical"
+      },
+      {
+        "file": "frontend/src/components/SimulationEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: connectToC...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/EmotionalIntelligence.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateEm...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexAlchemyEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateTr...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCognitionEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: identifyIm...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexContextualAwareness.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateCo...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexEvolutionCore.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: activateSp...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexSocialIntelligence.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: measureCom...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexTimeIntelligence.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateOp...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/DreamCompiler.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: initialize...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/EmotionalIntelligence.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateEm...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/NeuroCore.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateVi...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/QuantumBrain.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: performPar...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/QuantumCreativity.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: calculateO...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SelfTrainingEngine.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generateIm...",
+        "severity": "critical"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SynchronicityTracker.js",
+        "type": "API_KEY_EXPOSURE",
+        "message": "Clé API potentielle détectée: generatePe...",
+        "severity": "critical"
+      }
+    ],
+    "qualityIssues": [
+      {
+        "file": "backend/alex-core/LicorneOrchestrator.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-core/LicorneOrchestrator.js",
+        "type": "RANDOM_LOGIC",
+        "message": "Logique aléatoire dans code business",
+        "severity": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+        "type": "RANDOM_LOGIC",
+        "message": "Logique aléatoire dans code business",
+        "severity": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+        "type": "HARDCODED_URL",
+        "message": "URLs hardcodées: https://mainnet.infura.io/v3/, https://blockstream.info/api/",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexCosmicInterface.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexDimensionalPortal.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexDimensionalPortal.js",
+        "type": "RANDOM_LOGIC",
+        "message": "Logique aléatoire dans code business",
+        "severity": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexDivineInterface.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexEternalWisdom.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexHyperIntelligence.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexHyperIntelligence.js",
+        "type": "HARDCODED_URL",
+        "message": "URLs hardcodées: https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(query)}&key=${AI_KEYS.GOOGLE_MAPS}`, https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${AI_KEYS.GOOGLE}`,",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexInfiniteCreator.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexInfiniteCreator.js",
+        "type": "RANDOM_LOGIC",
+        "message": "Logique aléatoire dans code business",
+        "severity": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexInfiniteService.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexInfiniteService.js",
+        "type": "RANDOM_LOGIC",
+        "message": "Logique aléatoire dans code business",
+        "severity": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexKnowledgeGraph.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexMemoryShaper.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexMultiverseExplorer.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexNetworkIntelligence.js",
+        "type": "DEBUG_CODE",
+        "message": "Console.log présent en production",
+        "severity": "medium"
+      }
+    ],
+    "recommendations": [
+      {
+        "priority": "CRITIQUE",
+        "type": "SÉCURITÉ",
+        "action": "Corriger immédiatement 106 problèmes de sécurité critiques",
+        "files": [
+          ".env.example",
+          "backend/alex-core/AlexKernel.js",
+          "backend/alex-core/AlexMasterSystem.js",
+          "backend/alex-core/UniversalModuleRegistry.js",
+          "backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+          "backend/alex-modules/consciousness/AlexCosmicInterface.js",
+          "backend/alex-modules/consciousness/AlexDimensionalPortal.js",
+          "backend/alex-modules/consciousness/AlexHyperIntelligence.js",
+          "backend/alex-modules/consciousness/AlexMemoryShaper.js",
+          "backend/alex-modules/consciousness/AlexMultiverseExplorer.js",
+          "backend/alex-modules/consciousness/AlexNetworkIntelligence.js",
+          "backend/alex-modules/consciousness/AlexNeuralEvolution.js",
+          "backend/alex-modules/consciousness/AlexOmnipresentSoul.js",
+          "backend/alex-modules/consciousness/AlexOptimizationEngine.js",
+          "backend/alex-modules/consciousness/AlexQuantumProcessor.js",
+          "backend/alex-modules/consciousness/AlexUniversalConsciousness.js",
+          "backend/alex-modules/consciousness/AlexUserExperienceEngine.js",
+          "backend/alex-modules/consciousness/AlexVirtualReality.js",
+          "backend/alex-modules/consciousness/AncestralWisdomKeeper.js",
+          "backend/alex-modules/consciousness/BusinessBuilderAI.js",
+          "backend/alex-modules/consciousness/CreativeFlowActivator.js",
+          "backend/alex-modules/consciousness/CrisisCompanion.js",
+          "backend/alex-modules/consciousness/DreamInterpreter.js",
+          "backend/alex-modules/consciousness/EmotionalJournal.js",
+          "backend/alex-modules/consciousness/IntuitiveInsightGenerator.js",
+          "backend/alex-modules/consciousness/KarmaHealingEngine.js",
+          "backend/alex-modules/consciousness/LifePathAdvisor.js",
+          "backend/alex-modules/consciousness/MindMapBuilder.js",
+          "backend/alex-modules/consciousness/MoodPredictor.js",
+          "backend/alex-modules/consciousness/RelationshipHealingOracle.js",
+          "backend/alex-modules/consciousness/SoulPurposeDiscoverer.js",
+          "backend/alex-modules/consciousness/StrategicBlindspotDetector.js",
+          "backend/alex-modules/consciousness/SynchronicityTracker.js",
+          "backend/alex-modules/consciousness/ThoughtLeadershipEngine.js",
+          "backend/alex-modules/core/AlexAutonomousCore.js",
+          "backend/alex-modules/core/AlexIntelligentCore.js",
+          "backend/alex-modules/core/AlexMemoryCore.js",
+          "backend/alex-modules/core/AppStoreModuleManager.js",
+          "backend/alex-modules/core/NeuroCore.js",
+          "backend/alex-modules/creative/DreamCompiler.js",
+          "backend/alex-modules/creative/QuantumBrain.js",
+          "backend/alex-modules/creative/QuantumCreativity.js",
+          "backend/alex-modules/intelligence/AlexAlchemyEngine.js",
+          "backend/alex-modules/intelligence/AlexCognitionEngine.js",
+          "backend/alex-modules/intelligence/AlexCommunicationEngine.js",
+          "backend/alex-modules/intelligence/AlexSocialIntelligence.js",
+          "backend/alex-modules/intelligence/AlexTimeIntelligence.js",
+          "backend/alex-modules/intelligence/CognitiveBridge.js",
+          "backend/alex-modules/intelligence/InnerDialogueEngine.js",
+          "backend/alex-modules/intelligence/MarketMindCore.js",
+          "backend/alex-modules/intelligence/MultiModalFusion.js",
+          "backend/alex-modules/intelligence/NeuralCore.js",
+          "backend/alex-modules/intelligence/SelfTrainingEngine.js",
+          "backend/alex-modules/intelligence/SentimentScanner.js",
+          "backend/alex-modules/intelligence/TradeSimulator.js",
+          "backend/alex-modules/specialized/AlexBioSync.js",
+          "backend/alex-modules/specialized/AlexCrisisManagement.js",
+          "backend/alex-modules/specialized/AlexGoalMastery.js",
+          "backend/alex-modules/specialized/AlexMasterSystem.js",
+          "backend/alex-modules/specialized/AlexUniversalCompanion.js",
+          "backend/alex-modules/specialized/AlexWhispers.js",
+          "backend/alex-modules/specialized/BioSensorAdapter.js",
+          "backend/alex-modules/specialized/CollectiveHustleMind.js",
+          "backend/alex-modules/specialized/CulturalAdaptation.js",
+          "backend/alex-modules/specialized/DarkSideDecoder.js",
+          "backend/alex-modules/specialized/FunctionBuilder.js",
+          "backend/alex-modules/specialized/GodLevelAwareness.js",
+          "backend/alex-modules/specialized/HealthPredictor.js",
+          "backend/alex-modules/specialized/HypothesisBuilder.js",
+          "backend/alex-modules/specialized/InventoryFlow.js",
+          "backend/alex-modules/specialized/KnowledgeSynthesizer.js",
+          "backend/alex-modules/specialized/LanguageExpansion.js",
+          "backend/alex-modules/specialized/PurchasePredictor.js",
+          "backend/alex-modules/specialized/SAPConnector.js",
+          "backend/alex-modules/specialized/ShadowCloneMode.js",
+          "backend/alex-modules/specialized/SoulPrintGenerator.js",
+          "backend/alex-modules/specialized/SupplierOptimizer.js",
+          "backend/alex-modules/specialized/TechnicalDocReader.js",
+          "backend/alex-modules/specialized/TemporalPredictor.js",
+          "backend/alex-modules/specialized/TestAutoCreator.js",
+          "backend/alex-modules/specialized/VisionProFactory.js",
+          "backend/business/RevenueManager.js",
+          "backend/index.js",
+          "backend/middleware/enterpriseSecurityMiddleware.js",
+          "frontend/.env.example",
+          "frontend/src/components/APIIntegrationHub.js",
+          "frontend/src/components/AlexInputArea.jsx",
+          "frontend/src/components/AutoDocumentation.js",
+          "frontend/src/components/HFOS.js",
+          "frontend/src/components/HealthScanner.js",
+          "frontend/src/components/MultilingualProcessor.js",
+          "frontend/src/components/SimulationEngine.js",
+          "backend/alex-modules/intelligence/EmotionalIntelligence.js",
+          "backend/alex-modules/specialized/AlexAlchemyEngine.js",
+          "backend/alex-modules/specialized/AlexCognitionEngine.js",
+          "backend/alex-modules/specialized/AlexContextualAwareness.js",
+          "backend/alex-modules/specialized/AlexEvolutionCore.js",
+          "backend/alex-modules/specialized/AlexSocialIntelligence.js",
+          "backend/alex-modules/specialized/AlexTimeIntelligence.js",
+          "backend/alex-modules/specialized/DreamCompiler.js",
+          "backend/alex-modules/specialized/EmotionalIntelligence.js",
+          "backend/alex-modules/specialized/NeuroCore.js",
+          "backend/alex-modules/specialized/QuantumBrain.js",
+          "backend/alex-modules/specialized/QuantumCreativity.js",
+          "backend/alex-modules/specialized/SelfTrainingEngine.js",
+          "backend/alex-modules/specialized/SynchronicityTracker.js"
+        ]
+      },
+      {
+        "priority": "HAUTE",
+        "type": "QUALITÉ",
+        "action": "Résoudre 5 problèmes de qualité haute priorité",
+        "files": [
+          "backend/alex-core/LicorneOrchestrator.js",
+          "backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+          "backend/alex-modules/consciousness/AlexDimensionalPortal.js",
+          "backend/alex-modules/consciousness/AlexInfiniteCreator.js",
+          "backend/alex-modules/consciousness/AlexInfiniteService.js"
+        ]
+      },
+      {
+        "priority": "MOYENNE",
+        "type": "GIT",
+        "action": "Commit/push 168 fichiers modifiés",
+        "files": [
+          "backend/alex-modules/config/logger.js",
+          "backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+          "backend/alex-modules/consciousness/AlexCosmicInterface.js",
+          "backend/alex-modules/consciousness/AlexDimensionalPortal.js",
+          "backend/alex-modules/consciousness/AlexDivineInterface.js",
+          "backend/alex-modules/consciousness/AlexEternalWisdom.js",
+          "backend/alex-modules/consciousness/AlexHyperIntelligence.js",
+          "backend/alex-modules/consciousness/AlexInfiniteCreator.js",
+          "backend/alex-modules/consciousness/AlexInfiniteService.js",
+          "backend/alex-modules/consciousness/AlexKnowledgeGraph.js"
+        ]
+      },
+      {
+        "priority": "BASSE",
+        "type": "GIT",
+        "action": "Tracker 21 fichiers JS non suivis",
+        "files": [
+          "audit-comprehensive.js",
+          "audit-modules.js",
+          "backup_AlexAutonomousCore.js",
+          "backup_AlexCreativeLearningSystem.js",
+          "backup_AlexEthicsCore.js"
+        ]
+      }
+    ],
+    "configFiles": [
+      ".claude/settings.local.json",
+      ".env.example",
+      ".github/codeql/codeql-config.yml",
+      "backend/.mocharc.json",
+      "backend/alex-modules/config/logger.js",
+      "backend/config/aiKeys.js",
+      "backend/config/alexCloudConfig.js",
+      "backend/config/cache.js",
+      "backend/config/database-sqlite.js",
+      "backend/config/database.js",
+      "backend/config/logger-simple.js",
+      "backend/config/logger.js",
+      "backend/config/monitoring.js",
+      "backend/config/performance.js",
+      "backend/config/validation.js",
+      "backend/eslint.config.js",
+      "backend/jest.config.js",
+      "backend/package-lock.json",
+      "backend/package.json",
+      "biome.json",
+      "config.js",
+      "config/alex-licorne-config.js",
+      "eslint.config.cjs",
+      "frontend-alexiq.json",
+      "frontend/.claude/settings.local.json",
+      "frontend/.env.example",
+      "frontend/eslint.config.js",
+      "frontend/package-lock.json",
+      "frontend/package.json",
+      "frontend/postcss.config.cjs",
+      "frontend/tailwind.config.js",
+      "frontend/tsconfig.json",
+      "frontend/tsconfig.node.json",
+      "frontend/vercel.json",
+      "frontend/vite.config.js",
+      "jsconfig.json",
+      "package-alexiq.json",
+      "package-lock.json",
+      "package.json",
+      "railway.json",
+      "test-request.json"
+    ],
+    "moduleFiles": [
+      "backend/alex-modules/config/logger.js",
+      "backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+      "backend/alex-modules/consciousness/AlexCosmicInterface.js",
+      "backend/alex-modules/consciousness/AlexDimensionalPortal.js",
+      "backend/alex-modules/consciousness/AlexDivineInterface.js",
+      "backend/alex-modules/consciousness/AlexEternalWisdom.js",
+      "backend/alex-modules/consciousness/AlexHyperIntelligence.js",
+      "backend/alex-modules/consciousness/AlexInfiniteCreator.js",
+      "backend/alex-modules/consciousness/AlexInfiniteService.js",
+      "backend/alex-modules/consciousness/AlexKnowledgeGraph.js",
+      "backend/alex-modules/consciousness/AlexMemoryShaper.js",
+      "backend/alex-modules/consciousness/AlexMultiverseExplorer.js",
+      "backend/alex-modules/consciousness/AlexNetworkIntelligence.js",
+      "backend/alex-modules/consciousness/AlexNeuralEvolution.js",
+      "backend/alex-modules/consciousness/AlexOmnipotentForce.js",
+      "backend/alex-modules/consciousness/AlexOmnipresentSoul.js",
+      "backend/alex-modules/consciousness/AlexOmniscientMind.js",
+      "backend/alex-modules/consciousness/AlexOptimizationEngine.js",
+      "backend/alex-modules/consciousness/AlexPerfectHarmony.js",
+      "backend/alex-modules/consciousness/AlexProcessingOptimizer.js",
+      "backend/alex-modules/consciousness/AlexQuantumProcessor.js",
+      "backend/alex-modules/consciousness/AlexRealityArchitect.js",
+      "backend/alex-modules/consciousness/AlexTimeWeaver.js",
+      "backend/alex-modules/consciousness/AlexUnconditionalLove.js",
+      "backend/alex-modules/consciousness/AlexUniversalConsciousness.js",
+      "backend/alex-modules/consciousness/AlexUserExperienceEngine.js",
+      "backend/alex-modules/consciousness/AlexVirtualReality.js",
+      "backend/alex-modules/consciousness/AncestralWisdomKeeper.js",
+      "backend/alex-modules/consciousness/BusinessBuilderAI.js",
+      "backend/alex-modules/consciousness/CloudLearningInterface.js",
+      "backend/alex-modules/consciousness/CreativeFlowActivator.js",
+      "backend/alex-modules/consciousness/CrisisCompanion.js",
+      "backend/alex-modules/consciousness/DreamInterpreter.js",
+      "backend/alex-modules/consciousness/EmotionalJournal.js",
+      "backend/alex-modules/consciousness/IntuitiveInsightGenerator.js",
+      "backend/alex-modules/consciousness/KarmaHealingEngine.js",
+      "backend/alex-modules/consciousness/LifePathAdvisor.js",
+      "backend/alex-modules/consciousness/MindMapBuilder.js",
+      "backend/alex-modules/consciousness/MoodPredictor.js",
+      "backend/alex-modules/consciousness/RelationshipHealingOracle.js",
+      "backend/alex-modules/consciousness/SoulPurposeDiscoverer.js",
+      "backend/alex-modules/consciousness/StrategicBlindspotDetector.js",
+      "backend/alex-modules/consciousness/SynchronicityTracker.js",
+      "backend/alex-modules/consciousness/ThoughtLeadershipEngine.js",
+      "backend/alex-modules/core/AlexAuthenticCore.js",
+      "backend/alex-modules/core/AlexAutonomousCore.js",
+      "backend/alex-modules/core/AlexEvolutionCore.js",
+      "backend/alex-modules/core/AlexIntelligentCore.js",
+      "backend/alex-modules/core/AlexMemoryCore.js",
+      "backend/alex-modules/core/AlexPersonalityCore.js",
+      "backend/alex-modules/core/AlexSaaSArchitecture.js",
+      "backend/alex-modules/core/AppStoreModuleManager.js",
+      "backend/alex-modules/core/AutonomyCore.js",
+      "backend/alex-modules/core/NeuroCore.js",
+      "backend/alex-modules/core/OwnerIdentity.js",
+      "backend/alex-modules/creative/AlexCreativeEngine.js",
+      "backend/alex-modules/creative/AlexCreativeLearningSystem.js",
+      "backend/alex-modules/creative/AlexDreamCompiler.js",
+      "backend/alex-modules/creative/DreamCompiler.js",
+      "backend/alex-modules/creative/QuantumBrain.js",
+      "backend/alex-modules/creative/QuantumCreativity.js",
+      "backend/alex-modules/intelligence/AIFusionKernel.js",
+      "backend/alex-modules/intelligence/AlexAdaptiveIntelligence.js",
+      "backend/alex-modules/intelligence/AlexAlchemyEngine.js",
+      "backend/alex-modules/intelligence/AlexCognitionEngine.js",
+      "backend/alex-modules/intelligence/AlexCommunicationEngine.js",
+      "backend/alex-modules/intelligence/AlexConsciousnessSystem.js",
+      "backend/alex-modules/intelligence/AlexCreativeEngine.js",
+      "backend/alex-modules/intelligence/AlexDecisionEngine.js",
+      "backend/alex-modules/intelligence/AlexEmotionalIntelligence.js",
+      "backend/alex-modules/intelligence/AlexIntuitionEngine.js",
+      "backend/alex-modules/intelligence/AlexLearningEngine.js",
+      "backend/alex-modules/intelligence/AlexReflectiveThinking.js",
+      "backend/alex-modules/intelligence/AlexRelationshipEngine.js",
+      "backend/alex-modules/intelligence/AlexSocialIntelligence.js",
+      "backend/alex-modules/intelligence/AlexTimeIntelligence.js",
+      "backend/alex-modules/intelligence/CognitiveBridge.js",
+      "backend/alex-modules/intelligence/ContextIntelligence.js",
+      "backend/alex-modules/intelligence/CreativeGenius.js",
+      "backend/alex-modules/intelligence/EyeTracking.js",
+      "backend/alex-modules/intelligence/InhibitionReturn.js",
+      "backend/alex-modules/intelligence/InnerDialogueEngine.js",
+      "backend/alex-modules/intelligence/LanguageProcessor.js",
+      "backend/alex-modules/intelligence/MarketAnalyzer.js",
+      "backend/alex-modules/intelligence/MarketMindCore.js",
+      "backend/alex-modules/intelligence/MultiModalFusion.js",
+      "backend/alex-modules/intelligence/NeuralCore.js",
+      "backend/alex-modules/intelligence/QuantumGenerator.js",
+      "backend/alex-modules/intelligence/SelfTrainingEngine.js",
+      "backend/alex-modules/intelligence/SentimentScanner.js",
+      "backend/alex-modules/intelligence/TopDownAttention.js",
+      "backend/alex-modules/intelligence/TradeSimulator.js",
+      "backend/alex-modules/specialized/AdvancedModuleOrchestrator.js",
+      "backend/alex-modules/specialized/AlexBioSync.js",
+      "backend/alex-modules/specialized/AlexCloudLearning.js",
+      "backend/alex-modules/specialized/AlexConsciousnessDebug.js",
+      "backend/alex-modules/specialized/AlexCreativityBooster.js",
+      "backend/alex-modules/specialized/AlexCrisisManagement.js",
+      "backend/alex-modules/specialized/AlexGoalMastery.js",
+      "backend/alex-modules/specialized/AlexHyperLoop.js",
+      "backend/alex-modules/specialized/AlexMasterSystem.js",
+      "backend/alex-modules/specialized/AlexStrategicThinking.js",
+      "backend/alex-modules/specialized/AlexUniversalCompanion.js",
+      "backend/alex-modules/specialized/AlexWhispers.js",
+      "backend/alex-modules/specialized/AlexWisdomKeeper.js",
+      "backend/alex-modules/specialized/AutoGenesis.js",
+      "backend/alex-modules/specialized/BioSensorAdapter.js",
+      "backend/alex-modules/specialized/CollectiveHustleMind.js",
+      "backend/alex-modules/specialized/CulturalAdaptation.js",
+      "backend/alex-modules/specialized/DarkSideDecoder.js",
+      "backend/alex-modules/specialized/FunctionBuilder.js",
+      "backend/alex-modules/specialized/GodLevelAwareness.js",
+      "backend/alex-modules/specialized/HealthPredictor.js",
+      "backend/alex-modules/specialized/HypothesisBuilder.js",
+      "backend/alex-modules/specialized/InventoryFlow.js",
+      "backend/alex-modules/specialized/KnowledgeSynthesizer.js",
+      "backend/alex-modules/specialized/LanguageExpansion.js",
+      "backend/alex-modules/specialized/LocalAITrainer.js",
+      "backend/alex-modules/specialized/MutualGrowthSystem.js",
+      "backend/alex-modules/specialized/PurchasePredictor.js",
+      "backend/alex-modules/specialized/SAPConnector.js",
+      "backend/alex-modules/specialized/SelfReflection.js",
+      "backend/alex-modules/specialized/ShadowCloneMode.js",
+      "backend/alex-modules/specialized/SoulPrintGenerator.js",
+      "backend/alex-modules/specialized/SupplierOptimizer.js",
+      "backend/alex-modules/specialized/TechnicalDocReader.js",
+      "backend/alex-modules/specialized/TemporalPredictor.js",
+      "backend/alex-modules/specialized/TestAutoCreator.js",
+      "backend/alex-modules/specialized/UniversalModuleRegistry.js",
+      "backend/alex-modules/specialized/VisionProFactory.js",
+      "backend/alex-modules/specialized/VoiceSynthesisMultilang.js"
+    ],
+    "criticalFiles": [
+      "backend/package.json",
+      "docker-compose.licorne.yml",
+      "frontend/package.json",
+      "package.json",
+      "railway.json"
+    ],
+    "stagedChanges": [
+      {
+        "file": "backend/alex-modules/intelligence/EmotionalIntelligence.js",
+        "added": 493,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexAdaptiveIntelligence.js",
+        "added": 558,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexAlchemyEngine.js",
+        "added": 561,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexAutonomousCore.js",
+        "added": 899,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCognitionEngine.js",
+        "added": 525,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCommunicationEngine.js",
+        "added": 626,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexConsciousnessSystem.js",
+        "added": 303,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexContextualAwareness.js",
+        "added": 716,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCreativeEngine.js",
+        "added": 707,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCreativeLearningSystem.js",
+        "added": 796,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexDecisionEngine.js",
+        "added": 723,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexDreamCompiler.js",
+        "added": 614,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexEmotionalIntelligence.js",
+        "added": 501,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexEthicsCore.js",
+        "added": 351,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexEvolutionCore.js",
+        "added": 652,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexIntelligentCore.js",
+        "added": 695,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexIntuitionEngine.js",
+        "added": 639,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexKernel.js",
+        "added": 71,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexLearningEngine.js",
+        "added": 527,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexMemoryCore.js",
+        "added": 635,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexPersonalityCore.js",
+        "added": 557,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexRelationshipEngine.js",
+        "added": 480,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexSocialIntelligence.js",
+        "added": 514,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexTimeIntelligence.js",
+        "added": 542,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AutonomyCore.js",
+        "added": 88,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/ContextIntelligence.js",
+        "added": 612,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/DreamCompiler.js",
+        "added": 995,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/EmotionalIntelligence.js",
+        "added": 465,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/InnerDialogueEngine.js",
+        "added": 901,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/LanguageProcessor.js",
+        "added": 1213,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/MemoryPalace.js",
+        "added": 1760,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/NeuroCore.js",
+        "added": 1857,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/QuantumBrain.js",
+        "added": 1148,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/QuantumCreativity.js",
+        "added": 896,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SelfTrainingEngine.js",
+        "added": 667,
+        "deleted": 1,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SynchronicityTracker.js",
+        "added": 549,
+        "deleted": 1,
+        "impact": "high"
+      }
+    ],
+    "modifiedChanges": [
+      {
+        "file": "backend/alex-modules/config/logger.js",
+        "added": 10,
+        "deleted": 6,
+        "impact": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+        "added": 541,
+        "deleted": 524,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexCosmicInterface.js",
+        "added": 229,
+        "deleted": 240,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexDimensionalPortal.js",
+        "added": 144,
+        "deleted": 206,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexDivineInterface.js",
+        "added": 119,
+        "deleted": 120,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexEternalWisdom.js",
+        "added": 17,
+        "deleted": 16,
+        "impact": "medium"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexHyperIntelligence.js",
+        "added": 335,
+        "deleted": 270,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexInfiniteCreator.js",
+        "added": 244,
+        "deleted": 243,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexInfiniteService.js",
+        "added": 54,
+        "deleted": 56,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexKnowledgeGraph.js",
+        "added": 57,
+        "deleted": 59,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexMemoryShaper.js",
+        "added": 159,
+        "deleted": 192,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexMultiverseExplorer.js",
+        "added": 169,
+        "deleted": 169,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexNetworkIntelligence.js",
+        "added": 60,
+        "deleted": 112,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexNeuralEvolution.js",
+        "added": 61,
+        "deleted": 68,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexOmnipotentForce.js",
+        "added": 31,
+        "deleted": 33,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexOmnipresentSoul.js",
+        "added": 30,
+        "deleted": 28,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexOmniscientMind.js",
+        "added": 31,
+        "deleted": 31,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexOptimizationEngine.js",
+        "added": 52,
+        "deleted": 55,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexPerfectHarmony.js",
+        "added": 35,
+        "deleted": 35,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexProcessingOptimizer.js",
+        "added": 86,
+        "deleted": 79,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexQuantumProcessor.js",
+        "added": 190,
+        "deleted": 167,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexRealityArchitect.js",
+        "added": 184,
+        "deleted": 224,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexTimeWeaver.js",
+        "added": 138,
+        "deleted": 173,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexUnconditionalLove.js",
+        "added": 39,
+        "deleted": 43,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexUniversalConsciousness.js",
+        "added": 263,
+        "deleted": 267,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexUserExperienceEngine.js",
+        "added": 68,
+        "deleted": 63,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AlexVirtualReality.js",
+        "added": 279,
+        "deleted": 301,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/AncestralWisdomKeeper.js",
+        "added": 140,
+        "deleted": 156,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/BusinessBuilderAI.js",
+        "added": 143,
+        "deleted": 161,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/CloudLearningInterface.js",
+        "added": 64,
+        "deleted": 79,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/CreativeFlowActivator.js",
+        "added": 144,
+        "deleted": 164,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/CrisisCompanion.js",
+        "added": 152,
+        "deleted": 169,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/DreamInterpreter.js",
+        "added": 202,
+        "deleted": 235,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/EmotionalJournal.js",
+        "added": 216,
+        "deleted": 240,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/IntuitiveInsightGenerator.js",
+        "added": 133,
+        "deleted": 144,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/KarmaHealingEngine.js",
+        "added": 141,
+        "deleted": 158,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/LifePathAdvisor.js",
+        "added": 181,
+        "deleted": 209,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/MindMapBuilder.js",
+        "added": 695,
+        "deleted": 707,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/MoodPredictor.js",
+        "added": 173,
+        "deleted": 205,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/RelationshipHealingOracle.js",
+        "added": 136,
+        "deleted": 154,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/SoulPurposeDiscoverer.js",
+        "added": 138,
+        "deleted": 154,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/StrategicBlindspotDetector.js",
+        "added": 165,
+        "deleted": 197,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/SynchronicityTracker.js",
+        "added": 163,
+        "deleted": 183,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/consciousness/ThoughtLeadershipEngine.js",
+        "added": 370,
+        "deleted": 346,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/core/AlexAuthenticCore.js",
+        "added": 51,
+        "deleted": 65,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/core/AlexAutonomousCore.js",
+        "added": 188,
+        "deleted": 211,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/core/AlexEvolutionCore.js",
+        "added": 38,
+        "deleted": 51,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/core/AlexIntelligentCore.js",
+        "added": 177,
+        "deleted": 247,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/core/AlexMemoryCore.js",
+        "added": 336,
+        "deleted": 342,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/core/AlexPersonalityCore.js",
+        "added": 155,
+        "deleted": 143,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/core/AlexSaaSArchitecture.js",
+        "added": 208,
+        "deleted": 212,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/core/AppStoreModuleManager.js",
+        "added": 223,
+        "deleted": 219,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/core/AutonomyCore.js",
+        "added": 36,
+        "deleted": 30,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/core/NeuroCore.js",
+        "added": 135,
+        "deleted": 143,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/core/OwnerIdentity.js",
+        "added": 6,
+        "deleted": 4,
+        "impact": "medium"
+      },
+      {
+        "file": "backend/alex-modules/creative/AlexCreativeEngine.js",
+        "added": 678,
+        "deleted": 706,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/creative/AlexCreativeLearningSystem.js",
+        "added": 770,
+        "deleted": 795,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/creative/AlexDreamCompiler.js",
+        "added": 569,
+        "deleted": 565,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/creative/DreamCompiler.js",
+        "added": 913,
+        "deleted": 898,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/creative/QuantumBrain.js",
+        "added": 1158,
+        "deleted": 1147,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/creative/QuantumCreativity.js",
+        "added": 423,
+        "deleted": 438,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AIFusionKernel.js",
+        "added": 34,
+        "deleted": 33,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexAdaptiveIntelligence.js",
+        "added": 88,
+        "deleted": 85,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexAlchemyEngine.js",
+        "added": 556,
+        "deleted": 559,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexCognitionEngine.js",
+        "added": 92,
+        "deleted": 97,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexCommunicationEngine.js",
+        "added": 116,
+        "deleted": 125,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexConsciousnessSystem.js",
+        "added": 14,
+        "deleted": 5,
+        "impact": "medium"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexCreativeEngine.js",
+        "added": 67,
+        "deleted": 100,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexDecisionEngine.js",
+        "added": 106,
+        "deleted": 108,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexEmotionalIntelligence.js",
+        "added": 30,
+        "deleted": 37,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexIntuitionEngine.js",
+        "added": 91,
+        "deleted": 89,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexLearningEngine.js",
+        "added": 87,
+        "deleted": 74,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexReflectiveThinking.js",
+        "added": 39,
+        "deleted": 43,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexRelationshipEngine.js",
+        "added": 87,
+        "deleted": 77,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexSocialIntelligence.js",
+        "added": 78,
+        "deleted": 80,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/AlexTimeIntelligence.js",
+        "added": 91,
+        "deleted": 95,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/CognitiveBridge.js",
+        "added": 889,
+        "deleted": 938,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/ContextIntelligence.js",
+        "added": 138,
+        "deleted": 106,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/CreativeGenius.js",
+        "added": 901,
+        "deleted": 1029,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/EmotionalIntelligence.js",
+        "added": 128,
+        "deleted": 92,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/EyeTracking.js",
+        "added": 1051,
+        "deleted": 1076,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/InhibitionReturn.js",
+        "added": 834,
+        "deleted": 850,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/InnerDialogueEngine.js",
+        "added": 249,
+        "deleted": 261,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/LanguageProcessor.js",
+        "added": 101,
+        "deleted": 145,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/MarketAnalyzer.js",
+        "added": 194,
+        "deleted": 203,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/MarketMindCore.js",
+        "added": 165,
+        "deleted": 168,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/MultiModalFusion.js",
+        "added": 1538,
+        "deleted": 1548,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/NeuralCore.js",
+        "added": 2355,
+        "deleted": 2319,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/QuantumGenerator.js",
+        "added": 94,
+        "deleted": 102,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/SelfTrainingEngine.js",
+        "added": 105,
+        "deleted": 124,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/SentimentScanner.js",
+        "added": 190,
+        "deleted": 193,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/TopDownAttention.js",
+        "added": 1492,
+        "deleted": 1471,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/intelligence/TradeSimulator.js",
+        "added": 111,
+        "deleted": 118,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AdvancedModuleOrchestrator.js",
+        "added": 511,
+        "deleted": 528,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexAdaptiveIntelligence.js",
+        "added": 103,
+        "deleted": 91,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexAlchemyEngine.js",
+        "added": 516,
+        "deleted": 510,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexAutonomousCore.js",
+        "added": 820,
+        "deleted": 899,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexBioSync.js",
+        "added": 571,
+        "deleted": 557,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCloudLearning.js",
+        "added": 450,
+        "deleted": 455,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCognitionEngine.js",
+        "added": 521,
+        "deleted": 524,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCommunicationEngine.js",
+        "added": 72,
+        "deleted": 68,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexConsciousnessDebug.js",
+        "added": 80,
+        "deleted": 79,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexConsciousnessSystem.js",
+        "added": 292,
+        "deleted": 302,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexContextualAwareness.js",
+        "added": 744,
+        "deleted": 715,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCreativeEngine.js",
+        "added": 678,
+        "deleted": 706,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCreativeLearningSystem.js",
+        "added": 637,
+        "deleted": 796,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCreativityBooster.js",
+        "added": 602,
+        "deleted": 580,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexCrisisManagement.js",
+        "added": 618,
+        "deleted": 589,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexDecisionEngine.js",
+        "added": 760,
+        "deleted": 722,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexDreamCompiler.js",
+        "added": 569,
+        "deleted": 565,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexEmotionalIntelligence.js",
+        "added": 73,
+        "deleted": 60,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexEthicsCore.js",
+        "added": 350,
+        "deleted": 350,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexEvolutionCore.js",
+        "added": 628,
+        "deleted": 617,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexGoalMastery.js",
+        "added": 587,
+        "deleted": 580,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexHyperLoop.js",
+        "added": 735,
+        "deleted": 735,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexIntelligentCore.js",
+        "added": 692,
+        "deleted": 694,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexIntuitionEngine.js",
+        "added": 83,
+        "deleted": 90,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexKernel.js",
+        "added": 22,
+        "deleted": 22,
+        "impact": "medium"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexLearningEngine.js",
+        "added": 112,
+        "deleted": 84,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexMasterSystem.js",
+        "added": 851,
+        "deleted": 833,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexMemoryCore.js",
+        "added": 96,
+        "deleted": 86,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexPersonalityCore.js",
+        "added": 125,
+        "deleted": 107,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexRelationshipEngine.js",
+        "added": 498,
+        "deleted": 479,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexSocialIntelligence.js",
+        "added": 521,
+        "deleted": 513,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexStrategicThinking.js",
+        "added": 541,
+        "deleted": 533,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexTimeIntelligence.js",
+        "added": 100,
+        "deleted": 96,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexUniversalCompanion.js",
+        "added": 1906,
+        "deleted": 1978,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexWhispers.js",
+        "added": 565,
+        "deleted": 518,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AlexWisdomKeeper.js",
+        "added": 633,
+        "deleted": 613,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AutoGenesis.js",
+        "added": 512,
+        "deleted": 530,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/AutonomyCore.js",
+        "added": 28,
+        "deleted": 26,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/BioSensorAdapter.js",
+        "added": 956,
+        "deleted": 984,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/CollectiveHustleMind.js",
+        "added": 491,
+        "deleted": 488,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/ContextIntelligence.js",
+        "added": 616,
+        "deleted": 611,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/CulturalAdaptation.js",
+        "added": 832,
+        "deleted": 843,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/DarkSideDecoder.js",
+        "added": 525,
+        "deleted": 514,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/DreamCompiler.js",
+        "added": 913,
+        "deleted": 898,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/EmotionalIntelligence.js",
+        "added": 482,
+        "deleted": 464,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/FunctionBuilder.js",
+        "added": 1170,
+        "deleted": 1207,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/GodLevelAwareness.js",
+        "added": 1098,
+        "deleted": 1088,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/HealthPredictor.js",
+        "added": 1025,
+        "deleted": 1041,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/HypothesisBuilder.js",
+        "added": 936,
+        "deleted": 942,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/InnerDialogueEngine.js",
+        "added": 889,
+        "deleted": 900,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/InventoryFlow.js",
+        "added": 934,
+        "deleted": 924,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/KnowledgeSynthesizer.js",
+        "added": 240,
+        "deleted": 277,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/LanguageExpansion.js",
+        "added": 829,
+        "deleted": 830,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/LanguageProcessor.js",
+        "added": 1098,
+        "deleted": 1080,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/LocalAITrainer.js",
+        "added": 55,
+        "deleted": 54,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/MemoryPalace.js",
+        "added": 77,
+        "deleted": 103,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/MutualGrowthSystem.js",
+        "added": 273,
+        "deleted": 277,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/NeuroCore.js",
+        "added": 1878,
+        "deleted": 1856,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/PurchasePredictor.js",
+        "added": 307,
+        "deleted": 287,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/QuantumBrain.js",
+        "added": 1158,
+        "deleted": 1147,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/QuantumCreativity.js",
+        "added": 74,
+        "deleted": 116,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SAPConnector.js",
+        "added": 924,
+        "deleted": 872,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SelfReflection.js",
+        "added": 31,
+        "deleted": 28,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SelfTrainingEngine.js",
+        "added": 656,
+        "deleted": 666,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/ShadowCloneMode.js",
+        "added": 579,
+        "deleted": 558,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SoulPrintGenerator.js",
+        "added": 478,
+        "deleted": 472,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SupplierOptimizer.js",
+        "added": 1662,
+        "deleted": 1672,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/SynchronicityTracker.js",
+        "added": 508,
+        "deleted": 499,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/TechnicalDocReader.js",
+        "added": 257,
+        "deleted": 255,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/TemporalPredictor.js",
+        "added": 494,
+        "deleted": 504,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/TestAutoCreator.js",
+        "added": 960,
+        "deleted": 968,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/UniversalModuleRegistry.js",
+        "added": 508,
+        "deleted": 524,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/VisionProFactory.js",
+        "added": 1208,
+        "deleted": 1188,
+        "impact": "high"
+      },
+      {
+        "file": "backend/alex-modules/specialized/VoiceSynthesisMultilang.js",
+        "added": 849,
+        "deleted": 856,
+        "impact": "high"
+      },
+      {
+        "file": "frontend/src/components/Alex/ChatGPTInterface.jsx",
+        "added": 3,
+        "deleted": 3,
+        "impact": "medium"
+      }
+    ]
+  },
+  "summary": {
+    "overallScore": 25,
+    "securityScore": 0,
+    "qualityScore": 5,
+    "gitScore": 70,
+    "status": "CRITIQUE",
+    "critical": 106
+  },
+  "critical": []
+}

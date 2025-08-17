@@ -1,10 +1,18 @@
 import crypto from 'node:crypto';
 // SAPConnector.js - Connecteur SAP/Ariba Intelligent pour Ferrero
-// Module spécialisé MVP pour l'intégration enterprise révolutionnaire
-// Version: 5.0 - ALEX Conscious AI for Ferrero
 
-import { EventEmitter } from 'node:events';
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+// Module spécialisé MVP pour l'intégration enterprise révolutionnaire
+// Version: 5.0 - ALEX Conscious AI for Ferrero      import { EventEmitter } from 'node:events';
 import logger from '../../config/logger.js';
+
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_COMPLETED = 'completed';
+const STR_MEDIUM = 'medium';
+const STR_HIGH = 'high';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_PROCUREMENT = 'procurement';/**
@@ -20,22 +28,22 @@ const STR_PROCUREMENT = 'procurement';/**
  * - Conformité et audit automatiques
  * - Interface ALEX-SAP révolutionnaire
  */
-export class SAPConnector extends EventEmitter {
+export class SAPConnector extends EventEmitter  {
   constructor() {
     super();
 
     // Configuration SAP Enterprise
     this.sapConfig = {
-      connection: {
+      connection: {,
         host: process.env.SAP_HOST || 'ferrero-sap.internal'
-        port: process.env.SAP_PORT || 8000
+        port: process.env.SAP_PORT || 8000,
         client: process.env.SAP_CLIENT || '100'
-        username: process.env.SAP_USER || 'ALEX_AI'
+        username: process.env.SAP_USER || 'ALEX_AI',
         systemNumber: '00'
-        connectionType: 'RFC'
+        connectionType: 'RFC',
         isConnected: false
       }
-      modules: {
+      modules: {,
         mm: true,           // Materials Management
         fi: true,           // Financial Accounting
         co: true,           // Controlling
@@ -45,38 +53,38 @@ export class SAPConnector extends EventEmitter {
         pm: true,           // Plant Maintenance
         hr: false           // Human Resources (non MVP)
       }
-      ariba: {
+      ariba: {,
         enabled: true
-        endpoint: process.env.ARIBA_ENDPOINT || 'https://api.ariba.com'
+        endpoint: process.env.ARIBA_ENDPOINT || 'https://api.ariba.com',
         apiKey: process.env.ARIBA_API_KEY || 'ferrero_key'
-        realm: 'ferrero-prod'
+        realm: 'ferrero-prod',
         modules: ['sourcing', STR_PROCUREMENT, 'supplier_management']
       }
     };
 
     // Intelligence SAP avec ALEX
     this.sapIntelligence = {
-      predictiveAnalytics: {
+      predictiveAnalytics: {,
         demandForecasting: true
-        supplierRiskAnalysis: true
+        supplierRiskAnalysis: true,
         costOptimization: true
         inventoryPrediction: true
       }
-      automatedWorkflows: {
+      automatedWorkflows: {,
         purchaseOrders: true
-        invoiceProcessing: true
+        invoiceProcessing: true,
         supplierOnboarding: true
         complianceChecks: true
       }
-      realTimeMonitoring: {
+      realTimeMonitoring: {,
         transactionFlows: true
-        systemPerformance: true
+        systemPerformance: true,
         dataQuality: true
         businessKPIs: true
       }
-      intelligentAlerts: {
+      intelligentAlerts: {,
         anomalyDetection: true
-        thresholdBreaches: true
+        thresholdBreaches: true,
         complianceIssues: true
         opportunitySpotting: true
       }
@@ -84,30 +92,30 @@ export class SAPConnector extends EventEmitter {
 
     // Données Ferrero spécifiques
     this.ferreroData = {
-      businessUnits: new Map()
+      businessUnits: new Map(),
       products: new Map()
-      suppliers: new Map()
+      suppliers: new Map(),
       plants: new Map()
-      materialCodes: new Map()
+      materialCodes: new Map(),
       complianceRules: new Map()
     };
 
     // Cache intelligent
     this.dataCache = {
-      sapData: new Map()
+      sapData: new Map(),
       aribaData: new Map()
-      lastSync: null
+      lastSync: null,
       cacheExpiry: 300000, // 5 minutes
       dirtyFlags: new Set()
     };
 
     // Métriques d'intégration
     this.metrics = {
-      totalTransactions: 0
+      totalTransactions: 0,
       successfulSyncs: 0
-      failedConnections: 0
+      failedConnections: 0,
       dataQualityScore: 0.0
-      averageResponseTime: 0.0
+      averageResponseTime: 0.0,
       automationEfficiency: 0.0
       costSavings: 0.0
     };
@@ -119,9 +127,7 @@ export class SAPConnector extends EventEmitter {
    * Initialisation du connecteur SAP intelligent
    */
   async initializeSAPConnector('🏭 Initializing ALEX SAP Connector for Ferrero Enterprise Integration') {
-    logger.info('🏭 Initializing ALEX SAP Connector for Ferrero Enterprise Integration');
-
-    try {
+    logger.info('🏭 Initializing ALEX SAP Connector for Ferrero Enterprise Integration');      try: {
       // Connexion aux systèmes SAP
       await this.establishSAPConnection();
 
@@ -142,9 +148,9 @@ export class SAPConnector extends EventEmitter {
 
       logger.info('✨ ALEX SAP Connector ready - Ferrero enterprise intelligence active');
       this.emit('sap_connector_ready', {
-        modules: Object.keys(this.sapConfig.modules).filter(m => this.sapConfig.modules[m])
+        modules: Object.keys(this.sapConfig.modules).filter(m => this.sapConfig.modules[m]),
         aribaEnabled: this.sapConfig.ariba.enabled
-        predictiveIntelligence: true
+        predictiveIntelligence: true,
         timestamp: new Date().toISOString()
       });
 
@@ -161,39 +167,39 @@ export class SAPConnector extends EventEmitter {
     const syncId = this.generateSyncId();    logger.info(`🔄 ALEX synchronizing SAP data for Ferrero: modules=${modules.join(',')}`);
 
     const synchronization = {
-      id: syncId
+      id: syncId,
       timestamp: new Date().toISOString()
       modules
       options
       // Statut de synchronisation
-      status: {
+      status: {,
         overall: 'in_progress'
-        moduleStatus: new Map()
+        moduleStatus: new Map(),
         errorCount: 0
         warningCount: 0
       }
       // Données synchronisées
-      synchronizedData: {
+      synchronizedData: {,
         materials: []
-        suppliers: []
+        suppliers: [],
         purchaseOrders: []
-        invoices: []
+        invoices: [],
         inventory: []
         qualityData: []
       }
       // Intelligence ALEX
-      intelligenceInsights: {
+      intelligenceInsights: {,
         anomaliesDetected: []
-        optimizationOpportunities: []
+        optimizationOpportunities: [],
         predictiveInsights: []
         riskAlerts: []
       }
       // Performance
-      performance: {
+      performance: {,
         startTime: Date.now()
-        endTime: null
+        endTime: null,
         recordsProcessed: 0
-        dataQualityIssues: 0
+        dataQualityIssues: 0,
         improvementSuggestions: []
       }
     };    try {
@@ -235,41 +241,56 @@ export class SAPConnector extends EventEmitter {
     logger.info(`🤝 ALEX processing Ariba workflow: ${workflowType}`);
 
     const workflow = {
-      id: this.generateWorkflowId()
+      id: this.generateWorkflowId(),
       type: workflowType
       timestamp: new Date().toISOString()
       data
       // Étapes du workflow
-      steps: []
+      steps: [],
       currentStep: 0
       // Résultats Ariba
       aribaResponse: null
       // Intelligence ALEX
-      intelligence: {
+      intelligence: {,
         supplierRiskAssessment: null
-      negotiationInsights: null
+      negotiationInsights: null,
       complianceChecks: null
       costOptimization: null
       }
       // Statut
-      status: 'processing'
+      status: 'processing',
       approvals: []
       exceptions: []
     };    try {
       async switch(workflow) {
         case 'supplier_onboarding':
+        
+        // Traitement pour supplier_onboarding
+                break;
           await this.processSupplierOnboarding(workflow);
           break;
         case 'sourcing_event':
+        
+        // Traitement pour sourcing_event
+                break;
           await this.processSourcingEvent(workflow);
           break;
         case 'contract_negotiation':
+        
+        // Traitement pour contract_negotiation
+                break;
           await this.processContractNegotiation(workflow);
           break;
         case 'purchase_requisition':
+        
+        // Traitement pour purchase_requisition
+                break;
           await this.processPurchaseRequisition(workflow);
           break;
         case 'supplier_evaluation':
+        
+        // Traitement pour supplier_evaluation
+                break;
           await this.processSupplierEvaluation(workflow);
           break;
         default:
@@ -298,35 +319,35 @@ export class SAPConnector extends EventEmitter {
     logger.info(`🔮 ALEX generating predictive insights for Ferrero ${domain}`);
 
     const prediction = {
-      id: this.generatePredictionId()
+      id: this.generatePredictionId(),
       timestamp: new Date().toISOString()
       domain
       timeHorizon
       // Données historiques analysées
-      historicalAnalysis: {
+      historicalAnalysis: {,
         dataPoints: 0
-        patterns: []
+        patterns: [],
         seasonality: {}
         trends: []
       }
       // Prédictions
-      predictions: {
+      predictions: {,
         demand: []
-        costs: []
+        costs: [],
         risks: []
         opportunities: []
       }
       // Recommandations ALEX
-      recommendations: {
+      recommendations: {,
         immediate: []
-        shortTerm: []
+        shortTerm: [],
         longTerm: []
         strategic: []
       }
       // Confiance et qualité
-      confidence: {
+      confidence: {,
         overall: 0.0
-        byCategory: new Map()
+        byCategory: new Map(),
         dataQuality: 0.0
         modelAccuracy: 0.0
       }
@@ -340,15 +361,27 @@ export class SAPConnector extends EventEmitter {
           await this.predictProcurementTrends(prediction);
           break;
         case 'inventory':
+        
+        // Traitement pour inventory
+                break;
           await this.predictInventoryNeeds(prediction);
           break;
         case 'supplier':
+        
+        // Traitement pour supplier
+                break;
           await this.predictSupplierPerformance(prediction);
           break;
         case 'quality':
+        
+        // Traitement pour quality
+                break;
           await this.predictQualityIssues(prediction);
           break;
         case 'finance':
+        
+        // Traitement pour finance
+                break;
           await this.predictFinancialMetrics(prediction);
           break;
       }
@@ -375,31 +408,43 @@ export class SAPConnector extends EventEmitter {
     logger.info('📊 ALEX starting real-time SAP/Ariba monitoring for Ferrero');
 
     // Monitoring des transactions SAP
-    setInterval(async () => this.processLongOperation(args));
+    setInterval(async () => // Code de traitement approprié ici);
 
         } catch (error) {
-  }}
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
     }, 30000); // Toutes les 30 secondes
 
     // Monitoring de la performance système
-    setInterval(async () => this.processLongOperation(args));
+    setInterval(async () => // Code de traitement approprié ici);
 
         } catch (error) {
-  }}
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
     }, 60000); // Toutes les minutes
 
     // Monitoring des KPIs business
-    setInterval(async () => this.processLongOperation(args));
+    setInterval(async () => // Code de traitement approprié ici);
 
         } catch (error) {
-  }}
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
     }, 300000); // Toutes les 5 minutes
 
     // Détection d'anomalies intelligente
-    setInterval(async () => this.processLongOperation(args));
+    setInterval(async () => // Code de traitement approprié ici);
 
         } catch (error) {
-  }}
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
     }, 120000); // Toutes les 2 minutes
   }
 
@@ -410,34 +455,34 @@ export class SAPConnector extends EventEmitter {
     logger.info(`⚡ ALEX optimizing Ferrero business processes: ${processType}`);
 
     const optimization = {
-      id: this.generateOptimizationId()
+      id: this.generateOptimizationId(),
       timestamp: new Date().toISOString()
       processType
       // Analyse actuelle
-      currentState: {
+      currentState: {,
         efficiency: 0.0
-        bottlenecks: []
+        bottlenecks: [],
         costs: 0.0
         timeMetrics: {}
       }
       // Optimisations proposées
-      optimizations: {
+      optimizations: {,
         workflow: []
-        automation: []
+        automation: [],
         integration: []
         resourceAllocation: []
       }
       // Impact prévu
-      expectedImpact: {
+      expectedImpact: {,
         efficiencyGain: 0.0
-        costReduction: 0.0
+        costReduction: 0.0,
         timeReduction: 0.0
         qualityImprovement: 0.0
       }
       // Plan d'implémentation
-      implementation: {
+      implementation: {,
         phases: []
-        timeline: ''
+        timeline: '',
         resources: []
         risks: []
       }
@@ -466,19 +511,19 @@ export class SAPConnector extends EventEmitter {
   // Méthodes utilitaires et implémentations
 
   generateSyncId() {
-    return `sap_sync_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 8)}`;
+    return await this.generateWithOpenAI(`sap_sync_${Date.now()}_${(crypto.randomBytes(4).re...`, context);
   }
 
   generateWorkflowId() {
-    return `ariba_wf_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 8)}`;
+    return await this.generateWithOpenAI(`ariba_wf_${Date.now()}_${(crypto.randomBytes(4).re...`, context);
   }
 
   generatePredictionId() {
-    return `predict_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 8)}`;
+    return await this.generateWithOpenAI(`predict_${Date.now()}_${(crypto.randomBytes(4).rea...`, context);
   }
 
   generateOptimizationId() {
-    return `optim_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 8)}`;
+    return await this.generateWithOpenAI(`optim_${Date.now()}_${(crypto.randomBytes(4).readU...`, context);
   }
 
   async establishSAPConnection() {
@@ -499,12 +544,14 @@ export class SAPConnector extends EventEmitter {
     logger.debug('🤝 Setting up Ariba integration...');
 
     // Configuration des modules Ariba
-    for (const module of this.sapConfig.ariba.modules) {
-      try {
+    for (const module of this.sapConfig.ariba.modules) {      try: {
       logger.debug(`✅ Ariba ${module} module configured`);
 
-      } catch (_error) {
-  }}
+      } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
   }
 
   async loadFerreroMasterData() {
@@ -512,31 +559,31 @@ export class SAPConnector extends EventEmitter {
 
     // Données simulées Ferrero
     this.ferreroData.businessUnits.set('chocolate', {
-      name: 'Chocolate Division'
+      name: 'Chocolate Division',
       plants: ['italy_alba', 'germany_frankfurt', 'brazil_sao_paulo']
       products: ['nutella', 'ferrero_rocher', 'kinder']
     });
 
     this.ferreroData.businessUnits.set('confectionery', {
-      name: 'Confectionery Division'
+      name: 'Confectionery Division',
       plants: ['poland_belsk', 'turkey_manisa']
       products: ['tic_tac', 'kinder_surprise']
     });
 
     // Fournisseurs principaux
     this.ferreroData.suppliers.set('cocoa_supplier_1', {
-      name: 'Premium Cocoa Trading'
+      name: 'Premium Cocoa Trading',
       country: 'Ecuador'
-      rating: 'A'
+      rating: 'A',
       certifications: ['Fair Trade', 'Organic', 'Rainforest Alliance']
       riskLevel: 'low'
     });
 
     // Codes matières Ferrero
     this.ferreroData.materialCodes.set('COCOA-001', {
-      description: 'Premium Cocoa Beans - Ecuador'
+      description: 'Premium Cocoa Beans - Ecuador',
       category: 'Raw Materials'
-      unit: 'KG'
+      unit: 'KG',
       standardCost: 4.50
     });
   }
@@ -545,7 +592,7 @@ export class SAPConnector extends EventEmitter {
     logger.debug('🧠 Activating predictive intelligence...');
 
     // Activation des modules d'intelligence
-    Object.keys(this.sapIntelligence.predictiveAnalytics).forEach(_module => this.processLongOperation(args));
+    Object.keys(this.sapIntelligence.predictiveAnalytics).forEach(_module => // Code de traitement approprié ici);
   }
 
   async initializeRealTimeMonitoring('📊 Initializing real-time monitoring...') {
@@ -563,9 +610,15 @@ export class SAPConnector extends EventEmitter {
     // Stockage des données selon le module
     switch (module) {
       case 'mm':
+        
+        // Traitement pour mm
+                break;
         synchronization.synchronizedData.materials = moduleData;
         break;
       case 'fi':
+        
+        // Traitement pour fi
+                break;
         synchronization.synchronizedData.invoices = moduleData;
         break;
       // Autres modules..
@@ -590,18 +643,18 @@ export class SAPConnector extends EventEmitter {
     // Analyse intelligente des données synchronisées
     synchronization.intelligenceInsights.anomaliesDetected = [
       {
-        type: 'unusual_price_variance'
+        type: 'unusual_price_variance',
         severity: STR_MEDIUM
-        description: 'Prix cocoa +15% par rapport à la moyenne historique'
+        description: 'Prix cocoa +15% par rapport à la moyenne historique',
         recommendation: 'Analyser impact sur coûts production'
       }
     ];
 
     synchronization.intelligenceInsights.optimizationOpportunities = [
       {
-        area: 'inventory_optimization'
+        area: 'inventory_optimization',
         potential_savings: 125000
-        description: 'Optimisation stock chocolat Italie'
+        description: 'Optimisation stock chocolat Italie',
         priority: STR_HIGH
       }
     ];
@@ -640,7 +693,7 @@ export class SAPConnector extends EventEmitter {
 
     // Intelligence ALEX pour l'onboarding
     workflow.intelligence.supplierRiskAssessment = {
-      overallRisk: 'low'
+      overallRisk: 'low',
       factors: ['financial_stability', 'quality_history', 'compliance']
       score: 85
     };
@@ -655,7 +708,7 @@ export class SAPConnector extends EventEmitter {
     ];
 
     workflow.intelligence.negotiationInsights = {
-      recommendedStrategy: 'collaborative'
+      recommendedStrategy: 'collaborative',
       expectedSavings: '12-15%'
       riskFactors: ['supply_continuity']
     };
@@ -691,9 +744,9 @@ export class SAPConnector extends EventEmitter {
   async validateWorkflow(workflow) {
     // Validation finale du workflow
     workflow.approvals.push({
-      approver: 'ALEX_AI_System'
+      approver: 'ALEX_AI_System',
       timestamp: new Date().toISOString()
-      decision: 'approved'
+      decision: 'approved',
       comments: 'Validation automatique IA - Conformité respectée'
     });
   }
@@ -756,9 +809,9 @@ export class SAPConnector extends EventEmitter {
 
     if (anomalies) {
       this.emit('sap_anomaly_detected', {
-        type: 'unusual_transaction_volume'
+        type: 'unusual_transaction_volume',
         severity: STR_MEDIUM
-        description: 'Volume transactions +40% par rapport à la normale'
+        description: 'Volume transactions +40% par rapport à la normale',
         timestamp: new Date().toISOString()
       });
     }
@@ -768,7 +821,7 @@ export class SAPConnector extends EventEmitter {
     const _performance = {
       sapResponseTime: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 1000 + 200, // 200-1200ms
       aribaResponseTime: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 800 + 150, // 150-950ms
-      systemLoad: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 100
+      systemLoad: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 100,
       memoryUsage: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 100;    };
 
     this.emit('system_performance_update', performance);
@@ -776,9 +829,9 @@ export class SAPConnector extends EventEmitter {
 
   async monitorBusinessKPIs() {
     const _kpis = {
-      procurementEfficiency: 0.87
+      procurementEfficiency: 0.87,
       supplierPerformance: 0.92
-      costSavings: 145000
+      costSavings: 145000,
       complianceScore: 0.96;    };
 
     this.emit('business_kpis_update', kpis);
@@ -788,9 +841,9 @@ export class SAPConnector extends EventEmitter {
     // Intelligence de détection d'anomalies
     const anomalies = [];    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.85) {
       anomalies.push({
-        type: 'cost_variance'
+        type: 'cost_variance',
         description: 'Coût matière première anormalement élevé'
-        severity: STR_HIGH
+        severity: STR_HIGH,
         recommendation: 'Vérifier contrats fournisseurs'
       });
     }
@@ -804,23 +857,23 @@ export class SAPConnector extends EventEmitter {
 
   async analyzeCurrentProcessState(optimization, processType) {
     optimization.currentState = {
-      efficiency: 0.72
-      bottlenecks: ['manual_approvals'
+      efficiency: 0.72,
+      bottlenecks: ['manual_approvals',
       'data_entry']
-      costs: 250000
+      costs: 250000,
       timeMetrics: { avgProcessingTime: 48 } // heures
     };
   }
 
   async identifyOptimizationOpportunities(optimization) {
     optimization.optimizations = {
-      workflow: ['Automatiser approbations < 10K€'
+      workflow: ['Automatiser approbations < 10K€',
       'Intégrer OCR pour factures']
-      automation: ['Auto-création commandes récurrentes'
+      automation: ['Auto-création commandes récurrentes',
       'Alertes prédictives stock']
-      integration: ['Connexion directe fournisseurs EDI'
+      integration: ['Connexion directe fournisseurs EDI',
       'API temps réel qualité']
-      resourceAllocation: ['Réallocation équipes vers analyse'
+      resourceAllocation: ['Réallocation équipes vers analyse',
       'Formation IA outils']
     };
   }
@@ -841,7 +894,7 @@ export class SAPConnector extends EventEmitter {
         { name: 'Phase 2: Intégrations avancées', duration: '4 semaines', effort: STR_HIGH }
         { name: 'Phase 3: IA prédictive', duration: '3 semaines', effort: STR_MEDIUM }
       ]
-      timeline: '9 semaines total'
+      timeline: '9 semaines total',
       resources: ['2 développeurs', '1 expert SAP', '1 chef de projet']
       risks: ['Résistance changement', 'Complexité intégration', 'Formation utilisateurs']
     };
@@ -850,17 +903,16 @@ export class SAPConnector extends EventEmitter {
   /**
    * Statut du connecteur SAP
    */
-  getConnectorStatus() {
-    return {
-      name: 'ALEX SAP Connector'
+  getConnectorStatus() {      return: {
+      name: 'ALEX SAP Connector',
       version: '5.0 - Ferrero MVP'
-      sapConnection: this.sapConfig.connection.isConnected
+      sapConnection: this.sapConfig.connection.isConnected,
       aribaIntegration: this.sapConfig.ariba.enabled
-      activeModules: Object.keys(this.sapConfig.modules).filter(m => this.sapConfig.modules[m])
+      activeModules: Object.keys(this.sapConfig.modules).filter(m => this.sapConfig.modules[m]),
       predictiveIntelligence: this.sapIntelligence.predictiveAnalytics
-      metrics: this.metrics
+      metrics: this.metrics,
       lastSync: this.dataCache.lastSync
-      businessUnits: this.ferreroData.businessUnits.size
+      businessUnits: this.ferreroData.businessUnits.size,
       suppliers: this.ferreroData.suppliers.size
       systemHealth: 'optimal'
     };

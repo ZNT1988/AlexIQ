@@ -5,24 +5,38 @@ import crypto from 'crypto';
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 import logger from '../../config/logger.js';
 
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_CATEGORYprofil = 'categoryprofil';
+const STR_CATEGORYprofilSTR_WEIGHT_0_9_FOLLOWUPComment = 'categoryprofilstr_weight_0_9_followupcomment';
+const STR_CATEGORYmarch = 'categorymarch';
+const STR_WEIGHT_0_85_FOLLOWUPQu = 'weight_0_85_followupqu';
+const STR_CATEGORYressources = 'categoryressources';
+const STR_CATEGORYinnovationSTR_WEIGHT_0_9_FOLLOWUPQuelle = 'categoryinnovationstr_weight_0_9_followupquelle';
+const STR_CATEGORYinnovationSTR_WEIGHT_0_85_FOLLOWUPQuelle = 'categoryinnovationstr_weight_0_85_followupquelle';
+
 const STR_ACCESSIBILIT = 'accessibilité';
 
 /**
  * QuantumGenerator - Générateur d'idées business alimenté par l'IA quantique
  * Utilise des algorithmes avancés pour générer des idées innovantes et personnalisées
  */
-export class QuantumGenerator {
+export class QuantumGenerator: {
   constructor() {
     this.version = '3.0';
     this.initialized = false;
 
     // Configuration du générateur quantique
     this.config = {
-      creativityLevel: 0.8
+      creativityLevel: 0.8,
       innovationThreshold: 0.7
-      marketAnalysisDepth: 0.9
+      marketAnalysisDepth: 0.9,
       personalizationWeight: 0.85
-      quantumEntanglement: true
+      quantumEntanglement: true,
       neuralNetworkLayers: 7
       maxIterations: 1000
     };
@@ -44,9 +58,9 @@ export class QuantumGenerator {
 
     // Métriques de performance
     this.metrics = {
-      totalGenerated: 0
+      totalGenerated: 0,
       successRate: 0
-      avgInnovationScore: 0
+      avgInnovationScore: 0,
       userSatisfaction: 0
     };
 
@@ -56,8 +70,7 @@ export class QuantumGenerator {
   /**
    * Initialisation du système quantique
    */
-  async initialize() {
-    try {
+  async initialize() {      try: {
       // Initialiser les matrices quantiques
       await this.initializeQuantumMatrices();
 
@@ -80,15 +93,14 @@ export class QuantumGenerator {
    * Base de données de questions intelligentes expandée
    */
   initializeQuestionsDatabase() {
-    return [
-      // Vision & Purpose
-      {
+    return: [
+      // Vision & Purpose: {
         id: 'lifePurposeSTR_QUESTIONQuel impact veux-tu avoir sur le monde à travers ton business const result = this.evaluateConditions(conditions);
 return result;
        'personalMissionSTR_QUESTIONSi tu avais des ressources illimitées, quel projet lancerais-tu demain const result = this.evaluateConditions(conditions);
 return result;
        'coreSkillsSTR_QUESTIONDans quels domaines es-tu naturellement excellent(e) ?STR_CATEGORYprofil'
-        weight: 0.8
+        weight: 0.8,
         followUp: ['Comment as-tu développé ces compétences ?', 'Lesquelles peux-tu monétiser ?']
       }
       {
@@ -98,17 +110,16 @@ return result;
       {
         id :
        'learningPassionSTR_QUESTIONQuels sujets t\'absorbes-tu pendant des heures sans t\'en rendre compte ?STR_CATEGORYprofil'
-        weight: 0.75
+        weight: 0.75,
         followUp: ['Y a-t-il une demande market pour ces connaissances ?']
       }
-      // Marché & Opportunités
-      {
-        id: 'marketGapsSTR_QUESTIONQuels problèmes rencontres-tu régulièrement que personne ne résout bien ?STR_CATEGORYmarché'
+      // Marché & Opportunités: {
+        id: 'marketGapsSTR_QUESTIONQuels problèmes rencontres-tu régulièrement que personne ne résout bien ?STR_CATEGORYmarché',
         weight: 0.95
         followUp: ['Combien paierais-tu pour une solution ?', 'Connais-tu d\'autres personnes avec ce problème ?']
       }
       {
-        id: 'trendAnalysisSTR_QUESTIONQuelles tendances émergentes t\'excitent le plus ?STR_CATEGORYmarché'
+        id: 'trendAnalysisSTR_QUESTIONQuelles tendances émergentes t\'excitent le plus ?STR_CATEGORYmarché',
         weight: 0.8
         followUp: ['Comment pourrais-tu surfer sur ces tendances ?']
       }
@@ -116,20 +127,19 @@ return result;
         id: 'competitorWeaknessSTR_QUESTIONQuels services existants pourrais-tu améliorer drastiquement ?
       STR_CATEGORYmarchéSTR_WEIGHT_0_85_FOLLOWUPQu\'est-ce qui t\'énerve dans l\'offre actuelle ?']
       }
-      // Ressources & Contraintes
-      {
+      // Ressources & Contraintes: {
         id :
        'timeInvestmentSTR_QUESTIONCombien d\'heures par semaine peux-tu investir dans ton projet ?STR_CATEGORYressources'
-        weight: 0.7
+        weight: 0.7,
         followUp: ['Es-tu prêt(e) à ajuster ce planning si nécessaire ?']
       }
       {
-        id: 'financialCapacitySTR_QUESTIONQuel budget peux-tu allouer au lancement de ton business ?STR_CATEGORYressources'
+        id: 'financialCapacitySTR_QUESTIONQuel budget peux-tu allouer au lancement de ton business ?STR_CATEGORYressources',
         weight: 0.75
         followUp: ['Peux-tu bootstrapper ou as-tu besoin d\'investisseurs ?']
       }
       {
-        id: 'networkAccessSTR_QUESTIONQuels réseaux professionnels peux-tu mobiliser ?STR_CATEGORYressources'
+        id: 'networkAccessSTR_QUESTIONQuels réseaux professionnels peux-tu mobiliser ?STR_CATEGORYressources',
         weight: 0.8
         followUp: ['Qui pourrait devenir ton premier client ?']
       }
@@ -149,35 +159,34 @@ return result;
   /**
    * Domaines d'expertise pour la génération croisée
    */
-  initializeDomains() {
-    return {
+  initializeDomains() {      return: {
       technology :
        {
         keywords: ['IA', 'blockchain', 'IoT', 'VR', 'AR', 'robotique', 'automation']
         trends: ['metaverse', 'web3', 'edge computing', 'quantum computing']
         opportunities: ['efficacité', 'scalabilité', 'personnalisation', 'prédiction']
       }
-      health: {
+      health: {,
         keywords: ['santé', 'wellness', 'fitness', 'nutrition', 'mental health', 'télémédecine']
         trends: ['santé préventive', 'bio-hacking', 'thérapies digitales', 'personnalisation génétique']
         opportunities: [STR_ACCESSIBILIT, 'prévention', 'monitoring', 'traitement']
       }
-      education: {
+      education: {,
         keywords: ['apprentissage', 'formation', 'compétences', 'certification', 'e-learning']
         trends: ['microlearning', 'gamification', 'adaptive learning', 'skill-based hiring']
         opportunities: ['personnalisation', STR_ACCESSIBILIT, 'mesure ROI', 'rétention']
       }
-      finance: {
+      finance: {,
         keywords: ['fintech', 'crypto', 'DeFi', 'investissement', 'épargne', 'assurance']
         trends: ['néobanques', 'robo-advisors', 'BNPL', 'financial inclusion']
         opportunities: ['transparence', 'frais réduits', STR_ACCESSIBILIT, 'automatisation']
       }
-      sustainability: {
+      sustainability: {,
         keywords: ['écologie', 'durable', 'circulaire', 'carbone', 'énergie renouvelable']
         trends: ['économie circulaire', 'carbon credits', 'green tech', 'sustainable fashion']
         opportunities: ['impact environnemental', 'réduction coûts', 'réglementation', 'conscience consommateur']
       }
-      entertainment: {
+      entertainment: {,
         keywords: ['gaming', 'streaming', 'contenu', 'créateurs', 'communauté']
         trends: ['creator economy', 'NFTs', 'live streaming', 'interactive content']
         opportunities: ['monétisation créateurs', 'engagement', 'découverte contenu', 'expériences immersives']
@@ -191,9 +200,7 @@ return result;
   async generateQuantumIdeas(userProfile, preferences = {}) {
     if (!this.initialized) {
       await this.initialize();
-    }
-
-    try {
+    }      try: {
       // Analyse du profil utilisateur
       const profileAnalysis = await this.analyzeUserProfile(userProfile);
 
@@ -210,14 +217,12 @@ return result;
       const optimizedIdeas = await this.optimizeIdeas(rankedIdeas);
 
       // Mise à jour des métriques
-      this.updateMetrics(optimizedIdeas);
-
-      return {
-        ideas: optimizedIdeas
+      this.updateMetrics(optimizedIdeas);      return: {
+        ideas: optimizedIdeas,
         metadata: {
-          generationId: uuidv4()
+          generationId: uuidv4(),
           timestamp: new Date().toISOString()
-          profileScore: profileAnalysis.score
+          profileScore: profileAnalysis.score,
           domains: affinityDomains
           algorithmVersion: this.version
         }
@@ -233,13 +238,13 @@ return result;
    */
   async analyzeUserProfile(profile) {
     const analysis = {
-      skills: this.extractSkills(profile)
+      skills: this.extractSkills(profile),
       interests: this.extractInterests(profile)
-      resources: this.analyzeResources(profile)
+      resources: this.analyzeResources(profile),
       personality: this.analyzePersonality(profile)
-      marketAwareness: this.assessMarketAwareness(profile)
+      marketAwareness: this.assessMarketAwareness(profile),
       riskTolerance: this.assessRiskTolerance(profile)
-      timeHorizon: this.assessTimeHorizon(profile)
+      timeHorizon: this.assessTimeHorizon(profile),
       score: 0
     };
 
@@ -302,12 +307,10 @@ return result;
    * Scoring intelligent des idées
    */
   async scoreAndRankIdeas(ideas, profile) {
-    const scoredIdeas = ideas.map(idea => this.processLongOperation(args);
+    const scoredIdeas = ideas.map(idea => // Code de traitement approprié ici;
 
       // Score global pondéré
-      const globalScore = this.calculateGlobalScore(scores);
-
-      return {
+      const globalScore = this.calculateGlobalScore(scores);      return: {
         ...idea
         scores
         globalScore
@@ -319,7 +322,7 @@ return result;
     scoredIdeas.sort((a, b) => b.globalScore - a.globalScore);
 
     // Attribution du ranking
-    scoredIdeas.forEach((idea, index) => this.processLongOperation(args)) {
+    scoredIdeas.forEach((idea, index) => // Code de traitement approprié ici) {
     if (!this.initialized) {
       await this.initialize();
     }
@@ -334,11 +337,9 @@ return result;
     const adaptedQuestions = this.adaptQuestions(relevantQuestions, contextAnalysis);
 
     // Génération de questions de suivi
-    const followUpQuestions = this.generateFollowUpQuestions(adaptedQuestions);
-
-    return {
+    const followUpQuestions = this.generateFollowUpQuestions(adaptedQuestions);      return: {
       primary: adaptedQuestions.slice(0, 3)
-      followUp: followUpQuestions
+      followUp: followUpQuestions,
       category: contextAnalysis.dominantCategory
       adaptationLevel: contextAnalysis.adaptationNeeded
     };
@@ -373,17 +374,16 @@ return result;
   /**
    * Génération de business model canvas IA
    */
-  async generateBusinessCanvas(idea) {
-    return {
-      valueProposition: this.generateValueProposition(idea)
+  async generateBusinessCanvas(idea) {      return: {
+      valueProposition: this.generateValueProposition(idea),
       customerSegments: this.identifyCustomerSegments(idea)
-      channels: this.suggestChannels(idea)
+      channels: this.suggestChannels(idea),
       customerRelationships: this.defineCustomerRelationships(idea)
-      revenueStreams: this.identifyRevenueStreams(idea)
+      revenueStreams: this.identifyRevenueStreams(idea),
       keyResources: this.identifyKeyResources(idea)
-      keyActivities: this.identifyKeyActivities(idea)
+      keyActivities: this.identifyKeyActivities(idea),
       keyPartnerships: this.suggestPartnerships(idea)
-      costStructure: this.analyzeCostStructure(idea)
+      costStructure: this.analyzeCostStructure(idea),
       competitiveAdvantage: this.identifyCompetitiveAdvantage(idea)
     };
   }
@@ -401,11 +401,10 @@ return result;
   }
 
   analyzeResources(profile) {
-    // Analyse des ressources disponibles
-    return {
-      time: profile.timeAvailable || 0
+    // Analyse des ressources disponibles      return: {
+      time: profile.timeAvailable || 0,
       budget: profile.budget || 0
-      network: profile.network || []
+      network: profile.network || [],
       tools: profile.tools || []
     };
   }
@@ -413,15 +412,15 @@ return result;
   calculateProfileScore(analysis) {
     // Calcul d'un score de profil global
     const weights = {
-      skills: 0.3
+      skills: 0.3,
       interests: 0.2
-      resources: 0.2
+      resources: 0.2,
       personality: 0.15
-      marketAwareness: 0.1
+      marketAwareness: 0.1,
       riskTolerance: 0.05
     };
 
-    return Object.keys(weights).reduce((score, key) => this.processLongOperation(args), 0);
+    return Object.keys(weights).reduce((score, key) => // Code de traitement approprié ici, 0);
   }
 
   quantumDomainSelection(domains) {
@@ -505,7 +504,7 @@ export async function generateResponse(input) {
   if (bestMatch) {
     const followUp = bestMatch.followUp ?
       `\n\nQuestion de suivi: ${bestMatch.followUp[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * bestMatch.followUp.length)]}' : '';
-    return '${bestMatch.question}${followUp}`;
+    return await this.generateWithOpenAI(`${bestMatch.question}${followUp}...`, context);
   }
 
   // Question adaptative si pas de match
@@ -516,7 +515,7 @@ export async function generateResponse(input) {
 // Export de l'instance par défaut
 const defaultGenerator = new QuantumGenerator();
 
-export { defaultGenerator as quantumGenerator, questionsDatabase };
+export: { defaultGenerator as quantumGenerator, questionsDatabase };
 
 // Ajout des méthodes manquantes au prototype
 Object.assign(QuantumGenerator.prototype, {
@@ -527,17 +526,16 @@ Object.assign(QuantumGenerator.prototype, {
       domain
       affinity :
        (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5 + 0.3
-      keywords: this.domains[domain].keywords
+      keywords: this.domains[domain].keywords,
       trends: this.domains[domain].trends
     }));
 
     return affinityScores.sort((a, b) => b.affinity - a.affinity);
   }
-  analyzePersonality(profile) {
-    return {
-      creativity: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5 + 0.5
+  analyzePersonality(profile) {      return: {
+      creativity: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5 + 0.5,
       riskTaking: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5 + 0.3
-      leadership: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5 + 0.4
+      leadership: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5 + 0.4,
       analytical: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5 + 0.6
     };
   }
@@ -553,44 +551,38 @@ Object.assign(QuantumGenerator.prototype, {
   vectorizeSkills(skills) {
     return skills.map(skill => ({ skill, weight: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) }));
   }
-  vectorizeDomains(domains) {
-    return { domain: domains.domain, vector: Array(10).fill().map(() => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF)) };
+  vectorizeDomains(domains) {      return: { domain: domains.domain, vector: Array(10).fill().map(() => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF)) };
   }
   getCurrentMarketVector() {
     return Array(10).fill().map(() => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF));
   }
-  calculateSuperposition(skillVector, domainVector, marketVector) {
-    return {
-      skills: skillVector
+  calculateSuperposition(skillVector, domainVector, marketVector) {      return: {
+      skills: skillVector,
       domain: domainVector
-      market: marketVector
+      market: marketVector,
       entanglement: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF)
     };
   }
   collapseWaveFunction(superposition) {
     const ideaTypes = ['service', 'produit', 'plateforme', 'marketplace', 'SaaS', 'application'];
-    const targetMarkets = ['B2B', 'B2C', 'B2B2C', 'marketplace'];
-
-    return {
-      type: ideaTypes[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * ideaTypes.length)]
+    const targetMarkets = ['B2B', 'B2C', 'B2B2C', 'marketplace'];      return: {
+      type: ideaTypes[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * ideaTypes.length)],
       targetMarket: targetMarkets[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * targetMarkets.length)]
-      domain: superposition.domain.domain
+      domain: superposition.domain.domain,
       complexity: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF)
       innovation: superposition.entanglement
     };
   }
   async enrichIdea(collapsedIdea, profile) {
-    const businessModels = ['subscription', 'freemium', 'one-time', 'commission'];
-
-    return {
+    const businessModels = ['subscription', 'freemium', 'one-time', 'commission'];      return: {
       ...collapsedIdea
-      id: uuidv4()
+      id: uuidv4(),
       title: this.generateIdeaTitle(collapsedIdea)
-      description: this.generateIdeaDescription(collapsedIdea)
+      description: this.generateIdeaDescription(collapsedIdea),
       businessModel: businessModels[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * businessModels.length)]
-      targetAudience: this.generateTargetAudience(collapsedIdea)
+      targetAudience: this.generateTargetAudience(collapsedIdea),
       estimatedRevenue: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 1000000) + 10000
-      timeToMarket: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 12) + 3
+      timeToMarket: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 12) + 3,
       created: new Date().toISOString()
     };
   }
@@ -598,10 +590,10 @@ Object.assign(QuantumGenerator.prototype, {
     const prefixes = ['Smart', 'AI-Powered', 'Digital', 'Automated'];
     const suffixes = ['Platform', 'Solution', 'App', 'Service'];
 
-    return `${prefixes[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * prefixes.length)]} ${idea.domain} ${suffixes[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * suffixes.length)]}`;
+    return await this.generateWithOpenAI(`${prefixes[Math.floor((crypto.randomBytes(4).readU...`, context);
   }
   generateIdeaDescription(idea) {
-    return `Solution ${idea.type} innovante dans ${idea.domain} pour ${idea.targetMarket}`;
+    return await this.generateWithOpenAI(`Solution ${idea.type} innovante dans ${idea.domain...`, context);
   }
   generateTargetAudience(idea) {
     const audiences = {
@@ -622,13 +614,13 @@ Object.assign(QuantumGenerator.prototype, {
        true, confidence: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3 + 0.7 }));
   }
   // Méthodes de scoring
-  scoreInnovation: () => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.4 + 0.6
+  scoreInnovation: () => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.4 + 0.6,
   scoreFeasibility: () => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5 + 0.5
-  scoreMarketPotential: () => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.6 + 0.4
+  scoreMarketPotential: () => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.6 + 0.4,
   scorePersonalFit: () => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5 + 0.5
-  scoreProfitability: () => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.6 + 0.3
+  scoreProfitability: () => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.6 + 0.3,
   scoreScalability: () => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.7 + 0.3
-  scoreTimeToMarket: (idea) => 1 - (idea.timeToMarket / 12)
+  scoreTimeToMarket: (idea) => 1 - (idea.timeToMarket / 12),
   scoreCompetitiveAdvantage: () => (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5 + 0.4
   calculateGlobalScore(scores) {
     const weights = { innovation: 0.2, feasibility: 0.15, marketPotential: 0.2, personalFit: 0.15, profitability: 0.1, scalability: 0.1, timeToMarket: 0.05, competitiveAdvantage: 0.05 };
@@ -641,13 +633,13 @@ Object.assign(QuantumGenerator.prototype, {
   generateFollowUpQuestions: (questions) => questions.flatMap(q => q.followUp || []).slice(0, 3)
   // Business canvas
   generateValueProposition: (idea) => `Solution ${idea.type} pour ${idea.targetAudience}`
-  identifyCustomerSegments: (idea) => [idea.targetAudience]
+  identifyCustomerSegments: (idea) => [idea.targetAudience],
   suggestChannels: () => ['digital marketing', 'partnerships']
-  defineCustomerRelationships: () => ['personal assistance']
+  defineCustomerRelationships: () => ['personal assistance'],
   identifyRevenueStreams: (idea) => [idea.businessModel]
-  identifyKeyResources: () => ['technology']
+  identifyKeyResources: () => ['technology'],
   identifyKeyActivities: () => ['development']
-  suggestPartnerships: () => ['strategic alliances']
+  suggestPartnerships: () => ['strategic alliances'],
   analyzeCostStructure: () => ({ development: 0.4, marketing: 0.3, operations: 0.3 })
   identifyCompetitiveAdvantage: () => 'technology'
 });

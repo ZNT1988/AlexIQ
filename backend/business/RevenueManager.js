@@ -46,10 +46,10 @@ class RevenueManager extends EventEmitter {
     const dbPath = this.config.get("database.path");
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        console.error("❌ RevenueManager DB connection failed:", err.message);
+        
         return;
       }
-      console.log("✅ RevenueManager connecté à la base");
+      
       this.createRevenueTables();
     });
   }
@@ -119,7 +119,7 @@ class RevenueManager extends EventEmitter {
 
     tables.forEach((sql) => {
       this.db.run(sql, (err) => {
-        if (err) console.error("❌ RevenueManager table error:", err.message);
+        if (err) 
       });
     });
   }
@@ -171,7 +171,7 @@ class RevenueManager extends EventEmitter {
       );
       return transactionId;
     } catch (error) {
-      console.error("❌ Erreur enregistrement transaction:", error.message);
+      
       throw error;
     }
   }
@@ -239,10 +239,7 @@ class RevenueManager extends EventEmitter {
         tier: transaction.tier || customer.tier,
       });
     } catch (error) {
-      console.error(
-        `❌ Erreur mise à jour analytics client ${tenantId}:`,
-        error.message,
-      );
+      
     }
   }
 
@@ -360,7 +357,7 @@ class RevenueManager extends EventEmitter {
       this.revenueMetrics.month = await this.getMonthlyMetrics();
       this.revenueMetrics.lifetime = await this.getLifetimeMetrics();
     } catch (error) {
-      console.error("❌ Erreur mise à jour métriques revenus:", error.message);
+      
     }
   }
 
@@ -439,8 +436,7 @@ class RevenueManager extends EventEmitter {
 
   async runAnalytics() {
     try {
-      console.log("📊 Analyse business en cours...");
-
+      
       await Promise.all([
         this.analyzeConversions(),
         this.predictChurn(),
@@ -448,9 +444,9 @@ class RevenueManager extends EventEmitter {
         this.segmentCustomers(),
       ]);
 
-      console.log("✅ Analyses business terminées");
+      
     } catch (error) {
-      console.error("❌ Erreur analyses business:", error.message);
+      
     }
   }
 
@@ -725,7 +721,7 @@ class RevenueManager extends EventEmitter {
   }
 
   handleUpgrade(data) {
-    console.log(`📈 Upgrade client: ${data.tenantId} → ${data.newTier}`);
+    
   }
 
   handleChurn(data) {
@@ -733,7 +729,7 @@ class RevenueManager extends EventEmitter {
   }
 
   handleRevenueGoal(data) {
-    console.log(`🎉 Objectif revenus atteint: ${data.goal} - ${data.amount}€`);
+    
   }
 
   getRevenueMetrics() {
@@ -880,16 +876,15 @@ class RevenueManager extends EventEmitter {
   }
 
   async shutdown() {
-    console.log("🔄 Arrêt RevenueManager...");
-
+    
     if (this.db) {
       this.db.close((err) => {
-        if (err) console.error("❌ Erreur fermeture DB revenue:", err.message);
-        else console.log("✅ Base revenue fermée");
+        if (err) 
+        else 
       });
     }
 
-    console.log("✅ RevenueManager arrêté");
+    
   }
 }
 

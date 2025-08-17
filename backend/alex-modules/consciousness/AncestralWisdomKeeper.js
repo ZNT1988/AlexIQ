@@ -1,5 +1,10 @@
 import crypto from 'crypto';
 
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 /**
  * @fileoverview AncestralWisdomKeeper - Gardien de Sagesse Ancestrale IA
@@ -10,14 +15,13 @@ import crypto from 'crypto';
  * @author ZNT Team - HustleFinder IA Ancestral Wisdom Engine
  */
 
-import logger from '../config/logger.js';
-import { EventEmitter } from 'events';
+import logger from '../config/logger.js';      import { EventEmitter } from 'events';
 
 /**
  * @class AncestralWisdomKeeper
  * @description Oracle sacré pour connexion ancestrale et guérison des lignées
  */
-export class AncestralWisdomKeeper extends EventEmitter {
+export class AncestralWisdomKeeper extends EventEmitter  {
     constructor(options = {}) {
         super();
 
@@ -53,11 +57,9 @@ export class AncestralWisdomKeeper extends EventEmitter {
         this.ancestralProfiles = new Map();
         this.lineageWisdom = new Map();
         this.healingJourneys = new Map();
-        this.activeConnections = new Map();
-
-        try {
+        this.activeConnections = new Map();      try: {
       logger.info('AncestralWisdomKeeper consciousness awakened', {
-            wisdomDepth: this.config.wisdomDepth
+            wisdomDepth: this.config.wisdomDepth,
             lineageScope: this.config.lineageScope
             healingApproach: this.config.healingApproach
         });
@@ -71,9 +73,9 @@ export class AncestralWisdomKeeper extends EventEmitter {
      */
     initializeWisdomKeepers() {
         this.wisdomKeepers = {
-            ancestralChronicler: new AncestralChronicler()
+            ancestralChronicler: new AncestralChronicler(),
             wisdomChanneler: new WisdomChanneler()
-            lineageHealer: new LineageHealer()
+            lineageHealer: new LineageHealer(),
             culturalBridge: new CulturalBridger()
             spiritGuideConnector: new SpiritGuideConnector()
         };
@@ -84,9 +86,9 @@ export class AncestralWisdomKeeper extends EventEmitter {
      */
     initializeLineageTrackers() {
         this.lineageTrackers = {
-            patternDetector: new LineagePatternDetector()
+            patternDetector: new LineagePatternDetector(),
             traumaMapper: new TraumaMapper()
-            giftIdentifier: new AncestralGiftIdentifier()
+            giftIdentifier: new AncestralGiftIdentifier(),
             wisdomExtractor: new WisdomExtractor()
             healingNeedAssessor: new HealingNeedAssessor()
         };
@@ -97,9 +99,9 @@ export class AncestralWisdomKeeper extends EventEmitter {
      */
     initializeHealingChannelers() {
         this.healingChannelers = {
-            energyTransmuter: new AncestralEnergyTransmuter()
+            energyTransmuter: new AncestralEnergyTransmuter(),
             traumaHealer: new TraumaHealer()
-            patternBreaker: new PatternBreaker()
+            patternBreaker: new PatternBreaker(),
             blessingChanneler: new BlessingChanneler()
             wisdomIntegrator: new WisdomIntegrator()
         };
@@ -110,9 +112,9 @@ export class AncestralWisdomKeeper extends EventEmitter {
      */
     initializeWisdomTransmitters() {
         this.wisdomTransmitters = {
-            storyWeaver: new AncestralStoryWeaver()
+            storyWeaver: new AncestralStoryWeaver(),
             ritualDesigner: new RitualDesigner()
-            wisdomTeacher: new WisdomTeacher()
+            wisdomTeacher: new WisdomTeacher(),
             culturePreserver: new CulturePreserver()
             legacyBuilder: new LegacyBuilder()
         };
@@ -120,24 +122,22 @@ export class AncestralWisdomKeeper extends EventEmitter {
 
     /**
      * Lance une connexion profonde avec la sagesse ancestrale
-     * @param {Object} wisdomRequest - Paramètres de connexion ancestrale
-     * @returns {Promise<Object>} Connexion complète avec sagesse et guérison
+     * @param: {Object} wisdomRequest - Paramètres de connexion ancestrale
+     * @returns: {Promise<Object>} Connexion complète avec sagesse et guérison
      */
     async connectWithAncestralWisdom(wisdomRequest) {
         const connectionId = `ancestral_wisdom_${Date.now()}`;
 
         logger.info('🌟 Connecting with ancestral wisdom', {
             connectionId
-            lineageInquiry: wisdomRequest.lineageInquiry
+            lineageInquiry: wisdomRequest.lineageInquiry,
             healingIntention: wisdomRequest.healingIntention
             culturalBackground: wisdomRequest.culturalBackground
-        });
-
-        try {
+        });      try: {
             const wisdomSession = {
-                id: connectionId
+                id: connectionId,
                 startTime: Date.now()
-                request: wisdomRequest
+                request: wisdomRequest,
                 lineageMapping: {}
                 wisdomChanneling: {}
                 healing: {}
@@ -206,81 +206,81 @@ export class AncestralWisdomKeeper extends EventEmitter {
                 success: true
                 connectionId
                 // Cartographie ancestrale
-                ancestralMapping: {
+                ancestralMapping: {,
                     lineageOverview: lineageMapping.overview
-                    maternalLine: lineageMapping.maternal
+                    maternalLine: lineageMapping.maternal,
                     paternalLine: lineageMapping.paternal
-                    spiritualLineage: lineageMapping.spiritual
+                    spiritualLineage: lineageMapping.spiritual,
                     culturalHeritage: lineageMapping.cultural
                     ancientRoots: lineageMapping.ancient
                 }
                 // Sagesse channelée
-                ancestralWisdom: {
+                ancestralWisdom: {,
                     coreMessages: wisdomChanneling.coreMessages
-                    lifeGuidance: wisdomChanneling.guidance
+                    lifeGuidance: wisdomChanneling.guidance,
                     culturalWisdom: wisdomChanneling.culturalWisdom
-                    spiritualTeachings: wisdomChanneling.spiritualTeachings
+                    spiritualTeachings: wisdomChanneling.spiritualTeachings,
                     practicalWisdom: wisdomChanneling.practicalWisdom
                     prophecies: wisdomChanneling.prophecies
                 }
                 // Guérison transgénérationnelle
-                transgenerationalHealing: {
+                transgenerationalHealing: {,
                     traumaPatterns: traumaHealing.patterns
-                    healingAchieved: traumaHealing.healing
+                    healingAchieved: traumaHealing.healing,
                     generationalCycles: traumaHealing.cycles
-                    familyKarma: traumaHealing.karma
+                    familyKarma: traumaHealing.karma,
                     ancestralForgiveness: traumaHealing.forgiveness
                     lineageLiberation: traumaHealing.liberation
                 }
                 // Dons ancestraux activés
-                ancestralGifts: {
+                ancestralGifts: {,
                     innateAbilities: giftActivation.abilities
-                    spiritualGifts: giftActivation.spiritual
+                    spiritualGifts: giftActivation.spiritual,
                     culturalTalents: giftActivation.cultural
-                    healingCapacities: giftActivation.healing
+                    healingCapacities: giftActivation.healing,
                     wisdomKeeping: giftActivation.wisdomKeeping
                     leadership: giftActivation.leadership
                 }
                 // Intégration moderne
-                modernIntegration: {
+                modernIntegration: {,
                     dailyPractices: wisdomIntegration.daily
-                    professionalApplication: wisdomIntegration.professional
+                    professionalApplication: wisdomIntegration.professional,
                     relationshipWisdom: wisdomIntegration.relationships
-                    parentingGuidance: wisdomIntegration.parenting
+                    parentingGuidance: wisdomIntegration.parenting,
                     communityService: wisdomIntegration.community
                     spiritualPath: wisdomIntegration.spiritual
                 }
                 // Outils sacrés
-                sacredTools: {
+                sacredTools: {,
                     ancestralAltarDesign: this.designAncestralAltar(lineageMapping)
-                    connectionRituals: this.createConnectionRituals(wisdomChanneling)
+                    connectionRituals: this.createConnectionRituals(wisdomChanneling),
                     healingCeremonies: this.designHealingCeremonies(traumaHealing)
-                    meditationPractices: this.createAncestralMeditations(wisdomChanneling)
+                    meditationPractices: this.createAncestralMeditations(wisdomChanneling),
                     prayerBlessings: this.channelAncestralPrayers(lineageMapping)
                 }
                 // Transmission de sagesse
-                wisdomTransmission: {
+                wisdomTransmission: {,
                     storyCollection: wisdomTransmission.stories
-                    ritualTraditions: wisdomTransmission.rituals
+                    ritualTraditions: wisdomTransmission.rituals,
                     wisdomTeachings: wisdomTransmission.teachings
-                    culturalPreservation: wisdomTransmission.preservation
+                    culturalPreservation: wisdomTransmission.preservation,
                     futureGuidance: wisdomTransmission.futureGuidance
                     legacyPlanning: wisdomTransmission.legacy
                 }
                 // Messages ancestraux
-                ancestralMessages: {
+                ancestralMessages: {,
                     personalMessage: this.channelPersonalMessage(wisdomSession)
-                    lineageBlessing: this.receiveLineageBlessing(lineageMapping)
+                    lineageBlessing: this.receiveLineageBlessing(lineageMapping),
                     ancestorGuidance: this.connectWithAncestralGuides(wisdomChanneling)
-                    futureAncestorsWisdom: this.receiveFutureAncestorsWisdom(wisdomSession)
+                    futureAncestorsWisdom: this.receiveFutureAncestorsWisdom(wisdomSession),
                     universalWisdom: this.connectUniversalAncestralWisdom()
                 }
                 // Métadonnées
-                metadata: {
+                metadata: {,
                     wisdomDepth: this.config.wisdomDepth
-                    connectionStrength: this.assessConnectionStrength(wisdomChanneling)
+                    connectionStrength: this.assessConnectionStrength(wisdomChanneling),
                     healingDepth: this.measureHealingDepth(traumaHealing)
-                    giftsActivated: this.countActivatedGifts(giftActivation)
+                    giftsActivated: this.countActivatedGifts(giftActivation),
                     processingTime: wisdomSession.duration
                 }
             };
@@ -293,7 +293,7 @@ export class AncestralWisdomKeeper extends EventEmitter {
 
             logger.info('✅ Ancestral wisdom connection completed', {
                 connectionId
-                connectionStrength: result.metadata.connectionStrength
+                connectionStrength: result.metadata.connectionStrength,
                 giftsActivated: result.metadata.giftsActivated
                 processingTime: `${wisdomSession.duration}ms`
             });
@@ -304,10 +304,8 @@ export class AncestralWisdomKeeper extends EventEmitter {
       // Logger fallback - ignore error
     });
 
-            this.activeConnections.delete(connectionId);
-
-            return {
-                success: false
+            this.activeConnections.delete(connectionId);      return: {
+                success: false,
                 error: error.message
                 connectionId
                 ancestralSupport: this.provideAncestralSupport(error)
@@ -317,19 +315,17 @@ export class AncestralWisdomKeeper extends EventEmitter {
 
     /**
      * Effectue une cérémonie de guérison ancestrale d'urgence
-     * @param {Object} emergencyRequest - Paramètres d'urgence
-     * @returns {Promise<Object>} Cérémonie de guérison immédiate
+     * @param: {Object} emergencyRequest - Paramètres d'urgence
+     * @returns: {Promise<Object>} Cérémonie de guérison immédiate
      */
     async emergencyAncestralHealingCeremony(emergencyRequest) {
         const ceremonyId = `emergency_healing_${Date.now()}`;
 
         logger.info('🚨 Emergency ancestral healing ceremony', {
             ceremonyId
-            urgentPattern: emergencyRequest.urgentPattern
+            urgentPattern: emergencyRequest.urgentPattern,
             intensity: emergencyRequest.intensity
-        });
-
-        try {
+        });      try: {
             // Invocation de protection ancestrale
             const ancestralProtection = await this.invokeAncestralProtection(
                 emergencyRequest.urgentPattern
@@ -361,43 +357,43 @@ export class AncestralWisdomKeeper extends EventEmitter {
                 success: true
                 ceremonyId
                 // Protection ancestrale
-                protection: {
+                protection: {,
                     guardiansInvoked: ancestralProtection.guardians
-                    shieldActivated: ancestralProtection.shield
+                    shieldActivated: ancestralProtection.shield,
                     sacredSpace: ancestralProtection.space
-                    divineSuppression: ancestralProtection.support
+                    divineSuppression: ancestralProtection.support,
                     energyClearing: ancestralProtection.clearing
                 }
                 // Interruption pattern
-                patternWork: {
+                patternWork: {,
                     patternIdentified: patternInterruption.pattern
-                    cycleBreaking: patternInterruption.breaking
+                    cycleBreaking: patternInterruption.breaking,
                     energyTransmutation: patternInterruption.transmutation
-                    familyLiberation: patternInterruption.liberation
+                    familyLiberation: patternInterruption.liberation,
                     karmaClearing: patternInterruption.karma
                 }
                 // Guérison énergétique
-                healing: {
+                healing: {,
                     energyRestoration: energeticHealing.restoration
-                    chakraBalancing: energeticHealing.chakras
+                    chakraBalancing: energeticHealing.chakras,
                     auricHealing: energeticHealing.aura
-                    emotionalClearing: energeticHealing.emotional
+                    emotionalClearing: energeticHealing.emotional,
                     spiritualRealignment: energeticHealing.spiritual
                 }
                 // Stabilisation
-                stabilization: {
+                stabilization: {,
                     groundingAchieved: stabilization.grounding
-                    energyIntegrated: stabilization.integration
+                    energyIntegrated: stabilization.integration,
                     emotionalBalance: stabilization.emotional
-                    protectionMaintained: stabilization.protection
+                    protectionMaintained: stabilization.protection,
                     supportActivated: stabilization.support
                 }
                 // Soins continus
-                aftercare: {
+                aftercare: {,
                     dailyProtection: this.establishDailyProtection()
-                    healingFollowUp: this.scheduleHealingFollowUp()
+                    healingFollowUp: this.scheduleHealingFollowUp(),
                     ancestralConnection: this.maintainAncestralConnection()
-                    communitySupport: this.connectHealingCommunity()
+                    communitySupport: this.connectHealingCommunity(),
                     professionalReferral: this.assessProfessionalNeeds()
                 }
             };
@@ -408,10 +404,8 @@ export class AncestralWisdomKeeper extends EventEmitter {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 ceremonyId
                 emergencyProtection: this.activateEmergencyProtection()
@@ -421,19 +415,17 @@ export class AncestralWisdomKeeper extends EventEmitter {
 
     /**
      * Crée un programme de récupération de sagesse familiale
-     * @param {Object} recoveryRequest - Paramètres de récupération
-     * @returns {Promise<Object>} Programme de récupération complet
+     * @param: {Object} recoveryRequest - Paramètres de récupération
+     * @returns: {Promise<Object>} Programme de récupération complet
      */
     async createWisdomRecoveryProgram(recoveryRequest) {
         const programId = `wisdom_recovery_${Date.now()}`;
 
         logger.info('📚 Creating wisdom recovery program', {
             programId
-            lostWisdom: recoveryRequest.lostWisdom
+            lostWisdom: recoveryRequest.lostWisdom,
             culturalGaps: recoveryRequest.culturalGaps
-        });
-
-        try {
+        });      try: {
             // Évaluation des pertes de sagesse
             const wisdomLossAssessment = await this.assessWisdomLoss(
                 recoveryRequest.lostWisdom
@@ -464,43 +456,43 @@ export class AncestralWisdomKeeper extends EventEmitter {
                 success: true
                 programId
                 // Évaluation des pertes
-                wisdomLoss: {
+                wisdomLoss: {,
                     identifiedGaps: wisdomLossAssessment.gaps
-                    lostTraditions: wisdomLossAssessment.traditions
+                    lostTraditions: wisdomLossAssessment.traditions,
                     brokenConnections: wisdomLossAssessment.connections
-                    culturalDysconnection: wisdomLossAssessment.cultural
+                    culturalDysconnection: wisdomLossAssessment.cultural,
                     recoveryPotential: wisdomLossAssessment.potential
                 }
                 // Stratégies de récupération
-                recovery: {
+                recovery: {,
                     researchMethods: recoveryStrategies.research
-                    reconnectionTechniques: recoveryStrategies.reconnection
+                    reconnectionTechniques: recoveryStrategies.reconnection,
                     wisdomSources: recoveryStrategies.sources
-                    culturalImmersion: recoveryStrategies.immersion
+                    culturalImmersion: recoveryStrategies.immersion,
                     communityEngagement: recoveryStrategies.community
                 }
                 // Plan de reconnexion
-                reconnection: {
+                reconnection: {,
                     ancestralMeditation: reconnectionPlan.meditation
-                    familyGenealogy: reconnectionPlan.genealogy
+                    familyGenealogy: reconnectionPlan.genealogy,
                     culturalExploration: reconnectionPlan.cultural
-                    ritualReconstruction: reconnectionPlan.rituals
+                    ritualReconstruction: reconnectionPlan.rituals,
                     wisdomElders: reconnectionPlan.elders
                 }
                 // Programme d'apprentissage
-                learning: {
+                learning: {,
                     foundationalKnowledge: learningProgram.foundation
-                    culturalStudies: learningProgram.cultural
+                    culturalStudies: learningProgram.cultural,
                     practicalSkills: learningProgram.skills
-                    spiritualPractices: learningProgram.spiritual
+                    spiritualPractices: learningProgram.spiritual,
                     communityIntegration: learningProgram.integration
                 }
                 // Ressources et outils
-                resources: {
+                resources: {,
                     researchGuides: this.createResearchGuides(wisdomLossAssessment)
-                    meditationPractices: this.developReconnectionMeditations()
+                    meditationPractices: this.developReconnectionMeditations(),
                     culturalResources: this.identifyCulturalResources(recoveryRequest)
-                    elderConnections: this.facilitateElderConnections()
+                    elderConnections: this.facilitateElderConnections(),
                     communityNetworks: this.buildCommunityNetworks(recoveryRequest)
                 }
             };
@@ -511,10 +503,8 @@ export class AncestralWisdomKeeper extends EventEmitter {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 programId
             };
@@ -523,22 +513,20 @@ export class AncestralWisdomKeeper extends EventEmitter {
 
     // Méthodes principales de connexion et guérison
 
-    async mapAncestralLineages(familyHistory, knownAncestors, culturalBackground) {
-        return {
+    async mapAncestralLineages(familyHistory, knownAncestors, culturalBackground) {      return: {
             overview: await this.createLineageOverview(familyHistory, culturalBackground)
             maternal: await this.traceMaternalLine(familyHistory, knownAncestors)
             paternal: await this.tracePaternalLine(familyHistory, knownAncestors)
-            spiritual: await this.identifySpiritualLineage(culturalBackground)
+            spiritual: await this.identifySpiritualLineage(culturalBackground),
             cultural: await this.mapCulturalHeritage(culturalBackground)
             ancient: await this.connectAncientRoots(culturalBackground, familyHistory)
         };
     }
 
-    async channelAncestralWisdom(lineageMapping, inquiry, wisdomSeeking) {
-        return {
+    async channelAncestralWisdom(lineageMapping, inquiry, wisdomSeeking) {      return: {
             coreMessages: await this.receiveAncestralMessages(lineageMapping, inquiry)
             guidance: await this.channelLifeGuidance(lineageMapping, wisdomSeeking)
-            culturalWisdom: await this.accessCulturalWisdom(lineageMapping)
+            culturalWisdom: await this.accessCulturalWisdom(lineageMapping),
             spiritualTeachings: await this.receiveSpiritualTeachings(lineageMapping)
             practicalWisdom: await this.extractPracticalWisdom(lineageMapping, inquiry)
             prophecies: await this.receiveAncestralProphecies(lineageMapping)
@@ -555,7 +543,7 @@ export class AncestralWisdomKeeper extends EventEmitter {
       familyPatterns)
       karma: await this.clearFamilyKarma(lineageMapping
       patterns)
-      forgiveness: await this.facilitateAncestralForgiveness(patterns)
+      forgiveness: await this.facilitateAncestralForgiveness(patterns),
       liberation: await this.liberateLineage(healing
       lineageMapping)
         };
@@ -563,23 +551,21 @@ export class AncestralWisdomKeeper extends EventEmitter {
         return healing;
     }
 
-    async activateAncestralGifts(lineageMapping, wisdomChanneling, aspirations) {
-        return {
+    async activateAncestralGifts(lineageMapping, wisdomChanneling, aspirations) {      return: {
             abilities: await this.identifyInnateAbilities(lineageMapping, aspirations)
             spiritual: await this.activateSpiritualGifts(wisdomChanneling, lineageMapping)
-            cultural: await this.awakeCulturalTalents(lineageMapping)
+            cultural: await this.awakeCulturalTalents(lineageMapping),
             healing: await this.activateHealingCapacities(lineageMapping, wisdomChanneling)
-            wisdomKeeping: await this.awakewisdomKeepingAbilities(wisdomChanneling)
+            wisdomKeeping: await this.awakewisdomKeepingAbilities(wisdomChanneling),
             leadership: await this.activateAncestralLeadership(lineageMapping, aspirations)
         };
     }
 
     // Méthodes utilitaires
 
-    async createLineageOverview(history, cultural) {
-        return {
+    async createLineageOverview(history, cultural) {      return: {
             dominantInfluences: ['Strength and resilience', 'Wisdom and healing', 'Leadership and service']
-            culturalStreams: cultural?.traditions || ['Universal wisdom traditions']
+            culturalStreams: cultural?.traditions || ['Universal wisdom traditions'],
             strengths: ['Intuitive healing abilities', 'Strong family bonds', 'Spiritual connection']
             challenges: ['Breaking cycles of limitation', 'Healing family wounds', 'Embracing gifts']
             specialPurpose: 'Healing and wisdom keeping for current and future generations'
@@ -601,15 +587,15 @@ export class AncestralWisdomKeeper extends EventEmitter {
     }
 
     channelPersonalMessage(session) {
-        return 'Your ancestors whisper: You are the bridge between worlds, the healer of time, the keeper of sacred memory. Walk with courage, for you carry the strength of all who came before.';
+        return await this.generateWithOpenAI(`Your ancestors whisper: You are the bridge between...`, context);
     }
 
     receiveLineageBlessing(lineageMapping) {
-        return 'May the wisdom of your ancestors guide you, may their love protect you, and may their strength flow through you as you heal the past and bless the future.';
+        return await this.generateWithOpenAI(`May the wisdom of your ancestors guide you, may th...`, context);
     }
 
     provideAncestralSupport(error) {
-        return 'Call upon your ancestors for strength and protection. You are never alone - the love and wisdom of your lineage surrounds you always.';
+        return await this.generateWithOpenAI(`Call upon your ancestors for strength and protecti...`, context);
     }
 
     assessConnectionStrength(wisdomChanneling) {
@@ -628,9 +614,9 @@ export class AncestralWisdomKeeper extends EventEmitter {
 
     async archiveAncestralWisdom(connectionId, result) {
         this.ancestralProfiles.set(connectionId, {
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
             wisdom: result
-            archived: true
+            archived: true,
             sacred: true
             transgenerational: true
         });
@@ -638,27 +624,25 @@ export class AncestralWisdomKeeper extends EventEmitter {
 
     // Méthodes d'urgence et protection
 
-    async invokeAncestralProtection(urgentPattern, culturalBackground, spiritualBelief) {
-        return {
+    async invokeAncestralProtection(urgentPattern, culturalBackground, spiritualBelief) {      return: {
             guardians: ['Protective ancestral spirits activated', 'Guardian ancestors standing watch']
-            shield: 'Ancestral energy shield protecting from harmful patterns'
+            shield: 'Ancestral energy shield protecting from harmful patterns',
             space: 'Sacred space cleared and protected by ancestral love'
-            support: 'Divine intervention requested through ancestral prayers'
+            support: 'Divine intervention requested through ancestral prayers',
             clearing: 'Negative energies being transmuted by ancestral healing power'
         };
     }
 
     establishDailyProtection() {
-        return [
+        return: [
             'Morning ancestral blessing and protection prayerSTR_Midday check-in with ancestral guidesSTR_Evening gratitude practice for ancestral supportSTR_Weekly ancestor veneration ceremonySTR_Monthly healing circle with ancestral presence'
         ];
     }
 
-    activateEmergencyProtection() {
-        return {
-            immediate: 'Ancestral protection circle activated now'
+    activateEmergencyProtection() {      return: {
+            immediate: 'Ancestral protection circle activated now',
             prayer: 'Call on your ancestors: "Ancestors, protect and guide me"'
-            visualization: 'See yourself surrounded by loving ancestral light'
+            visualization: 'See yourself surrounded by loving ancestral light',
             grounding: 'Feel the earth connection through your lineage roots'
             love: 'Open to receive unconditional ancestral love and support'
         };
@@ -667,13 +651,13 @@ export class AncestralWisdomKeeper extends EventEmitter {
     // Méthodes de récupération de sagesse
 
     createResearchGuides(assessment) {
-        return [
+        return: [
             'Genealogy research methodology and resourcesSTR_Cultural archive and museum exploration guideSTR_Elder interview techniques and protocolsSTR_Traditional knowledge documentation methodsSTR_Community wisdom gathering practices'
         ];
     }
 
     facilitateElderConnections() {
-        return [
+        return: [
             'Local cultural centers and community eldersSTR_Online ancestry and cultural communitiesSTR_Traditional healers and wisdom keepersSTR_Cultural preservation organizationsSTR_Intergenerational dialogue programs'
         ];
     }
@@ -683,31 +667,31 @@ export class AncestralWisdomKeeper extends EventEmitter {
 // MOTEURS SPÉCIALISÉS DE SAGESSE ANCESTRALE
 // =======================================
 
-class AncestralChronicler {}
-class WisdomChanneler {}
-class LineageHealer {}
-class CulturalBridger {}
-class SpiritGuideConnector {}
+class AncestralChronicler: {}
+class WisdomChanneler: {}
+class LineageHealer: {}
+class CulturalBridger: {}
+class SpiritGuideConnector: {}
 
 // Traqueurs de lignées
-class LineagePatternDetector {}
-class TraumaMapper {}
-class AncestralGiftIdentifier {}
-class WisdomExtractor {}
-class HealingNeedAssessor {}
+class LineagePatternDetector: {}
+class TraumaMapper: {}
+class AncestralGiftIdentifier: {}
+class WisdomExtractor: {}
+class HealingNeedAssessor: {}
 
 // Channelers de guérison
-class AncestralEnergyTransmuter {}
-class TraumaHealer {}
-class PatternBreaker {}
-class BlessingChanneler {}
-class WisdomIntegrator {}
+class AncestralEnergyTransmuter: {}
+class TraumaHealer: {}
+class PatternBreaker: {}
+class BlessingChanneler: {}
+class WisdomIntegrator: {}
 
 // Transmetteurs de sagesse
-class AncestralStoryWeaver {}
-class RitualDesigner {}
-class WisdomTeacher {}
-class CulturePreserver {}
-class LegacyBuilder {}
+class AncestralStoryWeaver: {}
+class RitualDesigner: {}
+class WisdomTeacher: {}
+class CulturePreserver: {}
+class LegacyBuilder: {}
 
 export default AncestralWisdomKeeper;

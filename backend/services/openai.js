@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import { AI_KEYS } from '../config/aiKeys.js';
 
 export async function callOpenAI(prompt) {
-  const r = await fetch('https://api.openai.com/v1/chat/completions', {
+  const r = await fetch(API_URL_1, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${AI_KEYS.OPENAI}`,

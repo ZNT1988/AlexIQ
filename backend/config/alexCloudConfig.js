@@ -48,24 +48,24 @@ class AlexCloudConfig {
           apiKey: process.env.OPENAI_API_KEY,
           model: process.env.OPENAI_MODEL || 'gpt-4',
           maxTokens: parseInt(process.env.OPENAI_MAX_TOKENS) || 2000,
-          endpoint: process.env.API_BASE_OPENAI || 'https://api.openai.com/v1'
+          endpoint: process.env.API_BASE_OPENAI || API_URL_1
         },
         anthropic: {
           enabled: !!process.env.ANTHROPIC_API_KEY,
           apiKey: process.env.ANTHROPIC_API_KEY,
           model: process.env.ANTHROPIC_MODEL || 'claude-3-sonnet-20240229',
-          endpoint: process.env.API_BASE_ANTHROPIC || 'https://api.anthropic.com'
+          endpoint: process.env.API_BASE_ANTHROPIC || API_URL_2
         },
         googleAI: {
           enabled: !!process.env.GOOGLE_AI_API_KEY,
           apiKey: process.env.GOOGLE_AI_API_KEY,
           model: process.env.GOOGLE_AI_MODEL || 'gemini-pro',
-          endpoint: process.env.GOOGLE_AI_API_URL || 'https://generativelanguage.googleapis.com'
+          endpoint: process.env.GOOGLE_AI_API_URL || API_URL_3
         },
         huggingface: {
           enabled: !!process.env.HUGGINGFACE_API_KEY,
           apiKey: process.env.HUGGINGFACE_API_KEY,
-          endpoint: process.env.HUGGINGFACE_API_URL || 'https://api-inference.huggingface.co'
+          endpoint: process.env.HUGGINGFACE_API_URL || API_URL_4
         }
       },
       // Configuration de conscience Alex

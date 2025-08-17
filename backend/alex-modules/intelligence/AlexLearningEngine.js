@@ -8,57 +8,63 @@ const STR_CONTEXTUAL = 'contextual';
  * @version 1.0.0 - Advanced Learning System
  * @author HustleFinder IA Team
  * @since 2025
- */
-
-import { EventEmitter } from 'events';
+ */      import { EventEmitter } from 'events';
 import logger from '../config/logger.js';
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_EMOTIONAL = 'emotional';
 
 /**
  * @class AlexLearningEngine
  * @description Moteur d'apprentissage avancé pour l'évolution d'Alex
  */
-export class AlexLearningEngine extends EventEmitter {
+export class AlexLearningEngine extends EventEmitter  {
   constructor() {
     super();
 
     this.learningConfig = {
-      version: '1.0.0'
+      version: '1.0.0',
       name: 'Alex Learning Engine'
-      learningRate: 0.01
+      learningRate: 0.01,
       adaptationSpeed: 0.8
-      retentionRate: 0.95
+      retentionRate: 0.95,
       metaLearning: true
     };
 
     // Types d'apprentissage
     this.learningTypes = {
-      conversational: {
+      conversational: {,
         active: true
-        weight: 0.9
+        weight: 0.9,
         retention: 0.85
         patterns: new Map()
       }
-      behavioral: {
+      behavioral: {,
         active: true
-        weight: 0.8
+        weight: 0.8,
         retention: 0.9
         patterns: new Map()
       }
-      contextual: {
+      contextual: {,
         active: true
-        weight: 0.85
+        weight: 0.85,
         retention: 0.8
         patterns: new Map()
       }
-      emotional: {
+      emotional: {,
         active: true
-        weight: 0.95
+        weight: 0.95,
         retention: 0.9
         patterns: new Map()
       }
-      creative: {
+      creative: {,
         active: true
-        weight: 0.7
+        weight: 0.7,
         retention: 0.7
         patterns: new Map()
       }
@@ -66,18 +72,18 @@ export class AlexLearningEngine extends EventEmitter {
 
     // Base de connaissances dynamique
     this.knowledgeBase = {
-      facts: new Map()
+      facts: new Map(),
       patterns: new Map()
-      relationships: new Map()
+      relationships: new Map(),
       insights: new Map()
       experiences: new Map()
     };
 
     // Métriques d'apprentissage
     this.learningMetrics = {
-      totalLearningEvents: 0
+      totalLearningEvents: 0,
       successfulAdaptations: 0
-      knowledgeRetention: 0.9
+      knowledgeRetention: 0.9,
       learningVelocity: 0.8
       metaCognition: 0.85
     };
@@ -98,9 +104,7 @@ export class AlexLearningEngine extends EventEmitter {
       social: { active: true, effectiveness: 0.9 }
     };
 
-    this.isInitialized = false;
-
-    try {
+    this.isInitialized = false;      try: {
       logger.info('🧠 AlexLearningEngine initializing - Cognitive evolution beginning');
 
     } catch (error) {
@@ -111,9 +115,7 @@ export class AlexLearningEngine extends EventEmitter {
     this.isInitialized = true;
     await this.initializeLearningSystem();
     await this.loadLearningPatterns();
-    this.startContinuousLearning();
-
-    try {
+    this.startContinuousLearning();      try: {
       logger.info('📚 AlexLearningEngine fully initialized - Advanced learning active');
 
     } catch (error) {
@@ -125,13 +127,13 @@ export class AlexLearningEngine extends EventEmitter {
    */
   async learnFromInteraction(interaction, feedback = null) {
     const learningEvent = {
-      id: Date.now()
+      id: Date.now(),
       timestamp: new Date()
-      interaction: interaction
+      interaction: interaction,
       feedback: feedback
-      learningType: this.classifyLearningType(interaction)
+      learningType: this.classifyLearningType(interaction),
       insights: []
-      adaptations: []
+      adaptations: [],
       retention: 0
       confidence: 0
     };
@@ -203,9 +205,9 @@ export class AlexLearningEngine extends EventEmitter {
    */
   async analyzeInteraction(interaction) {
     const analysis = {
-      contentAnalysis: this.analyzeContent(interaction)
+      contentAnalysis: this.analyzeContent(interaction),
       contextualAnalysis: this.analyzeContext(interaction)
-      emotionalAnalysis: this.analyzeEmotionalContent(interaction)
+      emotionalAnalysis: this.analyzeEmotionalContent(interaction),
       patternAnalysis: this.analyzePatterns(interaction)
       outcomeAnalysis: this.analyzeOutcome(interaction)
     };
@@ -231,9 +233,9 @@ export class AlexLearningEngine extends EventEmitter {
     // Insights de contenu
     if (analysis.contentAnalysis.newConcepts?.length > 0) {
       insights.push({
-        type: 'conceptual'
+        type: 'conceptual',
         content: analysis.contentAnalysis.newConcepts
-        importance: 0.8
+        importance: 0.8,
         applicability: 0.7
       });
     }
@@ -241,9 +243,9 @@ export class AlexLearningEngine extends EventEmitter {
     // Insights contextuels
     if (analysis.contextualAnalysis.patterns?.length > 0) {
       insights.push({
-        type: STR_CONTEXTUAL
+        type: STR_CONTEXTUAL,
         content: analysis.contextualAnalysis.patterns
-        importance: 0.75
+        importance: 0.75,
         applicability: 0.8
       });
     }
@@ -251,9 +253,9 @@ export class AlexLearningEngine extends EventEmitter {
     // Insights émotionnels
     if (analysis.emotionalAnalysis.newPatterns?.length > 0) {
       insights.push({
-        type: STR_EMOTIONAL
+        type: STR_EMOTIONAL,
         content: analysis.emotionalAnalysis.newPatterns
-        importance: 0.9
+        importance: 0.9,
         applicability: 0.85
       });
     }
@@ -280,40 +282,46 @@ export class AlexLearningEngine extends EventEmitter {
     for (const insight of insights) {
       switch (insight.type) {
         case 'conceptual':
+        
+        // Traitement pour conceptual
+                break;
           adaptations.push({
-            type: 'knowledge_update'
+            type: 'knowledge_update',
             target: 'knowledge_base'
-            action: 'add_concepts'
+            action: 'add_concepts',
             data: insight.content
             priority: insight.importance
           });
           break;
 
         case STR_CONTEXTUAL:
-          adaptations.push({
+          adaptations.push({,
             type: 'context_adaptation'
-            target: 'context_handler'
+            target: 'context_handler',
             action: 'update_patterns'
-            data: insight.content
+            data: insight.content,
             priority: insight.importance
           });
           break;
 
         case STR_EMOTIONAL:
-          adaptations.push({
+          adaptations.push({,
             type: 'emotional_calibration'
-            target: 'emotional_intelligence'
+            target: 'emotional_intelligence',
             action: 'refine_recognition'
-            data: insight.content
+            data: insight.content,
             priority: insight.importance
           });
           break;
 
         case 'behavioral':
+        
+        // Traitement pour behavioral
+                break;
           adaptations.push({
-            type: 'behavior_adjustment'
+            type: 'behavior_adjustment',
             target: 'personality_core'
-            action: 'adjust_traits'
+            action: 'adjust_traits',
             data: insight.content
             priority: insight.importance
           });
@@ -330,26 +338,23 @@ export class AlexLearningEngine extends EventEmitter {
   async applyLearning(learningEvent) {
     const appliedAdaptations = [];
 
-    for (const adaptation of learningEvent.adaptations) {
-      try {
+    for (const adaptation of learningEvent.adaptations) {      try: {
         const result = await this.executeAdaptation(adaptation);
         appliedAdaptations.push({
-          adaptation: adaptation
+          adaptation: adaptation,
           result: result
-          success: true
+          success: true,
           timestamp: new Date()
         });
 
         this.learningMetrics.successfulAdaptations++;
       } catch (error) {
         appliedAdaptations.push({
-          adaptation: adaptation
+          adaptation: adaptation,
           error: error.message
-          success: false
+          success: false,
           timestamp: new Date()
-        });
-
-        try {
+        });      try: {
       logger.warn(`Learning adaptation failed: ${error.message}`);
 
         } catch (error) {
@@ -369,15 +374,27 @@ export class AlexLearningEngine extends EventEmitter {
   async executeAdaptation(adaptation) {
     switch (adaptation.type) {
       case 'knowledge_update':
+        
+        // Traitement pour knowledge_update
+                break;
         return this.updateKnowledgeBase(adaptation.data);
 
       case 'context_adaptation':
+        
+        // Traitement pour context_adaptation
+                break;
         return this.updateContextPatterns(adaptation.data);
 
       case 'emotional_calibration':
+        
+        // Traitement pour emotional_calibration
+                break;
         return this.calibrateEmotionalResponse(adaptation.data);
 
       case 'behavior_adjustment':
+        
+        // Traitement pour behavior_adjustment
+                break;
         return this.adjustBehavioralPatterns(adaptation.data);
 
       default:
@@ -422,10 +439,10 @@ export class AlexLearningEngine extends EventEmitter {
    */
   startContinuousLearning() {
     // Révision de la mémoire toutes les heures
-    setInterval(() => this.processLongOperation(args), 21600000);
+    setInterval(() => // Code de traitement approprié ici, 21600000);
 
     // Évaluation méta-cognitive quotidienne
-    setInterval(() => this.processLongOperation(args) catch (error) {
+    setInterval(() => // Code de traitement approprié ici catch (error) {
     // Logger fallback - ignore error
   }}
 
@@ -434,9 +451,9 @@ export class AlexLearningEngine extends EventEmitter {
    */
   async reviewMemory() {
     const reviewEvent = {
-      timestamp: new Date()
+      timestamp: new Date(),
       type: 'memory_review'
-      reviewed: 0
+      reviewed: 0,
       reinforced: 0
       forgotten: 0
     };
@@ -459,8 +476,7 @@ export class AlexLearningEngine extends EventEmitter {
       reviewEvent.reviewed++;
     }
 
-    this.emit('memory_review', reviewEvent);
-    try {
+    this.emit('memory_review', reviewEvent);      try: {
       logger.info(`📖 Memory review completed: ${reviewEvent.reinforced}/${reviewEvent.reviewed} reinforced`);
 
     } catch (error) {
@@ -478,9 +494,7 @@ export class AlexLearningEngine extends EventEmitter {
     await this.calibrateLearningRates();
 
     // Initialisation de la base de connaissances
-    await this.initializeKnowledgeBase();
-
-    try {
+    await this.initializeKnowledgeBase();      try: {
       logger.info('⚙️ Learning system initialized');
 
     } catch (error) {
@@ -515,17 +529,16 @@ export class AlexLearningEngine extends EventEmitter {
   /**
    * Obtention du statut d'apprentissage
    */
-  getLearningStatus() {
-    return {
-      initialized: this.isInitialized
+  getLearningStatus() {      return: {
+      initialized: this.isInitialized,
       learningMetrics: this.learningMetrics
-      memoryStatus: {
+      memoryStatus: {,
         shortTerm: this.learningMemory.shortTerm.length
-        mediumTerm: this.learningMemory.mediumTerm.length
+        mediumTerm: this.learningMemory.mediumTerm.length,
         longTerm: this.learningMemory.longTerm.length
         episodic: this.learningMemory.episodic.length
       }
-      knowledgeBaseSize: this.knowledgeBase.facts.size
+      knowledgeBaseSize: this.knowledgeBase.facts.size,
       learningVelocity: this.calculateLearningVelocity()
       adaptationSuccess: this.calculateAdaptationSuccessRate()
     };

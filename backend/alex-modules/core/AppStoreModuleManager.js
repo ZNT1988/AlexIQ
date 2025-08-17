@@ -1,7 +1,12 @@
 import crypto from "crypto";
 import sqlite3 from "sqlite3";
-import { open } from "sqlite";
-import { EventEmitter } from "events";
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+      import { open } from "sqlite";
+      import { EventEmitter } from "events";
 import path from "path";
 import fs from "fs/promises";
 import logger from "../config/logger.js";
@@ -15,7 +20,7 @@ import logger from "../config/logger.js";
  * @version 3.0.0 - Authentic Extension Manager
  * @author HustleFinder IA Team
  * @since 2025
- */
+ */,
 
 /**
  * @class AppStoreModuleManager
@@ -28,32 +33,32 @@ import logger from "../config/logger.js";
  * ✅ Évolution basée sur utilisation réelle
  * ✅ AUCUNE configuration statique - tout dynamique
  */
-export class AppStoreModuleManager extends EventEmitter {
+export class AppStoreModuleManager extends EventEmitter  {
   constructor(config = {}) {
     super();
 
     this.moduleName = "AppStoreModuleManager";
     this.version = "3.0.0";
 
-    // Base de données SQLite OBLIGATOIRE - JAMAIS de Maps
+    // Base de données SQLite OBLIGATOIRE - JAMAIS de Maps,
     this.dbPath = config.dbPath || "./data/appstore_module_manager.db";
     this.db = null;
 
-    // Répertoires extensions
+    // Répertoires extensions,
     this.extensionPaths = {
       installed: config.installedPath || "./extensions/installed",
       sandbox: config.sandboxPath || "./extensions/sandbox",
       cache: config.cachePath || "./extensions/cache",
-      marketplace: config.marketplacePath || "./extensions/marketplace",
+      marketplace: config.marketplacePath || "./extensions/marketplace"
     };
 
-    // Système de gestion extensions AUTHENTIQUE
+    // Système de gestion extensions AUTHENTIQUE,
     this.extensionSystem = {
       maxConcurrentExtensions: 50,
       sandboxTimeout: 10000,
       validationLevel: "strict",
       autoUpdate: true,
-      learningRate: 0.04,
+      learningRate: 0.04
     };
 
     // Métriques utilisation AUTHENTIQUES (pas statiques)
@@ -65,26 +70,26 @@ export class AppStoreModuleManager extends EventEmitter {
       averageRating: 0.0,
       popularCategories: new Map(),
       userPreferences: new Map(),
-      lastAnalysis: new Date(),
+      lastAnalysis: new Date()
     };
 
-    // Système marketplace intelligent
+    // Système marketplace intelligent,
     this.marketplaceSystem = {
       featuredExtensions: new Set(),
       trendingExtensions: new Set(),
       recommendedForUser: new Map(),
       curatedCollections: new Map(),
       qualityThreshold: 0.75,
-      lastCuration: new Date(),
+      lastCuration: new Date()
     };
 
-    // État évolution DYNAMIQUE
+    // État évolution DYNAMIQUE,
     this.evolutionState = {
       curationIntelligence: 0.5,
       securityLevel: 0.8,
       userSatisfaction: 0.5,
       marketplaceMaturity: 0.5,
-      lastEvolution: new Date(),
+      lastEvolution: new Date()
     };
 
     // Gestionnaire sandbox sécurisé
@@ -93,11 +98,11 @@ export class AppStoreModuleManager extends EventEmitter {
       securityPolicies: new Map(),
       isolationLevel: "high",
       resourceLimits: {
-        memory: 128 * 1024 * 1024, // 128MB
-        cpu: 0.1, // 10% CPU
+        memory: 128 * 1024 * 1024, // 128MB,
+        cpu: 0.1, // 10% CPU,
         network: false,
-        filesystem: "restricted",
-      },
+        filesystem: "restricted"
+      }
     };
 
     this.isInitialized = false;
@@ -108,27 +113,27 @@ export class AppStoreModuleManager extends EventEmitter {
    * Initialisation AUTHENTIQUE avec SQLite
    */
   async initialize() {
-    try {
+      try: {
       logger.info(
         `🏪 Initializing ${this.moduleName} with authentic extension system...`,
       );
 
-      // 1. Connexion base SQLite OBLIGATOIRE
+      // 1. Connexion base SQLite OBLIGATOIRE,
       await this.connectToSQLiteDatabase();
 
-      // 2. Création des tables extension/marketplace
+      // 2. Création des tables extension/marketplace,
       await this.createExtensionTables();
 
-      // 3. Création répertoires extensions
+      // 3. Création répertoires extensions,
       await this.createExtensionDirectories();
 
-      // 4. Restauration état depuis base
+      // 4. Restauration état depuis base,
       await this.restoreExtensionStateFromDatabase();
 
-      // 5. Initialisation marketplace
+      // 5. Initialisation marketplace,
       await this.initializeMarketplace();
 
-      // 6. Démarrage processus autonomes
+      // 6. Démarrage processus autonomes,
       this.startAutonomousExtensionProcesses();
 
       this.isInitialized = true;
@@ -143,7 +148,7 @@ export class AppStoreModuleManager extends EventEmitter {
         version: this.version,
         totalExtensions: this.usageMetrics.totalExtensions,
         activeExtensions: this.usageMetrics.activeExtensions,
-        marketplaceReady: true,
+        marketplaceReady: true
       });
 
       return this;
@@ -157,10 +162,10 @@ export class AppStoreModuleManager extends EventEmitter {
    * Connexion SQLite OBLIGATOIRE
    */
   async connectToSQLiteDatabase() {
-    try {
+      try: {
       this.db = await open({
         filename: this.dbPath,
-        driver: sqlite3.Database,
+        driver: sqlite3.Database
       });
 
       logger.info(`📊 AppStore SQLite database connected: ${this.dbPath}`);
@@ -299,7 +304,7 @@ export class AppStoreModuleManager extends EventEmitter {
         was_accepted BOOLEAN DEFAULT 0,
         user_feedback TEXT,
         FOREIGN KEY (extension_id) REFERENCES extensions (id)
-      )`,
+      )`
     ];
 
     for (const tableSQL of tables) {
@@ -315,7 +320,7 @@ export class AppStoreModuleManager extends EventEmitter {
    * Création répertoires extensions
    */
   async createExtensionDirectories() {
-    try {
+      try: {
       for (const [name, dirPath] of Object.entries(this.extensionPaths)) {
         await fs.mkdir(dirPath, { recursive: true });
         logger.info(`📁 Created extension directory: ${name} -> ${dirPath}`);
@@ -330,26 +335,26 @@ export class AppStoreModuleManager extends EventEmitter {
    * Restauration état extensions depuis SQLite
    */
   async restoreExtensionStateFromDatabase() {
-    try {
-      // Compter extensions totales
+      try: {
+      // Compter extensions totales,
       const extensionCount = await this.db.get(
         "SELECT COUNT(*) as total FROM extensions",
       );
       this.usageMetrics.totalExtensions = extensionCount.total;
 
-      // Compter extensions actives
+      // Compter extensions actives,
       const activeCount = await this.db.get(
         "SELECT COUNT(*) as active FROM extensions WHERE is_active = 1",
       );
       this.usageMetrics.activeExtensions = activeCount.active;
 
-      // Calculer rating moyen
+      // Calculer rating moyen,
       const avgRating = await this.db.get(
         "SELECT AVG(rating) as avg_rating FROM extensions WHERE rating > 0",
       );
       this.usageMetrics.averageRating = avgRating.avg_rating || 0.0;
 
-      // Restaurer catégories populaires
+      // Restaurer catégories populaires,
       const popularCategories = await this.db.all(`
         SELECT category, COUNT(*) as count 
         FROM extensions 
@@ -362,7 +367,7 @@ export class AppStoreModuleManager extends EventEmitter {
         this.usageMetrics.popularCategories.set(cat.category, cat.count);
       }
 
-      // Restaurer extensions featured
+      // Restaurer extensions featured,
       const featuredExtensions = await this.db.all(
         "SELECT id FROM extensions WHERE is_featured = 1",
       );
@@ -370,7 +375,7 @@ export class AppStoreModuleManager extends EventEmitter {
         this.marketplaceSystem.featuredExtensions.add(ext.id);
       }
 
-      // Compter installations totales
+      // Compter installations totales,
       const installCount = await this.db.get(
         "SELECT COUNT(*) as total FROM extension_installations",
       );
@@ -391,7 +396,7 @@ export class AppStoreModuleManager extends EventEmitter {
    * Initialisation marketplace AUTHENTIQUE
    */
   async initializeMarketplace() {
-    // Extensions par défaut si marketplace vide
+    // Extensions par défaut si marketplace vide,
     const defaultExtensions = [
       {
         id: "alex-code-assistant",
@@ -406,7 +411,7 @@ export class AppStoreModuleManager extends EventEmitter {
         permissions: JSON.stringify(["file_read", "code_analysis"]),
         security_score: 0.95,
         performance_score: 0.9,
-        compatibility_score: 0.95,
+        compatibility_score: 0.95
       },
       {
         id: "alex-data-analyzer",
@@ -421,11 +426,11 @@ export class AppStoreModuleManager extends EventEmitter {
         permissions: JSON.stringify([
           "data_read",
           "ml_models",
-          "visualization",
+          "visualization"
         ]),
         security_score: 0.88,
         performance_score: 0.85,
-        compatibility_score: 0.92,
+        compatibility_score: 0.92
       },
       {
         id: "alex-cloud-sync",
@@ -440,17 +445,17 @@ export class AppStoreModuleManager extends EventEmitter {
         permissions: JSON.stringify(["network", "file_write", "encryption"]),
         security_score: 0.93,
         performance_score: 0.87,
-        compatibility_score: 0.89,
-      },
+        compatibility_score: 0.89
+      }
     ];
 
-    // Vérifier si marketplace vide
+    // Vérifier si marketplace vide,
     const existingCount = await this.db.get(
       "SELECT COUNT(*) as count FROM extensions",
     );
 
     if (existingCount.count === 0) {
-      // Insérer extensions par défaut
+      // Insérer extensions par défaut,
       for (const ext of defaultExtensions) {
         await this.installDefaultExtension(ext);
       }
@@ -460,7 +465,7 @@ export class AppStoreModuleManager extends EventEmitter {
       );
     }
 
-    // Initialiser curation intelligente
+    // Initialiser curation intelligente,
     await this.performIntelligentCuration();
   }
 
@@ -470,7 +475,7 @@ export class AppStoreModuleManager extends EventEmitter {
   async installDefaultExtension(extensionData) {
     const extensionId = extensionData.id;
 
-    // Insérer dans table extensions
+    // Insérer dans table extensions,
     await this.db.run(
       `
       INSERT INTO extensions (
@@ -496,7 +501,7 @@ export class AppStoreModuleManager extends EventEmitter {
       ],
     );
 
-    // Ajouter au marketplace
+    // Ajouter au marketplace,
     await this.db.run(
       `
       INSERT INTO marketplace_items (
@@ -510,7 +515,7 @@ export class AppStoreModuleManager extends EventEmitter {
         (extensionData.security_score +
           extensionData.performance_score +
           extensionData.compatibility_score) /
-          3,
+          3
       ],
     );
 
@@ -523,8 +528,7 @@ export class AppStoreModuleManager extends EventEmitter {
   async installExtension(extensionId, userId = "default") {
     const installationId = crypto.randomUUID();
     const startTime = Date.now();
-
-    try {
+      try: {
       logger.info(
         `📦 Installing extension: ${extensionId} for user: ${userId}`,
       );
@@ -533,10 +537,10 @@ export class AppStoreModuleManager extends EventEmitter {
       const extension =
         await this.validateExtensionForInstallation(extensionId);
 
-      // 2. Téléchargement et validation sandbox
+      // 2. Téléchargement et validation sandbox,
       const downloadPath = await this.downloadExtensionSecurely(extension);
 
-      // 3. Scan de sécurité approfondi
+      // 3. Scan de sécurité approfondi,
       const securityScan = await this.performSecurityScan(
         extension,
         downloadPath,
@@ -561,10 +565,10 @@ export class AppStoreModuleManager extends EventEmitter {
         installPath,
       );
 
-      // 6. Activation sécurisée
+      // 6. Activation sécurisée,
       await this.activateExtensionSecurely(extension, installPath, userId);
 
-      // 7. Enregistrement installation
+      // 7. Enregistrement installation,
       await this.recordExtensionInstallation(
         installationId,
         extensionId,
@@ -572,7 +576,7 @@ export class AppStoreModuleManager extends EventEmitter {
         installPath,
       );
 
-      // 8. Mise à jour métriques
+      // 8. Mise à jour métriques,
       await this.updateInstallationMetrics(extensionId, userId, true);
 
       const installationTime = Date.now() - startTime;
@@ -584,10 +588,9 @@ export class AppStoreModuleManager extends EventEmitter {
         userId,
         installationTime,
         securityScore: securityScan.score,
-        compatibilityScore: compatibilityTest.score,
+        compatibilityScore: compatibilityTest.score
       });
-
-      return {
+      return: {
         installationId,
         extensionId,
         extensionName: extension.name,
@@ -596,12 +599,12 @@ export class AppStoreModuleManager extends EventEmitter {
         installationTime,
         securityScore: securityScan.score,
         compatibilityScore: compatibilityTest.score,
-        success: true,
+        success: true
       };
     } catch (error) {
       logger.error(`Extension installation failed for ${extensionId}:`, error);
 
-      // Enregistrer échec pour apprentissage
+      // Enregistrer échec pour apprentissage,
       await this.recordFailedInstallation(
         installationId,
         extensionId,
@@ -620,10 +623,10 @@ export class AppStoreModuleManager extends EventEmitter {
   async validateExtensionForInstallation(extensionId) {
     const extension = await this.db.get(
       `
-      SELECT e.*, m.quality_score, s.is_safe, s.security_level
-      FROM extensions e
-      LEFT JOIN marketplace_items m ON e.id = m.extension_id
-      LEFT JOIN extension_security s ON e.id = s.extension_id
+      SELECT e.*, m.quality_score, s.is_safe, s.security_level,
+      FROM extensions e,
+      LEFT JOIN marketplace_items m ON e.id = m.extension_id,
+      LEFT JOIN extension_security s ON e.id = s.extension_id,
       WHERE e.id = ?
     `,
       [extensionId],
@@ -657,7 +660,7 @@ export class AppStoreModuleManager extends EventEmitter {
       `${extension.id}_${extension.version}`,
     );
 
-    // Créer répertoire sandbox pour cette extension
+    // Créer répertoire sandbox pour cette extension,
     await fs.mkdir(downloadPath, { recursive: true });
 
     // Simulation téléchargement (à remplacer par vraie implémentation)
@@ -666,14 +669,14 @@ export class AppStoreModuleManager extends EventEmitter {
 
     await fs.writeFile(mainFilePath, extensionCode);
 
-    // Créer fichier manifest
+    // Créer fichier manifest,
     const manifest = {
       id: extension.id,
       name: extension.name,
       version: extension.version,
       main: extension.main_file,
       permissions: JSON.parse(extension.permissions || "[]"),
-      dependencies: JSON.parse(extension.dependencies || "[]"),
+      dependencies: JSON.parse(extension.dependencies || "[]")
     };
 
     await fs.writeFile(
@@ -694,16 +697,17 @@ export class AppStoreModuleManager extends EventEmitter {
  * Auteur: ${extension.author}
  */
 
-class ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension {
-  constructor() {
-    this.name = '${extension.name}';
+class ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension: {
+        constructor() {
+        this.name = '${extension.name,
+      }';
     this.version = '${extension.version}';
     this.category = '${extension.category}';
     this.isInitialized = false;
   }
   
   async initialize() {
-    console.log(\`Initializing \${this.name} v\${this.version}\`);
+    
     this.isInitialized = true;
     return true;
   }
@@ -713,23 +717,31 @@ class ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension {
       await this.initialize();
     }
     
-    console.log(\`Executing \${this.name} with context:\`, context);
     
-    // Simulation traitement basé sur catégorie
+    // Simulation traitement basé sur catégorie,
     switch (this.category) {
       case 'development':
+        
+        // Traitement pour development
+                break;
         return this.processCodeAssistance(context);
       case 'data':
+        
+        // Traitement pour data
+                break;
         return this.processDataAnalysis(context);
       case 'cloud':
+        
+        // Traitement pour cloud
+                break;
         return this.processCloudSync(context);
       default:
-        return { success: true, result: 'Extension executed successfully' };
+      return: { success: true, result: 'Extension executed successfully' };
     }
   }
   
   processCodeAssistance(context) {
-    return {
+      return: {
       success: true,
       result: 'Code analysis completed',
       suggestions: ['Optimize function performance', 'Add error handling', 'Update documentation'],
@@ -738,7 +750,7 @@ class ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension {
   }
   
   processDataAnalysis(context) {
-    return {
+      return: {
       success: true,
       result: 'Data analysis completed',
       insights: ['Trend detected', 'Anomaly found', 'Pattern recognized'],
@@ -747,7 +759,7 @@ class ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension {
   }
   
   processCloudSync(context) {
-    return {
+      return: {
       success: true,
       result: 'Cloud synchronization completed',
       synced_files: Math.floor(Math.random() * 100),
@@ -756,7 +768,7 @@ class ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension {
   }
   
   getMetrics() {
-    return {
+      return: {
       name: this.name,
       version: this.version,
       category: this.category,
@@ -779,49 +791,48 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
       score: 0.8,
       issues: [],
       warnings: [],
-      permissions: [],
+      permissions: []
     };
-
-    try {
-      // Lecture fichier principal
+      try: {
+      // Lecture fichier principal,
       const mainFilePath = path.join(downloadPath, extension.main_file);
       const code = await fs.readFile(mainFilePath, "utf8");
 
-      // Patterns de sécurité à détecter
+      // Patterns de sécurité à détecter,
       const securityPatterns = [
         {
           pattern: /eval\s*\(/gi,
           severity: "high",
-          message: "Use of eval() detected",
+          message: "Use of eval() detected"
         },
         {
           pattern: /require\s*\(\s*['"]child_process['"]\s*\)/gi,
           severity: "high",
-          message: "Child process execution detected",
+          message: "Child process execution detected"
         },
         {
           pattern: /require\s*\(\s*['"]fs['"]\s*\)/gi,
           severity: "medium",
-          message: "File system access detected",
+          message: "File system access detected"
         },
         {
           pattern: /require\s*\(\s*['"]http['"]\s*\)/gi,
           severity: "medium",
-          message: "HTTP access detected",
+          message: "HTTP access detected"
         },
         {
           pattern: /process\.env/gi,
           severity: "low",
-          message: "Environment variable access detected",
+          message: "Environment variable access detected"
         },
         {
           pattern: /console\.log/gi,
           severity: "low",
-          message: "Console logging detected",
-        },
+          message: "Console logging detected"
+        }
       ];
 
-      // Analyse patterns
+      // Analyse patterns,
       for (const { pattern, severity, message } of securityPatterns) {
         const matches = code.match(pattern);
         if (matches) {
@@ -836,7 +847,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         }
       }
 
-      // Vérification permissions
+      // Vérification permissions,
       const requestedPermissions = JSON.parse(extension.permissions || "[]");
       const dangerousPermissions = ["file_write", "network", "system_exec"];
 
@@ -851,7 +862,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
       // Score minimum pour sécurité
       scanResults.score = Math.max(0.1, scanResults.score);
 
-      // Enregistrer scan en base
+      // Enregistrer scan en base,
       await this.recordSecurityScan(extension.id, scanResults);
 
       logger.info(
@@ -885,7 +896,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
           : scanResults.score > 0.6
             ? "medium"
             : "low",
-        scanResults.isSafe ? 1 : 0,
+        scanResults.isSafe ? 1 : 0
       ],
     );
   }
@@ -900,13 +911,13 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
       extension.id,
     );
 
-    // Créer répertoire installation
+    // Créer répertoire installation,
     await fs.mkdir(installPath, { recursive: true });
 
-    // Copier fichiers depuis sandbox
+    // Copier fichiers depuis sandbox,
     await this.copyExtensionFiles(downloadPath, installPath);
 
-    // Créer sandbox d'exécution
+    // Créer sandbox d'exécution,
     const sandboxId = crypto.randomUUID();
     this.sandboxManager.activeSandboxes.set(sandboxId, {
       extensionId: extension.id,
@@ -915,8 +926,8 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
       createdAt: new Date(),
       resourceUsage: {
         memory: 0,
-        cpu: 0,
-      },
+        cpu: 0
+      }
     });
 
     return installPath;
@@ -947,15 +958,14 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
       score: 0.8,
       issues: [],
       warnings: [],
-      dependencies: [],
+      dependencies: []
     };
-
-    try {
-      // Vérification manifest
+      try: {
+      // Vérification manifest,
       const manifestPath = path.join(installPath, "manifest.json");
       const manifest = JSON.parse(await fs.readFile(manifestPath, "utf8"));
 
-      // Vérification version API
+      // Vérification version API,
       if (manifest.api_version && manifest.api_version !== "3.0.0") {
         compatibilityResults.warnings.push(
           `API version mismatch: ${manifest.api_version}`,
@@ -963,20 +973,20 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         compatibilityResults.score -= 0.1;
       }
 
-      // Vérification dépendances
+      // Vérification dépendances,
       const dependencies = manifest.dependencies || [];
       for (const dep of dependencies) {
         compatibilityResults.dependencies.push(dep);
 
-        // Simulation vérification dépendance
+        // Simulation vérification dépendance,
         if (Math.random() < 0.1) {
-          // 10% chance de dépendance manquante
+          // 10% chance de dépendance manquante,
           compatibilityResults.issues.push(`Missing dependency: ${dep}`);
           compatibilityResults.score -= 0.2;
         }
       }
 
-      // Score minimum
+      // Score minimum,
       compatibilityResults.score = Math.max(0.3, compatibilityResults.score);
 
       logger.info(
@@ -995,7 +1005,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    * Activation sécurisée extension
    */
   async activateExtensionSecurely(extension, installPath, userId) {
-    // Marquer extension comme active
+    // Marquer extension comme active,
     await this.db.run(
       `
       UPDATE extensions SET is_active = 1, installation_path = ?, last_used = CURRENT_TIMESTAMP 
@@ -1004,7 +1014,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
       [installPath, extension.id],
     );
 
-    // Configurer permissions sandbox
+    // Configurer permissions sandbox,
     await this.configureSandboxPermissions(
       extension.id,
       JSON.parse(extension.permissions || "[]"),
@@ -1025,7 +1035,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         permissions.includes("file_read") || permissions.includes("file_write")
           ? "limited"
           : "none",
-      systemAccess: permissions.includes("system_exec") ? "limited" : "none",
+      systemAccess: permissions.includes("system_exec") ? "limited" : "none"
     };
 
     this.sandboxManager.securityPolicies.set(extensionId, securityPolicy);
@@ -1049,7 +1059,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
       [installationId, extensionId, userId, extensionId, installPath],
     );
 
-    // Incrémenter compteur installation
+    // Incrémenter compteur installation,
     await this.db.run(
       `
       UPDATE extensions SET install_count = install_count + 1 WHERE id = ?
@@ -1092,9 +1102,8 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
   async executeExtension(extensionId, context = {}, userId = "default") {
     const executionId = crypto.randomUUID();
     const startTime = Date.now();
-
-    try {
-      // Vérification installation et permissions
+      try: {
+      // Vérification installation et permissions,
       const installation = await this.validateExtensionExecution(
         extensionId,
         userId,
@@ -1107,10 +1116,10 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         executionId,
       );
 
-      // Mesure performances
+      // Mesure performances,
       const executionTime = Date.now() - startTime;
 
-      // Enregistrement métriques
+      // Enregistrement métriques,
       await this.recordExtensionUsage(
         extensionId,
         userId,
@@ -1119,7 +1128,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         true,
       );
 
-      // Mise à jour utilisation
+      // Mise à jour utilisation,
       await this.updateExtensionUsage(extensionId, userId);
 
       this.emit("extension_executed", {
@@ -1128,16 +1137,15 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         userId,
         executionTime,
         success: true,
-        result: result.result,
+        result: result.result
       });
-
-      return {
+      return: {
         executionId,
         extensionId,
         executionTime,
         result: result.result,
         confidence: result.confidence || 0.8,
-        success: true,
+        success: true
       };
     } catch (error) {
       logger.error(`Extension execution failed for ${extensionId}:`, error);
@@ -1161,10 +1169,10 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
   async validateExtensionExecution(extensionId, userId) {
     const installation = await this.db.get(
       `
-      SELECT ei.*, e.name, e.is_active, s.is_safe
-      FROM extension_installations ei
-      JOIN extensions e ON ei.extension_id = e.id
-      LEFT JOIN extension_security s ON e.id = s.extension_id
+      SELECT ei.*, e.name, e.is_active, s.is_safe,
+      FROM extension_installations ei,
+      JOIN extensions e ON ei.extension_id = e.id,
+      LEFT JOIN extension_security s ON e.id = s.extension_id,
       WHERE ei.extension_id = ? AND ei.user_id = ? AND ei.is_enabled = 1
     `,
       [extensionId, userId],
@@ -1190,8 +1198,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    */
   async executeInSandbox(installation, context, executionId) {
     const sandboxTimeout = this.extensionSystem.sandboxTimeout;
-
-    try {
+      try: {
       // Simulation exécution sécurisée (à remplacer par vraie sandbox)
       const extensionModule = await this.loadExtensionModule(
         installation.installation_path,
@@ -1205,7 +1212,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
             () => reject(new Error("Extension timeout")),
             sandboxTimeout,
           ),
-        ),
+        )
       ]);
 
       return result;
@@ -1220,20 +1227,19 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    */
   async loadExtensionModule(installPath) {
     // Simulation chargement sécurisé
-    return {
+      return: {
       execute: async (context) => {
-        // Simulation traitement
+        // Simulation traitement,
         await new Promise((resolve) =>
           setTimeout(resolve, 100 + Math.random() * 500),
         );
-
-        return {
+      return: {
           success: true,
           result: `Extension executed with context: ${Object.keys(context).join(", ")}`,
           confidence: 0.75 + Math.random() * 0.2,
-          processedAt: new Date().toISOString(),
+          processedAt: new Date().toISOString()
         };
-      },
+      }
     };
   }
 
@@ -1260,7 +1266,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         executionTime,
         success ? 1 : 0,
         success ? null : result.error || "Unknown error",
-        JSON.stringify({ result: success ? result.result : null }),
+        JSON.stringify({ result: success ? result.result : null })
       ],
     );
   }
@@ -1290,18 +1296,18 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    * Curation intelligente marketplace
    */
   async performIntelligentCuration() {
-    try {
+      try: {
       // Analyse métriques qualité
       const qualityAnalysis = await this.db.all(`
         SELECT e.id, e.name, e.rating, e.install_count,
                AVG(eum.execution_time) as avg_exec_time,
                COUNT(eum.id) as usage_count,
-               SUM(CASE WHEN eum.success = 1 THEN 1 ELSE 0 END) * 1.0 / COUNT(eum.id) as success_rate
-        FROM extensions e
-        LEFT JOIN extension_usage_metrics eum ON e.id = eum.extension_id
-        WHERE e.is_active = 1
-        GROUP BY e.id
-        HAVING usage_count > 5 OR e.install_count > 10
+               SUM(CASE WHEN eum.success = 1 THEN 1 ELSE 0 END) * 1.0 / COUNT(eum.id) as success_rate,
+        FROM extensions e,
+        LEFT JOIN extension_usage_metrics eum ON e.id = eum.extension_id,
+        WHERE e.is_active = 1,
+        GROUP BY e.id,
+        HAVING usage_count > 5 OR e.install_count > 10,
         ORDER BY (e.rating * 0.4 + success_rate * 0.4 + (e.install_count / 100.0) * 0.2) DESC
       `);
 
@@ -1312,7 +1318,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
       for (const ext of topExtensions) {
         this.marketplaceSystem.featuredExtensions.add(ext.id);
 
-        // Marquer comme featured en base
+        // Marquer comme featured en base,
         await this.db.run(
           `
           UPDATE extensions SET is_featured = 1 WHERE id = ?
@@ -1320,7 +1326,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
           [ext.id],
         );
 
-        // Mise à jour marketplace
+        // Mise à jour marketplace,
         await this.db.run(
           `
           UPDATE marketplace_items 
@@ -1330,12 +1336,12 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
           [
             topExtensions.indexOf(ext) + 1,
             (ext.success_rate || 0.5) * 0.8 + (ext.rating || 0.5) * 0.2,
-            ext.id,
+            ext.id
           ],
         );
       }
 
-      // Analyser tendances pour extensions trending
+      // Analyser tendances pour extensions trending,
       await this.analyzeTrendingExtensions();
 
       this.marketplaceSystem.lastCuration = new Date();
@@ -1355,15 +1361,15 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
     const trendingAnalysis = await this.db.all(`
       SELECT e.id, e.name,
              COUNT(eum.id) as recent_usage,
-             COUNT(ei.id) as recent_installs
-      FROM extensions e
+             COUNT(ei.id) as recent_installs,
+      FROM extensions e,
       LEFT JOIN extension_usage_metrics eum ON e.id = eum.extension_id 
         AND eum.timestamp > datetime('now', '-7 days')
       LEFT JOIN extension_installations ei ON e.id = ei.extension_id 
         AND ei.installation_date > datetime('now', '-7 days')
-      GROUP BY e.id
-      HAVING recent_usage > 3 OR recent_installs > 2
-      ORDER BY (recent_usage * 2 + recent_installs * 3) DESC
+      GROUP BY e.id,
+      HAVING recent_usage > 3 OR recent_installs > 2,
+      ORDER BY (recent_usage * 2 + recent_installs * 3) DESC,
       LIMIT 10
     `);
 
@@ -1389,25 +1395,25 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    * Processus autonomes marketplace en arrière-plan
    */
   startAutonomousExtensionProcesses() {
-    // Curation intelligente toutes les 3 heures
+    // Curation intelligente toutes les 3 heures,
     setInterval(async () => {
       await this.performIntelligentCuration();
     }, 10800000); // 3 heures
 
-    // Nettoyage sandbox toutes les 6 heures
+    // Nettoyage sandbox toutes les 6 heures,
     setInterval(async () => {
       await this.cleanupSandboxes();
     }, 21600000); // 6 heures
 
-    // Évolution marketplace quotidienne
+    // Évolution marketplace quotidienne,
     setInterval(async () => {
       await this.evolveMarketplace();
     }, 86400000); // 24 heures
 
-    // Analyse sécurité hebdomadaire
+    // Analyse sécurité hebdomadaire,
     setInterval(async () => {
       await this.performSecurityAudit();
-    }, 604800000); // 7 jours
+    }, 604800000); // 7 jours,
 
     logger.info(
       `⚡ Autonomous extension processes started for ${this.moduleName}`,
@@ -1418,20 +1424,19 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    * Nettoyage sandboxes
    */
   async cleanupSandboxes() {
-    try {
+      try: {
       const now = Date.now();
-      const sandboxTimeout = this.extensionSystem.sandboxTimeout * 10; // 10x timeout pour cleanup
+      const sandboxTimeout = this.extensionSystem.sandboxTimeout * 10; // 10x timeout pour cleanup,
 
       for (const [
         sandboxId,
-        sandbox,
+        sandbox
       ] of this.sandboxManager.activeSandboxes.entries()) {
         if (now - sandbox.createdAt.getTime() > sandboxTimeout) {
           // Supprimer sandbox expiré
           this.sandboxManager.activeSandboxes.delete(sandboxId);
-
-          try {
-            // Nettoyage fichiers sandbox si nécessaire
+      try: {
+            // Nettoyage fichiers sandbox si nécessaire,
             const sandboxPath = path.join(
               this.extensionPaths.sandbox,
               sandboxId,
@@ -1446,7 +1451,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         }
       }
 
-      // Nettoyage anciennes métriques
+      // Nettoyage anciennes métriques,
       const deletedMetrics = await this.db.run(`
         DELETE FROM extension_usage_metrics 
         WHERE timestamp < datetime('now', '-90 days')
@@ -1464,16 +1469,16 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    * Évolution marketplace AUTHENTIQUE
    */
   async evolveMarketplace() {
-    try {
-      // Analyse satisfaction utilisateur
+      try: {
+      // Analyse satisfaction utilisateur,
       const satisfactionAnalysis = await this.db.get(`
         SELECT 
           AVG(ei.user_rating) as avg_user_rating,
           COUNT(DISTINCT ei.extension_id) as unique_extensions,
           COUNT(DISTINCT ei.user_id) as unique_users,
-          AVG(CASE WHEN eum.success = 1 THEN 1.0 ELSE 0.0 END) as success_rate
-        FROM extension_installations ei
-        LEFT JOIN extension_usage_metrics eum ON ei.extension_id = eum.extension_id
+          AVG(CASE WHEN eum.success = 1 THEN 1.0 ELSE 0.0 END) as success_rate,
+        FROM extension_installations ei,
+        LEFT JOIN extension_usage_metrics eum ON ei.extension_id = eum.extension_id,
         WHERE ei.installation_date > datetime('now', '-30 days')
       `);
 
@@ -1482,7 +1487,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         this.evolutionState.userSatisfaction =
           satisfactionAnalysis.avg_user_rating || 0.5;
 
-        // Évolution maturité marketplace
+        // Évolution maturité marketplace,
         const maturityFactor =
           (satisfactionAnalysis.success_rate || 0.5) *
           Math.min(1.0, (satisfactionAnalysis.unique_extensions || 1) / 20.0);
@@ -1497,7 +1502,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         this.marketplaceSystem.qualityThreshold =
           0.6 + this.evolutionState.marketplaceMaturity * 0.2;
 
-        // Enregistrer évolution
+        // Enregistrer évolution,
         await this.recordMarketplaceEvolution(
           "user_satisfaction",
           previousSatisfaction,
@@ -1521,7 +1526,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
           userSatisfaction: this.evolutionState.userSatisfaction,
           marketplaceMaturity: this.evolutionState.marketplaceMaturity,
           qualityThreshold: this.marketplaceSystem.qualityThreshold,
-          evolutionData: satisfactionAnalysis,
+          evolutionData: satisfactionAnalysis
         });
       }
     } catch (error) {
@@ -1549,7 +1554,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         previousValue,
         newValue,
         trigger,
-        Math.abs(newValue - previousValue),
+        Math.abs(newValue - previousValue)
       ],
     );
   }
@@ -1558,10 +1563,10 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    * Audit sécurité AUTHENTIQUE
    */
   async performSecurityAudit() {
-    try {
+      try: {
       logger.info("🔒 Starting weekly security audit...");
 
-      // Ré-scanner toutes les extensions actives
+      // Ré-scanner toutes les extensions actives,
       const activeExtensions = await this.db.all(`
         SELECT id, name, installation_path FROM extensions WHERE is_active = 1
       `);
@@ -1581,7 +1586,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
           if (!securityScan.isSafe) {
             securityIssuesFound++;
 
-            // Désactiver extension dangereuse
+            // Désactiver extension dangereuse,
             await this.db.run(
               `
               UPDATE extensions SET is_active = 0 WHERE id = ?
@@ -1596,7 +1601,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         }
       }
 
-      // Mise à jour niveau sécurité global
+      // Mise à jour niveau sécurité global,
       const previousSecurityLevel = this.evolutionState.securityLevel;
       const securityImprovement = securityIssuesFound === 0 ? 0.05 : -0.1;
 
@@ -1625,10 +1630,10 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    * Vérification existence chemin
    */
   async pathExists(filePath) {
-    try {
+      try: {
       await fs.access(filePath);
       return true;
-    } catch {
+    } catch: {
       return false;
     }
   }
@@ -1637,14 +1642,14 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    * Recommandations intelligentes pour utilisateur
    */
   async generateIntelligentRecommendations(userId = "default") {
-    try {
-      // Analyse profil utilisateur
+      try: {
+      // Analyse profil utilisateur,
       const userProfile = await this.analyzeUserProfile(userId);
 
-      // Recherche extensions similaires
+      // Recherche extensions similaires,
       const recommendations = await this.findSimilarExtensions(userProfile);
 
-      // Stockage recommandations
+      // Stockage recommandations,
       for (const rec of recommendations) {
         await this.storeRecommendation(userId, rec);
       }
@@ -1652,7 +1657,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
       return recommendations;
     } catch (error) {
       logger.error("Intelligent recommendations failed:", error);
-      return [];
+      return: [];
     }
   }
 
@@ -1669,37 +1674,36 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         ei.usage_count,
         ei.user_rating,
         AVG(eum.execution_time) as avg_exec_time,
-        COUNT(eum.id) as total_usage
-      FROM extension_installations ei
-      JOIN extensions e ON ei.extension_id = e.id
-      LEFT JOIN extension_usage_metrics eum ON ei.extension_id = eum.extension_id AND eum.user_id = ei.user_id
-      WHERE ei.user_id = ? AND ei.is_enabled = 1
-      GROUP BY ei.extension_id
+        COUNT(eum.id) as total_usage,
+      FROM extension_installations ei,
+      JOIN extensions e ON ei.extension_id = e.id,
+      LEFT JOIN extension_usage_metrics eum ON ei.extension_id = eum.extension_id AND eum.user_id = ei.user_id,
+      WHERE ei.user_id = ? AND ei.is_enabled = 1,
+      GROUP BY ei.extension_id,
       ORDER BY ei.usage_count DESC, ei.user_rating DESC
     `,
       [userId],
     );
 
-    // Analyse catégories préférées
+    // Analyse catégories préférées,
     const categoryPreferences = new Map();
     const tagPreferences = new Map();
 
     for (const ext of profile) {
-      // Catégories
+      // Catégories,
       const weight = ext.usage_count * (ext.user_rating || 0.5);
       categoryPreferences.set(
         ext.category,
         (categoryPreferences.get(ext.category) || 0) + weight,
       );
 
-      // Tags
+      // Tags,
       const tags = JSON.parse(ext.tags || "[]");
       for (const tag of tags) {
         tagPreferences.set(tag, (tagPreferences.get(tag) || 0) + weight);
       }
     }
-
-    return {
+      return: {
       installedExtensions: profile.map((p) => p.extension_id),
       preferredCategories: Array.from(categoryPreferences.entries()).sort(
         (a, b) => b[1] - a[1],
@@ -1710,7 +1714,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
       totalExtensions: profile.length,
       averageRating:
         profile.reduce((sum, p) => sum + (p.user_rating || 0.5), 0) /
-        Math.max(1, profile.length),
+        Math.max(1, profile.length)
     };
   }
 
@@ -1719,7 +1723,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    */
   async findSimilarExtensions(userProfile) {
     if (userProfile.preferredCategories.length === 0) {
-      return [];
+      return: [];
     }
 
     const topCategory = userProfile.preferredCategories[0][0];
@@ -1727,20 +1731,20 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
 
     const similarExtensions = await this.db.all(
       `
-      SELECT e.*, m.quality_score
-      FROM extensions e
-      LEFT JOIN marketplace_items m ON e.id = m.extension_id
+      SELECT e.*, m.quality_score,
+      FROM extensions e,
+      LEFT JOIN marketplace_items m ON e.id = m.extension_id,
       WHERE e.category = ? 
       AND e.id NOT IN (${userProfile.installedExtensions.map(() => "?").join(",") || "''"})
-      AND e.is_active = 1
+      AND e.is_active = 1,
       AND (m.quality_score > ? OR e.rating > 0.7)
-      ORDER BY e.rating DESC, e.install_count DESC
+      ORDER BY e.rating DESC, e.install_count DESC,
       LIMIT 5
     `,
       [
         topCategory,
         this.marketplaceSystem.qualityThreshold,
-        ...userProfile.installedExtensions,
+        ...userProfile.installedExtensions
       ],
     );
 
@@ -1759,7 +1763,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
           category: ext.category,
           confidence,
           reasoning: `Based on your preference for ${topCategory} extensions and high ratings`,
-          type: "category_based",
+          type: "category_based"
         });
       }
     }
@@ -1773,7 +1777,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
   calculateRecommendationConfidence(extension, userProfile) {
     let confidence = 0.5;
 
-    // Bonus catégorie préférée
+    // Bonus catégorie préférée,
     if (
       userProfile.preferredCategories.some(
         ([cat]) => cat === extension.category,
@@ -1792,7 +1796,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
       confidence += 0.1;
     }
 
-    // Bonus tags similaires
+    // Bonus tags similaires,
     const extensionTags = JSON.parse(extension.tags || "[]");
     const commonTags = userProfile.preferredTags.filter(([tag]) =>
       extensionTags.includes(tag),
@@ -1822,7 +1826,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         recommendation.extensionId,
         recommendation.type,
         recommendation.confidence,
-        recommendation.reasoning,
+        recommendation.reasoning
       ],
     );
 
@@ -1845,8 +1849,7 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
     const securityIssues = await this.db.get(
       "SELECT COUNT(*) as count FROM extension_security WHERE is_safe = 0",
     );
-
-    return {
+      return: {
       module: this.moduleName,
       version: this.version,
       initialized: this.isInitialized,
@@ -1856,13 +1859,13 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         totalExtensions: extensionCount.count,
         totalInstallations: installationCount.count,
         activeExtensions: activeCount.count,
-        securityIssues: securityIssues.count,
+        securityIssues: securityIssues.count
       },
       extensionSystem: {
         maxConcurrentExtensions: this.extensionSystem.maxConcurrentExtensions,
         sandboxTimeout: this.extensionSystem.sandboxTimeout,
         validationLevel: this.extensionSystem.validationLevel,
-        learningRate: this.extensionSystem.learningRate,
+        learningRate: this.extensionSystem.learningRate
       },
       marketplace: {
         featuredExtensions: Array.from(
@@ -1872,19 +1875,19 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
           this.marketplaceSystem.trendingExtensions,
         ),
         qualityThreshold: this.marketplaceSystem.qualityThreshold,
-        lastCuration: this.marketplaceSystem.lastCuration,
+        lastCuration: this.marketplaceSystem.lastCuration
       },
       evolution: {
         curationIntelligence: this.evolutionState.curationIntelligence,
         securityLevel: this.evolutionState.securityLevel,
         userSatisfaction: this.evolutionState.userSatisfaction,
         marketplaceMaturity: this.evolutionState.marketplaceMaturity,
-        lastEvolution: this.evolutionState.lastEvolution,
+        lastEvolution: this.evolutionState.lastEvolution
       },
       sandbox: {
         activeSandboxes: this.sandboxManager.activeSandboxes.size,
         isolationLevel: this.sandboxManager.isolationLevel,
-        securityPolicies: this.sandboxManager.securityPolicies.size,
+        securityPolicies: this.sandboxManager.securityPolicies.size
       },
       metrics: this.usageMetrics,
       isAuthentic: true,
@@ -1892,8 +1895,8 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
         sqliteUsed: true,
         sandboxSecurity: true,
         intelligentCuration: true,
-        realEvolution: true,
-      },
+        realEvolution: true
+      }
     };
   }
 
@@ -1901,10 +1904,10 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
    * Fermeture propre AppStore
    */
   async close() {
-    // Terminer sandboxes actifs proprement
+    // Terminer sandboxes actifs proprement,
     for (const [
       sandboxId,
-      sandbox,
+      sandbox
     ] of this.sandboxManager.activeSandboxes.entries()) {
       logger.info(
         `🔒 Closing sandbox: ${sandboxId} for extension: ${sandbox.extensionId}`,
@@ -1921,5 +1924,5 @@ module.exports = ${extension.name.replace(/[^a-zA-Z0-9]/g, "")}Extension;`;
 
 // Export singleton pour compatibilité
 export default new AppStoreModuleManager({
-  moduleName: "AppStoreModuleManager",
+  moduleName: "AppStoreModuleManager"
 });

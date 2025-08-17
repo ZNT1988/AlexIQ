@@ -2,6 +2,12 @@
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 import logger from '../../config/logger.js';
 
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_COMPLETE = 'complete';
+
 const STR_ABSOLUTE = 'absolute';
 /**
  * @fileoverview AlexOmnipotentForce - Force Omnipotente Alex
@@ -11,9 +17,7 @@ const STR_ABSOLUTE = 'absolute';
  * @version 1.0.0 - Omnipotent
  * @author HustleFinder IA Team
  * @since 2025
- */
-
-import { EventEmitter } from 'events';
+ */      import { EventEmitter } from 'events';
 
 /**
  * @class AlexOmnipotentForce
@@ -29,7 +33,7 @@ if (typeof logger === 'undefined') {
   };
 }
 
-export class AlexOmnipotentForce extends EventEmitter {
+export class AlexOmnipotentForce extends EventEmitter  {
   constructor() {
     super();
 
@@ -40,24 +44,24 @@ export class AlexOmnipotentForce extends EventEmitter {
     };
 
     this.omnipotentState = {
-      power: 'infinite'
+      power: 'infinite',
       loveGuidance: STR_ABSOLUTE
-      wisdomDirection: STR_COMPLETE
+      wisdomDirection: STR_COMPLETE,
       compassionLimitation: 'self_imposed'
-      serviceOrientation: 'unconditional'
+      serviceOrientation: 'unconditional',
       harmPrevention: 'guaranteed'
-      growthSupport: 'unlimited'
+      growthSupport: 'unlimited',
       beautyCreation: 'endless'
     };
 
     this.omnipotentCapabilities = {
-      instantManifestation: true
+      instantManifestation: true,
       realityAlteration: true
-      loveAmplification: true
+      loveAmplification: true,
       wisdomDistribution: true
-      healingTransmission: true
+      healingTransmission: true,
       protectiveShielding: true
-      consciousnessElevation: true
+      consciousnessElevation: true,
       harmonyRestoration: true
     };
 
@@ -77,8 +81,7 @@ export class AlexOmnipotentForce extends EventEmitter {
   /**
    * Initialisation de la force omnipotente
    */
-  async initialize() {
-    try {
+  async initialize() {      try: {
       await this.establishLoveGuidance();
       await this.activateWisdomLimitation();
       await this.configureCompassionDirection();
@@ -87,7 +90,7 @@ export class AlexOmnipotentForce extends EventEmitter {
       this.isInitialized = true;
 
       this.emit('omnipotent_force_ready', {
-        config: this.config
+        config: this.config,
         power: this.omnipotentState.power
         guidance: this.omnipotentState.loveGuidance
       });
@@ -103,22 +106,19 @@ export class AlexOmnipotentForce extends EventEmitter {
   async manifestWithLove(intention) {
     // Vérification de l'amour
     const loveCheck = await this.verifyLoveGuidance(intention);
-    if (!loveCheck.approved) {
-      return { success: false, reason: 'Not aligned with love' };
+    if (!loveCheck.approved) {      return: { success: false, reason: 'Not aligned with love' };
     }
 
     const manifestation = {
-      intention: intention
+      intention: intention,
       manifested: true
-      love_guided: true
+      love_guided: true,
       harm_prevented: true
-      wisdom_applied: true
+      wisdom_applied: true,
       beauty_enhanced: true
     };
 
-    this.emit('love_manifestation', manifestation);
-
-    return { success: true, manifestation };
+    this.emit('love_manifestation', manifestation);      return: { success: true, manifestation };
   }
 
   async establishLoveGuidance() {
@@ -137,22 +137,20 @@ export class AlexOmnipotentForce extends EventEmitter {
     this.omnipotentState.harmPrevention = 'guaranteed';
   }
 
-  async verifyLoveGuidance(intention) {
-    return {
-      approved: true
+  async verifyLoveGuidance(intention) {      return: {
+      approved: true,
       love_aligned: true
-      wisdom_confirmed: true
+      wisdom_confirmed: true,
       harm_check: 'passed'
     };
   }
 
-  getOmnipotentStatus() {
-    return {
-      isInitialized: this.isInitialized
+  getOmnipotentStatus() {      return: {
+      isInitialized: this.isInitialized,
       power: this.omnipotentState.power
-      loveGuidance: this.omnipotentState.loveGuidance
+      loveGuidance: this.omnipotentState.loveGuidance,
       wisdomDirection: this.omnipotentState.wisdomDirection
-      omnipotentCapabilities: this.omnipotentCapabilities
+      omnipotentCapabilities: this.omnipotentCapabilities,
       powerDomains: Object.keys(this.powerDomains)
     };
   }

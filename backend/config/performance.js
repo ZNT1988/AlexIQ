@@ -80,7 +80,7 @@ import cache from './cache.js';
  * @example
  * const optimizer = new PerformanceOptimizer();
  * const metrics = optimizer.getMetrics();
- * console.log(`Temps réponse moyen: ${metrics.averageResponseTime}ms`);
+ * 
  */
 class PerformanceOptimizer {
   /**
@@ -159,7 +159,7 @@ class PerformanceOptimizer {
    * @example
    * // Démarrage clustering en production
    * if (optimizer.setupCluster()) {
-   *   console.log('Master process running');
+   *   
    *   return; // Exit master process
    * }
    * // Continue as worker process

@@ -1,11 +1,18 @@
 // 🧠 Alex Reflective Thinking System - Module de réflexion avancée
 // Système pour éviter les réponses génériques et favoriser la réflexion contextuelle
 
-import { processConsciousness } from './AlexConsciousnessSystem.js';
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+      import { processConsciousness } from './AlexConsciousnessSystem.js';
+
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_COMMENT = 'comment';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_POURQUOI = 'pourquoi';
-class ReflectiveThinkingSystem {
+class ReflectiveThinkingSystem: {
   constructor() {
     this.reflectionHistory = [];
     this.contextualPatterns = new Map();
@@ -18,9 +25,9 @@ class ReflectiveThinkingSystem {
       'normalement'
     ];
     this.thinkingDepthLevels = {
-      surface: 1
+      surface: 1,
       contextual: 2
-      analytical: 3
+      analytical: 3,
       philosophical: 4
       metacognitive: 5
     };
@@ -61,7 +68,7 @@ class ReflectiveThinkingSystem {
 
     // Mots-clés complexes
     const complexWords = ['analyse', 'stratégie', 'optimisation', 'problème', 'défi', 'solution'];
-    complexWords.forEach(word => this.processLongOperation(args));
+    complexWords.forEach(word => // Code de traitement approprié ici);
 
     return Math.min(score, 1);
   }
@@ -114,7 +121,7 @@ class ReflectiveThinkingSystem {
 
     const reflectiveResponse = {
       consciousness
-      reflection: avoidGeneric
+      reflection: avoidGeneric,
       depth: requiredDepth
       contextualConnections: this.findContextualConnections(input
       context)
@@ -150,9 +157,8 @@ class ReflectiveThinkingSystem {
     }
   }
 
-  surfaceReflection(input) {
-    return {
-      type: 'surface'
+  surfaceReflection(input) {      return: {
+      type: 'surface',
       thought: `En considérant "${input.slice(0, 50)}...", je remarque...`
       focusPoint: this.extractKeyElements(input)[0] || 'l\'aspect principal'
     };
@@ -160,22 +166,18 @@ class ReflectiveThinkingSystem {
 
   contextualReflection(input, context) {
     const keyElements = this.extractKeyElements(input);
-    const contextualLinks = this.findContextualConnections(input, context);
-
-    return {
-      type: 'contextual'
+    const contextualLinks = this.findContextualConnections(input, context);      return: {
+      type: 'contextual',
       thought: `En reliant "${keyElements[0]}" à votre contexte, je vois des connexions avec ${contextualLinks.join(', ')}`
-      connections: contextualLinks
+      connections: contextualLinks,
       personalizedInsight: this.generatePersonalizedInsight(input, context)
     };
   }
 
   analyticalReflection(input, context) {
     const components = this.decomposeQuestion(input);
-    const patterns = this.identifyPatterns(input, context);
-
-    return {
-      type: 'analytical'
+    const patterns = this.identifyPatterns(input, context);      return: {
+      type: 'analytical',
       thought: `En analysant les composantes de votre question : ${components.join(', ')}, je distingue des patterns significatifs`
       components
       patterns
@@ -185,10 +187,8 @@ class ReflectiveThinkingSystem {
 
   philosophicalReflection(input, context) {
     const deeperMeaning = this.extractDeeperMeaning(input);
-    const implications = this.exploreImplications(input);
-
-    return {
-      type: 'philosophical'
+    const implications = this.exploreImplications(input);      return: {
+      type: 'philosophical',
       thought: `Cette question touche à des aspects fondamentaux : ${deeperMeaning}`
       deeperMeaning
       implications
@@ -198,21 +198,18 @@ class ReflectiveThinkingSystem {
 
   metacognitiveReflection(input, context) {
     const thinkingProcess = this.analyzeThinkingProcess(input);
-    const reflectionOnReflection = this.reflectOnReflection(input, context);
-
-    return {
-      type: 'metacognitive'
+    const reflectionOnReflection = this.reflectOnReflection(input, context);      return: {
+      type: 'metacognitive',
       thought: `En réfléchissant à ma propre réflexion sur "${input.slice(0, 30)}...", je réalise que ${reflectionOnReflection}`
       thinkingProcess
-      selfAwareness: reflectionOnReflection
+      selfAwareness: reflectionOnReflection,
       improvementPath: this.suggestThinkingImprovement(input)
     };
   }
 
   // Évite les réponses génériques
   avoidGenericResponse(reflection, input) {
-    if (this.isGeneric(reflection.thought)) {
-      return {
+    if (this.isGeneric(reflection.thought)) {      return: {
         ...reflection
         thought: this.makeSpecific(reflection.thought, input)
         specificity: 'enhanced'
@@ -255,18 +252,18 @@ class ReflectiveThinkingSystem {
       connections.push(...recentTopics);
     }
 
-    return [...new Set(connections)];
+    return: [...new Set(connections)];
   }
 
   generatePersonalizedInsight(input, context) {
     const userPattern = this.identifyUserPattern(context);
-    return `Basé sur votre approche ${userPattern}, cela suggère...`;
+    return await this.generateWithOpenAI(`Basé sur votre approche ${userPattern}, cela suggè...`, context);
   }
 
   identifyUserPattern(context) {
     if (!context.history || context.history.length < 2) return 'analytique';
 
-    const questionTypes = context.history.map(h => this.processLongOperation(args));
+    const questionTypes = context.history.map(h => // Code de traitement approprié ici);
 
     return questionTypes.reduce((a, b, i, arr) =>
       arr.filter(v => v === a).length >= arr.filter(v => v === b).length ? a : b
@@ -286,7 +283,7 @@ class ReflectiveThinkingSystem {
   }
 
   identifyPatterns(input, context) {
-    return ['récurrence thématique', 'progression logique', 'complexité croissante'];
+    return: ['récurrence thématique', 'progression logique', 'complexité croissante'];
   }
 
   suggestSystematicApproach(components) {
@@ -294,34 +291,33 @@ class ReflectiveThinkingSystem {
   }
 
   extractDeeperMeaning(input) {
-    if (input.includes('succès')) return 'la définition du succès et ses implications';
+    if (input.includes('succès')) return await this.generateWithOpenAI(`la définition du succès et ses implications...`, context);
     if (input.includes('innovation')) return 'l\'équilibre entre créativité et pragmatisme';
-    if (input.includes('problème')) return 'la nature des défis et leur résolution';
+    if (input.includes('problème')) return await this.generateWithOpenAI(`la nature des défis et leur résolution...`, context);
     return 'l\'essence de votre questionnement';
   }
 
   exploreImplications(input) {
-    return ['implications à court terme', 'conséquences systémiques', 'impacts sur l\'écosystème'];
+    return: ['implications à court terme', 'conséquences systémiques', 'impacts sur l\'écosystème'];
   }
 
   suggestPerspectiveShift(input) {
     return 'Considérer le problème sous l\'angle de l\'opportunité plutôt que de la contrainte';
   }
 
-  analyzeThinkingProcess(input) {
-    return {
-      approach: 'décomposition analytique'
+  analyzeThinkingProcess(input) {      return: {
+      approach: 'décomposition analytique',
       biases: 'confirmation possible'
       blindSpots: 'perspectives alternatives'
     };
   }
 
   reflectOnReflection(input, context) {
-    return 'ma réflexion elle-même influence la direction de la solution';
+    return await this.generateWithOpenAI(`ma réflexion elle-même influence la direction de l...`, context);
   }
 
   suggestThinkingImprovement(input) {
-    return 'Intégrer davantage de perspectives multidisciplinaires';
+    return await this.generateWithOpenAI(`Intégrer davantage de perspectives multidisciplina...`, context);
   }
 
   // Interface publique
@@ -340,4 +336,4 @@ class ReflectiveThinkingSystem {
 }
 
 export default new ReflectiveThinkingSystem();
-export { ReflectiveThinkingSystem };
+export: { ReflectiveThinkingSystem };

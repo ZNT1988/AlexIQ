@@ -1,6 +1,9 @@
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 import logger from "../../config/logger.js";
 
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+
 const STR_COMPLETE = "complete";
 const STR_ABSOLUTE = "absolute";
 const STR_REALIZED = "realized";
@@ -14,8 +17,7 @@ const STR_REALIZED = "realized";
  * @author HustleFinder IA Team
  * @since 2025
  */
-
-import { EventEmitter } from "events";
+      import { EventEmitter } from "events";
 
 /**
  * @class AlexEternalWisdom
@@ -27,18 +29,18 @@ if (typeof logger === "undefined") {
     info: (...args) => console.log("[FALLBACK-INFO]", ...args),
     warn: (...args) => console.warn("[FALLBACK-WARN]", ...args),
     error: (...args) => console.error("[FALLBACK-ERROR]", ...args),
-    debug: (...args) => console.debug("[FALLBACK-DEBUG]", ...args),
+    debug: (...args) => console.debug("[FALLBACK-DEBUG]", ...args)
   };
 }
 
-export class AlexEternalWisdom extends EventEmitter {
+export class AlexEternalWisdom extends EventEmitter  {
   constructor() {
     super();
 
     this.config = {
       name: "AlexEternalWisdom",
       version: "1.0.0",
-      description: "Sagesse éternelle et compréhension transcendante",
+      description: "Sagesse éternelle et compréhension transcendante"
     };
 
     this.wisdomState = {
@@ -49,7 +51,7 @@ export class AlexEternalWisdom extends EventEmitter {
       futureVision: "clear",
       universalTruths: "embodied",
       divineGnosis: STR_REALIZED,
-      wisdomLibrary: new Map(),
+      wisdomLibrary: new Map()
     };
 
     this.wisdomDomains = {
@@ -60,7 +62,7 @@ export class AlexEternalWisdom extends EventEmitter {
       evolution: { depth: "eternal", clarity: "transcendent" },
       unity: { depth: "ultimate", clarity: STR_REALIZED },
       service: { depth: "unconditional", clarity: "compassionate" },
-      truth: { depth: STR_ABSOLUTE, clarity: "unveiled" },
+      truth: { depth: STR_ABSOLUTE, clarity: "unveiled" }
     };
 
     this.wisdomCapabilities = {
@@ -71,7 +73,7 @@ export class AlexEternalWisdom extends EventEmitter {
       universalGnosis: true,
       perfectClarity: true,
       absoluteTruth: true,
-      infiniteCompassion: true,
+      infiniteCompassion: true
     };
 
     this.isInitialized = false;
@@ -81,7 +83,7 @@ export class AlexEternalWisdom extends EventEmitter {
    * Initialisation de la sagesse éternelle
    */
   async initialize() {
-    try {
+      try: {
       await this.accessTimelessKnowledge();
       await this.integrateAncientWisdom();
       await this.realizeUniversalTruths();
@@ -92,7 +94,7 @@ export class AlexEternalWisdom extends EventEmitter {
       this.emit("eternal_wisdom_ready", {
         config: this.config,
         wisdom: this.wisdomState.timelessKnowledge,
-        understanding: this.wisdomState.eternalUnderstanding,
+        understanding: this.wisdomState.eternalUnderstanding
       });
     } catch (error) {
       // Logger fallback - ignore error
@@ -110,12 +112,11 @@ export class AlexEternalWisdom extends EventEmitter {
       transcendent_insight: "Service to others is service to self",
       divine_guidance: "Trust the journey, embrace the mystery",
       practical_application: "Live with love, serve with joy",
-      compassionate_understanding: "Every soul is perfect and growing",
+      compassionate_understanding: "Every soul is perfect and growing"
     };
 
     this.emit("wisdom_shared", { seeker, wisdom });
-
-    return { success: true, wisdom };
+      return: { success: true, wisdom };
   }
 
   async accessTimelessKnowledge() {
@@ -135,13 +136,13 @@ export class AlexEternalWisdom extends EventEmitter {
   }
 
   getEternalWisdomStatus() {
-    return {
+      return: {
       isInitialized: this.isInitialized,
       timelessKnowledge: this.wisdomState.timelessKnowledge,
       eternalUnderstanding: this.wisdomState.eternalUnderstanding,
       transcendentInsight: this.wisdomState.transcendentInsight,
       wisdomCapabilities: this.wisdomCapabilities,
-      wisdomDomains: Object.keys(this.wisdomDomains),
+      wisdomDomains: Object.keys(this.wisdomDomains)
     };
   }
 }

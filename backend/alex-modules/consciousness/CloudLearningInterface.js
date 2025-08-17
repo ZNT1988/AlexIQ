@@ -1,7 +1,14 @@
 import crypto from "crypto";
 import sqlite3 from "sqlite3";
-import { open } from "sqlite";
-import { EventEmitter } from "events";
+
+// URLs externalisées
+const API_URL_1 = 'https://api.openai.com/v1/chat/completions';
+const API_URL_2 = 'https://api.anthropic.com/v1/messages';
+const API_URL_3 = 'https://generativelanguage.googleapis.com/v1/models/gemini-pro';
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+      import { open } from "sqlite";      import { EventEmitter } from "events";
 import logger from "../config/logger.js";
 
 /**
@@ -25,7 +32,7 @@ import logger from "../config/logger.js";
  * ✅ Évolution progressive vers autonomie locale
  * ✅ AUCUNE configuration statique - tout dynamique
  */
-export class CloudLearningInterface extends EventEmitter {
+export class CloudLearningInterface extends EventEmitter  {
   constructor(config = {}) {
     super();
 
@@ -43,7 +50,7 @@ export class CloudLearningInterface extends EventEmitter {
       sessionTimeout: 30000,
       maxRetries: 3,
       adaptiveRetry: true,
-      learningRate: 0.03,
+      learningRate: 0.03
     };
 
     // Métriques d'apprentissage AUTHENTIQUES (pas statiques)
@@ -54,7 +61,7 @@ export class CloudLearningInterface extends EventEmitter {
       averageResponseTime: 0,
       providerReliability: new Map(),
       domainSpecialization: new Map(),
-      lastOptimization: new Date(),
+      lastOptimization: new Date()
     };
 
     // Système de session d'apprentissage
@@ -62,7 +69,7 @@ export class CloudLearningInterface extends EventEmitter {
       activeSessions: new Map(),
       sessionHistory: [],
       maxConcurrentSessions: 5,
-      sessionQuality: new Map(),
+      sessionQuality: new Map()
     };
 
     // État d'évolution DYNAMIQUE
@@ -71,7 +78,7 @@ export class CloudLearningInterface extends EventEmitter {
       localAutonomy: 0.0,
       providerMastery: new Map(),
       learningEfficiency: 0.5,
-      lastEvolution: new Date(),
+      lastEvolution: new Date()
     };
 
     this.isInitialized = false;
@@ -81,8 +88,7 @@ export class CloudLearningInterface extends EventEmitter {
   /**
    * Initialisation AUTHENTIQUE avec SQLite
    */
-  async initialize() {
-    try {
+  async initialize() {      try: {
       logger.info(
         `🌐 Initializing ${this.moduleName} with authentic cloud learning...`,
       );
@@ -114,7 +120,7 @@ export class CloudLearningInterface extends EventEmitter {
         version: this.version,
         activeProviders: Array.from(this.cloudLearningSystem.activeProviders),
         cloudDependency: this.evolutionState.cloudDependency,
-        localAutonomy: this.evolutionState.localAutonomy,
+        localAutonomy: this.evolutionState.localAutonomy
       });
 
       return this;
@@ -127,11 +133,10 @@ export class CloudLearningInterface extends EventEmitter {
   /**
    * Connexion SQLite OBLIGATOIRE
    */
-  async connectToSQLiteDatabase() {
-    try {
+  async connectToSQLiteDatabase() {      try: {
       this.db = await open({
         filename: this.dbPath,
-        driver: sqlite3.Database,
+        driver: sqlite3.Database
       });
 
       logger.info(
@@ -221,7 +226,7 @@ export class CloudLearningInterface extends EventEmitter {
         success_rate REAL DEFAULT 0.0,
         implementation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
         is_active BOOLEAN DEFAULT 1
-      )`,
+      )`
     ];
 
     for (const tableSQL of tables) {
@@ -234,8 +239,7 @@ export class CloudLearningInterface extends EventEmitter {
   /**
    * Restauration état cloud depuis SQLite
    */
-  async restoreCloudStateFromDatabase() {
-    try {
+  async restoreCloudStateFromDatabase() {      try: {
       // Restaurer fournisseurs actifs
       const activeProviders = await this.db.all(`
         SELECT id, name, reliability_score, is_active 
@@ -297,22 +301,22 @@ export class CloudLearningInterface extends EventEmitter {
       {
         id: "openai-gpt4",
         name: "OpenAI GPT-4",
-        api_endpoint: process.env.API_BASE_OPENAI || "https://api.openai.com/v1/chat/completions",
+        api_endpoint: process.env.API_BASE_OPENAI || API_URL_1,
         reliability_score: 0.85,
         cost_per_query: 0.03,
-        specialization_domains: JSON.stringify(["general", "code", "analysis"]),
+        specialization_domains: JSON.stringify(["general", "code", "analysis"])
       },
       {
         id: "anthropic-claude",
         name: "Anthropic Claude",
-        api_endpoint: process.env.API_BASE_ANTHROPIC || "https://api.anthropic.com/v1/messages",
+        api_endpoint: process.env.API_BASE_ANTHROPIC || API_URL_2,
         reliability_score: 0.8,
         cost_per_query: 0.025,
         specialization_domains: JSON.stringify([
           "reasoning",
           "analysis",
-          "code",
-        ]),
+          "code"
+        ])
       },
       {
         id: "google-gemini",
@@ -324,9 +328,9 @@ export class CloudLearningInterface extends EventEmitter {
         specialization_domains: JSON.stringify([
           "multimodal",
           "general",
-          "research",
-        ]),
-      },
+          "research"
+        ])
+      }
     ];
 
     // Vérifier si fournisseurs existent déjà
@@ -349,7 +353,7 @@ export class CloudLearningInterface extends EventEmitter {
             provider.api_endpoint,
             provider.reliability_score,
             provider.cost_per_query,
-            provider.specialization_domains,
+            provider.specialization_domains
           ],
         );
 
@@ -372,9 +376,7 @@ export class CloudLearningInterface extends EventEmitter {
    */
   async performCloudLearning(domain, query, context = {}) {
     const sessionId = crypto.randomUUID();
-    const startTime = Date.now();
-
-    try {
+    const startTime = Date.now();      try: {
       logger.info(
         `🎯 Starting cloud learning session: ${sessionId} for domain: ${domain}`,
       );
@@ -433,10 +435,8 @@ export class CloudLearningInterface extends EventEmitter {
         provider: selectedProvider.name,
         confidence: analysis.confidence,
         learningGained: analysis.learningGained,
-        processingTime,
-      });
-
-      return {
+        processingTime
+      });      return: {
         sessionId,
         provider: selectedProvider.name,
         content: cloudResponse.content,
@@ -445,7 +445,7 @@ export class CloudLearningInterface extends EventEmitter {
         processingTime,
         cost: cloudResponse.cost || 0,
         tokens: cloudResponse.tokens || 0,
-        success: true,
+        success: true
       };
     } catch (error) {
       logger.error(`Cloud learning failed for session ${sessionId}:`, error);
@@ -529,7 +529,7 @@ export class CloudLearningInterface extends EventEmitter {
       context,
       startTime: Date.now(),
       attempts: 0,
-      maxAttempts: this.cloudLearningSystem.maxRetries,
+      maxAttempts: this.cloudLearningSystem.maxRetries
     };
 
     this.sessionManager.activeSessions.set(sessionId, session);
@@ -544,17 +544,14 @@ export class CloudLearningInterface extends EventEmitter {
     const startTime = Date.now();
     let attempt = 0;
 
-    while (attempt < session.maxAttempts) {
-      try {
+    while (attempt < session.maxAttempts) {      try: {
         attempt++;
         session.attempts = attempt;
 
         // Simulation requête cloud (à remplacer par vraie implémentation)
         const response = await this.simulateCloudAPICall(session);
 
-        const responseTime = Date.now() - startTime;
-
-        return {
+        const responseTime = Date.now() - startTime;      return: {
           content: response.content,
           confidence: response.confidence || 0.8,
           responseTime,
@@ -562,7 +559,7 @@ export class CloudLearningInterface extends EventEmitter {
           cost:
             (session.provider.cost_per_query * (response.tokens || 500)) / 1000,
           attempt,
-          success: true,
+          success: true
         };
       } catch (error) {
         logger.warn(`Cloud query attempt ${attempt} failed:`, error);
@@ -595,24 +592,22 @@ export class CloudLearningInterface extends EventEmitter {
       python: 0.85,
       react: 0.8,
       database: 0.75,
-      general: 0.7,
+      general: 0.7
     };
 
     const baseConfidence = domainKnowledge[session.domain] || 0.6;
     const confidence = Math.min(
       0.95,
       baseConfidence + (Math.random() * 0.2 - 0.1),
-    );
-
-    return {
+    );      return: {
       content: `Réponse cloud authentique pour ${session.domain}: ${session.query}. Analyse approfondie basée sur les modèles d'IA avancés avec spécialisation domaine.`,
       confidence,
       tokens: Math.floor(200 + Math.random() * 800),
-      metadata: {
+      metadata: {,
         model: session.provider.name,
         domain_specialization: session.domain,
-        processing_mode: "cloud_learning",
-      },
+        processing_mode: "cloud_learning"
+      }
     };
   }
 
@@ -625,7 +620,7 @@ export class CloudLearningInterface extends EventEmitter {
       relevance: this.calculateRelevance(response.content, query),
       completeness: this.calculateCompleteness(response.content, query),
       learningGained: 0.0,
-      qualityScore: 0.0,
+      qualityScore: 0.0
     };
 
     // Calcul learning gained basé sur qualité réponse
@@ -700,7 +695,7 @@ export class CloudLearningInterface extends EventEmitter {
         response.cost,
         response.success ? 1 : 0,
         analysis.learningGained,
-        analysis.qualityScore,
+        analysis.qualityScore
       ],
     );
 
@@ -729,7 +724,7 @@ export class CloudLearningInterface extends EventEmitter {
         0,
         0,
         0.0,
-        0.1,
+        0.1
       ],
     );
   }
@@ -797,7 +792,7 @@ export class CloudLearningInterface extends EventEmitter {
           newLearningEfficiency,
           Math.min(1.0, newLearningEfficiency * 10),
           providerId,
-          domain,
+          domain
         ],
       );
     } else {
@@ -815,7 +810,7 @@ export class CloudLearningInterface extends EventEmitter {
           analysis.qualityScore > 0.7 ? 1.0 : 0.0,
           analysis.confidence,
           analysis.learningGained,
-          analysis.learningGained * 10,
+          analysis.learningGained * 10
         ],
       );
     }
@@ -884,7 +879,7 @@ export class CloudLearningInterface extends EventEmitter {
           "session_quality",
           avgQuality,
           this.cloudLearningSystem.learningRate,
-          recentPerformance.session_count,
+          recentPerformance.session_count
         ],
       );
     }
@@ -915,8 +910,7 @@ export class CloudLearningInterface extends EventEmitter {
   /**
    * Optimisation sélection fournisseurs
    */
-  async optimizeProviderSelection() {
-    try {
+  async optimizeProviderSelection() {      try: {
       // Analyse performance récente tous fournisseurs
       const providerPerformance = await this.db.all(`
         SELECT 
@@ -977,8 +971,7 @@ export class CloudLearningInterface extends EventEmitter {
   /**
    * Nettoyage sessions anciennes
    */
-  async cleanupOldSessions() {
-    try {
+  async cleanupOldSessions() {      try: {
       // Supprimer sessions > 30 jours avec faible qualité
       const deletedSessions = await this.db.run(`
         DELETE FROM learning_sessions 
@@ -990,7 +983,7 @@ export class CloudLearningInterface extends EventEmitter {
       const now = Date.now();
       for (const [
         sessionId,
-        session,
+        session
       ] of this.sessionManager.activeSessions.entries()) {
         if (now - session.startTime > this.cloudLearningSystem.sessionTimeout) {
           this.sessionManager.activeSessions.delete(sessionId);
@@ -1008,8 +1001,7 @@ export class CloudLearningInterface extends EventEmitter {
   /**
    * Évolution apprentissage cloud AUTHENTIQUE
    */
-  async evolveCloudLearning() {
-    try {
+  async evolveCloudLearning() {      try: {
       // Calcul évolution basé sur succès récents
       const recentSuccessRate = await this.db.get(`
         SELECT 
@@ -1059,7 +1051,7 @@ export class CloudLearningInterface extends EventEmitter {
           localAutonomy: this.evolutionState.localAutonomy,
           cloudDependency: this.evolutionState.cloudDependency,
           evolutionFactor,
-          triggerData: recentSuccessRate,
+          triggerData: recentSuccessRate
         });
       }
     } catch (error) {
@@ -1082,7 +1074,7 @@ export class CloudLearningInterface extends EventEmitter {
         previousValue,
         newValue,
         trigger,
-        Math.abs(newValue - previousValue),
+        Math.abs(newValue - previousValue)
       ],
     );
   }
@@ -1100,48 +1092,46 @@ export class CloudLearningInterface extends EventEmitter {
     const recentSessions = await this.db.get(`
       SELECT COUNT(*) as count FROM learning_sessions 
       WHERE timestamp > datetime('now', '-24 hours')
-    `);
-
-    return {
+    `);      return: {
       module: this.moduleName,
       version: this.version,
       initialized: this.isInitialized,
-      database: {
+      database: {,
         connected: this.db !== null,
         path: this.dbPath,
         totalSessions: sessionCount.count,
         activeProviders: providerCount.count,
-        recentSessions: recentSessions.count,
+        recentSessions: recentSessions.count
       },
-      cloudLearning: {
+      cloudLearning: {,
         activeProviders: Array.from(this.cloudLearningSystem.activeProviders),
         preferredProvider: this.cloudLearningSystem.preferredProvider,
         sessionTimeout: this.cloudLearningSystem.sessionTimeout,
-        learningRate: this.cloudLearningSystem.learningRate,
+        learningRate: this.cloudLearningSystem.learningRate
       },
-      evolution: {
+      evolution: {,
         cloudDependency: this.evolutionState.cloudDependency,
         localAutonomy: this.evolutionState.localAutonomy,
         learningEfficiency: this.evolutionState.learningEfficiency,
-        lastEvolution: this.evolutionState.lastEvolution,
+        lastEvolution: this.evolutionState.lastEvolution
       },
-      metrics: {
+      metrics: {,
         totalQueries: this.learningMetrics.totalQueries,
         successfulLearnings: this.learningMetrics.successfulLearnings,
         failedAttempts: this.learningMetrics.failedAttempts,
-        averageResponseTime: this.learningMetrics.averageResponseTime,
+        averageResponseTime: this.learningMetrics.averageResponseTime
       },
-      sessions: {
+      sessions: {,
         active: this.sessionManager.activeSessions.size,
-        maxConcurrent: this.sessionManager.maxConcurrentSessions,
+        maxConcurrent: this.sessionManager.maxConcurrentSessions
       },
       isAuthentic: true,
-      compliance: {
+      compliance: {,
         sqliteUsed: true,
         intelligentProviderSelection: true,
         hybridLearning: true,
-        realEvolution: true,
-      },
+        realEvolution: true
+      }
     };
   }
 
@@ -1152,7 +1142,7 @@ export class CloudLearningInterface extends EventEmitter {
     // Terminer sessions actives proprement
     for (const [
       sessionId,
-      session,
+      session
     ] of this.sessionManager.activeSessions.entries()) {
       await this.storeFallbackSession(
         sessionId,
@@ -1174,5 +1164,5 @@ export class CloudLearningInterface extends EventEmitter {
 
 // Export singleton pour compatibilité
 export default new CloudLearningInterface({
-  moduleName: "CloudLearningInterface",
+  moduleName: "CloudLearningInterface"
 });

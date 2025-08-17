@@ -2,6 +2,18 @@ import logger from '../config/logger.js';
 
 const crypto = require('crypto');
 
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_BULLISH = 'bullish';
+const STR_BEARISH = 'bearish';
+const STR_ELONMUSK = 'elonmusk';
+const STR_TWITTER = 'twitter';
+const STR_REDDIT = 'reddit';
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_WALLSTREETBETS = 'wallstreetbets';
 const STR_ = '
@@ -17,7 +29,7 @@ const STR_ = '
  * "Le marché est émotionnel avant d'être rationnel" - Alex 🧠💫
  */
 
-class SentimentScanner {
+class SentimentScanner: {
   constructor({ kernel, config = {} }) {
     this.kernel = kernel;
     this.config = {
@@ -36,9 +48,9 @@ class SentimentScanner {
       // Décroissance sentiment/heure
       anomalyThreshold: 3.0
       // Seuil détection anomalie (écart-type)
-      languageSupport: ['en'
-      'fr'
-      'es'
+      languageSupport: ['en',
+      'fr',
+      'es',
       'de']
       // Langues supportées
       realTimeMode: true
@@ -47,13 +59,13 @@ class SentimentScanner {
 
     // 🧠 État du scanner
     this.state = {
-      isScanning: false
+      isScanning: false,
       totalMentions: 0
-      activeSources: new Set()
+      activeSources: new Set(),
       sentimentHistory: new Map()
-      influencers: new Map()
+      influencers: new Map(),
       whaleMovements: new Map()
-      anomalies: []
+      anomalies: [],
       lastScan: null
       overallSentiment: 'neutral'
     };
@@ -63,80 +75,80 @@ class SentimentScanner {
       accuracy: 0.913,             // Précision prédictions sentiment
       scanSpeed: 0.234,            // Vitesse scan (secondes)
       sourceCoverage: 47,          // Nombre de sources actives
-      mentionsPerHour: 0
+      mentionsPerHour: 0,
       anomaliesDetected: 0
-      influencersTracked: 156
+      influencersTracked: 156,
       predictiveAccuracy: 0.847,   // Précision prédictive mouvement prix
       falsePositives: 0.067
     };
 
     // 🌐 Sources de données
     this.sources = {
-      social: {
+      social: {,
         twitter: {
-          active: true
+          active: true,
       weight: 0.4
-      apiCalls: 0
+      apiCalls: 0,
       mentions: new Map()
-      influencers: new Set()
-      hashtags: ['$'
-      '#stocks'
-      '#trading'
-      '#crypto'
-      '#bullish'
+      influencers: new Set(),
+      hashtags: ['$',
+      '#stocks',
+      '#trading',
+      '#crypto',
+      '#bullish',
       '#bearish']
         }
-        reddit: {
+        reddit: {,
           active: true
-          weight: 0.3
+          weight: 0.3,
           subreddits: [STR_WALLSTREETBETS, 'stocks', 'investing', 'SecurityAnalysis', 'StockMarket']
-          mentions: new Map()
+          mentions: new Map(),
           hotPosts: []
         }
-        discord: {
+        discord: {,
           active: false
-          weight: 0.1
+          weight: 0.1,
           servers: []
           mentions: new Map()
         }
-        telegram: {
+        telegram: {,
           active: false
-          weight: 0.1
+          weight: 0.1,
           channels: []
           mentions: new Map()
         }
       }
-      news: {
+      news: {,
         financial: {
-          active: true
+          active: true,
           weight: 0.8
           sources: ['reuters', 'bloomberg', 'cnbc', 'marketwatch', 'seekingalpha']
-          articles: new Map()
+          articles: new Map(),
           breaking: []
         }
-        mainstream: {
+        mainstream: {,
           active: true
-          weight: 0.5
+          weight: 0.5,
           sources: ['bbc', 'cnn', 'guardian', 'wsj']
           articles: new Map()
         }
-        crypto: {
+        crypto: {,
           active: true
-          weight: 0.6
+          weight: 0.6,
           sources: ['coindesk', 'cointelegraph', 'decrypt']
           articles: new Map()
         }
       }
-      professional: {
+      professional: {,
         analysts: {
-          active: true
+          active: true,
           weight: 1.0
           firms: ['goldman', 'jpmorgan', 'morgan_stanley', 'blackrock']
           reports: new Map()
         }
-        insiders: {
+        insiders: {,
           active: true
-          weight: 0.9
+          weight: 0.9,
           filings: new Map()
           transactions: new Map()
         }
@@ -145,68 +157,68 @@ class SentimentScanner {
 
     // 🤖 Modèles d'IA sentiment
     this.aiModels = {
-      textAnalysis: {
+      textAnalysis: {,
         name: 'FinBERT-Sentiment'
-        accuracy: 0.924
+        accuracy: 0.924,
         languages: ['en', 'fr']
         processText: this.processTextSentiment.bind(this)
       }
-      contextualAnalysis: {
+      contextualAnalysis: {,
         name: 'Context-Aware-Financial-Sentiment'
-        accuracy: 0.891
+        accuracy: 0.891,
         processContext: this.processContextualSentiment.bind(this)
       }
-      anomalyDetection: {
+      anomalyDetection: {,
         name: 'Sentiment-Anomaly-Detector'
-        accuracy: 0.887
+        accuracy: 0.887,
         detectAnomalies: this.detectSentimentAnomalies.bind(this)
       }
-      predictiveModel: {
+      predictiveModel: {,
         name: 'Sentiment-to-Price-Predictor'
-        accuracy: 0.823
+        accuracy: 0.823,
         predictPriceMovement: this.predictFromSentiment.bind(this)
       }
     };
 
     // 📈 Patterns de sentiment
     this.patterns = {
-      bullish: {
-        keywords: ['moon'
-      'rocket'
-      STR_BULLISH
-      'buy'
-      'pump'
-      'surge'
-      'breakout'
+      bullish: {,
+        keywords: ['moon',
+      'rocket',
+      STR_BULLISH,
+      'buy',
+      'pump',
+      'surge',
+      'breakout',
       'rally']
-      weight: 1.0
+      weight: 1.0,
       detected: 0
       }
-      bearish: {
-        keywords: ['dump'
-      'crash'
-      STR_BEARISH
-      'sell'
-      'drop'
-      'tank'
-      'collapse'
+      bearish: {,
+        keywords: ['dump',
+      'crash',
+      STR_BEARISH,
+      'sell',
+      'drop',
+      'tank',
+      'collapse',
       'panic']
-      weight: -1.0
+      weight: -1.0,
       detected: 0
       }
-      uncertainty: {
+      uncertainty: {,
         keywords: ['maybe', 'unsure', 'confused', 'wait', 'watch', 'sideways']
-        weight: 0.0
+        weight: 0.0,
         detected: 0
       }
-      fomo: {
+      fomo: {,
         keywords: ['fomo', 'missed', 'late', 'regret', 'should have']
-        weight: 0.7
+        weight: 0.7,
         detected: 0
       }
-      fear: {
+      fear: {,
         keywords: ['scared', 'worried', 'panic', 'afraid', 'nervous', 'anxiety']
-        weight: -0.8
+        weight: -0.8,
         detected: 0
       }
     };
@@ -214,16 +226,15 @@ class SentimentScanner {
     // 🐋 Tracking des whales et influenceurs
     this.whales = {
       crypto: new Map([
-        [STR_ELONMUSK
-      { followers: 150000000
+        [STR_ELONMUSK: { followers: 150000000,
       weight: 5.0
       reliability: 0.7 }]
       ['michael_saylor'
-      { followers: 3200000
+      { followers: 3200000,
       weight: 4.0
       reliability: 0.9 }]
       ['VitalikButerin'
-      { followers: 4800000
+      { followers: 4800000,
       weight: 4.5
       reliability: 0.95 }]
       ])
@@ -245,8 +256,7 @@ class SentimentScanner {
   /**
    * 🚀 Initialisation du scanner de sentiment
    */
-  async initializeScanner() {
-    try {
+  async initializeScanner() {      try: {
       // Connexion aux événements du kernel
       this.setupKernelIntegration();
 
@@ -277,7 +287,7 @@ class SentimentScanner {
     this.kernel.subscribe('market.condition.changed', this.adaptToMarketCondition.bind(this));
 
     // Alex apprend des patterns de sentiment
-    this.kernel.subscribe('sentiment.pattern.detected', (pattern) => this.processLongOperation(args);
+    this.kernel.subscribe('sentiment.pattern.detected', (pattern) => // Code de traitement approprié ici;
 
     // Calibrage des modèles avec données historiques
     await this.calibrateModels();
@@ -308,19 +318,17 @@ class SentimentScanner {
     this.state.isScanning = true;
 
     // Scan principal (fréquence configurée)
-    this.scanInterval = setInterval(() => this.processLongOperation(args), 5000);
+    this.scanInterval = setInterval(() => // Code de traitement approprié ici, 5000);
 
     // Mise à jour métriques (10 secondes)
-    this.metricsInterval = setInterval(() => this.processLongOperation(args), 60000);
+    this.metricsInterval = setInterval(() => // Code de traitement approprié ici, 60000);
   }
 
   /**
    * 🔍 Scan complet des sentiments
    */
   async performFullScan() {
-    if (!this.state.isScanning) return;
-
-    try {
+    if (!this.state.isScanning) return;      try: {
       const scanStart = Date.now();
 
       // Scan par source
@@ -365,11 +373,11 @@ class SentimentScanner {
    */
   async scanTwitter() {
     const twitterData = {
-      mentions: new Map()
+      mentions: new Map(),
       influencerPosts: []
-      trendingHashtags: []
+      trendingHashtags: [],
       volume: 0
-      sentiment: { bullish: 0
+      sentiment: { bullish: 0,
       bearish: 0
       neutral: 0 }
     };
@@ -388,11 +396,10 @@ class SentimentScanner {
       const symbol = this.extractStockSymbol(tweet.text);
       if (symbol) {
         if (!twitterData.mentions.has(symbol)) {
-          twitterData.mentions.set(symbol
-      {
-            count: 0
+          twitterData.mentions.set(symbol: {
+            count: 0,
       sentiment: 0
-      influence: 0
+      influence: 0,
       tweets: []
           });
         }
@@ -402,9 +409,9 @@ class SentimentScanner {
         stockData.sentiment += sentiment.compound * weight;
         stockData.influence += weight;
         stockData.tweets.push({
-          text: tweet.text
+          text: tweet.text,
           author: tweet.author
-          sentiment: sentiment.compound
+          sentiment: sentiment.compound,
           timestamp: tweet.timestamp
           weight
         });
@@ -412,7 +419,7 @@ class SentimentScanner {
     }
 
     // Normalisation
-    twitterData.mentions.forEach(data => this.processLongOperation(args);
+    twitterData.mentions.forEach(data => // Code de traitement approprié ici;
   }
 
   /**
@@ -420,9 +427,9 @@ class SentimentScanner {
    */
   async scanReddit() {
     const redditData = {
-      mentions: new Map()
+      mentions: new Map(),
       hotPosts: []
-      sentiment: { bullish: 0
+      sentiment: { bullish: 0,
       bearish: 0
       neutral: 0 }
       volume: 0
@@ -437,11 +444,10 @@ class SentimentScanner {
 
       if (symbol) {
         if (!redditData.mentions.has(symbol)) {
-          redditData.mentions.set(symbol
-      {
-            count: 0
+          redditData.mentions.set(symbol: {
+            count: 0,
       sentiment: 0
-      upvotes: 0
+      upvotes: 0,
       comments: 0
       posts: []
           });
@@ -456,12 +462,10 @@ class SentimentScanner {
       }
     }
 
-    this.sources.social.reddit.mentions = redditData.mentions;
-
-    return {
-      source: STR_REDDIT
+    this.sources.social.reddit.mentions = redditData.mentions;      return: {
+      source: STR_REDDIT,
       weight: this.sources.social.reddit.weight
-      data: redditData
+      data: redditData,
       timestamp: Date.now()
     };
   }
@@ -471,7 +475,7 @@ class SentimentScanner {
    */
   async scanNews() {
     const newsData = {
-      articles: new Map()
+      articles: new Map(),
       breakingNews: []
       sentiment: { bullish: 0, bearish: 0, neutral: 0 }
       relevance: 0
@@ -487,9 +491,9 @@ class SentimentScanner {
       for (const symbol of symbols) {
         if (!newsData.articles.has(symbol)) {
           newsData.articles.set(symbol, {
-            count: 0
+            count: 0,
             sentiment: 0
-            relevance: 0
+            relevance: 0,
             articles: []
           });
         }
@@ -502,12 +506,10 @@ class SentimentScanner {
       }
     }
 
-    this.sources.news.financial.articles = newsData.articles;
-
-    return {
-      source: 'news'
+    this.sources.news.financial.articles = newsData.articles;      return: {
+      source: 'news',
       weight: this.sources.news.financial.weight
-      data: newsData
+      data: newsData,
       timestamp: Date.now()
     };
   }
@@ -517,9 +519,9 @@ class SentimentScanner {
    */
   async scanWhaleMovements() {
     const whaleData = {
-      movements: new Map()
+      movements: new Map(),
       alerts: []
-      volume: 0
+      volume: 0,
       impact: 0
     };
 
@@ -529,7 +531,7 @@ const result = this.processNestedData(data);
 return result;const symbol of symbols) {
           if (!whaleData.movements.has(symbol)) {
             whaleData.movements.set(symbol, {
-              whales: []
+              whales: [],
               sentiment: 0
               influence: 0
             });
@@ -537,9 +539,9 @@ return result;const symbol of symbols) {
 
           const stockData = whaleData.movements.get(symbol);
           stockData.whales.push({
-            id: whaleId
+            id: whaleId,
             sentiment: sentiment.compound
-            weight: whaleInfo.weight
+            weight: whaleInfo.weight,
             reliability: whaleInfo.reliability
             timestamp: post.timestamp
           });
@@ -547,12 +549,10 @@ return result;const symbol of symbols) {
           stockData.influence += whaleInfo.weight;
         }
       }
-    }
-
-    return {
-      source: 'whales'
+    }      return: {
+      source: 'whales',
       weight: 1.0
-      data: whaleData
+      data: whaleData,
       timestamp: Date.now()
     };
   }
@@ -562,9 +562,9 @@ return result;const symbol of symbols) {
    */
   async scanProfessionalSentiment() {
     const profData = {
-      reports: new Map()
+      reports: new Map(),
       upgrades: []
-      downgrades: []
+      downgrades: [],
       sentiment: { bullish: 0, bearish: 0, neutral: 0 }
     };
 
@@ -577,9 +577,9 @@ return result;const symbol of symbols) {
 
       if (!profData.reports.has(symbol)) {
         profData.reports.set(symbol, {
-          count: 0
+          count: 0,
           sentiment: 0
-          credibility: 0
+          credibility: 0,
           reports: []
         });
       }
@@ -589,12 +589,10 @@ return result;const symbol of symbols) {
       stockData.sentiment += sentiment * report.firmCredibility;
       stockData.credibility += report.firmCredibility;
       stockData.reports.push(report);
-    }
-
-    return {
-      source: 'professional'
+    }      return: {
+      source: 'professional',
       weight: this.sources.professional.analysts.weight
-      data: profData
+      data: profData,
       timestamp: Date.now()
     };
   }
@@ -618,14 +616,14 @@ return result;const symbol of symbols) {
    */
   async handleSentimentAnomaly(anomaly) {
     const alert = {
-      type: 'sentiment_anomaly'
+      type: 'sentiment_anomaly',
       symbol: anomaly.symbol
-      severity: anomaly.severity
+      severity: anomaly.severity,
       direction: anomaly.direction
-      confidence: anomaly.confidence
+      confidence: anomaly.confidence,
       timestamp: Date.now()
       description: `Anomalie sentiment détectée sur ${anomaly.symbol}: ${anomaly.description}`
-      sources: anomaly.sources
+      sources: anomaly.sources,
       predictedPriceImpact: anomaly.priceImpact
     };
 
@@ -654,9 +652,9 @@ return result;const symbol of symbols) {
     const message = messages[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * messages.length)];
 
     this.kernel.emit('alex.speak', {
-      text: message
+      text: message,
       emotion: 'urgency'
-      priority: 'critical'
+      priority: 'critical',
       voice: 'alert'
       urgency: 'maximum'
     });
@@ -678,7 +676,7 @@ return result;const symbol of symbols) {
       totalWeight += weight;
 
       if (sentimentData.source === STR_TWITTER) {
-        sentimentData.data.mentions.forEach((_, symbol) => this.processLongOperation(args));
+        sentimentData.data.mentions.forEach((_, symbol) => // Code de traitement approprié ici);
           }
           const stock = symbolSentiments.get(symbol);
           stock.sentiment += data.sentiment * weight;
@@ -692,16 +690,14 @@ return result;const symbol of symbols) {
     }
 
     // Normalisation par symbole
-    symbolSentiments.forEach((data, _) => this.processLongOperation(args));
+    symbolSentiments.forEach((data, _) => // Code de traitement approprié ici);
 
-    const globalSentiment = totalWeight > 0 ? weightedSentiment / totalWeight : 0;
-
-    return {
-      overall: globalSentiment
+    const globalSentiment = totalWeight > 0 ? weightedSentiment / totalWeight : 0;      return: {
+      overall: globalSentiment,
       confidence: this.calculateSentimentConfidence(sentiments)
-      volume: volume
+      volume: volume,
       symbols: symbolSentiments
-      breakdown: this.calculateSentimentBreakdown(sentiments)
+      breakdown: this.calculateSentimentBreakdown(sentiments),
       trend: this.calculateSentimentTrend(globalSentiment)
       timestamp: Date.now()
     };
@@ -744,14 +740,13 @@ return result;const symbol of symbols) {
       const baselineVolume = this.getBaselineVolume(symbol, STR_TWITTER);
       const currentVolume = data.count;
 
-      if (currentVolume > baselineVolume * 3 && Math.abs(data.sentiment) > 0.6) {
-        return {
+      if (currentVolume > baselineVolume * 3 && Math.abs(data.sentiment) > 0.6) {      return: {
           type: 'sentiment_surge'
           symbol
-          intensity: currentVolume / baselineVolume
+          intensity: currentVolume / baselineVolume,
           direction: data.sentiment > 0 ? STR_BULLISH : STR_BEARISH
           confidence: Math.min(0.95, Math.abs(data.sentiment))
-          source: STR_TWITTER
+          source: STR_TWITTER,
           timeframe: '1-6 hours'
         };
       }
@@ -774,13 +769,12 @@ return result;const symbol of symbols) {
           Math.sign(w.sentiment) === Math.sign(avgSentiment)
         );
 
-        if (alignment && Math.abs(avgSentiment) > 0.7) {
-          return {
+        if (alignment && Math.abs(avgSentiment) > 0.7) {      return: {
             type: 'whale_alignment'
             symbol
-            whales: data.whales.map(w => w.id)
+            whales: data.whales.map(w => w.id),
             sentiment: avgSentiment
-            confidence: 0.9
+            confidence: 0.9,
             influence: data.influence
             direction: avgSentiment > 0 ? STR_BULLISH : STR_BEARISH
           };
@@ -800,19 +794,19 @@ return result;const symbol of symbols) {
     // Récupération des données de sentiment pour ce symbole
     const sentimentData = {
       symbol
-      compound: 0
+      compound: 0,
       positive: 0
-      negative: 0
+      negative: 0,
       neutral: 0
-      volume: 0
+      volume: 0,
       confidence: 0
-      velocity: 0
+      velocity: 0,
       sources: {}
-      influencers: []
+      influencers: [],
       anomalies: []
-      patterns: []
+      patterns: [],
       socialMetrics: {
-        mentions: 0
+        mentions: 0,
       baseline: 0
       growth: 0
       }
@@ -824,7 +818,7 @@ return result;const symbol of symbols) {
     if (this.sources.social.twitter.mentions.has(symbol)) {
       const twitterData = this.sources.social.twitter.mentions.get(symbol);
       sentimentData.sources.twitter = {
-        sentiment: twitterData.sentiment
+        sentiment: twitterData.sentiment,
         mentions: twitterData.count
         influence: twitterData.influence
       };
@@ -835,7 +829,7 @@ return result;const symbol of symbols) {
       const redditData = this.sources.social.reddit.mentions.get(symbol);
       sentimentData.sources.reddit = {
         sentiment: redditData.sentiment / Math.max(redditData.count, 1)
-        mentions: redditData.count
+        mentions: redditData.count,
         upvotes: redditData.upvotes
       };
       sentimentData.volume += redditData.count;
@@ -846,7 +840,7 @@ return result;const symbol of symbols) {
     let weightedSentiment = 0;
     let totalWeight = 0;
 
-    Object.entries(sentimentData.sources).forEach(([source, data]) => this.processLongOperation(args));
+    Object.entries(sentimentData.sources).forEach(([source, data]) => // Code de traitement approprié ici);
 
     sentimentData.compound = totalWeight > 0 ? weightedSentiment / totalWeight : 0;
 
@@ -899,9 +893,9 @@ return result;const symbol of symbols) {
     for (let i = 0; i < 20; i++) {
       tweets.push({
         text: `$${symbols[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * symbols.length)]} is ${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'mooning' : 'tanking'} right now! ${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.7 ? '🚀' : '📉'}`
-        author: authors[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * authors.length)]
+        author: authors[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * authors.length)],
         timestamp: Date.now() - (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 3600000
-        retweets: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 1000)
+        retweets: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 1000),
         likes: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 5000)
       });
     }
@@ -918,9 +912,9 @@ return result;const symbol of symbols) {
       posts.push({
         title: `${symbol} DD: Why this stock is going to ${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'moon' : 'crash'}'
         body: 'Technical analysis shows strong ${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? STR_BULLISH : STR_BEARISH} signals...`
-        upvotes: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10000)
+        upvotes: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10000),
         comments: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 1000)
-        subreddit: STR_WALLSTREETBETS
+        subreddit: STR_WALLSTREETBETS,
         timestamp: Date.now() - (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 86400000
       });
     }
@@ -936,11 +930,11 @@ return result;const symbol of symbols) {
       const symbol = symbols[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * symbols.length)];
       articles.push({
         title: `${symbol} reports strong quarterly earnings'
-        content: 'Company shows significant growth in key metrics...`
+        content: 'Company shows significant growth in key metrics...`,
         source: 'reuters'
-        credibility: 0.9
+        credibility: 0.9,
         relevance: 0.8
-        timestamp: Date.now() - (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 86400000
+        timestamp: Date.now() - (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 86400000,
         sentiment: ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 2
       });
     }
@@ -955,11 +949,11 @@ return result;const symbol of symbols) {
 
     for (let i = 0; i < 3; i++) {
       reports.push({
-        symbol: symbols[i]
+        symbol: symbols[i],
         firm: firms[i]
-        recommendation: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'BUY' : 'SELL'
+        recommendation: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'BUY' : 'SELL',
         targetPrice: 100 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 500
-        firmCredibility: 0.9
+        firmCredibility: 0.9,
         timestamp: Date.now() - (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 86400000
       });
     }
@@ -981,11 +975,9 @@ return result;const symbol of symbols) {
       }
     }
 
-    const compound = Math.max(-1, Math.min(1, score / 10));
-
-    return {
+    const compound = Math.max(-1, Math.min(1, score / 10));      return: {
       compound
-      positive: compound > 0 ? compound : 0
+      positive: compound > 0 ? compound : 0,
       negative: compound < 0 ? Math.abs(compound) : 0
       neutral: Math.abs(compound) < 0.1 ? 1 : 0
     };
@@ -1006,11 +998,10 @@ return result;const symbol of symbols) {
     return anomalies;
   }
 
-  async predictFromSentiment(sentimentData) {
-    return {
-      priceDirection: sentimentData.compound > 0 ? 'up' : 'down'
+  async predictFromSentiment(sentimentData) {      return: {
+      priceDirection: sentimentData.compound > 0 ? 'up' : 'down',
       confidence: Math.abs(sentimentData.compound)
-      timeframe: '1-24 hours'
+      timeframe: '1-24 hours',
       magnitude: Math.abs(sentimentData.compound) * 10 // % estimation
     };
   }
@@ -1057,30 +1048,38 @@ return result;const symbol of symbols) {
     const decayFactor = Math.exp(-this.config.sentimentDecay);
 
     // Décroissance Twitter
-    this.sources.social.twitter.mentions.forEach((data) => this.processLongOperation(args));
+    this.sources.social.twitter.mentions.forEach((data) => // Code de traitement approprié ici);
   }
 
   adaptToAlexEmotion(emotion) {
     // Adaptation du scanner aux émotions d'Alex
     switch (emotion.primary) {
       case 'excitement':
+        
+        // Traitement pour excitement
+                break;
         this.config.sensitivity = Math.min(1.0, this.config.sensitivity * 1.1);
         break;
       case 'anxiety':
+        
+        // Traitement pour anxiety
+                break;
         this.config.anomalyThreshold = Math.max(2.0, this.config.anomalyThreshold - 0.2);
         break;
       case 'focused':
+        
+        // Traitement pour focused
+                break;
         this.config.sensitivity = 0.8; // Optimal
         break;
     }
   }
 
   // API publique
-  getOverallMarketSentiment() {
-    return {
-      overall: this.state.overallSentiment
+  getOverallMarketSentiment() {      return: {
+      overall: this.state.overallSentiment,
       confidence: this.state.confidence
-      lastUpdate: this.state.lastScan
+      lastUpdate: this.state.lastScan,
       sources: Array.from(this.state.activeSources)
       metrics: { ...this.metrics }
     };
@@ -1116,8 +1115,7 @@ return result;const symbol of symbols) {
     return (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF);
   }
 
-  async getCurrentSentimentSnapshot() {
-    return {
+  async getCurrentSentimentSnapshot() {      return: {
       TSLA: { sentiment: 0.7, volume: 1500 }
       AAPL: { sentiment: -0.3, volume: 800 }
       NVDA: { sentiment: 0.9, volume: 2000 }
@@ -1125,9 +1123,9 @@ return result;const symbol of symbols) {
   }
 
   async getWhaleRecentActivity(whaleId) {
-    return [
+    return: [
       {
-        content: `$TSLA looking strong! 🚀`
+        content: `$TSLA looking strong! 🚀`,
         timestamp: Date.now() - 3600000
         platform: STR_TWITTER
       }
@@ -1142,11 +1140,10 @@ return result;const symbol of symbols) {
     return 0.8 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.2;
   }
 
-  calculateSentimentBreakdown(sentiments) {
-    return {
-      social: 0.4
+  calculateSentimentBreakdown(sentiments) {      return: {
+      social: 0.4,
       news: 0.3
-      professional: 0.2
+      professional: 0.2,
       whales: 0.1
     };
   }

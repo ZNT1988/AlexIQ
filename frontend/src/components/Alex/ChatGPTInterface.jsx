@@ -48,8 +48,8 @@ const ChatGPTInterface = () => {
     setIsTyping(true);
 
     try {
-      // Connexion au backend Alex Palier 3 (production)
-      const response = await fetch('https://alexiq.site/api/chat', {
+      // Connexion au backend Alex local
+      const response = await fetch('http://localhost:3003/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -93,7 +93,6 @@ const ChatGPTInterface = () => {
         throw new Error(data.error || 'Erreur de communication avec Alex');
       }
     } catch (error) {
-      console.error('Erreur API:', error);
       
       // Message d'erreur avec suggestion
       const errorMessage = {

@@ -1,9 +1,12 @@
 // DarkSideDecoder.js - Décodeur de l'Ombre Intérieure
 // Système révolutionnaire d'identification des blocages inconscients
-// Version: 2.0 - HustleFinderIA Advanced AI System
-
-import { EventEmitter } from 'node:events';
+// Version: 2.0 - HustleFinderIA Advanced AI System      import { EventEmitter } from 'node:events';
 import logger from '../config/logger.js';
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 
@@ -16,7 +19,7 @@ import logger from '../config/logger.js';
  * - Décoder les mécanismes de l'ombre psychologique
  * - Fournir des antidotes et stratégies de transformation
  */
-export class DarkSideDecoder extends EventEmitter {
+export class DarkSideDecoder extends EventEmitter  {
   constructor() {
     super();
 
@@ -37,24 +40,23 @@ export class DarkSideDecoder extends EventEmitter {
     this.setupPsychologicalAnalysis();
     this.initializeBlockageDetection();
     this.loadTransformationProtocols();
-    this.setupAntidoteGeneration();
-
-    try {
+    this.setupAntidoteGeneration();      try: {
       logger.info('DarkSideDecoder initialized - Ready to illuminate the shadows');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   /**
    * Analyse complète de l'ombre psychologique
    */
   async decodeDarkSide(userData, analysisDepth = 'comprehensive') {
     logger.info('Starting dark side analysis', {
-      userId: userData.userId
+      userId: userData.userId,
       depth: analysisDepth
-    });
-
-    try {
+    });      try: {
       // Phase 1: Analyse linguistique des patterns inconscients
       const linguisticShadows = await this.analyzeLinguisticShadows(userData);      // Phase 2: Détection des patterns comportementaux limitants
       const behavioralBlocks = await this.detectBehavioralBlocks(userData);      // Phase 3: Analyse des échecs et patterns de sabotage
@@ -62,22 +64,22 @@ export class DarkSideDecoder extends EventEmitter {
       const limitingBeliefs = await this.identifyLimitingBeliefs(userData);      // Phase 5: Révélation des traumas et blessures anciennes
       const ancientWounds = await this.revealAncientWounds(userData);      // Phase 6: Mapping de l'architecture de l'ombre
       const shadowArchitecture = await this.mapShadowArchitecture(
-        linguisticShadows
+        linguisticShadows,
         behavioralBlocks
-        sabotagePatterns
+        sabotagePatterns,
         limitingBeliefs
         ancientWounds
       );      // Phase 7: Génération des antidotes personnalisés
       const personalizedAntidotes = await this.generateAntidotes(shadowArchitecture);      const _darkSideAnalysis = {
-        userId: userData.userId
+        userId: userData.userId,
         analysisDate: new Date().toISOString()
         depth: analysisDepth
         // Shadows détectées
-        shadows: {
-          linguistic: linguisticShadows
-          behavioral: behavioralBlocks
-          sabotage: sabotagePatterns
-          beliefs: limitingBeliefs
+        shadows: {,
+          linguistic: linguisticShadows,
+          behavioral: behavioralBlocks,
+          sabotage: sabotagePatterns,
+          beliefs: limitingBeliefs,
           wounds: ancientWounds
         }
         // Architecture de l'ombre
@@ -85,11 +87,11 @@ export class DarkSideDecoder extends EventEmitter {
         // Antidotes et transformations
         antidotes: personalizedAntidotes
         // Métriques de l'ombre
-        metrics: {
+        metrics: {,
           shadowIntensity: this.calculateShadowIntensity(shadowArchitecture)
-          blockageCount: this.countActiveBlockages(shadowArchitecture)
+          blockageCount: this.countActiveBlockages(shadowArchitecture),
           transformationPotential: this.calculateTransformationPotential(shadowArchitecture)
-          urgencyLevel: this.assessTransformationUrgency(shadowArchitecture)
+          urgencyLevel: this.assessTransformationUrgency(shadowArchitecture),
           healingTimeEstimate: this.estimateHealingTime(shadowArchitecture)
         }
         // Plan de transformation
@@ -109,13 +111,13 @@ export class DarkSideDecoder extends EventEmitter {
    */
   async analyzeLinguisticShadows(userData) {
     const shadows = {
-      limitingLanguage: []
-      victimPatterns: []
-      fearExpressions: []
-      excusePatterns: []
-      perfectionism: []
-      impostor: []
-      powerlessness: []
+      limitingLanguage: [],
+      victimPatterns: [],
+      fearExpressions: [],
+      excusePatterns: [],
+      perfectionism: [],
+      impostor: [],
+      powerlessness: [],
       unworthiness: []
     };    // Analyse des messages et conversations
     if (userData.conversationHistory) {
@@ -154,10 +156,10 @@ export class DarkSideDecoder extends EventEmitter {
     const recurringPatterns = this.analyzeRecurringLinguisticPatterns(shadows);    // Calcul des intensités
     const intensities = this.calculateLinguisticIntensities(shadows);    // Identification des shadows dominantes
     const dominantShadows = this.identifyDominantLinguisticShadows(shadows, intensities);    return {
-      rawPatterns: shadows
-      recurring: recurringPatterns
+      rawPatterns: shadows,
+      recurring: recurringPatterns,
       intensities
-      dominant: dominantShadows
+      dominant: dominantShadows,
       linguisticProfile: this.generateLinguisticShadowProfile(shadows)
     };
   }
@@ -198,9 +200,9 @@ export class DarkSideDecoder extends EventEmitter {
     // Identification des mécanismes de défense
     const defensemechanisms = this.identifyDefenseMechanisms(blocks);    // Calcul de l'impact comportemental
     const behavioralImpact = this.calculateBehavioralImpact(blocks);    return {
-      activeBlocks: blocks
+      activeBlocks: blocks,
       defensemechanisms
-      impact: behavioralImpact
+      impact: behavioralImpact,
       severity: this.assessBlockageSeverity(blocks)
       transformation_readiness: this.assessTransformationReadiness(blocks)
     };
@@ -211,7 +213,7 @@ export class DarkSideDecoder extends EventEmitter {
    */
   async analyzeSabotagePatterns(userData) {
     const _sabotage = {
-      self_sabotage_events: []
+      self_sabotage_events: [],
       timing_patterns: {}
       trigger_analysis: {}
       frequency: {}
@@ -249,12 +251,12 @@ export class DarkSideDecoder extends EventEmitter {
    */
   async identifyLimitingBeliefs(userData) {
     const beliefs = {
-      core_beliefs: []
-      money_beliefs: []
-      success_beliefs: []
-      relationship_beliefs: []
-      self_worth_beliefs: []
-      capability_beliefs: []
+      core_beliefs: [],
+      money_beliefs: [],
+      success_beliefs: [],
+      relationship_beliefs: [],
+      self_worth_beliefs: [],
+      capability_beliefs: [],
       origin_analysis: {}
       strength_assessment: {}
     };    // Analyse linguistique pour les croyances
@@ -283,12 +285,12 @@ export class DarkSideDecoder extends EventEmitter {
    */
   async revealAncientWounds(userData) {
     const wounds = {
-      childhood_wounds: []
-      betrayal_wounds: []
-      abandonment_wounds: []
-      rejection_wounds: []
-      humiliation_wounds: []
-      injustice_wounds: []
+      childhood_wounds: [],
+      betrayal_wounds: [],
+      abandonment_wounds: [],
+      rejection_wounds: [],
+      humiliation_wounds: [],
+      injustice_wounds: [],
       healing_status: {}
       activation_triggers: {}
     };    // Analyse des patterns émotionnels
@@ -315,12 +317,12 @@ export class DarkSideDecoder extends EventEmitter {
    */
   async mapShadowArchitecture(linguistic, behavioral, sabotage, beliefs, wounds) {
     const architecture = {
-      primary_shadow: null
-      secondary_shadows: []
+      primary_shadow: null,
+      secondary_shadows: [],
       shadow_clusters: {}
       interconnections: {}
       power_dynamics: {}
-      evolution_stage: ''
+      evolution_stage: '',
       integration_potential: 0
     };    // Identification de l'ombre primaire
     architecture.primary_shadow = this.identifyPrimaryShadow(linguistic, behavioral, sabotage, beliefs, wounds);
@@ -351,23 +353,23 @@ export class DarkSideDecoder extends EventEmitter {
    */
   async generateAntidotes(shadowArchitecture) {
     const antidotes = {
-      immediate: []
-      short_term: []
-      long_term: []
-      maintenance: []
+      immediate: [],
+      short_term: [],
+      long_term: [],
+      maintenance: [],
       emergency: []
     };    // Antidotes immédiats (24-48h)
     antidotes.immediate = [
       {
-        name: 'Shadow Awareness Meditation'
-        description: 'Méditation de 20 minutes pour observer sans jugementSTR_FREQUENCYdailySTR_DURATION20 minutes'
-        target: shadowArchitecture.primary_shadow
+        name: 'Shadow Awareness Meditation',
+        description: 'Méditation de 20 minutes pour observer sans jugementSTR_FREQUENCYdailySTR_DURATION20 minutes',
+        target: shadowArchitecture.primary_shadow,
         effectiveness: 0.7
       }
       {
-        name: 'Pattern Interrupt Technique'
-        description: 'Technique pour interrompre les patterns automatiquesSTR_FREQUENCYas_neededSTR_DURATION5 minutes'
-        target: 'behavioral_loops'
+        name: 'Pattern Interrupt Technique',
+        description: 'Technique pour interrompre les patterns automatiquesSTR_FREQUENCYas_neededSTR_DURATION5 minutes',
+        target: 'behavioral_loops',
         effectiveness: 0.8
       }
     ];
@@ -375,17 +377,17 @@ export class DarkSideDecoder extends EventEmitter {
     // Antidotes court terme (1-4 semaines)
     antidotes.short_term = [
       {
-        name: 'Belief Restructuring Protocol'
-        description: 'Protocole de restructuration des croyances limitantesSTR_FREQUENCYweeklySTR_DURATION60 minutes'
-        sessions: 4
-        target: 'limiting_beliefs'
+        name: 'Belief Restructuring Protocol',
+        description: 'Protocole de restructuration des croyances limitantesSTR_FREQUENCYweeklySTR_DURATION60 minutes',
+        sessions: 4,
+        target: 'limiting_beliefs',
         effectiveness: 0.85
       }
       {
-        name: 'Inner Child Healing Sessions'
-        description: 'Sessions de guérison de l\'enfant intérieurSTR_FREQUENCYbi-weeklySTR_DURATION90 minutes'
-        sessions: 6
-        target: 'childhood_wounds'
+        name: 'Inner Child Healing Sessions',
+        description: 'Sessions de guérison de l\'enfant intérieurSTR_FREQUENCYbi-weeklySTR_DURATION90 minutes',
+        sessions: 6,
+        target: 'childhood_wounds',
         effectiveness: 0.9
       }
     ];
@@ -393,9 +395,9 @@ export class DarkSideDecoder extends EventEmitter {
     // Antidotes long terme (3-12 mois)
     antidotes.long_term = [
       {
-        name: 'Shadow Integration Journey'
-        description: 'Parcours complet d\'intégration de l\'ombreSTR_FREQUENCYongoingSTR_DURATION6-12 months'
-        target: 'complete_shadow_architecture'
+        name: 'Shadow Integration Journey',
+        description: 'Parcours complet d\'intégration de l\'ombreSTR_FREQUENCYongoingSTR_DURATION6-12 months',
+        target: 'complete_shadow_architecture',
         effectiveness: 0.95
       }
     ];
@@ -417,8 +419,8 @@ export class DarkSideDecoder extends EventEmitter {
     ];    const detected = [];    for (const phrase of limitingPhrases) {
       if (content.includes(phrase)) {
         detected.push({
-          phrase
-          type: 'limiting_language'
+          phrase,
+          type: 'limiting_language',
           intensity: this.calculatePhraseIntensity(phrase, content)
           context: this.extractContext(phrase, content)
         });
@@ -433,8 +435,8 @@ export class DarkSideDecoder extends EventEmitter {
     ];    const detected = [];    for (const phrase of victimPhrases) {
       if (content.includes(phrase)) {
         detected.push({
-          phrase
-          type: 'victim_pattern'
+          phrase,
+          type: 'victim_pattern',
           intensity: this.calculatePhraseIntensity(phrase, content)
           context: this.extractContext(phrase, content)
         });
@@ -447,10 +449,10 @@ export class DarkSideDecoder extends EventEmitter {
     const sabotageEvents = [];    // Analyse des abandons près du succès
     if (project.status === 'abandoned' && project.completion > 0.8) {
       sabotageEvents.push({
-        type: 'near_success_abandonment'
-        project: project.name
-        completion: project.completion
-        timing: project.abandonedAt
+        type: 'near_success_abandonment',
+        project: project.name,
+        completion: project.completion,
+        timing: project.abandonedAt,
         severity: 'high'
       });
     }
@@ -460,9 +462,9 @@ export class DarkSideDecoder extends EventEmitter {
       for (const event of project.procrastinationEvents) {
         if (event.beforeImportantDeadline) {
           sabotageEvents.push({
-            type: 'deadline_procrastination'
-            project: project.name
-            timing: event.date
+            type: 'deadline_procrastination',
+            project: project.name,
+            timing: event.date,
             severity: 'medium'
           });
         }
@@ -510,50 +512,59 @@ export class DarkSideDecoder extends EventEmitter {
   loadShadowDatabase() {
     // Chargement de la base de données des ombres
     this.shadowPatterns.set('perfectionism', {
-      indicators: ['parfait', 'impeccable', 'sans faute']
+      indicators: ['parfait', 'impeccable', 'sans faute'],
       antidotes: ['done_is_better_than_perfect', 'progress_over_perfection']
-    });
-
-    try {
+    });      try: {
       logger.debug('Shadow database loaded');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   setupPsychologicalAnalysis() {
-    // Configuration de l'analyse psychologique
-    try {
+    // Configuration de l'analyse psychologique      try: {
       logger.debug('Psychological analysis configured');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   initializeBlockageDetection() {
-    // Initialisation de la détection de blocages
-    try {
+    // Initialisation de la détection de blocages      try: {
       logger.debug('Blockage detection initialized');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   loadTransformationProtocols() {
-    // Chargement des protocoles de transformation
-    try {
+    // Chargement des protocoles de transformation      try: {
       logger.debug('Transformation protocols loaded');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   setupAntidoteGeneration() {
-    // Configuration de la génération d'antidotes
-    try {
+    // Configuration de la génération d'antidotes      try: {
       logger.debug('Antidote generation configured');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 }
 
 // Export des fonctions utilitaires
-export const decodeDarkSide = async (_userData, _depth = 'comprehensive') => this.processLongOperation(args);export const identifyBlockages = async (_userData) => this.processLongOperation(args);export const generateHealingPlan = async (_shadowAnalysis) => this.processLongOperation(args);// Instance singleton
+export const decodeDarkSide = async (_userData, _depth = 'comprehensive') => // Code de traitement approprié ici;export const identifyBlockages = async (_userData) => // Code de traitement approprié ici;export const generateHealingPlan = async (_shadowAnalysis) => // Code de traitement approprié ici;// Instance singleton
 const darkSideDecoder = new DarkSideDecoder();
 export default darkSideDecoder;

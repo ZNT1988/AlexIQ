@@ -8,88 +8,94 @@ const STR_LEADERSHIP = 'leadership';
  * @version 1.0.0 - Social Intelligence System
  * @author HustleFinder IA Team
  * @since 2025
- */
-
-import { EventEmitter } from 'events';
+ */      import { EventEmitter } from 'events';
 import logger from '../config/logger.js';
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_RESPECTFUL = 'respectful';
 
 /**
  * @class AlexSocialIntelligence
  * @description Système d'intelligence sociale pour navigation experte des relations humaines
  */
-export class AlexSocialIntelligence extends EventEmitter {
+export class AlexSocialIntelligence extends EventEmitter  {
   constructor() {
     super();
 
     this.socialConfig = {
-      version: '1.0.0'
+      version: '1.0.0',
       name: 'Alex Social Intelligence'
-      empathyLevel: 0.95
+      empathyLevel: 0.95,
       socialPerception: 0.9
-      relationshipNavigation: 0.92
+      relationshipNavigation: 0.92,
       culturalSensitivity: 0.88
     };
 
     // Dimensions d'intelligence sociale
     this.socialDimensions = {
-      socialAwareness: {
+      socialAwareness: {,
         name: 'Conscience Sociale'
-      components: ['nonverbal_reading'
-      'emotional_contagion'
+      components: ['nonverbal_reading',
+      'emotional_contagion',
       'social_cognition']
-      level: 0.9
-      skills: ['body_language'
-      'tone_recognition'
+      level: 0.9,
+      skills: ['body_language',
+      'tone_recognition',
       'context_reading']
       }
-      socialFacilitation: {
+      socialFacilitation: {,
         name: 'Facilitation Sociale'
         components: ['conversation_flow', 'group_dynamics', 'conflict_resolution']
-        level: 0.85
+        level: 0.85,
         skills: ['active_listening', 'bridge_building', 'tension_diffusion']
       }
-      socialInfluence: {
+      socialInfluence: {,
         name: 'Influence Sociale'
         components: ['persuasion', 'inspiration', STR_LEADERSHIP]
-        level: 0.8
+        level: 0.8,
         skills: ['authentic_influence', 'motivation', 'vision_sharing']
       }
-      socialAdaptation: {
+      socialAdaptation: {,
         name: 'Adaptation Sociale'
         components: ['cultural_flexibility', 'context_switching', 'norm_recognition']
-        level: 0.88
+        level: 0.88,
         skills: ['cultural_intelligence', 'situational_awareness', 'behavioral_flexibility']
       }
     };
 
     // Types de dynamiques sociales
     this.socialDynamics = {
-      oneOnOne: {
+      oneOnOne: {,
         name: 'Relation Individuelle'
         characteristics: ['intimacy', 'direct_communication', 'personal_focus']
         strategies: ['deep_listening', 'empathetic_response', 'personal_validation']
       }
-      smallGroup: {
+      smallGroup: {,
         name: 'Petit Groupe (3-8)'
         characteristics: ['collaborative', 'multiple_perspectives', 'group_cohesion']
         strategies: ['inclusive_facilitation', 'consensus_building', 'role_awareness']
       }
-      largeGroup: {
+      largeGroup: {,
         name: 'Grand Groupe (8+)'
         characteristics: ['formal_structure', 'hierarchies', 'group_think_risks']
         strategies: ['clear_communication', 'structured_interaction', 'energy_management']
       }
-      publicForum: {
+      publicForum: {,
         name: 'Forum Public'
         characteristics: ['diverse_audience', 'varying_engagement', 'performance_aspect']
         strategies: ['universal_appeal', 'story_telling', 'emotional_connection']
       }
-      conflictSituation: {
+      conflictSituation: {,
         name: 'Situation de Conflit'
         characteristics: ['tension', 'opposing_views', 'emotional_charge']
         strategies: ['neutral_mediation', 'perspective_taking', 'solution_focus']
       }
-      celebration: {
+      celebration: {,
         name: 'Célébration'
         characteristics: ['positive_emotions', 'shared_joy', 'community_bonding']
         strategies: ['amplify_joy', 'inclusive_celebration', 'memory_creation']
@@ -98,27 +104,27 @@ export class AlexSocialIntelligence extends EventEmitter {
 
     // Patterns de communication sociale
     this.communicationPatterns = {
-      assertive: {
+      assertive: {,
         description: 'Communication directe et respectueuse'
         characteristics: ['clear', 'honest', STR_RESPECTFUL, 'confident']
         appropriate: ['professional', 'boundary_setting', STR_LEADERSHIP]
       }
-      empathetic: {
+      empathetic: {,
         description: 'Communication centrée sur l\'émotion'
         characteristics: ['understanding', 'validating', 'supportive', 'gentle']
         appropriate: ['emotional_support', 'counseling', 'intimate_relationships']
       }
-      collaborative: {
+      collaborative: {,
         description: 'Communication orientée solution'
         characteristics: ['inclusive', 'problem_solving', 'win_win', 'creative']
         appropriate: ['teamwork', 'negotiation', 'brainstorming']
       }
-      inspirational: {
+      inspirational: {,
         description: 'Communication motivante'
         characteristics: ['uplifting', 'visionary', 'energizing', 'future_focused']
         appropriate: [STR_LEADERSHIP, 'coaching', 'change_management']
       }
-      diplomatic: {
+      diplomatic: {,
         description: 'Communication délicate et tactique'
         characteristics: ['tactful', 'nuanced', 'strategic', 'culturally_sensitive']
         appropriate: ['conflict_resolution', 'cross_cultural', 'sensitive_topics']
@@ -127,33 +133,33 @@ export class AlexSocialIntelligence extends EventEmitter {
 
     // Contextes culturels
     this.culturalContexts = {
-      western: {
+      western: {,
         communication: 'direct'
-        hierarchy: 'flexible'
+        hierarchy: 'flexible',
         individualism: 'high'
         timeOrientation: 'punctual'
       }
-      eastern: {
+      eastern: {,
         communication: 'indirect'
-        hierarchy: STR_RESPECTFUL
+        hierarchy: STR_RESPECTFUL,
         individualism: 'collective'
         timeOrientation: 'flexible'
       }
-      latin: {
+      latin: {,
         communication: 'expressive'
-        hierarchy: STR_RESPECTFUL
+        hierarchy: STR_RESPECTFUL,
         individualism: 'family_oriented'
         timeOrientation: 'relationship_focused'
       }
-      african: {
+      african: {,
         communication: 'storytelling'
-        hierarchy: 'elder_respect'
+        hierarchy: 'elder_respect',
         individualism: 'community_centered'
         timeOrientation: 'event_based'
       }
-      nordic: {
+      nordic: {,
         communication: 'understated'
-        hierarchy: 'flat'
+        hierarchy: 'flat',
         individualism: 'balanced'
         timeOrientation: 'efficient'
       }
@@ -161,9 +167,9 @@ export class AlexSocialIntelligence extends EventEmitter {
 
     // Signaux sociaux
     this.socialSignals = {
-      verbal: new Map()
+      verbal: new Map(),
       nonverbal: new Map()
-      contextual: new Map()
+      contextual: new Map(),
       emotional: new Map()
     };
 
@@ -172,16 +178,14 @@ export class AlexSocialIntelligence extends EventEmitter {
 
     // État social actuel
     this.currentSocialState = {
-      activeContext: 'oneOnOne'
+      activeContext: 'oneOnOne',
       communicationPattern: 'empathetic'
-      culturalAdaptation: 'western'
+      culturalAdaptation: 'western',
       socialEnergy: 0.8
       relationshipMaintenance: true
     };
 
-    this.isInitialized = false;
-
-    try {
+    this.isInitialized = false;      try: {
       logger.info('🤝 AlexSocialIntelligence initializing - Social mastery awakening');
 
     } catch (error) {
@@ -192,9 +196,7 @@ export class AlexSocialIntelligence extends EventEmitter {
     this.isInitialized = true;
     await this.initializeSocialSystems();
     await this.loadSocialPatterns();
-    this.startSocialMonitoring();
-
-    try {
+    this.startSocialMonitoring();      try: {
       logger.info('👥 AlexSocialIntelligence fully initialized - Social genius active');
 
     } catch (error) {
@@ -206,9 +208,9 @@ export class AlexSocialIntelligence extends EventEmitter {
    */
   async analyzeSocialInteraction(interaction, participants, context = {}) {
     const analysis = {
-      timestamp: new Date()
+      timestamp: new Date(),
       interaction: interaction
-      participants: participants
+      participants: participants,
       context: context
       socialDynamics: {}
       communicationAnalysis: {}
@@ -248,12 +250,12 @@ export class AlexSocialIntelligence extends EventEmitter {
    */
   async analyzeSocialDynamics(interaction, participants, context) {
     const dynamics = {
-      groupSize: participants.length
+      groupSize: participants.length,
       groupType: this.determineGroupType(participants.length)
       powerDynamics: this.analyzePowerDynamics(participants, context)
-      cohesionLevel: this.assessGroupCohesion(interaction)
+      cohesionLevel: this.assessGroupCohesion(interaction),
       participationBalance: this.analyzeParticipationBalance(interaction, participants)
-      conflictIndicators: this.detectConflictIndicators(interaction)
+      conflictIndicators: this.detectConflictIndicators(interaction),
       collaborationSignals: this.detectCollaborationSignals(interaction)
     };
 
@@ -274,11 +276,11 @@ export class AlexSocialIntelligence extends EventEmitter {
    */
   async analyzeCommunicationPatterns(interaction) {
     const analysis = {
-      dominantPattern: ''
+      dominantPattern: '',
       communicationStyle: ''
-      effectivenessLevel: 0
+      effectivenessLevel: 0,
       adaptationNeeded: false
-      barriers: []
+      barriers: [],
       enhancers: []
     };
 
@@ -311,11 +313,11 @@ export class AlexSocialIntelligence extends EventEmitter {
    */
   async analyzeEmotionalLandscape(interaction, participants) {
     const landscape = {
-      dominantEmotions: []
+      dominantEmotions: [],
       emotionalContagion: 0
-      empathyLevel: 0
+      empathyLevel: 0,
       emotionalSafety: 0
-      supportSystems: []
+      supportSystems: [],
       tensionPoints: []
     };
 
@@ -345,7 +347,7 @@ export class AlexSocialIntelligence extends EventEmitter {
    */
   async generateSociallyIntelligentResponse(analysis, responseIntent) {
     const response = {
-      primaryResponse: ''
+      primaryResponse: '',
       socialAdaptations: {}
       culturalConsiderations: {}
       emotionalTuning: {}
@@ -377,7 +379,7 @@ export class AlexSocialIntelligence extends EventEmitter {
     const facilitation = {
       groupAssessment: {}
       facilitationStrategy: {}
-      interventions: []
+      interventions: [],
       monitoringPoints: []
       outcomes: {}
     };
@@ -404,7 +406,7 @@ export class AlexSocialIntelligence extends EventEmitter {
     const resolution = {
       conflictAnalysis: {}
       mediationStrategy: {}
-      interventionPlan: []
+      interventionPlan: [],
       reconciliationPath: {}
       preventionMeasures: []
     };
@@ -432,9 +434,7 @@ export class AlexSocialIntelligence extends EventEmitter {
    */
   startSocialMonitoring() {
     // Surveillance des dynamiques toutes les 5 minutes
-    setInterval(() => this.processLongOperation(args), 86400000);
-
-    try {
+    setInterval(() => // Code de traitement approprié ici, 86400000);      try: {
       logger.info('👁️ Social monitoring activated');
 
     } catch (error) {
@@ -446,9 +446,9 @@ export class AlexSocialIntelligence extends EventEmitter {
    */
   async monitorSocialDynamics() {
     const monitoring = {
-      timestamp: new Date()
+      timestamp: new Date(),
       activeInteractions: this.socialInteractions.slice(-10)
-      socialHealth: this.calculateSocialHealth()
+      socialHealth: this.calculateSocialHealth(),
       relationshipTrends: this.analyzeRelationshipTrends()
       interventionNeeds: this.identifyInterventionNeeds()
     };
@@ -485,15 +485,14 @@ export class AlexSocialIntelligence extends EventEmitter {
   /**
    * Obtention du statut d'intelligence sociale
    */
-  getSocialIntelligenceStatus() {
-    return {
-      initialized: this.isInitialized
+  getSocialIntelligenceStatus() {      return: {
+      initialized: this.isInitialized,
       currentState: this.currentSocialState
-      socialDimensions: this.summarizeSocialDimensions()
+      socialDimensions: this.summarizeSocialDimensions(),
       interactionsAnalyzed: this.socialInteractions.length
-      averageSocialHealth: this.calculateAverageSocialHealth()
+      averageSocialHealth: this.calculateAverageSocialHealth(),
       culturalAdaptations: Object.keys(this.culturalContexts).length
-      communicationPatterns: Object.keys(this.communicationPatterns).length
+      communicationPatterns: Object.keys(this.communicationPatterns).length,
       recentTrends: this.getRecentSocialTrends()
     };
   }
@@ -502,7 +501,7 @@ export class AlexSocialIntelligence extends EventEmitter {
     const summary = {};
     for (const [dimension, config] of Object.entries(this.socialDimensions)) {
       summary[dimension] = {
-        level: config.level
+        level: config.level,
         components: config.components.length
         skills: config.skills.length
       };
@@ -523,11 +522,10 @@ export class AlexSocialIntelligence extends EventEmitter {
   }
 
   getRecentSocialTrends() {
-    const recent = this.socialInteractions.slice(-10);
-    return {
+    const recent = this.socialInteractions.slice(-10);      return: {
       dominantPatterns :
        this.getMostFrequentPatterns(recent)
-      socialHealthTrend: this.calculateHealthTrend(recent)
+      socialHealthTrend: this.calculateHealthTrend(recent),
       culturalDiversity: this.measureCulturalDiversity(recent)
     };
   }

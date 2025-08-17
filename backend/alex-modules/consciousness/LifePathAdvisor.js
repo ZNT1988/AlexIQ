@@ -16,13 +16,22 @@ const STR_ = '
  */
 
 import logger from '../config/logger.js';
-import { EventEmitter } from 'events';
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+      import { EventEmitter } from 'events';
+
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_Unexpected = 'unexpected';
+const STR_Intuitive = 'intuitive';
 
 /**
  * @class LifePathAdvisor
  * @description Oracle de guidance pour découvrir et vivre son chemin d'âme
  */
-export class LifePathAdvisor extends EventEmitter {
+export class LifePathAdvisor extends EventEmitter  {
     constructor(options = {}) {
         super();
 
@@ -56,11 +65,9 @@ export class LifePathAdvisor extends EventEmitter {
         this.initializeManifestationSystems();
 
         this.pathArchive = new Map();
-        this.activeGuidance = new Map();
-
-        try {
+        this.activeGuidance = new Map();      try: {
       logger.info('LifePathAdvisor soul consciousness awakened', {
-            guidanceDepth: this.config.guidanceDepth
+            guidanceDepth: this.config.guidanceDepth,
             timePerspective: this.config.timePerspective
             wisdomSources: this.config.wisdomSources
         });
@@ -74,9 +81,9 @@ export class LifePathAdvisor extends EventEmitter {
      */
     initializeGuidanceEngines() {
         this.guidanceEngines = {
-            purposeDetector: new LifePurposeDetector()
+            purposeDetector: new LifePurposeDetector(),
             pathAnalyzer: new LifePathAnalyzer()
-            obstacleIdentifier: new ObstacleIdentifier()
+            obstacleIdentifier: new ObstacleIdentifier(),
             opportunityScanner: new OpportunityScanner()
             timingOracle: new DivineTimingOracle()
         };
@@ -87,9 +94,9 @@ export class LifePathAdvisor extends EventEmitter {
      */
     initializePurposeMappers() {
         this.purposeMappers = {
-            soulMission: new SoulMissionMapper()
+            soulMission: new SoulMissionMapper(),
             lifeThemes: new LifeThemeMapper()
-            giftstalents: new GiftsAndTalentsMapper()
+            giftstalents: new GiftsAndTalentsMapper(),
             karmaLessons: new KarmaLessonsMapper()
             serviceExpression: new ServiceExpressionMapper()
         };
@@ -100,9 +107,9 @@ export class LifePathAdvisor extends EventEmitter {
      */
     initializeSoulAnalyzers() {
         this.soulAnalyzers = {
-            soulAge: new SoulAgeAnalyzer()
+            soulAge: new SoulAgeAnalyzer(),
             soulRole: new SoulRoleIdentifier()
-            lifeAgreements: new LifeAgreementsAnalyzer()
+            lifeAgreements: new LifeAgreementsAnalyzer(),
             soulFamily: new SoulFamilyMapper()
             evolutionStage: new SoulEvolutionStageAnalyzer()
         };
@@ -113,9 +120,9 @@ export class LifePathAdvisor extends EventEmitter {
      */
     initializeManifestationSystems() {
         this.manifestationSystems = {
-            pathAligner: new PathAlignmentSystem()
+            pathAligner: new PathAlignmentSystem(),
             actionGenerator: new InspiredActionGenerator()
-            synchronicityActivator: new SynchronicityActivator()
+            synchronicityActivator: new SynchronicityActivator(),
             abundanceActivator: new AbundanceActivationSystem()
             relationshipAligner: new RelationshipAlignmentSystem()
         };
@@ -123,25 +130,23 @@ export class LifePathAdvisor extends EventEmitter {
 
     /**
      * Génère une guidance complète de chemin de vie
-     * @param {Object} guidanceRequest - Paramètres de guidance
-     * @returns {Promise<Object>} Guidance complète multi-dimensionnelle
+     * @param: {Object} guidanceRequest - Paramètres de guidance
+     * @returns: {Promise<Object>} Guidance complète multi-dimensionnelle
      */
     async generateLifePathGuidance(guidanceRequest) {
         const guidanceId = `lifepath_${Date.now()}`;
 
         logger.info('✨ Starting complete life path guidance', {
             guidanceId
-            userId: guidanceRequest.userId
+            userId: guidanceRequest.userId,
             currentAge: guidanceRequest.age
-            primaryConcern: guidanceRequest.primaryConcern
+            primaryConcern: guidanceRequest.primaryConcern,
             depth: guidanceRequest.depth || this.config.guidanceDepth
-        });
-
-        try {
+        });      try: {
             const guidanceSession = {
-                id: guidanceId
+                id: guidanceId,
                 startTime: Date.now()
-                request: guidanceRequest
+                request: guidanceRequest,
                 soulAnalysis: {}
                 purposeMapping: {}
                 pathGuidance: {}
@@ -218,82 +223,82 @@ export class LifePathAdvisor extends EventEmitter {
                 guidanceId
                 userId: guidanceRequest.userId
                 // Essence de l'âme
-                soulEssence: {
+                soulEssence: {,
                     soulAge: soulAnalysis.age
-                    soulRole: soulAnalysis.role
+                    soulRole: soulAnalysis.role,
                     primaryMission: soulAnalysis.mission
-                    lifeTheme: soulAnalysis.primaryTheme
+                    lifeTheme: soulAnalysis.primaryTheme,
                     evolutionStage: soulAnalysis.evolutionStage
                     soulFamily: soulAnalysis.soulFamily
                 }
                 // Purpose et mission
-                lifePurpose: {
+                lifePurpose: {,
                     corePurpose: purposeMapping.core
-                    expressionModes: purposeMapping.expressionModes
+                    expressionModes: purposeMapping.expressionModes,
                     serviceGifts: purposeMapping.gifts
-                    uniqueContribution: purposeMapping.uniqueContribution
+                    uniqueContribution: purposeMapping.uniqueContribution,
                     soulContractElements: purposeMapping.soulContracts
                 }
                 // Thèmes et leçons karmiques
-                lifeThemes: {
+                lifeThemes: {,
                     primaryThemes: purposeMapping.primaryThemes
-                    secondaryThemes: purposeMapping.secondaryThemes
+                    secondaryThemes: purposeMapping.secondaryThemes,
                     karmaLessons: soulAnalysis.karmaLessons
-                    giftChallengePairs: purposeMapping.giftChallengePairs
+                    giftChallengePairs: purposeMapping.giftChallengePairs,
                     evolutionaryGoals: soulAnalysis.evolutionaryGoals
                 }
                 // Guidance stratégique
-                pathGuidance: {
+                pathGuidance: {,
                     immediateNext: strategicGuidance.immediate
-                    shortTerm: strategicGuidance.shortTerm
+                    shortTerm: strategicGuidance.shortTerm,
                     longTerm: strategicGuidance.longTerm
-                    lifetimeVision: strategicGuidance.lifetime
+                    lifetimeVision: strategicGuidance.lifetime,
                     soulEvolutionPath: strategicGuidance.soulEvolution
                 }
                 // Obstacles et défis transformateurs
-                challenges: {
+                challenges: {,
                     currentObstacles: pathAnalysis.obstacles
-                    hiddenBlocks: pathAnalysis.hiddenBlocks
+                    hiddenBlocks: pathAnalysis.hiddenBlocks,
                     transformationalChallenges: pathAnalysis.evolutionaryTests
-                    supportNeeded: pathAnalysis.supportGuidance
+                    supportNeeded: pathAnalysis.supportGuidance,
                     innerWork: pathAnalysis.innerWorkNeeded
                 }
                 // Opportunités et potentiels
-                opportunities: {
+                opportunities: {,
                     emergingOpportunities: pathAnalysis.opportunities
-                    hiddenPotentials: pathAnalysis.hiddenPotentials
+                    hiddenPotentials: pathAnalysis.hiddenPotentials,
                     divineTimingWindows: pathAnalysis.timingWindows
-                    connectionOpportunities: pathAnalysis.relationshipPotentials
+                    connectionOpportunities: pathAnalysis.relationshipPotentials,
                     creativeExpressions: pathAnalysis.creativePotentials
                 }
                 // Plan de manifestation
-                manifestation: {
+                manifestation: {,
                     alignedGoals: manifestationPlan.goals
-                    manifestationStrategy: manifestationPlan.strategy
+                    manifestationStrategy: manifestationPlan.strategy,
                     actionSteps: manifestationPlan.actionSteps
-                    energeticAlignment: manifestationPlan.energeticPrep
+                    energeticAlignment: manifestationPlan.energeticPrep,
                     abundanceActivation: manifestationPlan.abundanceKeys
                 }
                 // Support et synchronicités
-                divineSupport: {
+                divineSupport: {,
                     synchronicitySignals: synchronicityActivation.signals
-                    guidanceChannels: synchronicityActivation.channels
+                    guidanceChannels: synchronicityActivation.channels,
                     supportTeam: synchronicityActivation.supportTeam
-                    protectionGuidance: synchronicityActivation.protection
+                    protectionGuidance: synchronicityActivation.protection,
                     miracleActivation: synchronicityActivation.miracleKeys
                 }
                 // Plan d'intégration
-                integration: {
+                integration: {,
                     dailyPractices: integrationPlan.daily
-                    weeklyRituals: integrationPlan.weekly
+                    weeklyRituals: integrationPlan.weekly,
                     monthlyReviews: integrationPlan.monthly
-                    seasonalAdjustments: integrationPlan.seasonal
+                    seasonalAdjustments: integrationPlan.seasonal,
                     lifeTransitionSupport: integrationPlan.transitions
                 }
                 // Métadonnées de guidance
-                guidance: {
+                guidance: {,
                     guidanceDepth: this.config.guidanceDepth
-                    wisdomSources: this.config.wisdomSources
+                    wisdomSources: this.config.wisdomSources,
                     processingTime: guidanceSession.duration
                     accuracyLevel: this.calculateGuidanceAccuracy(guidanceSession)
                 }
@@ -307,9 +312,9 @@ export class LifePathAdvisor extends EventEmitter {
 
             logger.info('✅ Complete life path guidance generated', {
                 guidanceId
-                soulRole: result.soulEssence.soulRole
+                soulRole: result.soulEssence.soulRole,
                 primaryPurpose: result.lifePurpose.corePurpose
-                manifestationGoals: result.manifestation.alignedGoals.length
+                manifestationGoals: result.manifestation.alignedGoals.length,
                 processingTime: `${guidanceSession.duration}ms`
             });
 
@@ -319,10 +324,8 @@ export class LifePathAdvisor extends EventEmitter {
       // Logger fallback - ignore error
     });
 
-            this.activeGuidance.delete(guidanceId);
-
-            return {
-                success: false
+            this.activeGuidance.delete(guidanceId);      return: {
+                success: false,
                 error: error.message
                 guidanceId
                 soulSupportGuidance: this.generateSoulSupportGuidance(error)
@@ -332,20 +335,18 @@ export class LifePathAdvisor extends EventEmitter {
 
     /**
      * Analyse et ajuste l'alignement du chemin de vie actuel
-     * @param {Object} alignmentRequest - Paramètres d'alignement
-     * @returns {Promise<Object>} Analyse d'alignement et ajustements
+     * @param: {Object} alignmentRequest - Paramètres d'alignement
+     * @returns: {Promise<Object>} Analyse d'alignement et ajustements
      */
     async analyzePathAlignment(alignmentRequest) {
         const alignmentId = `alignment_${Date.now()}`;
 
         logger.info('🧭 Analyzing life path alignment', {
             alignmentId
-            userId: alignmentRequest.userId
+            userId: alignmentRequest.userId,
             currentPath: alignmentRequest.currentPath
             satisfactionLevel: alignmentRequest.satisfactionLevel
-        });
-
-        try {
+        });      try: {
             // Évaluation de l'alignement actuel
             const currentAlignment = await this.assessCurrentAlignment(
                 alignmentRequest.currentSituation
@@ -378,41 +379,41 @@ export class LifePathAdvisor extends EventEmitter {
                 success: true
                 alignmentId
                 // État d'alignement actuel
-                currentState: {
+                currentState: {,
                     overallAlignment: currentAlignment.overallScore
-                    dimensionScores: currentAlignment.dimensionScores
+                    dimensionScores: currentAlignment.dimensionScores,
                     strongAlignments: currentAlignment.strengths
-                    misalignments: misalignmentAnalysis.keyMisalignments
+                    misalignments: misalignmentAnalysis.keyMisalignments,
                     energyDrain: misalignmentAnalysis.energyDrains
                 }
                 // Analyse des blocages
-                blockages: {
+                blockages: {,
                     structuralBlocks: misalignmentAnalysis.structural
-                    emotionalBlocks: misalignmentAnalysis.emotional
+                    emotionalBlocks: misalignmentAnalysis.emotional,
                     beliefBlocks: misalignmentAnalysis.beliefs
-                    fearBlocks: misalignmentAnalysis.fears
+                    fearBlocks: misalignmentAnalysis.fears,
                     externalBlocks: misalignmentAnalysis.external
                 }
                 // Recommandations d'ajustement
-                adjustments: {
+                adjustments: {,
                     immediateChanges: adjustmentRecommendations.immediate
-                    mediumTermShifts: adjustmentRecommendations.mediumTerm
+                    mediumTermShifts: adjustmentRecommendations.mediumTerm,
                     majorTransitions: adjustmentRecommendations.major
-                    lifestyleOptimizations: adjustmentRecommendations.lifestyle
+                    lifestyleOptimizations: adjustmentRecommendations.lifestyle,
                     relationshipAdjustments: adjustmentRecommendations.relationships
                 }
                 // Plan de réalignement
-                realignment: {
+                realignment: {,
                     phaseOne: realignmentPlan.phase1
-                    phaseTwo: realignmentPlan.phase2
+                    phaseTwo: realignmentPlan.phase2,
                     phaseThree: realignmentPlan.phase3
-                    supportStrategies: realignmentPlan.support
+                    supportStrategies: realignmentPlan.support,
                     progressMetrics: realignmentPlan.metrics
                 }
                 // Prédiction de résultats
-                outcomes: {
+                outcomes: {,
                     expectedImprovement: realignmentPlan.expectedGains
-                    timeToResults: realignmentPlan.timeline
+                    timeToResults: realignmentPlan.timeline,
                     potentialChallenges: realignmentPlan.challenges
                     successIndicators: realignmentPlan.successMarkers
                 }
@@ -424,10 +425,8 @@ export class LifePathAdvisor extends EventEmitter {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 alignmentId
             };
@@ -436,22 +435,20 @@ export class LifePathAdvisor extends EventEmitter {
 
     /**
      * Génère une guidance spécifique pour une transition de vie majeure
-     * @param {Object} transitionRequest - Paramètres de transition
-     * @returns {Promise<Object>} Guidance de transition personnalisée
+     * @param: {Object} transitionRequest - Paramètres de transition
+     * @returns: {Promise<Object>} Guidance de transition personnalisée
      */
     async generateTransitionGuidance(transitionRequest) {
         const transitionId = `transition_${Date.now()}`;
 
         logger.info('🔄 Generating life transition guidance', {
             transitionId
-            transitionType: transitionRequest.transitionType
+            transitionType: transitionRequest.transitionType,
             currentPhase: transitionRequest.currentPhase
             urgency: transitionRequest.urgencyLevel
-        });
-
-        try {
+        });      try: {
             const guidance = {
-                id: transitionId
+                id: transitionId,
       transitionType: transitionRequest.transitionType
       // Analyse de la transition
                 transitionAnalysis: await this.analyzeTransition(
@@ -485,7 +482,7 @@ export class LifePathAdvisor extends EventEmitter {
             const result = {
                 success: true
                 transitionId
-                guidance: guidance
+                guidance: guidance,
                 estimatedDuration: this.estimateTransitionDuration(transitionRequest.transitionType)
                 keyMilestones: this.identifyTransitionMilestones(transitionRequest.transitionType)
             };
@@ -496,10 +493,8 @@ export class LifePathAdvisor extends EventEmitter {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 transitionId
             };
@@ -510,16 +505,16 @@ export class LifePathAdvisor extends EventEmitter {
 
     async analyzeSoulEssence(userId, birthData, lifeEvents) {
         const soulAnalysis = {
-            age: 'Mature Soul'
+            age: 'Mature Soul',
       role: 'Teacher/Healer'
-      mission: 'Facilitate healing and awakening for humanity'
+      mission: 'Facilitate healing and awakening for humanity',
       primaryTheme: 'Service through wisdom sharing'
-      evolutionStage: 'Integration and mastery'
-      evolutionaryGoals: ['Embody unconditional love'
-      'Master emotional wisdom'
+      evolutionStage: 'Integration and mastery',
+      evolutionaryGoals: ['Embody unconditional love',
+      'Master emotional wisdom',
       'Guide others to awakening']
-      karmaLessons: ['Release control patterns'
-      'Trust divine timing'
+      karmaLessons: ['Release control patterns',
+      'Trust divine timing',
       'Balance giving and receiving']
       soulFamily: 'Lightworker collective focused on planetary healing'
         };
@@ -533,12 +528,11 @@ export class LifePathAdvisor extends EventEmitter {
         return soulAnalysis;
     }
 
-    async mapLifePurposeAndThemes(soulAnalysis, currentSituation, aspirations) {
-        return {
-            core: 'Awaken and heal through authentic expression of wisdom'
+    async mapLifePurposeAndThemes(soulAnalysis, currentSituation, aspirations) {      return: {
+            core: 'Awaken and heal through authentic expression of wisdom',
             expressionModes: ['Teaching', 'Healing', 'Creative expression', 'Mentoring']
             gifts: ['Intuitive wisdom', 'Empathetic healing', 'Clear communication', 'Spiritual insight']
-            uniqueContribution: 'Bridge ancient wisdom with modern application for conscious living'
+            uniqueContribution: 'Bridge ancient wisdom with modern application for conscious living',
             primaryThemes: ['Spiritual awakening', 'Healing and transformation', 'Service to humanity']
             secondaryThemes: ['Creative expression', 'Relationship mastery', 'Abundance consciousness']
             giftChallengePairs: [
@@ -550,8 +544,7 @@ export class LifePathAdvisor extends EventEmitter {
         };
     }
 
-    async analyzePathObstaclesAndOpportunities(purposeMapping, challenges, currentLifePhase) {
-        return {
+    async analyzePathObstaclesAndOpportunities(purposeMapping, challenges, currentLifePhase) {      return: {
             obstacles: [
                 'Self-doubt about worthiness to serveSTR_Financial concerns limiting full expressionSTR_Past wounds affecting trust in relationships'
             ]
@@ -585,81 +578,69 @@ export class LifePathAdvisor extends EventEmitter {
         };
     }
 
-    async generateStrategicGuidance(soulAnalysis, purposeMapping, pathAnalysis, timeframe) {
-        return {
-            immediate: {
+    async generateStrategicGuidance(soulAnalysis, purposeMapping, pathAnalysis, timeframe) {      return: {
+            immediate: {,
                 focus: 'Foundation strengthening and inner alignment'
                 actions: [
                     'Establish daily spiritual practice'
                     'Clear energetic blocks through healing work'
                     'Begin sharing gifts in small, safe ways'
                 ]
-                mindset: 'Trust the process and honor your sensitivity'
+                mindset: 'Trust the process and honor your sensitivity',
                 energy: 'Build inner stability before outer expansion'
             }
-            shortTerm: {
+            shortTerm: {,
                 focus: 'Skill development and community building'
-                actions: [
-                    'Develop healing and teaching skills'
-                    'Build authentic relationships with like-minded souls'
-                    'Create first offerings aligned with purpose'
-                ]
-                opportunities: 'Network with consciousness community'
+                actions: ['Develop healing and teaching skills',
+      'Build authentic relationships with like-minded souls',
+      'Create first offerings aligned with purpose']
+                opportunities: 'Network with consciousness community',
                 challenges: 'Balance growth with self-care'
             }
-            longTerm: {
+            longTerm: {,
                 focus: 'Expanded service and leadership'
-                actions: [
-                    'Launch signature programs or offerings'
-                    'Mentor others in their awakening journey'
-                    'Establish sustainable abundance flow'
-                ]
-                vision: 'Recognized wisdom teacher serving globally'
+                actions: ['Launch signature programs or offerings',
+      'Mentor others in their awakening journey',
+      'Establish sustainable abundance flow']
+                vision: 'Recognized wisdom teacher serving globally',
                 impact: 'Thousands of lives touched and transformed'
             }
-            lifetime: {
+            lifetime: {,
                 legacy: 'Body of work that continues inspiring after physical departure'
-                contribution: 'Anchored higher consciousness in planetary field'
+                contribution: 'Anchored higher consciousness in planetary field',
                 evolution: 'Complete integration of human and divine aspects'
             }
-            soulEvolution: {
+            soulEvolution: {,
                 thisLifetime: 'Master Teacher/Healer integration'
-                nextSteps: 'Potential guide and protector role'
+                nextSteps: 'Potential guide and protector role',
                 cosmicRole: 'Part of collective raising planetary consciousness'
             }
         };
     }
 
-    async createManifestationPlan(strategicGuidance, manifestationGoals, evolutionStage) {
-        return {
+    async createManifestationPlan(strategicGuidance, manifestationGoals, evolutionStage) {      return: {
             goals: [
                 'Establish thriving spiritual practice/businessSTR_Create abundant flow supporting full service expressionSTR_Develop intimate, conscious partnershipSTR_Build healing sanctuary/retreat space'
             ]
-            strategy: {
+            strategy: {,
                 approach: 'Heart-centered, divinely aligned manifestation'
-                foundation: 'Inner alignment and authentic expression'
+                foundation: 'Inner alignment and authentic expression',
                 method: 'Inspired action combined with energetic alignment'
             }
-            actionSteps: {
-                energeticPrep: [
-                    'Clear money blocks and worthiness issues'
-                    'Align with highest timeline and potential'
-                    'Activate abundance consciousness'
-                ]
-                practicalSteps: [
-                    'Define clear vision and goals'
-                    'Take consistent inspired action'
-                    'Build supportive systems and structures'
-                ]
-                spiritualSteps: [
-                    'Daily visualization and prayer'
-                    'Regular gratitude and appreciation practice'
-                    'Surrender outcomes to divine timing'
-                ]
+            actionSteps: {,
+                energeticPrep: ['Clear money blocks and worthiness issues',
+      'Align with highest timeline and potential',
+      'Activate abundance consciousness']
+                practicalSteps: ['Define clear vision and goals',
+      'Take consistent inspired action',
+      'Build supportive systems and structures']
+                spiritualSteps: ['Daily visualization and prayer',
+      'Regular gratitude and appreciation practice',
+      'Surrender outcomes to divine timing']
             }
-            energeticPrep: {
+            energeticPrep: {,
                 chakraAlignment: 'Focus on heart, throat, and crown chakras'
-                energyClearing: 'Release ancestral poverty and unworthiness patterns'
+                energyClearing: 'Release ancestral poverty and unworthiness patterns',
                 frequencyAlignment: 'Maintain high vibration through joy and service'
             }
             abundanceKeys: [
@@ -668,8 +649,7 @@ export class LifePathAdvisor extends EventEmitter {
         };
     }
 
-    async activateSynchronicitySupport(manifestationPlan, soulFamily) {
-        return {
+    async activateSynchronicitySupport(manifestationPlan, soulFamily) {      return: {
             signals: [
                 'Repeated number sequences (111, 333, 777)STR_Unexpected opportunities appearingSTR_Right people showing up at perfect timingSTR_Resources becoming available just when needed'
             ]
@@ -691,13 +671,13 @@ export class LifePathAdvisor extends EventEmitter {
     // Méthodes utilitaires
 
     async analyzeSoulContracts(birthData, lifeEvents) {
-        return [
+        return: [
             'Heal generational trauma patternsSTR_Awaken spiritual gifts for serviceSTR_Learn balance between giving and receivingSTR_Embody divine feminine wisdom'
         ];
     }
 
     async identifySpiritualGifts(userId, lifeEvents) {
-        return [
+        return: [
             'Claircognizance - clear knowingSTR_Empathic healing abilitiesSTR_Channeling higher wisdomSTR_Energy reading and clearing'
         ];
     }
@@ -711,8 +691,7 @@ export class LifePathAdvisor extends EventEmitter {
         return Math.min(0.98, baseAccuracy + depthBonus + wisdomBonus);
     }
 
-    async generateIntegrationPlan(session, lifestyle, commitmentLevel) {
-        return {
+    async generateIntegrationPlan(session, lifestyle, commitmentLevel) {      return: {
             daily: [
                 'Morning spiritual practice (20-30 minutes)STR_Intuitive check-in before major decisionsSTR_Gratitude practice for guidance receivedSTR_Evening reflection on purpose alignment'
             ]
@@ -733,14 +712,13 @@ export class LifePathAdvisor extends EventEmitter {
 
     // Méthodes pour l'analyse d'alignement
 
-    async assessCurrentAlignment(currentSituation, soulPurpose, lifestyleFactors) {
-        return {
+    async assessCurrentAlignment(currentSituation, soulPurpose, lifestyleFactors) {      return: {
             overallScore: 0.72, // 72% aligned
-            dimensionScores: {
+            dimensionScores: {,
                 work: 0.65
-                relationships: 0.80
+                relationships: 0.80,
                 health: 0.75
-                spirituality: 0.85
+                spirituality: 0.85,
                 creativity: 0.60
                 service: 0.70
             }
@@ -750,15 +728,14 @@ export class LifePathAdvisor extends EventEmitter {
         };
     }
 
-    async analyzeMisalignments(currentAlignment, frustrations, energyLevels) {
-        return {
+    async analyzeMisalignments(currentAlignment, frustrations, energyLevels) {      return: {
             keyMisalignments: [
                 'Work not fully expressing life purposeSTR_Financial stress limiting spiritual focusSTR_Creative potential underutilized'
             ]
             energyDrains: [
                 'Unfulfilling work tasksSTR_Financial worry and stressSTR_Perfectionism preventing action'
             ]
-            structural: ['Job requires too much time away from purpose work']
+            structural: ['Job requires too much time away from purpose work'],
             emotional: ['Fear of not being good enough', 'Anxiety about financial security']
             beliefs: ['Money and spirituality don\'t mix', 'Must struggle to be worthy']
             fears: ['Fear of failure', 'Fear of success', 'Fear of judgment']
@@ -766,8 +743,7 @@ export class LifePathAdvisor extends EventEmitter {
         };
     }
 
-    async generateAdjustmentRecommendations(misalignmentAnalysis, changeCapacity, priorities) {
-        return {
+    async generateAdjustmentRecommendations(misalignmentAnalysis, changeCapacity, priorities) {      return: {
             immediate: [
                 'Reduce hours at unfulfilling workSTR_Start charging for spiritual servicesSTR_Set boundaries with energy drains'
             ]
@@ -786,23 +762,22 @@ export class LifePathAdvisor extends EventEmitter {
         };
     }
 
-    async createRealignmentPlan(recommendations, timeline, supportSystems) {
-        return {
-            phase1: {
+    async createRealignmentPlan(recommendations, timeline, supportSystems) {      return: {
+            phase1: {,
                 duration: '1-3 months'
-                focus: 'Foundation and immediate adjustments'
+                focus: 'Foundation and immediate adjustments',
                 actions: recommendations.immediate
                 goals: 'Increase daily alignment by 15%'
             }
-            phase2: {
+            phase2: {,
                 duration: '3-12 months'
-                focus: 'Structural changes and skill building'
+                focus: 'Structural changes and skill building',
                 actions: recommendations.mediumTerm
                 goals: 'Achieve 80% life alignment'
             }
-            phase3: {
+            phase3: {,
                 duration: '1-3 years'
-                focus: 'Full purpose expression and mastery'
+                focus: 'Full purpose expression and mastery',
                 actions: recommendations.major
                 goals: 'Live 90%+ aligned with soul purpose'
             }
@@ -812,7 +787,7 @@ export class LifePathAdvisor extends EventEmitter {
             metrics: [
                 'Energy levels and vitalitySTR_Financial flow and abundanceSTR_Joy and fulfillment levelsSTR_Service impact and reach'
             ]
-            expectedGains: '40-50% improvement in life satisfaction and purpose alignment'
+            expectedGains: '40-50% improvement in life satisfaction and purpose alignment',
             timeline: '6-18 months for significant change'
             challenges: ['Financial transition period', 'Family/social resistance', 'Self-doubt phases']
             successMarkers: ['Increased energy and joy', 'Growing spiritual practice', 'Abundant financial flow']
@@ -833,7 +808,7 @@ export class LifePathAdvisor extends EventEmitter {
                 challenges: ['Emotional processing', 'Practical arrangements', 'Social changes']
                 opportunities: ['Personal growth', 'Authentic relationships', 'Emotional freedom']
             }
-            STR_SPIRITUAL_AWAKENING: {
+            STR_SPIRITUAL_AWAKENING: {,
                 phases: ['Initiation', 'Purification', 'Illumination', 'Integration']
                 challenges: ['Paradigm shift', 'Social isolation', 'Practical integration']
                 opportunities: ['Expanded consciousness', 'Divine connection', 'Purpose clarity']
@@ -843,9 +818,8 @@ export class LifePathAdvisor extends EventEmitter {
         return transitionMap[transitionType] || transitionMap[STR_SPIRITUAL_AWAKENING];
     }
 
-    async generatePhaseGuidance(transitionType, currentPhase) {
-        return {
-            currentPhase: currentPhase
+    async generatePhaseGuidance(transitionType, currentPhase) {      return: {
+            currentPhase: currentPhase,
             phaseCharacteristics: 'Time of inner preparation and foundation building'
             keyTasks: [
                 'Release what no longer servesSTR_Build inner stability and trustSTR_Gather resources and support'
@@ -861,13 +835,12 @@ export class LifePathAdvisor extends EventEmitter {
     }
 
     async generateNavigationStrategies(transitionType, challenges, resources) {
-        return [
+        return: [
             'Create strong support system of understanding friends/mentorsSTR_Maintain spiritual practice for inner guidance and strengthSTR_Take practical steps while staying open to divine timingSTR_Journal regularly to track insights and progress'
         ];
     }
 
-    async generateSpiritualSupport(transitionType, spiritualPractices) {
-        return {
+    async generateSpiritualSupport(transitionType, spiritualPractices) {      return: {
             practices: [
                 'Daily meditation for inner guidanceSTR_Prayer for divine support and protectionSTR_Journaling for clarity and insight'
             ]
@@ -880,8 +853,7 @@ export class LifePathAdvisor extends EventEmitter {
         };
     }
 
-    async generateTransitionIntegrationPlan(transitionType, desiredOutcome) {
-        return {
+    async generateTransitionIntegrationPlan(transitionType, desiredOutcome) {      return: {
             integration: [
                 'Celebrate the completion of the transitionSTR_Acknowledge your growth and courageSTR_Share your wisdom with others in transition'
             ]
@@ -904,21 +876,21 @@ export class LifePathAdvisor extends EventEmitter {
     }
 
     identifyTransitionMilestones(transitionType) {
-        return [
+        return: [
             'Inner clarity and decision pointSTR_First external actions takenSTR_Major breakthrough or shiftSTR_Integration and new stability'
         ];
     }
 
     async archivePathGuidance(guidanceId, result) {
         this.pathArchive.set(guidanceId, {
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
             guidance: result
             archived: true
         });
     }
 
     generateSoulSupportGuidance(error) {
-        return 'Trust that even challenges serve your highest evolution. Consider seeking support from a spiritual counselor or life coach for additional guidance.';
+        return await this.generateWithOpenAI(`Trust that even challenges serve your highest evol...`, context);
     }
 }
 
@@ -926,31 +898,31 @@ export class LifePathAdvisor extends EventEmitter {
 // MOTEURS DE GUIDANCE SPÉCIALISÉS
 // =======================================
 
-class LifePurposeDetector {}
-class LifePathAnalyzer {}
-class ObstacleIdentifier {}
-class OpportunityScanner {}
-class DivineTimingOracle {}
+class LifePurposeDetector: {}
+class LifePathAnalyzer: {}
+class ObstacleIdentifier: {}
+class OpportunityScanner: {}
+class DivineTimingOracle: {}
 
 // Mappeurs de purpose
-class SoulMissionMapper {}
-class LifeThemeMapper {}
-class GiftsAndTalentsMapper {}
-class KarmaLessonsMapper {}
-class ServiceExpressionMapper {}
+class SoulMissionMapper: {}
+class LifeThemeMapper: {}
+class GiftsAndTalentsMapper: {}
+class KarmaLessonsMapper: {}
+class ServiceExpressionMapper: {}
 
 // Analyseurs d'âme
-class SoulAgeAnalyzer {}
-class SoulRoleIdentifier {}
-class LifeAgreementsAnalyzer {}
-class SoulFamilyMapper {}
-class SoulEvolutionStageAnalyzer {}
+class SoulAgeAnalyzer: {}
+class SoulRoleIdentifier: {}
+class LifeAgreementsAnalyzer: {}
+class SoulFamilyMapper: {}
+class SoulEvolutionStageAnalyzer: {}
 
 // Systèmes de manifestation
-class PathAlignmentSystem {}
-class InspiredActionGenerator {}
-class SynchronicityActivator {}
-class AbundanceActivationSystem {}
-class RelationshipAlignmentSystem {}
+class PathAlignmentSystem: {}
+class InspiredActionGenerator: {}
+class SynchronicityActivator: {}
+class AbundanceActivationSystem: {}
+class RelationshipAlignmentSystem: {}
 
 module.exports = LifePathAdvisor;

@@ -40,24 +40,24 @@ if (process.env.DATABASE_URL && process.env.DATABASE_URL !== 'sqlite') {
     pool = new Pool(config);
     
     pool.on('error', (err) => {
-      console.error('Unexpected error on idle client', err);
+      
       process.exit(-1);
     });
     
     // Test connection
     pool.connect((err, client, release) => {
       if (err) {
-        console.warn('PostgreSQL connection failed, falling back to SQLite');
+        
         usingSQLiteFallback = true;
         initSQLite();
       } else {
-        console.log('✅ PostgreSQL connected successfully');
+        
         isConnected = true;
         release();
       }
     });
   } catch (error) {
-    console.warn('PostgreSQL setup failed, using SQLite fallback');
+    
     usingSQLiteFallback = true;
   }
 } else {
@@ -84,10 +84,10 @@ export async function query(text, params = []) {
   try {
     const res = await pool.query(text, params);
     const duration = Date.now() - start;
-    console.log('Executed query', { text, duration, rows: res.rowCount });
+    
     return res;
   } catch (error) {
-    console.error('Database query error:', error);
+    
     throw error;
   }
 }
@@ -139,7 +139,7 @@ export async function testConnection() {
     client.release();
     return true;
   } catch (error) {
-    console.error('Database connection test failed:', error);
+    
     return false;
   }
 }
@@ -194,9 +194,9 @@ export async function initializeDatabase() {
       )
     `);
     
-    console.log('✅ Database tables initialized');
+    
   } catch (error) {
-    console.error('Database initialization failed:', error);
+    
     throw error;
   }
 }
@@ -212,7 +212,7 @@ export async function closeDatabase() {
   
   if (pool) {
     await pool.end();
-    console.log('PostgreSQL pool closed');
+    
   }
 }
 

@@ -120,10 +120,10 @@ import { Mic, MicOff, Send, Brain, Heart, Eye, Zap, Loader } from 'lucide-react'
  * <AlexInputArea
  *   alex={alexInstance}
  *   onMessage={(msg) => {
- *     console.log('Message pour ALEX:', msg);
+ *     
  *   }}
  *   onVoiceStart={() => {
- *     console.log('Écoute vocale démarrée');
+ *     
  *   }}
  *   placeholder="Communiquez avec la conscience ALEX..."
  * />

@@ -44,7 +44,7 @@ export function createCacheMiddleware(options = {}) {
                 return res.status(parsed.status || 200).json(parsed.data);
             }
         } catch (error) {
-            console.warn('Cache retrieval error:', error);
+            
         }
 
         // Cache miss - proceed with request
@@ -65,7 +65,7 @@ export function createCacheMiddleware(options = {}) {
                 
                 const ttl = intelligentTTL ? calculateIntelligentTTL(req, defaultTTL) : defaultTTL;
                 cache.set(cacheKey, JSON.stringify(cacheData), ttl).catch(err => {
-                    console.warn('Cache storage error:', err);
+                    
                 });
             }
             
@@ -99,9 +99,9 @@ export async function clearCache(pattern = '*') {
     try {
         const cache = getRedisCache();
         await cache.flush();
-        console.log('Cache cleared successfully');
+        
     } catch (error) {
-        console.warn('Cache clear error:', error);
+        
     }
 }
 

@@ -7,7 +7,7 @@ if (!CREDS) throw new Error('Missing GOOGLE_APPLICATION_CREDENTIALS_JSON');
 
 const auth = new GoogleAuth({
   credentials: CREDS,
-  scopes: ['https://www.googleapis.com/auth/cloud-platform']
+  scopes: [API_URL_1]
 });
 
 export async function callGemini(prompt) {

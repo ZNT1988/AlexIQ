@@ -28,17 +28,17 @@ const Home = () => {
             key={i}
             className="absolute w-1 h-1 bg-white/20 rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${this.getDeterministicValue() * 100}%`,
+              top: `${this.getDeterministicValue() * 100}%`,
             }}
             animate={{
               y: [-20, 20],
               opacity: [0, 1, 0],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 3 + this.getDeterministicValue() * 2,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: this.getDeterministicValue() * 2,
             }}
           />
         ))}

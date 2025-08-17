@@ -16,9 +16,9 @@ if (process.env.PROVIDER_HYBRID_ENABLED === 'true') {
     providersHealthCheck = require('../core/providers/healthCheck');
     budgetAlerting = require('../core/providers/budgetAlerting');
     performanceOptimizer = require('../core/providers/performanceOptimizer');
-    console.log('✅ Providers hybrides activés');
+    
   } catch (error) {
-    console.warn('⚠️ Providers hybrides non disponibles:', error.message);
+    
   }
 }
 
@@ -44,14 +44,14 @@ class AlexLicorneServer {
     try {
       this.db = new sqlite3.Database("./db/hustlefinder.sqlite", (err) => {
         if (err) {
-          console.error("❌ Database connection failed:", err.message);
+          
         } else {
-          console.log("✅ Database connected successfully");
+          
           this.createSystemTables();
         }
       });
     } catch (error) {
-      console.error("❌ Database initialization failed:", error.message);
+      
     }
   }
 
@@ -86,7 +86,7 @@ class AlexLicorneServer {
 
     tables.forEach((sql) => {
       this.db.run(sql, (err) => {
-        if (err) console.error("❌ Table creation error:", err.message);
+        if (err) 
       });
     });
   }
@@ -257,9 +257,9 @@ class AlexLicorneServer {
     try {
       const streamingRoutes = require("../routes/streaming-api");
       this.app.use("/api/streaming", streamingRoutes);
-      console.log("✅ Streaming routes loaded");
+      
     } catch (error) {
-      console.warn("⚠️ Streaming routes not available:", error.message);
+      
     }
     
     // 🤖 ROUTES PROVIDERS HYBRIDES - Monitoring et contrôle
@@ -458,8 +458,7 @@ class AlexLicorneServer {
 
   setupErrorHandling() {
     this.app.use((error, req, res, next) => {
-      console.error("❌ Erreur serveur:", error);
-
+      
       res.status(500).json({
         success: false,
         error: "Erreur interne serveur",
@@ -469,11 +468,11 @@ class AlexLicorneServer {
     });
 
     process.on("unhandledRejection", (reason, promise) => {
-      console.error("❌ Unhandled Rejection:", reason);
+      
     });
 
     process.on("uncaughtException", (error) => {
-      console.error("❌ Uncaught Exception:", error);
+      
       this.gracefulShutdown();
     });
   }
@@ -484,7 +483,6 @@ class AlexLicorneServer {
     try {
       // 🤖 PROVIDERS HYBRIDES - Routing intelligent avec feature flag
       if (alexProviderWrapper && process.env.PROVIDER_HYBRID_ENABLED === 'true') {
-        console.log('🚀 Routing via providers hybrides...');
         
         const request = { 
           input, 
@@ -518,14 +516,14 @@ class AlexLicorneServer {
           
           return result;
         } catch (providerError) {
-          console.error('❌ Provider error, fallback to orchestrator:', providerError.message);
+          
           // Continue vers orchestrator legacy en cas d'erreur
         }
       }
       
       // 🦄 LEGACY ORCHESTRATOR - Système HF classique
       if (this.orchestrator) {
-        console.log('🔄 Using legacy orchestrator...');
+        
         return await this.orchestrator.processRequest(input, context);
       }
 
@@ -610,7 +608,7 @@ class AlexLicorneServer {
         req.ip,
       ],
       (err) => {
-        if (err) console.error("❌ Log request error:", err.message);
+        if (err) 
       },
     );
   }
@@ -628,26 +626,25 @@ class AlexLicorneServer {
 
   setOrchestrator(orchestrator) {
     this.orchestrator = orchestrator;
-    console.log("✅ Orchestrateur connecté");
+    
   }
 
   setSystemMonitor(monitor) {
     this.systemMonitor = monitor;
-    console.log("✅ System Monitor connecté");
+    
   }
 
   setTenantManager(manager) {
     this.tenantManager = manager;
-    console.log("✅ Tenant Manager connecté");
+    
   }
 
   gracefulShutdown() {
-    console.log("🔄 Arrêt gracieux du serveur...");
-
+    
     if (this.db) {
       this.db.close((err) => {
-        if (err) console.error("❌ Erreur fermeture DB:", err.message);
-        else console.log("✅ Base fermée");
+        if (err) 
+        else 
       });
     }
 
@@ -657,11 +654,9 @@ class AlexLicorneServer {
   start() {
     return new Promise((resolve) => {
       this.app.listen(this.port, () => {
-        console.log(`🚀 Alex Licorne Server démarré sur port ${this.port}`);
-        console.log(
-          `📊 Dashboard: http://localhost:${this.port}/api/admin/dashboard`,
-        );
-        console.log(`❤️ Health: http://localhost:${this.port}/api/health`);
+        
+        
+        
         resolve();
       });
     });

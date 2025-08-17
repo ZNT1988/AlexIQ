@@ -1,5 +1,8 @@
 import crypto from 'node:crypto';
 
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_REASONING = 'reasoning';/**
  * @fileoverview Alex Cloud Learning - Système d'Apprentissage Inter-IA
@@ -8,9 +11,7 @@ const STR_REASONING = 'reasoning';/**
  * @version 1.0.0
  * @author HustleFinder IA Team
  * @since 2025
- */
-
-import { EventEmitter } from 'node:events';
+ */      import { EventEmitter } from 'node:events';
 import alexCloudConfig from '../config/alexCloudConfig.js';
 import logger from '../config/logger.js';
 
@@ -18,17 +19,17 @@ import logger from '../config/logger.js';
  * @class AlexCloudLearning
  * @description Système d'apprentissage cloud et inter-IA pour Alex
  */
-export class AlexCloudLearning extends EventEmitter {
+export class AlexCloudLearning extends EventEmitter  {
   constructor() {
     super();
 
     this.cloudConfig = alexCloudConfig.getConfig();
     this.learningState = {
-      isActive: false
+      isActive: false,
       sessionsCount: 0
-      lastSyncTime: null
+      lastSyncTime: null,
       learnedConcepts: new Map()
-      sharedKnowledge: new Map()
+      sharedKnowledge: new Map(),
       aiPeers: new Map()
     };
 
@@ -38,26 +39,26 @@ export class AlexCloudLearning extends EventEmitter {
 
     // Métriques d'apprentissage
     this.learningMetrics = {
-      conceptsLearned: 0
+      conceptsLearned: 0,
       knowledgeShared: 0
-      successfulExchanges: 0
+      successfulExchanges: 0,
       failedExchanges: 0
       averageConfidence: 0.8
     };
 
-    this.isInitialized = false;
-
-    try {
+    this.isInitialized = false;      try: {
       logger.info('🌐 Alex Cloud Learning System initializing...');
 
-    } catch (_error) {
-  }}
+    } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
 
   /**
    * Initialise le système d'apprentissage cloud
    */
-  async initialize() {
-    try {
+  async initialize() {      try: {
       this.isInitialized = true;
 
       // Vérification de la configuration cloud
@@ -86,7 +87,7 @@ export class AlexCloudLearning extends EventEmitter {
       logger.info(`📡 Connected to ${availableApis.length} AI peers: ${availableApis.map(api => api.name).join(', ')}`);
 
       this.emit('cloud_learning_ready', {
-        apis: availableApis.length
+        apis: availableApis.length,
         peers: this.learningState.aiPeers.size
       });
 
@@ -99,31 +100,33 @@ export class AlexCloudLearning extends EventEmitter {
    * Initialise les connexions avec les autres IA
    */
   async initializeAiConnections(const _api _of availableApis) {
-    for (const api of availableApis) {
-      try {
+    for (const api of availableApis) {      try: {
         const connection = await this.establishAiConnection(api);
         if (connection) {
           this.learningState.aiPeers.set(api.name, {
-            name: api.name
+            name: api.name,
             config: api.config
-            connection: connection
+            connection: connection,
             status: 'connected'
-            lastInteraction: new Date()
+            lastInteraction: new Date(),
             exchangeCount: 0
             trustLevel: 0.8
-          });
-
-          try {
+          });      try: {
       logger.info(`🤝 Connected to ${api.name} for knowledge exchange`);
 
-          } catch (_error) {
+          } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
     }}
-      } catch (error) {
-        try {
+      } catch (error) {      try: {
       logger.error(`❌ Failed to connect to ${api.name}:`, error.message);
 
-        } catch (_error) {
-  }}
+        } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
+    }}
     }
   }
 
@@ -131,11 +134,10 @@ export class AlexCloudLearning extends EventEmitter {
    * Établit une connexion avec une IA
    */
   async establishAiConnection(api) {
-    // Simulation de connexion - à implémenter selon les APIs réelles
-    return {
-      apiName: api.name
+    // Simulation de connexion - à implémenter selon les APIs réelles      return: {
+      apiName: api.name,
       endpoint: api.config.endpoint
-      connected: true
+      connected: true,
       capabilities: this.getApiCapabilities(api.name)
     };
   }
@@ -145,20 +147,20 @@ export class AlexCloudLearning extends EventEmitter {
    */
   getApiCapabilities(_apiName) {
     const _capabilities = {
-      openai: ['text_generation'
-      STR_REASONING
-      'creativity'
+      openai: ['text_generation',
+      STR_REASONING,
+      'creativity',
       'problem_solving']
-      anthropic: [STR_REASONING
-      'ethics'
-      'analysis'
+      anthropic: [STR_REASONING,
+      'ethics',
+      'analysis',
       'safety']
-      googleAI: ['multimodal'
-      'search'
-      'knowledge'
+      googleAI: ['multimodal',
+      'search',
+      'knowledge',
       STR_REASONING]
-      huggingface: ['specialized_models'
-      'embeddings'
+      huggingface: ['specialized_models',
+      'embeddings',
       'classification'];    };
 
     return capabilities[apiName] || ['general_intelligence'];
@@ -169,15 +171,14 @@ export class AlexCloudLearning extends EventEmitter {
    */
   startLearningSystem() {
     // Apprentissage périodique
-    setInterval(() => this.processLongOperation(args) catch (error) {
+    setInterval(() => // Code de traitement approprié ici catch (error) {
     console.error("Logger error:", error);
   }}
 
   /**
    * Apprentissage d'un concept auprès d'autres IA
    */
-  async learnFromAI(concept, context = {}) {
-    try {
+  async learnFromAI(concept, context = {}) {      try: {
       if (!this.learningState.isActive) {
         logger.warn('Cloud learning not active');
         return null;
@@ -204,9 +205,9 @@ export class AlexCloudLearning extends EventEmitter {
         logger.info(`🧠 Learned new concept: ${concept} from ${selectedPeer.name}`);
 
         this.emit('concept_learned', {
-          concept: concept
+          concept: concept,
           source: selectedPeer.name
-          confidence: learningResult.confidence
+          confidence: learningResult.confidence,
           knowledge: learningResult.knowledge
         });
 
@@ -221,31 +222,31 @@ export class AlexCloudLearning extends EventEmitter {
   /**
    * Partage des connaissances avec d'autres IA
    */
-  async shareKnowledge(this.learningState.aiPeers.values() {
-    try {
+  async shareKnowledge(this.learningState.aiPeers.values() {      try: {
       const peers = targetAIs ?
       Array.from(this.learningState.aiPeers.values()).filter(peer => targetAIs.includes(peer.name))  :
       
-        Array.from(this.learningState.aiPeers.values());      const shareResults = [];      for (const peer of peers) {
-        try {
+        Array.from(this.learningState.aiPeers.values());      const shareResults = [];      for (const peer of peers) {      try: {
           const shareResult = await this.shareKnowledgeWithPeer(peer, knowledge);
           shareResults.push({
-            peer: peer.name
+            peer: peer.name,
             success: shareResult.success
             feedback: shareResult.feedback
           });
 
           if (shareResult.success) {
-            this.learningMetrics.knowledgeShared++;
-            try {
+            this.learningMetrics.knowledgeShared++;      try: {
       logger.info(`📤 Shared knowledge with ${peer.name}`);
 
-            } catch (_error) {
+            } catch (error) {
+      console.error('Erreur dans le module:', error);
+      // Fallback vers une réponse contextuelle
+      return this.generateFallbackResponse(error, context);
     }}
         } catch (error) {
           logger.error(`❌ Failed to share with ${peer.name}:`, error.message);
           shareResults.push({
-            peer: peer.name
+            peer: peer.name,
             success: false
             error: error.message
           });
@@ -253,14 +254,14 @@ export class AlexCloudLearning extends EventEmitter {
       }
 
       this.emit('knowledge_shared', {
-        knowledge: knowledge
+        knowledge: knowledge,
         results: shareResults
       });
 
       return shareResults;
     } catch (error) {
       logger.error('❌ Error sharing knowledge:', error);
-      return [];
+      return: [];
     }
   }
 
@@ -295,18 +296,18 @@ export class AlexCloudLearning extends EventEmitter {
   async exchangeKnowledgeWithPeer(peer, concept, context) {
     // Simulation d'échange - à implémenter selon les APIs réelles
     const simulatedResponse = {
-      success: true
+      success: true,
       confidence: 0.85
-      knowledge: {
+      knowledge: {,
         concept: concept
         explanation: `Connaissance enrichie sur ${concept} par ${peer.name}'
         examples: ['Exemple pratique de ${concept}']
         applications: ['Application de ${concept} en contexte business']
         insights: ['Insight unique de ${peer.name} sur ${concept}`]
       }
-      metadata: {
+      metadata: {,
         source: peer.name
-        timestamp: new Date()
+        timestamp: new Date(),
         context: context
       }
     };    // Mise à jour du peer
@@ -322,11 +323,11 @@ export class AlexCloudLearning extends EventEmitter {
   async shareKnowledgeWithPeer(peer, knowledge) {
     // Simulation de partage
     const simulatedFeedback = {
-      success: true
+      success: true,
       feedback: {
-        received: true
+        received: true,
         quality: 'high'
-        relevance: 0.9
+        relevance: 0.9,
         novelty: 0.7
         appreciation: `Merci pour ce partage sur ${knowledge.topic || 'ce sujet'}`
       }
@@ -342,11 +343,11 @@ export class AlexCloudLearning extends EventEmitter {
   recordLearning(concept, learningResult, peer) {
     const _learningRecord = {
       id: `learning_${Date.now()}`
-      concept: concept
+      concept: concept,
       source: peer.name
-      knowledge: learningResult.knowledge
+      knowledge: learningResult.knowledge,
       confidence: learningResult.confidence
-      timestamp: new Date()
+      timestamp: new Date(),
       context: learningResult.metadata?
       .context || {};    };
 
@@ -373,8 +374,7 @@ export class AlexCloudLearning extends EventEmitter {
   /**
    * Apprentissage périodique
    */
-  async performPeriodicLearning('🔄 Performing periodic learning sync...') {
-    try {
+  async performPeriodicLearning('🔄 Performing periodic learning sync...') {      try: {
       logger.info('🔄 Performing periodic learning sync...');
 
       // Concepts à explorer
@@ -390,14 +390,11 @@ export class AlexCloudLearning extends EventEmitter {
        true });
 
       this.learningState.lastSyncTime = new Date();
-      this.learningState.sessionsCount++;
-
-      try {
+      this.learningState.sessionsCount++;      try: {
       logger.info('✅ Periodic learning completed');
 
       } catch (_error) {
-    } catch (error) 
-      try {
+    } catch (error)       try: {
       logger.error('❌ Error in periodic learning:', error);
 
       } catch (_error) {
@@ -407,18 +404,17 @@ export class AlexCloudLearning extends EventEmitter {
   /**
    * Obtient l'état de l'apprentissage cloud
    */
-  getLearningState() 
-    return {
+  getLearningState()       return: {
       ...this.learningState
-      metrics: this.learningMetrics
+      metrics: this.learningMetrics,
       peersStatus: Array.from(this.learningState.aiPeers.values()).map(peer => ({
-        name: peer.name
+        name: peer.name,
         status: peer.status
-        trustLevel: peer.trustLevel
+        trustLevel: peer.trustLevel,
         exchangeCount: peer.exchangeCount
         lastInteraction: peer.lastInteraction
       }))
-      recentLearnings: this.learningHistory.slice(-5)
+      recentLearnings: this.learningHistory.slice(-5),
       cloudStatus: alexCloudConfig.getCloudStatus()
     };
 
@@ -443,8 +439,7 @@ export class AlexCloudLearning extends EventEmitter {
    */
   shutdown() 
     this.learningState.isActive = false;
-    this.removeAllListeners();
-    try {
+    this.removeAllListeners();      try: {
       logger.info('🌙 Alex Cloud Learning System shut down');
 
     } catch (_error) {

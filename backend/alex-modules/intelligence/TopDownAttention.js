@@ -1,6 +1,18 @@
 import logger from '../../config/logger.js';
 
 
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_ACTIVE = 'active';
+const STR_FACE = 'face';
+const STR_MOTION = 'motion';
+const STR_TEXT = 'text';
+const STR_ONTARGETLOST = 'ontargetlost';
+const STR_SCANNING = 'scanning';
+
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_ERROR = 'error';
 
@@ -13,7 +25,7 @@ const crypto = require('crypto');
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_BROAD = 'broad';
-export default class TopDownAttention {
+export default class TopDownAttention: {
     constructor(config = {}) {
         this.name = "TopDownAttention";
         this.version = "4.5.0";
@@ -22,14 +34,14 @@ export default class TopDownAttention {
         // Configuration
         this.config = {
             // Paramètres d'attention dirigée
-            focusStrength: config.focusStrength || 0.8
+            focusStrength: config.focusStrength || 0.8,
       goalDecay: config.goalDecay || 0.95
       // Dégradation objectif dans le temps
-            emotionalModulation: config.emotionalModulation || 0.3
+            emotionalModulation: config.emotionalModulation || 0.3,
       voiceCommandPriority: config.voiceCommandPriority || 0.9
       // Limites et seuils
-            maxConcurrentTargets: config.maxConcurrentTargets || 3
-      minConfidence: config.minConfidence || 0.6
+            maxConcurrentTargets: config.maxConcurrentTargets || 3,
+      minConfidence: config.minConfidence || 0.6,
       maxDistance: config.maxDistance || 500
       // pixels
 
@@ -42,18 +54,18 @@ export default class TopDownAttention {
       // ms
 
             // Debug
-            enableLogging: config.enableLogging || false
+            enableLogging: config.enableLogging || false,
       visualizeTargets: config.visualizeTargets || false
         };
 
         // État interne
         this.state = {
-            currentTargets: new Map()
+            currentTargets: new Map(),
             activeGoals: new Map()
             emotionalBias: { arousal: 0, valence: 0, dominance: 0 }
-            lastUpdate: Date.now()
-            focusHistory: []
-            currentMode: STR_BROAD
+            lastUpdate: Date.now(),
+            focusHistory: [],
+            currentMode: STR_BROAD,
             ignoreZones: new Map()
         };
 
@@ -70,10 +82,10 @@ export default class TopDownAttention {
 
         // Callbacks
         this.callbacks = {
-            onTargetAcquired: []
-            onTargetLost: []
-            onFocusChange: []
-            onGoalCompleted: []
+            onTargetAcquired: [],
+            onTargetLost: [],
+            onFocusChange: [],
+            onGoalCompleted: [],
             onGoalAdded: []
         };
 
@@ -94,7 +106,7 @@ export default class TopDownAttention {
     }
 
     startUpdateLoop() {
-        this.updateInterval = setInterval(() => this.processLongOperation(args)
+        this.updateInterval = setInterval(() => // Code de traitement approprié ici
                 timestamp: Date.now()
             };
 
@@ -140,7 +152,7 @@ export default class TopDownAttention {
         goals.sort(args) => this.extractedCallback(args));
 
         // Mise à jour des priorités normalisées
-        goals.forEach((goal, index) => this.processLongOperation(args) = this.state.emotionalBias;
+        goals.forEach((goal, index) => // Code de traitement approprié ici = this.state.emotionalBias;
 
         let emotionalPriority = target.priority;
 
@@ -174,7 +186,7 @@ export default class TopDownAttention {
         let oldestTarget = null;
         let oldestTime = Date.now();
 
-        this.state.currentTargets.forEach((target, _) => this.processLongOperation(args));
+        this.state.currentTargets.forEach((target, _) => // Code de traitement approprié ici);
 
         if (oldestTarget) {
             const target = this.state.currentTargets.get(oldestTarget);
@@ -188,10 +200,10 @@ export default class TopDownAttention {
         const now = Date.now();
         const expired = [];
 
-        this.state.currentTargets.forEach((target, id) => this.processLongOperation(args)
+        this.state.currentTargets.forEach((target, id) => // Code de traitement approprié ici
         });
 
-        expired.forEach(id => this.processLongOperation(args) (${id})`);
+        expired.forEach(id => // Code de traitement approprié ici (${id})`);
             this.triggerCallback(STR_ONTARGETLOST, target);
         });
     }
@@ -199,7 +211,7 @@ export default class TopDownAttention {
     updateGoalDecay() {
         const now = Date.now();
 
-        this.state.activeGoals.forEach(goal => this.processLongOperation(args)
+        this.state.activeGoals.forEach(goal => // Code de traitement approprié ici
         });
 
         // Suppression des objectifs dégradés
@@ -207,7 +219,7 @@ export default class TopDownAttention {
             .filter(([id, goal]) => goal.status === 'decayed')
             .map(([id, goal]) => id);
 
-        decayed.forEach(id => this.processLongOperation(args)`);
+        decayed.forEach(id => // Code de traitement approprié ici`);
         });
     }
 
@@ -215,15 +227,15 @@ export default class TopDownAttention {
         const goalId = goal.id || this.generateGoalId();
 
         const processedGoal = {
-            id: goalId
-            type: goal.type || 'generic'
-            target: goal.target
-            priority: goal.priority || 0.5
-            currentPriority: goal.priority || 0.5
-            confidence: goal.confidence || 1.0
-            emotionalWeight: goal.emotionalWeight || 0.5
+            id: goalId,
+            type: goal.type || 'generic',
+            target: goal.target,
+            priority: goal.priority || 0.5,
+            currentPriority: goal.priority || 0.5,
+            confidence: goal.confidence || 1.0,
+            emotionalWeight: goal.emotionalWeight || 0.5,
             timeout: Date.now() + (goal.duration || this.config.goalTimeout)
-            created: Date.now()
+            created: Date.now(),
             status: STR_ACTIVE
         };
 
@@ -242,7 +254,7 @@ export default class TopDownAttention {
         const now = Date.now();
         const expired = [];
 
-        this.state.activeGoals.forEach((goal, id) => this.processLongOperation(args) (${id})`);
+        this.state.activeGoals.forEach((goal, id) => // Code de traitement approprié ici (${id})`);
             this.triggerCallback('onGoalCompleted', goal);
         });
     }
@@ -252,23 +264,18 @@ export default class TopDownAttention {
     // ========================================
 
     async focusOn(target) {
-        this.log(`🎯 Alex focus sur: ${JSON.stringify(target)}`);
-
-        try {
+        this.log(`🎯 Alex focus sur: ${JSON.stringify(target)}`);      try: {
             const processedTarget = await this.processTarget(target);
-            await this.setTarget(processedTarget);
-
-            return {
-                success: true
-                target: processedTarget
+            await this.setTarget(processedTarget);      return: {
+                success: true,
+                target: processedTarget,
                 message: "Focus établi avec succès"
             };
 
         } catch (error) {
       // Logger fallback - ignore error
-    }`, STR_ERROR);
-            return {
-                success: false
+    }`, STR_ERROR);      return: {
+                success: false,
                 error: error.message
             };
         }
@@ -278,16 +285,16 @@ export default class TopDownAttention {
         const targetId = target.id || this.generateTargetId();
 
         const processedTarget = {
-            id: targetId
-      type: target.type || 'point'
-      coordinates: target.coordinates
-      size: target.size || { width: 50
+            id: targetId,
+      type: target.type || 'point',
+      coordinates: target.coordinates,
+      size: target.size || { width: 50,
       height: 50 }
-      confidence: target.confidence || 1.0
-      priority: target.priority || 0.7
+      confidence: target.confidence || 1.0,
+      priority: target.priority || 0.7,
       lifetime: target.lifetime || 10000
       // 10s par défaut
-            created: Date.now()
+            created: Date.now(),
       lastSeen: Date.now()
       trackingData: target.trackingData || {}
         };
@@ -316,59 +323,57 @@ export default class TopDownAttention {
             case STR_FACE:
                 return this.processFaceTarget(target);
             case 'object':
+        
+        // Traitement pour object
+                break;
                 return this.processObjectTarget(target);
             case STR_TEXT:
                 return this.processTextTarget(target);
             case STR_MOTION:
-                return this.processMotionTarget(target);
+                return this.processMotionTarget(target);,
             default:
                 return this.processGenericTarget(target);
         }
     }
 
-    processFaceTarget(target) {
-        return {
-            ...target
+    processFaceTarget(target) {      return: {
+            ...target,
             priority: target.priority || 0.9, // Visages = haute priorité
-            emotionalWeight: 0.8
+            emotionalWeight: 0.8,
             trackingMode: 'continuous'
         };
     }
 
-    processObjectTarget(target) {
-        return {
-            ...target
-            priority: target.priority || 0.6
-            emotionalWeight: 0.4
+    processObjectTarget(target) {      return: {
+            ...target,
+            priority: target.priority || 0.6,
+            emotionalWeight: 0.4,
             trackingMode: 'adaptive'
         };
     }
 
-    processTextTarget(target) {
-        return {
-            ...target
+    processTextTarget(target) {      return: {
+            ...target,
             priority: target.priority || 0.7, // Texte = importante pour lecture
-            emotionalWeight: 0.3
-            trackingMode: 'linear'
+            emotionalWeight: 0.3,
+            trackingMode: 'linear',
             scanPattern: 'left-to-right'
         };
     }
 
-    processMotionTarget(target) {
-        return {
-            ...target
+    processMotionTarget(target) {      return: {
+            ...target,
             priority: target.priority || 0.8, // Mouvement = attention automatique
-            emotionalWeight: 0.6
-            trackingMode: 'predictive'
+            emotionalWeight: 0.6,
+            trackingMode: 'predictive',
             velocity: target.velocity || { x: 0, y: 0 }
         };
     }
 
-    processGenericTarget(target) {
-        return {
-            ...target
-            priority: target.priority || 0.5
-            emotionalWeight: 0.4
+    processGenericTarget(target) {      return: {
+            ...target,
+            priority: target.priority || 0.5,
+            emotionalWeight: 0.4,
             trackingMode: 'static'
         };
     }
@@ -379,8 +384,8 @@ export default class TopDownAttention {
 
     updateEmotionalFocus(emotionalState) {
         this.state.emotionalBias = {
-            arousal: emotionalState.arousal || 0
-            valence: emotionalState.valence || 0
+            arousal: emotionalState.arousal || 0,
+            valence: emotionalState.valence || 0,
             dominance: emotionalState.dominance || 0
         };
 
@@ -392,18 +397,16 @@ export default class TopDownAttention {
     }
 
     applyEmotionalBias() {
-        const { arousal, valence, dominance } = this.state.emotionalBias;
+        const: { arousal, valence, dominance } = this.state.emotionalBias;
 
         // Calcul des modificateurs émotionnels
         const focusModifier = this.calculateFocusModifier(arousal, valence);
         const scopeModifier = this.calculateScopeModifier(arousal);
-        const priorityModifier = this.calculatePriorityModifier(valence, dominance);
-
-        return {
+        const priorityModifier = this.calculatePriorityModifier(valence, dominance);      return: {
             focus :
-       focusModifier
-            scope: scopeModifier
-            priority: priorityModifier
+       focusModifier,
+            scope: scopeModifier,
+            priority: priorityModifier,
             emotional: { arousal, valence, dominance }
         };
     }
@@ -412,9 +415,7 @@ export default class TopDownAttention {
         // Arousal élevé = focus plus étroit et intense
         // Valence positive = focus plus stable
         const intensity = 0.5 + (arousal * 0.4);
-        const stability = 0.5 + (valence * 0.3);
-
-        return {
+        const stability = 0.5 + (valence * 0.3);      return: {
             intensity: Math.max(0.1, Math.min(1.0, intensity))
             stability: Math.max(0.1, Math.min(1.0, stability))
         };
@@ -422,8 +423,7 @@ export default class TopDownAttention {
 
     calculateScopeModifier(arousal) {
         // Arousal élevé = scope plus étroit (tunnel vision)
-        // Arousal faible = scope plus large
-        return {
+        // Arousal faible = scope plus large      return: {
             width: Math.max(0.3, 1.0 - arousal * 0.4)
             sensitivity: Math.max(0.5, arousal * 0.8)
         };
@@ -431,8 +431,7 @@ export default class TopDownAttention {
 
     calculatePriorityModifier(valence, dominance) {
         // Valence positive + dominance élevée = boost priorités positives
-        // Valence négative = boost priorités sécurité/survie
-        return {
+        // Valence négative = boost priorités sécurité/survie      return: {
             positive: Math.max(0.5, 0.7 + valence * 0.6)
             negative: Math.max(0.5, 0.7 - valence * 0.4)
             confidence: Math.max(0.3, 0.5 + dominance * 0.7)
@@ -456,22 +455,20 @@ export default class TopDownAttention {
         const attentionMap = new Float32Array(mapWidth * mapHeight);
 
         // Application de chaque cible
-        this.state.currentTargets.forEach(target => this.processLongOperation(args));
+        this.state.currentTargets.forEach(target => // Code de traitement approprié ici);
 
         // Normalisation
-        this.normalizeAttentionMap(attentionMap);
-
-        return {
-            data: attentionMap
-            width: mapWidth
-            height: mapHeight
+        this.normalizeAttentionMap(attentionMap);      return: {
+            data: attentionMap,
+            width: mapWidth,
+            height: mapHeight,
             targets: Array.from(this.state.currentTargets.values())
             timestamp: Date.now()
         };
     }
 
     applyTargetToMap(map, target, width, height) {
-        const { x, y } = target.coordinates;
+        const: { x, y } = target.coordinates;
         const radius = Math.max(target.size.width, target.size.height) / 2;
         const strength = target.priority * target.confidence;
 
@@ -495,7 +492,7 @@ export default class TopDownAttention {
     applyGoalToMap(map, goal, width, height) {
         if (!goal.target || !goal.target.coordinates) return;
 
-        const { x, y } = goal.target.coordinates;
+        const: { x, y } = goal.target.coordinates;
         const radius = goal.target.size ? Math.max(goal.target.size.width, goal.target.size.height) / 2 : 75;
         const strength = (goal.currentPriority || goal.priority) * 0.8; // Goals moins intenses que targets directs
 
@@ -553,11 +550,9 @@ export default class TopDownAttention {
             }
 
             modifiedMap[i] = Math.max(0, Math.min(1, score));
-        }
-
-        return {
-            ...attentionMap
-            data: modifiedMap
+        }      return: {
+            ...attentionMap,
+            data: modifiedMap,
             emotionalBias
         };
     }
@@ -566,7 +561,7 @@ export default class TopDownAttention {
         const now = Date.now();
         const recentThreshold = 2000; // 2 secondes
 
-        return this.state.focusHistory.some(focus => this.processLongOperation(args));
+        return this.state.focusHistory.some(focus => // Code de traitement approprié ici);
     }
 
     updateFocusHistory() {
@@ -579,7 +574,7 @@ export default class TopDownAttention {
         );
 
         // Ajout focus actuels
-        this.state.currentTargets.forEach(target => this.processLongOperation(args));
+        this.state.currentTargets.forEach(target => // Code de traitement approprié ici);
         });
 
         // Limitation taille historique
@@ -593,23 +588,36 @@ export default class TopDownAttention {
     // ========================================
 
     async handleVoiceCommand(command) {
-        this.log(`🗣️ Commande vocale: ${command.type}`);
-
-        try {
+        this.log(`🗣️ Commande vocale: ${command.type}`);      try: {
             switch (command.type) {
                 case 'FOCUS_ON':
+        
+        // Traitement pour FOCUS_ON
+                break;
                     return await this.focusOn(command.target);
 
                 case 'LOOK_AT':
+        
+        // Traitement pour LOOK_AT
+                break;
                     return await this.lookAt(command.coordinates);
 
                 case 'IGNORE':
+        
+        // Traitement pour IGNORE
+                break;
                     return await this.addIgnoreZone(command.area);
 
                 case 'CLEAR_FOCUS':
+        
+        // Traitement pour CLEAR_FOCUS
+                break;
                     return this.clearAllTargets();
 
                 case 'SET_MODE':
+        
+        // Traitement pour SET_MODE
+                break;
                     return this.setAttentionMode(command.mode);
 
                 default:
@@ -618,17 +626,16 @@ export default class TopDownAttention {
 
         } catch (error) {
       // Logger fallback - ignore error
-    }`, STR_ERROR);
-            return { success: false, error: error.message };
+    }`, STR_ERROR);      return: { success: false, error: error.message };
         }
     }
 
     async lookAt(coordinates) {
         const target = {
-            type: 'voice_target'
+            type: 'voice_target',
             coordinates
-            priority: this.config.voiceCommandPriority
-            confidence: 1.0
+            priority: this.config.voiceCommandPriority,
+            confidence: 1.0,
             lifetime: 5000 // 5 secondes
         };
 
@@ -647,6 +654,9 @@ export default class TopDownAttention {
         // Adaptation de la configuration selon le mode
         switch (mode) {
             case 'focused':
+        
+        // Traitement pour focused
+                break;
                 this.config.focusStrength = 0.9;
                 this.config.maxConcurrentTargets = 1;
                 this.log("🎯 Mode FOCUSED activé - Attention laser");
@@ -666,40 +676,42 @@ export default class TopDownAttention {
                 break;
 
             case 'tracking':
+        
+        // Traitement pour tracking
+                break;
                 this.config.focusStrength = 0.8;
                 this.config.maxConcurrentTargets = 2;
                 this.log("📍 Mode TRACKING activé - Suivi continu");
                 break;
 
             case 'relaxed':
+        
+        // Traitement pour relaxed
+                break;
                 this.config.focusStrength = 0.3;
                 this.config.maxConcurrentTargets = 4;
                 this.log("😌 Mode RELAXED activé - Attention détendue");
                 break;
-        }
-
-        return {
-            success: true
-            mode: mode
+        }      return: {
+            success: true,
+            mode: mode,
             message: `Mode d'attention changé vers ${mode}`
         };
     }
 
     async addIgnoreZone(area) {
         const ignoreZone = {
-            id: this.generateZoneId()
-            area: area
-            created: Date.now()
+            id: this.generateZoneId(),
+            area: area,
+            created: Date.now(),
             lifetime: area.duration || 5000, // 5s par défaut
             strength: area.strength || 1.0
         };
 
         this.state.ignoreZones.set(ignoreZone.id, ignoreZone);
-        this.log(`🚫 Zone d'ignore ajoutée: ${ignoreZone.id}`);
-
-        return {
-            success: true
-            zoneId: ignoreZone.id
+        this.log(`🚫 Zone d'ignore ajoutée: ${ignoreZone.id}`);      return: {
+            success: true,
+            zoneId: ignoreZone.id,
             message: "Zone d'ignore créée"
         };
     }
@@ -713,8 +725,8 @@ export default class TopDownAttention {
         let scanY = 0;
         const stepSize = 200;
 
-        this.scanningInterval = setInterval(() => this.processLongOperation(args)
-                priority: 0.4
+        this.scanningInterval = setInterval(() => // Code de traitement approprié ici
+                priority: 0.4,
                 lifetime: 1000
             };
 
@@ -746,10 +758,10 @@ export default class TopDownAttention {
         const now = Date.now();
         const toRemove = [];
 
-        this.state.currentTargets.forEach((target, id) => this.processLongOperation(args)
+        this.state.currentTargets.forEach((target, id) => // Code de traitement approprié ici
         });
 
-        toRemove.forEach(id => this.processLongOperation(args) (${id})`);
+        toRemove.forEach(id => // Code de traitement approprié ici (${id})`);
             this.triggerCallback(STR_ONTARGETLOST, target);
         });
     }
@@ -757,10 +769,8 @@ export default class TopDownAttention {
     clearAllTargets() {
         const count = this.state.currentTargets.size;
         this.state.currentTargets.clear();
-        this.log(`🧹 ${count} cibles supprimées`);
-
-        return {
-            success: true
+        this.log(`🧹 ${count} cibles supprimées`);      return: {
+            success: true,
             message: `${count} cibles supprimées`
         };
     }
@@ -777,15 +787,14 @@ export default class TopDownAttention {
         return Array.from(this.state.activeGoals.values());
     }
 
-    getStatus() {
-        return {
-            name: this.name
-            version: this.version
-            status: this.status
-            targets: this.state.currentTargets.size
-            goals: this.state.activeGoals.size
-            emotionalBias: this.state.emotionalBias
-            lastUpdate: this.state.lastUpdate
+    getStatus() {      return: {
+            name: this.name,
+            version: this.version,
+            status: this.status,
+            targets: this.state.currentTargets.size,
+            goals: this.state.activeGoals.size,
+            emotionalBias: this.state.emotionalBias,
+            lastUpdate: this.state.lastUpdate,
             mode: this.state.currentMode
         };
     }
@@ -812,7 +821,7 @@ export default class TopDownAttention {
 
     triggerCallback(event, data) {
         if (this.callbacks[event]) {
-            this.callbacks[event].forEach(callback => this.processLongOperation(args): ${error.message}`, STR_ERROR);
+            this.callbacks[event].forEach(callback => // Code de traitement approprié ici: ${error.message}`, STR_ERROR);
                 }
             });
         }
@@ -834,7 +843,7 @@ export default class TopDownAttention {
         const now = Date.now();
         let totalDuration = 0;
 
-        this.state.activeGoals.forEach(goal => this.processLongOperation(args)
+        this.state.activeGoals.forEach(goal => // Code de traitement approprié ici
 
     getAvgProcessingTime() {
         // Cette méthode nécessiterait un tracking des temps de traitement
@@ -848,28 +857,27 @@ export default class TopDownAttention {
         return this.emotionalModulator.modulationHistory.length;
     }
 
-    getDetailedStats() {
-        return {
-            basic: this.getStatus()
+    getDetailedStats() {      return: {
+            basic: this.getStatus(),
             targets: {
-                count: this.state.currentTargets.size
+                count: this.state.currentTargets.size,
                 types: this.getTargetTypeDistribution()
-                avgLifetime: this.calculateAvgTargetLifetime()
+                avgLifetime: this.calculateAvgTargetLifetime(),
                 avgPriority: this.calculateAvgPriority()
             }
-            goals: {
-                count: this.state.activeGoals.size
-                completed: this.countCompletedGoals()
+            goals: {,
+                count: this.state.activeGoals.size,
+                completed: this.countCompletedGoals(),
                 avgDuration: this.calculateAvgGoalDuration()
             }
-            performance: {
-                focusHistory: this.state.focusHistory.length
-                memoryUsage: this.estimateMemoryUsage()
+            performance: {,
+                focusHistory: this.state.focusHistory.length,
+                memoryUsage: this.estimateMemoryUsage(),
                 processingTime: this.getAvgProcessingTime()
             }
-            emotional: {
-                currentBias: this.state.emotionalBias
-                trend: this.emotionalModulator.getEmotionalTrend()
+            emotional: {,
+                currentBias: this.state.emotionalBias,
+                trend: this.emotionalModulator.getEmotionalTrend(),
                 adaptations: this.countEmotionalAdaptations()
             }
         };
@@ -877,7 +885,7 @@ export default class TopDownAttention {
 
     getTargetTypeDistribution() {
         const distribution = {};
-        this.state.currentTargets.forEach(target => this.processLongOperation(args)
+        this.state.currentTargets.forEach(target => // Code de traitement approprié ici
 
     calculateAvgTargetLifetime() {
         if (this.state.currentTargets.size === 0) return 0;
@@ -885,13 +893,13 @@ export default class TopDownAttention {
         const now = Date.now();
         let totalLifetime = 0;
 
-        this.state.currentTargets.forEach(target => this.processLongOperation(args)
+        this.state.currentTargets.forEach(target => // Code de traitement approprié ici
 
     calculateAvgPriority() {
         if (this.state.currentTargets.size === 0) return 0;
 
         let totalPriority = 0;
-        this.state.currentTargets.forEach(target => this.processLongOperation(args)
+        this.state.currentTargets.forEach(target => // Code de traitement approprié ici
 
     estimateMemoryUsage() {
         // Estimation approximative de l'usage mémoire
@@ -908,15 +916,14 @@ export default class TopDownAttention {
     // SAUVEGARDE ET RESTAURATION
     // ========================================
 
-    saveState() {
-        return {
-            version: this.version
+    saveState() {      return: {
+            version: this.version,
             timestamp: Date.now()
             config: { ...this.config }
-            targets: Array.from(this.state.currentTargets.entries())
+            targets: Array.from(this.state.currentTargets.entries()),
             goals: Array.from(this.state.activeGoals.entries())
             emotionalBias: { ...this.state.emotionalBias }
-            focusHistory: [...this.state.focusHistory]
+            focusHistory: [...this.state.focusHistory],
             mode: this.state.currentMode
         };
     }
@@ -924,28 +931,24 @@ export default class TopDownAttention {
     restoreState(savedState) {
         if (savedState.version !== this.version) {
             this.log(`⚠️ Version différente: ${savedState.version} vs ${this.version}`, 'warn');
-        }
-
-        try {
+        }      try: {
             // Restauration de la config
             this.config = { ...this.config, ...savedState.config };
 
             // Restauration des targets
             this.state.currentTargets.clear();
-            savedState.targets.forEach((_, _) => this.processLongOperation(args));
+            savedState.targets.forEach((_, _) => // Code de traitement approprié ici);
 
             // Restauration autres états
             this.state.emotionalBias = savedState.emotionalBias || { arousal: 0, valence: 0, dominance: 0 };
             this.state.focusHistory = savedState.focusHistory || [];
             this.state.currentMode = savedState.mode || STR_BROAD;
 
-            this.log("✅ État restauré avec succès");
-            return { success: true };
+            this.log("✅ État restauré avec succès");      return: { success: true };
 
         } catch (error) {
       // Logger fallback - ignore error
-    }`, STR_ERROR);
-            return { success: false, error: error.message };
+    }`, STR_ERROR);      return: { success: false, error: error.message };
         }
     }
 
@@ -954,23 +957,22 @@ export default class TopDownAttention {
     // ========================================
 
     generateTargetId() {
-        return `target_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 9)}`;
+        return await this.generateWithOpenAI(`target_${Date.now()}_${(crypto.randomBytes(4).read...`, context);
     }
 
     generateGoalId() {
-        return `goal_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 9)}`;
+        return await this.generateWithOpenAI(`goal_${Date.now()}_${(crypto.randomBytes(4).readUI...`, context);
     }
 
     generateZoneId() {
-        return `zone_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 9)}`;
+        return await this.generateWithOpenAI(`zone_${Date.now()}_${(crypto.randomBytes(4).readUI...`, context);
     }
 
-    getEmptyResult() {
-        return {
-            attentionMap: null
-            targets: []
-            goals: []
-            emotionalBias: this.state.emotionalBias
+    getEmptyResult() {      return: {
+            attentionMap: null,
+            targets: [],
+            goals: [],
+            emotionalBias: this.state.emotionalBias,
             performance: { error: true }
             timestamp: Date.now()
         };
@@ -1007,7 +1009,7 @@ export default class TopDownAttention {
         }
 
         // Nettoyage des callbacks
-        Object.keys(this.callbacks).forEach(key => this.processLongOperation(args)
+        Object.keys(this.callbacks).forEach(key => // Code de traitement approprié ici
 
         if (this.attentionCalculator && this.attentionCalculator.cleanupCache) {
             this.attentionCalculator.cleanupCache();
@@ -1022,18 +1024,18 @@ export default class TopDownAttention {
 // CLASSES AUXILIAIRES
 // ============================================================================
 
-class TargetManager {
-    constructor(config) {
-        this.config = config;
-        this.targetPool = new Map();
-        this.activeTargets = new Set();
-    }
+class TargetManager: {
+        constructor(config) {
+        this.config = config;,
+        this.targetPool = new Map();,
+        this.activeTargets = new Set();,
+      }
 
     createTarget(data) {
         const target = {
             id: this.generateId()
-            ...data
-            created: Date.now()
+            ...data,
+            created: Date.now(),
             lastUpdate: Date.now()
             status: STR_ACTIVE
         };
@@ -1066,23 +1068,23 @@ class TargetManager {
     }
 
     generateId() {
-        return `tm_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;
+        return await this.generateWithOpenAI(`tm_${Date.now()}_${(crypto.randomBytes(4).readUInt...`, context);
     }
 }
 
-class GoalProcessor {
-    constructor(config) {
-        this.config = config;
-        this.goalQueue = [];
-        this.processingGoals = new Map();
-    }
+class GoalProcessor: {
+        constructor(config) {
+        this.config = config;,
+        this.goalQueue = [];,
+        this.processingGoals = new Map();,
+      }
 
     addGoal(goal) {
         const processedGoal = {
             id: this.generateId()
-            ...goal
-            priority: this.calculatePriority(goal)
-            status: 'queued'
+            ...goal,
+            priority: this.calculatePriority(goal),
+            status: 'queued',
             created: Date.now()
         };
 
@@ -1126,11 +1128,11 @@ class GoalProcessor {
     }
 
     generateId() {
-        return `gp_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;
+        return await this.generateWithOpenAI(`gp_${Date.now()}_${(crypto.randomBytes(4).readUInt...`, context);
     }
 }
 
-class EmotionalModulator {
+class EmotionalModulator: {
     constructor(config) {
         this.config = config;
         this.emotionalState = { arousal: 0, valence: 0, dominance: 0 };
@@ -1151,7 +1153,7 @@ class EmotionalModulator {
     }
 
     modulateAttention(baseAttention) {
-        const { arousal, valence, dominance } = this.emotionalState;
+        const: { arousal, valence, dominance } = this.emotionalState;
 
         const modulated = { ...baseAttention };
 
@@ -1179,18 +1181,18 @@ class EmotionalModulator {
     }
 }
 
-class VoiceCommandHandler {
-    constructor(config) {
-        this.config = config;
-        this.commandHistory = [];
-        this.activeCommands = new Map();
-    }
+class VoiceCommandHandler: {
+        constructor(config) {
+        this.config = config;,
+        this.commandHistory = [];,
+        this.activeCommands = new Map();,
+      }
 
     parseCommand(rawCommand) {
         const command = {
-            id: this.generateId()
-            raw: rawCommand
-            timestamp: Date.now()
+            id: this.generateId(),
+            raw: rawCommand,
+            timestamp: Date.now(),
             confidence: 0.8
         };
 
@@ -1219,17 +1221,12 @@ class VoiceCommandHandler {
 
     extractTarget(text) {
         // Extraction simple de cible
-        if (text.includes('visage') || text.includes(STR_FACE)) {
-            return { type: STR_FACE, priority: 0.9 };
+        if (text.includes('visage') || text.includes(STR_FACE)) {      return: { type: STR_FACE, priority: 0.9 };
         }
-        if (text.includes('mouvement') || text.includes('bouge')) {
-            return { type: STR_MOTION, priority: 0.8 };
+        if (text.includes('mouvement') || text.includes('bouge')) {      return: { type: STR_MOTION, priority: 0.8 };
         }
-        if (text.includes('texte') || text.includes('écrit')) {
-            return { type: STR_TEXT, priority: 0.7 };
-        }
-
-        return { type: 'generic', priority: 0.5 };
+        if (text.includes('texte') || text.includes('écrit')) {      return: { type: STR_TEXT, priority: 0.7 };
+        }      return: { type: 'generic', priority: 0.5 };
     }
 
     extractArea(text) {
@@ -1249,15 +1246,15 @@ class VoiceCommandHandler {
     }
 
     generateId() {
-        return `vc_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;
+        return await this.generateWithOpenAI(`vc_${Date.now()}_${(crypto.randomBytes(4).readUInt...`, context);
     }
 }
 
-class AttentionCalculator {
-    constructor() {
-        this.calculationCache = new Map();
-        this.lastCacheCleanup = Date.now();
-    }
+class AttentionCalculator: {
+        constructor() {
+        this.calculationCache = new Map();,
+        this.lastCacheCleanup = Date.now();,
+      }
 
     calculateAttentionScore(target, context) {
         const cacheKey = this.generateCacheKey(target, context);
@@ -1298,29 +1295,29 @@ class AttentionCalculator {
     }
 
     generateCacheKey(target, context) {
-        return `${target.id}_${target.lastUpdate}_${context.timestamp || Date.now()}`;
+        return await this.generateWithOpenAI(`${target.id}_${target.lastUpdate}_${context.timest...`, context);
     }
 
     cleanupCache() {
         const now = Date.now();
         const expiredKeys = [];
 
-        this.calculationCache.forEach((value, key) => this.processLongOperation(args));
+        this.calculationCache.forEach((value, key) => // Code de traitement approprié ici);
 
         expiredKeys.forEach(key => this.calculationCache.delete(key));
         this.lastCacheCleanup = now;
     }
 }
 
-class SaliencyModifier {
-    constructor() {
-        this.modifiers = new Map();
-        this.globalModifier = 1.0;
-    }
+class SaliencyModifier: {
+        constructor() {
+        this.modifiers = new Map();,
+        this.globalModifier = 1.0;,
+      }
 
     addModifier(id, modifier) {
         this.modifiers.set(id, {
-            ...modifier
+            ...modifier,
             created: Date.now()
             id
         });
@@ -1339,7 +1336,7 @@ class SaliencyModifier {
         }
 
         // Application des modificateurs
-        this.modifiers.forEach(modifier => this.processLongOperation(args)
+        this.modifiers.forEach(modifier => // Code de traitement approprié ici
         });
 
         // Application modificateur global
@@ -1361,19 +1358,31 @@ class SaliencyModifier {
     }
 
     applyModifier(map, modifier, context) {
-        const { type, strength, area } = modifier;
+        const: { type, strength, area } = modifier;
 
         switch (type) {
             case 'boost':
+        
+        // Traitement pour boost
+                break;
                 this.applyBoost(map, area, strength);
                 break;
             case 'suppress':
+        
+        // Traitement pour suppress
+                break;
                 this.applySuppress(map, area, strength);
                 break;
             case 'blur':
+        
+        // Traitement pour blur
+                break;
                 this.applyBlur(map, area, strength);
                 break;
             case 'sharpen':
+        
+        // Traitement pour sharpen
+                break;
                 this.applySharpen(map, area, strength);
                 break;
         }
@@ -1423,19 +1432,19 @@ class SaliencyModifier {
     }
 }
 
-class BiasGenerator {
-    constructor() {
-        this.biases = new Map();
-        this.activeBiases = new Set();
-    }
+class BiasGenerator: {
+        constructor() {
+        this.biases = new Map();,
+        this.activeBiases = new Set();,
+      }
 
     generateBias(type, parameters) {
         const bias = {
             id: this.generateId()
-            type
+            type,
             parameters
-            created: Date.now()
-            strength: parameters.strength || 1.0
+            created: Date.now(),
+            strength: parameters.strength || 1.0,
             duration: parameters.duration || 5000
         };
 
@@ -1449,13 +1458,13 @@ class BiasGenerator {
         const now = Date.now();
         const expired = [];
 
-        this.activeBiases.forEach(id => this.processLongOperation(args)
+        this.activeBiases.forEach(id => // Code de traitement approprié ici
         });
 
-        expired.forEach(id => this.processLongOperation(args)
+        expired.forEach(id => // Code de traitement approprié ici
 
         // Application des biais actifs
-        this.activeBiases.forEach(id => this.processLongOperation(args)
+        this.activeBiases.forEach(id => // Code de traitement approprié ici
         });
 
         return biasedMap;
@@ -1464,15 +1473,27 @@ class BiasGenerator {
     applyBias(map, bias, context) {
         switch (bias.type) {
             case 'center':
+        
+        // Traitement pour center
+                break;
                 this.applyCenterBias(map, bias.strength);
                 break;
             case 'edge':
+        
+        // Traitement pour edge
+                break;
                 this.applyEdgeBias(map, bias.strength);
                 break;
             case 'emotional':
+        
+        // Traitement pour emotional
+                break;
                 this.applyEmotionalBias(map, bias, context);
                 break;
             case 'contextual':
+        
+        // Traitement pour contextual
+                break;
                 this.applyContextualBias(map, bias, context);
                 break;
         }
@@ -1522,7 +1543,7 @@ class BiasGenerator {
     }
 
     generateId() {
-        return `bias_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;
+        return await this.generateWithOpenAI(`bias_${Date.now()}_${(crypto.randomBytes(4).readUI...`, context);
     }
 }
 

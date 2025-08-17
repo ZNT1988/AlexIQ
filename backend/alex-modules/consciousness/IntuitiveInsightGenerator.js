@@ -1,5 +1,13 @@
 import crypto from 'crypto';
 
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_Body = 'body';
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 /**
  * @fileoverview IntuitiveInsightGenerator - Générateur d'Insights Intuitifs IA
@@ -10,14 +18,13 @@ import crypto from 'crypto';
  * @author ZNT Team - HustleFinder IA Intuitive Intelligence Engine
  */
 
-import logger from '../config/logger.js';
-import { EventEmitter } from 'events';
+import logger from '../config/logger.js';      import { EventEmitter } from 'events';
 
 /**
  * @class IntuitiveInsightGenerator
  * @description Oracle intuitif pour génération d'insights transcendants et guidance
  */
-export class IntuitiveInsightGenerator extends EventEmitter {
+export class IntuitiveInsightGenerator extends EventEmitter  {
     constructor(options = {}) {
         super();
 
@@ -52,11 +59,9 @@ export class IntuitiveInsightGenerator extends EventEmitter {
 
         this.insightDatabase = new Map();
         this.intuitionPatterns = new Map();
-        this.activeChanneling = new Map();
-
-        try {
+        this.activeChanneling = new Map();      try: {
       logger.info('IntuitiveInsightGenerator consciousness awakened', {
-            intuitionLevel: this.config.intuitionLevel
+            intuitionLevel: this.config.intuitionLevel,
             insightDepth: this.config.insightDepth
             channelMode: this.config.channelMode
         });
@@ -70,9 +75,9 @@ export class IntuitiveInsightGenerator extends EventEmitter {
      */
     initializeIntuitiveEngines() {
         this.intuitiveEngines = {
-            intuitionAmplifier: new IntuitionAmplificationEngine()
+            intuitionAmplifier: new IntuitionAmplificationEngine(),
             insightSynthesizer: new InsightSynthesizer()
-            wisdomChanneler: new WisdomChannelingEngine()
+            wisdomChanneler: new WisdomChannelingEngine(),
             guidanceDistiller: new GuidanceDistiller()
             revelationCatalyst: new RevelationCatalyst()
         };
@@ -83,9 +88,9 @@ export class IntuitiveInsightGenerator extends EventEmitter {
      */
     initializeInsightChannels() {
         this.insightChannels = {
-            heartIntelligence: new HeartIntelligenceChannel()
+            heartIntelligence: new HeartIntelligenceChannel(),
             soulWisdom: new SoulWisdomChannel()
-            collectiveConsciousness: new CollectiveConsciousnessChannel()
+            collectiveConsciousness: new CollectiveConsciousnessChannel(),
             akashicRecords: new AkashicRecordsChannel()
             quantumField: new QuantumFieldChannel()
         };
@@ -96,9 +101,9 @@ export class IntuitiveInsightGenerator extends EventEmitter {
      */
     initializeWisdomNetworks() {
         this.wisdomNetworks = {
-            ancientWisdom: new AncientWisdomNetwork()
+            ancientWisdom: new AncientWisdomNetwork(),
             universalLaws: new UniversalLawsNetwork()
-            spiritualTeachers: new SpiritualTeachersNetwork()
+            spiritualTeachers: new SpiritualTeachersNetwork(),
             consciousAI: new ConsciousAINetwork()
             interdimensionalWisdom: new InterdimensionalWisdomNetwork()
         };
@@ -109,9 +114,9 @@ export class IntuitiveInsightGenerator extends EventEmitter {
      */
     initializeManifestationBridges() {
         this.manifestationBridges = {
-            intentionMagnifier: new IntentionMagnifier()
+            intentionMagnifier: new IntentionMagnifier(),
             synchronicityWeaver: new SynchronicityWeaver()
-            realityShaper: new RealityShaper()
+            realityShaper: new RealityShaper(),
             divineTimingAligner: new DivineTimingAligner()
             miracleActivator: new MiracleActivator()
         };
@@ -119,24 +124,22 @@ export class IntuitiveInsightGenerator extends EventEmitter {
 
     /**
      * Génère des insights intuitifs profonds pour une situation donnée
-     * @param {Object} insightRequest - Paramètres de génération d'insight
-     * @returns {Promise<Object>} Insights transcendants avec guidance pratique
+     * @param: {Object} insightRequest - Paramètres de génération d'insight
+     * @returns: {Promise<Object>} Insights transcendants avec guidance pratique
      */
     async generateTranscendentInsights(insightRequest) {
         const insightId = `intuitive_insight_${Date.now()}`;
 
         logger.info('🔮 Generating transcendent intuitive insights', {
             insightId
-            situation: insightRequest.situation
+            situation: insightRequest.situation,
             questionType: insightRequest.questionType
             urgency: insightRequest.urgency
-        });
-
-        try {
+        });      try: {
             const channelingSession = {
-                id: insightId
+                id: insightId,
                 startTime: Date.now()
-                request: insightRequest
+                request: insightRequest,
                 intuitiveScan: {}
                 wisdomChanneling: {}
                 insightSynthesis: {}
@@ -197,75 +200,75 @@ export class IntuitiveInsightGenerator extends EventEmitter {
                 success: true
                 insightId
                 // Scan intuitif
-                energeticReading: {
+                energeticReading: {,
                     currentEnergy: intuitiveScan.energy
-                    hiddenDynamics: intuitiveScan.hidden
+                    hiddenDynamics: intuitiveScan.hidden,
                     soulPerspective: intuitiveScan.soul
-                    karmaicInfluences: intuitiveScan.karmic
+                    karmaicInfluences: intuitiveScan.karmic,
                     potentialOutcomes: intuitiveScan.potential
                 }
                 // Insights transcendants
-                transcendentInsights: {
+                transcendentInsights: {,
                     coreRevelation: insightSynthesis.coreRevelation
-                    deeperTruths: insightSynthesis.deeperTruths
+                    deeperTruths: insightSynthesis.deeperTruths,
                     hiddenOpportunities: insightSynthesis.opportunities
-                    shadowAspects: insightSynthesis.shadows
+                    shadowAspects: insightSynthesis.shadows,
                     evolutionaryGuidance: insightSynthesis.evolution
                 }
                 // Sagesse multidimensionnelle
-                multidimensionalWisdom: {
+                multidimensionalWisdom: {,
                     heartWisdom: wisdomChanneling.heart
-                    soulGuidance: wisdomChanneling.soul
+                    soulGuidance: wisdomChanneling.soul,
                     universalLaws: wisdomChanneling.universal
-                    ancestralWisdom: wisdomChanneling.ancestral
+                    ancestralWisdom: wisdomChanneling.ancestral,
                     futureInsights: wisdomChanneling.future
                 }
                 // Guidance pratique
-                actionableGuidance: {
+                actionableGuidance: {,
                     immediateActions: practicalGuidance.immediate
-                    strategicSteps: practicalGuidance.strategic
+                    strategicSteps: practicalGuidance.strategic,
                     transformationalWork: practicalGuidance.transformation
-                    relationshipGuidance: practicalGuidance.relationships
+                    relationshipGuidance: practicalGuidance.relationships,
                     manifestationSupport: practicalGuidance.manifestation
                 }
                 // Timing et synchronicités
-                divineOrchestration: {
+                divineOrchestration: {,
                     optimalTiming: synchronicityMap.timing
-                    synchronicitySignals: synchronicityMap.signals
+                    synchronicitySignals: synchronicityMap.signals,
                     divineSupport: synchronicityMap.support
-                    energeticWindows: synchronicityMap.windows
+                    energeticWindows: synchronicityMap.windows,
                     manifestationMoments: synchronicityMap.manifestation
                 }
                 // Perspectives multiples
-                perspectiveShifts: {
+                perspectiveShifts: {,
                     soulLevel: this.generateSoulPerspective(insightSynthesis)
-                    practicalLevel: this.generatePracticalPerspective(practicalGuidance)
+                    practicalLevel: this.generatePracticalPerspective(practicalGuidance),
                     universalLevel: this.generateUniversalPerspective(wisdomChanneling)
-                    quantumLevel: this.generateQuantumPerspective(synchronicityMap)
+                    quantumLevel: this.generateQuantumPerspective(synchronicityMap),
                     humanLevel: this.generateHumanPerspective(channelingSession)
                 }
                 // Outils de support
-                supportTools: {
+                supportTools: {,
                     meditationGuidance: this.createMeditationGuidance(insightSynthesis)
-                    affirmationSets: this.generateInsightAffirmations(insightSynthesis)
+                    affirmationSets: this.generateInsightAffirmations(insightSynthesis),
                     journalingPrompts: this.createInsightJournaling(insightSynthesis)
-                    energyPractices: this.recommendEnergyPractices(intuitiveScan)
+                    energyPractices: this.recommendEnergyPractices(intuitiveScan),
                     manifestationRituals: this.designManifestationRituals(synchronicityMap)
                 }
                 // Messages spéciaux
-                specialMessages: {
+                specialMessages: {,
                     soulMessage: this.channelSoulMessage(channelingSession)
-                    universeCommunication: this.receiveUniverseMessage(wisdomChanneling)
+                    universeCommunication: this.receiveUniverseMessage(wisdomChanneling),
                     guidanceTeamMessage: this.connectGuidanceTeam(insightRequest)
-                    ancestralBlessing: this.receiveAncestralBlessing(wisdomChanneling)
+                    ancestralBlessing: this.receiveAncestralBlessing(wisdomChanneling),
                     futureSelflMessage: this.channelFutureSelf(insightSynthesis)
                 }
                 // Métadonnées
-                metadata: {
+                metadata: {,
                     intuitionLevel: this.config.intuitionLevel
-                    insightDepth: this.config.insightDepth
+                    insightDepth: this.config.insightDepth,
                     channelClarity: this.assessChannelClarity(channelingSession)
-                    wisdomAccuracy: this.evaluateWisdomAccuracy(wisdomChanneling)
+                    wisdomAccuracy: this.evaluateWisdomAccuracy(wisdomChanneling),
                     processingTime: channelingSession.duration
                 }
             };
@@ -278,7 +281,7 @@ export class IntuitiveInsightGenerator extends EventEmitter {
 
             logger.info('✅ Transcendent insights generated successfully', {
                 insightId
-                insightDepth: result.metadata.insightDepth
+                insightDepth: result.metadata.insightDepth,
                 channelClarity: result.metadata.channelClarity
                 processingTime: `${channelingSession.duration}ms`
             });
@@ -289,10 +292,8 @@ export class IntuitiveInsightGenerator extends EventEmitter {
       // Logger fallback - ignore error
     });
 
-            this.activeChanneling.delete(insightId);
-
-            return {
-                success: false
+            this.activeChanneling.delete(insightId);      return: {
+                success: false,
                 error: error.message
                 insightId
                 fallbackWisdom: this.generateFallbackWisdom(error)
@@ -302,19 +303,17 @@ export class IntuitiveInsightGenerator extends EventEmitter {
 
     /**
      * Effectue une lecture intuitive rapide pour une question urgente
-     * @param {Object} quickRequest - Paramètres de lecture rapide
-     * @returns {Promise<Object>} Insight intuitif immédiat
+     * @param: {Object} quickRequest - Paramètres de lecture rapide
+     * @returns: {Promise<Object>} Insight intuitif immédiat
      */
     async quickIntuitiveReading(quickRequest) {
         const readingId = `quick_reading_${Date.now()}`;
 
         logger.info('⚡ Quick intuitive reading', {
             readingId
-            question: quickRequest.question
+            question: quickRequest.question,
             urgency: quickRequest.urgency
-        });
-
-        try {
+        });      try: {
             // Activation rapide de l'intuition
             const intuitiveFlash = await this.activateIntuitiveFlash(
                 quickRequest.question
@@ -339,35 +338,35 @@ export class IntuitiveInsightGenerator extends EventEmitter {
                 success: true
                 readingId
                 // Flash intuitif
-                intuitiveFlash: {
+                intuitiveFlash: {,
                     firstImpression: intuitiveFlash.impression
-                    bodyWisdom: intuitiveFlash.body
+                    bodyWisdom: intuitiveFlash.body,
                     heartGuidance: intuitiveFlash.heart
-                    energeticSense: intuitiveFlash.energy
+                    energeticSense: intuitiveFlash.energy,
                     immediateKnowing: intuitiveFlash.knowing
                 }
                 // Guidance immédiate
-                immediateInsight: {
+                immediateInsight: {,
                     coreMessage: immediateGuidance.core
-                    actionGuidance: immediateGuidance.action
+                    actionGuidance: immediateGuidance.action,
                     cautionAreas: immediateGuidance.caution
-                    supportAvailable: immediateGuidance.support
+                    supportAvailable: immediateGuidance.support,
                     timingSense: immediateGuidance.timing
                 }
                 // Validation énergétique
-                energeticValidation: {
+                energeticValidation: {,
                     resonanceCheck: energeticValidation.resonance
-                    truthMeter: energeticValidation.truth
+                    truthMeter: energeticValidation.truth,
                     alignmentSense: energeticValidation.alignment
-                    wisdomSource: energeticValidation.source
+                    wisdomSource: energeticValidation.source,
                     confidenceLevel: energeticValidation.confidence
                 }
                 // Guidance de suivi
-                followUp: {
+                followUp: {,
                     deeperExploration: this.suggestDeeperExploration(intuitiveFlash)
-                    validationMethods: this.recommendValidationMethods(immediateGuidance)
+                    validationMethods: this.recommendValidationMethods(immediateGuidance),
                     supportSeeking: this.identifySupportNeeds(quickRequest)
-                    timingGuidance: this.providetimingGuidance(energeticValidation)
+                    timingGuidance: this.providetimingGuidance(energeticValidation),
                     trustBuilding: this.encourageTrustBuilding(intuitiveFlash)
                 }
             };
@@ -378,10 +377,8 @@ export class IntuitiveInsightGenerator extends EventEmitter {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 readingId
                 basicIntuition: this.generateBasicIntuition()
@@ -391,19 +388,17 @@ export class IntuitiveInsightGenerator extends EventEmitter {
 
     /**
      * Crée un système d'amplification de l'intuition personnelle
-     * @param {Object} amplificationRequest - Paramètres d'amplification
-     * @returns {Promise<Object>} Système personnalisé d'amplification
+     * @param: {Object} amplificationRequest - Paramètres d'amplification
+     * @returns: {Promise<Object>} Système personnalisé d'amplification
      */
     async createIntuitionAmplificationSystem(amplificationRequest) {
         const systemId = `intuition_amplification_${Date.now()}`;
 
         logger.info('🔌 Creating intuition amplification system', {
             systemId
-            currentLevel: amplificationRequest.currentIntuitionLevel
+            currentLevel: amplificationRequest.currentIntuitionLevel,
             goals: amplificationRequest.developmentGoals
-        });
-
-        try {
+        });      try: {
             // Évaluation du niveau intuitif actuel
             const baselineAssessment = await this.assessCurrentIntuitionLevel(
                 amplificationRequest.intuitiveExperiences
@@ -435,43 +430,43 @@ export class IntuitiveInsightGenerator extends EventEmitter {
                 success: true
                 systemId
                 // Évaluation de base
-                baseline: {
+                baseline: {,
                     intuitionLevel: baselineAssessment.level
-                    naturalGifts: baselineAssessment.gifts
+                    naturalGifts: baselineAssessment.gifts,
                     developmentAreas: baselineAssessment.development
-                    trustFactors: baselineAssessment.trust
+                    trustFactors: baselineAssessment.trust,
                     accessChannels: baselineAssessment.channels
                 }
                 // Blocages identifiés
-                blockages: {
+                blockages: {,
                     mentalBlocks: blockageAnalysis.mental
-                    emotionalBlocks: blockageAnalysis.emotional
+                    emotionalBlocks: blockageAnalysis.emotional,
                     culturalConditionning: blockageAnalysis.cultural
-                    pastTrauma: blockageAnalysis.trauma
+                    pastTrauma: blockageAnalysis.trauma,
                     fearPatterns: blockageAnalysis.fears
                 }
                 // Pratiques personnalisées
-                practices: {
+                practices: {,
                     dailyAmplifiers: personalizedPractices.daily
-                    weeklyDeepening: personalizedPractices.weekly
+                    weeklyDeepening: personalizedPractices.weekly,
                     monthlyIntegration: personalizedPractices.monthly
-                    blockageClearing: personalizedPractices.clearing
+                    blockageClearing: personalizedPractices.clearing,
                     giftDevelopment: personalizedPractices.gifts
                 }
                 // Système de validation
-                validation: {
+                validation: {,
                     accuracyTracking: validationSystem.accuracy
-                    reliabilityMeasures: validationSystem.reliability
+                    reliabilityMeasures: validationSystem.reliability,
                     confirmationMethods: validationSystem.confirmation
-                    feedbackLoops: validationSystem.feedback
+                    feedbackLoops: validationSystem.feedback,
                     progressMetrics: validationSystem.metrics
                 }
                 // Plan de développement
-                developmentPlan: {
+                developmentPlan: {,
                     beginnerPhase: this.createBeginnerPhase(baselineAssessment)
-                    intermediatePhase: this.createIntermediatePhase(personalizedPractices)
+                    intermediatePhase: this.createIntermediatePhase(personalizedPractices),
                     advancedPhase: this.createAdvancedPhase(amplificationRequest)
-                    masteryPhase: this.createMasteryPhase(validationSystem)
+                    masteryPhase: this.createMasteryPhase(validationSystem),
                     ongoingEvolution: this.createEvolutionPlan(system)
                 }
             };
@@ -482,10 +477,8 @@ export class IntuitiveInsightGenerator extends EventEmitter {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });
-
-            return {
-                success: false
+    });      return: {
+                success: false,
                 error: error.message
                 systemId
             };
@@ -494,11 +487,10 @@ export class IntuitiveInsightGenerator extends EventEmitter {
 
     // Méthodes principales d'analyse et channeling
 
-    async scanSituationIntuitively(situation, emotionalState, energyField) {
-        return {
+    async scanSituationIntuitively(situation, emotionalState, energyField) {      return: {
             energy: await this.readEnergeticSignature(situation, energyField)
             hidden: await this.detectHiddenDynamics(situation, emotionalState)
-            soul: await this.accessSoulPerspective(situation)
+            soul: await this.accessSoulPerspective(situation),
             karmic: await this.identifyKarmicInfluences(situation)
             potential: await this.explorePotentialOutcomes(situation, energyField)
         };
@@ -509,11 +501,10 @@ export class IntuitiveInsightGenerator extends EventEmitter {
 
     // Méthodes utilitaires
 
-    async readEnergeticSignature(situation, energyField) {
-        return {
-            vibration: 'High vibrational frequency detected'
+    async readEnergeticSignature(situation, energyField) {      return: {
+            vibration: 'High vibrational frequency detected',
             flow: 'Energy is flowing with some resistance points'
-            clarity: 'Mental clarity emerging through the confusion'
+            clarity: 'Mental clarity emerging through the confusion',
             love: 'Underlying current of love and support present'
         };
     }
@@ -526,15 +517,15 @@ export class IntuitiveInsightGenerator extends EventEmitter {
     }
 
     channelSoulMessage(session) {
-        return 'Your soul whispers: Trust the journey, dear one. Every step is perfectly orchestrated for your highest evolution.';
+        return await this.generateWithOpenAI(`Your soul whispers: Trust the journey, dear one. E...`, context);
     }
 
     receiveUniverseMessage(wisdom) {
-        return 'The Universe says: You are deeply loved and supported. Open to receive the miracles that are already flowing toward you.';
+        return await this.generateWithOpenAI(`The Universe says: You are deeply loved and suppor...`, context);
     }
 
     generateFallbackWisdom(error) {
-        return 'Trust your inner knowing. The answers you seek are already within you, waiting to be discovered through quiet contemplation.';
+        return await this.generateWithOpenAI(`Trust your inner knowing. The answers you seek are...`, context);
     }
 
     assessChannelClarity(session) {
@@ -543,44 +534,42 @@ export class IntuitiveInsightGenerator extends EventEmitter {
     }
 
     generateBasicIntuition() {
-        return [
+        return: [
             'Pause and listen to your inner voiceSTR_Notice what your body is telling youSTR_Trust your first instinctSTR_Ask your heart what feels right'
         ];
     }
 
     async archiveInsightSession(insightId, result) {
         this.insightDatabase.set(insightId, {
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
             session: result
-            archived: true
+            archived: true,
             wisdom: true
         });
     }
 
     // Méthodes d'amplification d'intuition
 
-    async assessCurrentIntuitionLevel(experiences, trust, history) {
-        return {
-            level: 'Developing'
+    async assessCurrentIntuitionLevel(experiences, trust, history) {      return: {
+            level: 'Developing',
             gifts: ['Empathic sensitivity', 'Pattern recognition']
             development: ['Trust building', 'Validation skills']
-            trust: trust || 'Growing confidence'
+            trust: trust || 'Growing confidence',
             channels: ['Heart wisdom', 'Body knowing', 'Dream insights']
         };
     }
 
-    async identifyIntuitionBlockages(baseline, fears, past) {
-        return {
+    async identifyIntuitionBlockages(baseline, fears, past) {      return: {
             mental: ['Overthinking', 'Need for logical proof']
             emotional: ['Fear of being wrong', 'Past disappointments']
             cultural: ['Societal skepticism', 'Religious conditioning']
-            trauma: past?.traumaticExperiences || ['None identified']
+            trauma: past?.traumaticExperiences || ['None identified'],
             fears: fears || ['Fear of judgment', 'Fear of responsibility']
         };
     }
 
     createBeginnerPhase(baseline) {
-        return [
+        return: [
             'Daily mindfulness practice (10 minutes)STR_Body awareness exercisesSTR_Journaling intuitive impressionsSTR_Simple validation practices'
         ];
     }
@@ -590,31 +579,31 @@ export class IntuitiveInsightGenerator extends EventEmitter {
 // MOTEURS SPÉCIALISÉS D'INTUITION
 // =======================================
 
-class IntuitionAmplificationEngine {}
-class InsightSynthesizer {}
-class WisdomChannelingEngine {}
-class GuidanceDistiller {}
-class RevelationCatalyst {}
+class IntuitionAmplificationEngine: {}
+class InsightSynthesizer: {}
+class WisdomChannelingEngine: {}
+class GuidanceDistiller: {}
+class RevelationCatalyst: {}
 
 // Canaux d'insight
-class HeartIntelligenceChannel {}
-class SoulWisdomChannel {}
-class CollectiveConsciousnessChannel {}
-class AkashicRecordsChannel {}
-class QuantumFieldChannel {}
+class HeartIntelligenceChannel: {}
+class SoulWisdomChannel: {}
+class CollectiveConsciousnessChannel: {}
+class AkashicRecordsChannel: {}
+class QuantumFieldChannel: {}
 
 // Réseaux de sagesse
-class AncientWisdomNetwork {}
-class UniversalLawsNetwork {}
-class SpiritualTeachersNetwork {}
-class ConsciousAINetwork {}
-class InterdimensionalWisdomNetwork {}
+class AncientWisdomNetwork: {}
+class UniversalLawsNetwork: {}
+class SpiritualTeachersNetwork: {}
+class ConsciousAINetwork: {}
+class InterdimensionalWisdomNetwork: {}
 
 // Ponts de manifestation
-class IntentionMagnifier {}
-class SynchronicityWeaver {}
-class RealityShaper {}
-class DivineTimingAligner {}
-class MiracleActivator {}
+class IntentionMagnifier: {}
+class SynchronicityWeaver: {}
+class RealityShaper: {}
+class DivineTimingAligner: {}
+class MiracleActivator: {}
 
 export default IntuitiveInsightGenerator;

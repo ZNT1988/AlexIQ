@@ -140,13 +140,13 @@ const AlexIQUltimateInterface = () => {
   };
 
   const handleSendMessage = async (text = inputText) => {
-    console.log('🎯 HandleSendMessage called with text:', text);
+    
     if (!text.trim()) {
-      console.log('❌ Empty text, returning early');
+      
       return;
     }
 
-    console.log('🚀 Starting send message process...');
+    
     setInputText('');
     setShowSuggestions(false);
     setIsThinking(true);
@@ -161,7 +161,7 @@ const AlexIQUltimateInterface = () => {
     ];
 
     for (let i = 0; i < thinkingSteps.length; i++) {
-      console.log('🧠 Thinking step:', thinkingSteps[i]);
+      
       setThoughtProcess(thinkingSteps[i]);
       await new Promise(resolve => setTimeout(resolve, 300));
     }
@@ -169,10 +169,10 @@ const AlexIQUltimateInterface = () => {
     setIsThinking(false);
     setThoughtProcess('');
 
-    console.log('📞 Calling processInput with:', text);
+    
     // Envoi à l'IA
     await processInput(text);
-    console.log('✅ ProcessInput completed');
+    
   };
 
   const toggleVoiceRecognition = () => {
@@ -209,7 +209,7 @@ const AlexIQUltimateInterface = () => {
       await navigator.clipboard.writeText(text);
       // Toast success
     } catch (err) {
-      console.error('Erreur copie:', err);
+      
     }
   };
 
@@ -312,7 +312,7 @@ const AlexIQUltimateInterface = () => {
                     }`}
                   >
                     <div className="text-sm font-medium text-white truncate">{session}</div>
-                    <div className="text-xs text-gray-400 mt-1">Il y a {index + 1}h - {Math.floor(Math.random() * 50) + 10} messages</div>
+                    <div className="text-xs text-gray-400 mt-1">Il y a {index + 1}h - {Math.floor(this.getDeterministicValue() * 50) + 10} messages</div>
                   </button>
                 ))}
               </div>
@@ -631,8 +631,8 @@ const AlexIQUltimateInterface = () => {
 
                   <button
                     onClick={() => {
-                      console.log('🔘 Send button clicked!');
-                      console.log('📝 Current inputText:', inputText);
+                      
+                      
                       handleSendMessage();
                     }}
                     disabled={!inputText.trim() || loading}
