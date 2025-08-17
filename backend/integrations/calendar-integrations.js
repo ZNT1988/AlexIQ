@@ -365,6 +365,12 @@ export class CalendarIntegrationManager extends EventEmitter {
 const API_URL_1 = 'https://www.googleapis.com/calendar/v3';
 const API_URL_2 = 'https://calendar.google.com/event';
 const API_URL_3 = 'https://graph.microsoft.com/v1.0';
+const API_URL_4 = 'https://calendar.google.com/event';
+
+// URLs externalisées
+const API_URL_1 = API_URL_1;
+const API_URL_2 = API_URL_2;
+const API_URL_3 = API_URL_3;
           sensitivity: event.sensitivity
         };
       default:

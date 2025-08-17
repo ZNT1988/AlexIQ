@@ -32,7 +32,7 @@ class BackupManager extends EventEmitter {
     const dbPath = this.config.get("database.path");
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        
+        console.error('Database initialization error:', err.message);
         return;
       }
       
@@ -78,7 +78,7 @@ class BackupManager extends EventEmitter {
 
     tables.forEach((sql) => {
       this.db.run(sql, (err) => {
-        if (err) 
+        if (err) console.error('Error creating backup table:', err.message);
       });
     });
 
@@ -128,9 +128,8 @@ class BackupManager extends EventEmitter {
   async ensureBackupDirectory() {
     try {
       await fs.mkdir(this.backupPath, { recursive: true });
-      
     } catch (error) {
-      
+      console.error('Error creating backup directory:', error.message);
       throw error;
     }
   }
@@ -138,7 +137,6 @@ class BackupManager extends EventEmitter {
   async start() {
     if (this.isRunning) return;
 
-    
     this.isRunning = true;
 
     if (this.backupConfig.enabled) {
@@ -147,7 +145,6 @@ class BackupManager extends EventEmitter {
 
     await this.loadBackupHistory();
 
-    
     this.emit("backupManagerStarted");
   }
 
@@ -163,10 +160,9 @@ class BackupManager extends EventEmitter {
 
   async performScheduledBackup() {
     try {
-      
       await this.createBackup("scheduled");
     } catch (error) {
-      
+      console.error('Scheduled backup failed:', error.message);
       this.emit("backupFailed", {
         type: "scheduled",
         error: error.message,
@@ -184,7 +180,6 @@ class BackupManager extends EventEmitter {
     const backupFilePath = path.join(this.backupPath, backupFileName);
 
     try {
-      
       await this.validateSourceDatabase();
 
       const backupData = await this.createDatabaseDump();
@@ -217,9 +212,6 @@ class BackupManager extends EventEmitter {
       await this.verifyBackup(backupId, backupFilePath);
       await this.cleanOldBackups();
 
-      console.log(
-        `✅ Backup créé: ${backupFileName} (${this.formatBytes(fileStats.size)})`,
-      );
 
       this.emit("backupCompleted", {
         id: backupId,
@@ -231,7 +223,7 @@ class BackupManager extends EventEmitter {
 
       return backupRecord;
     } catch (error) {
-      
+      console.error('Backup creation failed:', error.message);
       await this.recordBackup({
         id: backupId,
         backup_type: type,
@@ -401,9 +393,8 @@ class BackupManager extends EventEmitter {
 
       await this.recordVerification(verificationResult);
 
-      
     } catch (error) {
-      
+      console.error('Backup verification failed:', error.message);
       await this.recordVerification({
         backup_id: backupId,
         verification_status: "failed",
@@ -465,7 +456,6 @@ class BackupManager extends EventEmitter {
 
       const duration = Date.now() - startTime;
 
-      console.log(`✅ Restauration terminée: ${restorePath} (${duration}ms)`);
 
       this.emit("restoreCompleted", {
         backupId: backupId,
@@ -475,7 +465,7 @@ class BackupManager extends EventEmitter {
 
       return restorePath;
     } catch (error) {
-      
+      console.error('Restore failed:', error.message);
       throw error;
     }
   }
@@ -557,9 +547,8 @@ class BackupManager extends EventEmitter {
         try {
           await fs.unlink(backup.file_path);
           await this.deleteBackupRecord(backup.id);
-          console.log(`🗑️ Backup supprimé: ${path.basename(backup.file_path)}`);
         } catch (error) {
-          
+          console.error('Error deleting backup file:', error.message);
         }
       }
 
@@ -568,7 +557,7 @@ class BackupManager extends EventEmitter {
         retention: retention,
       });
     } catch (error) {
-      
+      console.error('Cleanup failed:', error.message);
     }
   }
 
@@ -593,16 +582,12 @@ class BackupManager extends EventEmitter {
   async loadBackupHistory() {
     try {
       this.backupHistory = await this.listBackups({ limit: 100 });
-      
     } catch (error) {
-      
+      console.error('Error loading backup history:', error.message);
     }
   }
 
   handleBackupCompleted(data) {
-    console.log(
-      `🎉 Backup terminé: ${data.fileName} - ${this.formatBytes(data.size)} en ${data.duration}ms`,
-    );
   }
 
   handleBackupFailed(data) {
@@ -610,13 +595,9 @@ class BackupManager extends EventEmitter {
   }
 
   handleRestoreCompleted(data) {
-    
   }
 
   handleCleanupCompleted(data) {
-    console.log(
-      `🧹 Nettoyage terminé: ${data.deleted} backups supprimés (rétention: ${data.retention}j)`,
-    );
   }
 
   generateBackupId() {
@@ -673,12 +654,10 @@ class BackupManager extends EventEmitter {
 
     if (this.db) {
       this.db.close((err) => {
-        if (err) 
-        else 
+        if (err) console.error('Error closing database:', err.message);
       });
     }
 
-    
   }
 }
 

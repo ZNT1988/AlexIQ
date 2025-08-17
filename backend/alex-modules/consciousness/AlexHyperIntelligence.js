@@ -4,6 +4,12 @@ import sqlite3 from "sqlite3";
 // URLs externalisées
 const API_URL_1 = 'https://maps.googleapis.com/maps/api/geocode/json';
 const API_URL_2 = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro';
+const API_URL_3 = 'https://maps.googleapis.com/maps/api/geocode/json';
+const API_URL_4 = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro';
+
+// URLs externalisées
+const API_URL_1 = API_URL_1;
+const API_URL_2 = API_URL_2;
 
 // Imports AI Services
       import { AI_KEYS } from '../config/aiKeys.js';

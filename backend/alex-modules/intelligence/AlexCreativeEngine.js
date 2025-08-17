@@ -25,6 +25,14 @@ const API_URL_4 = 'https://api.runwayml.com';
 const API_URL_5 = 'https://api.suno.ai';
 const API_URL_6 = 'https://placeholder-image.com/generated';
 
+// URLs externalisées
+const API_URL_1 = API_URL_1;
+const API_URL_2 = API_URL_2;
+const API_URL_3 = API_URL_3;
+const API_URL_4 = API_URL_4;
+const API_URL_5 = API_URL_5;
+const API_URL_6 = API_URL_6;
+
 // Imports AI Services
       import { AI_KEYS } from '../config/aiKeys.js';
 

@@ -46,10 +46,9 @@ class RevenueManager extends EventEmitter {
     const dbPath = this.config.get("database.path");
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        
+        console.error('Database initialization error:', err.message);
         return;
       }
-      
       this.createRevenueTables();
     });
   }
@@ -119,7 +118,7 @@ class RevenueManager extends EventEmitter {
 
     tables.forEach((sql) => {
       this.db.run(sql, (err) => {
-        if (err) 
+        if (err) console.error('Error creating revenue table:', err.message);
       });
     });
   }
@@ -166,12 +165,9 @@ class RevenueManager extends EventEmitter {
         id: transactionId,
       });
 
-      console.log(
-        `💰 Transaction enregistrée: ${transaction.amount}€ (${transaction.tenantId})`,
-      );
       return transactionId;
     } catch (error) {
-      
+      console.error('Error recording transaction:', error.message);
       throw error;
     }
   }
@@ -239,7 +235,7 @@ class RevenueManager extends EventEmitter {
         tier: transaction.tier || customer.tier,
       });
     } catch (error) {
-      
+      console.error('Error updating customer analytics:', error.message);
     }
   }
 
@@ -357,7 +353,7 @@ class RevenueManager extends EventEmitter {
       this.revenueMetrics.month = await this.getMonthlyMetrics();
       this.revenueMetrics.lifetime = await this.getLifetimeMetrics();
     } catch (error) {
-      
+      console.error('Error updating revenue metrics:', error.message);
     }
   }
 
@@ -443,10 +439,8 @@ class RevenueManager extends EventEmitter {
         this.forecastRevenue(),
         this.segmentCustomers(),
       ]);
-
-      
     } catch (error) {
-      
+      console.error('Error running analytics:', error.message);
     }
   }
 
@@ -708,9 +702,6 @@ class RevenueManager extends EventEmitter {
   }
 
   handleTransaction(transaction) {
-    console.log(
-      `💰 Transaction traitée: ${transaction.amount}€ (${transaction.tenant_id})`,
-    );
 
     if (this.revenueMetrics.today.revenue > 10000) {
       this.emit("revenueGoalAchieved", {
@@ -721,15 +712,14 @@ class RevenueManager extends EventEmitter {
   }
 
   handleUpgrade(data) {
-    
+    // Handle customer upgrade logic
   }
 
   handleChurn(data) {
-    console.log(`📉 Client churné: ${data.tenantId} (raison: ${data.reason})`);
   }
 
   handleRevenueGoal(data) {
-    
+    // Handle revenue goal achievement
   }
 
   getRevenueMetrics() {
@@ -876,15 +866,11 @@ class RevenueManager extends EventEmitter {
   }
 
   async shutdown() {
-    
     if (this.db) {
       this.db.close((err) => {
-        if (err) 
-        else 
+        if (err) console.error('Error closing database:', err.message);
       });
     }
-
-    
   }
 }
 

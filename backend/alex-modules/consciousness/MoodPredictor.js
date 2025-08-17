@@ -2,6 +2,10 @@ import crypto from 'crypto';
 
 // URLs externalisées
 const API_URL_1 = 'https://hustlefinder.ai/dashboard/emotional/';
+const API_URL_2 = 'https://hustlefinder.ai/dashboard/emotional/';
+
+// URLs externalisées
+const API_URL_1 = API_URL_1;
 
 
 // Imports AI Services

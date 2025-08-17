@@ -15,6 +15,22 @@ const API_URL_11 = 'https://polygon-rpc.com/';
 const API_URL_12 = 'https://bsc-dataseed.binance.org/';
 const API_URL_13 = 'https://api.avax.network/ext/bc/C/rpc';
 const API_URL_14 = 'https://api.mainnet-beta.solana.com';
+
+// URLs externalisées
+const API_URL_1 = API_URL_1;
+const API_URL_2 = API_URL_2;
+const API_URL_3 = API_URL_3;
+const API_URL_4 = API_URL_4;
+const API_URL_5 = API_URL_5;
+const API_URL_6 = API_URL_6;
+const API_URL_7 = API_URL_7;
+const API_URL_8 = API_URL_2;
+const API_URL_9 = API_URL_9;
+const API_URL_10 = API_URL_1;
+const API_URL_11 = API_URL_11;
+const API_URL_12 = API_URL_12;
+const API_URL_13 = API_URL_13;
+const API_URL_14 = API_URL_14;
       import { EventEmitter } from "events";
 
 // Imports AI Services

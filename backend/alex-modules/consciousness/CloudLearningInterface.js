@@ -5,6 +5,12 @@ import sqlite3 from "sqlite3";
 const API_URL_1 = 'https://api.openai.com/v1/chat/completions';
 const API_URL_2 = 'https://api.anthropic.com/v1/messages';
 const API_URL_3 = 'https://generativelanguage.googleapis.com/v1/models/gemini-pro';
+const API_URL_4 = 'https://generativelanguage.googleapis.com/v1/models/gemini-pro';
+
+// URLs externalisées
+const API_URL_1 = API_URL_1;
+const API_URL_2 = API_URL_2;
+const API_URL_3 = API_URL_3;
 
 // Imports AI Services
       import { AI_KEYS } from '../config/aiKeys.js';

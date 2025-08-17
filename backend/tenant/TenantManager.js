@@ -23,10 +23,9 @@ class TenantManager extends EventEmitter {
     const dbPath = this.config.get("database.path");
     this.db = new sqlite3.Database(dbPath, (err) => {
       if (err) {
-        
+        console.error('Database initialization error:', err.message);
         return;
       }
-      
       this.createTenantTables();
     });
   }
@@ -95,7 +94,7 @@ class TenantManager extends EventEmitter {
 
     tables.forEach((sql) => {
       this.db.run(sql, (err) => {
-        if (err) 
+        if (err) console.error('Error creating tenant table:', err.message);
       });
     });
 
@@ -166,10 +165,9 @@ class TenantManager extends EventEmitter {
 
       this.emit("tenantCreated", tenant);
 
-      console.log(`✅ Tenant créé: ${tenant.name} (${tenantId})`);
       return tenant;
     } catch (error) {
-      
+      console.error('Error creating tenant:', error.message);
       throw error;
     }
   }
@@ -288,7 +286,7 @@ class TenantManager extends EventEmitter {
       this.emit("tenantUpdated", updatedTenant);
       return updatedTenant;
     } catch (error) {
-      
+      console.error('Error updating tenant:', error.message);
       throw error;
     }
   }
@@ -343,7 +341,7 @@ class TenantManager extends EventEmitter {
 
       return sessionToken;
     } catch (error) {
-      
+      console.error('Error creating session:', error.message);
       throw error;
     }
   }
@@ -565,10 +563,9 @@ class TenantManager extends EventEmitter {
         }
       }
 
-      
       return true;
     } catch (error) {
-      
+      console.error('Error deleting tenant:', error.message);
       throw error;
     }
   }
@@ -610,26 +607,22 @@ class TenantManager extends EventEmitter {
         });
       }
     } catch (error) {
-      
+      console.error('Error monitoring resource usage:', error.message);
     }
   }
 
   handleTenantCreated(tenant) {
-    console.log(`🎉 Nouveau tenant: ${tenant.name} (${tenant.tier})`);
   }
 
   handleTenantUpdated(tenant) {
-    
+    // Handle tenant update logic
   }
 
   handleUsageExceeded(data) {
-    
+    // Handle usage exceeded logic
   }
 
   handleQuotaWarning(data) {
-    console.warn(
-      `📊 Avertissement quota - Tenant: ${data.tenantId}, Type: ${data.usageType}, Usage: ${data.percentage.toFixed(1)}%`,
-    );
   }
 
   generateTenantId() {
@@ -676,15 +669,11 @@ class TenantManager extends EventEmitter {
   }
 
   async shutdown() {
-    
     if (this.db) {
       this.db.close((err) => {
-        if (err) 
-        else 
+        if (err) console.error('Error closing database:', err.message);
       });
     }
-
-    
   }
 }
 

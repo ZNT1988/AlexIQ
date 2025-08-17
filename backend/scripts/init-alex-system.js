@@ -22,8 +22,6 @@ class AlexSystemInitializer {
   }
 
   async init() {
-    
-    
     try {
       await this.createDirectories();
       await this.initializeDatabase();
@@ -32,17 +30,14 @@ class AlexSystemInitializer {
       await this.performSystemBootstrap();
       await this.runHealthChecks();
 
-      
-      
     } catch (error) {
-      
+      console.error('System initialization failed:', error.message);
       await this.logError(error);
       process.exit(1);
     }
   }
 
   async createDirectories() {
-    
     const dirs = [
       "data",
       "config",
@@ -59,7 +54,6 @@ class AlexSystemInitializer {
       const dirPath = path.join(this.baseDir, dir);
       try {
         await fs.mkdir(dirPath, { recursive: true });
-        
       } catch (error) {
         if (error.code !== "EEXIST") throw error;
         console.log(`   ~ ${dir}/ (existe)`);
@@ -68,7 +62,6 @@ class AlexSystemInitializer {
   }
 
   async initializeDatabase() {
-    
     return new Promise((resolve, reject) => {
       const db = new sqlite3.Database(this.dbPath, (err) => {
         if (err) return reject(err);
@@ -132,7 +125,6 @@ class AlexSystemInitializer {
           db.run(sql, (err) => {
             if (err) return reject(err);
             completed++;
-            
             if (completed === tables.length) {
               db.close();
               resolve();
@@ -144,7 +136,6 @@ class AlexSystemInitializer {
   }
 
   async createConfiguration() {
-    
     const config = {
       system: {
         name: "Alex HustleFinder LICORNE",
@@ -198,11 +189,9 @@ class AlexSystemInitializer {
     };
 
     await fs.writeFile(this.configPath, JSON.stringify(config, null, 2));
-    
   }
 
   async validateModules() {
-    
     for (const modulePath of this.modules) {
       const fullPath = path.join(this.baseDir, modulePath);
       try {
@@ -223,7 +212,7 @@ class AlexSystemInitializer {
         console.log(`   ${status} ${path.basename(modulePath)}`);
 
         if (hasStaticLogic) {
-          
+          // Static logic detected - consider refactoring for better adaptability
         }
       } catch (error) {
         console.log(`   ❌ ${path.basename(modulePath)} - MANQUANT`);
@@ -244,7 +233,6 @@ class AlexSystemInitializer {
   }
 
   async performSystemBootstrap() {
-    
     const bootstrapTasks = [
       () => this.initializeHyperIntelligence(),
       () => this.initializeMemoryPalace(),
@@ -256,8 +244,6 @@ class AlexSystemInitializer {
     for (const task of bootstrapTasks) {
       await task();
     }
-
-    
   }
 
   async initializeHyperIntelligence() {
@@ -373,7 +359,6 @@ setInterval(() => {
   }
 
   async runHealthChecks() {
-    
     const checks = [
       () => this.checkDatabaseConnection(),
       () => this.checkConfigurationIntegrity(),
@@ -384,8 +369,6 @@ setInterval(() => {
     for (const check of checks) {
       await check();
     }
-
-    
   }
 
   async checkDatabaseConnection() {
@@ -393,7 +376,6 @@ setInterval(() => {
       const db = new sqlite3.Database(this.dbPath, (err) => {
         if (err) return reject(new Error("Base données inaccessible"));
         db.close();
-        
         resolve();
       });
     });
@@ -403,26 +385,19 @@ setInterval(() => {
     try {
       const config = await fs.readFile(this.configPath, "utf8");
       JSON.parse(config);
-      
     } catch (error) {
       throw new Error("Configuration corrompue");
     }
   }
 
   async checkModuleCompatibility() {
-    
+    // Module compatibility checks can be added here
   }
 
   async checkResourceAvailability() {
     const freeMemory = process.memoryUsage().heapUsed / 1024 / 1024;
     if (freeMemory > 1000) {
-      console.log(
-        "   ⚠️  Utilisation mémoire élevée:",
-        Math.round(freeMemory),
-        "MB",
-      );
-    } else {
-      
+      console.error('High memory usage warning:', Math.round(freeMemory), 'MB');
     }
   }
 
@@ -440,7 +415,7 @@ setInterval(() => {
     try {
       await fs.appendFile(this.logPath, JSON.stringify(logEntry) + "\n");
     } catch (logError) {
-      
+      console.error('Failed to write to log file:', logError.message);
     }
   }
 }
