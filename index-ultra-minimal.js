@@ -144,6 +144,11 @@ const server = createServer(async (req, res) => {
       status: 'healthy',
       timestamp: new Date().toISOString(),
       system: 'Palier 3 - IA Augmentée (Railway)',
+      providers: {
+        openai: !!process.env.OPENAI_API_KEY,
+        anthropic: !!process.env.ANTHROPIC_API_KEY,
+        google_vertex: !!process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON
+      },
       alex: {
         kernel: {
           initialized: AlexKernel?.isInitialized || false,
@@ -418,7 +423,8 @@ const server = createServer(async (req, res) => {
     req.on('data', chunk => (body += chunk))
     req.on('end', async () => {
       try {
-        const { message } = JSON.parse(body || '{}')
+        const { message, provider } = JSON.parse(body || '{}')
+        const t0 = Date.now()
         
         if (!message) {
           res.writeHead(400)
@@ -561,6 +567,19 @@ const server = createServer(async (req, res) => {
               source: 'Alex_Palier1_Railway',
               timestamp: new Date().toISOString()
             }
+          }
+
+          // Ajout des headers de traçage
+          const latencyMs = Date.now() - t0
+          res.setHeader('X-AI-Provider', response.source || provider || 'alex-hybrid')
+          res.setHeader('X-AI-Model', response.palier3 ? 'alex-palier3' : response.palier2 ? 'alex-palier2' : 'alex-palier1')
+          res.setHeader('X-AI-Latency', String(latencyMs))
+          
+          // Enrichir la réponse avec métadonnées
+          response.meta = {
+            provider: response.source || provider || 'alex-hybrid',
+            model: response.palier3 ? 'alex-palier3' : response.palier2 ? 'alex-palier2' : 'alex-palier1',
+            latency_ms: latencyMs
           }
 
           res.writeHead(200)
