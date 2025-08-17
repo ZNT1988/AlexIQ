@@ -299,7 +299,7 @@ export class VisionProFactory extends EventEmitter  {
    * Initialisation du système VisionProFactory
    */
   async initializeVisionProFactory('🏭 Initializing ALEX VisionProFactory for Ferrero 3D Factory Intelligence') {
-    logger.info('🏭 Initializing ALEX VisionProFactory for Ferrero 3D Factory Intelligence');      try: {
+    logger.info('🏭 Initializing ALEX VisionProFactory for Ferrero 3D Factory Intelligence');      try {
       // Initialisation modèles 3D des usines
       await this.initialize3DFactoryModels();
 
@@ -854,7 +854,7 @@ export class VisionProFactory extends EventEmitter  {
       await this.generateBasicFactoryMeshes(model);
 
       this.factoryModels.set(factoryId, model);
-    }      try: {
+    }      try {
       logger.debug(`✅ Initialized ${this.factoryModels.size} factory models`);
 
     } catch (error) {
@@ -1137,7 +1137,7 @@ export class VisionProFactory extends EventEmitter  {
   /**
    * Tableau de bord 3D temps réel
    */
-  getDashboard3D() {      return: {
+  getDashboard3D() {      return {
       timestamp: new Date().toISOString(),
       overview: {
         active_factories: this.factoryModels.size,
@@ -1171,7 +1171,7 @@ export class VisionProFactory extends EventEmitter  {
   /**
    * Statut du système VisionProFactory
    */
-  getSystemStatus() {      return: {
+  getSystemStatus() {      return {
       name: 'ALEX VisionProFactory',
       version: '5.0 - Ferrero MVP'
       status: STR_OPERATIONAL,

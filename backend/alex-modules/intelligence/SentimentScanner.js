@@ -256,7 +256,7 @@ class SentimentScanner: {
   /**
    * 🚀 Initialisation du scanner de sentiment
    */
-  async initializeScanner() {      try: {
+  async initializeScanner() {      try {
       // Connexion aux événements du kernel
       this.setupKernelIntegration();
 
@@ -328,7 +328,7 @@ class SentimentScanner: {
    * 🔍 Scan complet des sentiments
    */
   async performFullScan() {
-    if (!this.state.isScanning) return;      try: {
+    if (!this.state.isScanning) return;      try {
       const scanStart = Date.now();
 
       // Scan par source
@@ -462,7 +462,7 @@ class SentimentScanner: {
       }
     }
 
-    this.sources.social.reddit.mentions = redditData.mentions;      return: {
+    this.sources.social.reddit.mentions = redditData.mentions;      return {
       source: STR_REDDIT,
       weight: this.sources.social.reddit.weight
       data: redditData,
@@ -506,7 +506,7 @@ class SentimentScanner: {
       }
     }
 
-    this.sources.news.financial.articles = newsData.articles;      return: {
+    this.sources.news.financial.articles = newsData.articles;      return {
       source: 'news',
       weight: this.sources.news.financial.weight
       data: newsData,
@@ -549,7 +549,7 @@ return result;const symbol of symbols) {
           stockData.influence += whaleInfo.weight;
         }
       }
-    }      return: {
+    }      return {
       source: 'whales',
       weight: 1.0
       data: whaleData,
@@ -589,7 +589,7 @@ return result;const symbol of symbols) {
       stockData.sentiment += sentiment * report.firmCredibility;
       stockData.credibility += report.firmCredibility;
       stockData.reports.push(report);
-    }      return: {
+    }      return {
       source: 'professional',
       weight: this.sources.professional.analysts.weight
       data: profData,
@@ -692,7 +692,7 @@ return result;const symbol of symbols) {
     // Normalisation par symbole
     symbolSentiments.forEach((data, _) => // Code de traitement approprié ici);
 
-    const globalSentiment = totalWeight > 0 ? weightedSentiment / totalWeight : 0;      return: {
+    const globalSentiment = totalWeight > 0 ? weightedSentiment / totalWeight : 0;      return {
       overall: globalSentiment,
       confidence: this.calculateSentimentConfidence(sentiments)
       volume: volume,
@@ -740,7 +740,7 @@ return result;const symbol of symbols) {
       const baselineVolume = this.getBaselineVolume(symbol, STR_TWITTER);
       const currentVolume = data.count;
 
-      if (currentVolume > baselineVolume * 3 && Math.abs(data.sentiment) > 0.6) {      return: {
+      if (currentVolume > baselineVolume * 3 && Math.abs(data.sentiment) > 0.6) {      return {
           type: 'sentiment_surge'
           symbol
           intensity: currentVolume / baselineVolume,
@@ -769,7 +769,7 @@ return result;const symbol of symbols) {
           Math.sign(w.sentiment) === Math.sign(avgSentiment)
         );
 
-        if (alignment && Math.abs(avgSentiment) > 0.7) {      return: {
+        if (alignment && Math.abs(avgSentiment) > 0.7) {      return {
             type: 'whale_alignment'
             symbol
             whales: data.whales.map(w => w.id),
@@ -975,7 +975,7 @@ return result;const symbol of symbols) {
       }
     }
 
-    const compound = Math.max(-1, Math.min(1, score / 10));      return: {
+    const compound = Math.max(-1, Math.min(1, score / 10));      return {
       compound
       positive: compound > 0 ? compound : 0,
       negative: compound < 0 ? Math.abs(compound) : 0
@@ -998,7 +998,7 @@ return result;const symbol of symbols) {
     return anomalies;
   }
 
-  async predictFromSentiment(sentimentData) {      return: {
+  async predictFromSentiment(sentimentData) {      return {
       priceDirection: sentimentData.compound > 0 ? 'up' : 'down',
       confidence: Math.abs(sentimentData.compound)
       timeframe: '1-24 hours',
@@ -1076,7 +1076,7 @@ return result;const symbol of symbols) {
   }
 
   // API publique
-  getOverallMarketSentiment() {      return: {
+  getOverallMarketSentiment() {      return {
       overall: this.state.overallSentiment,
       confidence: this.state.confidence
       lastUpdate: this.state.lastScan,
@@ -1115,7 +1115,7 @@ return result;const symbol of symbols) {
     return (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF);
   }
 
-  async getCurrentSentimentSnapshot() {      return: {
+  async getCurrentSentimentSnapshot() {      return {
       TSLA: { sentiment: 0.7, volume: 1500 }
       AAPL: { sentiment: -0.3, volume: 800 }
       NVDA: { sentiment: 0.9, volume: 2000 }
@@ -1123,7 +1123,7 @@ return result;const symbol of symbols) {
   }
 
   async getWhaleRecentActivity(whaleId) {
-    return: [
+    return [
       {
         content: `$TSLA looking strong! 🚀`,
         timestamp: Date.now() - 3600000
@@ -1140,7 +1140,7 @@ return result;const symbol of symbols) {
     return 0.8 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.2;
   }
 
-  calculateSentimentBreakdown(sentiments) {      return: {
+  calculateSentimentBreakdown(sentiments) {      return {
       social: 0.4,
       news: 0.3
       professional: 0.2,

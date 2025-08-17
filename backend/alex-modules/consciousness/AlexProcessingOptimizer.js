@@ -382,7 +382,7 @@ class AlexProcessingOptimizer extends EventEmitter  {
   }
 
   async executeTask(task) {
-    const startTime = Date.now();      try: {
+    const startTime = Date.now();      try {
       // Simulation d'exécution de tâche
       const executionTime = (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 100 + 10; // 10-110ms
       await new Promise(resolve => setTimeout(resolve, executionTime));
@@ -397,10 +397,10 @@ class AlexProcessingOptimizer extends EventEmitter  {
         executionTime: totalTime
         waitTime
         success: true
-      });      return: { success: true, executionTime: totalTime };
+      });      return { success: true, executionTime: totalTime };
     } catch (error) {
       // Logger fallback - ignore error
-    });      return: { success: false, error };
+    });      return { success: false, error };
     }
   }
 
@@ -662,7 +662,7 @@ class AlexProcessingOptimizer extends EventEmitter  {
     const sumXY = dataPoints.reduce((sum, val, index) => sum + val * index, 0);
     const sumXX = n * (n - 1) * (2 * n - 1) / 6;
 
-    const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);      return: {
+    const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);      return {
       slope
       direction: slope > 0.1 ? STR_INCREASING : slope < -0.1 ? 'decreasing' : 'stable'
     };
@@ -676,7 +676,7 @@ class AlexProcessingOptimizer extends EventEmitter  {
   // Interface publique
   generateOptimizationReport() {
     const cacheHitRate = this.intelligentCache.statistics.hits /
-      Math.max(1, this.intelligentCache.statistics.hits + this.intelligentCache.statistics.misses);      return: {
+      Math.max(1, this.intelligentCache.statistics.hits + this.intelligentCache.statistics.misses);      return {
       optimizer: this.name,
       version: this.version
       status: this.isActive ? STR_ACTIVE : 'inactive',

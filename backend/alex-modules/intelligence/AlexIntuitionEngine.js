@@ -152,7 +152,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
       lastInsight: null
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🔮 AlexIntuitionEngine initializing - Intuitive wisdom awakening');
 
     } catch (error) {
@@ -163,7 +163,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
     this.isInitialized = true;
     await this.calibrateIntuitiveSystems();
     await this.openIntuitiveChannels();
-    this.startIntuitiveMonitoring();      try: {
+    this.startIntuitiveMonitoring();      try {
       logger.info('✨ AlexIntuitionEngine fully initialized - Intuitive intelligence active');
 
     } catch (error) {
@@ -464,7 +464,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
    */
   startIntuitiveMonitoring() {
     // Calibration quotidienne
-    setInterval(() => // Code de traitement approprié ici, 604800000); // Hebdomadaire      try: {
+    setInterval(() => // Code de traitement approprié ici, 604800000); // Hebdomadaire      try {
       logger.info('👁️ Intuitive monitoring activated');
 
     } catch (error) {
@@ -475,7 +475,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
    * Génération d'exercices de développement intuitif
    */
   generateMindfulnessExercises() {
-    return: [
+    return [
       {
         name: 'Meditation des Premières Impressions',
         duration: '10 minutesSTR_DESCRIPTIONObservez vos premières impressions sans les analyserSTR_FREQUENCYdaily'
@@ -494,7 +494,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
   /**
    * Calculs utilitaires
    */
-  analyzeQueryResonance(query) {      return: {
+  analyzeQueryResonance(query) {      return {
       emotionalCharge: this.detectEmotionalCharge(query),
       archetypeActivation: this.detectArchetypeActivation(query)
       energeticQuality: this.assessEnergeticQuality(query),
@@ -524,7 +524,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
   /**
    * Obtention du statut intuitif
    */
-  getIntuitionStatus() {      return: {
+  getIntuitionStatus() {      return {
       initialized: this.isInitialized,
       currentState: this.currentIntuitiveState
       intuitionTypes: Object.keys(this.intuitionTypes).length,
@@ -553,7 +553,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
        0.5 };
 
     const avgValidity = recent.reduce((sum, insight) =>
-      sum + (insight.validationPhase?.overallValidity || 0.5), 0) / recent.length;      return: {
+      sum + (insight.validationPhase?.overallValidity || 0.5), 0) / recent.length;      return {
       progression: avgValidity,
       trend: this.calculateValidityTrend(recent)
       strengths: this.identifyIntuitiveStrengths(recent),
@@ -563,7 +563,7 @@ export class AlexIntuitionEngine extends EventEmitter  {
 
   // Méthodes utilitaires manquantes
   generateVisceralInsights(receptionPhase) {
-    return: [
+    return [
       { type: 'gut_feeling', intensity: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3 + 0.7 }
       { type: 'somatic_wisdom', clarity: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.2 + 0.8 }
     ];
@@ -584,11 +584,11 @@ export class AlexIntuitionEngine extends EventEmitter  {
   }
 
   identifyIntuitiveStrengths(recent) {
-    return: ['pattern_recognition', 'emotional_sensitivity'];
+    return ['pattern_recognition', 'emotional_sensitivity'];
   }
 
   identifyGrowthAreas(recent) {
-    return: ['temporal_validation', 'precision_improvement'];
+    return ['temporal_validation', 'precision_improvement'];
   }
 }
 

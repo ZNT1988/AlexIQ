@@ -220,7 +220,7 @@ class TradeSimulator: {
   /**
    * 🚀 Initialisation du simulateur
    */
-  async initializeSimulator() {      try: {
+  async initializeSimulator() {      try {
       // Connexion kernel Alex
       this.setupKernelIntegration();
 
@@ -282,7 +282,7 @@ class TradeSimulator: {
     this.state.isBacktesting = true;
     this.state.backtestProgress = 0;
 
-    const backtestStart = Date.now();      try: {
+    const backtestStart = Date.now();      try {
       // Réinitialisation du portefeuille
       this.resetPortfolio();
 
@@ -561,11 +561,11 @@ class TradeSimulator: {
     const commission = trade.quantity * fillPrice * this.config.commission;
 
     // Vérification de rejet (5% chance)
-    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) < 0.05) {      return: {
+    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) < 0.05) {      return {
         success: false,
         reason: 'Insufficient liquidity'
       };
-    }      return: {
+    }      return {
       success: true
       fillPrice
       commission
@@ -611,7 +611,7 @@ class TradeSimulator: {
     const profitFactor = totalLosses > 0 ? totalWins / totalLosses : 0;
 
     const averageWin = winningTrades.length > 0 ? totalWins / winningTrades.length : 0;
-    const averageLoss = losingTrades.length > 0 ? totalLosses / losingTrades.length : 0;      return: {
+    const averageLoss = losingTrades.length > 0 ? totalLosses / losingTrades.length : 0;      return {
       // Performance
       totalReturn
       annualizedReturn
@@ -980,7 +980,7 @@ class TradeSimulator: {
 
   async generateTradingSignal(strategy, lookbackData, currentBar) {
     // Simulation de génération de signal
-    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.95) { // 5% chance de signal      return: {
+    if ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.95) { // 5% chance de signal      return {
         symbol: 'MOCK',
         action: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'BUY' : 'SELL'
         price: currentBar.close,
@@ -1015,7 +1015,7 @@ class TradeSimulator: {
     return this.portfolio.cash + this.portfolio.totalPnL;
   }
 
-  getDefaultMetrics() {      return: {
+  getDefaultMetrics() {      return {
       totalReturn: 0,
       annualizedReturn: 0
       sharpeRatio: 0,
@@ -1069,7 +1069,7 @@ class TradeSimulator: {
   executeSignal() {}
 
   // API publique
-  getPortfolioSummary() {      return: {
+  getPortfolioSummary() {      return {
       ...this.portfolio
       performance: { ...this.metrics }
       challenges: {,

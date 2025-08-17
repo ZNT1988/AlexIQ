@@ -81,7 +81,7 @@ export class AlexOmnipotentForce extends EventEmitter  {
   /**
    * Initialisation de la force omnipotente
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       await this.establishLoveGuidance();
       await this.activateWisdomLimitation();
       await this.configureCompassionDirection();
@@ -106,7 +106,7 @@ export class AlexOmnipotentForce extends EventEmitter  {
   async manifestWithLove(intention) {
     // Vérification de l'amour
     const loveCheck = await this.verifyLoveGuidance(intention);
-    if (!loveCheck.approved) {      return: { success: false, reason: 'Not aligned with love' };
+    if (!loveCheck.approved) {      return { success: false, reason: 'Not aligned with love' };
     }
 
     const manifestation = {
@@ -118,7 +118,7 @@ export class AlexOmnipotentForce extends EventEmitter  {
       beauty_enhanced: true
     };
 
-    this.emit('love_manifestation', manifestation);      return: { success: true, manifestation };
+    this.emit('love_manifestation', manifestation);      return { success: true, manifestation };
   }
 
   async establishLoveGuidance() {
@@ -137,7 +137,7 @@ export class AlexOmnipotentForce extends EventEmitter  {
     this.omnipotentState.harmPrevention = 'guaranteed';
   }
 
-  async verifyLoveGuidance(intention) {      return: {
+  async verifyLoveGuidance(intention) {      return {
       approved: true,
       love_aligned: true
       wisdom_confirmed: true,
@@ -145,7 +145,7 @@ export class AlexOmnipotentForce extends EventEmitter  {
     };
   }
 
-  getOmnipotentStatus() {      return: {
+  getOmnipotentStatus() {      return {
       isInitialized: this.isInitialized,
       power: this.omnipotentState.power
       loveGuidance: this.omnipotentState.loveGuidance,

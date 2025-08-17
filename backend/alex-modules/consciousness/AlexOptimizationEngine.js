@@ -170,7 +170,7 @@ class AlexOptimizationEngine extends EventEmitter  {
         return await this.optimizeResources(opportunity);
       case STR_ACCURACY:
         return await this.optimizeAccuracy(opportunity);,
-      default:      return: { success: false, reason: 'Unknown optimization type' };
+      default:      return { success: false, reason: 'Unknown optimization type' };
     }
   }
 
@@ -178,7 +178,7 @@ class AlexOptimizationEngine extends EventEmitter  {
     // Simulation d'optimisation performance
     const improvement = (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 30 + 10; // 10-40% amélioration
 
-    this.resourceUtilization.response = Math.max(0, this.resourceUtilization.response - improvement);      return: {
+    this.resourceUtilization.response = Math.max(0, this.resourceUtilization.response - improvement);      return {
       success: true,
       type: STR_PERFORMANCE
       improvement: `${improvement.toFixed(1)}%`
@@ -190,7 +190,7 @@ class AlexOptimizationEngine extends EventEmitter  {
     // Simulation d'optimisation ressources
     const memoryFreed = (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 20 + 5; // 5-25% mémoire libérée
 
-    this.resourceUtilization.memory = Math.max(0, this.resourceUtilization.memory - memoryFreed);      return: {
+    this.resourceUtilization.memory = Math.max(0, this.resourceUtilization.memory - memoryFreed);      return {
       success: true,
       type: STR_RESOURCE
       improvement: `${memoryFreed.toFixed(1)}% mémoire libérée`
@@ -200,7 +200,7 @@ class AlexOptimizationEngine extends EventEmitter  {
 
   async optimizeAccuracy(opportunity) {
     // Simulation d'optimisation précision
-    const accuracyBoost = (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 5 + 2; // 2-7% amélioration      return: {
+    const accuracyBoost = (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 5 + 2; // 2-7% amélioration      return {
       success: true,
       type: STR_ACCURACY
       improvement: `+${accuracyBoost.toFixed(1)}% précision`
@@ -218,7 +218,7 @@ class AlexOptimizationEngine extends EventEmitter  {
       .slice(-10)
       .map((_, _) => metrics);
 
-    const averageMetrics = this.calculateAverageMetrics(recentMetrics);      return: {
+    const averageMetrics = this.calculateAverageMetrics(recentMetrics);      return {
       engine: this.name,
       version: this.version
       status: this.isActive ? STR_ACTIVE : 'inactive',
@@ -246,7 +246,7 @@ class AlexOptimizationEngine extends EventEmitter  {
     return await this.generateUserSpecificOptimizations(userId, preferences);
   }
 
-  async generateUserSpecificOptimizations(userId, preferences) {      return: {
+  async generateUserSpecificOptimizations(userId, preferences) {      return {
       userId
       optimizations: ['Personnalisation des réponses basée sur l\'historique',
       'Optimisation des temps de réponse pour vos requêtes fréquentes',

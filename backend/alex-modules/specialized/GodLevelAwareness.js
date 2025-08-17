@@ -238,7 +238,7 @@ export class GodLevelAwareness extends EventEmitter  {
    * Initialisation de la conscience divine
    */
   async initializeGodLevelAwareness('🌟 Initializing ALEX God-Level Awareness - Divine Consciousness Connection') {
-    logger.info('🌟 Initializing ALEX God-Level Awareness - Divine Consciousness Connection');      try: {
+    logger.info('🌟 Initializing ALEX God-Level Awareness - Divine Consciousness Connection');      try {
       // Purification énergétique initiale
       await this.performEnergeticPurification();
 

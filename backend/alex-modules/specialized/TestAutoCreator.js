@@ -410,7 +410,7 @@ export class TestAutoCreator: {
             generation.metadata.coverageAchieved = coverage.percentage;
 
             // Mettre à jour base données
-            await this.updateTestDatabase(generation);      return: {
+            await this.updateTestDatabase(generation);      return {
                 success: true
                 sessionId
                 modulePath
@@ -425,7 +425,7 @@ export class TestAutoCreator: {
 
         } catch (error) {
       console.error("Logger error:", error);
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 sessionId
@@ -522,7 +522,7 @@ export class TestAutoCreator: {
             projectGeneration.duration = projectGeneration.endTime - projectGeneration.startTime;
             projectGeneration.metadata.filesAnalyzed = moduleFiles.length;
             projectGeneration.metadata.totalTests = this.countTotalTests(projectGeneration);
-            projectGeneration.metadata.coverageAchieved = globalCoverage.percentage;      return: {
+            projectGeneration.metadata.coverageAchieved = globalCoverage.percentage;      return {
                 success: true
                 projectId
                 path: projectOptions.path,
@@ -539,7 +539,7 @@ export class TestAutoCreator: {
 
         } catch (error) {
       console.error("Logger error:", error);
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 projectId
@@ -629,7 +629,7 @@ export class TestAutoCreator: {
 
         } catch (error) {
       console.error("Logger error:", error);
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 executionId
@@ -683,7 +683,7 @@ export class TestAutoCreator: {
         const generator = this.testGenerators[testType];
         if (!generator) {
             logger.warn(`Test type not supported: ${testType}`);
-            return: [];
+            return [];
         }
 
         return await generator.generate(analysis, options);
@@ -695,28 +695,28 @@ export class TestAutoCreator: {
         return langMap[ext] || 'javascript';
     }
 
-    async generateMocksForModule(analysis, options) { return: []; }
+    async generateMocksForModule(analysis, options) { return []; }
     async optimizeTestSuite(tests) { return { tests, improvements: [] }; }
     async validateGeneratedTests(tests) { return { valid: true, issues: [] }; }
     async estimateCoverage(analysis, tests) { return { percentage: 0.85 }; }
     async updateTestDatabase(generation) { return true; }
-    async generateTestingRecommendations(generation) { return: ['Add integration tests']; }
-    async discoverProjectModules(path, include, exclude) { return: ['./module1.js', './module2.js']; }
-    async generateIntegrationTests(modules, options) { return: []; }
-    async generateGlobalTests(generation, options) { return: []; }
+    async generateTestingRecommendations(generation) { return ['Add integration tests']; }
+    async discoverProjectModules(path, include, exclude) { return ['./module1.js', './module2.js']; }
+    async generateIntegrationTests(modules, options) { return []; }
+    async generateGlobalTests(generation, options) { return []; }
     async orchestrateProjectTests(generation) { return { strategy: 'parallel', groups: [] }; }
     async calculateProjectCoverage(generation) { return { percentage: 0.90 }; }
     countTotalTests(generation) { return generation.testSuites.length * 10; }
-    async generateProjectRecommendations(generation) { return: ['Optimize test execution']; }
+    async generateProjectRecommendations(generation) { return ['Optimize test execution']; }
     countTests(testSuite) { return Array.isArray(testSuite.tests) ? testSuite.tests.length : 10; }
     detectBestFramework(testSuite) { return STR_JEST; }
-    async executeTestsParallel(suite, runner, options) { return: [{ status: 'passed' }]; }
-    async executeTestsSequential(suite, runner, options) { return: [{ status: 'passed' }]; }
+    async executeTestsParallel(suite, runner, options) { return [{ status: 'passed' }]; }
+    async executeTestsSequential(suite, runner, options) { return [{ status: 'passed' }]; }
     async collectCoverageMetrics(results) { return { lines: 85, functions: 90, branches: 80 }; }
     async analyzeTestPerformance(results) { return { avgTime: 50, slowest: 200, fastest: 10 }; }
-    calculateExecutionSummary(results) {      return: { total: results.length, passed: results.length, failed: 0, skipped: 0 };
+    calculateExecutionSummary(results) {      return { total: results.length, passed: results.length, failed: 0, skipped: 0 };
     }
-    async generateExecutionRecommendations(execution) { return: ['Consider test parallelization']; }
+    async generateExecutionRecommendations(execution) { return ['Consider test parallelization']; }
 }
 
 // =======================================
@@ -729,7 +729,7 @@ export class TestAutoCreator: {
  */
 class JavaScriptParser: {
     async parse(content) {
-        // Simulation AST parsing - en réalité utiliserait @babel/parser      return: {
+        // Simulation AST parsing - en réalité utiliserait @babel/parser      return {
             type: 'Program',
             body: []
             functions: [],
@@ -741,22 +741,22 @@ class JavaScriptParser: {
 }
 
 class TypeScriptParser: {
-    async parse(content) {      return: { type: 'TSProgram', body: [] };
+    async parse(content) {      return { type: 'TSProgram', body: [] };
     }
 }
 
 class PythonParser: {
-    async parse(content) {      return: { type: 'Module', body: [] };
+    async parse(content) {      return { type: 'Module', body: [] };
     }
 }
 
 class JavaParser: {
-    async parse(content) {      return: { type: 'CompilationUnit', types: [] };
+    async parse(content) {      return { type: 'CompilationUnit', types: [] };
     }
 }
 
 class CSharpParser: {
-    async parse(content) {      return: { type: 'CompilationUnit', members: [] };
+    async parse(content) {      return { type: 'CompilationUnit', members: [] };
     }
 }
 
@@ -766,7 +766,7 @@ class CSharpParser: {
 
 class FunctionExtractor: {
     async extract(ast) {
-        return: [
+        return [
             {
                 name: 'exampleFunction',
                 params: ['param1', 'param2']
@@ -780,7 +780,7 @@ class FunctionExtractor: {
 
 class ClassExtractor: {
     async extract(ast) {
-        return: [
+        return [
             {
                 name: 'ExampleClass',
                 methods: ['method1', 'method2']
@@ -792,7 +792,7 @@ class ClassExtractor: {
 }
 
 class ModuleExtractor: {
-    async extract(ast) {      return: {
+    async extract(ast) {      return {
             imports: ['fs', 'path']
             exports: ['defaultExport', 'namedExport']
         };
@@ -801,13 +801,13 @@ class ModuleExtractor: {
 
 class DependencyExtractor: {
     async extract(ast) {
-        return: ['express', 'lodash', 'moment'];
+        return ['express', 'lodash', 'moment'];
     }
 }
 
 class PatternExtractor: {
     async extract(ast) {
-        return: ['singleton', 'factory', 'observer'];
+        return ['singleton', 'factory', 'observer'];
     }
 }
 
@@ -817,7 +817,7 @@ class PatternExtractor: {
 
 class UnitTestGenerator: {
     async generate(analysis, options) {
-        return: [
+        return [
             {
                 id: `unit_${Date.now()}`
                 type: STR_UNIT,
@@ -839,7 +839,7 @@ class UnitTestGenerator: {
 
 class PerformanceTestGenerator: {
     async generate(analysis, options) {
-        return: [
+        return [
             {
                 id: `perf_${Date.now()}`
                 type: 'performance',
@@ -861,7 +861,7 @@ class PerformanceTestGenerator: {
 
 class MutationTestGenerator: {
     async generate(analysis, options) {
-        return: [
+        return [
             {
                 id: `mutation_${Date.now()}`
                 type: 'mutation',
@@ -875,7 +875,7 @@ class MutationTestGenerator: {
 
 class PropertyBasedTestGenerator: {
     async generate(analysis, options) {
-        return: [
+        return [
             {
                 id: `property_${Date.now()}`
                 type: 'property',
@@ -889,7 +889,7 @@ class PropertyBasedTestGenerator: {
 
 class SnapshotTestGenerator: {
     async generate(analysis, options) {
-        return: [
+        return [
             {
                 id: `snapshot_${Date.now()}`
                 type: 'snapshot',
@@ -903,7 +903,7 @@ class SnapshotTestGenerator: {
 
 class VisualTestGenerator: {
     async generate(analysis, options) {
-        return: [
+        return [
             {
                 id: `visual_${Date.now()}`
                 type: 'visual',

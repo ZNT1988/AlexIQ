@@ -155,7 +155,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
   /**
    * Initialise le système de debug de conscience
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       // Initialiser collecteurs de données
       this.initializeDataCollectors();
 
@@ -307,7 +307,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
   /**
    * Connecte aux systèmes à monitorer
    */
-  async connectToSystems('./AlexCognitionEngine.js') {      try: {
+  async connectToSystems('./AlexCognitionEngine.js') {      try {
       // Connexion au moteur de cognition
       const alexCognitionEngine = await import('./AlexCognitionEngine.js');
       this.connectToCognitionEngine(alexCognitionEngine.default);
@@ -433,7 +433,7 @@ class AlexConsciousnessDebug extends EventEmitter  {
   /**
    * Obtient l'état du debug
    */
-  getDebugState() {      return: {
+  getDebugState() {      return {
       identity: this.identity,
       isInitialized: this.isInitialized
       debugState: this.debugState,
@@ -528,10 +528,10 @@ class AlexConsciousnessDebug extends EventEmitter  {
     };
   }
 
-  analyzeObservedPatterns() { return: ['pattern_curiosity', 'pattern_logical_flow']; }
-  identifyAnomalies() { return: []; }
-  analyzeTrends() { return: ['increasing_awareness', 'stable_cognitive_load']; }
-  generateRecommendations() { return: ['continue_monitoring', 'enhance_meta_cognition']; }
+  analyzeObservedPatterns() { return ['pattern_curiosity', 'pattern_logical_flow']; }
+  identifyAnomalies() { return []; }
+  analyzeTrends() { return ['increasing_awareness', 'stable_cognitive_load']; }
+  generateRecommendations() { return ['continue_monitoring', 'enhance_meta_cognition']; }
 
   getCollectorStatus() {
     const status = {};    for (const [name, collector] of Object.entries(this.dataCollectors)) {

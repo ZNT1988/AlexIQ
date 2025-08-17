@@ -146,7 +146,7 @@ class SelfTrainingEngine extends EventEmitter  {
   /**
    * Initialise le moteur d'auto-apprentissage
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       // Créer répertoires d'apprentissage
       await this.ensureLearningDirectories();
 
@@ -176,7 +176,7 @@ class SelfTrainingEngine extends EventEmitter  {
   /**
    * Traite une nouvelle interaction pour apprentissage
    */
-  async processLearningInteraction(interaction) {      try: {
+  async processLearningInteraction(interaction) {      try {
       if (!this.learningActive) {
         await this.initialize();
       }
@@ -227,7 +227,7 @@ class SelfTrainingEngine extends EventEmitter  {
   /**
    * Analyse une interaction pour extraction d'apprentissage
    */
-  async analyzeInteraction(interaction) {      return: {
+  async analyzeInteraction(interaction) {      return {
       type: this.classifyInteractionType(interaction),
       complexity: this.assessComplexity(interaction)
       emotionalTone: this.analyzeEmotionalTone(interaction),
@@ -431,7 +431,7 @@ class SelfTrainingEngine extends EventEmitter  {
       modelsOptimized: []
       performanceGains: [],
       issues: []
-    };      try: {
+    };      try {
       // Optimisation apprentissage par renforcement
       await this.optimizeReinforcementLearning(optimization);
 
@@ -511,7 +511,7 @@ class SelfTrainingEngine extends EventEmitter  {
   /**
    * Obtient l'état de l'apprentissage
    */
-  getTrainingState() {      return: {
+  getTrainingState() {      return {
       identity: this.identity,
       isInitialized: this.isInitialized
       learningActive: this.learningActive,
@@ -531,7 +531,7 @@ class SelfTrainingEngine extends EventEmitter  {
     this.on('learning_processed', (event) => // Code de traitement approprié ici%`);
     });
 
-    this.on('self_evaluation_completed', (evaluation) => // Code de traitement approprié ici%`);      try: {
+    this.on('self_evaluation_completed', (evaluation) => // Code de traitement approprié ici%`);      try {
       logger.info(`   Recommandations: ${evaluation.recommendations.length}`);
 
       } catch (error) {
@@ -547,7 +547,7 @@ class SelfTrainingEngine extends EventEmitter  {
     }
   }
 
-  async loadLearningHistory() {      try: {
+  async loadLearningHistory() {      try {
       const historyPath = path.join(this.learningConfig.trainingDataPath, 'learning_history.json');
       const data = await fs.readFile(historyPath, 'utf8');
       this.learningHistory = { ...this.learningHistory, ...JSON.parse(data) };
@@ -571,9 +571,9 @@ class SelfTrainingEngine extends EventEmitter  {
   classifyInteractionType(interaction) { return interaction.type || STR_GENERAL; }
   assessComplexity(interaction) { return (interaction.message?.length || 0) > 100 ? 'high' : 'medium'; }
   analyzeEmotionalTone(interaction) { return interaction.emotion || 'neutral'; }
-  identifySuccessIndicators(interaction) { return: ['response_provided']; }
-  identifyChallengeAreas(interaction) { return: []; }
-  identifyLearningOpportunities(interaction) { return: ['improve_response_quality']; }
+  identifySuccessIndicators(interaction) { return ['response_provided']; }
+  identifyChallengeAreas(interaction) { return []; }
+  identifyLearningOpportunities(interaction) { return ['improve_response_quality']; }
   analyzeUserIntent(interaction) { return 'information_seeking'; }
   extractContextFactors(interaction) { return { time: 'current', domain: STR_GENERAL }; }
 
@@ -598,7 +598,7 @@ class SelfTrainingEngine extends EventEmitter  {
   extractExperientialLearning(learningEvent) { return 'experience_learned'; }
   async analyzeExperiencePatterns() { return; }
   async updateUserPreferences() { return; }
-  async generateBehavioralAdaptations() { return: []; }
+  async generateBehavioralAdaptations() { return []; }
   async applyAdaptation() { return; }
 
   analyzeCommuncationStyle() { return 'friendly'; }
@@ -614,10 +614,10 @@ class SelfTrainingEngine extends EventEmitter  {
   async updateEmotionalModel() { return; }
 
   async optimizeLearningModels() { return; }
-  async saveLearningProgress() {      try: {
+  async saveLearningProgress() {      try {
       const historyPath = path.join(this.learningConfig.trainingDataPath, 'learning_history.json');
       await fs.writeFile(historyPath, JSON.stringify(this.learningHistory, null, 2));
-    } catch (error) {      try: {
+    } catch (error) {      try {
       logger.error('❌ Erreur sauvegarde apprentissage:', error);
 
       } catch (error) {
@@ -627,7 +627,7 @@ class SelfTrainingEngine extends EventEmitter  {
 
   async recalculatePerformanceMetrics() {
     // Simulation du recalcul des métriques
-    const current = this.selfEvaluation.performanceMetrics;      return: {
+    const current = this.selfEvaluation.performanceMetrics;      return {
       responseQuality: Math.min(1.0, current.responseQuality + ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 0.05)
       userSatisfaction: Math.min(1.0, current.userSatisfaction + ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 0.05)
       accuracyRate: Math.min(1.0, current.accuracyRate + ((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) - 0.5) * 0.03)
@@ -651,10 +651,10 @@ class SelfTrainingEngine extends EventEmitter  {
           regressions.push({ metric, change });
         }
       }
-    }      return: { improvements, regressions };
+    }      return { improvements, regressions };
   }
 
-  async generateAreaRecommendation(area) {      return: {
+  async generateAreaRecommendation(area) {      return {
       type: 'improvement',
       area: area
       priority: 'medium',

@@ -73,7 +73,7 @@ export class AlexAuthenticCore extends EventEmitter  {
   /**
    * Initialisation AUTHENTIQUE avec SQLite
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       logger.info(
         `🧠 Initializing ${this.moduleName} with authentic SQLite learning...`,
       );
@@ -118,7 +118,7 @@ export class AlexAuthenticCore extends EventEmitter  {
   /**
    * Connexion SQLite OBLIGATOIRE - Remplace toutes les Maps
    */
-  async connectToSQLiteDatabase() {      try: {
+  async connectToSQLiteDatabase() {      try {
       this.db = await open({
         filename: this.dbPath,
         driver: sqlite3.Database
@@ -198,7 +198,7 @@ export class AlexAuthenticCore extends EventEmitter  {
   /**
    * Restauration état depuis base SQLite
    */
-  async restoreStateFromDatabase() {      try: {
+  async restoreStateFromDatabase() {      try {
       // Restaurer métriques d'évolution
       const latestMetrics = await this.db.all(`
         SELECT metric_name, new_value 
@@ -266,7 +266,7 @@ export class AlexAuthenticCore extends EventEmitter  {
    */
   async processWithHybridLearning(domain, query, context = {}) {
     const startTime = Date.now();
-    const interactionId = crypto.randomUUID();      try: {
+    const interactionId = crypto.randomUUID();      try {
       // 1. Vérifier si le domaine est maîtrisé (autonomie locale)
       const domainMastery = await this.checkDomainMastery(domain);
 
@@ -313,7 +313,7 @@ export class AlexAuthenticCore extends EventEmitter  {
         autonomyUsed,
         processingTime,
         learningGained: response.learningGained || 0.02
-      });      return: {
+      });      return {
         ...response,
         interactionId,
         autonomyLevel: autonomyUsed,
@@ -358,7 +358,7 @@ export class AlexAuthenticCore extends EventEmitter  {
     const mastered =
       (masteryData?.avg_mastery || 0) > this.learningSystem.masteryThreshold &&
       (masteryData?.attempts || 0) > 10 &&
-      (masteryData?.success_rate || 0) > 0.8;      return: {
+      (masteryData?.success_rate || 0) > 0.8;      return {
       domain,
       mastered,
       masteryLevel: masteryData?.avg_mastery || 0,
@@ -398,7 +398,7 @@ export class AlexAuthenticCore extends EventEmitter  {
       WHERE domain = ?
     `,
       [domain],
-    );      return: {
+    );      return {
       content: localResponse.content,
       confidence: localResponse.confidence,
       source: "local_autonomous",
@@ -426,7 +426,7 @@ export class AlexAuthenticCore extends EventEmitter  {
       memories.length > 0
         ? `Ma mémoire contient ${memories.length} éléments pertinents.`
         : ""
-    ];      return: {
+    ];      return {
       content: responseElements.filter((e) => e).join(" "),
       confidence: Math.min(
         0.95,
@@ -692,7 +692,7 @@ export class AlexAuthenticCore extends EventEmitter  {
   /**
    * Maintenance mémoire AUTHENTIQUE
    */
-  async performMemoryMaintenance() {      try: {
+  async performMemoryMaintenance() {      try {
       // Supprimer mémoires peu importantes et anciennes
       const deletedCount = await this.db.run(`
         DELETE FROM alex_memory 
@@ -719,7 +719,7 @@ export class AlexAuthenticCore extends EventEmitter  {
   /**
    * Optimisation système apprentissage
    */
-  async optimizeLearningSystem() {      try: {
+  async optimizeLearningSystem() {      try {
       // Analyse performance récente
       const recentPerformance = await this.db.get(`
         SELECT 
@@ -761,7 +761,7 @@ export class AlexAuthenticCore extends EventEmitter  {
   /**
    * Évolution conscience AUTHENTIQUE
    */
-  async evolveConsciousness() {      try: {
+  async evolveConsciousness() {      try {
       // Calcul évolution basé sur activité récente
       const recentActivity = await this.db.get(`
         SELECT 
@@ -814,7 +814,7 @@ export class AlexAuthenticCore extends EventEmitter  {
     );
     const masteredDomains = await this.db.get(
       "SELECT COUNT(*) as count FROM alex_learning WHERE mastered = 1",
-    );      return: {
+    );      return {
       module: this.moduleName,
       version: this.version,
       initialized: this.isInitialized,

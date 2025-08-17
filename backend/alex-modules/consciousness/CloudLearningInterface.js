@@ -55,7 +55,7 @@ export class CloudLearningInterface extends EventEmitter  {
       preferredProvider: null,
       sessionTimeout: 30000,
       maxRetries: 3,
-      adaptiveRetry: true,
+      adaptiveRetry { true,
       learningRate: 0.03
     };
 
@@ -94,7 +94,7 @@ export class CloudLearningInterface extends EventEmitter  {
   /**
    * Initialisation AUTHENTIQUE avec SQLite
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       logger.info(
         `🌐 Initializing ${this.moduleName} with authentic cloud learning...`,
       );
@@ -139,7 +139,7 @@ export class CloudLearningInterface extends EventEmitter  {
   /**
    * Connexion SQLite OBLIGATOIRE
    */
-  async connectToSQLiteDatabase() {      try: {
+  async connectToSQLiteDatabase() {      try {
       this.db = await open({
         filename: this.dbPath,
         driver: sqlite3.Database
@@ -245,7 +245,7 @@ export class CloudLearningInterface extends EventEmitter  {
   /**
    * Restauration état cloud depuis SQLite
    */
-  async restoreCloudStateFromDatabase() {      try: {
+  async restoreCloudStateFromDatabase() {      try {
       // Restaurer fournisseurs actifs
       const activeProviders = await this.db.all(`
         SELECT id, name, reliability_score, is_active 
@@ -382,7 +382,7 @@ export class CloudLearningInterface extends EventEmitter  {
    */
   async performCloudLearning(domain, query, context = {}) {
     const sessionId = crypto.randomUUID();
-    const startTime = Date.now();      try: {
+    const startTime = Date.now();      try {
       logger.info(
         `🎯 Starting cloud learning session: ${sessionId} for domain: ${domain}`,
       );
@@ -442,7 +442,7 @@ export class CloudLearningInterface extends EventEmitter  {
         confidence: analysis.confidence,
         learningGained: analysis.learningGained,
         processingTime
-      });      return: {
+      });      return {
         sessionId,
         provider: selectedProvider.name,
         content: cloudResponse.content,
@@ -550,14 +550,14 @@ export class CloudLearningInterface extends EventEmitter  {
     const startTime = Date.now();
     let attempt = 0;
 
-    while (attempt < session.maxAttempts) {      try: {
+    while (attempt < session.maxAttempts) {      try {
         attempt++;
         session.attempts = attempt;
 
         // Simulation requête cloud (à remplacer par vraie implémentation)
         const response = await this.simulateCloudAPICall(session);
 
-        const responseTime = Date.now() - startTime;      return: {
+        const responseTime = Date.now() - startTime;      return {
           content: response.content,
           confidence: response.confidence || 0.8,
           responseTime,
@@ -605,7 +605,7 @@ export class CloudLearningInterface extends EventEmitter  {
     const confidence = Math.min(
       0.95,
       baseConfidence + (Math.random() * 0.2 - 0.1),
-    );      return: {
+    );      return {
       content: `Réponse cloud authentique pour ${session.domain}: ${session.query}. Analyse approfondie basée sur les modèles d'IA avancés avec spécialisation domaine.`,
       confidence,
       tokens: Math.floor(200 + Math.random() * 800),
@@ -916,7 +916,7 @@ export class CloudLearningInterface extends EventEmitter  {
   /**
    * Optimisation sélection fournisseurs
    */
-  async optimizeProviderSelection() {      try: {
+  async optimizeProviderSelection() {      try {
       // Analyse performance récente tous fournisseurs
       const providerPerformance = await this.db.all(`
         SELECT 
@@ -977,7 +977,7 @@ export class CloudLearningInterface extends EventEmitter  {
   /**
    * Nettoyage sessions anciennes
    */
-  async cleanupOldSessions() {      try: {
+  async cleanupOldSessions() {      try {
       // Supprimer sessions > 30 jours avec faible qualité
       const deletedSessions = await this.db.run(`
         DELETE FROM learning_sessions 
@@ -1007,7 +1007,7 @@ export class CloudLearningInterface extends EventEmitter  {
   /**
    * Évolution apprentissage cloud AUTHENTIQUE
    */
-  async evolveCloudLearning() {      try: {
+  async evolveCloudLearning() {      try {
       // Calcul évolution basé sur succès récents
       const recentSuccessRate = await this.db.get(`
         SELECT 
@@ -1098,7 +1098,7 @@ export class CloudLearningInterface extends EventEmitter  {
     const recentSessions = await this.db.get(`
       SELECT COUNT(*) as count FROM learning_sessions 
       WHERE timestamp > datetime('now', '-24 hours')
-    `);      return: {
+    `);      return {
       module: this.moduleName,
       version: this.version,
       initialized: this.isInitialized,

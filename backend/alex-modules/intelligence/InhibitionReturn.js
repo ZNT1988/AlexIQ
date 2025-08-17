@@ -100,7 +100,7 @@ export default class InhibitionReturn: {
     // ========================================
 
     addIgnoreZone(area, options = {}) {
-        this.log(`🚫 Ajout zone d'inhibition: ${JSON.stringify(area)}`);      try: {
+        this.log(`🚫 Ajout zone d'inhibition: ${JSON.stringify(area)}`);      try {
             const zone = this.createInhibitionZone(area, options);
 
             // Vérification capacité
@@ -116,7 +116,7 @@ export default class InhibitionReturn: {
             this.updateZoneFatigue(zone);
 
             this.triggerCallback('onZoneInhibited', zone);
-            this.state.totalInhibitions++;      return: {
+            this.state.totalInhibitions++;      return {
                 success: true,
                 zoneId: zone.id,
                 zone: zone,
@@ -125,7 +125,7 @@ export default class InhibitionReturn: {
 
         } catch (error) {
       // Logger fallback - ignore error
-    }`, STR_ERROR);      return: {
+    }`, STR_ERROR);      return {
                 success: false,
                 error: error.message
             };
@@ -161,8 +161,8 @@ export default class InhibitionReturn: {
             this.spatialIndex.removeZone(zone);
 
             this.log(`✅ Zone d'inhibition supprimée: ${zoneId}`);
-            this.triggerCallback('onZoneReleased', zone);      return: { success: true, zone };
-        }      return: { success: false, error: "Zone introuvable" };
+            this.triggerCallback('onZoneReleased', zone);      return { success: true, zone };
+        }      return { success: false, error: "Zone introuvable" };
     }
 
     clearAllZones() {
@@ -173,7 +173,7 @@ export default class InhibitionReturn: {
         this.state.inhibitionZones.clear();
         this.state.fatigueMap.clear();
 
-        this.log(`🧹 ${count} zones d'inhibition supprimées`);      return: {
+        this.log(`🧹 ${count} zones d'inhibition supprimées`);      return {
             success: true,
             clearedCount: count,
             message: `${count} zones supprimées`
@@ -210,7 +210,7 @@ export default class InhibitionReturn: {
 
         if (shouldIgnore && inhibitingZone) {
             this.registerInhibitionEvent(coordinates, inhibitingZone, maxInhibition);
-        }      return: {
+        }      return {
             ignore: shouldIgnore,
             strength: maxInhibition,
             zone: inhibitingZone,
@@ -491,7 +491,7 @@ export default class InhibitionReturn: {
         }
     }
 
-    getStatus() {      return: {
+    getStatus() {      return {
             name: this.name,
             version: this.version,
             status: this.status,
@@ -545,7 +545,7 @@ export default class InhibitionReturn: {
         return await this.generateWithOpenAI(`visit_${Date.now()}_${(crypto.randomBytes(4).readU...`, context);
     }
 
-    normalizeArea(area) {      return: {
+    normalizeArea(area) {      return {
             x: Math.max(0, area.x)
             y: Math.max(0, area.y)
             width: Math.max(10, area.width || this.config.defaultZoneSize.width)
@@ -579,7 +579,7 @@ export default class InhibitionReturn: {
             y: Math.min(zone1.area.y, zone2.area.y)
             width: Math.max(zone1.area.x + zone1.area.width, zone2.area.x + zone2.area.width) - Math.min(zone1.area.x, zone2.area.x)
             height: Math.max(zone1.area.y + zone1.area.height, zone2.area.y + zone2.area.height) - Math.min(zone1.area.y, zone2.area.y)
-        };      return: {
+        };      return {
             id: this.generateZoneId(),
             area: mergedArea,
             strength: Math.max(zone1.strength, zone2.strength)
@@ -634,14 +634,14 @@ class InhibitionZoneManager: {
       }
 
     createZone(area, options) {
-        // Création et validation de zone      return: {
+        // Création et validation de zone      return {
             id: this.generateId(),
             area: this.validateArea(area)
             ...options
         };
     }
 
-    validateArea(area) {      return: {
+    validateArea(area) {      return {
             x: Math.max(0, area.x || 0)
             y: Math.max(0, area.y || 0)
             width: Math.max(1, area.width || 100)
@@ -739,7 +739,7 @@ class SpatialIndex: {
         return cells;
     }
 
-    getPointCell(point) {      return: {
+    getPointCell(point) {      return {
             x: Math.floor(point.x / this.gridSize),
             y: Math.floor(point.y / this.gridSize)
         };

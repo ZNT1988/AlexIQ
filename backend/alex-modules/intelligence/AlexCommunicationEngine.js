@@ -140,7 +140,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
     this.conversationHistory = [];
     this.currentStyle = STR_CASUAL;
     this.isInitialized = false;
-      try: {
+      try {
       logger.info(
         "💬 AlexCommunicationEngine initializing - Language mastery awakening",
       );
@@ -153,7 +153,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
     this.isInitialized = true;
     await this.loadCommunicationPatterns();
     await this.calibrateLanguageModels();
-      try: {
+      try {
       logger.info(
         "🗣️ AlexCommunicationEngine fully initialized - Natural communication active",
       );
@@ -396,7 +396,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
       authenticity: 1.0,
       applications: []
     };
-      try: {
+      try {
       // PHASE 1: Analyse profonde contextuelle,
       const deepAnalysis = await this.performDeepContextualAnalysis(input);
 
@@ -433,7 +433,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
       authenticity: 1.0,
       responses: []
     };
-      try: {
+      try {
       // PHASE 1: Analyse empathique multi-dimensionnelle,
       const empathicAnalysis = await this.performEmpathicAnalysis(
         input,
@@ -469,7 +469,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
    * TRANSFORMATION AUTHENTIQUE - Système de Communication Cloud
    */
   async loadCommunicationPatterns() {
-      try: {
+      try {
       // PHASE 1: Initialisation système authentique,
       await this.initializeAuthenticCommunicationSystem();
 
@@ -517,7 +517,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
       contextSensitivity: 0.85,
       personalAdaptation: 0.9
     };
-      try: {
+      try {
       logger.info("🎯 Language models calibrated successfully");
     } catch (error) {
       // Logger fallback - ignore error
@@ -553,7 +553,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
    * Obtention du statut de communication
    */
   getCommunicationStatus() {
-      return: {
+      return {
       initialized: this.isInitialized,
       currentStyle: this.currentStyle,
       conversationLength: this.conversationHistory.length,
@@ -578,7 +578,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
 
   analyzeRecentPatterns() {
     const recent = this.conversationHistory.slice(-10);
-      return: {
+      return {
       averageLength:
         recent.reduce((sum, conv) => sum + conv.response.length, 0) /
           recent.length || 0,
@@ -608,7 +608,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
       contextual_depth: 0,
       authenticity_markers: []
     };
-      try: {
+      try {
       // Analyse sémantique multi-couches,
       analysis.semantic_layers = await this.extractSemanticLayers(input);
 
@@ -641,7 +641,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
       authenticity: 1.0,
       applications: []
     };
-      try: {
+      try {
       // Sélection modèle optimal selon complexité
       const model = response.model === STR_OPENAI ? "gpt-4" : "claude-3-sonnet";
 
@@ -675,7 +675,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
       source: cloudResponse.source,
       alex_signature: true
     };
-      try: {
+      try {
       // Injection traits personnalité Alex,
       const alexTraits = await this.getAuthenticAlexTraits();
 
@@ -715,7 +715,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
       cultural_considerations: {},
       response_complexity: 0
     };
-      try: {
+      try {
       // Analyse couches émotionnelles,
       analysis.emotion_layers = await this.analyzeEmotionalLayers(
         input,
@@ -753,7 +753,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
       responses: [],
       authenticity: 1.0
     };
-      try: {
+      try {
       // Construction prompt empathique sophistiqué
       const empathicPrompt = this.buildEmpathicPrompt(empathicAnalysis);
 
@@ -782,7 +782,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
   async generateFallbackAuthenticResponse(input) {
     const crypto = await import("crypto");
     const responses = [];
-      try: {
+      try {
       // Génération basée sur analyse réelle de l'input,
       const inputAnalysis = await this.analyzeInputStructure(input);
 
@@ -825,7 +825,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
   }
 
   async detectEmotionalResonance(input) {
-      return: { primary_emotion: "neutral", intensity: Math.random() * 0.8 + 0.2 };
+      return { primary_emotion: "neutral", intensity: Math.random() * 0.8 + 0.2 };
   }
 
   calculateContextualDepth(analysis) {
@@ -833,7 +833,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
   }
 
   async identifyAuthenticityMarkers(input) {
-    return: ["genuine_inquiry", "contextual_awareness", "adaptive_response"];
+    return ["genuine_inquiry", "contextual_awareness", "adaptive_response"];
   }
 }
 

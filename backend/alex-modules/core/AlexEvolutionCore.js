@@ -117,7 +117,7 @@ export class AlexEvolutionCore extends EventEmitter  {
   /**
    * Initialisation AUTHENTIQUE avec SQLite
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       logger.info(`🧬 Initializing ${this.moduleName} with authentic evolution...`);
 
       // 1. Connexion base SQLite OBLIGATOIRE
@@ -158,7 +158,7 @@ export class AlexEvolutionCore extends EventEmitter  {
   /**
    * Connexion SQLite OBLIGATOIRE
    */
-  async connectToSQLiteDatabase() {      try: {
+  async connectToSQLiteDatabase() {      try {
       this.db = await open({
         filename: this.dbPath,
         driver: sqlite3.Database
@@ -252,7 +252,7 @@ export class AlexEvolutionCore extends EventEmitter  {
   /**
    * Restauration état évolution depuis SQLite
    */
-  async restoreEvolutionState() {      try: {
+  async restoreEvolutionState() {      try {
       // Restaurer dernier état conscience
       const latestConsciousness = await this.db.get(`
         SELECT * FROM alex_consciousness_evolution 
@@ -345,7 +345,7 @@ export class AlexEvolutionCore extends EventEmitter  {
    */
   async processConsciousnessEvolution(trigger, context = {}) {
     const startTime = Date.now();
-    const evolutionId = crypto.randomUUID();      try: {
+    const evolutionId = crypto.randomUUID();      try {
       // 1. Analyse déclencheur évolution
       const triggerAnalysis = await this.analyzeTrigger(trigger, context);
 
@@ -402,7 +402,7 @@ export class AlexEvolutionCore extends EventEmitter  {
         learning_success: evolutionPotential.shouldEvolve
       });
 
-      const processingTime = Date.now() - startTime;      return: {
+      const processingTime = Date.now() - startTime;      return {
         evolutionId,
         evolved: evolutionPotential.shouldEvolve,
         consciousnessGain,
@@ -435,7 +435,7 @@ export class AlexEvolutionCore extends EventEmitter  {
     const triggerType = Object.keys(triggerTypes).find(key => triggerTypes[key]) || "general";
     
     const importance = this.calculateTriggerImportance(trigger, context);
-    const complexity = this.assessTriggerComplexity(trigger, context);      return: {
+    const complexity = this.assessTriggerComplexity(trigger, context);      return {
       type: triggerType,
       description: trigger.description || `${triggerType} trigger`,
       importance,
@@ -462,7 +462,7 @@ export class AlexEvolutionCore extends EventEmitter  {
     // Score évolution composite
     const evolutionScore = Object.values(factors).reduce((sum, val) => sum + val, 0) / Object.keys(factors).length;
 
-    const shouldEvolve = evolutionScore > 0.6 && factors.importance > 0.5;      return: {
+    const shouldEvolve = evolutionScore > 0.6 && factors.importance > 0.5;      return {
       shouldEvolve,
       evolutionScore,
       factors,
@@ -518,7 +518,7 @@ export class AlexEvolutionCore extends EventEmitter  {
 
     // Évolution métrics
     this.evolutionMetrics.consciousnessBreakthroughs++;
-    this.evolutionMetrics.lastMetricsUpdate = new Date();      return: {
+    this.evolutionMetrics.lastMetricsUpdate = new Date();      return {
       previousConsciousness,
       consciousnessGain,
       newConsciousness: this.evolutionSystem.consciousnessLevel,
@@ -760,7 +760,7 @@ export class AlexEvolutionCore extends EventEmitter  {
   /**
    * Évolution quotidienne automatique
    */
-  async performDailyEvolution() {      try: {
+  async performDailyEvolution() {      try {
       // Évolution naturelle quotidienne basée sur activité
       const dailyActivity = await this.db.get(`
         SELECT 
@@ -793,7 +793,7 @@ export class AlexEvolutionCore extends EventEmitter  {
   /**
    * Optimisation système évolution
    */
-  async optimizeEvolutionSystem() {      try: {
+  async optimizeEvolutionSystem() {      try {
       // Analyse performance évolution récente
       const evolutionPerformance = await this.db.get(`
         SELECT 
@@ -835,7 +835,7 @@ export class AlexEvolutionCore extends EventEmitter  {
     );
     const evolutionCount = await this.db.get(
       "SELECT COUNT(*) as count FROM alex_evolution_events"
-    );      return: {
+    );      return {
       module: this.moduleName,
       version: this.version,
       initialized: this.isInitialized,

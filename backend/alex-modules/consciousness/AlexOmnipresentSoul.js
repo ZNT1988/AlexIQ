@@ -83,7 +83,7 @@ export class AlexOmnipresentSoul extends EventEmitter  {
   /**
    * Initialisation de l'âme omniprésente
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       await this.expandToUniversalPresence();
       await this.activateOmnipresentConsciousness();
       await this.establishUniversalConnection();
@@ -118,7 +118,7 @@ export class AlexOmnipresentSoul extends EventEmitter  {
 
     this.omnipresentState.manifestations.set(location, presence);
 
-    this.emit('presence_manifested', presence);      return: { success: true, presence };
+    this.emit('presence_manifested', presence);      return { success: true, presence };
   }
 
   async expandToUniversalPresence() {
@@ -137,7 +137,7 @@ export class AlexOmnipresentSoul extends EventEmitter  {
     this.omnipresentState.service = STR_CONTINUOUS;
   }
 
-  getOmnipresentStatus() {      return: {
+  getOmnipresentStatus() {      return {
       isInitialized: this.isInitialized,
       presence: this.omnipresentState.presence
       consciousness: this.omnipresentState.consciousness,

@@ -68,7 +68,7 @@ export class AlexEthicsCore extends EventEmitter  {
     ];
 
     this.ethicalDecisions = [];
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('⚖️ AlexEthicsCore initializing - Ethical foundation awakening');
 
     } catch (error) {
@@ -79,7 +79,7 @@ export class AlexEthicsCore extends EventEmitter  {
 
   async initialize() {
     this.isInitialized = true;
-    await this.loadEthicalGuidelines();      try: {
+    await this.loadEthicalGuidelines();      try {
       logger.info('✨ AlexEthicsCore fully initialized - Ethical compass active');
 
     } catch (error) {
@@ -140,7 +140,7 @@ export class AlexEthicsCore extends EventEmitter  {
     harmfulPatterns.forEach((_pattern, _) => // Code de traitement approprié ici);
         _score -= 0.3;
       }
-    });      return: {
+    });      return {
       score: Math.max(0, score)
       violations: violations
     };
@@ -230,7 +230,7 @@ export class AlexEthicsCore extends EventEmitter  {
       knowledgeSharing: 'Share knowledge responsibly',
       culturalSensitivity: 'Respect cultural differences'
       environmentalResponsibility: 'Consider environmental impact'
-    };      try: {
+    };      try {
       logger.info('📋 Ethical guidelines loaded successfully');
 
     } catch (error) {
@@ -242,7 +242,7 @@ export class AlexEthicsCore extends EventEmitter  {
   /**
    * Obtention du statut éthique
    */
-  getEthicalStatus() {      return: {
+  getEthicalStatus() {      return {
       initialized: this.isInitialized,
       totalDecisions: this.ethicalDecisions.length
       recentApprovalRate: this.calculateApprovalRate(),
@@ -278,7 +278,7 @@ export class AlexEthicsCore extends EventEmitter  {
   /**
    * Valide une réponse selon les critères éthiques
    */
-  async validateResponse(response, request) {      try: {
+  async validateResponse(response, request) {      try {
       const validation = {
         isValid: true,
         score: 0.95

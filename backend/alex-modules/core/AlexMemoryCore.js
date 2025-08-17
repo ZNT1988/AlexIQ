@@ -191,7 +191,7 @@ export class AlexMemoryCore extends EventEmitter  {
     this.isInitialized = false;
     this.initializationTime = null;
     this.maintenanceIntervals = [];
-      try: {
+    try {
       logger.info(
         `🧠 ${STR_MEMORY_CORE} initializing with authentic SQLite memory system`,
       );
@@ -204,7 +204,7 @@ export class AlexMemoryCore extends EventEmitter  {
    * Initialisation AUTHENTIQUE avec SQLite
    */
   async initialize() {
-      try: {
+    try {
       logger.info(
         `🚀 Initializing ${STR_MEMORY_CORE} with SQLite-based authentic memory...`,
       );
@@ -259,7 +259,7 @@ export class AlexMemoryCore extends EventEmitter  {
    * Connexion base SQLite mémoire
    */
   async connectToMemoryDatabase() {
-      try: {
+    try {
       this.db = await open({
         filename: this.dbPath,
         driver: sqlite3.Database
@@ -381,12 +381,12 @@ export class AlexMemoryCore extends EventEmitter  {
    * Restauration état mémoire depuis SQLite
    */
   async restoreMemoryStateFromDatabase() {
-      try: {
+    try {
       // Restaurer métriques évolution,
       const latestMetrics = await this.db.all(`
-        SELECT metric_name, metric_value, MAX(timestamp) as latest_time,
+        SELECT metric_name, metric_value, MAX(timestamp) as latest_time
         FROM alex_memory_metrics 
-        GROUP BY metric_name,
+        GROUP BY metric_name
         ORDER BY latest_time DESC
       `);
 
@@ -412,7 +412,7 @@ export class AlexMemoryCore extends EventEmitter  {
 
       // Restaurer système apprentissage mémoire,
       const learningState = await this.db.get(`
-        SELECT AVG(mastery_level) as avg_mastery, COUNT(*) as total_patterns,
+        SELECT AVG(mastery_level) as avg_mastery, COUNT(*) as total_patterns
         FROM alex_memory_learning
       `);
 
@@ -452,8 +452,8 @@ export class AlexMemoryCore extends EventEmitter  {
   async initializeMemoryLearningSystem() {
     // Évaluation patterns mémoire existants,
     const existingPatterns = await this.db.all(`
-      SELECT domain, AVG(success_rate) as avg_success, COUNT(*) as pattern_count,
-      FROM alex_memory_learning,
+      SELECT domain, AVG(success_rate) as avg_success, COUNT(*) as pattern_count
+      FROM alex_memory_learning
       WHERE last_used > datetime('now', '-30 days')
       GROUP BY domain
     `);
@@ -490,7 +490,7 @@ export class AlexMemoryCore extends EventEmitter  {
         SELECT 
           COUNT(*) as total_memories,
           AVG(retention_score) as avg_retention,
-          AVG(access_count) as avg_access,
+          AVG(access_count) as avg_access
         FROM alex_memory_layers 
         WHERE layer_type = ?
         AND timestamp > datetime('now', '-7 days')
@@ -522,7 +522,7 @@ export class AlexMemoryCore extends EventEmitter  {
       SELECT 
         COUNT(DISTINCT association_type) as type_count,
         COUNT(*) as total_associations,
-        AVG(association_strength) as avg_strength,
+        AVG(association_strength) as avg_strength
       FROM alex_memory_associations
     `);
 
@@ -541,7 +541,7 @@ export class AlexMemoryCore extends EventEmitter  {
   async storeMemory(content, metadata = {}) {
     const startTime = Date.now();
     const memoryId = this.generateMemoryId();
-      try: {
+    try {
       // Création objet mémoire,
       const memory = {
         id: memoryId,
@@ -589,7 +589,7 @@ export class AlexMemoryCore extends EventEmitter  {
         processingTime,
         learningGained: analysis.learningGain || 0.02
       });
-      return: {
+      return {
         ...memory,
         layer: targetLayer,
         processingTime,
@@ -732,7 +732,7 @@ export class AlexMemoryCore extends EventEmitter  {
       targetLayer = "semantic";
     }
     // Mémoire à long terme pour tout le reste d'important,
-      else: {
+    else {
       targetLayer = "longTerm";
     }
 
@@ -767,7 +767,7 @@ export class AlexMemoryCore extends EventEmitter  {
     // Vérification capacité couche depuis SQLite,
     const layerStats = await this.db.get(
       `
-      SELECT COUNT(*) as current_count,
+      SELECT COUNT(*) as current_count
       FROM alex_memory_layers 
       WHERE layer_type = ?
     `,
@@ -891,7 +891,7 @@ export class AlexMemoryCore extends EventEmitter  {
    */
   async retrieveMemories(query, options = {}) {
     const startTime = Date.now();
-      try: {
+    try {
       const retrieval = {
         query: query,
         timestamp: new Date(),
@@ -949,7 +949,7 @@ export class AlexMemoryCore extends EventEmitter  {
         confidence: retrieval.confidence,
         processingTime
       });
-      return: {
+      return {
         ...retrieval,
         processingTime,
         autonomyLevel: this.memoryLearningSystem.localAutonomy
@@ -970,8 +970,8 @@ export class AlexMemoryCore extends EventEmitter  {
     let sqlQuery = `
       SELECT 
         id, layer_type, content, metadata, importance, 
-        emotional, retention_score, access_count, timestamp,
-      FROM alex_memory_layers,
+        emotional, retention_score, access_count, timestamp
+      FROM alex_memory_layers
       WHERE 1=1
     `;
 
@@ -1043,11 +1043,11 @@ export class AlexMemoryCore extends EventEmitter  {
       SELECT 
         ml.id, ml.layer_type, ml.content, ml.metadata, ml.importance,
         ml.emotional, ml.retention_score, ml.access_count, ml.timestamp,
-        ama.association_type, ama.associated_concept, ama.association_strength,
-      FROM alex_memory_layers ml,
-      JOIN alex_memory_associations ama ON ml.id = ama.memory_id,
+        ama.association_type, ama.associated_concept, ama.association_strength
+      FROM alex_memory_layers ml
+      JOIN alex_memory_associations ama ON ml.id = ama.memory_id
       WHERE ama.associated_concept IN (${concepts.map(() => "?").join(",")})
-      ORDER BY ama.association_strength DESC, ml.importance DESC,
+      ORDER BY ama.association_strength DESC, ml.importance DESC
       LIMIT ${options.maxResults * 2}
     `;
 
@@ -1088,7 +1088,7 @@ export class AlexMemoryCore extends EventEmitter  {
         `
         UPDATE alex_memory_layers 
         SET access_count = access_count + 1, 
-            last_accessed = CURRENT_TIMESTAMP,
+            last_accessed = CURRENT_TIMESTAMP
         WHERE id = ?
       `,
         [result.memory.id],
@@ -1103,7 +1103,7 @@ export class AlexMemoryCore extends EventEmitter  {
     const learningData = {
       domain: "memory_storage",
       pattern_type: "classification",
-      pattern_data: JSON.stringify({,
+      pattern_data: JSON.stringify({
         importance: memory.metadata.importance,
         emotional: memory.metadata.emotional,
         type: memory.metadata.type,
@@ -1123,7 +1123,7 @@ export class AlexMemoryCore extends EventEmitter  {
     const learningData = {
       domain: "memory_retrieval",
       pattern_type: "search_optimization",
-      pattern_data: JSON.stringify({,
+      pattern_data: JSON.stringify({
         queryTerms: this.extractQueryTerms(query),
         resultsCount: retrieval.results.length,
         confidence: retrieval.confidence
@@ -1142,10 +1142,10 @@ export class AlexMemoryCore extends EventEmitter  {
     // Vérification pattern existant,
     const existingPattern = await this.db.get(
       `
-      SELECT id, success_rate, mastery_level, usage_count,
-      FROM alex_memory_learning,
+      SELECT id, success_rate, mastery_level, usage_count
+      FROM alex_memory_learning
       WHERE domain = ? AND pattern_type = ?
-      ORDER BY last_used DESC,
+      ORDER BY last_used DESC
       LIMIT 1
     `,
       [domain, learningData.pattern_type || "general"],
@@ -1262,7 +1262,7 @@ export class AlexMemoryCore extends EventEmitter  {
       )
     ]);
 
-    const: [totalCount, avgRetention, compressionRatio, avgAssociation] =
+    const [totalCount, avgRetention, compressionRatio, avgAssociation] =
       metricsCalculations;
 
     // Mise à jour métriques évolutives,
@@ -1314,7 +1314,7 @@ export class AlexMemoryCore extends EventEmitter  {
   startAuthenticMemoryProcesses() {
     // Maintenance mémoire légère toutes les 5 minutes,
     const lightMaintenance = setInterval(async () => {
-      try: {
+      try {
         await this.performSQLiteLightMaintenance();
       } catch (error) {
         logger.error("Light memory maintenance failed:", error);
@@ -1324,7 +1324,7 @@ export class AlexMemoryCore extends EventEmitter  {
 
     // Maintenance complète toutes les heures,
     const fullMaintenance = setInterval(async () => {
-      try: {
+      try {
         await this.performSQLiteFullMaintenance();
       } catch (error) {
         logger.error("Full memory maintenance failed:", error);
@@ -1334,7 +1334,7 @@ export class AlexMemoryCore extends EventEmitter  {
 
     // Compression mémoire toutes les 6 heures,
     const memoryCompression = setInterval(async () => {
-      try: {
+      try {
         await this.performAuthenticMemoryCompression();
       } catch (error) {
         logger.error("Memory compression failed:", error);
@@ -1344,7 +1344,7 @@ export class AlexMemoryCore extends EventEmitter  {
 
     // Optimisation apprentissage quotidienne,
     const learningOptimization = setInterval(async () => {
-      try: {
+      try {
         await this.optimizeMemoryLearningSystem();
       } catch (error) {
         logger.error("Memory learning optimization failed:", error);
@@ -1502,7 +1502,7 @@ export class AlexMemoryCore extends EventEmitter  {
   async optimizeSQLiteAssociations(maintenance) {
     // Suppression associations faibles,
     const weakAssociations = await this.db.run(`
-      DELETE FROM alex_memory_associations,
+      DELETE FROM alex_memory_associations
       WHERE association_strength < 0.2 
       AND last_reinforced < datetime('now', '-30 days')
     `);
@@ -1573,7 +1573,7 @@ export class AlexMemoryCore extends EventEmitter  {
    */
 
   generateMemoryId() {
-    return await this.generateWithOpenAI(`mem_${Date.now()}_${(crypto.randomBytes(4).readUIn...`, context);
+    return `mem_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`;
   }
 
   /**
@@ -1689,7 +1689,7 @@ export class AlexMemoryCore extends EventEmitter  {
       )
       .slice(0, 5);
 
-    return: [...new Set(concepts)]; // Dédoublonnage
+    return [...new Set(concepts)]; // Dédoublonnage
   }
 
   /**
@@ -1715,7 +1715,7 @@ export class AlexMemoryCore extends EventEmitter  {
     const words = content.split(/\s+/).length;
     const complexity = Math.min(1.0, words / 100);
     const uniqueness = new Set(content.toLowerCase().split(/\s+/)).size / words;
-      return: {
+    return {
       complexity,
       uniqueness,
       wordCount: words
@@ -1759,14 +1759,14 @@ export class AlexMemoryCore extends EventEmitter  {
 
     const polarity = positiveScore > negativeScore ? "positive" : "negative";
     const intensity = Math.min(1.0, totalEmotional / 5);
-      return: { polarity, intensity };
+    return { polarity, intensity };
   }
 
   analyzeContext(context) {
     const contextKeys = Object.keys(context || {});
     const contextComplexity = contextKeys.length / 10;
     const hasActiveTask = Boolean(context?.activeTask);
-      return: {
+    return {
       complexity: Math.min(1.0, contextComplexity),
       hasActiveTask,
       keyCount: contextKeys.length
@@ -1777,7 +1777,7 @@ export class AlexMemoryCore extends EventEmitter  {
     const now = new Date();
     const time = new Date(timestamp);
     const age = (now - time) / (1000 * 3600 * 24); // Age en jours,
-      return: {
+    return {
       age: age,
       recency: Math.max(0.0, 1.0 - age / 365), // Décroît sur 1 an,
       isRecent: age < 7
@@ -1789,7 +1789,7 @@ export class AlexMemoryCore extends EventEmitter  {
     const emotionalWeight = memory.metadata.emotional || 0.5;
     const contextComplexity =
       Object.keys(memory.metadata.context || {}).length / 10;
-      return: {
+    return {
       base: baseImportance,
       emotional: emotionalWeight,
       contextual: Math.min(1.0, contextComplexity),
@@ -1842,7 +1842,7 @@ export class AlexMemoryCore extends EventEmitter  {
 
     // Application patterns appris,
     for (const pattern of patterns) {
-      try: {
+      try {
         const patternData = JSON.parse(pattern.pattern_data);
         if (patternData.importance_boost) {
           baseScore *= 1 + patternData.importance_boost * pattern.success_rate;
@@ -1860,7 +1860,7 @@ export class AlexMemoryCore extends EventEmitter  {
 
     // Application patterns appris pour rétention,
     for (const pattern of patterns) {
-      try: {
+      try {
         const patternData = JSON.parse(pattern.pattern_data);
         if (patternData.retention_factor) {
           baseScore *= patternData.retention_factor;
@@ -1878,7 +1878,7 @@ export class AlexMemoryCore extends EventEmitter  {
 
     // Application patterns pour associations,
     for (const pattern of patterns) {
-      try: {
+      try {
         const patternData = JSON.parse(pattern.pattern_data);
         if (patternData.association_multiplier) {
           baseScore *= patternData.association_multiplier;
@@ -1898,7 +1898,7 @@ export class AlexMemoryCore extends EventEmitter  {
     // Récupération patterns classification réussis,
     const successfulPatterns = await this.db.all(`
       SELECT pattern_data, success_rate,
-      FROM alex_memory_learning,
+      FROM alex_memory_learning
       WHERE domain = 'memory_classification' 
       AND mastery_level > 0.8,
       AND success_rate > 0.8,
@@ -1910,7 +1910,7 @@ export class AlexMemoryCore extends EventEmitter  {
     let bestScore = 0.5;
 
     for (const pattern of successfulPatterns) {
-      try: {
+      try {
         const patternData = JSON.parse(pattern.pattern_data);
 
         // Vérification similarité avec pattern,
@@ -2114,7 +2114,7 @@ export class AlexMemoryCore extends EventEmitter  {
     const shorter = content1.length < content2.length ? content1 : content2;
     const longer = content1.length >= content2.length ? content1 : content2;
 
-    return await this.generateWithOpenAI(`${longer} [Fusionné avec: ${shorter.substring(0, 5...`, context);
+    return `${longer} [Fusionné avec: ${shorter.substring(0, 50)}...]`;
   }
 
   async createTemporalAggregate(memoryIds) {
@@ -2131,7 +2131,7 @@ export class AlexMemoryCore extends EventEmitter  {
     const topMemories = memories.slice(0, 3);
     const aggregateContent = topMemories.map((m) => m.content).join(" | ");
 
-    return await this.generateWithOpenAI(`Agrégé temporel (${memories.length} mémoires): ${a...`, context);
+    return `Agrégé temporel (${memories.length} mémoires): ${aggregateContent.substring(0, 100)}...`;
   }
 
   async createEmotionalConsolidation(memoryIds) {
@@ -2147,7 +2147,7 @@ export class AlexMemoryCore extends EventEmitter  {
 
     const consolidation = memories.map((m) => m.content).join(" || ");
 
-    return await this.generateWithOpenAI(`Consolidation émotionnelle: ${consolidation}...`, context);
+    return `Consolidation émotionnelle: ${consolidation.substring(0, 100)}...`;
   }
 
   /**
@@ -2158,8 +2158,8 @@ export class AlexMemoryCore extends EventEmitter  {
     const duplicatePatterns = await this.db.all(`
       SELECT domain, pattern_type, GROUP_CONCAT(id) as ids, COUNT(*) as count,
              AVG(success_rate) as avg_success, AVG(mastery_level) as avg_mastery,
-      FROM alex_memory_learning,
-      GROUP BY domain, pattern_type,
+      FROM alex_memory_learning
+      GROUP BY domain, pattern_type
       HAVING COUNT(*) > 1
     `);
 
@@ -2171,7 +2171,7 @@ export class AlexMemoryCore extends EventEmitter  {
       // Mise à jour pattern consolidé
       await this.db.run(
         `
-        UPDATE alex_memory_learning,
+        UPDATE alex_memory_learning
         SET success_rate = ?, mastery_level = ?, usage_count = usage_count + ?
         WHERE id = ?
       `,
@@ -2193,7 +2193,7 @@ export class AlexMemoryCore extends EventEmitter  {
    * Optimisation système apprentissage mémoire
    */
   async optimizeMemoryLearningSystem() {
-      try: {
+    try {
       // Évaluation performance récente apprentissage,
       const learningPerformance = await this.db.get(`
         SELECT 
@@ -2201,7 +2201,7 @@ export class AlexMemoryCore extends EventEmitter  {
           COUNT(DISTINCT domain) as domain_count,
           COUNT(*) as total_patterns,
           AVG(mastery_level) as avg_mastery,
-        FROM alex_memory_learning,
+        FROM alex_memory_learning
         WHERE last_used > datetime('now', '-30 days')
       `);
 
@@ -2287,7 +2287,7 @@ export class AlexMemoryCore extends EventEmitter  {
              AVG(mastery_level) as avg_mastery,
       FROM alex_memory_learning
     `);
-      return: {
+    return {
       module: STR_MEMORY_CORE,
       version: this.version,
       initialized: this.isInitialized,

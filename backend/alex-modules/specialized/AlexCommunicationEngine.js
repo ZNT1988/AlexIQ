@@ -139,7 +139,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
 
     this.conversationHistory = [];
     this.currentStyle = STR_CASUAL;
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('💬 AlexCommunicationEngine initializing - Language mastery awakening');
 
     } catch (error) {
@@ -151,7 +151,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
   async initialize() {
     this.isInitialized = true;
     await this.loadCommunicationPatterns();
-    await this.calibrateLanguageModels();      try: {
+    await this.calibrateLanguageModels();      try {
       logger.info('🗣️ AlexCommunicationEngine fully initialized - Natural communication active');
 
     } catch (error) {
@@ -412,7 +412,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
     // Patterns d'encouragement
     this.communicationPatterns.encouragement.set('motivational', [
       'Tu peux le faire !', 'C\'est un excellent début', 'Continue comme ça', 'Je crois en toi'
-    ]);      try: {
+    ]);      try {
       logger.info('📝 Communication patterns loaded successfully');
 
     } catch (error) {
@@ -439,7 +439,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
       registerShifting: 0.8,
       contextSensitivity: 0.85,
       personalAdaptation: 0.9
-    };      try: {
+    };      try {
       logger.info('🎯 Language models calibrated successfully');
 
     } catch (error) {
@@ -469,7 +469,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
   /**
    * Obtention du statut de communication
    */
-  getCommunicationStatus() {      return: {
+  getCommunicationStatus() {      return {
       initialized: this.isInitialized,
       currentStyle: this.currentStyle,
       conversationLength: this.conversationHistory.length,
@@ -500,16 +500,16 @@ export class AlexCommunicationEngine extends EventEmitter  {
   /**
    * Méthodes d'analyse et de traitement
    */
-  analyzeText(input) {      return: { length: input.length, complexity: 'medium' };
+  analyzeText(input) {      return { length: input.length, complexity: 'medium' };
   }
 
-  analyzeEmotions(_input) {      return: { dominant: 'neutral', intensity: 0.5 };
+  analyzeEmotions(_input) {      return { dominant: 'neutral', intensity: 0.5 };
   }
 
-  analyzeIntent(_input) {      return: { category: 'general', confidence: 0.8 };
+  analyzeIntent(_input) {      return { category: 'general', confidence: 0.8 };
   }
 
-  analyzeContext(_context) {      return: { relevance: 0.7, adaptations: [] };
+  analyzeContext(_context) {      return { relevance: 0.7, adaptations: [] };
   }
 
   determineStyleRequirements(_input, _context) {
@@ -521,7 +521,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
   }
 
   detectSpecialNeeds(_analysis) {
-    return: [];
+    return [];
   }
 
   assessResponseComplexity(_analysis) {
@@ -533,30 +533,30 @@ export class AlexCommunicationEngine extends EventEmitter  {
   }
 
   selectCommunicationTechniques(_analysis) {
-    return: ['activeListening'];
+    return ['activeListening'];
   }
 
   selectLanguageRegister(_analysis) {
     return this.languageRegisters.neutral;
   }
 
-  structureResponse(_generation, _analysis) {      return: { structure: 'standard' };
+  structureResponse(_generation, _analysis) {      return { structure: 'standard' };
   }
 
   async finalizeResponse(refinementPhase) {
     return refinementPhase.refinedContent || 'Réponse finalisée';
   }
 
-  async adaptToStyle(_generation, style) {      return: { adapted: true, style: style };
+  async adaptToStyle(_generation, style) {      return { adapted: true, style: style };
   }
 
-  async injectPersonality(_styleAdaptation) {      return: { personality: 'Alex', traits: [] };
+  async injectPersonality(_styleAdaptation) {      return { personality: 'Alex', traits: [] };
   }
 
-  async adaptToCulture(_personalityInjection, _culturalContext) {      return: { culturallyAdapted: true };
+  async adaptToCulture(_personalityInjection, _culturalContext) {      return { culturallyAdapted: true };
   }
 
-  async tuneEmotionalResonance(_refinement, _context) {      return: { emotionalTuning: 'applied' };
+  async tuneEmotionalResonance(_refinement, _context) {      return { emotionalTuning: 'applied' };
   }
 
   assembleRefinedContent(_refinement) {
@@ -580,30 +580,30 @@ export class AlexCommunicationEngine extends EventEmitter  {
   }
 
   getAlexPersonalityTraits() {
-    return: ['helpful', 'creative', 'empathetic'];
+    return ['helpful', 'creative', 'empathetic'];
   }
 
   getAlexLanguagePatterns() {
-    return: ['conversational', 'engaging'];
+    return ['conversational', 'engaging'];
   }
 
   getAlexCommunicationPreferences() {
-    return: ['clear', 'supportive'];
+    return ['clear', 'supportive'];
   }
 
   injectPersonalityTraits(_adaptation, _traits) {
-    return: [];
+    return [];
   }
 
   injectLanguagePatterns(_adaptation, _patterns) {
-    return: [];
+    return [];
   }
 
   injectCommunicationPreferences(_adaptation, _preferences) {
-    return: [];
+    return [];
   }
 
-  extractKeyElements(_input) {      return: { main: 'élément principal' };
+  extractKeyElements(_input) {      return { main: 'élément principal' };
   }
 
   detectEmotion(_input) {
@@ -618,7 +618,7 @@ export class AlexCommunicationEngine extends EventEmitter  {
     return 0.5;
   }
 
-  getStyleDistribution(_conversations) {      return: { casual: 0.8, formal: 0.2 };
+  getStyleDistribution(_conversations) {      return { casual: 0.8, formal: 0.2 };
   }
 
   getEmotionalTone(_conversations) {

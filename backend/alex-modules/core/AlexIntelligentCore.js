@@ -66,27 +66,27 @@ export class AlexIntelligentCore extends EventEmitter  {
 
     // Définitions stockage SQLite (remplace Maps)
     this.storageDefinitions = {
-      conversations: {,
+      conversations: {
         tableName: "alex_intelligent_conversations",
         indexType: "user_id",
         retention: "permanent"
       },
-      userProfiles: {,
+      userProfiles: {
         tableName: "alex_intelligent_profiles",
         indexType: "user_id",
         retention: "permanent"
       },
-      sessionContext: {,
+      sessionContext: {
         tableName: "alex_intelligent_sessions",
         indexType: "session_id",
         retention: "temporary"
       },
-      businessContext: {,
+      businessContext: {
         tableName: "alex_intelligent_business",
         indexType: "context_type",
         retention: "long_term"
       },
-      learningData: {,
+      learningData: {
         tableName: "alex_intelligent_learning",
         indexType: "pattern_type",
         retention: "permanent"
@@ -142,14 +142,14 @@ export class AlexIntelligentCore extends EventEmitter  {
     this.personalityState = {
       corePersonalityBase: "Assistant IA entrepreneurial",
       // Traits évoluent avec succès interactions - CALCULÉS DYNAMIQUEMENT
-      traitEvolution: {,
+      traitEvolution: {
         expertise: 0.0, // Grandit avec succès
         communication: 0.0, // S'améliore avec feedback
         contextMemory: 0.0, // Perfection mémoire
         adaptation: 0.0, // Capacité adaptation
         creativity: 0.0, // Innovation développée
       },
-      toneAdaptation: {,
+      toneAdaptation: {
         professional: 0.5,
         accessible: 0.5,
         motivating: 0.5,
@@ -162,7 +162,7 @@ export class AlexIntelligentCore extends EventEmitter  {
     this.isInitialized = false;
     this.initializationTime = null;
     this.llmProvider = null;
-    this.maintenanceIntervals = [];      try: {
+    this.maintenanceIntervals = [];      try {
       logger.info(
         `🧠 ${STR_INTELLIGENT_CORE} initializing with authentic SQLite dialogue system`,
       );
@@ -174,7 +174,7 @@ export class AlexIntelligentCore extends EventEmitter  {
   /**
    * Initialisation AUTHENTIQUE avec SQLite
    */
-  async initialize(llmConfig = {}) {      try: {
+  async initialize(llmConfig = {}) {      try {
       logger.info(
         `🧠 Initializing ${this.moduleName} with authentic SQLite dialogue learning...`,
       );
@@ -257,16 +257,16 @@ export class AlexIntelligentCore extends EventEmitter  {
   /**
    * Initialiser OpenAI GPT
    */
-  async initializeOpenAI() {      try: {
+  async initializeOpenAI() {      try {
       // Import dynamique d'OpenAI
-      const: { OpenAI } = await import(STR_OPENAI);
+      const { OpenAI } = await import(STR_OPENAI);
 
       this.llmProvider = new OpenAI({
         apiKey: this.llmConfig.apiKey
       });
 
       // Test de connexion
-      await this.testLLMConnection();      try: {
+      await this.testLLMConnection();      try {
         logger.info("🤖 OpenAI GPT provider initialized successfully");
       } catch (error) {
         // Logger fallback - ignore error
@@ -282,13 +282,13 @@ export class AlexIntelligentCore extends EventEmitter  {
   /**
    * Initialiser Anthropic Claude
    */
-  async initializeAnthropic() {      try: {
+  async initializeAnthropic() {      try {
       // Import dynamique d'Anthropic
-      const: { Anthropic } = await import("@anthropic-ai/sdk");
+      const { Anthropic } = await import("@anthropic-ai/sdk");
 
       this.llmProvider = new Anthropic({
         apiKey: this.llmConfig.apiKey || process.env.ANTHROPIC_API_KEY
-      });      try: {
+      });      try {
         logger.info("🧠 Anthropic Claude provider initialized successfully");
       } catch (error) {
         // Logger fallback - ignore error
@@ -308,7 +308,7 @@ export class AlexIntelligentCore extends EventEmitter  {
     this.llmProvider = {
       type: STR_HYBRID,
       generateResponse: this.generateHybridResponse.bind(this)
-    };      try: {
+    };      try {
       logger.info("🔄 Hybrid intelligent system initialized as fallback");
     } catch (error) {
       // Logger fallback - ignore error
@@ -318,7 +318,7 @@ export class AlexIntelligentCore extends EventEmitter  {
   /**
    * Test de connexion LLM
    */
-  async testLLMConnection() {      try: {
+  async testLLMConnection() {      try {
       // VRAIE API call avec les clés - test authentique
       const aiClient = await import('../../core/providers/AIClient.js');
       const testResponse = await aiClient.default.query("Test connexion", 'openai');
@@ -342,7 +342,7 @@ export class AlexIntelligentCore extends EventEmitter  {
     sessionContext = {},
   ) {
     const startTime = Date.now();
-    const interactionId = crypto.randomUUID();      try: {
+    const interactionId = crypto.randomUUID();      try {
       if (!this.isInitialized) {
         await this.initialize();
       }
@@ -470,7 +470,7 @@ export class AlexIntelligentCore extends EventEmitter  {
         learning_gained: 0.0,
         autonomy_used: 0.0,
         success: false
-      });      return: {
+      });      return {
         error: "Intelligence processing failed",
         mode: "emergency",
         fallback: await this.generateEmergencyAuthenticResponse(
@@ -517,7 +517,7 @@ export class AlexIntelligentCore extends EventEmitter  {
    * Analyse de l'intent utilisateur
    */
   async analyzeUserIntent(message, context) {
-    const messageContent = message.toLowerCase();      return: {
+    const messageContent = message.toLowerCase();      return {
       intent: this.detectIntent(messageContent),
       emotion: this.detectEmotion(messageContent),
       businessFocus: this.detectBusinessFocus(messageContent),
@@ -539,14 +539,14 @@ export class AlexIntelligentCore extends EventEmitter  {
     const systemPrompt = this.buildAlexSystemPrompt(context, userAnalysis);
 
     // Construire l'historique de conversation
-    const conversationHistory = this.buildConversationHistory(context);      try: {
+    const conversationHistory = this.buildConversationHistory(context);      try {
       // Générer via LLM avec apprentissage
       const llmResponse = await this.generateLLMResponse(message, {
         systemPrompt,
         conversationHistory,
         userAnalysis,
         context
-      });      return: {
+      });      return {
         content: llmResponse,
         personality: this.selectOptimalPersonality(userAnalysis),
         confidence: 0.9,
@@ -619,7 +619,7 @@ INSTRUCTIONS:
         context.context,
         context.userAnalysis,
       );
-    }      try: {
+    }      try {
       if (this.llmConfig.provider === STR_OPENAI) {
         const response = await this.llmProvider.chat.completions.create({
           model: this.llmConfig.model,
@@ -656,14 +656,14 @@ INSTRUCTIONS:
    * TRANSFORMATION RADICALE: Élimination totale des templates statiques
    * APRÈS: Vraie génération cloud avec OpenAI/Anthropic même en fallback
    */
-  async generateHybridResponse(message, context, userAnalysis) {      try: {
+  async generateHybridResponse(message, context, userAnalysis) {      try {
       // PHASE 1: Tentative de connexion cloud d'urgence
       const emergencyCloudResponse = await this.attemptEmergencyCloudGeneration(
         message,
         context,
         userAnalysis,
       );
-      if (emergencyCloudResponse.success) {      return: {
+      if (emergencyCloudResponse.success) {      return {
           content: emergencyCloudResponse.content,
           personality: STR_ALEX_ULTIMATE,
           confidence: 0.9,
@@ -698,7 +698,7 @@ INSTRUCTIONS:
         personalizedResponse,
         userAnalysis,
         context,
-      );      return: {
+      );      return {
         content: expertiseEnhanced.content,
         personality: expertiseEnhanced.personality,
         confidence: expertiseEnhanced.confidence,
@@ -854,13 +854,13 @@ INSTRUCTIONS:
   }
 
   selectOptimalPersonality(userAnalysis) {
-    if (userAnalysis.emotion === "excited") return await this.generateWithOpenAI(`Créateur visionnaire...`, context);
+    if (userAnalysis.emotion === "excited") return "Créateur visionnaire";
     if (userAnalysis.expertise_needed === "strategy") return "Analyste logique";
     if (userAnalysis.emotion === "concerned") return "Cœur émotionnel";
     return STR_ALEX_ULTIMATE;
   }
 
-  createDefaultProfile() {      return: {
+  createDefaultProfile() {      return {
       interests: [],
       businessStage: "exploration",
       communicationStyle: "casual",
@@ -887,7 +887,7 @@ INSTRUCTIONS:
   }
 
   calculateResponseMetrics(startTime, response) {
-    const responseTime = Date.now() - startTime;      return: {
+    const responseTime = Date.now() - startTime;      return {
       responseTime,
       isUltraFast: responseTime < 200,
       quality: response.confidence || 0.8,
@@ -899,7 +899,7 @@ INSTRUCTIONS:
   /**
    * Mise à jour de la mémoire contextuelle AVEC SQLite
    */
-  async updateContextMemory(userId, message, response, context) {      try: {
+  async updateContextMemory(userId, message, response, context) {      try {
       // Sauvegarder la conversation en SQLite
       await this.db.run(
         `
@@ -955,7 +955,7 @@ INSTRUCTIONS:
   /**
    * Mise à jour profil utilisateur AVEC SQLite
    */
-  async updateUserProfileWithSQLite(userId, message, response, context) {      try: {
+  async updateUserProfileWithSQLite(userId, message, response, context) {      try {
       // Récupérer profil existant
       let profile = await this.getUserProfileFromDatabase(userId);
 
@@ -1050,7 +1050,7 @@ INSTRUCTIONS:
   /**
    * Connexion SQLite OBLIGATOIRE - Remplace toutes les Maps
    */
-  async connectToSQLiteDatabase() {      try: {
+  async connectToSQLiteDatabase() {      try {
       this.db = await open({
         filename: this.dbPath,
         driver: sqlite3.Database
@@ -1191,7 +1191,7 @@ INSTRUCTIONS:
   /**
    * Restauration état dialogue depuis base SQLite
    */
-  async restoreDialogueStateFromDatabase() {      try: {
+  async restoreDialogueStateFromDatabase() {      try {
       // Restaurer métriques évolution dialogue
       const latestMetrics = await this.db.all(`
         SELECT metric_name, new_value 
@@ -1242,7 +1242,7 @@ INSTRUCTIONS:
   /**
    * Restauration état personnalité depuis SQLite
    */
-  async restorePersonalityStateFromDatabase() {      try: {
+  async restorePersonalityStateFromDatabase() {      try {
       // Restaurer adaptations personnalité globales
       const personalityData = await this.db.all(`
         SELECT trait_type, AVG(evolution_score) as avg_evolution
@@ -1336,14 +1336,14 @@ INSTRUCTIONS:
   /**
    * Tentative de connexion cloud d'urgence
    */
-  async attemptEmergencyCloudGeneration(message, context, userAnalysis) {      try: {
+  async attemptEmergencyCloudGeneration(message, context, userAnalysis) {      try {
       // Tentative avec API keys alternatives ou cached
       const alternativeConfigs = [
         { provider: STR_OPENAI, model: "gpt-3.5-turbo" },
         { provider: STR_ANTHROPIC, model: "claude-3-haiku-20240307" }
       ];
 
-      for (const config of alternativeConfigs) {      try: {
+      for (const config of alternativeConfigs) {      try {
           const tempProvider = await this.initializeTempProvider(config);
           if (tempProvider) {
             const response = await this.generateWithTempProvider(
@@ -1352,16 +1352,16 @@ INSTRUCTIONS:
               context,
               userAnalysis,
             );
-            if (response && response.length > 10) {      return: { success: true, content: response };
+            if (response && response.length > 10) {      return { success: true, content: response };
             }
           }
         } catch (error) {
           // Continue avec la configuration suivante
           continue;
         }
-      }      return: { success: false, reason: "all_cloud_providers_failed" };
+      }      return { success: false, reason: "all_cloud_providers_failed" };
     } catch (error) {
-      logger.warn("Échec connexion cloud d'urgence:", error);      return: { success: false, reason: "emergency_cloud_failed" };
+      logger.warn("Échec connexion cloud d'urgence:", error);      return { success: false, reason: "emergency_cloud_failed" };
     }
   }
 
@@ -1385,7 +1385,7 @@ INSTRUCTIONS:
     const mastered =
       (masteryData?.avg_mastery || 0) > this.learningSystem.masteryThreshold &&
       (masteryData?.attempts || 0) > 10 &&
-      (masteryData?.success_rate || 0) > 0.8;      return: {
+      (masteryData?.success_rate || 0) > 0.8;      return {
       intent,
       mastered,
       masteryLevel: masteryData?.avg_mastery || 0,
@@ -1415,7 +1415,7 @@ INSTRUCTIONS:
       successfulPatterns,
       userAnalysis,
       masteryData,
-    );      return: {
+    );      return {
       content: localResponse.content,
       personality: this.selectOptimalPersonality(userAnalysis),
       confidence: localResponse.confidence,
@@ -1453,15 +1453,15 @@ INSTRUCTIONS:
     // Application des patterns appris si disponibles
     let synthesizedContent = responseElements.filter((e) => e).join(" ");
 
-    if (patterns.length > 0 && patterns[0].successful_response) {      try: {
+    if (patterns.length > 0 && patterns[0].successful_response) {      try {
         const patternResponse = JSON.parse(patterns[0].successful_response);
         if (patternResponse.content) {
           synthesizedContent = patternResponse.content;
         }
-      } catch: {
+      } catch (error) {
         // Utiliser la réponse synthétisée
       }
-    }      return: {
+    }      return {
       content: synthesizedContent,
       confidence: Math.min(
         0.95,
@@ -1504,7 +1504,7 @@ INSTRUCTIONS:
     if (response.confidence > 0.8) {
       await this.storePersonalityAdaptation({
         intent,
-        adaptation_data: JSON.stringify({,
+        adaptation_data: JSON.stringify({
           message_pattern: message,
           successful_personality: response.personality,
           confidence: response.confidence
@@ -1561,7 +1561,7 @@ INSTRUCTIONS:
   /**
    * Récupération historique conversations DEPUIS SQLite
    */
-  async getConversationHistoryFromDatabase(userId) {      try: {
+  async getConversationHistoryFromDatabase(userId) {      try {
       const conversations = await this.db.all(
         `
         SELECT message, response, intent, emotion, confidence, timestamp
@@ -1583,14 +1583,14 @@ INSTRUCTIONS:
       }));
     } catch (error) {
       logger.warn("Could not get conversation history from database:", error);
-      return: [];
+      return [];
     }
   }
 
   /**
    * Récupération profil utilisateur DEPUIS SQLite
    */
-  async getUserProfileFromDatabase(userId) {      try: {
+  async getUserProfileFromDatabase(userId) {      try {
       const profile = await this.db.get(
         `
         SELECT * FROM alex_intelligent_profiles WHERE user_id = ?
@@ -1600,7 +1600,7 @@ INSTRUCTIONS:
 
       if (!profile) {
         return this.createDefaultProfile();
-      }      return: {
+      }      return {
         interests: JSON.parse(profile.interests || "[]"),
         businessStage: profile.business_stage,
         communicationStyle: profile.communication_style,
@@ -1619,7 +1619,7 @@ INSTRUCTIONS:
   /**
    * Récupération contexte business DEPUIS SQLite
    */
-  async getBusinessContextFromDatabase(userId) {      try: {
+  async getBusinessContextFromDatabase(userId) {      try {
       const contexts = await this.db.all(
         `
         SELECT context_type, business_data, expertise_needed, urgency_level
@@ -1641,14 +1641,14 @@ INSTRUCTIONS:
 
       return businessContext;
     } catch (error) {
-      logger.warn("Could not get business context from database:", error);      return: {};
+      logger.warn("Could not get business context from database:", error);      return {};
     }
   }
 
   /**
    * Mise à jour contexte session actuelle
    */
-  async updateCurrentSessionContext(userId, sessionContext, enrichedContext) {      try: {
+  async updateCurrentSessionContext(userId, sessionContext, enrichedContext) {      try {
       const sessionId = sessionContext.sessionId || crypto.randomUUID();
 
       await this.db.run(
@@ -1698,7 +1698,7 @@ INSTRUCTIONS:
       expertiseResponse,
       userAnalysis.emotion,
       context.conversationHistory,
-    );      return: {
+    );      return {
       content: personalityEnhanced,
       reasoning: "authentic_local_ai_generation",
       semanticScore: semanticAnalysis.confidence,
@@ -1723,7 +1723,7 @@ INSTRUCTIONS:
     const responseLevel = this.calculateRequiredResponseLevel(
       complexity,
       implicitNeeds,
-    );      return: {
+    );      return {
       keyConcepts,
       complexity,
       implicitNeeds,
@@ -1737,7 +1737,7 @@ INSTRUCTIONS:
    */
   accessAlexKnowledgeBase(expertiseNeeded) {
     const knowledgeBases = {
-      strategy: {,
+      strategy: {
         principles: [
           "Analyse SWOT approfondie",
           "Définition d'objectifs SMART",
@@ -1752,7 +1752,7 @@ INSTRUCTIONS:
         ],
         expertiseLevel: 0.9
       },
-      finance: {,
+      finance: {
         principles: [
           "Cash-flow positif prioritaire",
           "Diversification des revenus",
@@ -1767,7 +1767,7 @@ INSTRUCTIONS:
         ],
         expertiseLevel: 0.85
       },
-      marketing: {,
+      marketing: {
         principles: [
           "Persona client détaillé",
           "Value proposition unique",
@@ -1782,7 +1782,7 @@ INSTRUCTIONS:
         ],
         expertiseLevel: 0.9
       },
-      general: {,
+      general: {
         principles: [
           "Approche holistique",
           "Innovation continue",
@@ -1821,7 +1821,7 @@ INSTRUCTIONS:
       basicIntent,
       basicEmotion,
       alexPrinciples,
-    );      return: {
+    );      return {
       content: principleBasedResponse,
       personality: STR_ALEX_ULTIMATE,
       confidence: 0.7,
@@ -1834,7 +1834,7 @@ INSTRUCTIONS:
   /**
    * Obtention des principes fondamentaux d'Alex
    */
-  getAlexCorePrinciples() {      return: {
+  getAlexCorePrinciples() {      return {
       helpfulness: "Toujours chercher à apporter une valeur concrète",
       expertise: "Utiliser les connaissances business pour guider",
       empathy: "Comprendre et s'adapter aux besoins utilisateur",
@@ -1907,7 +1907,7 @@ INSTRUCTIONS:
     return concepts;
   }
 
-  analyzeSemanticComplexity(message, concepts) {      return: {
+  analyzeSemanticComplexity(message, concepts) {      return {
       wordCount: message.split(" ").length,
       conceptDensity: concepts.length / message.split(" ").length,
       complexityScore: Math.min(
@@ -1991,7 +1991,7 @@ INSTRUCTIONS:
   /**
    * Apprentissage pattern dialogue
    */
-  async learnDialoguePattern(userId, message, response, context) {      try: {
+  async learnDialoguePattern(userId, message, response, context) {      try {
       // Détection de patterns réussis
       if (response.confidence > 0.8) {
         await this.db.run(
@@ -2149,7 +2149,7 @@ INSTRUCTIONS:
   /**
    * MAINTENANCE ET OPTIMISATION CONTINUE DIALOGUE
    */
-  async performDialogueMemoryMaintenance() {      try: {
+  async performDialogueMemoryMaintenance() {      try {
       // Nettoyage conversations anciennes et peu performantes par utilisateur
       const deletedCount = await this.db.run(`
         DELETE FROM alex_intelligent_conversations 
@@ -2176,7 +2176,7 @@ INSTRUCTIONS:
   /**
    * Optimisation système apprentissage dialogue
    */
-  async optimizeDialogueLearningSystem() {      try: {
+  async optimizeDialogueLearningSystem() {      try {
       // Analyse performance récente dialogue
       const recentPerformance = await this.db.get(`
         SELECT 
@@ -2217,7 +2217,7 @@ INSTRUCTIONS:
   /**
    * Évolution personnalité intelligence AUTHENTIQUE
    */
-  async evolvePersonalityIntelligence() {      try: {
+  async evolvePersonalityIntelligence() {      try {
       // Calcul évolution basé sur activité dialogue récente
       const recentActivity = await this.db.get(`
         SELECT 
@@ -2264,7 +2264,7 @@ INSTRUCTIONS:
   /**
    * Statut intelligence dialogue AUTHENTIQUE
    */
-  async getDialogueIntelligenceStatus() {      try: {
+  async getDialogueIntelligenceStatus() {      try {
       const conversationCount = await this.db.get(`
         SELECT COUNT(*) as total FROM alex_intelligent_conversations
       `);
@@ -2275,43 +2275,43 @@ INSTRUCTIONS:
 
       const masteredIntents = await this.db.get(`
         SELECT COUNT(DISTINCT domain) as total FROM alex_intelligent_learning WHERE mastered = 1
-      `);      return: {
+      `);      return {
         module: this.moduleName,
         version: this.version,
         isInitialized: this.isInitialized,
-        database: {,
+        database: {
           connected: this.db !== null,
           path: this.dbPath,
           conversations: conversationCount.total,
           profiles: profileCount.total,
           masteredIntents: masteredIntents.total
         },
-        learning: {,
+        learning: {
           cloudDependency: this.learningSystem.cloudDependency,
           localAutonomy: this.learningSystem.localAutonomy,
           masteryThreshold: this.learningSystem.masteryThreshold,
           learningRate: this.learningSystem.learningRate
         },
-        personality: {,
+        personality: {
           coreBase: this.personalityState.corePersonalityBase,
           traitEvolution: this.personalityState.traitEvolution,
           toneAdaptation: this.personalityState.toneAdaptation,
           lastUpdate: this.personalityState.lastPersonalityUpdate
         },
-        evolution: {,
+        evolution: {
           totalConversations: this.evolutionMetrics.totalConversations,
           successfulDialogues: this.evolutionMetrics.successfulDialogues,
           autonomyGained: this.evolutionMetrics.autonomyGained,
           masteredDomains: Array.from(this.evolutionMetrics.masteredDomains),
           lastEvolution: this.evolutionMetrics.lastEvolution
         },
-        llmConfig: {,
+        llmConfig: {
           provider: this.llmConfig?.provider || "none",
           model: this.llmConfig?.model || "none",
           available: this.llmProvider !== null
         },
         isAuthentic: true,
-        compliance: {,
+        compliance: {
           sqliteUsed: true,
           noStaticConfigs: true,
           hybridLearning: true,
@@ -2320,7 +2320,7 @@ INSTRUCTIONS:
         }
       };
     } catch (error) {
-      logger.error("Failed to get dialogue intelligence status:", error);      return: {
+      logger.error("Failed to get dialogue intelligence status:", error);      return {
         module: this.moduleName,
         version: this.version,
         error: "Status retrieval failed",

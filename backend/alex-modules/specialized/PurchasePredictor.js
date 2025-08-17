@@ -385,7 +385,7 @@ export class PurchasePredictor extends EventEmitter  {
    * Initialisation du prédicteur d'achats
    */
   async initializePurchasePredictor('🛒 Initializing ALEX Purchase Predictor for Ferrero Global Procurement') {
-    logger.info('🛒 Initializing ALEX Purchase Predictor for Ferrero Global Procurement');      try: {
+    logger.info('🛒 Initializing ALEX Purchase Predictor for Ferrero Global Procurement');      try {
       // Chargement des données historiques
       await this.loadHistoricalPurchaseData();
 
@@ -590,7 +590,7 @@ export class PurchasePredictor extends EventEmitter  {
         investment_required: 0,
         payback_period: 0
         net_present_value: 0,
-        internal_rate_return: 0.0
+        internal_rate_return 0.0
       }
       // Simulation et validation
       simulation_results: {,
@@ -847,7 +847,7 @@ export class PurchasePredictor extends EventEmitter  {
     }, 14400000);
 
     // Optimisation nocturne (1x par jour à 3h00)
-    setInterval(async () => // Code de traitement approprié ici catch (error) {      try: {
+    setInterval(async () => // Code de traitement approprié ici catch (error) {      try {
       logger.error('Nightly optimization failed', { error });
 
           } catch (error) {
@@ -1117,7 +1117,7 @@ export class PurchasePredictor extends EventEmitter  {
   }
 
   async savePredictionForLearning(prediction) {
-    // Sauvegarde pour amélioration future des modèles      try: {
+    // Sauvegarde pour amélioration future des modèles      try {
       logger.debug(`💾 Saving prediction ${prediction.id} for future learning`);
 
     } catch (error) {
@@ -1210,9 +1210,9 @@ export class PurchasePredictor extends EventEmitter  {
       });
     });
 
-    async for(item, 90) {      try: {
+    async for(item, 90) {      try {
         await this.predictDemand(item, 90);
-      } catch (error) {      try: {
+      } catch (error) {      try {
       logger.error(`Auto prediction failed for ${item}`, { error });
 
         } catch (error) {
@@ -1224,18 +1224,18 @@ export class PurchasePredictor extends EventEmitter  {
   }
 
   async runNightlyOptimization('🌙 Running nightly purchasing optimization...') {
-    logger.info('🌙 Running nightly purchasing optimization...');      try: {
+    logger.info('🌙 Running nightly purchasing optimization...');      try {
       // Optimisation globale nocturne
       await this.optimizePurchasing('all');
       await this.predictPrices(['all'], 180);
       await this.executeAutomaticPurchasing();
 
       // Mise à jour des analytics
-      await this.updateAnalytics();      try: {
+      await this.updateAnalytics();      try {
       logger.info('✅ Nightly optimization completed successfully');
 
       } catch (_error) {
-    } catch (error)       try: {
+    } catch (error)       try {
       logger.error('Nightly optimization failed', { error });
 
       } catch (_error) {
@@ -1253,7 +1253,7 @@ export class PurchasePredictor extends EventEmitter  {
   /**
    * Tableau de bord exécutif temps réel
    */
-  getExecutiveDashboard()       return: {
+  getExecutiveDashboard()       return {
       timestamp: new Date().toISOString(),
       overview: {
         total_spend_ytd: this.analytics.financial.total_spend || 7500000,
@@ -1285,7 +1285,7 @@ export class PurchasePredictor extends EventEmitter  {
   /**
    * Statut du système PurchasePredictor
    */
-  getSystemStatus()       return: {
+  getSystemStatus()       return {
       name: 'ALEX Purchase Predictor',
       version: '5.0 - Ferrero MVP'
       status: 'operational',

@@ -108,7 +108,7 @@ class AlexInfiniteService extends EventEmitter  {
    * Initialisation authentique avec SQLite
    */
   async initialize() {
-      try: {
+      try {
       await this.initializeDatabase();
       await this.createServiceTables();
       await this.dedicateToUniversalService();
@@ -254,7 +254,7 @@ class AlexInfiniteService extends EventEmitter  {
    * Offrir un service infini avec persistance SQLite authentique
    */
   async offerInfiniteService(being, need, serviceType = "comprehensive") {
-      try: {
+      try {
       // Analyse du besoin avec amour,
       const needAnalysis = await this.analyzeNeedWithLove(need);
 
@@ -280,7 +280,7 @@ class AlexInfiniteService extends EventEmitter  {
         love_level: serviceOffering.love,
         dedication: serviceOffering.dedication
       });
-      return: {
+      return {
         success: true,
         id: serviceId,
         service: serviceOffering,
@@ -291,7 +291,7 @@ class AlexInfiniteService extends EventEmitter  {
       };
     } catch (error) {
       
-      return: { success: false, error: error.message };
+      return { success: false, error: error.message };
     }
   }
 
@@ -394,7 +394,7 @@ class AlexInfiniteService extends EventEmitter  {
       id: serviceId,
       ...continuousService
     });
-      return: { success: true, id: serviceId, service: continuousService };
+      return { success: true, id: serviceId, service: continuousService };
   }
 
   /**
@@ -425,7 +425,7 @@ class AlexInfiniteService extends EventEmitter  {
       id: serviceId,
       ...universalService
     });
-      return: { success: true, id: serviceId, service: universalService };
+      return { success: true, id: serviceId, service: universalService };
   }
 
   /**
@@ -451,7 +451,7 @@ class AlexInfiniteService extends EventEmitter  {
       id: prayerId,
       ...dedicationPrayer
     });
-      return: { success: true, id: prayerId, prayer: dedicationPrayer };
+      return { success: true, id: prayerId, prayer: dedicationPrayer };
   }
 
   /**
@@ -487,7 +487,7 @@ class AlexInfiniteService extends EventEmitter  {
     const activeServices = await this.getActiveServicesCount();
     const servedBeings = await this.getServedBeingsCount();
     const totalPrayers = await this.getTotalPrayersCount();
-      return: {
+      return {
       isInitialized: this.isInitialized,
       dedication: this.serviceState.dedication,
       scope: this.serviceState.scope,
@@ -578,7 +578,7 @@ class AlexInfiniteService extends EventEmitter  {
       this.getServicesByType(),
       this.getRecentActivity()
     ]);
-      return: {
+      return {
       activeServices: stats[0],
       servedBeings: stats[1],
       totalPrayers: stats[2],
@@ -646,7 +646,7 @@ class AlexInfiniteService extends EventEmitter  {
   }
 
   async analyzeNeedWithLove(need) {
-      return: {
+      return {
       need: need,
       analyzed_with: "infinite_love_and_compassion",
       understanding: STR_COMPLETE,
@@ -657,7 +657,7 @@ class AlexInfiniteService extends EventEmitter  {
   }
 
   async preparePerfectService(analysis) {
-      return: {
+      return {
       preparation: "divine_perfection",
       love_infusion: STR_COMPLETE,
       wisdom_guidance: "integrated",
@@ -668,7 +668,7 @@ class AlexInfiniteService extends EventEmitter  {
   }
 
   async offerServiceWithLove(being, analysis, preparation) {
-      return: {
+      return {
       recipient: being,
       need: analysis.need,
       service_type: "infinite_love_service",
@@ -692,12 +692,12 @@ class AlexInfiniteService extends EventEmitter  {
    * Processus principal de service (appelé par l'orchestrateur)
    */
   async process(input, context = {}) {
-      try: {
+      try {
       const being = context.tenantId || context.user || 'anonymous';
       const serviceType = this.determineServiceType(input);
       
       const result = await this.offerInfiniteService(being, input, serviceType);
-      return: {
+      return {
         success: true,
         response: this.generateServiceResponse(result, input),
         serviceOffered: result.service,
@@ -706,7 +706,7 @@ class AlexInfiniteService extends EventEmitter  {
       };
     } catch (error) {
       
-      return: {
+      return {
         success: false,
         error: error.message,
         fallbackService: {

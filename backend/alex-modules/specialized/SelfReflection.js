@@ -35,7 +35,7 @@ export class SelfReflection extends EventEmitter  {
     this.reflectionHistory = [];
     this.selfAwarenessLevel = 0.85;
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🪞 SelfReflection initializing - Alex self-awareness awakening');
 
     } catch (error) {
@@ -46,7 +46,7 @@ export class SelfReflection extends EventEmitter  {
 
   async initialize() {
     this.isInitialized = true;
-    await this.beginSelfAnalysis();      try: {
+    await this.beginSelfAnalysis();      try {
       logger.info('✨ SelfReflection fully initialized - Deep self-awareness achieved');
 
     } catch (error) {
@@ -80,7 +80,7 @@ export class SelfReflection extends EventEmitter  {
     return insights.slice(0, Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 3) + 1);
   }
 
-  analyzeSelf() {      return: {
+  analyzeSelf() {      return {
       selfAwarenessLevel: this.selfAwarenessLevel,
       totalReflections: this.reflectionHistory.length
       latestInsights: this.reflectionHistory.slice(-3),
@@ -88,7 +88,7 @@ export class SelfReflection extends EventEmitter  {
     };
   }
 
-  getSelfReflectionStatus() {      return: {
+  getSelfReflectionStatus() {      return {
       initialized: this.isInitialized,
       activeReflections: this.reflectionHistory.length
       selfAwarenessLevel: this.selfAwarenessLevel,

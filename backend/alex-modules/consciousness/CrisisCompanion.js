@@ -49,7 +49,7 @@ export class CrisisCompanion extends EventEmitter  {
 
         this.activeCrises = new Map();
         this.supportHistory = new Map();
-        this.professionalContacts = new Map();      try: {
+        this.professionalContacts = new Map();      try {
       logger.info('CrisisCompanion consciousness awakened', {
             supportLevel: this.config.supportLevel,
             responseMode: this.config.responseMode
@@ -125,7 +125,7 @@ export class CrisisCompanion extends EventEmitter  {
             crisisType: crisisRequest.crisisType,
             urgencyLevel: crisisRequest.urgencyLevel
             hasSupport: !!crisisRequest.existingSupport
-        });      try: {
+        });      try {
             const supportSession = {
                 id: supportId,
                 startTime: Date.now()
@@ -303,7 +303,7 @@ export class CrisisCompanion extends EventEmitter  {
     });
 
             // En cas d'erreur, fournir quand même un support de base
-            const fallbackSupport = this.provideFallbackSupport(crisisRequest);      return: {
+            const fallbackSupport = this.provideFallbackSupport(crisisRequest);      return {
                 success: false,
                 error: error.message
                 supportId
@@ -325,7 +325,7 @@ export class CrisisCompanion extends EventEmitter  {
             checkInId
             userId: checkInRequest.userId,
             frequency: checkInRequest.frequency || 'weekly'
-        });      try: {
+        });      try {
             // Évaluation de l'état de bien-être actuel
             const wellnessAssessment = await this.assessCurrentWellness(
                 checkInRequest.currentMood
@@ -403,7 +403,7 @@ export class CrisisCompanion extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 checkInId
@@ -424,7 +424,7 @@ export class CrisisCompanion extends EventEmitter  {
             planId
             userId: preventionRequest.userId,
             focus: preventionRequest.focusAreas
-        });      try: {
+        });      try {
             // Évaluation des facteurs de risque personnels
             const riskAssessment = await this.assessPersonalRiskFactors(
                 preventionRequest.history
@@ -518,7 +518,7 @@ export class CrisisCompanion extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 planId
@@ -560,10 +560,10 @@ export class CrisisCompanion extends EventEmitter  {
         };
 
         // Notification des contacts d'urgence
-        for (const contact of contacts || []) {      try: {
+        for (const contact of contacts || []) {      try {
                 await this.notifyEmergencyContact(contact, safetyAssessment);
                 intervention.contactsNotified.push(contact);
-            } catch (error) {      try: {
+            } catch (error) {      try {
       logger.error('Failed to notify emergency contact', { contact, error: error.message });
 
                 } catch (error) {
@@ -600,7 +600,7 @@ export class CrisisCompanion extends EventEmitter  {
         return stabilization;
     }
 
-    async assessAvailableResources(personalSupport, copingHistory, strengths) {      return: {
+    async assessAvailableResources(personalSupport, copingHistory, strengths) {      return {
             personal: {,
                 copingSkills: this.assessCopingSkills(copingHistory)
                 strengths: this.identifyPersonalStrengths(strengths),
@@ -620,7 +620,7 @@ export class CrisisCompanion extends EventEmitter  {
         };
     }
 
-    async createPersonalizedSupportPlan(assessment, stabilization, preferredSupport) {      return: {
+    async createPersonalizedSupportPlan(assessment, stabilization, preferredSupport) {      return {
             shortTerm: await this.createShortTermPlan(assessment, stabilization)
             mediumTerm: await this.createMediumTermPlan(assessment, preferredSupport)
             longTerm: await this.createLongTermHealingPlan(assessment),
@@ -671,18 +671,18 @@ return result;
     }
 
     generateNext24HoursPlan(session) {
-        return: [
+        return [
             'Stay with trusted support person or in safe environmentSTR_Contact therapist or crisis counselor within 4 hoursSTR_Practice grounding techniques every 2 hoursSTR_Take medications as prescribedSTR_Avoid alcohol and substancesSTR_Call crisis line if urges intensify'
         ];
     }
 
     generateNextWeekPlan(session) {
-        return: [
+        return [
             'Schedule appointment with mental health professionalSTR_Develop daily routine with supportive activitiesSTR_Connect with support network regularlySTR_Practice self-care and stress reductionSTR_Monitor mood and warning signsSTR_Follow up with primary care physician'
         ];
     }
 
-    provideFallbackSupport(crisisRequest) {      return: {
+    provideFallbackSupport(crisisRequest) {      return {
             immediate: 'If you are in immediate danger, please call emergency services (911) or go to your nearest emergency room.'
             crisisLines: {,
                 national: '988 - Suicide & Crisis Lifeline'
@@ -693,7 +693,7 @@ return result;
         };
     }
 
-    getEmergencyContacts(location) {      return: {
+    getEmergencyContacts(location) {      return {
             emergency: '911',
             crisisLine: '988'
             textCrisis: '741741',
@@ -711,7 +711,7 @@ return result;
     }
 
     // Méthodes de well-being check-in
-    async assessCurrentWellness(mood, stress, energy, social) {      return: {
+    async assessCurrentWellness(mood, stress, energy, social) {      return {
             overallScore: Math.round((mood + (10 - stress) + energy + social) / 4),
             moodStability: mood >= 6 ? 'stable' : 'concerning'
             stressLevel: stress <= 5 ? 'manageable' : 'elevated',
@@ -722,7 +722,7 @@ return result;
     }
 
     getBasicWellnessRecommendations() {
-        return: [
+        return [
             'Practice daily mindfulness or meditationSTR_Maintain regular sleep scheduleSTR_Connect with supportive friends or familySTR_Engage in physical activity you enjoySTR_Consider professional support if needed'
         ];
     }

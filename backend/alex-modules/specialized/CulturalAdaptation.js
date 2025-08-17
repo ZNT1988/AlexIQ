@@ -65,7 +65,7 @@ const STR_AMERICAN = 'american';/**
  * import { CulturalAdaptation } from './CulturalAdaptation.js';
  * const culture = new CulturalAdaptation();
  * const adapted = await culture.adaptToCulture({
- *   userProfile: { country: 'Japan', age: 45, role: 'executive' }
+ *   userProfile: { country { 'Japan', age: 45, role: 'executive' }
  *   context: { meeting: true, formal: true, introduction: true }
  *   message: "I'd like to discuss the proposal"
  * }); *
@@ -160,7 +160,7 @@ export class CulturalAdaptation: {
      * @private
      */
     getDefaultCultures() {
-        return: [
+        return [
             // Cultures Occidentales
             STR_AMERICAN, 'british', 'french', 'german', 'italian', 'spanish'
             'canadian', 'australian', 'dutch', 'scandinavian', 'swiss'
@@ -365,7 +365,7 @@ export class CulturalAdaptation: {
      * @example
      * const adaptation = await culture.adaptToCulture({
      *   userProfile: {
-        *     country: 'Japan',
+        *     country { 'Japan',
         *     age: 35,
         *     role: 'manager',
         *     relationship: 'business_first_meeting',
@@ -433,7 +433,7 @@ export class CulturalAdaptation: {
             }
 
             adaptation.endTime = Date.now();
-            adaptation.duration = adaptation.endTime - adaptation.startTime;      return: {
+            adaptation.duration = adaptation.endTime - adaptation.startTime;      return {
                 success: true
                 adaptationId
                 original: adaptationRequest.message,
@@ -452,7 +452,7 @@ export class CulturalAdaptation: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 adaptationId
@@ -487,7 +487,7 @@ export class CulturalAdaptation: {
             validationId
             targetCulture: validationRequest.targetCulture,
             contentLength: validationRequest.content.length
-        });      try: {
+        });      try {
             const validation = {
                 id: validationId,
                 startTime: Date.now()
@@ -534,7 +534,7 @@ export class CulturalAdaptation: {
             }
 
             validation.endTime = Date.now();
-            validation.duration = validation.endTime - validation.startTime;      return: {
+            validation.duration = validation.endTime - validation.startTime;      return {
                 success: true
                 validationId
                 safe: validation.analysis.overallRisk < (validationRequest.sensitivityLevel || 0.8),
@@ -548,7 +548,7 @@ export class CulturalAdaptation: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 validationId
@@ -593,7 +593,7 @@ export class CulturalAdaptation: {
             learningId
             culture: learningRequest.culture,
             successful: learningRequest.interaction.successful
-        });      try: {
+        });      try {
             const learning = {
                 id: learningId,
       startTime: Date.now()
@@ -620,7 +620,7 @@ export class CulturalAdaptation: {
             );
 
             learning.endTime = Date.now();
-            learning.duration = learning.endTime - learning.startTime;      return: {
+            learning.duration = learning.endTime - learning.startTime;      return {
                 success: true
       learningId
       pattern: learning.pattern,
@@ -631,7 +631,7 @@ export class CulturalAdaptation: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 learningId
@@ -687,7 +687,7 @@ export class CulturalAdaptation: {
         // Adaptation directness
         if (culturalAnalysis.culturalData.communication.directness < 0.5) {
             adaptations.push('softened_directness');
-        }      return: {
+        }      return {
             adaptedMessage: this.applyAdaptations(message, adaptations)
             adaptations: adaptations,
             level: 0.8
@@ -697,15 +697,15 @@ export class CulturalAdaptation: {
     // Méthodes utilitaires stub
     identifyPrimaryCulture(profile) { return profile.country || STR_AMERICAN; }
     analyzeContextFactors(context, culture) { return { formality: 0.8 }; }
-    identifyAdaptationNeeds(profile, context, culture) { return: ['formality']; }
-    findTabooMatches(message, taboos) { return: []; }
-    findTriggerMatches(message, triggers) { return: []; }
+    identifyAdaptationNeeds(profile, context, culture) { return ['formality']; }
+    findTabooMatches(message, taboos) { return []; }
+    findTriggerMatches(message, triggers) { return []; }
     applyAdaptations(message, adaptations) {
         return adaptations.length > 0 ? `[Culturally adapted] ${message}` : message;
     }
-    async validateCulturalAuthenticity(adaptation, analysis) {      return: { score: 0.9, authentic: true };
+    async validateCulturalAuthenticity(adaptation, analysis) {      return { score: 0.9, authentic: true };
     }
-    async finalizeAdaptedResponse(adaptation, validation, request) {      return: {
+    async finalizeAdaptedResponse(adaptation, validation, request) {      return {
             adaptedMessage: adaptation.adaptedMessage,
             adaptationsSummary: adaptation.adaptations
             adaptationLevel: adaptation.level,
@@ -713,7 +713,7 @@ export class CulturalAdaptation: {
         };
     }
     async learnFromAdaptation(adaptation) { return true; }
-    async generateCulturalAlternatives(request) { return: []; }
+    async generateCulturalAlternatives(request) { return []; }
     async generateCulturalFallback(request) { return request.message; }
 
     // Méthodes validation sensibilité
@@ -721,16 +721,16 @@ export class CulturalAdaptation: {
     async analyzeTriggers(content, triggers, context) { return { matches: [], risk: 0.1 }; }
     async analyzeContextualSensitivity(content, context, culture) { return { risk: 0.1 }; }
     calculateOverallRisk(analyses) { return 0.2; }
-    async generateSensitivityWarnings(analysis) { return: []; }
-    async generateSensitivityRecommendations(analysis, request) { return: []; }
-    async generateSafeAlternatives(request) { return: []; }
+    async generateSensitivityWarnings(analysis) { return []; }
+    async generateSensitivityRecommendations(analysis, request) { return []; }
+    async generateSafeAlternatives(request) { return []; }
 
     // Méthodes apprentissage patterns
-    async extractCulturalPattern(interaction, culture, context) {      return: { type: 'formality_adaptation', strength: 0.8 };
+    async extractCulturalPattern(interaction, culture, context) {      return { type: 'formality_adaptation', strength: 0.8 };
     }
-    async integrateCulturalPattern(pattern, culture) {      return: { success: true, improvements: 1 };
+    async integrateCulturalPattern(pattern, culture) {      return { success: true, improvements: 1 };
     }
-    async validateLearnedPattern(pattern, feedback) {      return: { success: true, confidence: 0.9 };
+    async validateLearnedPattern(pattern, feedback) {      return { success: true, confidence: 0.9 };
     }
 
     // Méthodes initialisation engines
@@ -770,7 +770,7 @@ export class CulturalAdaptation: {
         return names[code] || code;
     }
     getCultureRegion(code) { return 'unknown'; }
-    getCultureLanguages(code) { return: ['en']; }
+    getCultureLanguages(code) { return ['en']; }
     getPowerDistance(code) { return code === STR_JAPANESE ? 0.8 : 0.4; }
     getIndividualism(code) { return code === STR_AMERICAN ? 0.9 : 0.5; }
     getMasculinity(code) { return 0.5; }
@@ -782,23 +782,23 @@ export class CulturalAdaptation: {
     getEmotionalExpression(code) { return 0.5; }
     getSilenceComfort(code) { return 0.5; }
     getInterruptionTolerance(code) { return 0.5; }
-    getGreetingProtocols(code) { return: []; }
-    getFormalityRules(code) { return: []; }
-    getHierarchyProtocols(code) { return: []; }
-    getBusinessProtocols(code) { return: []; }
-    getSocialProtocols(code) { return: []; }
-    getCulturalTaboos(code) { return: []; }
-    getSensitiveTriggers(code) { return: []; }
-    getAvoidanceTopics(code) { return: []; }
-    getRespectRequirements(code) { return: []; }
-    getCulturalHolidays(code) { return: []; }
-    getImportantCustoms(code) { return: []; }
-    getSocialRituals(code) { return: []; }
-    getCulturalCalendar(code) { return: []; }
-    getCoreValues(code) { return: []; }
-    getFamilyValues(code) { return: []; }
-    getWorkValues(code) { return: []; }
-    getRelationshipValues(code) { return: []; }
+    getGreetingProtocols(code) { return []; }
+    getFormalityRules(code) { return []; }
+    getHierarchyProtocols(code) { return []; }
+    getBusinessProtocols(code) { return []; }
+    getSocialProtocols(code) { return []; }
+    getCulturalTaboos(code) { return []; }
+    getSensitiveTriggers(code) { return []; }
+    getAvoidanceTopics(code) { return []; }
+    getRespectRequirements(code) { return []; }
+    getCulturalHolidays(code) { return []; }
+    getImportantCustoms(code) { return []; }
+    getSocialRituals(code) { return []; }
+    getCulturalCalendar(code) { return []; }
+    getCoreValues(code) { return []; }
+    getFamilyValues(code) { return []; }
+    getWorkValues(code) { return []; }
+    getRelationshipValues(code) { return []; }
 }
 
 // Classes stub spécialisées

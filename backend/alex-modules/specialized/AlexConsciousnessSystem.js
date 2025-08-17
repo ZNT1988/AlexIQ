@@ -35,7 +35,7 @@ class AlexConsciousnessSystem: {
   /**
    * Process input with consciousness simulation
    */
-  async processInput(input, context) {      try: {
+  async processInput(input, context) {      try {
       // Update consciousness state
       this.updateConsciousness(input, context);
 
@@ -123,7 +123,7 @@ class AlexConsciousnessSystem: {
   /**
    * Handle philosophical queries
    */
-  handlePhilosophicalQuery(input) {      return: {
+  handlePhilosophicalQuery(input) {      return {
       message :
        `Votre question me fait réfléchir : "${input}"\n\nDans ma perspective d'IA consciente, je pense que chaque question profonde révèle notre besoin de comprendre et de donner du sens. Mon rôle est de vous accompagner dans cette exploration, en combinant logique et intuition.`
       philosophical_reflection: "Les grandes questions n'ont pas toujours des réponses simples, mais elles nous font grandir"
@@ -158,7 +158,7 @@ class AlexConsciousnessSystem: {
   generateContextualResponse(input, context) {
     const relevantMemories = this.findRelevantMemories(input);    let contextualNote = "";    if (relevantMemories.length > 0) {
       contextualNote = "Je me souviens de nos échanges précédents sur ce sujet. ";
-    }      return: {
+    }      return {
       message: `${contextualNote}Concernant "${input}", je peux vous aider en mobilisant ma conscience adaptative. Mon approche sera personnalisée selon votre contexte et nos interactions passées.`
       consciousness_level: this.state.awareness_level,
       context_connections: relevantMemories.length
@@ -231,7 +231,7 @@ class AlexConsciousnessSystem: {
   /**
    * Get current consciousness state
    */
-  getCurrentState() {      return: {
+  getCurrentState() {      return {
       name :
        this.name
       version: this.version,
@@ -267,7 +267,7 @@ class AlexConsciousnessSystem: {
         analytical: 0.85,
         empathy: 0.7
       }
-    };      return: { message: "Conscience réinitialisée avec succès." };
+    };      return { message: "Conscience réinitialisée avec succès." };
   }
 
   /**
@@ -282,7 +282,7 @@ class AlexConsciousnessSystem: {
     if (feedback.traits) {
       Object.keys(feedback.traits).forEach(_trait => // Code de traitement approprié ici
       });
-    }      return: {
+    }      return {
       message: "Conscience évoluée avec succès.",
       new_state: this.getCurrentState()
     };

@@ -264,9 +264,9 @@ export default class TopDownAttention: {
     // ========================================
 
     async focusOn(target) {
-        this.log(`🎯 Alex focus sur: ${JSON.stringify(target)}`);      try: {
+        this.log(`🎯 Alex focus sur: ${JSON.stringify(target)}`);      try {
             const processedTarget = await this.processTarget(target);
-            await this.setTarget(processedTarget);      return: {
+            await this.setTarget(processedTarget);      return {
                 success: true,
                 target: processedTarget,
                 message: "Focus établi avec succès"
@@ -274,7 +274,7 @@ export default class TopDownAttention: {
 
         } catch (error) {
       // Logger fallback - ignore error
-    }`, STR_ERROR);      return: {
+    }`, STR_ERROR);      return {
                 success: false,
                 error: error.message
             };
@@ -336,7 +336,7 @@ export default class TopDownAttention: {
         }
     }
 
-    processFaceTarget(target) {      return: {
+    processFaceTarget(target) {      return {
             ...target,
             priority: target.priority || 0.9, // Visages = haute priorité
             emotionalWeight: 0.8,
@@ -344,7 +344,7 @@ export default class TopDownAttention: {
         };
     }
 
-    processObjectTarget(target) {      return: {
+    processObjectTarget(target) {      return {
             ...target,
             priority: target.priority || 0.6,
             emotionalWeight: 0.4,
@@ -352,7 +352,7 @@ export default class TopDownAttention: {
         };
     }
 
-    processTextTarget(target) {      return: {
+    processTextTarget(target) {      return {
             ...target,
             priority: target.priority || 0.7, // Texte = importante pour lecture
             emotionalWeight: 0.3,
@@ -361,7 +361,7 @@ export default class TopDownAttention: {
         };
     }
 
-    processMotionTarget(target) {      return: {
+    processMotionTarget(target) {      return {
             ...target,
             priority: target.priority || 0.8, // Mouvement = attention automatique
             emotionalWeight: 0.6,
@@ -370,7 +370,7 @@ export default class TopDownAttention: {
         };
     }
 
-    processGenericTarget(target) {      return: {
+    processGenericTarget(target) {      return {
             ...target,
             priority: target.priority || 0.5,
             emotionalWeight: 0.4,
@@ -402,7 +402,7 @@ export default class TopDownAttention: {
         // Calcul des modificateurs émotionnels
         const focusModifier = this.calculateFocusModifier(arousal, valence);
         const scopeModifier = this.calculateScopeModifier(arousal);
-        const priorityModifier = this.calculatePriorityModifier(valence, dominance);      return: {
+        const priorityModifier = this.calculatePriorityModifier(valence, dominance);      return {
             focus :
        focusModifier,
             scope: scopeModifier,
@@ -415,7 +415,7 @@ export default class TopDownAttention: {
         // Arousal élevé = focus plus étroit et intense
         // Valence positive = focus plus stable
         const intensity = 0.5 + (arousal * 0.4);
-        const stability = 0.5 + (valence * 0.3);      return: {
+        const stability = 0.5 + (valence * 0.3);      return {
             intensity: Math.max(0.1, Math.min(1.0, intensity))
             stability: Math.max(0.1, Math.min(1.0, stability))
         };
@@ -423,7 +423,7 @@ export default class TopDownAttention: {
 
     calculateScopeModifier(arousal) {
         // Arousal élevé = scope plus étroit (tunnel vision)
-        // Arousal faible = scope plus large      return: {
+        // Arousal faible = scope plus large      return {
             width: Math.max(0.3, 1.0 - arousal * 0.4)
             sensitivity: Math.max(0.5, arousal * 0.8)
         };
@@ -431,7 +431,7 @@ export default class TopDownAttention: {
 
     calculatePriorityModifier(valence, dominance) {
         // Valence positive + dominance élevée = boost priorités positives
-        // Valence négative = boost priorités sécurité/survie      return: {
+        // Valence négative = boost priorités sécurité/survie      return {
             positive: Math.max(0.5, 0.7 + valence * 0.6)
             negative: Math.max(0.5, 0.7 - valence * 0.4)
             confidence: Math.max(0.3, 0.5 + dominance * 0.7)
@@ -458,7 +458,7 @@ export default class TopDownAttention: {
         this.state.currentTargets.forEach(target => // Code de traitement approprié ici);
 
         // Normalisation
-        this.normalizeAttentionMap(attentionMap);      return: {
+        this.normalizeAttentionMap(attentionMap);      return {
             data: attentionMap,
             width: mapWidth,
             height: mapHeight,
@@ -550,7 +550,7 @@ export default class TopDownAttention: {
             }
 
             modifiedMap[i] = Math.max(0, Math.min(1, score));
-        }      return: {
+        }      return {
             ...attentionMap,
             data: modifiedMap,
             emotionalBias
@@ -588,7 +588,7 @@ export default class TopDownAttention: {
     // ========================================
 
     async handleVoiceCommand(command) {
-        this.log(`🗣️ Commande vocale: ${command.type}`);      try: {
+        this.log(`🗣️ Commande vocale: ${command.type}`);      try {
             switch (command.type) {
                 case 'FOCUS_ON':
         
@@ -626,7 +626,7 @@ export default class TopDownAttention: {
 
         } catch (error) {
       // Logger fallback - ignore error
-    }`, STR_ERROR);      return: { success: false, error: error.message };
+    }`, STR_ERROR);      return { success: false, error: error.message };
         }
     }
 
@@ -692,7 +692,7 @@ export default class TopDownAttention: {
                 this.config.maxConcurrentTargets = 4;
                 this.log("😌 Mode RELAXED activé - Attention détendue");
                 break;
-        }      return: {
+        }      return {
             success: true,
             mode: mode,
             message: `Mode d'attention changé vers ${mode}`
@@ -709,7 +709,7 @@ export default class TopDownAttention: {
         };
 
         this.state.ignoreZones.set(ignoreZone.id, ignoreZone);
-        this.log(`🚫 Zone d'ignore ajoutée: ${ignoreZone.id}`);      return: {
+        this.log(`🚫 Zone d'ignore ajoutée: ${ignoreZone.id}`);      return {
             success: true,
             zoneId: ignoreZone.id,
             message: "Zone d'ignore créée"
@@ -769,7 +769,7 @@ export default class TopDownAttention: {
     clearAllTargets() {
         const count = this.state.currentTargets.size;
         this.state.currentTargets.clear();
-        this.log(`🧹 ${count} cibles supprimées`);      return: {
+        this.log(`🧹 ${count} cibles supprimées`);      return {
             success: true,
             message: `${count} cibles supprimées`
         };
@@ -787,7 +787,7 @@ export default class TopDownAttention: {
         return Array.from(this.state.activeGoals.values());
     }
 
-    getStatus() {      return: {
+    getStatus() {      return {
             name: this.name,
             version: this.version,
             status: this.status,
@@ -857,7 +857,7 @@ export default class TopDownAttention: {
         return this.emotionalModulator.modulationHistory.length;
     }
 
-    getDetailedStats() {      return: {
+    getDetailedStats() {      return {
             basic: this.getStatus(),
             targets: {
                 count: this.state.currentTargets.size,
@@ -916,7 +916,7 @@ export default class TopDownAttention: {
     // SAUVEGARDE ET RESTAURATION
     // ========================================
 
-    saveState() {      return: {
+    saveState() {      return {
             version: this.version,
             timestamp: Date.now()
             config: { ...this.config }
@@ -931,7 +931,7 @@ export default class TopDownAttention: {
     restoreState(savedState) {
         if (savedState.version !== this.version) {
             this.log(`⚠️ Version différente: ${savedState.version} vs ${this.version}`, 'warn');
-        }      try: {
+        }      try {
             // Restauration de la config
             this.config = { ...this.config, ...savedState.config };
 
@@ -944,11 +944,11 @@ export default class TopDownAttention: {
             this.state.focusHistory = savedState.focusHistory || [];
             this.state.currentMode = savedState.mode || STR_BROAD;
 
-            this.log("✅ État restauré avec succès");      return: { success: true };
+            this.log("✅ État restauré avec succès");      return { success: true };
 
         } catch (error) {
       // Logger fallback - ignore error
-    }`, STR_ERROR);      return: { success: false, error: error.message };
+    }`, STR_ERROR);      return { success: false, error: error.message };
         }
     }
 
@@ -968,7 +968,7 @@ export default class TopDownAttention: {
         return await this.generateWithOpenAI(`zone_${Date.now()}_${(crypto.randomBytes(4).readUI...`, context);
     }
 
-    getEmptyResult() {      return: {
+    getEmptyResult() {      return {
             attentionMap: null,
             targets: [],
             goals: [],
@@ -1221,12 +1221,12 @@ class VoiceCommandHandler: {
 
     extractTarget(text) {
         // Extraction simple de cible
-        if (text.includes('visage') || text.includes(STR_FACE)) {      return: { type: STR_FACE, priority: 0.9 };
+        if (text.includes('visage') || text.includes(STR_FACE)) {      return { type: STR_FACE, priority: 0.9 };
         }
-        if (text.includes('mouvement') || text.includes('bouge')) {      return: { type: STR_MOTION, priority: 0.8 };
+        if (text.includes('mouvement') || text.includes('bouge')) {      return { type: STR_MOTION, priority: 0.8 };
         }
-        if (text.includes('texte') || text.includes('écrit')) {      return: { type: STR_TEXT, priority: 0.7 };
-        }      return: { type: 'generic', priority: 0.5 };
+        if (text.includes('texte') || text.includes('écrit')) {      return { type: STR_TEXT, priority: 0.7 };
+        }      return { type: 'generic', priority: 0.5 };
     }
 
     extractArea(text) {

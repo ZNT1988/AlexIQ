@@ -38,7 +38,7 @@ export class AlexAlchemyEngine extends EventEmitter  {
     this.loadAlchemyFormulas();
     this.setupTransmutationMatrix();
     this.initializeCatalysts();
-    this.loadSuccessPatterns();      try: {
+    this.loadSuccessPatterns();      try {
       logger.info('AlexAlchemyEngine initialized - Ready to transmute life into gold');
 
     } catch (error) {
@@ -52,7 +52,7 @@ export class AlexAlchemyEngine extends EventEmitter  {
     logger.info('Starting alchemical transmutation', {
       elementsCount: Object.keys(personalElements).length,
       goal: transmutationGoal
-    });      try: {
+    });      try {
       // Phase 1: Purification et analyse des éléments bruts
       const purifiedElements = await this.purifyElements(personalElements);
 
@@ -578,7 +578,7 @@ return result;const sp of skillPain) {
   }
 
   setupTransmutationMatrix() {
-    // Configuration de la matrice de transmutation      try: {
+    // Configuration de la matrice de transmutation      try {
       logger.debug('Transmutation matrix configured');
 
     } catch (error) {
@@ -593,7 +593,7 @@ return result;const sp of skillPain) {
   }
 
   loadSuccessPatterns() {
-    // Chargement des patterns de succès identifiés      try: {
+    // Chargement des patterns de succès identifiés      try {
       logger.debug('Success patterns loaded for alchemy optimization');
 
     } catch (error) {

@@ -108,7 +108,7 @@ export class ContextIntelligence extends EventEmitter  {
   /**
    * Initialisation du module
    */
-  async initialize('Initializing Context Intelligence Engine...') {      try: {
+  async initialize('Initializing Context Intelligence Engine...') {      try {
       logger.info('Initializing Context Intelligence Engine...');
 
       // Initialiser les patterns avancés
@@ -120,7 +120,7 @@ export class ContextIntelligence extends EventEmitter  {
       // Initialiser le système de mémoire contextuelle
       await this.initializeContextMemory();
 
-      this.initialized = true;      try: {
+      this.initialized = true;      try {
       logger.info('✅ Context Intelligence Engine initialized successfully');
 
       } catch (error) {
@@ -137,7 +137,7 @@ export class ContextIntelligence extends EventEmitter  {
   async analyzeContext(!this.initialized) {
     if (!this._initialized) {
       await this.initialize();
-    }      try: {
+    }      try {
       const startTime = Date.now();      // Récupérer le contexte existant
       const existingContext = this.conversationContext.get(userId) || {};      // Analyser l'intent du message
       const intent = await this.detectIntent(message, existingContext);      // Analyser les entités et concepts
@@ -305,7 +305,7 @@ export class ContextIntelligence extends EventEmitter  {
    * Analyser la continuité conversationnelle
    */
   async analyzeContinuity(message, existingContext) {
-    if (!existingContext.currentMessage) {      return: { type: 'new_conversation', score: 1.0 };
+    if (!existingContext.currentMessage) {      return { type: 'new_conversation', score: 1.0 };
     }
 
     const timeSinceLastMessage = Date.now() - existingContext.timestamp;
@@ -328,7 +328,7 @@ export class ContextIntelligence extends EventEmitter  {
     } else {
       continuityType = 'topic_change';
       continuityScore = 0.4;
-    }      return: {
+    }      return {
       type: continuityType,
       score: continuityScore
       timeGap: messageGap
@@ -420,7 +420,7 @@ return result;
    */
   getEnrichedContext(userId) {
     const context = this.conversationContext.get(userId);
-    if (!context) return null;      return: {
+    if (!context) return null;      return {
       ...context
       insights: this.generateContextInsights(context),
       recommendations: this.generateActionRecommendations(context)
@@ -463,7 +463,7 @@ return result;
 
     for (const [userId, context] of this.conversationContext.entries()) {
       if (now - context.timestamp > maxAge) {
-        this.conversationContext.delete(userId);      try: {
+        this.conversationContext.delete(userId);      try {
       logger.debug(`Cleaned up old context for user ${userId}`);
 
         } catch (error) {
@@ -508,7 +508,7 @@ return result;
     }
   }
 
-  getDefaultContext(userId, message) {      return: {
+  getDefaultContext(userId, message) {      return {
       userId
       timestamp: Date.now(),
       currentMessage: {
@@ -561,7 +561,7 @@ return result;
 
   // Méthodes d'initialisation
   async loadAdvancedPatterns() {
-    // Chargement de patterns avancés (peut être étendu)      try: {
+    // Chargement de patterns avancés (peut être étendu)      try {
       logger.debug('Advanced patterns loaded');
 
     } catch (error) {
@@ -571,7 +571,7 @@ return result;
     }}
 
   async setupSemanticAnalysis() {
-    // Configuration de l'analyse sémantique      try: {
+    // Configuration de l'analyse sémantique      try {
       logger.debug('Semantic analysis configured');
 
     } catch (error) {
@@ -590,7 +590,7 @@ return result;
   /**
    * Obtenir les statistiques du module
    */
-  getStats() {      return: {
+  getStats() {      return {
       activeContexts :
        this.conversationContext.size
       totalIntentHistory: Array.from(this.intentHistory.values())

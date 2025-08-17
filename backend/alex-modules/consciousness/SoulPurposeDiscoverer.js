@@ -52,7 +52,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
 
         this.soulProfiles = new Map();
         this.purposeJourneys = new Map();
-        this.activeDiscoveries = new Map();      try: {
+        this.activeDiscoveries = new Map();      try {
       logger.info('SoulPurposeDiscoverer consciousness awakened', {
             discoveryDepth: this.config.discoveryDepth,
             guidanceLevel: this.config.guidanceLevel
@@ -128,7 +128,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
             seeker: discoveryRequest.seekerProfile?.name || 'Anonymous',
             currentLifeStage: discoveryRequest.currentLifeStage
             seekingDepth: discoveryRequest.seekingDepth || this.config.discoveryDepth
-        });      try: {
+        });      try {
             const discoverySession = {
                 id: questId,
                 startTime: Date.now()
@@ -311,7 +311,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
       // Logger fallback - ignore error
     });
 
-            this.activeDiscoveries.delete(questId);      return: {
+            this.activeDiscoveries.delete(questId);      return {
                 success: false,
                 error: error.message
                 questId
@@ -332,7 +332,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
             alignmentId
             decision: alignmentRequest.decision,
             urgency: alignmentRequest.urgency
-        });      try: {
+        });      try {
             // Évaluation de l'alignement avec le purpose
             const purposeAlignment = await this.assessPurposeAlignment(
                 alignmentRequest.decision
@@ -397,7 +397,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 alignmentId
@@ -418,7 +418,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
             planId
             currentState: transformationRequest.currentState,
             desiredAlignment: transformationRequest.desiredAlignment
-        });      try: {
+        });      try {
             // Analyse de l'écart entre état actuel et purpose
             const gapAnalysis = await this.analyzePurposeGap(
                 transformationRequest.currentLifeSituation
@@ -495,7 +495,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 planId
@@ -505,7 +505,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
 
     // Méthodes principales d'analyse et révélation
 
-    async analyzeSoulSignature(lifeHistory, deepFeelings, spiritualExperiences) {      return: {
+    async analyzeSoulSignature(lifeHistory, deepFeelings, spiritualExperiences) {      return {
             archetype: await this.identifySoulArchetype(lifeHistory, spiritualExperiences)
             frequency: await this.measureSoulFrequency(deepFeelings, spiritualExperiences)
             lineage: await this.traceSpiritualLineage(spiritualExperiences),
@@ -514,7 +514,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
         };
     }
 
-    async extractHiddenPurposePatterns(soulProfile, lifeChallenges, peakExperiences) {      return: {
+    async extractHiddenPurposePatterns(soulProfile, lifeChallenges, peakExperiences) {      return {
             challengeTransformation: await this.analyzeChallengePatterns(lifeChallenges),
             peakExperienceThemes: await this.analyzePeakExperienceThemes(peakExperiences)
             giftEmergence: await this.trackGiftEmergencePatterns(soulProfile, peakExperiences)
@@ -523,7 +523,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
         };
     }
 
-    async revealAuthenticSoulPurpose(soulProfile, purposePatterns, innerWisdom) {      return: {
+    async revealAuthenticSoulPurpose(soulProfile, purposePatterns, innerWisdom) {      return {
             primary: await this.distillPrimaryPurpose(soulProfile, purposePatterns)
             secondary: await this.identifySecondaryPurposes(purposePatterns),
             theme: await this.extractLifeTheme(soulProfile, purposePatterns)
@@ -532,7 +532,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
         };
     }
 
-    async clarifyDivineMission(purposeRevelation, serviceDesire, worldVision) {      return: {
+    async clarifyDivineMission(purposeRevelation, serviceDesire, worldVision) {      return {
             statement: await this.craftMissionStatement(purposeRevelation, serviceDesire)
             service: await this.defineServiceAreas(purposeRevelation, worldVision)
             impact: await this.envisionImpact(purposeRevelation, worldVision)
@@ -567,7 +567,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
     }
 
     generateImmediateSteps(session) {
-        return: [
+        return [
             'Begin daily purpose meditation practiceSTR_Journal about how your discovered purpose feels in your bodySTR_Identify one area of life that needs alignmentSTR_Take one small action aligned with your purpose today'
         ];
     }
@@ -586,7 +586,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
     }
 
     generateBasicPurposeGuidance() {
-        return: [
+        return [
             'Listen to your heart and inner wisdomSTR_Pay attention to what brings you joy and fulfillmentSTR_Notice how you naturally want to serve othersSTR_Trust the guidance that comes through meditation and reflection'
         ];
     }
@@ -603,7 +603,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
 
     // Méthodes d'alignement rapide
 
-    async assessPurposeAlignment(decision, knownPurpose, values) {      return: {
+    async assessPurposeAlignment(decision, knownPurpose, values) {      return {
             score: Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 30) + 70,
             areas: ['values alignment', 'service potential', 'growth opportunity']
             risks: ['potential misalignment with long-term vision'],
@@ -612,7 +612,7 @@ export class SoulPurposeDiscoverer extends EventEmitter  {
         };
     }
 
-    async analyzeSpiritualConsequences(decision, stakeholders, impact) {      return: {
+    async analyzeSpiritualConsequences(decision, stakeholders, impact) {      return {
             karmic: 'Positive karmic implications for service',
             growth: 'Significant soul growth potential'
             service: 'Opportunity to serve others meaningfully',

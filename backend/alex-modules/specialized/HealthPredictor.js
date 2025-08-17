@@ -425,7 +425,7 @@ export class HealthPredictor: {
             // Apprentissage depuis prédiction
             async if(prediction) {
                 await this.learnFromFatiguePrediction(prediction);
-            }      return: {
+            }      return {
                 success: true
                 predictionId
                 type: STR_FATIGUE,
@@ -445,7 +445,7 @@ export class HealthPredictor: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 predictionId
@@ -538,7 +538,7 @@ export class HealthPredictor: {
                 );
 
             // Enregistrement session monitoring active
-            await this.registerActiveMonitoring(monitoring);      return: {
+            await this.registerActiveMonitoring(monitoring);      return {
                 success: true
                 monitoringId
                 active: true,
@@ -552,7 +552,7 @@ export class HealthPredictor: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 monitoringId
@@ -587,7 +587,7 @@ export class HealthPredictor: {
             detectionId
             userId: detectionRequest.userId,
             sensitivity: detectionRequest.sensitivity || 0.8
-        });      try: {
+        });      try {
             const detection = {
                 id: detectionId,
                 startTime: Date.now()
@@ -639,7 +639,7 @@ export class HealthPredictor: {
             }
 
             detection.endTime = Date.now();
-            detection.duration = detection.endTime - detection.startTime;      return: {
+            detection.duration = detection.endTime - detection.startTime;      return {
                 success: true
                 detectionId
                 illnessDetected: detection.detections.length > 0,
@@ -656,7 +656,7 @@ export class HealthPredictor: {
             };
 
         } catch (error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 detectionId
@@ -716,12 +716,12 @@ export class HealthPredictor: {
 
     async learnFromFatiguePrediction(prediction) { return true; }
     calculateNextUpdateTime(horizon) { return new Date(Date.now() + 2 * 60 * 60 * 1000); }
-    async generateBasicFatiguePrediction(request) {      return: { risk :
+    async generateBasicFatiguePrediction(request) {      return { risk :
        'low', recommendations: ['Get adequate rest'] };
     }
 
     // Méthodes monitoring
-    async personalizeMonitoringConfig(user, predictions) {      return: {
+    async personalizeMonitoringConfig(user, predictions) {      return {
             predictions: predictions || [STR_FATIGUE, STR_STRESS]
             dataSources: ['bioSensors', STR_ACTIVITY]
             expectedAccuracy: 0.85
@@ -729,21 +729,21 @@ export class HealthPredictor: {
     }
 
     async initializeUserPredictionModels(userId, config) { return true; }
-    async setupPersonalizedAlertSystem(user, methods) {      return: { channels: methods || [STR_PUSH] };
+    async setupPersonalizedAlertSystem(user, methods) {      return { channels: methods || [STR_PUSH] };
     }
     async startContinuousDataCollection(userId, dataTypes) { return true; }
-    async activatePredictionScheduler(monitoringId, schedule) {      return: { schedule: schedule.frequency };
+    async activatePredictionScheduler(monitoringId, schedule) {      return { schedule: schedule.frequency };
     }
     async initializePersonalLearning(userId, monitoring) { return true; }
     async registerActiveMonitoring(monitoring) { return true; }
     async generateMonitoringOptimizationRecommendations(monitoring) {
-        return: ['Ensure consistent sleep schedule', 'Maintain device battery levels'];
+        return ['Ensure consistent sleep schedule', 'Maintain device battery levels'];
     }
-    async startBasicMonitoring(request) {      return: { mode: 'basic', predictions: [STR_FATIGUE] };
+    async startBasicMonitoring(request) {      return { mode: 'basic', predictions: [STR_FATIGUE] };
     }
 
     // Méthodes détection maladie
-    async analyzeIllnessSignals(userId, types) {      return: { signalsCount: 10, abnormalSignals: 2 };
+    async analyzeIllnessSignals(userId, types) {      return { signalsCount: 10, abnormalSignals: 2 };
     }
 
     calculateIllnessUrgency(detections) {
@@ -753,9 +753,9 @@ export class HealthPredictor: {
 
     async generateIllnessRecommendations(detections, urgency) {
         if (urgency === STR_HIGH) {
-            return: ['Consult healthcare provider immediately', 'Monitor symptoms closely'];
+            return ['Consult healthcare provider immediately', 'Monitor symptoms closely'];
         }
-        return: ['Increase rest', 'Stay hydrated', 'Monitor for symptom development'];
+        return ['Increase rest', 'Stay hydrated', 'Monitor for symptom development'];
     }
 
     async triggerEmergencyAlerts(detection, userId) {
@@ -767,11 +767,11 @@ export class HealthPredictor: {
         return new Date(Date.now() + hours * 60 * 60 * 1000);
     }
 
-    async generateBasicIllnessCheck(request) {      return: { status: 'healthy', recommendations: ['Continue healthy habits'] };
+    async generateBasicIllnessCheck(request) {      return { status: 'healthy', recommendations: ['Continue healthy habits'] };
     }
 
     async generateFatiguePreventionRecommendations(predictions, patterns, userId) {
-        return: ['Take a 15-minute power nap',
+        return ['Take a 15-minute power nap',
       'Increase water intake',
       'Reduce screen time for next 2 hours',
       'Consider light exercise or stretching'];
@@ -809,42 +809,42 @@ export class HealthPredictor: {
 
 // Data Sources
 class BioSensorDataSource: {
-    async collect(_userId, _timeHorizon) {      return: { points: 100, type: 'bioSensor' };
+    async collect(_userId, _timeHorizon) {      return { points: 100, type: 'bioSensor' };
     }
 }
 
 class EnvironmentalDataSource: {
-    async collect(_userId, _timeHorizon) {      return: { points: 20, type: 'environmental' };
+    async collect(_userId, _timeHorizon) {      return { points: 20, type: 'environmental' };
     }
 }
 
 class LifestyleDataSource: {
-    async collect(_userId, _timeHorizon) {      return: { points: 50, type: 'lifestyle' };
+    async collect(_userId, _timeHorizon) {      return { points: 50, type: 'lifestyle' };
     }
 }
 
 class SleepDataSource: {
-    async collect(_userId, _timeHorizon) {      return: { points: 30, type: STR_SLEEP };
+    async collect(_userId, _timeHorizon) {      return { points: 30, type: STR_SLEEP };
     }
 }
 
 class ActivityDataSource: {
-    async collect(_userId, _timeHorizon) {      return: { points: 40, type: STR_ACTIVITY };
+    async collect(_userId, _timeHorizon) {      return { points: 40, type: STR_ACTIVITY };
     }
 }
 
 class NutritionDataSource: {
-    async collect(_userId, _timeHorizon) {      return: { points: 25, type: 'nutrition' };
+    async collect(_userId, _timeHorizon) {      return { points: 25, type: 'nutrition' };
     }
 }
 
 class MoodDataSource: {
-    async collect(_userId, _timeHorizon) {      return: { points: 15, type: 'mood' };
+    async collect(_userId, _timeHorizon) {      return { points: 15, type: 'mood' };
     }
 }
 
 class ContextualDataSource: {
-    async collect(_userId, _timeHorizon) {      return: { points: 10, type: 'contextual' };
+    async collect(_userId, _timeHorizon) {      return { points: 10, type: 'contextual' };
     }
 }
 
@@ -862,22 +862,22 @@ class ContextualEnricher: {}
 
 // Pattern Detectors
 class TrendPatternDetector: {
-    async detectFatiguePatterns(_data, _types) { return: []; }
+    async detectFatiguePatterns(_data, _types) { return []; }
 }
 class CyclicPatternDetector: {
-    async detectFatiguePatterns(_data, _types) { return: []; }
+    async detectFatiguePatterns(_data, _types) { return []; }
 }
 class AnomalyPatternDetector: {
-    async detectFatiguePatterns(_data, _types) { return: []; }
+    async detectFatiguePatterns(_data, _types) { return []; }
 }
 class CorrelationPatternDetector: {
-    async detectFatiguePatterns(_data, _types) { return: []; }
+    async detectFatiguePatterns(_data, _types) { return []; }
 }
 class SeasonalPatternDetector: {
-    async detectFatiguePatterns(_data, _types) { return: []; }
+    async detectFatiguePatterns(_data, _types) { return []; }
 }
 class BehavioralPatternDetector: {
-    async detectFatiguePatterns(_data, _types) { return: []; }
+    async detectFatiguePatterns(_data, _types) { return []; }
 }
 
 // Analyzers
@@ -899,7 +899,7 @@ class ReproducibilityValidator: {}
 
 // Prediction Models
 class PhysicalFatiguePredictionModel: {
-    async predict(_options) {      return: {
+    async predict(_options) {      return {
             probability: 0.7,
             confidence: 0.85
             expectedOnset: '4hours',
@@ -911,7 +911,7 @@ class PhysicalFatiguePredictionModel: {
 }
 
 class MentalFatiguePredictionModel: {
-    async predict(_options) {      return: {
+    async predict(_options) {      return {
             probability: 0.6,
             confidence: 0.8
             expectedOnset: '3hours',
@@ -923,7 +923,7 @@ class MentalFatiguePredictionModel: {
 }
 
 class CombinedFatiguePredictionModel: {
-    async predict(_options) {      return: {
+    async predict(_options) {      return {
             probability: 0.75,
             confidence: 0.9
             expectedOnset: '2hours',
@@ -941,7 +941,7 @@ class BurnoutPredictionModel: {}
 
 // Illness Models
 class ViralInfectionPredictionModel: {
-    async detectEarlySignals(_options) {      return: {
+    async detectEarlySignals(_options) {      return {
             probability: 0.4,
             confidence: 0.7
             signals: ['elevated_resting_hr', 'temp_variation']
@@ -952,7 +952,7 @@ class ViralInfectionPredictionModel: {
 }
 
 class BacterialInfectionPredictionModel: {
-    async detectEarlySignals(_options) {      return: {
+    async detectEarlySignals(_options) {      return {
             probability: 0.2,
             confidence: 0.6
             signals: ['inflammation_markers'],
@@ -963,7 +963,7 @@ class BacterialInfectionPredictionModel: {
 }
 
 class InflammatoryPredictionModel: {
-    async detectEarlySignals(_options) {      return: {
+    async detectEarlySignals(_options) {      return {
             probability: 0.3,
             confidence: 0.75
             signals: ['hrv_decreased', 'recovery_impaired']

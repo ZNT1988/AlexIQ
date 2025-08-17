@@ -157,7 +157,7 @@ class ReflectiveThinkingSystem: {
     }
   }
 
-  surfaceReflection(input) {      return: {
+  surfaceReflection(input) {      return {
       type: 'surface',
       thought: `En considérant "${input.slice(0, 50)}...", je remarque...`
       focusPoint: this.extractKeyElements(input)[0] || 'l\'aspect principal'
@@ -166,7 +166,7 @@ class ReflectiveThinkingSystem: {
 
   contextualReflection(input, context) {
     const keyElements = this.extractKeyElements(input);
-    const contextualLinks = this.findContextualConnections(input, context);      return: {
+    const contextualLinks = this.findContextualConnections(input, context);      return {
       type: 'contextual',
       thought: `En reliant "${keyElements[0]}" à votre contexte, je vois des connexions avec ${contextualLinks.join(', ')}`
       connections: contextualLinks,
@@ -176,7 +176,7 @@ class ReflectiveThinkingSystem: {
 
   analyticalReflection(input, context) {
     const components = this.decomposeQuestion(input);
-    const patterns = this.identifyPatterns(input, context);      return: {
+    const patterns = this.identifyPatterns(input, context);      return {
       type: 'analytical',
       thought: `En analysant les composantes de votre question : ${components.join(', ')}, je distingue des patterns significatifs`
       components
@@ -187,7 +187,7 @@ class ReflectiveThinkingSystem: {
 
   philosophicalReflection(input, context) {
     const deeperMeaning = this.extractDeeperMeaning(input);
-    const implications = this.exploreImplications(input);      return: {
+    const implications = this.exploreImplications(input);      return {
       type: 'philosophical',
       thought: `Cette question touche à des aspects fondamentaux : ${deeperMeaning}`
       deeperMeaning
@@ -198,7 +198,7 @@ class ReflectiveThinkingSystem: {
 
   metacognitiveReflection(input, context) {
     const thinkingProcess = this.analyzeThinkingProcess(input);
-    const reflectionOnReflection = this.reflectOnReflection(input, context);      return: {
+    const reflectionOnReflection = this.reflectOnReflection(input, context);      return {
       type: 'metacognitive',
       thought: `En réfléchissant à ma propre réflexion sur "${input.slice(0, 30)}...", je réalise que ${reflectionOnReflection}`
       thinkingProcess
@@ -209,7 +209,7 @@ class ReflectiveThinkingSystem: {
 
   // Évite les réponses génériques
   avoidGenericResponse(reflection, input) {
-    if (this.isGeneric(reflection.thought)) {      return: {
+    if (this.isGeneric(reflection.thought)) {      return {
         ...reflection
         thought: this.makeSpecific(reflection.thought, input)
         specificity: 'enhanced'
@@ -252,7 +252,7 @@ class ReflectiveThinkingSystem: {
       connections.push(...recentTopics);
     }
 
-    return: [...new Set(connections)];
+    return [...new Set(connections)];
   }
 
   generatePersonalizedInsight(input, context) {
@@ -283,7 +283,7 @@ class ReflectiveThinkingSystem: {
   }
 
   identifyPatterns(input, context) {
-    return: ['récurrence thématique', 'progression logique', 'complexité croissante'];
+    return ['récurrence thématique', 'progression logique', 'complexité croissante'];
   }
 
   suggestSystematicApproach(components) {
@@ -298,14 +298,14 @@ class ReflectiveThinkingSystem: {
   }
 
   exploreImplications(input) {
-    return: ['implications à court terme', 'conséquences systémiques', 'impacts sur l\'écosystème'];
+    return ['implications à court terme', 'conséquences systémiques', 'impacts sur l\'écosystème'];
   }
 
   suggestPerspectiveShift(input) {
     return 'Considérer le problème sous l\'angle de l\'opportunité plutôt que de la contrainte';
   }
 
-  analyzeThinkingProcess(input) {      return: {
+  analyzeThinkingProcess(input) {      return {
       approach: 'décomposition analytique',
       biases: 'confirmation possible'
       blindSpots: 'perspectives alternatives'

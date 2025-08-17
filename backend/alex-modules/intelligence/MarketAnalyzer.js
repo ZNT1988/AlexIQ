@@ -310,7 +310,7 @@ class MarketAnalyzer: {
   /**
    * 🚀 Initialisation de l'analyseur technique
    */
-  async initializeAnalyzer() {      try: {
+  async initializeAnalyzer() {      try {
       // Connexion au kernel Alex
       this.setupKernelIntegration();
 
@@ -349,7 +349,7 @@ class MarketAnalyzer: {
    */
   async analyzeStock(stock) {
     const symbol = typeof stock === 'string' ? stock : stock.symbol;
-    const analysisStart = Date.now();      try: {
+    const analysisStart = Date.now();      try {
       // Récupération des données de prix
       const priceData = await this.getPriceData(symbol);
 
@@ -612,7 +612,7 @@ class MarketAnalyzer: {
   async detectPatternWithAI(priceData, patternType) {
     // Simulation d'analyse IA sophistiquée
     const patterns = [STR_BULL_FLAG, STR_BEAR_FLAG, STR_HEAD_SHOULDERS, STR_DOUBLE_TOP, 'triangle'];
-    const detectedPattern = patterns[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * patterns.length)];      return: {
+    const detectedPattern = patterns[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * patterns.length)];      return {
       pattern: detectedPattern,
       confidence: 0.7 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3
       timeframe: this.estimatePatternTimeframe(detectedPattern),
@@ -683,7 +683,7 @@ class MarketAnalyzer: {
     } else {
       overallTrend = STR_NEUTRAL;
       confidence = 0.5;
-    }      return: {
+    }      return {
       trend: overallTrend
       confidence
       timeframes
@@ -880,7 +880,7 @@ class MarketAnalyzer: {
     }
 
     const signalLine = this.calculateEMA(macdHistory, signalPeriod);
-    const histogram = macdLine - signalLine;      return: {
+    const histogram = macdLine - signalLine;      return {
       macd: macdLine,
       signal: signalLine
       histogram: histogram,
@@ -944,7 +944,7 @@ class MarketAnalyzer: {
       kValues.push(((sliceClose - sliceLowest) / (sliceHighest - sliceLowest)) * 100);
     }
 
-    const d = this.calculateSMA(kValues, dPeriod);      return: { k, d };
+    const d = this.calculateSMA(kValues, dPeriod);      return { k, d };
   }
 
   // Williams %R
@@ -1023,7 +1023,7 @@ class MarketAnalyzer: {
 
     // Mock calculation for demonstration
     const diPlus = 15 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 20;
-    const diMinus = 15 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 20;      return: { diPlus, diMinus };
+    const diMinus = 15 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 20;      return { diPlus, diMinus };
   }
 
   // OBV (On-Balance Volume)
@@ -1083,7 +1083,7 @@ class MarketAnalyzer: {
     const kijunPeriod = 26;
     const senkouBPeriod = 52;
 
-    if (priceData.highs.length < senkouBPeriod) {      return: {
+    if (priceData.highs.length < senkouBPeriod) {      return {
         tenkanSen: 0,
         kijunSen: 0
         senkouSpanA: 0,
@@ -1111,7 +1111,7 @@ class MarketAnalyzer: {
     const senkouSpanB = (senkouBHigh + senkouBLow) / 2;
 
     // Chikou Span (Lagging Span)
-    const chikouSpan = priceData.closes[priceData.closes.length - 1];      return: {
+    const chikouSpan = priceData.closes[priceData.closes.length - 1];      return {
       tenkanSen
       kijunSen
       senkouSpanA
@@ -1125,7 +1125,7 @@ class MarketAnalyzer: {
   // Keltner Channels
   calculateKeltnerChannels(priceData, period = 20, multiplier = 2) {
     const ema = this.calculateEMA(priceData.closes, period);
-    const atr = this.calculateATR(priceData, period);      return: {
+    const atr = this.calculateATR(priceData, period);      return {
       upper: ema + (atr * multiplier),
       middle: ema
       lower: ema - (atr * multiplier)
@@ -1205,7 +1205,7 @@ return result;
 
   async analyzeSingleTimeframe(data, timeframe) {
     const sma20 = this.calculateSMA(data.closes, 20);
-    const sma50 = this.calculateSMA(data.closes, 50);      return: {
+    const sma50 = this.calculateSMA(data.closes, 50);      return {
       timeframe
       trend: data.current > sma20 && sma20 > sma50 ? STR_BULLISH :
              data.current < sma20 && sma20 < sma50 ? STR_BEARISH : STR_NEUTRAL
@@ -1261,10 +1261,10 @@ return result;
   }
 
   async detectCandlestickPatterns(priceData) {
-    return: []; // Implémentation simplifiée
+    return []; // Implémentation simplifiée
   }
 
-  findPivotPoints(priceData) {      return: {
+  findPivotPoints(priceData) {      return {
       support: [
         { price: 95, strength: 0.8 }
         { price: 90, strength: 0.6 }
@@ -1281,7 +1281,7 @@ return result;
     const low = priceData.lows[priceData.lows.length - 1];
     const close = priceData.closes[priceData.closes.length - 1];
 
-    const pivot = (high + low + close) / 3;      return: {
+    const pivot = (high + low + close) / 3;      return {
       pivot
       r1: 2 * pivot - low,
       r2: pivot + (high - low)
@@ -1295,7 +1295,7 @@ return result;
   calculateFibonacciLevels(priceData) {
     const high = Math.max(...priceData.highs.slice(-50));
     const low = Math.min(...priceData.lows.slice(-50));
-    const range = high - low;      return: {
+    const range = high - low;      return {
       level_236: high - range * 0.236,
       level_382: high - range * 0.382
       level_500: high - range * 0.5,
@@ -1304,12 +1304,12 @@ return result;
     };
   }
 
-  calculateVolumeBasedLevels(priceData) {      return: {}; // Implémentation simplifiée
+  calculateVolumeBasedLevels(priceData) {      return {}; // Implémentation simplifiée
   }
 
   async analyzeVolume(priceData) {
     const avgVolume = this.calculateSMA(priceData.volumes, 20);
-    const currentVolume = priceData.volumes[priceData.volumes.length - 1];      return: {
+    const currentVolume = priceData.volumes[priceData.volumes.length - 1];      return {
       trend: currentVolume > avgVolume ? 'increasing' : 'decreasing',
       strength: currentVolume / avgVolume
       unusual: currentVolume > avgVolume * 2
@@ -1348,7 +1348,7 @@ return result;
     return 0.5 + (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5;
   }
 
-  async generateTechnicalPredictions(indicators, patterns, supportResistance, volumeAnalysis) {      return: {
+  async generateTechnicalPredictions(indicators, patterns, supportResistance, volumeAnalysis) {      return {
       shortTerm: {,
         direction: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5 ? 'up' : STR_DOWN
         magnitude: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 5,
@@ -1401,7 +1401,7 @@ return result;
     return current * (multipliers[pattern] || 1.05);
   }
 
-  analyzePatternVolume(priceData, pattern) {      return: {
+  analyzePatternVolume(priceData, pattern) {      return {
       confirmation: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) > 0.5,
       strength: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF)
     };
@@ -1465,7 +1465,7 @@ return result;
     return this.performMultiTimeframeAnalysis(priceData);
   }
 
-  async calculatePriceTargets(indicators, patterns, supportResistance) {      return: {
+  async calculatePriceTargets(indicators, patterns, supportResistance) {      return {
       conservative: 105,
       aggressive: 120
       stop: 95

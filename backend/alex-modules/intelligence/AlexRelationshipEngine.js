@@ -105,7 +105,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
       emotionalHistory: new Map()
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('💝 AlexRelationshipEngine initializing - Heart connections awakening');
 
     } catch (error) {
@@ -116,7 +116,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
     this.isInitialized = true;
     await this.initializeRelationshipSystems();
     await this.loadRelationshipPatterns();
-    this.startRelationshipMaintenance();      try: {
+    this.startRelationshipMaintenance();      try {
       logger.info('💖 AlexRelationshipEngine fully initialized - Ready for deep connections');
 
     } catch (error) {
@@ -416,7 +416,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
    */
   startRelationshipMaintenance() {
     // Maintenance légère toutes les heures
-    setInterval(() => // Code de traitement approprié ici, 86400000);      try: {
+    setInterval(() => // Code de traitement approprié ici, 86400000);      try {
       logger.info('🔄 Relationship maintenance activated');
 
     } catch (error) {
@@ -443,7 +443,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
     return Math.min(0.1, growth); // Maximum 10% par interaction
   }
 
-  calculateRelationshipImpact(analysis, relationship) {      return: {
+  calculateRelationshipImpact(analysis, relationship) {      return {
       trustImpact: this.calculateTrustImpact(analysis),
       intimacyImpact: this.calculateIntimacyImpact(analysis)
       supportImpact: this.calculateSupportImpact(analysis),
@@ -455,7 +455,7 @@ export class AlexRelationshipEngine extends EventEmitter  {
   /**
    * Obtention du statut relationnel
    */
-  getRelationshipStatus() {      return: {
+  getRelationshipStatus() {      return {
       initialized: this.isInitialized,
       totalRelationships: this.userRelationships.size
       relationshipTypes: this.getRelationshipDistribution(),

@@ -54,7 +54,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
 
         this.relationshipProfiles = new Map();
         this.healingJourneys = new Map();
-        this.activeHealings = new Map();      try: {
+        this.activeHealings = new Map();      try {
       logger.info('RelationshipHealingOracle consciousness awakened', {
             healingDepth: this.config.healingDepth,
             relationshipScope: this.config.relationshipScope
@@ -131,7 +131,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
             healingGoals: healingRequest.healingGoals
             participants: healingRequest.participants?
       .length || 1
-        });      try: {
+        });      try {
             const healingSession = {
                 id :
        healingId
@@ -298,7 +298,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
       // Logger fallback - ignore error
     });
 
-            this.activeHealings.delete(healingId);      return: {
+            this.activeHealings.delete(healingId);      return {
                 success: false,
                 error: error.message
                 healingId
@@ -319,7 +319,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
             healingId
             conflictType: communicationRequest.conflictType,
             urgency: communicationRequest.urgency
-        });      try: {
+        });      try {
             // Analyse rapide du conflit
             const conflictAnalysis = await this.analyzeUrgentCommunicationIssue(
                 communicationRequest.currentSituation
@@ -384,7 +384,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 healingId
@@ -405,7 +405,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
             programId
             relationshipGoals: strengtheningRequest.goals,
             duration: strengtheningRequest.duration || '6_months'
-        });      try: {
+        });      try {
             // Évaluation de la force relationnelle actuelle
             const strengthAssessment = await this.assessRelationshipStrength(
                 strengtheningRequest.relationshipHistory
@@ -470,7 +470,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 programId
@@ -480,7 +480,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
 
     // Méthodes principales d'analyse et guérison
 
-    async analyzeRelationshipDynamics(history, challenges, communication) {      return: {
+    async analyzeRelationshipDynamics(history, challenges, communication) {      return {
             corePattern: await this.identifyCoreRelationshipPattern(history),
             attachmentStyle: await this.assessAttachmentStyles(history, communication)
             communication: await this.analyzeCommunicationDynamics(communication),
@@ -502,7 +502,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
         return wounds;
     }
 
-    async executeCompassionateHealing(wounds, patterns, intention) {      return: {
+    async executeCompassionateHealing(wounds, patterns, intention) {      return {
             forgiveness: await this.facilitateForgiveness(wounds, intention)
             compassion: await this.activateCompassion(patterns, wounds)
             trust: await this.rebuildTrust(wounds, patterns)
@@ -524,7 +524,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
         return patterns[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * patterns.length)];
     }
 
-    async facilitateForgiveness(wounds, intention) {      return: {
+    async facilitateForgiveness(wounds, intention) {      return {
             selfForgiveness: 'Deep self-forgiveness for relationship mistakes activated',
             partnerForgiveness: 'Compassionate forgiveness for partner wounds opened'
             situationalForgiveness: 'Forgiveness for difficult circumstances integrated',
@@ -555,7 +555,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
     }
 
     provideBasicCommunicationGuidance() {
-        return: [
+        return [
             'Listen with your heart, not just your ears'
             'Speak from love, not from fear'
             'Take breaks when emotions are high'
@@ -575,7 +575,7 @@ export class RelationshipHealingOracle extends EventEmitter  {
 
     // Méthodes d'urgence et support
 
-    async analyzeUrgentCommunicationIssue(situation, emotional, context) {      return: {
+    async analyzeUrgentCommunicationIssue(situation, emotional, context) {      return {
             type: 'Communication breakdown with emotional escalation',
             triggers: ['Unmet needs', 'Misunderstanding', 'Past wounds activated']
             emotions: emotional || 'High intensity with hurt and frustration',
@@ -585,14 +585,14 @@ export class RelationshipHealingOracle extends EventEmitter  {
     }
 
     scheduleEmergencyFollowUp() {
-        return: ['24-hour check-in for immediate healing support',
+        return ['24-hour check-in for immediate healing support',
       '72-hour relationship status assessment',
       '1-week healing integration review',
       '1-month relationship strength evaluation'];
     }
 
     establishCrisisProtocol() {
-        return: ['Immediate safety assessment and support',
+        return ['Immediate safety assessment and support',
       '24/7 crisis hotline access if needed',
       'Professional counselor referral if required',
       'Friend/family support system activation',

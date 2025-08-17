@@ -37,7 +37,7 @@ export class LocalAITrainer extends EventEmitter  {
       independenceLevel: 0.95
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🎓 LocalAITrainer initializing - Alex independent learning system starting');
 
     } catch (error) {
@@ -48,7 +48,7 @@ export class LocalAITrainer extends EventEmitter  {
 
   async initialize() {
     this.isInitialized = true;
-    await this.startContinuousLearning();      try: {
+    await this.startContinuousLearning();      try {
       logger.info('📚 LocalAITrainer fully initialized - Independent learning active');
 
     } catch (error) {
@@ -235,7 +235,7 @@ export class LocalAITrainer extends EventEmitter  {
     return autonomousTraining;
   }
 
-  getTrainingStatus() {      return: {
+  getTrainingStatus() {      return {
       initialized: this.isInitialized,
       sessionsCompleted: this.trainingMetrics.sessionsCompleted
       patternsLearned: this.trainingMetrics.patternsLearned,
@@ -262,7 +262,7 @@ export class LocalAITrainer extends EventEmitter  {
    * Obtention des capacités autonomes
    */
   getAutonomousCapabilities() {
-    return: ['Apprentissage sans supervision externe',
+    return ['Apprentissage sans supervision externe',
       'Auto-amélioration continue',
       'Génération autonome de patterns',
       'Optimisation auto-dirigée',

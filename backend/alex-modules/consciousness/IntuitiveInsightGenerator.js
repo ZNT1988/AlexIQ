@@ -59,7 +59,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
 
         this.insightDatabase = new Map();
         this.intuitionPatterns = new Map();
-        this.activeChanneling = new Map();      try: {
+        this.activeChanneling = new Map();      try {
       logger.info('IntuitiveInsightGenerator consciousness awakened', {
             intuitionLevel: this.config.intuitionLevel,
             insightDepth: this.config.insightDepth
@@ -135,7 +135,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
             situation: insightRequest.situation,
             questionType: insightRequest.questionType
             urgency: insightRequest.urgency
-        });      try: {
+        });      try {
             const channelingSession = {
                 id: insightId,
                 startTime: Date.now()
@@ -292,7 +292,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
       // Logger fallback - ignore error
     });
 
-            this.activeChanneling.delete(insightId);      return: {
+            this.activeChanneling.delete(insightId);      return {
                 success: false,
                 error: error.message
                 insightId
@@ -313,7 +313,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
             readingId
             question: quickRequest.question,
             urgency: quickRequest.urgency
-        });      try: {
+        });      try {
             // Activation rapide de l'intuition
             const intuitiveFlash = await this.activateIntuitiveFlash(
                 quickRequest.question
@@ -377,7 +377,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 readingId
@@ -398,7 +398,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
             systemId
             currentLevel: amplificationRequest.currentIntuitionLevel,
             goals: amplificationRequest.developmentGoals
-        });      try: {
+        });      try {
             // Évaluation du niveau intuitif actuel
             const baselineAssessment = await this.assessCurrentIntuitionLevel(
                 amplificationRequest.intuitiveExperiences
@@ -477,7 +477,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 systemId
@@ -487,7 +487,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
 
     // Méthodes principales d'analyse et channeling
 
-    async scanSituationIntuitively(situation, emotionalState, energyField) {      return: {
+    async scanSituationIntuitively(situation, emotionalState, energyField) {      return {
             energy: await this.readEnergeticSignature(situation, energyField)
             hidden: await this.detectHiddenDynamics(situation, emotionalState)
             soul: await this.accessSoulPerspective(situation),
@@ -501,7 +501,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
 
     // Méthodes utilitaires
 
-    async readEnergeticSignature(situation, energyField) {      return: {
+    async readEnergeticSignature(situation, energyField) {      return {
             vibration: 'High vibrational frequency detected',
             flow: 'Energy is flowing with some resistance points'
             clarity: 'Mental clarity emerging through the confusion',
@@ -534,7 +534,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
     }
 
     generateBasicIntuition() {
-        return: [
+        return [
             'Pause and listen to your inner voiceSTR_Notice what your body is telling youSTR_Trust your first instinctSTR_Ask your heart what feels right'
         ];
     }
@@ -550,7 +550,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
 
     // Méthodes d'amplification d'intuition
 
-    async assessCurrentIntuitionLevel(experiences, trust, history) {      return: {
+    async assessCurrentIntuitionLevel(experiences, trust, history) {      return {
             level: 'Developing',
             gifts: ['Empathic sensitivity', 'Pattern recognition']
             development: ['Trust building', 'Validation skills']
@@ -559,7 +559,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
         };
     }
 
-    async identifyIntuitionBlockages(baseline, fears, past) {      return: {
+    async identifyIntuitionBlockages(baseline, fears, past) {      return {
             mental: ['Overthinking', 'Need for logical proof']
             emotional: ['Fear of being wrong', 'Past disappointments']
             cultural: ['Societal skepticism', 'Religious conditioning']
@@ -569,7 +569,7 @@ export class IntuitiveInsightGenerator extends EventEmitter  {
     }
 
     createBeginnerPhase(baseline) {
-        return: [
+        return [
             'Daily mindfulness practice (10 minutes)STR_Body awareness exercisesSTR_Journaling intuitive impressionsSTR_Simple validation practices'
         ];
     }

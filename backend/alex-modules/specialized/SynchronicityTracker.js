@@ -39,7 +39,7 @@ export class SynchronicityTracker extends EventEmitter  {
     this.setupPatternRecognition();
     this.initializeTemporalTracking();
     this.setupMeaningExtraction();
-    this.startCosmicFluxMonitoring();      try: {
+    this.startCosmicFluxMonitoring();      try {
       logger.info('SynchronicityTracker initialized - Tuned into cosmic frequencies');
 
     } catch (error) {
@@ -55,7 +55,7 @@ export class SynchronicityTracker extends EventEmitter  {
     logger.debug('Tracking synchronicity event', {
       type: eventData.type,
       userId
-    });      try: {
+    });      try {
       // Normalisation de l'événement
       const normalizedEvent = await this.normalizeEvent(eventData, userId);      // Ajout à l'historique utilisateur
       await this.addToUserHistory(normalizedEvent, userId);
@@ -85,7 +85,7 @@ export class SynchronicityTracker extends EventEmitter  {
    * Analyse complète des synchronicités pour un utilisateur
    */
   async analyzeSynchronicities(userId, timeframe = '30d') {
-    logger.info('Analyzing synchronicities', { userId, timeframe });      try: {
+    logger.info('Analyzing synchronicities', { userId, timeframe });      try {
       // Récupération de l'historique
       const userHistory = await this.getUserHistory(userId, timeframe);      // Détection des patterns récurrents
       const recurringPatterns = await this.detectRecurringPatterns(userHistory);      // Analyse des cycles temporels
@@ -137,7 +137,7 @@ export class SynchronicityTracker extends EventEmitter  {
   /**
    * Normalisation d'un événement pour le tracking
    */
-  async normalizeEvent() {      return: {
+  async normalizeEvent() {      return {
       id: this.generateEventId()
       userId,
       timestamp: new Date(rawEvent.timestamp || Date.now()),
@@ -501,7 +501,7 @@ export class SynchronicityTracker extends EventEmitter  {
   }
 
   loadCosmicDatabase() {
-    // Chargement de la base de données cosmique      try: {
+    // Chargement de la base de données cosmique      try {
       logger.debug('Cosmic database loaded');
 
     } catch (error) {
@@ -511,7 +511,7 @@ export class SynchronicityTracker extends EventEmitter  {
     }}
 
   setupPatternRecognition() {
-    // Configuration de la reconnaissance de patterns      try: {
+    // Configuration de la reconnaissance de patterns      try {
       logger.debug('Pattern recognition configured');
 
     } catch (error) {
@@ -521,7 +521,7 @@ export class SynchronicityTracker extends EventEmitter  {
     }}
 
   initializeTemporalTracking() {
-    // Initialisation du tracking temporel      try: {
+    // Initialisation du tracking temporel      try {
       logger.debug('Temporal tracking initialized');
 
     } catch (error) {
@@ -531,7 +531,7 @@ export class SynchronicityTracker extends EventEmitter  {
     }}
 
   setupMeaningExtraction() {
-    // Configuration de l'extraction de sens      try: {
+    // Configuration de l'extraction de sens      try {
       logger.debug('Meaning extraction configured');
 
     } catch (error) {
@@ -541,7 +541,7 @@ export class SynchronicityTracker extends EventEmitter  {
     }}
 
   startCosmicFluxMonitoring() {
-    // Démarrage du monitoring du flux cosmique      try: {
+    // Démarrage du monitoring du flux cosmique      try {
       logger.debug('Cosmic flux monitoring started');
 
     } catch (error) {

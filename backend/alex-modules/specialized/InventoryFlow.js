@@ -34,7 +34,7 @@ export class InventoryFlow extends EventEmitter  {
     this.plantConfiguration = {
       alba_italy: {,
         name: 'Alba Plant - Italy (HQ)'
-      location: { country: 'Italy',
+      location: { country { 'Italy',
       city: 'Alba'
       timezone: 'Europe/Rome' }
       capacity: { storage: 15000,
@@ -49,7 +49,7 @@ export class InventoryFlow extends EventEmitter  {
       }
       frankfurt_germany: {,
         name: 'Frankfurt Plant - Germany'
-        location: { country: 'Germany', city: 'Frankfurt', timezone: 'Europe/Berlin' }
+        location: { country { 'Germany', city: 'Frankfurt', timezone: 'Europe/Berlin' }
         capacity: { storage: 12000, production: 2000 }
         products: ['kinder_chocolate', 'hanuta', 'duplo']
         specializations: ['kinder_family', 'wafer_products']
@@ -57,7 +57,7 @@ export class InventoryFlow extends EventEmitter  {
       }
       sao_paulo_brazil: {,
         name: 'São Paulo Plant - Brazil'
-        location: { country: 'Brazil', city: 'São Paulo', timezone: 'America/Sao_Paulo' }
+        location: { country { 'Brazil', city: 'São Paulo', timezone: 'America/Sao_Paulo' }
         capacity: { storage: 8000, production: 1200 }
         products: ['nutella_brazil', 'kinder_ovo', 'tic_tac']
         specializations: ['tropical_adaptations', 'local_preferences']
@@ -65,7 +65,7 @@ export class InventoryFlow extends EventEmitter  {
       }
       belsk_poland: {,
         name: 'Belsk Plant - Poland'
-        location: { country: 'Poland', city: 'Belsk', timezone: 'Europe/Warsaw' }
+        location: { country { 'Poland', city: 'Belsk', timezone: 'Europe/Warsaw' }
         capacity: { storage: 10000, production: 1800 }
         products: ['kinder_surprise', 'kinder_joy', 'ferrero_collection']
         specializations: ['toy_integration', 'surprise_products']
@@ -152,7 +152,7 @@ export class InventoryFlow extends EventEmitter  {
    * Initialisation du système de gestion stock
    */
   async initializeInventoryFlow('📦 Initializing ALEX Inventory Flow for Ferrero Global Operations') {
-    logger.info('📦 Initializing ALEX Inventory Flow for Ferrero Global Operations');      try: {
+    logger.info('📦 Initializing ALEX Inventory Flow for Ferrero Global Operations');      try {
       // Initialisation inventaire temps réel
       await this.initializeRealTimeInventory();
 
@@ -531,7 +531,7 @@ export class InventoryFlow extends EventEmitter  {
     }, 3600000);
 
     // Optimisation nocturne (1x par jour à 2h00)
-    setInterval(async () => // Code de traitement approprié ici catch (error) {      try: {
+    setInterval(async () => // Code de traitement approprié ici catch (error) {      try {
       logger.error('Nightly optimization failed', { error });
 
           } catch (error) {
@@ -810,9 +810,9 @@ export class InventoryFlow extends EventEmitter  {
   async runAutomaticPredictions(const: [plantId, plantData] of this.realTimeInventory) {
     // Prédictions automatiques pour tous les produits
     for (const [plantId, plantData] of this.realTimeInventory) {
-      for (const [productCode] of plantData.inventory) {      try: {
+      for (const [productCode] of plantData.inventory) {      try {
           await this.predictDemand(productCode, plantId, 30);
-        } catch (error) {      try: {
+        } catch (error) {      try {
       logger.error(`Auto prediction failed for ${productCode} at ${plantId}`, { error });
 
           } catch (error) {
@@ -825,7 +825,7 @@ export class InventoryFlow extends EventEmitter  {
   }
 
   async runNightlyOptimization('🌙 Running nightly inventory optimization...') {
-    logger.info('🌙 Running nightly inventory optimization...');      try: {
+    logger.info('🌙 Running nightly inventory optimization...');      try {
       // Optimisation globale nocturne
       await this.optimizeInventoryLevels('all', 'all');
       await this.processAutomaticOrdering();
@@ -833,11 +833,11 @@ export class InventoryFlow extends EventEmitter  {
       await this.optimizeGlobalSupplyChain();
 
       // Mise à jour des KPIs
-      await this.updateKPIs();      try: {
+      await this.updateKPIs();      try {
       logger.info('✅ Nightly optimization completed successfully');
 
       } catch (_error) {
-    } catch (error)       try: {
+    } catch (error)       try {
       logger.error('Nightly optimization failed', { error });
 
       } catch (_error) {
@@ -908,7 +908,7 @@ export class InventoryFlow extends EventEmitter  {
   /**
    * Statut du système InventoryFlow
    */
-  getSystemStatus()       return: {
+  getSystemStatus()       return {
       name: 'ALEX Inventory Flow',
       version: '5.0 - Ferrero MVP'
       status: 'operational',

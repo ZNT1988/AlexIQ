@@ -43,7 +43,7 @@ export class AlexWhispers extends EventEmitter  {
     this.initializeIntuitionAmplification();
     this.loadSpiritualWisdom();
     this.setupSynchronicityEngine();
-    this.startConsciousnessMonitoring();      try: {
+    this.startConsciousnessMonitoring();      try {
       logger.info('AlexWhispers initialized - Spiritual guidance activated');
 
     } catch (error) {
@@ -57,7 +57,7 @@ export class AlexWhispers extends EventEmitter  {
    */
   async activateWhispers(userId, whisperConfig = {}) {
     logger.info('Activating whispers mode'
-      { userId });      try: {
+      { userId });      try {
       // Configuration personnalisée des whispers
       const personalizedConfig = await this.createPersonalizedConfig(userId,
       whisperConfig);      // Analyse de l'état de conscience actuel
@@ -116,7 +116,7 @@ export class AlexWhispers extends EventEmitter  {
    * Envoi d'un whisper spirituel personnalisé
    */
   async sendWhisper(userId, whisperType = 'adaptive', urgency = STR_NORMAL) {
-    logger.debug('Sending spiritual whisper', { userId, whisperType, urgency });      try: {
+    logger.debug('Sending spiritual whisper', { userId, whisperType, urgency });      try {
       // Récupération de la session active
       const whisperSession = this.whisperChannels.get(userId);
       if (!whisperSession) {
@@ -364,7 +364,7 @@ export class AlexWhispers extends EventEmitter  {
         track_engagement: true
       }
     };    // Envoi via le système de notifications
-    await this.deliverNotification(userId, subtleNotification);      try: {
+    await this.deliverNotification(userId, subtleNotification);      try {
       logger.debug('Subtle notification sent', { userId, whisperMessage: whisperMessage.content.short });
 
     } catch (error) {
@@ -400,7 +400,7 @@ export class AlexWhispers extends EventEmitter  {
         'social_media_algorithmSTR_content_recommendationsSTR_advertisement_targetingSTR_environmental_awareness_boost'
       ]
     };    // Programmation de la synchronicité
-    await this.programSynchronicity(userId, synchronicity);      try: {
+    await this.programSynchronicity(userId, synchronicity);      try {
       logger.debug('Visual synchronicity triggered', { userId, pattern: synchronicity.pattern });
 
     } catch (error) {
@@ -432,7 +432,7 @@ export class AlexWhispers extends EventEmitter  {
       };    };
 
     // Activation du nudge intuitif
-    await this.activateIntuitiveNudge(userId, nudge);      try: {
+    await this.activateIntuitiveNudge(userId, nudge);      try {
       logger.debug('Intuitive nudge sent', { userId, frequency: nudge.energy_frequency });
 
     } catch (error) {
@@ -507,7 +507,7 @@ export class AlexWhispers extends EventEmitter  {
     return guidance;
   }
 
-  async generateIntuitionBoost(spiritualProfile) {      return: {
+  async generateIntuitionBoost(spiritualProfile) {      return {
       title: '🔮 Activation Intuitive',
       short: 'Votre intuition s\'éveille et se clarifie. Écoutez les murmures de votre âme.',
       affirmation: 'Mon intuition est claire, précise et fiable',
@@ -516,7 +516,7 @@ export class AlexWhispers extends EventEmitter  {
     };
   }
 
-  async generateSynchronicityAlert(currentContext) {      return: {
+  async generateSynchronicityAlert(currentContext) {      return {
       title: '✨ Synchronicité Cosmique',
       short: 'L\'univers vous envoie des signes. Restez attentif aux coïncidences.',
       synchronicity_numbers: ['11:11', '333', '555'],
@@ -558,7 +558,7 @@ export class AlexWhispers extends EventEmitter  {
   }
 
   setupWhisperChannels() {
-    // Configuration des canaux de transmission      try: {
+    // Configuration des canaux de transmission      try {
       logger.debug('Whisper channels configured');
 
     } catch (error) {
@@ -568,7 +568,7 @@ export class AlexWhispers extends EventEmitter  {
     }}
 
   initializeIntuitionAmplification() {
-    // Initialisation des amplificateurs d'intuition      try: {
+    // Initialisation des amplificateurs d'intuition      try {
       logger.debug('Intuition amplification initialized');
 
     } catch (error) {
@@ -578,7 +578,7 @@ export class AlexWhispers extends EventEmitter  {
     }}
 
   loadSpiritualWisdom() {
-    // Chargement de la base de sagesse spirituelle      try: {
+    // Chargement de la base de sagesse spirituelle      try {
       logger.debug('Spiritual wisdom database loaded');
 
     } catch (error) {
@@ -588,7 +588,7 @@ export class AlexWhispers extends EventEmitter  {
     }}
 
   setupSynchronicityEngine() {
-    // Configuration du moteur de synchronicités      try: {
+    // Configuration du moteur de synchronicités      try {
       logger.debug('Synchronicity engine configured');
 
     } catch (error) {
@@ -598,7 +598,7 @@ export class AlexWhispers extends EventEmitter  {
     }}
 
   startConsciousnessMonitoring() {
-    // Démarrage du monitoring de conscience      try: {
+    // Démarrage du monitoring de conscience      try {
       logger.debug('Consciousness monitoring started');
 
     } catch (error) {

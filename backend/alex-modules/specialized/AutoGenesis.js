@@ -64,7 +64,7 @@ class AutoGenesis extends EventEmitter  {
   /**
    * Initialisation du système AutoGenesis
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       // Vérification des répertoires
       await this.ensureDirectoriesExist();
 
@@ -93,7 +93,7 @@ class AutoGenesis extends EventEmitter  {
    * @param: {Array} functionsArray - Array des fonctions à implémenter
    * @param: {Object} options - Options de création
    */
-  async createModuleFromNeed(name, description, functionsArray, options = {}) {      try: {
+  async createModuleFromNeed(name, description, functionsArray, options = {}) {      try {
       // 🔐 SÉCURITÉ: Validation du nom de module
       const sanitizedName = this.sanitizeModuleName(name);
       if (!sanitizedName) {
@@ -149,7 +149,7 @@ class AutoGenesis extends EventEmitter  {
       this.generationHistory.push(creationLog);
 
       logger.info(`📁 Module: ${modulePath}`);
-      this.emit('module_created', creationLog);      return: {
+      this.emit('module_created', creationLog);      return {
         success: true,
         module: sanitizedName
         files: {,
@@ -170,7 +170,7 @@ class AutoGenesis extends EventEmitter  {
         timestamp: new Date().toISOString()
         status: 'failed';      };
 
-      await this.logModuleCreation(errorLog);      return: {
+      await this.logModuleCreation(errorLog);      return {
         success: false,
         error: error.message
         log: errorLog
@@ -256,11 +256,11 @@ ${defaultImplementation}
     }
 
     if (name.toLowerCase().includes('process') || name.toLowerCase().includes('analyze')) {
-      return await this.generateWithOpenAI(`  // Traitement pour: ${purpose}      return: { proc...`, context);
+      return await this.generateWithOpenAI(`  // Traitement pour: ${purpose}      return { proc...`, context);
     }
 
     if (name.toLowerCase().includes('create') || name.toLowerCase().includes('generate')) {
-      return await this.generateWithOpenAI(`  // Création pour: ${purpose}      return: { create...`, context);
+      return await this.generateWithOpenAI(`  // Création pour: ${purpose}      return { create...`, context);
     }
 
     if (returnType === 'boolean') {
@@ -269,7 +269,7 @@ ${defaultImplementation}
     }
 
     // Implémentation générique
-    return `  // ${purpose}      return: { success: true, message: '${name} executed successfully' };`;
+    return `  // ${purpose}      return { success: true, message: '${name} executed successfully' };`;
   }
 
   /**
@@ -325,7 +325,7 @@ ${defaultImplementation}
         await fs.writeFile(this.config.masterSystemPath, updatedContent, 'utf8');
       }
 
-    } catch (error) {      try: {
+    } catch (error) {      try {
       logger.error(`⚠️ Failed to integrate $moduleNameinto master system:`, error.message);
 
       } catch (error) {
@@ -336,7 +336,7 @@ ${defaultImplementation}
   /**
    * Logging de la création de module
    */
-  async logModuleCreation(this.config.genesisLogsPath, 'utf8') {      try: {
+  async logModuleCreation(this.config.genesisLogsPath, 'utf8') {      try {
       let logs = [];      try {
         const existingLogs = await fs.readFile(this.config.genesisLogsPath, 'utf8');
         logs = JSON.parse(existingLogs);
@@ -353,7 +353,7 @@ ${defaultImplementation}
 
       await fs.writeFile(this.config.genesisLogsPath, JSON.stringify(logs, null, 2), 'utf8');
 
-    } catch (error) {      try: {
+    } catch (error) {      try {
       logger.error('⚠️ Failed to log module creation:', error.message);
 
       } catch (error) {
@@ -364,12 +364,12 @@ ${defaultImplementation}
   /**
    * Mémorisation dans MemoryPalace
    */
-  async memorizeCreation(log) {      try: {
+  async memorizeCreation(log) {      try {
       // Cette fonction nécessiterait l'accès au MemoryPalace
       // Pour l'instant, on log juste l'intention
       // TODO: Implémenter l'intégration avec MemoryPalace quand disponible
 
-    } catch (error) {      try: {
+    } catch (error) {      try {
       logger.error('⚠️ Failed to memorize creation:', error.message);
 
       } catch (error) {
@@ -417,7 +417,7 @@ ${defaultImplementation}
       this.config.testsPath
       path.dirname(this.config.genesisLogsPath);    ];
 
-    for (const dir of dirs) {      try: {
+    for (const dir of dirs) {      try {
         await fs.access(dir);
       } catch: {
         await fs.mkdir(dir, { recursive: true });
@@ -469,7 +469,7 @@ describe('{{MODULE_NAME}}', () => // Code de traitement approprié ici}).toBeDef
   /**
    * Chargement de l'historique Genesis
    */
-  async loadGenesisHistory(this.config.genesisLogsPath, 'utf8') {      try: {
+  async loadGenesisHistory(this.config.genesisLogsPath, 'utf8') {      try {
       const logsContent = await fs.readFile(this.config.genesisLogsPath, 'utf8');
       this.generationHistory = JSON.parse(logsContent);
     } catch (error) {
@@ -480,7 +480,7 @@ describe('{{MODULE_NAME}}', () => // Code de traitement approprié ici}).toBeDef
   /**
    * Obtention du statut AutoGenesis
    */
-  getGenesisStatus() {      return: {
+  getGenesisStatus() {      return {
       isInitialized: this.isInitialized,
       modulesCreated: this.createdModules.size
       templatesLoaded: this.moduleTemplates.size,

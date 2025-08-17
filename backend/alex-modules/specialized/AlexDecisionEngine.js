@@ -458,7 +458,7 @@ export class AlexDecisionEngine extends EventEmitter  {
     return context.importance ? context.importance / 10 : 0.5;
   }
 
-  analyzeTimeConstraints(context) {      return: {
+  analyzeTimeConstraints(context) {      return {
       urgent: context.urgent || false,
       deadline: context.deadline || null,
       timeAvailable: context.timeAvailable || 'moderate'
@@ -473,7 +473,7 @@ export class AlexDecisionEngine extends EventEmitter  {
     return context.constraints || [];
   }
 
-  assessInformationQuality(context) {      return: {
+  assessInformationQuality(context) {      return {
       completeness: context.informationCompleteness || 0.7,
       reliability: context.informationReliability || 0.8,
       timeliness: context.informationTimeliness || 0.9
@@ -503,7 +503,7 @@ export class AlexDecisionEngine extends EventEmitter  {
     const framework = this.decisionFrameworks[frameworkName];
     if (!framework) {
       throw new Error(`Framework ${frameworkName} non trouvé`);
-    }      return: {
+    }      return {
       steps: framework.steps,
       executed: true,
       analysis: analysis
@@ -526,7 +526,7 @@ export class AlexDecisionEngine extends EventEmitter  {
 
   collectOptions(frameworkPhase) {
     // Génération d'options basiques
-    return: [
+    return [
       { id: 'option1', name: 'Option A', description: 'Première alternative' },
       { id: 'option2', name: 'Option B', description: 'Seconde alternative' },
       { id: 'option3', name: 'Option C', description: 'Troisième alternative' }
@@ -563,7 +563,7 @@ export class AlexDecisionEngine extends EventEmitter  {
     return rankings.sort((a, b) => b.totalScore - a.totalScore);
   }
 
-  performSensitivityAnalysis(evaluation) {      return: {
+  performSensitivityAnalysis(evaluation) {      return {
       robust: true,
       variations: 'Low sensitivity to weight changes'
     };
@@ -580,14 +580,14 @@ export class AlexDecisionEngine extends EventEmitter  {
   }
 
   buildSelectionReasoning(evaluationPhase) {
-    return: [
+    return [
       `Option sélectionnée avec score de ${evaluationPhase.rankings[0].totalScore.toFixed(2)}`,
       'Évaluation basée sur critères multiples',
       'Analyse de sensibilité confirmée'
     ];
   }
 
-  assessSelectionRisks(selectedOption) {      return: {
+  assessSelectionRisks(selectedOption) {      return {
       level: 'moderate',
       factors: ['Incertitude marché', 'Ressources limitées'],
       mitigation: 'Monitoring continu recommandé'
@@ -597,7 +597,7 @@ export class AlexDecisionEngine extends EventEmitter  {
   /**
    * Obtention du statut du moteur de décision
    */
-  getDecisionEngineStatus() {      return: {
+  getDecisionEngineStatus() {      return {
       initialized: this.isInitialized,
       currentState: this.currentDecisionState,
       personalProfile: this.personalDecisionProfile,
@@ -632,7 +632,7 @@ export class AlexDecisionEngine extends EventEmitter  {
   /**
    * Optimise une réponse selon l'analyse décisionnelle
    */
-  async optimizeResponse(response, request, context = {}) {      try: {
+  async optimizeResponse(response, request, context = {}) {      try {
       const optimization = {
         confidence: 0.85,
         reasoning: [],
@@ -660,7 +660,7 @@ export class AlexDecisionEngine extends EventEmitter  {
       optimization.riskAssessment = this.assessResponseRisks(response, context);
 
       return optimization;
-    } catch (error) {      return: {
+    } catch (error) {      return {
         confidence: 0.5,
         reasoning: ['Erreur dans l\'optimisation'],
         decisionQuality: 'medium',
@@ -673,7 +673,7 @@ export class AlexDecisionEngine extends EventEmitter  {
   /**
    * Analyse une réponse comme une décision
    */
-  async analyzeResponseAsDecision(response, request, context) {      return: {
+  async analyzeResponseAsDecision(response, request, context) {      return {
       contentComplexity: this.assessContentComplexity(response.content),
       contextRelevance: this.assessContextRelevance(response, context),
       informationCompleteness: this.assessInformationCompleteness(response, request),
@@ -749,7 +749,7 @@ export class AlexDecisionEngine extends EventEmitter  {
     return analysis.contentComplexity > 0.8 ? ['Version simplifiée', 'Version détaillée'] : [];
   }
 
-  assessResponseRisks(response, context) {      return: {
+  assessResponseRisks(response, context) {      return {
       level: 'low',
       factors: [],
       mitigation: 'Standard response protocols applied'

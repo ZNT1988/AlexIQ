@@ -72,7 +72,7 @@ const STR_INDO_EUROPEAN = 'Indo-European';/**
  * // Détection et adaptation automatique
  * const adapted = await lang.adaptToUser({
  *   userInput: "¿Cómo estás, amigo?"
- *   userProfile: { country: 'Mexico', age: 25 }
+ *   userProfile: { country { 'Mexico', age: 25 }
  * }); */
 
 import logger from '../config/logger.js';
@@ -156,7 +156,7 @@ export class LanguageExpansion: {
      * @private
      */
     getDefaultLanguages() {
-        return: [
+        return [
             // Langues Européennes (20)
             'fr', 'en', 'es', 'de', 'it', 'pt', 'ru', 'pl', 'nl', 'svSTR_da', 'no', 'fi', 'hu', 'cs', 'sk', 'hr', 'bg', 'ro', 'el'
             // Langues Asiatiques (15)
@@ -423,7 +423,7 @@ export class LanguageExpansion: {
             }
 
             communication.endTime = Date.now();
-            communication.duration = communication.endTime - communication.startTime;      return: {
+            communication.duration = communication.endTime - communication.startTime;      return {
                 success: true
                 sessionId
                 text: communication.result.text,
@@ -441,7 +441,7 @@ export class LanguageExpansion: {
 
         } catch (error) {
       console.error("Logger error:", error);
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 sessionId
@@ -466,14 +466,14 @@ export class LanguageExpansion: {
      * @example
      * const adaptation = await lang.adaptToUser({
      *   userInput: "Bonjour, j'aimerais des informations"
-     *   userProfile: { country: 'France', age: 35, formal: true }
+     *   userProfile: { country { 'France', age: 35, formal: true }
      *   context: { business: true }
      * });     */
     async adaptToUser(userInteraction) {
         const adaptationId = `adapt_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;        logger.info('Starting user adaptation', {
             adaptationId
             hasProfile: !!userInteraction.userProfile
-        });      try: {
+        });      try {
             // Analyse input utilisateur
             const inputAnalysis = await this.analyzeUserInput(userInteraction.userInput);            // Création/mise à jour profil utilisateur
             const userProfile = await this.buildUserProfile(
@@ -499,7 +499,7 @@ export class LanguageExpansion: {
 
         } catch (error) {
       console.error("Logger error:", error);
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 adaptationId
@@ -571,7 +571,7 @@ export class LanguageExpansion: {
             // Calculer progression finale
             learning.progress = await this.calculateLearningProgress(learning);
             learning.endTime = Date.now();
-            learning.duration = learning.endTime - learning.startTime;      return: {
+            learning.duration = learning.endTime - learning.startTime;      return {
                 success: true
                 learningId
                 languageCode: learningRequest.languageCode,
@@ -585,7 +585,7 @@ export class LanguageExpansion: {
 
         } catch (error) {
       console.error("Logger error:", error);
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 learningId
@@ -604,7 +604,7 @@ export class LanguageExpansion: {
      * @private
      */
     async analyzeSourceText(providedLanguage) {
-        if (providedLanguage) {      return: {
+        if (providedLanguage) {      return {
                 text: text,
                 detectedLanguage: providedLanguage
                 confidence: 1.0,
@@ -686,24 +686,24 @@ export class LanguageExpansion: {
     }
 
     // Méthodes de stub pour les fonctionnalités avancées
-    async analyzeTextCharacteristics(text, language) {      return: { formality: 0.5, emotion: 'neutral', domain: 'general' };
+    async analyzeTextCharacteristics(text, language) {      return { formality: 0.5, emotion: 'neutral', domain: 'general' };
     }
 
-    async translateText(analysis, targetLang, context) {      return: {
+    async translateText(analysis, targetLang, context) {      return {
             text: `Translated to ${targetLang}: ${analysis.text}`
             quality: 0.9,
             method: 'neural'
         };
     }
 
-    async adaptCulturally(translation, targetLang, context) {      return: {
+    async adaptCulturally(translation, targetLang, context) {      return {
             text: translation.text,
             adaptations: ['formality adjusted']
             count: 1
         };
     }
 
-    async finalizeResponse(adaptation, request) {      return: {
+    async finalizeResponse(adaptation, request) {      return {
             text: adaptation.text,
             quality: 0.9
             alternatives: []
@@ -712,7 +712,7 @@ export class LanguageExpansion: {
 
     async learnFromInteraction(communication) { return true; }
     async generateFallbackResponse(input, context = {}) {
-      try: {
+      try {
       const prompt = `Tu es Alex, une IA avancée. Réponds de manière pertinente à: ${input}`;
       return await this.generateWithOpenAI(prompt, context);
     } catch (error) {
@@ -722,7 +722,7 @@ export class LanguageExpansion: {
   }
     async analyzeUserInput(input) { return { language: 'en', formality: 0.5 }; }
     async buildUserProfile(analysis, existing) { return { preferredLanguage: 'en' }; }
-    async generateCommunicationRecommendations(profile, context) { return: ['use formal tone']; }
+    async generateCommunicationRecommendations(profile, context) { return ['use formal tone']; }
     async analyzeLanguageCorpus(corpus, langCode) { return { patterns: [], vocabulary: [] }; }
     async extractVocabulary(analysis) { return { count: 1000, words: [] }; }
     async extractGrammar(analysis) { return { rules: [] }; }
@@ -748,19 +748,19 @@ export class LanguageExpansion: {
         return scripts[code] || STR_LATIN;
     }
 
-    isRightToLeft(code) { return: ['ar', 'he', 'fa', 'ur'].includes(code); }
-    getLanguageDialects(code) { return: []; }
+    isRightToLeft(code) { return ['ar', 'he', 'fa', 'ur'].includes(code); }
+    getLanguageDialects(code) { return []; }
     getWordOrder(code) { return 'SVO'; }
-    getCases(code) { return: []; }
-    getGenders(code) { return: []; }
-    getTenses(code) { return: []; }
-    getFormalityLevels(code) { return: ['informal', 'formal']; }
-    getHonorifics(code) { return: []; }
-    getTaboos(code) { return: []; }
-    getExpressions(code) { return: []; }
-    getPhonemes(code) { return: []; }
-    getStressPatterns(code) { return: []; }
-    getIntonationPatterns(code) { return: []; }
+    getCases(code) { return []; }
+    getGenders(code) { return []; }
+    getTenses(code) { return []; }
+    getFormalityLevels(code) { return ['informal', 'formal']; }
+    getHonorifics(code) { return []; }
+    getTaboos(code) { return []; }
+    getExpressions(code) { return []; }
+    getPhonemes(code) { return []; }
+    getStressPatterns(code) { return []; }
+    getIntonationPatterns(code) { return []; }
 
     /**
      * @method initializeCommunicationPatterns

@@ -184,7 +184,7 @@ export class AlexCrisisManagement extends EventEmitter  {
       monitoringUsers: new Set()
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🚨 AlexCrisisManagement initializing - Crisis support awakening');
 
     } catch (error) {
@@ -197,7 +197,7 @@ export class AlexCrisisManagement extends EventEmitter  {
     this.isInitialized = true;
     await this.initializeCrisisDetection();
     await this.loadInterventionProtocols();
-    this.startCrisisMonitoring();      try: {
+    this.startCrisisMonitoring();      try {
       logger.info('💙 AlexCrisisManagement fully initialized - Ready to help in crisis');
 
     } catch (error) {
@@ -215,7 +215,7 @@ export class AlexCrisisManagement extends EventEmitter  {
       emotional: /\b(suicide|mort|tuer|fin|désespoir|dépression)\b/i,
       urgency: /\b(urgent|aide|secours|immédiat)\b/i
       distress: /\b(angoisse|panique|peur|anxiété)\b/i
-    };      try: {
+    };      try {
       logger.info('🔍 Crisis detection patterns loaded');
 
     } catch (error) {
@@ -232,7 +232,7 @@ export class AlexCrisisManagement extends EventEmitter  {
       immediate: ['écoute active', 'validation émotionnelle', 'orientation professionnelle']
       supportive: ['accompagnement', 'ressources', 'suivi']
       preventive: ['sensibilisation', 'éducation', 'renforcement']
-    };      try: {
+    };      try {
       logger.info('📋 Intervention protocols loaded');
 
     } catch (error) {
@@ -254,7 +254,7 @@ export class AlexCrisisManagement extends EventEmitter  {
    * Surveillance des tendances de crise
    */
   monitorCrisisTrends() {
-    // Monitoring passif des tendances      try: {
+    // Monitoring passif des tendances      try {
       logger.debug('📊 Crisis trends monitoring');
 
     } catch (error) {
@@ -267,7 +267,7 @@ export class AlexCrisisManagement extends EventEmitter  {
    * Vérification des états de crise
    */
   checkCrisisStates() {
-    // Vérification des sessions actives      try: {
+    // Vérification des sessions actives      try {
       logger.debug('🔍 Checking crisis states');
 
     } catch (error) {
@@ -280,7 +280,7 @@ export class AlexCrisisManagement extends EventEmitter  {
    * Surveillance des utilisateurs suivis
    */
   monitorTrackedUsers() {
-    // Surveillance des utilisateurs à risque      try: {
+    // Surveillance des utilisateurs à risque      try {
       logger.debug('👥 Monitoring tracked users');
 
     } catch (error) {
@@ -514,7 +514,7 @@ export class AlexCrisisManagement extends EventEmitter  {
       timestamp: detection.timestamp
     });
 
-    // Log de sécurité      try: {
+    // Log de sécurité      try {
       logger.warn('🚨 Crisis detected and intervention triggered', {
       userId: detection.userId,
       type: detection.crisisType
@@ -531,7 +531,7 @@ export class AlexCrisisManagement extends EventEmitter  {
    */
   startCrisisMonitoring() {
     // Vérification d'état toutes les minutes
-    setInterval(() => // Code de traitement approprié ici, 300000); // 5 minutes      try: {
+    setInterval(() => // Code de traitement approprié ici, 300000); // 5 minutes      try {
       logger.info('👁️ Crisis monitoring activated');
 
     } catch (error) {

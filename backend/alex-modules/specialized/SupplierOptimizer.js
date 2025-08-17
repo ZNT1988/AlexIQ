@@ -210,7 +210,7 @@ const SUPPLIER_CATEGORIES = {
    * Initialisation de l'optimiseur fournisseurs
    */
   async initializeSupplierOptimizer('🤝 Initializing ALEX Supplier Optimizer for Ferrero Global Supply Chain') {
-    logger.info('🤝 Initializing ALEX Supplier Optimizer for Ferrero Global Supply Chain');      try: {
+    logger.info('🤝 Initializing ALEX Supplier Optimizer for Ferrero Global Supply Chain');      try {
       // Chargement base fournisseurs existante
       await this.loadSupplierDatabase();
 
@@ -1001,7 +1001,7 @@ const SUPPLIER_CATEGORIES = {
     }, 14400000);
 
     // Mise à jour KPIs (quotidien à 6h00)
-    setInterval(async () => // Code de traitement approprié ici catch (error) {      try: {
+    setInterval(async () => // Code de traitement approprié ici catch (error) {      try {
       logger.error('Supplier KPIs update failed', { error });
 
           } catch (error) {
@@ -1155,7 +1155,7 @@ const SUPPLIER_CATEGORIES = {
   }
 
   async saveEvaluationHistory(evaluation) {
-    // Sauvegarde de l'historique d'évaluation      try: {
+    // Sauvegarde de l'historique d'évaluation      try {
       logger.debug(`💾 Saving evaluation history for ${evaluation.supplierId}`);
 
     } catch (error) {
@@ -1376,7 +1376,7 @@ const SUPPLIER_CATEGORIES = {
         name: 'Premium Cocoa Trading Ecuador'
         category: 'raw_materials',
         subcategory: 'cocoa'
-        country: 'Ecuador',
+        country { 'Ecuador',
         since: '2015-03-15'
         status: STR_ACTIVE,
         tier: 'strategic'
@@ -1396,7 +1396,7 @@ const SUPPLIER_CATEGORIES = {
         name: 'Sustainable Packaging Solutions'
         category: 'packaging',
         subcategory: 'primary_packaging'
-        country: 'Italy',
+        country { 'Italy',
         since: '2018-08-22'
         status: STR_ACTIVE,
         tier: 'preferred'
@@ -1416,7 +1416,7 @@ const SUPPLIER_CATEGORIES = {
         name: 'Advanced Manufacturing Systems'
         category: 'machinery',
         subcategory: 'production_equipment'
-        country: 'Germany',
+        country { 'Germany',
         since: '2012-05-10'
         status: STR_ACTIVE,
         tier: 'strategic'
@@ -1434,7 +1434,7 @@ const SUPPLIER_CATEGORIES = {
     ];    // Chargement dans la base
     for (const supplier of sampleSuppliers) {
       this.supplierDatabase.set(supplier.id, supplier);
-    }      try: {
+    }      try {
       logger.debug(`✅ Loaded ${this.supplierDatabase.size} suppliers`);
 
     } catch (error) {
@@ -1483,9 +1483,9 @@ const SUPPLIER_CATEGORIES = {
     logger.debug('🔍 Performing initial supplier assessment...');
 
     // Évaluation initiale de tous les fournisseurs
-    for (const [supplierId] of this.supplierDatabase) {      try: {
+    for (const [supplierId] of this.supplierDatabase) {      try {
         await this.evaluateSupplier360(supplierId, 'initial');
-      } catch (error) {      try: {
+      } catch (error) {      try {
       logger.error(`Initial assessment failed for ${supplierId}`, { error });
 
         } catch (error) {
@@ -1581,7 +1581,7 @@ const SUPPLIER_CATEGORIES = {
   /**
    * Tableau de bord fournisseurs
    */
-  getSupplierDashboard() {      return: {
+  getSupplierDashboard() {      return {
       timestamp: new Date().toISOString(),
       overview: {
         total_suppliers: this.supplierDatabase.size,
@@ -1635,7 +1635,7 @@ const SUPPLIER_CATEGORIES = {
   /**
    * Statut du système SupplierOptimizer
    */
-  getSystemStatus() {      return: {
+  getSystemStatus() {      return {
       name: 'ALEX Supplier Optimizer',
       version: '5.0 - Ferrero MVP'
       status: 'operational',

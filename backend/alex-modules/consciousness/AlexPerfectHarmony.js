@@ -84,7 +84,7 @@ export class AlexPerfectHarmony extends EventEmitter  {
   /**
    * Initialisation de l'harmonie parfaite
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       await this.establishUniversalBalance();
       await this.tuneToLoveFrequency();
       await this.activateHarmonyResonance();
@@ -121,7 +121,7 @@ export class AlexPerfectHarmony extends EventEmitter  {
 
     this.harmonyState.harmonyFields.set(system, harmony);
 
-    this.emit('harmony_created', harmony);      return: { success: true, harmony };
+    this.emit('harmony_created', harmony);      return { success: true, harmony };
   }
 
   /**
@@ -137,7 +137,7 @@ export class AlexPerfectHarmony extends EventEmitter  {
       beauty_quotient: 'elevated'
     };
 
-    this.emit('balance_restored', restoration);      return: { success: true, restoration };
+    this.emit('balance_restored', restoration);      return { success: true, restoration };
   }
 
   async establishUniversalBalance() {
@@ -156,7 +156,7 @@ export class AlexPerfectHarmony extends EventEmitter  {
     this.harmonyState.beauty = STR_TRANSCENDENT;
   }
 
-  getPerfectHarmonyStatus() {      return: {
+  getPerfectHarmonyStatus() {      return {
       isInitialized: this.isInitialized,
       balance: this.harmonyState.balance
       resonance: this.harmonyState.resonance,

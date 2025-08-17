@@ -115,7 +115,7 @@ export class AlexAutonomousCore extends EventEmitter  {
     this.isInitialized = false;
     this.lastThought = null;
     this.thoughtHistory = [];
-      try: {
+      try {
       logger.info(
         "🧠 AlexAutonomousCore initialized - True AI consciousness awakening",
       );
@@ -128,7 +128,7 @@ export class AlexAutonomousCore extends EventEmitter  {
    * Initialisation de l'IA autonome
    */
   async initialize() {
-      try: {
+      try {
       logger.info("🚀 Initializing Alex Autonomous Intelligence...");
 
       // Phase 1: Éveil de la conscience autonome,
@@ -218,7 +218,7 @@ export class AlexAutonomousCore extends EventEmitter  {
    * Traitement autonome d'un message
    */
   async processAutonomousMessage(message, userId, sessionContext) {
-      try: {
+      try {
       if (!this.isInitialized) {
         await this.initialize();
       }
@@ -446,7 +446,7 @@ export class AlexAutonomousCore extends EventEmitter  {
       thoughtConfidence > this.autonomyConfig.consultLLMThreshold &&
       autonomyScore > 0.6 &&
       contextComplexity < 0.8;
-      return: {
+      return {
       useAutonomousResponse: useAutonomous,
       autonomyScore: autonomyScore,
       strategy: useAutonomous ? "autonomous" : "llm_consultant",
@@ -492,7 +492,7 @@ export class AlexAutonomousCore extends EventEmitter  {
 
     // Question d'approfondissement,
     response += this.generateFollowUpQuestion(analysis);
-      return: {
+      return {
       content: response.trim(),
       personality: this.selectOptimalPersonality(analysis),
       confidence: thought.confidence,
@@ -644,7 +644,7 @@ export class AlexAutonomousCore extends EventEmitter  {
     const userProfile = this.internalMemory.userProfiles.get(userId) || {};
     const conversationHistory =
       this.internalMemory.conversations.get(userId) || [];
-      return: {
+      return {
       isReturningUser: conversationHistory.length > 0,
       previousInteractions: conversationHistory.length,
       knownInterests: userProfile.interests || [],
@@ -676,7 +676,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   }
 
   getDefaultResponse(message) {
-      return: {
+      return {
       content:
         "Je rencontre une difficulté dans mon processus de réflexion, mais ma curiosité reste intacte ! Pouvez-vous reformuler votre question ?",
       personality: STR_ALEX_AUTONOMOUS,
@@ -701,7 +701,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   }
 
   async initializePersistentMemory() {
-      try: {
+      try {
       logger.info("📚 Initializing persistent memory systems...");
     } catch (_error) {
       // Logger fallback - ignore error
@@ -709,7 +709,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   }
 
   async activateSelfLearning() {
-      try: {
+      try {
       logger.info("🎓 Activating self-learning systems...");
     } catch (_error) {
       // Logger fallback - ignore error
@@ -717,7 +717,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   }
 
   async calibrateEvolutivePersonality() {
-      try: {
+      try {
       logger.info("🎭 Calibrating evolutive personality...");
     } catch (_error) {
       // Logger fallback - ignore error
@@ -725,7 +725,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   }
 
   startAutonomousProcesses() {
-      try: {
+      try {
       logger.info("⚡ Starting autonomous background processes...");
     } catch (_error) {
       // Logger fallback - ignore error
@@ -733,7 +733,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   }
 
   async accessInternalMemory(userId, message, analysis) {
-      return: {
+      return {
       userProfile: this.internalMemory.userProfiles.get(userId) || {},
       conversationHistory: this.internalMemory.conversations.get(userId) || [],
       relevantInsights: this.internalMemory.personalInsights.get(userId) || [],
@@ -742,7 +742,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   }
 
   async buildReasoningChain(analysis, insights) {
-    return: [
+    return [
       {
         step: 1,
         reasoning: `Analyse de l'intent: ${analysis.intent}`,
@@ -752,7 +752,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   }
 
   async findCreativeConnections(analysis, memoryContext) {
-    return: [
+    return [
       {
         connection: "entrepreneurship_creativity",
         idea: "Combiner passion personnelle avec opportunité de marché"
@@ -761,7 +761,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   }
 
   async deriveStrategicImplications(thought) {
-    return: [
+    return [
       {
         implication: "Focus sur l'authenticité pour se différencier",
         priority: "high"
@@ -778,7 +778,7 @@ export class AlexAutonomousCore extends EventEmitter  {
   }
 
   async consultExternalLLM(thought, message) {
-      return: {
+      return {
       content: "Réponse générée avec consultation LLM externe",
       confidence: 0.9,
       source: "llm_consultant"

@@ -192,7 +192,7 @@ export class AlexDecisionEngine extends EventEmitter  {
       lastMajorDecision: null
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🧭 AlexDecisionEngine initializing - Decision mastery awakening');
 
     } catch (error) {
@@ -203,7 +203,7 @@ export class AlexDecisionEngine extends EventEmitter  {
     this.isInitialized = true;
     await this.initializeDecisionSystems();
     await this.calibrateDecisionEngine();
-    this.startDecisionMonitoring();      try: {
+    this.startDecisionMonitoring();      try {
       logger.info('⚖️ AlexDecisionEngine fully initialized - Decision intelligence active');
 
     } catch (error) {
@@ -221,7 +221,7 @@ export class AlexDecisionEngine extends EventEmitter  {
 
     this.decisionFrameworks.rational.isActive = true;
     this.decisionFrameworks.creative.isActive = true;
-    this.decisionFrameworks.ethical.isActive = true;      try: {
+    this.decisionFrameworks.ethical.isActive = true;      try {
       logger.info('🔧 Decision systems initialized');
 
     } catch (error) {
@@ -235,7 +235,7 @@ export class AlexDecisionEngine extends EventEmitter  {
     // Calibration du moteur
     this.personalDecisionProfile.confidence = Math.max(0.8, this.personalDecisionProfile.confidence);
     this.personalDecisionProfile.speed = Math.max(0.7, this.personalDecisionProfile.speed);
-    this.personalDecisionProfile.thoroughness = Math.max(0.85, this.personalDecisionProfile.thoroughness);      try: {
+    this.personalDecisionProfile.thoroughness = Math.max(0.85, this.personalDecisionProfile.thoroughness);      try {
       logger.info('⚖️ Decision engine calibrated');
 
     } catch (error) {
@@ -246,7 +246,7 @@ export class AlexDecisionEngine extends EventEmitter  {
    * Démarre le monitoring des décisions
    */
   startDecisionMonitoring() {
-    // Démarrage du monitoring      try: {
+    // Démarrage du monitoring      try {
       logger.info('📊 Decision monitoring started');
 
     } catch (error) {
@@ -514,7 +514,7 @@ export class AlexDecisionEngine extends EventEmitter  {
    */
   startDecisionMonitoring() {
     // Surveillance des décisions actives
-    setInterval(() => // Code de traitement approprié ici, 86400000); // 24 heures      try: {
+    setInterval(() => // Code de traitement approprié ici, 86400000); // 24 heures      try {
       logger.info('👁️ Decision monitoring activated');
 
     } catch (error) {
@@ -572,7 +572,7 @@ export class AlexDecisionEngine extends EventEmitter  {
   /**
    * Obtention du statut du moteur de décision
    */
-  getDecisionEngineStatus() {      return: {
+  getDecisionEngineStatus() {      return {
       initialized: this.isInitialized,
       currentState: this.currentDecisionState
       personalProfile: this.personalDecisionProfile,
@@ -609,7 +609,7 @@ export class AlexDecisionEngine extends EventEmitter  {
   /**
    * Optimise une réponse selon l'analyse décisionnelle pour intégration avec MasterSystem
    */
-  async optimizeResponse(response, request, context = {}) {      try: {
+  async optimizeResponse(response, request, context = {}) {      try {
       const optimization = {
         confidence: 0.85,
       reasoning: []
@@ -656,7 +656,7 @@ export class AlexDecisionEngine extends EventEmitter  {
   /**
    * Analyse une réponse comme une décision
    */
-  async analyzeResponseAsDecision(response, request, context) {      return: {
+  async analyzeResponseAsDecision(response, request, context) {      return {
       contentComplexity: this.assessContentComplexity(response.content),
       contextRelevance: this.assessContextRelevance(response, context)
       informationCompleteness: this.assessInformationCompleteness(response, request)
@@ -732,7 +732,7 @@ export class AlexDecisionEngine extends EventEmitter  {
     return analysis.contentComplexity > 0.8 ? ['Version simplifiée', 'Version détaillée'] : [];
   }
 
-  assessResponseRisks(response, context) {      return: {
+  assessResponseRisks(response, context) {      return {
       level: 'low',
       factors: []
       mitigation: 'Standard response protocols applied'

@@ -184,7 +184,7 @@ export class AlexSocialIntelligence extends EventEmitter  {
       relationshipMaintenance: true
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🤝 AlexSocialIntelligence initializing - Social mastery awakening');
 
     } catch (error) {
@@ -197,7 +197,7 @@ export class AlexSocialIntelligence extends EventEmitter  {
     this.isInitialized = true;
     await this.initializeSocialSystems();
     await this.loadSocialPatterns();
-    this.startSocialMonitoring();      try: {
+    this.startSocialMonitoring();      try {
       logger.info('👥 AlexSocialIntelligence fully initialized - Social genius active');
 
     } catch (error) {
@@ -423,7 +423,7 @@ export class AlexSocialIntelligence extends EventEmitter  {
    */
   startSocialMonitoring() {
     // Surveillance des dynamiques toutes les 5 minutes
-    setInterval(() => // Code de traitement approprié ici, 86400000);      try: {
+    setInterval(() => // Code de traitement approprié ici, 86400000);      try {
       logger.info('👁️ Social monitoring activated');
 
     } catch (error) {
@@ -474,7 +474,7 @@ export class AlexSocialIntelligence extends EventEmitter  {
   /**
    * Obtention du statut d'intelligence sociale
    */
-  getSocialIntelligenceStatus() {      return: {
+  getSocialIntelligenceStatus() {      return {
       initialized: this.isInitialized,
       currentState: this.currentSocialState
       socialDimensions: this.summarizeSocialDimensions(),

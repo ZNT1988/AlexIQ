@@ -168,7 +168,7 @@ class AlexUserExperienceEngine extends EventEmitter  {
     return profile;
   }
 
-  async analyzeInteractionContext(interaction) {      return: {
+  async analyzeInteractionContext(interaction) {      return {
       intent: this.detectUserIntent(interaction.message),
       emotion: this.detectEmotionalState(interaction.message)
       complexity: this.assessQueryComplexity(interaction.message),
@@ -455,7 +455,7 @@ class AlexUserExperienceEngine extends EventEmitter  {
   async getPersonalizedExperience(userId) {
     const profile = this.userProfiles.get(userId);
     const metrics = this.experienceMetrics.get(userId);
-    const personalization = this.personalizations.get(userId);      return: {
+    const personalization = this.personalizations.get(userId);      return {
       profile
       metrics
       personalization
@@ -464,7 +464,7 @@ class AlexUserExperienceEngine extends EventEmitter  {
   }
 
   async generateExperienceRecommendations(userId) {
-    return: ['Utiliser des interactions plus visuelles',
+    return ['Utiliser des interactions plus visuelles',
       'Proposer des raccourcis pour les tâches fréquentes',
       'Adapter le niveau de détail aux préférences',
       'Améliorer la fluidité conversationnelle'];
@@ -473,7 +473,7 @@ class AlexUserExperienceEngine extends EventEmitter  {
   generateUXReport() {
     const totalUsers = this.userProfiles.size;
     const avgSatisfaction = this.calculateAverageSatisfaction();
-    const avgEngagement = this.calculateAverageEngagement();      return: {
+    const avgEngagement = this.calculateAverageEngagement();      return {
       engine: this.name,
       version: this.version
       status: this.isActive ? STR_ACTIVE : 'inactive'

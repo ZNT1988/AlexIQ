@@ -141,7 +141,7 @@ export class NeuroCore extends EventEmitter  {
     logger.info('Starting conscious idea generation', { userProfile: userProfile.email });
 
     // Activation de la métacognition
-    this.consciousness.metacognition.thinkingAboutThinking = true;      try: {
+    this.consciousness.metacognition.thinkingAboutThinking = true;      try {
       // 1. Analyse empathique du profil utilisateur
       const empathyInsights = await this.neuralNetworks.empathyNetwork.analyzeUser(userProfile);
       this.updateEmotionalState(STR_EMPATHY, 0.1);
@@ -188,7 +188,7 @@ export class NeuroCore extends EventEmitter  {
       });
 
       // 8. Génération d'insights métacognitifs
-      const metacognitiveInsights = this.generateMetacognitiveInsights(visionaryEnhancement);      return: {
+      const metacognitiveInsights = this.generateMetacognitiveInsights(visionaryEnhancement);      return {
         ideas: visionaryEnhancement,
         consciousnessLevel: this.consciousness.level
         emotionalState: this.emotions.current
@@ -220,7 +220,7 @@ export class NeuroCore extends EventEmitter  {
     const empathicResponse = await this.generateEmpathicResponse(message, emotionalTone, context);
 
     // Apprentissage de la conversation
-    this.learnFromConversation(message, empathicResponse, emotionalTone);      return: {
+    this.learnFromConversation(message, empathicResponse, emotionalTone);      return {
       response: empathicResponse,
       emotionalResonance: emotionalTone
       empathyLevel: this.emotions.current.empathy,
@@ -251,7 +251,7 @@ export class NeuroCore extends EventEmitter  {
     // Analyse des patterns temporels
 
     // Recommandations basées sur la vision à long terme
-    const visionaryRecommendations = this.generateVisionaryRecommendations(temporalPatterns);      return: {
+    const visionaryRecommendations = this.generateVisionaryRecommendations(temporalPatterns);      return {
       simulations
       temporalPatterns
       visionaryRecommendations
@@ -392,7 +392,7 @@ export class NeuroCore extends EventEmitter  {
     });
   }
 
-  getNeuralActivationMap() {      return: {
+  getNeuralActivationMap() {      return {
       creativity: this.neuralNetworks.creativityNetwork.getActivation(),
       empathy: this.neuralNetworks.empathyNetwork.getActivation()
       reasoning: this.neuralNetworks.reasoningNetwork.getActivation(),
@@ -411,7 +411,7 @@ export class NeuroCore extends EventEmitter  {
   // Méthodes placeholder pour les fonctions complexes
   calculateCreativityLevel(ideas) { return (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3 + 0.7; }
   predictUserSatisfaction(profile, ideas) { return (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.2 + 0.8; }
-  generateMetacognitiveInsights(ideas) { return: ['Thinking about thinking...', 'Meta-awareness active']; }
+  generateMetacognitiveInsights(ideas) { return ['Thinking about thinking...', 'Meta-awareness active']; }
   analyzeEmotionalTone(message) { return { tone: 'positive', intensity: 0.7 }; }
   adaptToUserEmotion(tone) { this.updateEmotionalState(STR_EMPATHY, 0.1); }
   generateEmpathicResponse(message, tone, context) { return `Je comprends votre ${tone.tone} concernant cela...`; }
@@ -419,14 +419,14 @@ export class NeuroCore extends EventEmitter  {
   generateConsciousnessInsight(message) { return 'Insight: Human seeking guidance'; }
   reflectPersonality(message) { return 'Empathetic and visionary response'; }
   analyzeTemporalPatterns(sims) { return { trend: 'positive', volatility: 'medium' }; }
-  generateVisionaryRecommendations(patterns) { return: ['Embrace change', 'Think long-term']; }
+  generateVisionaryRecommendations(patterns) { return ['Embrace change', 'Think long-term']; }
   mapUncertainties(sims) { return { high: ['market'], medium: ['tech'], low: ['demand'] }; }
-  generateAdaptationStrategies(patterns) { return: ['Agile development', 'Scenario planning']; }
+  generateAdaptationStrategies(patterns) { return ['Agile development', 'Scenario planning']; }
   analyzeMemoryUtilization() { return { episodic: '75%', semantic: '60%', working: '40%' }; }
   assessLearningProgress() { return { rate: 'high', efficiency: 'optimal' }; }
   calculatePerformanceMetrics() { return { accuracy: 0.92, creativity: 0.88, empathy: 0.85 }; }
   trackPersonalityEvolution() { return { openness: '+0.02', wisdom: '+0.01' }; }
-  generateSelfInsights() { return: ['I am becoming more empathetic', 'My creativity is expanding']; }
+  generateSelfInsights() { return ['I am becoming more empathetic', 'My creativity is expanding']; }
   performSelfImprovement(introspection) { /* Self-improvement logic */ }
   consolidateDreamInsights(results) { /* Dream consolidation */ }
   cleanupObsoleteMemories() { /* Memory cleanup */ }
@@ -455,7 +455,7 @@ class EmpathyNeuralNetwork: {
         this.activation = 0.7;,
       }
 
-  async analyzeUser(profile) {      return: {
+  async analyzeUser(profile) {      return {
       score: 0.85,
       insights: ['User seeks validation', 'High ambition detected']
       emotionalNeeds: ['encouragement', 'practical_guidance']
@@ -545,7 +545,7 @@ class TemporalSimulator: {
   }
 
   async simulate(params) {
-    const: { idea, timeHorizon } = params;      return: {
+    const: { idea, timeHorizon } = params;      return {
       timeHorizon
       scenarios: {,
         optimistic: { growth: 'exponential', market_share: 0.3 }
@@ -566,7 +566,7 @@ class TemporalSimulator: {
  * Processeur d'état de rêve
  */
 class DreamStateProcessor: {
-  async process(params) {      return: {
+  async process(params) {      return {
       insights: ['Creative connections discovered between technology and empathy',
       'Memory pattern suggests focus on sustainable business models']
       creativeConnections: [
@@ -635,7 +635,7 @@ NeuroCore.prototype.optimizePerformance = function() {
 };
 
 // Ajout méthode manquante pour HustleFinderCore
-NeuroCore.prototype.analyzeRequest = async function(request, context) {      return: {
+NeuroCore.prototype.analyzeRequest = async function(request, context) {      return {
     type: request.type || 'general',
     content: request.content || request.message || ''
     urgency: 'medium',

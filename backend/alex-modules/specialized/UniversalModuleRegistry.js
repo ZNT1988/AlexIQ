@@ -209,7 +209,7 @@ export class UniversalModuleRegistry extends EventEmitter  {
       'AlexCosmicSymphony']
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🌟 UniversalModuleRegistry initializing - Preparing to manage 141 modules');
 
     } catch (error) {
@@ -221,7 +221,7 @@ export class UniversalModuleRegistry extends EventEmitter  {
   /**
    * Initialise le registre universel des modules
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       this.isInitialized = true;
 
       // Enregistrement de tous les modules par catégorie
@@ -256,7 +256,7 @@ export class UniversalModuleRegistry extends EventEmitter  {
       }
     }
 
-    this.systemState.totalRegistered = totalRegistered;      try: {
+    this.systemState.totalRegistered = totalRegistered;      try {
       logger.info(`✅ Total modules registered: ${totalRegistered}/141`);
 
     } catch (error) {
@@ -342,7 +342,7 @@ export class UniversalModuleRegistry extends EventEmitter  {
     if (moduleEntry.loaded) {
       logger.debug(`Module ${moduleName} already loaded`);
       return moduleEntry.instance;
-    }      try: {
+    }      try {
       logger.info(`🔄 Loading module: ${moduleName}`);
 
       const startTime = Date.now();      const moduleImport = await import(moduleEntry.loadPath);
@@ -402,7 +402,7 @@ export class UniversalModuleRegistry extends EventEmitter  {
 
     logger.info(`🔄 Loading category: ${category} (${modules.length} modules)`);
 
-    const results = [];    async for(moduleName) {      try: {
+    const results = [];    async for(moduleName) {      try {
         const instance = await this.loadModule(moduleName);
         results.push({ name: moduleName, success: true, instance });
       } catch (error) {
@@ -430,13 +430,13 @@ export class UniversalModuleRegistry extends EventEmitter  {
   async performHealthCheck() {
     this.systemState.lastHealthCheck = new Date();
 
-    for (const [name, instance] of this.loadedModules) {      try: {
+    for (const [name, instance] of this.loadedModules) {      try {
         if (instance && typeof instance.getStatus === STR_FUNCTION) {
           const status = await instance.getStatus();          const moduleEntry = this.moduleRegistry.get(name);
           moduleEntry.lastHealthCheck = new Date();
           moduleEntry.healthStatus = status;
         }
-      } catch (error) {      try: {
+      } catch (error) {      try {
       logger.warn(`⚠️ Health check failed for module ${name}:`, error.message);
 
         } catch (error) {
@@ -450,7 +450,7 @@ export class UniversalModuleRegistry extends EventEmitter  {
   /**
    * Obtient le statut complet du registre
    */
-  getRegistryStatus() {      return: {
+  getRegistryStatus() {      return {
       initialized: this.isInitialized,
       config: this.registryConfig
       systemState: this.systemState,
@@ -482,7 +482,7 @@ export class UniversalModuleRegistry extends EventEmitter  {
     const moduleEntry = this.moduleRegistry.get(moduleName);
     if (!moduleEntry || !moduleEntry.loaded) {
       return false;
-    }      try: {
+    }      try {
       const instance = this.loadedModules.get(moduleName);      async if() {
         await instance.shutdown();
       }

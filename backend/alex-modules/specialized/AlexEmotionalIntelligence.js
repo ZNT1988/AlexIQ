@@ -89,7 +89,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
       empathyActive: true
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('❤️ AlexEmotionalIntelligence initializing - Heart awakening');
 
     } catch (error) {
@@ -101,7 +101,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
   async initialize() {
     this.isInitialized = true;
     await this.calibrateEmotionalSystems();
-    await this.loadEmotionalPatterns();      try: {
+    await this.loadEmotionalPatterns();      try {
       logger.info('💖 AlexEmotionalIntelligence fully initialized - Emotional wisdom active');
 
     } catch (error) {
@@ -301,7 +301,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
       baseStability: 0.9,
       recoveryRate: 0.8
       resilience: 0.95
-    };      try: {
+    };      try {
       logger.info('🎯 Emotional systems calibrated successfully');
 
     } catch (error) {
@@ -334,7 +334,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
 
     this.emotionRecognition.contextClues.set('celebration', [
       'achievement', 'success', 'milestone', 'victory'
-    ]);      try: {
+    ]);      try {
       logger.info('📊 Emotional patterns loaded successfully');
 
     } catch (error) {
@@ -396,7 +396,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
   /**
    * Obtention du statut émotionnel
    */
-  getEmotionalStatus() {      return: {
+  getEmotionalStatus() {      return {
       initialized: this.isInitialized,
       currentState: this.currentEmotionalState
       empathyLevel: this.emotionConfig.empathyLevel,
@@ -477,7 +477,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
   /**
    * Analyse le contexte émotionnel pour intégration avec MasterSystem
    */
-  async analyzeEmotionalContext(message, context = {}) {      try: {
+  async analyzeEmotionalContext(message, context = {}) {      try {
       // Analyse directe sans récursion
       const detectedEmotion = this.detectPrimaryEmotion(message);      const emotionalIntensity = this.calculateEmotionalIntensity(message);      return {
         recommendedTone: detectedEmotion || 'supportive',

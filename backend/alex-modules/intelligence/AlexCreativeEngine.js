@@ -25,13 +25,7 @@ const API_URL_4 = 'https://api.runwayml.com';
 const API_URL_5 = 'https://api.suno.ai';
 const API_URL_6 = 'https://placeholder-image.com/generated';
 
-// URLs externalisées
-const API_URL_1 = API_URL_1;
-const API_URL_2 = API_URL_2;
-const API_URL_3 = API_URL_3;
-const API_URL_4 = API_URL_4;
-const API_URL_5 = API_URL_5;
-const API_URL_6 = API_URL_6;
+// URLs externalisées déjà définies ci-dessus
 
 // Imports AI Services
       import { AI_KEYS } from '../config/aiKeys.js';
@@ -133,7 +127,7 @@ export class AlexCreativeEngine extends EventEmitter  {
       creativityScore: 0.0
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🎨 AlexCreativeEngine initializing - The ultimate creative powerhouse');
     } catch (error) {
       // Logger fallback - ignore error
@@ -143,7 +137,7 @@ export class AlexCreativeEngine extends EventEmitter  {
   /**
    * Initialisation du moteur créatif
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       logger.info('🚀 Initializing Alex Creative Engine...');
 
       // Phase 1: Création des dossiers de stockage
@@ -173,17 +167,17 @@ export class AlexCreativeEngine extends EventEmitter  {
   /**
    * Création des dossiers de stockage
    */
-  async createStorageDirectories() {      try: {
+  async createStorageDirectories() {      try {
       await fs.mkdir(this.storageConfig.basePath, { recursive: true });
       await fs.mkdir(this.storageConfig.images, { recursive: true });
       await fs.mkdir(this.storageConfig.videos, { recursive: true });
       await fs.mkdir(this.storageConfig.audio, { recursive: true });
-      await fs.mkdir(this.storageConfig.music, { recursive: true });      try: {
+      await fs.mkdir(this.storageConfig.music, { recursive: true });      try {
         logger.info('📁 Storage directories created successfully');
       } catch (error) {
         // Logger fallback - ignore error
       }
-    } catch (error) {      try: {
+    } catch (error) {      try {
         logger.error('❌ Failed to create storage directories:', error);
       } catch (error) {
         // Logger fallback - ignore error
@@ -198,8 +192,8 @@ export class AlexCreativeEngine extends EventEmitter  {
     logger.info('🔌 Initializing creative providers...');
 
     // OpenAI DALL-E 3
-    if (process.env.OPENAI_API_KEY) {      try: {
-        const: { OpenAI } = await import('openai');
+    if (process.env.OPENAI_API_KEY) {      try {
+        const { OpenAI } = await import('openai');
         this.imageProviders.openai.client = new OpenAI({
           apiKey: process.env.OPENAI_API_KEY
         });
@@ -216,17 +210,17 @@ export class AlexCreativeEngine extends EventEmitter  {
     }
 
     // Stability AI
-    if (process.env.STABILITY_API_KEY) {      try: {
+    if (process.env.STABILITY_API_KEY) {      try {
         this.imageProviders.stability.client = {
           apiKey: process.env.STABILITY_API_KEY,
           baseURL: API_URL_1
         };
-        this.imageProviders.stability.enabled = true;      try: {
+        this.imageProviders.stability.enabled = true;      try {
           logger.info('✅ Stability AI initialized');
         } catch (error) {
           // Logger fallback - ignore error
         }
-      } catch (error) {      try: {
+      } catch (error) {      try {
           logger.warn('⚠️ Stability AI initialization failed:', error.message);
         } catch (error) {
           // Logger fallback - ignore error
@@ -235,17 +229,17 @@ export class AlexCreativeEngine extends EventEmitter  {
     }
 
     // ElevenLabs
-    if (process.env.ELEVENLABS_API_KEY) {      try: {
+    if (process.env.ELEVENLABS_API_KEY) {      try {
         this.audioProviders.elevenlabs.client = {
           apiKey: process.env.ELEVENLABS_API_KEY,
           baseURL: API_URL_2
         };
-        this.audioProviders.elevenlabs.enabled = true;      try: {
+        this.audioProviders.elevenlabs.enabled = true;      try {
           logger.info('✅ ElevenLabs initialized');
         } catch (error) {
           // Logger fallback - ignore error
         }
-      } catch (error) {      try: {
+      } catch (error) {      try {
           logger.warn('⚠️ ElevenLabs initialization failed:', error.message);
         } catch (error) {
           // Logger fallback - ignore error
@@ -267,7 +261,7 @@ export class AlexCreativeEngine extends EventEmitter  {
         apiKey: process.env.KLING_API_KEY,
         baseURL: API_URL_3
       };
-      this.videoProviders.klingai.enabled = true;      try: {
+      this.videoProviders.klingai.enabled = true;      try {
         logger.info('✅ KlingAI placeholder initialized');
       } catch (error) {
         // Logger fallback - ignore error
@@ -280,7 +274,7 @@ export class AlexCreativeEngine extends EventEmitter  {
         apiKey: process.env.RUNWAY_API_KEY,
         baseURL: API_URL_4
       };
-      this.videoProviders.runwayml.enabled = true;      try: {
+      this.videoProviders.runwayml.enabled = true;      try {
         logger.info('✅ RunwayML placeholder initialized');
       } catch (error) {
         // Logger fallback - ignore error
@@ -293,7 +287,7 @@ export class AlexCreativeEngine extends EventEmitter  {
         apiKey: process.env.SUNO_API_KEY,
         baseURL: API_URL_5
       };
-      this.audioProviders.suno.enabled = true;      try: {
+      this.audioProviders.suno.enabled = true;      try {
         logger.info('✅ Suno Music placeholder initialized');
       } catch (error) {
         // Logger fallback - ignore error
@@ -310,9 +304,9 @@ export class AlexCreativeEngine extends EventEmitter  {
     let activeProviders = 0;
 
     // Test OpenAI
-    if (this.imageProviders.openai.enabled) {      try: {
+    if (this.imageProviders.openai.enabled) {      try {
         // Test simple
-        activeProviders++;      try: {
+        activeProviders++;      try {
           logger.info('✅ OpenAI connection verified');
         } catch (error) {
           // Logger fallback - ignore error
@@ -321,7 +315,7 @@ export class AlexCreativeEngine extends EventEmitter  {
         logger.warn('⚠️ OpenAI connection test failed');
         this.imageProviders.openai.enabled = false;
       }
-    }      try: {
+    }      try {
       logger.info(`🌐 ${activeProviders} creative providers active and ready`);
     } catch (error) {
       // Logger fallback - ignore error
@@ -331,14 +325,14 @@ export class AlexCreativeEngine extends EventEmitter  {
   /**
    * Génération d'image principale
    */
-  async generateImage(prompt, options = {}) {      try: {
+  async generateImage(prompt, options = {}) {      try {
       if (!this.isInitialized) {
         await this.initialize();
       }
 
       logger.info('🎨 Generating image...', { prompt: prompt.substring(0, 50) });
 
-      const: { provider = STR_AUTO, style = 'photorealistic', size = '1024x1024', quality = 'standard', userId = 'anonymous' } = options;
+      const { provider = STR_AUTO, style = 'photorealistic', size = '1024x1024', quality = 'standard', userId = 'anonymous' } = options;
       // Sélection du provider
       const selectedProvider = this.selectBestImageProvider(provider, style);
 
@@ -374,7 +368,7 @@ export class AlexCreativeEngine extends EventEmitter  {
         prompt: prompt,
         style: style,
         provider: selectedProvider,
-        metadata: {,
+        metadata: {
           size: size,
           quality: quality,
           generatedAt: new Date().toISOString(),
@@ -399,7 +393,7 @@ export class AlexCreativeEngine extends EventEmitter  {
    * Génération avec DALL-E 3
    */
   async generateWithDALLE3(prompt, options) {
-    const: { style, size, quality } = options;
+    const { style, size, quality } = options;
 
     // Optimisation du prompt pour DALL-E 3
     const optimizedPrompt = this.optimizePromptForDALLE3(prompt, style);
@@ -411,7 +405,7 @@ export class AlexCreativeEngine extends EventEmitter  {
       size: size,
       quality: quality,
       response_format: "url"
-    });      return: {
+    });      return {
       url: response.data[0].url,
       revisedPrompt: response.data[0].revised_prompt,
       provider: 'dall-e-3'
@@ -422,10 +416,10 @@ export class AlexCreativeEngine extends EventEmitter  {
    * Génération avec Stability AI
    */
   async generateWithStability(prompt, options) {
-    const: { style, size } = options;
+    const { style, size } = options;
 
     // Implementation placeholder pour Stability AI
-    logger.info('🎭 Generating with Stability AI (placeholder)');      return: {
+    logger.info('🎭 Generating with Stability AI (placeholder)');      return {
       url: API_URL_6,
       prompt: prompt,
       provider: 'stability-ai'
@@ -435,18 +429,18 @@ export class AlexCreativeEngine extends EventEmitter  {
   /**
    * Génération vidéo principale
    */
-  async generateVideo(prompt, options = {}) {      try: {
+  async generateVideo(prompt, options = {}) {      try {
       if (!this.isInitialized) {
         await this.initialize();
       }
 
       logger.info('🎬 Generating video...', { prompt: prompt.substring(0, 50) });
 
-      const: { provider = STR_AUTO, style = STR_CINEMATIC, duration = 5, resolution = '720p' } = options;
+      const { provider = STR_AUTO, style = STR_CINEMATIC, duration = 5, resolution = '720p' } = options;
       // Sélection du provider vidéo
       const selectedProvider = this.selectBestVideoProvider(provider, style);
 
-      if (!selectedProvider) {      return: {
+      if (!selectedProvider) {      return {
           success: false,
           error: 'Aucun provider vidéo disponible',
           message: 'Les fonctionnalités vidéo seront bientôt disponibles !'
@@ -473,12 +467,12 @@ export class AlexCreativeEngine extends EventEmitter  {
           videoResult = await this.generatePlaceholderVideo(prompt, options);
       }
 
-      this.creativeMetrics.videosCreated++;      return: {
+      this.creativeMetrics.videosCreated++;      return {
         success: true,
         videoUrl: videoResult.url,
         prompt: prompt,
         provider: selectedProvider,
-        metadata: {,
+        metadata: {
           duration: duration,
           style: style,
           resolution: resolution,
@@ -495,17 +489,17 @@ export class AlexCreativeEngine extends EventEmitter  {
   /**
    * Synthèse audio/voix
    */
-  async synthesizeAudio(text, options = {}) {      try: {
+  async synthesizeAudio(text, options = {}) {      try {
       if (!this.isInitialized) {
         await this.initialize();
       }
 
       logger.info('🎵 Synthesizing audio...', { text: text.substring(0, 50) });
 
-      const: { speed = 1.0, provider = STR_AUTO, voice = 'alloy', language = 'en', emotion = 'neutral' } = options;
+      const { speed = 1.0, provider = STR_AUTO, voice = 'alloy', language = 'en', emotion = 'neutral' } = options;
       const selectedProvider = this.selectBestAudioProvider(provider);
 
-      if (!selectedProvider) {      return: {
+      if (!selectedProvider) {      return {
           success: false,
           error: 'Aucun provider audio disponible'
         };
@@ -523,18 +517,18 @@ export class AlexCreativeEngine extends EventEmitter  {
                 break;
           audioResult = await this.synthesizeWithElevenLabs(text, options);
           break;
-        default:      return: {,
+        default:      return {
             success: false,
             message: 'Synthèse vocale en cours de développement !'
           };
       }
 
-      this.creativeMetrics.audioSynthesized++;      return: {
+      this.creativeMetrics.audioSynthesized++;      return {
         success: true,
         audioUrl: audioResult.url,
         text: text,
         provider: selectedProvider,
-        metadata: {,
+        metadata: {
           voice: voice,
           language: language,
           emotion: emotion,
@@ -552,7 +546,7 @@ export class AlexCreativeEngine extends EventEmitter  {
    * Synthèse avec OpenAI TTS
    */
   async synthesizeWithOpenAI(text, options) {
-    const: { speed = 1.0, voice = 'alloy' } = options;
+    const { speed = 1.0, voice = 'alloy' } = options;
     const response = await this.audioProviders.openai.client.audio.speech.create({
       model: "tts-1-hd",
       voice: voice,
@@ -565,7 +559,7 @@ export class AlexCreativeEngine extends EventEmitter  {
     const fileName = `speech_${Date.now()}.mp3`;
     const filePath = path.join(this.storageConfig.audio, fileName);
 
-    await fs.writeFile(filePath, audioBuffer);      return: {
+    await fs.writeFile(filePath, audioBuffer);      return {
       url: `/generated_media/audio/${fileName}`,
       path: filePath,
       provider: 'openai-tts'
@@ -575,11 +569,11 @@ export class AlexCreativeEngine extends EventEmitter  {
   /**
    * Composition musicale
    */
-  async composeMusic(prompt, options = {}) {      try: {
+  async composeMusic(prompt, options = {}) {      try {
       logger.info('🎼 Composing music...', { prompt: prompt.substring(0, 50) });
 
-      const: { } = options;
-      // Pour l'instant, placeholder      return: {
+      const { } = options;
+      // Pour l'instant, placeholder      return {
         success: false,
         message: '🎵 La composition musicale avec Suno et Udio arrive bientôt ! En attendant, je peux vous aider à créer des concepts musicaux et des paroles.',
         suggestions: [
@@ -677,11 +671,11 @@ export class AlexCreativeEngine extends EventEmitter  {
   /**
    * Sauvegarde d'image générée
    */
-  async saveGeneratedImage(imageResult, userId) {      try: {
+  async saveGeneratedImage(imageResult, userId) {      try {
       const fileName = `image_${Date.now()}.jpg`;
       const filePath = path.join(this.storageConfig.images, fileName);
 
-      // Simulation de sauvegarde      return: {
+      // Simulation de sauvegarde      return {
         url: `/generated_media/images/${fileName}`,
         path: filePath
       };
@@ -694,7 +688,7 @@ export class AlexCreativeEngine extends EventEmitter  {
   /**
    * Génération d'image fallback
    */
-  async generateFallbackImage(prompt, options) {      return: {
+  async generateFallbackImage(prompt, options) {      return {
       success: false,
       message: `🎨 Je visualise parfaitement votre idée : "${prompt}". La génération d'images sera bientôt disponible avec DALL-E 3, Midjourney et Stability AI !`,
       suggestion: 'En attendant, je peux vous aider à affiner votre concept créatif et optimiser votre prompt.'
@@ -704,7 +698,7 @@ export class AlexCreativeEngine extends EventEmitter  {
   /**
    * Génération vidéo placeholder
    */
-  async generatePlaceholderVideo(prompt, options) {      return: {
+  async generatePlaceholderVideo(prompt, options) {      return {
       url: null,
       message: `🎬 Concept vidéo capturé : "${prompt}". KlingAI et RunwayML arrivent bientôt pour donner vie à vos visions !`
     };
@@ -713,19 +707,19 @@ export class AlexCreativeEngine extends EventEmitter  {
   /**
    * Méthodes placeholder pour providers futurs
    */
-  async generateWithKlingAI(prompt, options) {      return: {
+  async generateWithKlingAI(prompt, options) {      return {
       url: null,
       message: 'KlingAI integration en cours...'
     };
   }
 
-  async generateWithRunwayML(prompt, options) {      return: {
+  async generateWithRunwayML(prompt, options) {      return {
       url: null,
       message: 'RunwayML integration en cours...'
     };
   }
 
-  async synthesizeWithElevenLabs(text, options) {      return: {
+  async synthesizeWithElevenLabs(text, options) {      return {
       url: null,
       message: 'ElevenLabs integration en cours...'
     };

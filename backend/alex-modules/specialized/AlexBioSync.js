@@ -46,7 +46,7 @@ export class AlexBioSync extends EventEmitter  {
     this.initializeCircadianTracking();
     this.loadAdaptationProtocols();
     this.setupEnergyOptimization();
-    this.startRealTimeMonitoring();      try: {
+    this.startRealTimeMonitoring();      try {
       logger.info('AlexBioSync initialized - Connected to biological rhythms');
 
     } catch (error) {
@@ -62,7 +62,7 @@ export class AlexBioSync extends EventEmitter  {
     logger.info('Connecting bio device', {
       device: deviceInfo.type
       userId
-    });      try: {
+    });      try {
       // Validation et authentification de l'appareil
       const deviceAuth = await this.authenticateDevice(deviceInfo);      // Configuration de la synchronisation
       const syncConfig = await this.setupDeviceSync(deviceInfo, userId);      // Calibration biologique initiale
@@ -114,7 +114,7 @@ export class AlexBioSync extends EventEmitter  {
    * Adaptation intelligente basée sur les métriques biologiques
    */
   async adaptToCurrentState(userId) {
-    logger.debug('Adapting to current biological state', { userId });      try: {
+    logger.debug('Adapting to current biological state', { userId });      try {
       // Récupération des métriques actuelles
       const currentMetrics = await this.getCurrentBioMetrics(userId);      // Analyse de l'état énergétique
       const energyState = await this.analyzeEnergyState(currentMetrics);      // Détection des patterns circadiens
@@ -464,7 +464,7 @@ export class AlexBioSync extends EventEmitter  {
         apiVersion: 'v1STR_AUTHMETHODoauth2'
       };    };
 
-    this.supportedDevices = supportedDevices;      try: {
+    this.supportedDevices = supportedDevices;      try {
       logger.debug('Device connections configured');
 
     } catch (error) {
@@ -474,7 +474,7 @@ export class AlexBioSync extends EventEmitter  {
     }}
 
   async authenticateDevice(deviceInfo) {
-    // Simulation d'authentification OAuth      return: {
+    // Simulation d'authentification OAuth      return {
       accessToken: `bio_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36)}'
       refreshToken: 'refresh_${Date.now()}`
       expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
@@ -483,7 +483,7 @@ export class AlexBioSync extends EventEmitter  {
   }
 
   async establishBioBaseline(deviceInfo, userId) {
-    // Établissement des métriques de base personnalisées      return: {
+    // Établissement des métriques de base personnalisées      return {
       restingHeartRate: 65, // À calibrer avec les données réelles
       maxHeartRate: 190,    // Formule: 220 - âge,
       averageHRV: 35,       // Variabilité cardiaque moyenne
@@ -520,7 +520,7 @@ export class AlexBioSync extends EventEmitter  {
   }
 
   initializeCircadianTracking() {
-    // Initialisation du tracking des rythmes circadiens      try: {
+    // Initialisation du tracking des rythmes circadiens      try {
       logger.debug('Circadian tracking initialized');
 
     } catch (error) {
@@ -541,7 +541,7 @@ export class AlexBioSync extends EventEmitter  {
       activities: ['admin_tasks', 'email', 'research']
       duration: '25-45 minutes',
       breaks: 'frequent'
-    });      try: {
+    });      try {
       logger.debug('Adaptation protocols loaded');
 
     } catch (error) {
@@ -551,7 +551,7 @@ export class AlexBioSync extends EventEmitter  {
     }}
 
   setupEnergyOptimization() {
-    // Configuration de l'optimisation énergétique      try: {
+    // Configuration de l'optimisation énergétique      try {
       logger.debug('Energy optimization configured');
 
     } catch (error) {

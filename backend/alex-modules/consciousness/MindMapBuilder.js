@@ -60,7 +60,7 @@ export class MindMapBuilder extends EventEmitter  {
 
         this.activeMaps = new Map();
         this.mapTemplates = new Map();
-        this.collaborativeSessions = new Map();      try: {
+        this.collaborativeSessions = new Map();      try {
       logger.info('MindMapBuilder consciousness activated', {
             mapComplexity: this.config.mapComplexity,
             visualStyle: this.config.visualStyle,
@@ -136,7 +136,7 @@ export class MindMapBuilder extends EventEmitter  {
             topic: mapRequest.centralTopic,
             complexity: mapRequest.complexity || this.config.mapComplexity,
             style: mapRequest.style || this.config.visualStyle
-        });      try: {
+        });      try {
             const mapSession = {
                 id: mapId,
                 startTime: Date.now()
@@ -312,7 +312,7 @@ export class MindMapBuilder extends EventEmitter  {
       // Logger fallback - ignore error
     });
 
-            this.activeMaps.delete(mapId);      return: {
+            this.activeMaps.delete(mapId);      return {
                 success: false,
                 error: error.message,
                 mapId
@@ -334,7 +334,7 @@ export class MindMapBuilder extends EventEmitter  {
             facilitator: collaborationRequest.facilitator,
             participants: collaborationRequest.participants?.length || 0,
             topic: collaborationRequest.topic
-        });      try: {
+        });      try {
             // Configuration de la session collaborative
             const sessionConfig = await this.configureCollaborativeSession(
                 collaborationRequest.sessionType,
@@ -418,7 +418,7 @@ export class MindMapBuilder extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message,
                 sessionId
@@ -437,7 +437,7 @@ export class MindMapBuilder extends EventEmitter  {
             templateSetId,
             purpose: templateRequest.purpose,
             domain: templateRequest.domain
-        });      try: {
+        });      try {
             // Templates par domaine d'application
             const domainTemplates = await this.createDomainSpecificTemplates(
                 templateRequest.domain,
@@ -468,7 +468,7 @@ export class MindMapBuilder extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message,
                 templateSetId
@@ -478,7 +478,7 @@ export class MindMapBuilder extends EventEmitter  {
 
     // Méthodes principales d'analyse et de génération
 
-    async analyzeCentralConcept(topic, context, purpose) {      return: {
+    async analyzeCentralConcept(topic, context, purpose) {      return {
             centralNode: {,
                 concept: topic,
                 type: this.identifyConceptType(topic),
@@ -565,7 +565,7 @@ export class MindMapBuilder extends EventEmitter  {
         return relationships;
     }
 
-    async generateVisualDesign(structure, style, colorPreferences) {      return: {
+    async generateVisualDesign(structure, style, colorPreferences) {      return {
             layout: await this.generateLayoutDesign(structure, style)
             nodeStyles: await this.generateNodeStyles(structure, style)
             connections: await this.generateConnectionStyles(structure, style)
@@ -598,7 +598,7 @@ export class MindMapBuilder extends EventEmitter  {
     }
 
     async generateSemanticField(topic, context) {
-        // Simulation of semantic field generation      return: {
+        // Simulation of semantic field generation      return {
             relatedConcepts :
        ['innovation', 'creativity', 'problem-solving', 'collaboration'],
             semanticClusters: [
@@ -627,7 +627,7 @@ export class MindMapBuilder extends EventEmitter  {
     }
 
     async generateSubConcepts(branch, semanticField, remainingDepth) {
-        if (remainingDepth <= 0) return: [];
+        if (remainingDepth <= 0) return [];
 
         const subConcepts = [];
         const count = Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 4) + 2; // 2-5 sub-concepts
@@ -674,7 +674,7 @@ export class MindMapBuilder extends EventEmitter  {
 
     async discoverHiddenRelationships(structure) {
         // Simulation of hidden relationship discovery
-        return: [
+        return [
             {
                 from: 'branch_1',
                 to: 'branch_3',
@@ -686,7 +686,7 @@ export class MindMapBuilder extends EventEmitter  {
     }
 
     generateFallbackSuggestions(mapRequest) {
-        return: [
+        return [
             'Try starting with a simpler central concept',
             'Reduce the complexity level'
             'Consider breaking the topic into smaller sub-topics',
@@ -703,7 +703,7 @@ export class MindMapBuilder extends EventEmitter  {
         });
     }
 
-    generateSVGElements(mapSession) {      return: {
+    generateSVGElements(mapSession) {      return {
             nodes: 'Generated SVG node elements',
             connections: 'Generated SVG connection elements',
             layout: 'Generated SVG layout structure'
@@ -720,7 +720,7 @@ export class MindMapBuilder extends EventEmitter  {
     }
 
     // Méthodes de session collaborative
-    async configureCollaborativeSession(sessionType, participants, facilitation) {      return: {
+    async configureCollaborativeSession(sessionType, participants, facilitation) {      return {
             type :
        sessionType || 'brainstorming',
             duration: 90, // minutes

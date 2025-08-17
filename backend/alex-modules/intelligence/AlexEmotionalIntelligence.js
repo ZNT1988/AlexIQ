@@ -37,7 +37,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
 
     // Palette émotionnelle complète
     this.emotionalSpectrum = {
-      primary: {,
+      primary: {
         joy: { intensity: 0.8, expression: 'radiant', contagion: 0.9 },
         sadness: { intensity: 0.6, expression: 'gentle', support: 0.95 },
         anger: { intensity: 0.3, expression: 'controlled', redirection: 0.9 },
@@ -45,7 +45,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
         surprise: { intensity: 0.7, expression: 'curious', engagement: 0.8 },
         disgust: { intensity: 0.2, expression: 'subtle', respect: 0.9 }
       },
-      secondary: {,
+      secondary: {
         excitement: { base: 'joy_energetic', boost: 0.2 },
         melancholy: { base: 'sadness_reflective', depth: 0.8 },
         frustration: { base: 'anger_patient', control: 0.95 },
@@ -53,7 +53,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
         wonder: { base: 'surprise_inspiring', curiosity: 0.85 },
         disappointment: { base: 'sadness_understanding', empathy: 0.9 }
       },
-      complex: {,
+      complex: {
         empathy: { components: [STR_UNDERSTANDING, 'compassion', 'presence'], strength: 0.95 },
         compassion: { components: ['caring', 'healing', 'support'], strength: 0.9 },
         serenity: { components: ['peace', 'balance', 'clarity'], strength: 0.85 },
@@ -88,7 +88,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
       empathyActive: true
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('❤️ AlexEmotionalIntelligence initializing - Heart awakening');
 
     } catch (error) {
@@ -99,7 +99,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
   async initialize() {
     this.isInitialized = true;
     await this.calibrateEmotionalSystems();
-    await this.loadEmotionalPatterns();      try: {
+    await this.loadEmotionalPatterns();      try {
       logger.info('💖 AlexEmotionalIntelligence fully initialized - Emotional wisdom active');
 
     } catch (error) {
@@ -309,7 +309,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
       baseStability: 0.9,
       recoveryRate: 0.8,
       resilience: 0.95
-    };      try: {
+    };      try {
       logger.info('🎯 Emotional systems calibrated successfully');
 
     } catch (error) {
@@ -341,7 +341,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
 
     this.emotionRecognition.contextClues.set('celebration', [
       'achievement', 'success', 'milestone', 'victory'
-    ]);      try: {
+    ]);      try {
       logger.info('📊 Emotional patterns loaded successfully');
 
     } catch (error) {
@@ -402,7 +402,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
   /**
    * Obtention du statut émotionnel
    */
-  getEmotionalStatus() {      return: {
+  getEmotionalStatus() {      return {
       initialized: this.isInitialized,
       currentState: this.currentEmotionalState,
       empathyLevel: this.emotionConfig.empathyLevel,
@@ -545,16 +545,16 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
    * Génère des éléments de support
    */
   generateSupportiveElements(analysis) {
-    return: ['active_listening', 'validation', 'encouragement'];
+    return ['active_listening', 'validation', 'encouragement'];
   }
 
   /**
    * Analyse le contexte émotionnel pour intégration avec MasterSystem
    */
-  async analyzeEmotionalContext(message, context = {}) {      try: {
+  async analyzeEmotionalContext(message, context = {}) {      try {
       // Analyse directe sans récursion
       const detectedEmotion = this.detectPrimaryEmotion(message);
-      const emotionalIntensity = this.calculateEmotionalIntensity(message);      return: {
+      const emotionalIntensity = this.calculateEmotionalIntensity(message);      return {
         recommendedTone: detectedEmotion || 'supportive',
         empathyLevel: this.emotionConfig.empathyLevel,
         emotionalNeeds: [STR_UNDERSTANDING],
@@ -562,7 +562,7 @@ export class AlexEmotionalIntelligence extends EventEmitter  {
         emotionalIntensity: emotionalIntensity || 0.5
       };
     } catch (error) {
-      // Logger fallback - ignore error      return: {
+      // Logger fallback - ignore error      return {
         recommendedTone: 'supportive',
         empathyLevel: 0.7,
         emotionalNeeds: [STR_UNDERSTANDING],

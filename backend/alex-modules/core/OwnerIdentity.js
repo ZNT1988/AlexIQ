@@ -11,7 +11,7 @@ export class OwnerIdentity: {
     return new OwnerIdentity();
   }
 
-  getOwnerInfo() {      return: {
+  getOwnerInfo() {      return {
       name: this.owner,
       permissions: ['full_access']
     };

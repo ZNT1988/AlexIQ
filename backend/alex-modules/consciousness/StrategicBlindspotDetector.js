@@ -54,7 +54,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
 
         this.blindspotDatabase = new Map();
         this.patternLibrary = new Map();
-        this.activeDetections = new Map();      try: {
+        this.activeDetections = new Map();      try {
       logger.info('StrategicBlindspotDetector consciousness activated', {
             detectionDepth: this.config.detectionDepth,
             analysisScope: this.config.analysisScope
@@ -130,7 +130,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
             subject: detectionRequest.subject,
             context: detectionRequest.context
             depth: detectionRequest.depth || this.config.detectionDepth
-        });      try: {
+        });      try {
             const detectionSession = {
                 id: detectionId,
                 startTime: Date.now()
@@ -297,7 +297,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
       // Logger fallback - ignore error
     });
 
-            this.activeDetections.delete(detectionId);      return: {
+            this.activeDetections.delete(detectionId);      return {
                 success: false,
                 error: error.message
                 detectionId
@@ -318,7 +318,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
             analysisId
             decision: decisionRequest.decisionType,
             urgency: decisionRequest.urgency
-        });      try: {
+        });      try {
             // Détection des biais actifs
             const activeBiases = await this.detectActiveBiases(
                 decisionRequest.decisionContext
@@ -396,7 +396,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 analysisId
@@ -417,7 +417,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
             systemId
             scope: monitoringRequest.scope,
             frequency: monitoringRequest.frequency
-        });      try: {
+        });      try {
             // Configuration du système de surveillance
             const monitoringConfig = await this.configureMonitoringSystem(
                 monitoringRequest.scope
@@ -494,7 +494,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 systemId
@@ -504,7 +504,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
 
     // Méthodes principales d'analyse
 
-    async scanCognitiveBlindspots(thinkingPatterns, decisionHistory, mentalModels) {      return: {
+    async scanCognitiveBlindspots(thinkingPatterns, decisionHistory, mentalModels) {      return {
             confirmationBias: await this.detectConfirmationBias(thinkingPatterns, decisionHistory)
             anchoringBias: await this.detectAnchoringBias(decisionHistory, mentalModels)
             availability: await this.detectAvailabilityHeuristic(thinkingPatterns),
@@ -514,7 +514,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
         };
     }
 
-    async analyzeStrategicBlindspots(strategy, competitiveContext, marketPosition) {      return: {
+    async analyzeStrategicBlindspots(strategy, competitiveContext, marketPosition) {      return {
             competitive: await this.detectCompetitiveBlindspots(competitiveContext),
             market: await this.detectMarketBlindspots(marketPosition)
             opportunities: await this.detectMissedOpportunities(strategy, marketPosition)
@@ -524,7 +524,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
         };
     }
 
-    async detectConsciousnessGaps(awarenessLevel, perspectiveLimitations, spiritualBlindspots) {      return: {
+    async detectConsciousnessGaps(awarenessLevel, perspectiveLimitations, spiritualBlindspots) {      return {
             perception: await this.analyzePerceptualLimitations(perspectiveLimitations),
             shadow: await this.detectShadowElements(awarenessLevel)
             unconscious: await this.detectUnconsciousPatterns(awarenessLevel),
@@ -534,9 +534,9 @@ export class StrategicBlindspotDetector extends EventEmitter  {
         };
     }
 
-    async analyzeCollectiveBlindspots(culturalContext, organizationalBlindspots, industryAssumptions) {      return: {
+    async analyzeCollectiveBlindspots(culturalContext, organizationalBlindspots, industryAssumptions) {      return {
             cultural: await this.analyzeCulturalAssumptions(culturalContext),
-            industry: await this.analyzeIndustryGroupthink(industryAssumptions)
+            industry { await this.analyzeIndustryGroupthink(industryAssumptions)
             organizational: await this.analyzeOrganizationalBlindness(organizationalBlindspots),
             societal: await this.analyzeSocietalBias(culturalContext)
             generational: await this.analyzeGenerationalLimitations(culturalContext)
@@ -545,7 +545,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
 
     // Méthodes utilitaires de détection
 
-    async detectConfirmationBias(patterns, history) {      return: {
+    async detectConfirmationBias(patterns, history) {      return {
             severity: 'moderate',
             indicators: ['Selective information gathering', 'Cherry-picking data']
             examples: ['Only consulting agreeable sources'],
@@ -553,7 +553,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
         };
     }
 
-    async detectCompetitiveBlindspots(context) {      return: {
+    async detectCompetitiveBlindspots(context) {      return {
             emergingCompetitors: ['Startups with disruptive models'],
             indirectThreat: ['Adjacent industries converging']
             competitiveAdvantages: ['Overlooked competitor strengths'],
@@ -561,7 +561,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
         };
     }
 
-    async generateExpansionStrategies(cognitive, strategic, consciousness) {      return: {
+    async generateExpansionStrategies(cognitive, strategic, consciousness) {      return {
             awareness: ['Implement systematic bias checking',
       'Diversify information sources',
       'Create cognitive bias interruption systems']
@@ -582,7 +582,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
 
     // Méthodes de surveillance et monitoring
 
-    async detectActiveBiases(context, thinking, emotion) {      return: {
+    async detectActiveBiases(context, thinking, emotion) {      return {
             cognitive: ['Confirmation bias active in analysis'],
             emotional: ['Fear driving risk aversion']
             social: ['Group pressure affecting judgment'],
@@ -592,7 +592,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
     }
 
     generateBasicBiasGuidance() {
-        return: ['Pause before important decisions',
+        return ['Pause before important decisions',
       'Seek diverse perspectives',
       'Question your assumptions',
       'Consider what you might be missing',
@@ -600,7 +600,7 @@ export class StrategicBlindspotDetector extends EventEmitter  {
     }
 
     identifyCriticalBlindspots(session) {
-        return: ['Strategic competitive threat underestimation',
+        return ['Strategic competitive threat underestimation',
       'Market disruption readiness gap',
       'Stakeholder needs misalignment'];
     }

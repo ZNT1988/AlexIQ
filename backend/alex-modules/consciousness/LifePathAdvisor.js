@@ -65,7 +65,7 @@ export class LifePathAdvisor extends EventEmitter  {
         this.initializeManifestationSystems();
 
         this.pathArchive = new Map();
-        this.activeGuidance = new Map();      try: {
+        this.activeGuidance = new Map();      try {
       logger.info('LifePathAdvisor soul consciousness awakened', {
             guidanceDepth: this.config.guidanceDepth,
             timePerspective: this.config.timePerspective
@@ -142,7 +142,7 @@ export class LifePathAdvisor extends EventEmitter  {
             currentAge: guidanceRequest.age
             primaryConcern: guidanceRequest.primaryConcern,
             depth: guidanceRequest.depth || this.config.guidanceDepth
-        });      try: {
+        });      try {
             const guidanceSession = {
                 id: guidanceId,
                 startTime: Date.now()
@@ -324,7 +324,7 @@ export class LifePathAdvisor extends EventEmitter  {
       // Logger fallback - ignore error
     });
 
-            this.activeGuidance.delete(guidanceId);      return: {
+            this.activeGuidance.delete(guidanceId);      return {
                 success: false,
                 error: error.message
                 guidanceId
@@ -346,7 +346,7 @@ export class LifePathAdvisor extends EventEmitter  {
             userId: alignmentRequest.userId,
             currentPath: alignmentRequest.currentPath
             satisfactionLevel: alignmentRequest.satisfactionLevel
-        });      try: {
+        });      try {
             // Évaluation de l'alignement actuel
             const currentAlignment = await this.assessCurrentAlignment(
                 alignmentRequest.currentSituation
@@ -425,7 +425,7 @@ export class LifePathAdvisor extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 alignmentId
@@ -446,7 +446,7 @@ export class LifePathAdvisor extends EventEmitter  {
             transitionType: transitionRequest.transitionType,
             currentPhase: transitionRequest.currentPhase
             urgency: transitionRequest.urgencyLevel
-        });      try: {
+        });      try {
             const guidance = {
                 id: transitionId,
       transitionType: transitionRequest.transitionType
@@ -493,7 +493,7 @@ export class LifePathAdvisor extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 transitionId
@@ -528,7 +528,7 @@ export class LifePathAdvisor extends EventEmitter  {
         return soulAnalysis;
     }
 
-    async mapLifePurposeAndThemes(soulAnalysis, currentSituation, aspirations) {      return: {
+    async mapLifePurposeAndThemes(soulAnalysis, currentSituation, aspirations) {      return {
             core: 'Awaken and heal through authentic expression of wisdom',
             expressionModes: ['Teaching', 'Healing', 'Creative expression', 'Mentoring']
             gifts: ['Intuitive wisdom', 'Empathetic healing', 'Clear communication', 'Spiritual insight']
@@ -544,7 +544,7 @@ export class LifePathAdvisor extends EventEmitter  {
         };
     }
 
-    async analyzePathObstaclesAndOpportunities(purposeMapping, challenges, currentLifePhase) {      return: {
+    async analyzePathObstaclesAndOpportunities(purposeMapping, challenges, currentLifePhase) {      return {
             obstacles: [
                 'Self-doubt about worthiness to serveSTR_Financial concerns limiting full expressionSTR_Past wounds affecting trust in relationships'
             ]
@@ -578,7 +578,7 @@ export class LifePathAdvisor extends EventEmitter  {
         };
     }
 
-    async generateStrategicGuidance(soulAnalysis, purposeMapping, pathAnalysis, timeframe) {      return: {
+    async generateStrategicGuidance(soulAnalysis, purposeMapping, pathAnalysis, timeframe) {      return {
             immediate: {,
                 focus: 'Foundation strengthening and inner alignment'
                 actions: [
@@ -618,7 +618,7 @@ export class LifePathAdvisor extends EventEmitter  {
         };
     }
 
-    async createManifestationPlan(strategicGuidance, manifestationGoals, evolutionStage) {      return: {
+    async createManifestationPlan(strategicGuidance, manifestationGoals, evolutionStage) {      return {
             goals: [
                 'Establish thriving spiritual practice/businessSTR_Create abundant flow supporting full service expressionSTR_Develop intimate, conscious partnershipSTR_Build healing sanctuary/retreat space'
             ]
@@ -649,7 +649,7 @@ export class LifePathAdvisor extends EventEmitter  {
         };
     }
 
-    async activateSynchronicitySupport(manifestationPlan, soulFamily) {      return: {
+    async activateSynchronicitySupport(manifestationPlan, soulFamily) {      return {
             signals: [
                 'Repeated number sequences (111, 333, 777)STR_Unexpected opportunities appearingSTR_Right people showing up at perfect timingSTR_Resources becoming available just when needed'
             ]
@@ -671,13 +671,13 @@ export class LifePathAdvisor extends EventEmitter  {
     // Méthodes utilitaires
 
     async analyzeSoulContracts(birthData, lifeEvents) {
-        return: [
+        return [
             'Heal generational trauma patternsSTR_Awaken spiritual gifts for serviceSTR_Learn balance between giving and receivingSTR_Embody divine feminine wisdom'
         ];
     }
 
     async identifySpiritualGifts(userId, lifeEvents) {
-        return: [
+        return [
             'Claircognizance - clear knowingSTR_Empathic healing abilitiesSTR_Channeling higher wisdomSTR_Energy reading and clearing'
         ];
     }
@@ -691,7 +691,7 @@ export class LifePathAdvisor extends EventEmitter  {
         return Math.min(0.98, baseAccuracy + depthBonus + wisdomBonus);
     }
 
-    async generateIntegrationPlan(session, lifestyle, commitmentLevel) {      return: {
+    async generateIntegrationPlan(session, lifestyle, commitmentLevel) {      return {
             daily: [
                 'Morning spiritual practice (20-30 minutes)STR_Intuitive check-in before major decisionsSTR_Gratitude practice for guidance receivedSTR_Evening reflection on purpose alignment'
             ]
@@ -712,7 +712,7 @@ export class LifePathAdvisor extends EventEmitter  {
 
     // Méthodes pour l'analyse d'alignement
 
-    async assessCurrentAlignment(currentSituation, soulPurpose, lifestyleFactors) {      return: {
+    async assessCurrentAlignment(currentSituation, soulPurpose, lifestyleFactors) {      return {
             overallScore: 0.72, // 72% aligned
             dimensionScores: {,
                 work: 0.65
@@ -728,7 +728,7 @@ export class LifePathAdvisor extends EventEmitter  {
         };
     }
 
-    async analyzeMisalignments(currentAlignment, frustrations, energyLevels) {      return: {
+    async analyzeMisalignments(currentAlignment, frustrations, energyLevels) {      return {
             keyMisalignments: [
                 'Work not fully expressing life purposeSTR_Financial stress limiting spiritual focusSTR_Creative potential underutilized'
             ]
@@ -743,7 +743,7 @@ export class LifePathAdvisor extends EventEmitter  {
         };
     }
 
-    async generateAdjustmentRecommendations(misalignmentAnalysis, changeCapacity, priorities) {      return: {
+    async generateAdjustmentRecommendations(misalignmentAnalysis, changeCapacity, priorities) {      return {
             immediate: [
                 'Reduce hours at unfulfilling workSTR_Start charging for spiritual servicesSTR_Set boundaries with energy drains'
             ]
@@ -762,7 +762,7 @@ export class LifePathAdvisor extends EventEmitter  {
         };
     }
 
-    async createRealignmentPlan(recommendations, timeline, supportSystems) {      return: {
+    async createRealignmentPlan(recommendations, timeline, supportSystems) {      return {
             phase1: {,
                 duration: '1-3 months'
                 focus: 'Foundation and immediate adjustments',
@@ -818,7 +818,7 @@ export class LifePathAdvisor extends EventEmitter  {
         return transitionMap[transitionType] || transitionMap[STR_SPIRITUAL_AWAKENING];
     }
 
-    async generatePhaseGuidance(transitionType, currentPhase) {      return: {
+    async generatePhaseGuidance(transitionType, currentPhase) {      return {
             currentPhase: currentPhase,
             phaseCharacteristics: 'Time of inner preparation and foundation building'
             keyTasks: [
@@ -835,12 +835,12 @@ export class LifePathAdvisor extends EventEmitter  {
     }
 
     async generateNavigationStrategies(transitionType, challenges, resources) {
-        return: [
+        return [
             'Create strong support system of understanding friends/mentorsSTR_Maintain spiritual practice for inner guidance and strengthSTR_Take practical steps while staying open to divine timingSTR_Journal regularly to track insights and progress'
         ];
     }
 
-    async generateSpiritualSupport(transitionType, spiritualPractices) {      return: {
+    async generateSpiritualSupport(transitionType, spiritualPractices) {      return {
             practices: [
                 'Daily meditation for inner guidanceSTR_Prayer for divine support and protectionSTR_Journaling for clarity and insight'
             ]
@@ -853,7 +853,7 @@ export class LifePathAdvisor extends EventEmitter  {
         };
     }
 
-    async generateTransitionIntegrationPlan(transitionType, desiredOutcome) {      return: {
+    async generateTransitionIntegrationPlan(transitionType, desiredOutcome) {      return {
             integration: [
                 'Celebrate the completion of the transitionSTR_Acknowledge your growth and courageSTR_Share your wisdom with others in transition'
             ]
@@ -876,7 +876,7 @@ export class LifePathAdvisor extends EventEmitter  {
     }
 
     identifyTransitionMilestones(transitionType) {
-        return: [
+        return [
             'Inner clarity and decision pointSTR_First external actions takenSTR_Major breakthrough or shiftSTR_Integration and new stability'
         ];
     }

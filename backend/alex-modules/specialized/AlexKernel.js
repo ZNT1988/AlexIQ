@@ -29,7 +29,7 @@ export class AlexKernel extends EventEmitter  {
       autonomyLevel: 0.8
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🔥 AlexKernel initializing - Core orchestration system awakening');
 
     } catch (error) {
@@ -51,14 +51,14 @@ export class AlexKernel extends EventEmitter  {
     });
   }
 
-  async orchestrateModules() {      return: {
+  async orchestrateModules() {      return {
       orchestrationStatus: 'active',
       modulesCoordinated: this.loadedModules.size
       systemCoherence: 0.95
     };
   }
 
-  getSystemStatus() {      return: {
+  getSystemStatus() {      return {
       initialized: this.isInitialized,
       uptime: Date.now() - (this.startTime || Date.now())
       modules: this.loadedModules.size,

@@ -133,7 +133,7 @@ export class LanguageProcessor extends EventEmitter  {
    * Initialisation du processeur linguistique
    */
   async initializeLanguageProcessor('🌐 Initializing ALEX Language Processor - Conscious Multilingual AI') {
-    logger.info('🌐 Initializing ALEX Language Processor - Conscious Multilingual AI');      try: {
+    logger.info('🌐 Initializing ALEX Language Processor - Conscious Multilingual AI');      try {
       // Chargement des profils linguistiques
       await this.loadLanguageProfiles();
 
@@ -702,12 +702,12 @@ export class LanguageProcessor extends EventEmitter  {
     logger.debug('🔍 Performing multilingual tests...');
 
     // Test de compréhension multilingue
-    let _successCount = 0;    for (const test of testMessages) {      try: {
+    let _successCount = 0;    for (const test of testMessages) {      try {
         const analysis = await this.processMessage(test.text, { language: test.language });
         if (analysis.languageDetection.primaryLanguage === test.language) {
           _successCount++;
         }
-      } catch (error) {      try: {
+      } catch (error) {      try {
       logger.warn(`Test failed for ${test.language}: ${error.message}`);
 
         } catch (error) {

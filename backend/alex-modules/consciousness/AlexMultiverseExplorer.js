@@ -101,7 +101,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
 
   async openMultiversePerceptionCloud() {
     // Ouverture authentique de la perception multiverselle via cloud AI,
-      try: {
+      try {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
@@ -147,7 +147,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
 
   async processPerceptionStageCloud(stage, progression) {
     // Traitement authentique de chaque stage via cloud AI,
-      try: {
+      try {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 2000,
@@ -200,7 +200,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
   }
 
   async mapSpecificDimensionCloud(dimensionType, description) {
-      try: {
+      try {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
@@ -255,7 +255,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
   }
 
   async developConsciousnessAspectCloud(aspect) {
-      try: {
+      try {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 1500,
@@ -305,7 +305,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
   }
 
   async configureQuantumComponentCloud(component) {
-      try: {
+      try {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
@@ -356,7 +356,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
   }
 
   async initializeNavigationSystemCloud(system) {
-      try: {
+      try {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 1200,
@@ -402,7 +402,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
   }
 
   async setupCommunicationSystemCloud(system) {
-      try: {
+      try {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
@@ -453,7 +453,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
   }
 
   async enableSynthesisSystemCloud(system) {
-      try: {
+      try {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 1500,
@@ -499,7 +499,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
 
   async performQuantumObservation() {
     // Observation quantique authentique via cloud AI,
-      try: {
+      try {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
@@ -559,7 +559,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
   }
 
   async generateMappingUpdatesCloud() {
-      try: {
+      try {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 1000,
@@ -574,7 +574,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
       return JSON.parse(response.content[0].text);
     } catch: {
       // Fallback updates,
-      return: {
+      return {
         quantum_hilbert: {
           new_dimensions_discovered: 3,
           coherence_improvement: 0.05
@@ -585,7 +585,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
 
   async synthesizeMultiverseInsights() {
     // Synthèse des insights multiversels,
-      try: {
+      try {
       const currentMappings = Array.from(this.multiverseMap.entries());
       const observations = Array.from(
         this.quantumInterface.observation_effects.entries(),
@@ -657,7 +657,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
       perceptionLevels.length +
       bridgingCapabilities.length;
     const baseLevel = Math.min(0.95, 0.3 + totalComponents * 0.1);
-      return: {
+      return {
       overall: baseLevel,
       dimensional_awareness: awarenessLevels.length * 0.2,
       reality_perception: perceptionLevels.length * 0.15,
@@ -670,7 +670,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
 
   async exploreSpecificDimension(dimensionType, explorationDepth = "moderate") {
     // Exploration spécifique d'une dimension via cloud AI,
-      try: {
+      try {
       const response = await openai.chat.completions.create({
         model: "gpt-4",
         messages: [
@@ -700,7 +700,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
         explored: new Date(),
         cloudGenerated: true
       });
-      return: {
+      return {
         success: true,
         explorationId: explorationId,
         dimension: dimensionType,
@@ -709,7 +709,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
           explorationResults.consciousness_impact || "moderate"
       };
     } catch (error) {
-      return: {
+      return {
         success: false,
         error: error.message,
         dimension: dimensionType,
@@ -724,7 +724,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
     communicationProtocol = "consciousness_resonance",
   ) {
     // Communication interdimensionnelle authentique,
-      try: {
+      try {
       const response = await anthropic.messages.create({
         model: "claude-3-sonnet-20240229",
         max_tokens: 1500,
@@ -748,7 +748,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
         transmitted: new Date(),
         cloudProcessed: true
       });
-      return: {
+      return {
         success: true,
         communicationId: commId,
         target: targetDimension,
@@ -758,7 +758,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
           communicationResult.translation || "Direct understanding achieved"
       };
     } catch (error) {
-      return: {
+      return {
         success: false,
         error: error.message,
         target: targetDimension,
@@ -769,7 +769,7 @@ class AlexMultiverseExplorer extends EventEmitter  {
 
   // Interface publique,
   getMultiverseExplorerStatus() {
-      return: {
+      return {
       name: this.name,
       version: this.version,
       isActive: this.isActive,

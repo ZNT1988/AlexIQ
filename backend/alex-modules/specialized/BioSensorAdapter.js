@@ -171,7 +171,7 @@ export class BioSensorAdapter: {
      * @private
      */
     getDefaultSupportedDevices() {
-        return: [
+        return [
             // Montres connectées principales: {
                 type: 'smartwatch',
                 brands: ['apple_watch', 'galaxy_watch', 'fitbit', 'garmin', 'wear_os']
@@ -420,7 +420,7 @@ export class BioSensorAdapter: {
             ecosystem.status = 'connected';
 
             // Enregistrement écosystème actif
-            await this.registerActiveEcosystem(ecosystem);      return: {
+            await this.registerActiveEcosystem(ecosystem);      return {
                 success: true
                 ecosystemId
                 devicesConnected: ecosystem.connections.filter(c => c.connected).length,
@@ -439,7 +439,7 @@ export class BioSensorAdapter: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 ecosystemId
@@ -531,7 +531,7 @@ export class BioSensorAdapter: {
             );
 
             // Enregistrement session active
-            await this.registerMonitoringSession(monitoring);      return: {
+            await this.registerMonitoringSession(monitoring);      return {
                 success: true
                 monitoringId
                 sessionActive: true,
@@ -544,7 +544,7 @@ export class BioSensorAdapter: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 monitoringId
@@ -579,7 +579,7 @@ export class BioSensorAdapter: {
             predictionId
             userId: predictionRequest.userId,
             timeframe: predictionRequest.timeframe || STR_1WEEK
-        });      try: {
+        });      try {
             const prediction = {
                 id: predictionId,
                 startTime: Date.now()
@@ -630,7 +630,7 @@ export class BioSensorAdapter: {
             );
 
             prediction.endTime = Date.now();
-            prediction.duration = prediction.endTime - prediction.startTime;      return: {
+            prediction.duration = prediction.endTime - prediction.startTime;      return {
                 success: true
                 predictionId
                 timeframe: prediction.timeframe,
@@ -648,7 +648,7 @@ export class BioSensorAdapter: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 predictionId
@@ -700,7 +700,7 @@ export class BioSensorAdapter: {
 
     // Méthodes utilitaires stub
     extractAvailableParameters(connections) {
-        return: [STR_HEART_RATE, STR_ACTIVITY, STR_SLEEP, STR_STRESS];
+        return [STR_HEART_RATE, STR_ACTIVITY, STR_SLEEP, STR_STRESS];
     }
 
     mapParametersToDataTypes(parameters) {
@@ -712,39 +712,39 @@ export class BioSensorAdapter: {
       .deviceType }));
     }
 
-    async setupAlertingSystem(monitoring, thresholds) {      return: { alertsCount :
+    async setupAlertingSystem(monitoring, thresholds) {      return { alertsCount :
        monitoring.parameters.length, active: true };
     }
 
-    async activatePredictiveMode(monitoring, request) {      return: { active: true, models: ['trend', 'anomaly'] };
+    async activatePredictiveMode(monitoring, request) {      return { active: true, models: ['trend', 'anomaly'] };
     }
 
-    async startContinuousMonitoring(ecosystem) {      return: { active: true, interval: this.config.syncFrequency };
+    async startContinuousMonitoring(ecosystem) {      return { active: true, interval: this.config.syncFrequency };
     }
 
-    calculateBatteryImpact(ecosystem) {      return: { estimatedDaily: '15%', optimized: true };
+    calculateBatteryImpact(ecosystem) {      return { estimatedDaily: '15%', optimized: true };
     }
 
     async registerActiveEcosystem(ecosystem) { return true; }
     async generateEcosystemRecommendations(ecosystem) {
-        return: ['Maintain regular sync', 'Monitor battery levels'];
+        return ['Maintain regular sync', 'Monitor battery levels'];
     }
     async generateTroubleshootingRecommendations(ecosystem) {
-        return: ['Check device connections', 'Restart Bluetooth'];
+        return ['Check device connections', 'Restart Bluetooth'];
     }
 
     // Méthodes monitoring santé
-    async personalizeMonitoringConfig(user, focusAreas) {      return: { parameters: focusAreas || [STR_HEART_RATE, STR_SLEEP] };
+    async personalizeMonitoringConfig(user, focusAreas) {      return { parameters: focusAreas || [STR_HEART_RATE, STR_SLEEP] };
     }
 
-    async establishPersonalBaselines(user, config) {      return: {
+    async establishPersonalBaselines(user, config) {      return {
             heartRate: { resting: 65, max: 180 }
             sleep: { duration: 8, quality: 0.8 }
             stress: { baseline: 0.3, threshold: 0.7 }
         };
     }
 
-    async configurePersonalizedAlerts(baselines, thresholdType) {      return: { alertsCount: Object.keys(baselines).length, type: thresholdType };
+    async configurePersonalizedAlerts(baselines, thresholdType) {      return { alertsCount: Object.keys(baselines).length, type: thresholdType };
     }
 
     async activateParameterMonitoring(parameters, alertConfig) {
@@ -753,29 +753,29 @@ export class BioSensorAdapter: {
 
     async initializePersonalLearning(monitoring) { return true; }
     async generateInitialInsights(baselines, user) {
-        return: ['Your resting heart rate is optimal', 'Sleep quality could improve'];
+        return ['Your resting heart rate is optimal', 'Sleep quality could improve'];
     }
     async registerMonitoringSession(monitoring) { return true; }
     async generateMonitoringRecommendations(monitoring) {
-        return: ['Stay hydrated', 'Take regular breaks'];
+        return ['Stay hydrated', 'Take regular breaks'];
     }
-    async predictHealthImprovements(monitoring) {      return: { energyIncrease: '15%', stressReduction: '20%' };
+    async predictHealthImprovements(monitoring) {      return { energyIncrease: '15%', stressReduction: '20%' };
     }
-    async activateBasicMonitoring(request) {      return: { mode: 'basic', parameters: [STR_HEART_RATE] };
+    async activateBasicMonitoring(request) {      return { mode: 'basic', parameters: [STR_HEART_RATE] };
     }
 
     // Méthodes prédictions santé
-    async collectHistoricalBioData(userId, timeframe) {      return: { totalPoints: 1000, timeRange: timeframe };
+    async collectHistoricalBioData(userId, timeframe) {      return { totalPoints: 1000, timeRange: timeframe };
     }
 
-    async analyzeCurrentHealthPatterns(data, metrics) {      return: {
+    async analyzeCurrentHealthPatterns(data, metrics) {      return {
             patterns: ['circadian_rhythm', 'stress_spikes']
             trends: ['improving_sleep', 'stable_heart_rate']
             historicalAccuracy: 0.87
         };
     }
 
-    async predictMetricTrend(metric, analysis, timeframe) {      return: {
+    async predictMetricTrend(metric, analysis, timeframe) {      return {
             metric: metric,
             currentValue: 0.75
             predictedValue: 0.80,
@@ -785,14 +785,14 @@ export class BioSensorAdapter: {
     }
 
     async assessHealthRisks(predictions, userId) {
-        return: [
+        return [
             { type: 'fatigue', probability: 0.2, severity: 'low' }
             { type: STR_STRESS, probability: 0.4, severity: 'medium' }
         ];
     }
 
     async generatePersonalizedRecommendations(predictions, risks, userId) {
-        return: ['Increase sleep duration by 30 minutes',
+        return ['Increase sleep duration by 30 minutes',
       'Consider meditation for stress reduction',
       'Maintain current exercise routine'];
     }
@@ -805,7 +805,7 @@ export class BioSensorAdapter: {
         return new Date(Date.now() + 24 * 60 * 60 * 1000); // 24h
     }
 
-    async generateBasicHealthPrediction(request) {      return: {
+    async generateBasicHealthPrediction(request) {      return {
             prediction: 'General wellness stable',
             recommendations: ['Maintain healthy lifestyle']
         };
@@ -842,7 +842,7 @@ export class BioSensorAdapter: {
 
 // Device Drivers
 class AppleWatchDriver: {
-    async connect(_deviceId) {      return: {
+    async connect(_deviceId) {      return {
             success: true,
             capabilities: [STR_HEART_RATE, 'ecg', 'spo2']
             batteryLevel: 85
@@ -851,32 +851,32 @@ class AppleWatchDriver: {
 }
 
 class GalaxyWatchDriver: {
-    async connect(_deviceId) {      return: { success: true, capabilities: [STR_HEART_RATE, STR_SLEEP] };
+    async connect(_deviceId) {      return { success: true, capabilities: [STR_HEART_RATE, STR_SLEEP] };
     }
 }
 
 class FitbitDriver: {
-    async connect(_deviceId) {      return: { success: true, capabilities: ['steps', STR_HEART_RATE] };
+    async connect(_deviceId) {      return { success: true, capabilities: ['steps', STR_HEART_RATE] };
     }
 }
 
 class OuraRingDriver: {
-    async connect(_deviceId) {      return: { success: true, capabilities: ['hrv', STR_TEMPERATURE, STR_SLEEP] };
+    async connect(_deviceId) {      return { success: true, capabilities: ['hrv', STR_TEMPERATURE, STR_SLEEP] };
     }
 }
 
 class FreestyleLibreDriver: {
-    async connect(_deviceId) {      return: { success: true, capabilities: [STR_GLUCOSE] };
+    async connect(_deviceId) {      return { success: true, capabilities: [STR_GLUCOSE] };
     }
 }
 
 class OmronBloodPressureDriver: {
-    async connect(_deviceId) {      return: { success: true, capabilities: ['blood_pressure'] };
+    async connect(_deviceId) {      return { success: true, capabilities: ['blood_pressure'] };
     }
 }
 
 class WithingsScaleDriver: {
-    async connect(_deviceId) {      return: { success: true, capabilities: ['weight', 'body_composition'] };
+    async connect(_deviceId) {      return { success: true, capabilities: ['weight', 'body_composition'] };
     }
 }
 

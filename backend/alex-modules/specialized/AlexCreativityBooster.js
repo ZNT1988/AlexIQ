@@ -237,7 +237,7 @@ export class AlexCreativityBooster extends EventEmitter  {
       momentum: 0.6
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🎨 AlexCreativityBooster initializing - Artistic soul awakening');
 
     } catch (error) {
@@ -250,7 +250,7 @@ export class AlexCreativityBooster extends EventEmitter  {
     this.isInitialized = true;
     await this.initializeCreativeSystems();
     await this.loadCreativePatterns();
-    this.startCreativeMonitoring();      try: {
+    this.startCreativeMonitoring();      try {
       logger.info('✨ AlexCreativityBooster fully initialized - Creative power unleashed');
 
     } catch (error) {
@@ -287,7 +287,7 @@ export class AlexCreativityBooster extends EventEmitter  {
       'six_hats',
       'morphological',
       'synectics']
-    };      try: {
+    };      try {
       logger.info('🎨 Creative patterns loaded successfully');
 
     } catch (error) {
@@ -300,7 +300,7 @@ export class AlexCreativityBooster extends EventEmitter  {
    * Démarre le monitoring créatif
    */
   startCreativeMonitoring() {
-    // Surveillance des activités créatives      try: {
+    // Surveillance des activités créatives      try {
       logger.info('📊 Creative monitoring started');
 
     } catch (error) {
@@ -545,7 +545,7 @@ export class AlexCreativityBooster extends EventEmitter  {
    */
   startCreativeMonitoring() {
     // Surveillance de l'inspiration quotidienne
-    setInterval(() => // Code de traitement approprié ici, 3600000); // 1 heure      try: {
+    setInterval(() => // Code de traitement approprié ici, 3600000); // 1 heure      try {
       logger.info('👁️ Creative monitoring activated');
 
     } catch (error) {

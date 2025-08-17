@@ -39,7 +39,7 @@ export class CollectiveHustleMind extends EventEmitter  {
     this.initializeIdeasCloud();
     this.setupIntentionMatching();
     this.initializeMetaHustleGeneration();
-    this.startCollectiveEvolution();      try: {
+    this.startCollectiveEvolution();      try {
       logger.info('CollectiveHustleMind initialized - Collective intelligence activated');
 
     } catch (error) {
@@ -55,7 +55,7 @@ export class CollectiveHustleMind extends EventEmitter  {
     logger.info('Contributing to collective mind', {
       userId: anonymize ? 'anonymous' : userId,
       ideaType: ideaData.type
-    });      try: {
+    });      try {
       // Anonymisation de la contribution
       const anonymizedIdea = await this.anonymizeContribution(ideaData, userId, anonymize);      // Analyse de l'intention et de l'énergie
       const intentionAnalysis = await this.analyzeContributionIntention(anonymizedIdea);      // Classification de l'idée
@@ -107,7 +107,7 @@ export class CollectiveHustleMind extends EventEmitter  {
    * Recherche et matching d'intentions similaires
    */
   async findSimilarIntentions(userIntention, userId) {
-    logger.info('Finding similar intentions', { userId });      try: {
+    logger.info('Finding similar intentions', { userId });      try {
       // Analyse de l'intention utilisateur
       const intentionVector = await this.vectorizeIntention(userIntention);      // Recherche dans les clusters d'intentions
       const similarClusters = await this.searchIntentionClusters(intentionVector);      // Identification des utilisateurs alignés
@@ -158,7 +158,7 @@ export class CollectiveHustleMind extends EventEmitter  {
     logger.info('Creating meta-hustle', {
       membersCount: foundingMembers.length
       scope
-    });      try: {
+    });      try {
       // Validation des membres fondateurs
       const validatedMembers = await this.validateFoundingMembers(foundingMembers);      // Analyse de la vision collective
       const visionAnalysis = await this.analyzeCollectiveVision(metaVision);      // Conception de l'architecture du méta-hustle
@@ -266,7 +266,7 @@ export class CollectiveHustleMind extends EventEmitter  {
     logger.info('Orchestrating collective project', {
       participantsCount: participantPool.length
       orchestrationLevel
-    });      try: {
+    });      try {
       // Analyse de la vision projet
       const visionBreakdown = await this.breakdownProjectVision(projectVision);      // Optimisation de l'équipe collective
       const optimizedTeam = await this.optimizeCollectiveTeam(participantPool, visionBreakdown);      // Génération de la stratégie d'exécution
@@ -317,7 +317,7 @@ export class CollectiveHustleMind extends EventEmitter  {
   // Méthodes d'analyse et de traitement
 
   async anonymizeContribution(!anonymize) {
-    if (!anonymize) return ideaData;      return: {
+    if (!anonymize) return ideaData;      return {
       content: ideaData.content,
       type: ideaData.type
       domain: ideaData.domain
@@ -369,7 +369,7 @@ export class CollectiveHustleMind extends EventEmitter  {
     return opportunities;
   }
 
-  async designMetaHustleArchitecture(members) {      return: {
+  async designMetaHustleArchitecture(members) {      return {
       type: 'adaptive_network',
       structure: 'distributed_autonomous'
       // Layers de l'architecture
@@ -435,7 +435,7 @@ export class CollectiveHustleMind extends EventEmitter  {
   }
 
   setupCollectiveIntelligence() {
-    // Configuration de l'intelligence collective      try: {
+    // Configuration de l'intelligence collective      try {
       logger.debug('Collective intelligence configured');
 
     } catch (error) {
@@ -445,7 +445,7 @@ export class CollectiveHustleMind extends EventEmitter  {
     }}
 
   initializeIdeasCloud() {
-    // Initialisation du cloud d'idées      try: {
+    // Initialisation du cloud d'idées      try {
       logger.debug('Ideas cloud initialized');
 
     } catch (error) {
@@ -455,7 +455,7 @@ export class CollectiveHustleMind extends EventEmitter  {
     }}
 
   setupIntentionMatching() {
-    // Configuration du matching d'intentions      try: {
+    // Configuration du matching d'intentions      try {
       logger.debug('Intention matching configured');
 
     } catch (error) {
@@ -465,7 +465,7 @@ export class CollectiveHustleMind extends EventEmitter  {
     }}
 
   initializeMetaHustleGeneration() {
-    // Initialisation de la génération de méta-hustles      try: {
+    // Initialisation de la génération de méta-hustles      try {
       logger.debug('Meta-hustle generation initialized');
 
     } catch (error) {
@@ -475,7 +475,7 @@ export class CollectiveHustleMind extends EventEmitter  {
     }}
 
   startCollectiveEvolution() {
-    // Démarrage de l'évolution collective      try: {
+    // Démarrage de l'évolution collective      try {
       logger.debug('Collective evolution started');
 
     } catch (error) {

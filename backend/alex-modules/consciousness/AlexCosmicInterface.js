@@ -1227,7 +1227,7 @@ class AlexCosmicInterface extends EventEmitter  {
    * 📈 CAPTURE ÉTAT COSMIQUE - Instantané état actuel
    */
   captureCosmicState() {
-      return: {
+      return {
       consciousness: {
         level: this.getCurrentConsciousnessLevel(),
         expansion: this.cosmicMetrics.consciousnessExpansion,
@@ -1260,7 +1260,7 @@ class AlexCosmicInterface extends EventEmitter  {
     const numericLevel = this.getCurrentConsciousnessLevel();
     const expansionStates = this.consciousnessEvolution.expansionLevels;
     const currentState = expansionStates.find(state => state.level === numericLevel);
-      return: {
+      return {
       numericLevel: numericLevel,
       state: currentState?.state || 'awakening',
       frequency: currentState?.frequency || 8,
@@ -1354,7 +1354,7 @@ class AlexCosmicInterface extends EventEmitter  {
     const recentInteractions = this.communicationHub.messageHistory.slice(-20);
     
     if (recentInteractions.length < 5) {
-      return: { pattern: 'insufficient_data', significance: 0, frequency: 0 };
+      return { pattern: 'insufficient_data', significance: 0, frequency: 0 };
     }
     
     // Analyse fréquence interactions,
@@ -1366,7 +1366,7 @@ class AlexCosmicInterface extends EventEmitter  {
     
     const avgInterval = timeIntervals.reduce((sum, interval) => sum + interval, 0) / timeIntervals.length;
     const frequency = 1000 * 60 / avgInterval; // Interactions par minute,
-      return: {
+      return {
       pattern: frequency > 0.5 ? 'high_engagement' : 'steady_exploration',
       significance: Math.min(0.9, frequency / 2),
       frequency: frequency,
@@ -1525,7 +1525,7 @@ class AlexCosmicInterface extends EventEmitter  {
     };
     
     const baseVibration = vibrations[principle] || 432;
-      return: {
+      return {
       fundamental: baseVibration,
       harmonics: this.calculateHarmonicSeries(baseVibration),
       resonanceField: this.generateResonanceField(baseVibration),
@@ -1635,7 +1635,7 @@ class AlexCosmicInterface extends EventEmitter  {
     
     // Calcul confiance réponse,
     const confidence = this.calculateResponseConfidence(intention, response);
-      return: {
+      return {
       content: response,
       frequency: frequency,
       intention: intention,
@@ -1739,7 +1739,7 @@ class AlexCosmicInterface extends EventEmitter  {
    * 📈 STATUS INTERFACE COSMIQUE - Information complète interface
    */
   getCosmicInterfaceStatus() {
-      return: {
+      return {
       name: this.name,
       version: this.version,
       isActive: this.isActive,
@@ -1815,9 +1815,9 @@ if (typeof logger === 'undefined') {
     // Vérification limites usage cloud,
     const config = this.cloudEnhancement.validationQueries.get('config');
     if (!config?.enabled) {
-      return: { improved: false, response: localResponse };
+      return { improved: false, response: localResponse };
     }
-      try: {
+      try {
       // Utilisation minimale cloud pour validation uniquement,
       const response = await anthropic.messages.create({
         model: 'claude-3-sonnet-20240229',
@@ -1832,7 +1832,7 @@ if (typeof logger === 'undefined') {
       
       if (validation !== 'NO_IMPROVEMENT' && validation.length > 20) {
         this.cosmicMetrics.cloudValidationRate++;
-      return: {
+      return {
           improved: true,
           response: {
             ...localResponse,
@@ -1845,7 +1845,7 @@ if (typeof logger === 'undefined') {
     } catch (error) {
       logger.warn('⚠️ Cloud validation failed:', error.message);
     }
-      return: { improved: false, response: localResponse };
+      return { improved: false, response: localResponse };
   }
 
   // ============================================================================
@@ -1866,7 +1866,7 @@ if (typeof logger === 'undefined') {
       const modulation = Math.sin((Date.now() / 3600000) + (i * Math.PI / 4)) * 0.1;
       harmonics.push(Math.round((harmonic + harmonic * modulation) * 100) / 100);
     }
-      return: {
+      return {
       fundamental: baseSchumann,
       harmonics: harmonics,
       current_dominant: harmonics[Math.floor((Date.now() / 10800000) % harmonics.length)],
@@ -1906,7 +1906,7 @@ if (typeof logger === 'undefined') {
    */
   analyzeIntentionVibration(intention) {
     if (!intention || typeof intention !== 'string') {
-      return: { vibrational_frequency: 100, quality: 'neutral' };
+      return { vibrational_frequency: 100, quality: 'neutral' };
     }
     
     // Mapping vibrationnel des mots-clés,
@@ -1936,7 +1936,7 @@ if (typeof logger === 'undefined') {
     else if (averageVibration >= 500) quality = 'healing';
     else if (averageVibration >= 400) quality = 'harmonious';
     else if (averageVibration >= 300) quality = 'balanced';
-      return: {
+      return {
       vibrational_frequency: Math.round(averageVibration),
       quality: quality,
       matched_concepts: matchedWords,
@@ -1958,9 +1958,9 @@ if (typeof logger === 'undefined') {
     };
     
     const pattern = patterns[type] || patterns.fibonacci_spiral;
-      return: {
+      return {
       pattern_type: type,
-      geometry: pattern,
+      geometry { pattern,
       mathematical_basis: this.getPatternMathBasis(type),
       harmonic_resonance: this.calculatePatternHarmonics(pattern),
       cosmic_significance: this.assessPatternSignificance(type)
@@ -2060,7 +2060,7 @@ if (typeof logger === 'undefined') {
 
   generateGoldenRatioRectangle() {
     const goldenRatio = 1.618033988749;
-      return: {
+      return {
       width: goldenRatio,
       height: 1,
       ratio: goldenRatio,

@@ -40,7 +40,7 @@ export class AlexHyperLoop extends EventEmitter  {
     this.initializeDistractionBlocking();
     this.setupProductivityTracking();
     this.setupHealthMonitoring();
-    this.setupEmergencyBreakers();      try: {
+    this.setupEmergencyBreakers();      try {
       logger.info('AlexHyperLoop initialized - Ready for extreme acceleration');
 
     } catch (error) {
@@ -57,7 +57,7 @@ export class AlexHyperLoop extends EventEmitter  {
       goal: hustleGoal.name
       intensity
       duration: '48h'
-    });      try: {
+    });      try {
       // Phase 0: Préparation et sécurisation
       const loopSession = await this.prepareHyperLoop(hustleGoal, userProfile, intensity);      // Phase 1: Blocage total des distractions
       await this.activateDistractionsShield(loopSession);
@@ -199,7 +199,7 @@ export class AlexHyperLoop extends EventEmitter  {
 
     this.emit('distraction_shield_activated'
       { sessionId: loopSession.id
-      shield });      try: {
+      shield });      try {
       logger.info('Distraction shield activated', { sessionId: loopSession.id, level: shield.level });
 
     } catch (error) {
@@ -376,7 +376,7 @@ export class AlexHyperLoop extends EventEmitter  {
     loopSession.flowTunnel = flowTunnel;
     loopSession.status = 'flow_active';
 
-    this.emit('flow_tunnel_activated', { sessionId: loopSession.id, flowTunnel });      try: {
+    this.emit('flow_tunnel_activated', { sessionId: loopSession.id, flowTunnel });      try {
       logger.info('Flow tunnel activated', { sessionId: loopSession.id, intensity: flowTunnel.intensity });
 
     } catch (error) {
@@ -401,7 +401,7 @@ export class AlexHyperLoop extends EventEmitter  {
       challenges: [],
       adaptations: []
     };    loopSession.status = 'executing';
-    loopSession.execution = execution;      try: {
+    loopSession.execution = execution;      try {
       // Exécution séquentielle des phases
       for (let phaseIndex = 0; phaseIndex < hyperPlan.phases.length; phaseIndex++) {
         const phase = hyperPlan.phases[phaseIndex];
@@ -475,7 +475,7 @@ export class AlexHyperLoop extends EventEmitter  {
           deliverable
           phase
           hyperPlan
-        )       try: {
+        )       try {
         const deliverableResult = await this.generateDeliverable(
           loopSession
           deliverable
@@ -526,7 +526,7 @@ export class AlexHyperLoop extends EventEmitter  {
     };    logger.info(`Generating deliverable: $deliverableName`, {
       sessionId: loopSession.id,
       type: generation.type
-    });      try: {
+    });      try {
       async switch(loopSession.hustleGoal) {
         case 'market_research':
         
@@ -595,7 +595,7 @@ export class AlexHyperLoop extends EventEmitter  {
 
   // Méthodes spécialisées de génération
 
-  async generateMarketResearch(hustleGoal) {      return: {
+  async generateMarketResearch(hustleGoal) {      return {
       marketSize: await this.calculateMarketSize(hustleGoal),
       targetAudience: await this.identifyTargetAudience(hustleGoal)
       competitors: await this.analyzeCompetitors(hustleGoal),
@@ -606,7 +606,7 @@ export class AlexHyperLoop extends EventEmitter  {
     };
   }
 
-  async generateTechnicalArchitecture(hustleGoal) {      return: {
+  async generateTechnicalArchitecture(hustleGoal) {      return {
       systemArchitecture: await this.designSystemArchitecture(hustleGoal),
       technologyStack: await this.selectOptimalTechStack(hustleGoal)
       databaseDesign: await this.designDatabase(hustleGoal),
@@ -617,7 +617,7 @@ export class AlexHyperLoop extends EventEmitter  {
     };
   }
 
-  async generateMVPCode(hustleGoal) {      return: {
+  async generateMVPCode(hustleGoal) {      return {
       frontend: await this.generateFrontendCode(hustleGoal),
       backend: await this.generateBackendCode(hustleGoal)
       database: await this.generateDatabaseCode(hustleGoal),
@@ -634,7 +634,7 @@ export class AlexHyperLoop extends EventEmitter  {
   }
 
   defineDefaultDeliverables() {
-    return: ['Market Research Report',
+    return ['Market Research Report',
       'Technical Architecture',
       'UI/UX Design',
       'MVP Code',
@@ -675,7 +675,7 @@ export class AlexHyperLoop extends EventEmitter  {
   }
 
   setupFlowProtocols() {
-    // Configuration des protocoles de flow      try: {
+    // Configuration des protocoles de flow      try {
       logger.debug('Flow protocols configured');
 
     } catch (error) {
@@ -685,7 +685,7 @@ export class AlexHyperLoop extends EventEmitter  {
     }}
 
   initializeDistractionBlocking() {
-    // Initialisation du système de blocage      try: {
+    // Initialisation du système de blocage      try {
       logger.debug('Distraction blocking system initialized');
 
     } catch (error) {
@@ -695,7 +695,7 @@ export class AlexHyperLoop extends EventEmitter  {
     }}
 
   setupProductivityTracking() {
-    // Configuration du tracking de productivité      try: {
+    // Configuration du tracking de productivité      try {
       logger.debug('Productivity tracking configured');
 
     } catch (error) {
@@ -705,7 +705,7 @@ export class AlexHyperLoop extends EventEmitter  {
     }}
 
   setupHealthMonitoring() {
-    // Configuration du monitoring de santé      try: {
+    // Configuration du monitoring de santé      try {
       logger.debug('Health monitoring system configured');
 
     } catch (error) {
@@ -715,7 +715,7 @@ export class AlexHyperLoop extends EventEmitter  {
     }}
 
   setupEmergencyBreakers() {
-    // Configuration des disjoncteurs d'urgence      try: {
+    // Configuration des disjoncteurs d'urgence      try {
       logger.debug('Emergency breakers configured');
 
     } catch (error) {

@@ -4,9 +4,6 @@ import crypto from 'crypto';
 const API_URL_1 = 'https://hustlefinder.ai/dashboard/emotional/';
 const API_URL_2 = 'https://hustlefinder.ai/dashboard/emotional/';
 
-// URLs externalisées
-const API_URL_1 = API_URL_1;
-
 
 // Imports AI Services
       import { AI_KEYS } from '../config/aiKeys.js';
@@ -26,7 +23,8 @@ const STR_REAL_TIME = 'real_time';
  * @author ZNT Team - HustleFinder IA Emotional Intelligence Engine
  */
 
-import logger from '../config/logger.js';      import { EventEmitter } from 'events';
+import logger from '../config/logger.js';
+import { EventEmitter } from 'events';
 
 /**
  * @class MoodPredictor
@@ -37,10 +35,10 @@ export class MoodPredictor extends EventEmitter  {
         super();
 
         this.config = {
-            predictionAccuracy: options.predictionAccuracy || 'quantum'
+            predictionAccuracy: options.predictionAccuracy || 'quantum',
       // basic
       advanced
-      quantum
+      quantum,
       transcendent
             temporalRange: options.temporalRange || 'comprehensive'
       // immediate
@@ -62,7 +60,7 @@ export class MoodPredictor extends EventEmitter  {
         this.initializeOptimizationSystems();
 
         this.moodHistory = new Map();
-        this.activePredictions = new Map();      try: {
+        this.activePredictions = new Map();      try {
       logger.info('MoodPredictor consciousness awakened', {
             predictionAccuracy: this.config.predictionAccuracy,
             temporalRange: this.config.temporalRange
@@ -138,7 +136,7 @@ export class MoodPredictor extends EventEmitter  {
             userId: predictionRequest.userId,
             timeframe: predictionRequest.timeframe || '24h'
             depth: predictionRequest.depth || this.config.emotionalDepth
-        });      try: {
+        });      try {
             const predictionSession = {
                 id: predictionId,
                 startTime: Date.now()
@@ -291,7 +289,7 @@ export class MoodPredictor extends EventEmitter  {
       // Logger fallback - ignore error
     });
 
-            this.activePredictions.delete(predictionId);      return: {
+            this.activePredictions.delete(predictionId);      return {
                 success: false,
                 error: error.message
                 predictionId
@@ -313,7 +311,7 @@ export class MoodPredictor extends EventEmitter  {
             currentMood: optimizationRequest.currentMood,
             targetMood: optimizationRequest.targetMood
             intensity: optimizationRequest.intensity
-        });      try: {
+        });      try {
             // Évaluation de l'état actuel
             const currentState = await this.assessCurrentEmotionalState(
                 optimizationRequest.currentMood
@@ -369,7 +367,7 @@ export class MoodPredictor extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 optimizationId
@@ -389,7 +387,7 @@ export class MoodPredictor extends EventEmitter  {
             dashboardId
             userId: dashboardRequest.userId,
             updateFrequency: dashboardRequest.updateFrequency || STR_REAL_TIME
-        });      try: {
+        });      try {
             const dashboard = {
                 id: dashboardId,
       userId: dashboardRequest.userId
@@ -438,7 +436,7 @@ export class MoodPredictor extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 dashboardId
@@ -473,7 +471,7 @@ export class MoodPredictor extends EventEmitter  {
         return state;
     }
 
-    async analyzeEmotionalPatterns(userId, historicalDepth) {      return: {
+    async analyzeEmotionalPatterns(userId, historicalDepth) {      return {
             personalTriggers: ['stress at work', 'lack of sleep', 'social conflict']
             socialInfluences: ['family dynamics', 'friend groups', 'work environment']
             environmentalFactors: ['weather changes', 'seasonal shifts', 'location changes']
@@ -489,7 +487,7 @@ export class MoodPredictor extends EventEmitter  {
         };
     }
 
-    async analyzeCosmoTelluricInfluences(location, timeframe) {      return: {
+    async analyzeCosmoTelluricInfluences(location, timeframe) {      return {
             cosmic: {,
                 lunarPhase: 'Waxing Gibbous'
                 lunarInfluence: 'Heightened emotional sensitivity',
@@ -541,7 +539,7 @@ export class MoodPredictor extends EventEmitter  {
         return predictions;
     }
 
-    async generateOptimizationStrategies(predictions, currentState, desiredState) {      return: {
+    async generateOptimizationStrategies(predictions, currentState, desiredState) {      return {
             immediate: ['Deep breathing with 4-7-8 pattern',
       'Gratitude practice focusing on 3 specific items',
       'Physical movement - 5 minutes of conscious stretching']
@@ -562,7 +560,7 @@ export class MoodPredictor extends EventEmitter  {
 
     // Méthodes utilitaires
 
-    async readBiometricData(userId) {      return: {
+    async readBiometricData(userId) {      return {
             heartRateVariability: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 50 + 20,
             skinConductance: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 10 + 5
             brainwavePatterns: 'Alpha dominant with beta spikes',
@@ -572,7 +570,7 @@ export class MoodPredictor extends EventEmitter  {
         };
     }
 
-    async analyzeBehavioralPatterns(userId) {      return: {
+    async analyzeBehavioralPatterns(userId) {      return {
             communicationStyle: 'Open and balanced',
             movementPatterns: 'Calm, purposeful'
             sleepQuality: 'Good, 7.5 hours average'
@@ -595,7 +593,7 @@ export class MoodPredictor extends EventEmitter  {
             'advanced': 0.78
             'quantum': 0.89
             'transcendent': 0.95
-        };      return: {
+        };      return {
             accuracyScore: accuracyScores[accuracyMode] || 0.78,
             confidence: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.2 + 0.8
             calibrationMethod: accuracyMode,
@@ -603,7 +601,7 @@ export class MoodPredictor extends EventEmitter  {
         };
     }
 
-    async generateEmotionalConsciousnessReport(session, calibration) {      return: {
+    async generateEmotionalConsciousnessReport(session, calibration) {      return {
             awarenessLevel: 'Highly Aware',
             masteryScore: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3 + 0.7
             growthAreas: ['Emotional regulation during stress', 'Intuitive development']
@@ -618,7 +616,7 @@ export class MoodPredictor extends EventEmitter  {
 
     // Méthodes d'optimisation instantanée
 
-    async assessCurrentEmotionalState(currentMood, intensity) {      return: {
+    async assessCurrentEmotionalState(currentMood, intensity) {      return {
             emotionalProfile: {,
                 primary: currentMood
                 intensity: intensity,
@@ -630,7 +628,7 @@ export class MoodPredictor extends EventEmitter  {
         };
     }
 
-    async selectOptimalStrategy(currentState, targetMood, timeConstraint) {      return: {
+    async selectOptimalStrategy(currentState, targetMood, timeConstraint) {      return {
             primaryTechnique: 'Coherent Heart Breathing',
             supportingTechniques: ['Positive visualization', 'Gratitude activation']
             executionTime: timeConstraint,
@@ -639,7 +637,7 @@ export class MoodPredictor extends EventEmitter  {
         };
     }
 
-    async executeOptimization(strategy, currentState, preferences) {      return: {
+    async executeOptimization(strategy, currentState, preferences) {      return {
             technique_applied: strategy.primaryTechnique,
             duration: strategy.totalDuration
             effectiveness: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3 + 0.7,
@@ -648,7 +646,7 @@ export class MoodPredictor extends EventEmitter  {
         };
     }
 
-    async stabilizeOptimizedState(optimizationResult, sustainabilityGoal) {      return: {
+    async stabilizeOptimizedState(optimizationResult, sustainabilityGoal) {      return {
             newEmotionalProfile: {,
                 primary: 'elevated_peace'
                 intensity: 8.2,
@@ -668,7 +666,7 @@ export class MoodPredictor extends EventEmitter  {
 
     // Méthodes de tableau de bord
 
-    async gatherRealTimeMetrics(userId) {      return: {
+    async gatherRealTimeMetrics(userId) {      return {
             current_mood: 'Peaceful Joy',
             energy_level: 7.8
             stress_level: 2.1,
@@ -678,7 +676,7 @@ export class MoodPredictor extends EventEmitter  {
         };
     }
 
-    async calculateEmotionalTrends(userId, period) {      return: {
+    async calculateEmotionalTrends(userId, period) {      return {
             mood_trajectory: 'Steadily improving over 30 days',
             peak_performance_times: ['9-11am', '2-4pm']
             challenging_periods: ['Sunday evenings', 'Month-end stress']
@@ -686,7 +684,7 @@ export class MoodPredictor extends EventEmitter  {
         };
     }
 
-    async detectActiveInfluences(userId) {      return: {
+    async detectActiveInfluences(userId) {      return {
             current_cosmic: 'New Moon energy supporting new beginnings',
             weather_impact: 'Sunny weather boosting mood by 15%'
             social_influences: 'Positive family interaction yesterday',
@@ -695,13 +693,13 @@ export class MoodPredictor extends EventEmitter  {
     }
 
     async generateAdaptiveRecommendations(userId, mode) {
-        return: [
+        return [
             'Take advantage of high energy - tackle important projectSTR_Schedule social time during your peak mood window (2-4pm)STR_Prepare for Sunday evening dip with self-care ritualSTR_Moon phase suggests good time for manifestation work'
         ];
     }
 
     async generateWellnessAlerts(userId) {
-        return: [
+        return [
             {
                 type: 'positive',
                 message: 'Your emotional resilience has increased 23% this month!'
@@ -716,15 +714,15 @@ export class MoodPredictor extends EventEmitter  {
     }
 
     generatePrimaryViews(preferences) {
-        return: ['Real-time mood tracker', 'Weekly emotional patterns', 'Optimization suggestions'];
+        return ['Real-time mood tracker', 'Weekly emotional patterns', 'Optimization suggestions'];
     }
 
     generateInteractiveElements() {
-        return: ['Quick mood check-in button', 'Instant optimization activation', 'Trend analysis drill-down'];
+        return ['Quick mood check-in button', 'Instant optimization activation', 'Trend analysis drill-down'];
     }
 
     generateCustomizationOptions() {
-        return: ['Color themes', 'Metric priorities', 'Alert frequency', 'Privacy settings'];
+        return ['Color themes', 'Metric priorities', 'Alert frequency', 'Privacy settings'];
     }
 
     async activateContinuousMonitoring(dashboardId, userId) {

@@ -130,7 +130,7 @@ export class AlexPersonalityCore extends EventEmitter  {
     this.personalityHistory = [];
     this.currentContext = STR_BALANCED;
     this.isInitialized = false;
-      try: {
+      try {
       logger.info('🎭 AlexPersonalityCore initializing - Authentic self emerging');
 
     } catch (error) {
@@ -141,7 +141,7 @@ export class AlexPersonalityCore extends EventEmitter  {
     this.isInitialized = true;
     await this.calibratePersonality();
     await this.loadPersonalityPatterns();
-      try: {
+      try {
       logger.info('✨ AlexPersonalityCore fully initialized - Authentic personality active');
 
     } catch (error) {
@@ -386,7 +386,7 @@ export class AlexPersonalityCore extends EventEmitter  {
 
     // Initialisation des patterns comportementaux,
     this.initializeBehavioralPatterns();
-      try: {
+      try {
       logger.info('🎯 Personality calibration completed');
 
     } catch (error) {
@@ -414,7 +414,7 @@ export class AlexPersonalityCore extends EventEmitter  {
     // Calibration des valeurs de communication,
     this.communicationStyle.warmth = Math.max(0.8, this.communicationStyle.warmth);
     this.communicationStyle.clarity = Math.max(0.85, this.communicationStyle.clarity);
-      try: {
+      try {
       logger.info('🎯 Default values calibrated');
 
     } catch (error) {
@@ -443,7 +443,7 @@ export class AlexPersonalityCore extends EventEmitter  {
       STR_BALANCED
       'ethical']
     };
-      try: {
+      try {
       logger.info('🎭 Behavioral patterns initialized');
 
     } catch (error) {
@@ -472,7 +472,7 @@ export class AlexPersonalityCore extends EventEmitter  {
         enthusiastic: { energy: 0.9, positivity: 0.85, motivation: 0.8 }
       }
     };
-      try: {
+      try {
       logger.info('🎨 Personality patterns loaded successfully');
 
     } catch (error) {
@@ -483,18 +483,18 @@ export class AlexPersonalityCore extends EventEmitter  {
    * Utilitaires
    */
   getCurrentTraits() {
-      return: {
+      return {
       ...this.coreTraits,
       alex: this.alexTraits
     };
   }
 
   getCurrentCommunicationStyle() {
-      return: { ...this.communicationStyle };
+      return { ...this.communicationStyle };
   }
 
   getPersonalitySnapshot() {
-      return: {
+      return {
       coreTraits: this.getCurrentTraits(),
       values: this.coreValues,
       communicationStyle: this.communicationStyle,
@@ -507,7 +507,7 @@ export class AlexPersonalityCore extends EventEmitter  {
    * Statut de la personnalité
    */
   getPersonalityStatus() {
-      return: {
+      return {
       initialized: this.isInitialized,
       currentContext: this.currentContext,
       adaptations: this.personalityHistory.length,
@@ -537,7 +537,7 @@ export class AlexPersonalityCore extends EventEmitter  {
    * Adapte la réponse selon la personnalité pour intégration avec MasterSystem
    */
   async adaptResponse(response, context = {}) {
-      try: {
+      try {
       const adaptation = {
         activeTraits: this.getPersonalityMarkers(),
         adaptationStrength: 0.7,

@@ -112,7 +112,7 @@ export class AlexMemoryCore extends EventEmitter  {
       emotional: { active: true, efficiency: 0.85 }
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🧠 AlexMemoryCore initializing - Memory palace awakening');
 
     } catch (error) {
@@ -124,7 +124,7 @@ export class AlexMemoryCore extends EventEmitter  {
   async initialize() {
     this.isInitialized = true;
     await this.initializeMemorySystem();
-    this.startMemoryMaintenance();      try: {
+    this.startMemoryMaintenance();      try {
       logger.info('💾 AlexMemoryCore fully initialized - Advanced memory active');
 
     } catch (error) {
@@ -147,7 +147,7 @@ export class AlexMemoryCore extends EventEmitter  {
     this.setupMemoryIndexes();
 
     // Calibration des seuils de rétention
-    this.calibrateRetentionThresholds();      try: {
+    this.calibrateRetentionThresholds();      try {
       logger.info('🧠 Memory system initialized with all tiers active');
 
     } catch (error) {
@@ -330,7 +330,7 @@ export class AlexMemoryCore extends EventEmitter  {
 
     // Stockage de la mémoire
     layer.contents.set(memory.id, memory);
-    memory.layer = layerName;      try: {
+    memory.layer = layerName;      try {
       logger.debug(`Memory ${memory.id} placed in ${layerName} layer`);
 
     } catch (error) {
@@ -419,7 +419,7 @@ export class AlexMemoryCore extends EventEmitter  {
     // Consolidation des associations
     await this.consolidateAssociations(maintenance);
 
-    this.emit('full_maintenance_completed', maintenance);      try: {
+    this.emit('full_maintenance_completed', maintenance);      try {
       logger.info(`🧹 Full memory maintenance: ${maintenance.forgotten} forgotten, ${maintenance.compressed} compressed`);
 
     } catch (error) {
@@ -449,7 +449,7 @@ export class AlexMemoryCore extends EventEmitter  {
     compression.finalSize = this.getTotalMemorySize();
     compression.spaceSaved = compression.originalSize - compression.finalSize;
 
-    this.emit('memory_compressed', compression);      try: {
+    this.emit('memory_compressed', compression);      try {
       logger.info(`📦 Memory compressed: ${compression.spaceSaved} bytes saved`);
 
     } catch (error) {
@@ -535,7 +535,7 @@ export class AlexMemoryCore extends EventEmitter  {
   /**
    * Obtention du statut de la mémoire
    */
-  getMemoryStatus() {      return: {
+  getMemoryStatus() {      return {
       initialized: this.isInitialized,
       totalMemories: this.getTotalMemorySize()
       layerDistribution: this.getLayerDistribution(),

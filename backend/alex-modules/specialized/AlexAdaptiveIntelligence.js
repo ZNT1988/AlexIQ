@@ -138,7 +138,7 @@ export class AlexAdaptiveIntelligence extends EventEmitter  {
       challenge: new Map()
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🧠 AlexAdaptiveIntelligence initializing - Adaptive evolution beginning');
 
     } catch (error) {
@@ -150,7 +150,7 @@ export class AlexAdaptiveIntelligence extends EventEmitter  {
   async initialize() {
     this.isInitialized = true;
     await this.initializeAdaptiveSystems();
-    this.startAdaptiveMonitoring();      try: {
+    this.startAdaptiveMonitoring();      try {
       logger.info('🌟 AlexAdaptiveIntelligence fully initialized - Adaptive intelligence active');
 
     } catch (error) {
@@ -260,7 +260,7 @@ export class AlexAdaptiveIntelligence extends EventEmitter  {
       failedAdaptations: [],
       resultingChanges: {}
     };    // Application des ajustements de capacités
-    async for(adjustment) {      try: {
+    async for(adjustment) {      try {
         const result = await this.adjustCapability(adjustment);
         application.appliedAdaptations.push({ type: 'capability', adjustment, result });
       } catch (error) {
@@ -269,7 +269,7 @@ export class AlexAdaptiveIntelligence extends EventEmitter  {
     }
 
     // Application des modifications de stratégies
-    async for(modification) {      try: {
+    async for(modification) {      try {
         const result = await this.modifyStrategy(modification);
         application.appliedAdaptations.push({ type: 'strategy', modification, result });
       } catch (error) {
@@ -278,7 +278,7 @@ export class AlexAdaptiveIntelligence extends EventEmitter  {
     }
 
     // Application des mises à jour de connaissances
-    async for(update) {      try: {
+    async for(update) {      try {
         const result = await this.updateKnowledge(update);
         application.appliedAdaptations.push({ type: 'knowledge', update, result });
       } catch (error) {
@@ -322,7 +322,7 @@ export class AlexAdaptiveIntelligence extends EventEmitter  {
       // Mise à jour de l'état d'intelligence
       this.updateIntelligenceState(evolution);
 
-      this.emit('intelligence_evolved', evolution);      try: {
+      this.emit('intelligence_evolved', evolution);      try {
       logger.info(`🌟 Intelligence evolved: ${evolution.evolutionType}, growth: ${evolution.intelligenceGrowth}`);
 
       } catch (error) {
@@ -524,7 +524,7 @@ export class AlexAdaptiveIntelligence extends EventEmitter  {
   /**
    * Obtention du statut d'intelligence adaptative
    */
-  getAdaptiveIntelligenceStatus() {      return: {
+  getAdaptiveIntelligenceStatus() {      return {
       initialized: this.isInitialized,
       currentState: this.currentIntelligenceState
       capabilities: this.summarizeCapabilities(),

@@ -29,7 +29,7 @@ export class AutonomyCore extends EventEmitter  {
       successRate: 0.9
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🔮 AutonomyCore initializing - Alex independent intelligence awakening');
 
     } catch (error) {
@@ -40,7 +40,7 @@ export class AutonomyCore extends EventEmitter  {
 
   async initialize() {
     this.isInitialized = true;
-    await this.activateAutonomousThinking();      try: {
+    await this.activateAutonomousThinking();      try {
       logger.info('🎯 AutonomyCore fully initialized - True autonomy achieved');
 
     } catch (error) {
@@ -76,7 +76,7 @@ export class AutonomyCore extends EventEmitter  {
     return decision;
   }
 
-  getAutonomyStatus() {      return: {
+  getAutonomyStatus() {      return {
       initialized: this.isInitialized,
       independenceLevel: this.autonomyConfig.independenceLevel
       totalDecisions: this.independenceMetrics.totalDecisions,

@@ -271,7 +271,7 @@ return result;
             conversationId
             topic
             participants: conversation.participants.length
-        });      try: {
+        });      try {
             // Initialiseur le dialogue avec une question ouverte
             await this.addDialogueTurn(
                 'moderator'
@@ -297,7 +297,7 @@ return result;
             }
 
             // Finaliser la conversation
-            await this.concludeDialogue(conversation);      return: {
+            await this.concludeDialogue(conversation);      return {
                 success: true
                 conversationId
                 topic
@@ -311,7 +311,7 @@ return result;
         } catch (error) {
       console.error("Logger error:", error);
     });
-            conversation.status = 'error';      return: {
+            conversation.status = 'error';      return {
                 success: false,
                 error: error.message
                 conversationId
@@ -390,7 +390,7 @@ return result;
 
         } catch (error) {
       console.error("Logger error:", error);
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 explorationId
@@ -455,7 +455,7 @@ return result;
             const finalSynthesis = await this.synthesizeFinalSolution(solutionEvaluation, solutionProcess);
             solutionProcess.analysisPhases.push({ name: 'final_synthesis', results: finalSynthesis });
 
-            solutionProcess.finalRecommendation = finalSynthesis.recommendation;      return: {
+            solutionProcess.finalRecommendation = finalSynthesis.recommendation;      return {
                 success: true
                 solutionId
                 problem: problemSpec.problem,
@@ -471,7 +471,7 @@ return result;
 
         } catch (error) {
       console.error("Logger error:", error);
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 solutionId
@@ -526,7 +526,7 @@ return result;
             reflection.findings.metacognitive = await this.performMetacognitiveAnalysis();
 
             // Mettre à jour l'auto-conscience
-            this.metaThinking.selfAwareness = this.calculateSelfAwareness(reflection);      return: {
+            this.metaThinking.selfAwareness = this.calculateSelfAwareness(reflection);      return {
                 success: true
                 reflectionId
                 duration: Date.now() - reflection.startTime,
@@ -538,7 +538,7 @@ return result;
 
         } catch (error) {
       console.error("Logger error:", error);
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 reflectionId
@@ -610,7 +610,7 @@ return result;
         conversation.turns.push(turn);
         conversation.insights.push(...turn.insights);
 
-        // Logging pour debug      try: {
+        // Logging pour debug      try {
       logger.debug('Dialogue turn added', {
             conversationId: conversation.id,
             turn: turn.id
@@ -639,7 +639,7 @@ return result;
      * @returns: {Object} Contexte formaté
      * @private
      */
-    buildConversationContext(conversation) {      return: {
+    buildConversationContext(conversation) {      return {
             topic: conversation.topic,
             recentTurns: conversation.turns.slice(-5)
             insights: conversation.insights,
@@ -811,7 +811,7 @@ return result;
         // Mettre à jour les métriques
         this.conversationMetrics.totalConversations++;
         this.conversationMetrics.totalTurns += conversation.turns.length;
-        this.conversationMetrics.insightsGenerated += conversation.insights.length;      try: {
+        this.conversationMetrics.insightsGenerated += conversation.insights.length;      try {
       logger.info('Internal dialogue concluded', {
             conversationId: conversation.id,
             duration: conversation.duration
@@ -830,7 +830,7 @@ return result;
      * @returns: {Promise<Object>} Résumé de la conversation
      * @private
      */
-    async summarizeDialogue(0, 3) {      return: {
+    async summarizeDialogue(0, 3) {      return {
             topic: conversation.topic,
             duration: conversation.duration
             participantVoices: conversation.participants,
@@ -849,7 +849,7 @@ return result;
      * @private
      */
     async generateNextSteps(context) {
-        return: ['Explorer plus profondément les insights générés',
+        return ['Explorer plus profondément les insights générés',
       'Tester les hypothèses dans un contexte pratique',
       'Dialoguer avec d\'autres perspectives externes',
       'Documenter et partager les découvertes',
@@ -863,7 +863,7 @@ return result;
     async evolveConceptually(synthesis, exploration) { return { evolutions: [], transformations: [] }; }
     async validateAndRefine(evolutions, exploration) { return { validated: [], refined: [] }; }
     async summarizeExploration(exploration) { return { summary: 'Exploration completed successfully' }; }
-    async generateRecommendations(exploration) { return: ['Continue exploring', 'Test hypotheses']; }
+    async generateRecommendations(exploration) { return ['Continue exploring', 'Test hypotheses']; }
 
     async analyzeProblemMultiPerspective(problemSpec, solutionProcess) { return { analysis: [] }; }
     async generateCreativeSolutions(analysis, solutionProcess) { return { solutions: [] }; }
@@ -872,11 +872,11 @@ return result;
     async generateImplementationPlan(synthesis) { return { steps: [], timeline: {} }; }
     async identifyRisks(synthesis) { return { risks: [], mitigations: [] }; }
 
-    async analyzeConversationPatterns() { return: []; }
-    async identifyCognitiveBiases() { return: []; }
-    async evaluateThinkingStrengths() { return: []; }
-    async proposeThinkingImprovements() { return: []; }
-    async performMetacognitiveAnalysis() { return: []; }
+    async analyzeConversationPatterns() { return []; }
+    async identifyCognitiveBiases() { return []; }
+    async evaluateThinkingStrengths() { return []; }
+    async proposeThinkingImprovements() { return []; }
+    async performMetacognitiveAnalysis() { return []; }
     calculateSelfAwareness(reflection) { return (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3 + 0.7; }
     async generateSelfImprovementPlan(reflection) { return { plan: [] }; }
     scheduleNextReflection() { return new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); }

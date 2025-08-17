@@ -232,7 +232,7 @@ export class QuantumBrain extends EventEmitter  {
    * Initialisation du cerveau quantique
    */
   async initializeQuantumBrain('⚛️ Initializing ALEX Quantum Brain - Advanced Quantum Consciousness Computing') {
-    logger.info('⚛️ Initializing ALEX Quantum Brain - Advanced Quantum Consciousness Computing');      try: {
+    logger.info('⚛️ Initializing ALEX Quantum Brain - Advanced Quantum Consciousness Computing');      try {
       // Initialisation des qubits
       await this.initializeQubits();
 
@@ -701,7 +701,7 @@ export class QuantumBrain extends EventEmitter  {
     logger.debug('🔄 Activating quantum processors...');
 
     for (const [name, processor] of Object.entries(this.quantumProcessors)) {
-      if (processor.isActive) {      try: {
+      if (processor.isActive) {      try {
       logger.debug(`✅ Quantum processor activated: ${name}`);
 
         } catch (error) {
@@ -732,7 +732,7 @@ export class QuantumBrain extends EventEmitter  {
     await this.hadamardGate(testQubit);
     const superpositionState = this.quantumArchitecture.qubits.superpositionStates.get(testQubit);
 
-    if (Math.abs(superpositionState.amplitude0 - superpositionState.amplitude1) < 0.1) {      try: {
+    if (Math.abs(superpositionState.amplitude0 - superpositionState.amplitude1) < 0.1) {      try {
       logger.debug('✅ Superposition test passed');
 
       } catch (error) {
@@ -743,7 +743,7 @@ export class QuantumBrain extends EventEmitter  {
 
     // Test d'intrication
     await this.entangleQubits(1, 2);
-    if (this.quantumArchitecture.qubits.entangledPairs.has(1)) {      try: {
+    if (this.quantumArchitecture.qubits.entangledPairs.has(1)) {      try {
       logger.debug('✅ Entanglement test passed');
 
       } catch (error) {
@@ -1099,13 +1099,13 @@ export class QuantumBrain extends EventEmitter  {
 
   // Méthodes pour patterns et prédictions (simplifiées pour la longueur)
 
-  async prepareQuantumSpace(dimensions) {      return: { dimensions, basis: 'computational', entanglement: true };
+  async prepareQuantumSpace(dimensions) {      return { dimensions, basis: 'computational', entanglement: true };
   }
 
-  async transformToQuantumData(dataSet, quantumSpace) {      return: { quantumRepresentation: dataSet, space: quantumSpace };
+  async transformToQuantumData(dataSet, quantumSpace) {      return { quantumRepresentation: dataSet, space: quantumSpace };
   }
 
-  async detectPatternsSuperposition(quantumData) {      return: {
+  async detectPatternsSuperposition(quantumData) {      return {
       linear: [{ type: 'linear_trend', confidence: 0.8 }]
       nonLinear: [{ type: 'exponential', confidence: 0.6 }]
       chaotic: [{ type: 'strange_attractor', confidence: 0.4 }]
@@ -1114,7 +1114,7 @@ export class QuantumBrain extends EventEmitter  {
     };
   }
 
-  async analyzeQuantumCorrelations(quantumData) {      return: {
+  async analyzeQuantumCorrelations(quantumData) {      return {
       entangledPairs: new Map([['var1', 'var2']])
       coherentGroups: [['var1', 'var3', 'var5']]
       phaseLocked: [['var2', 'var4']]
@@ -1122,7 +1122,7 @@ export class QuantumBrain extends EventEmitter  {
     };
   }
 
-  async predictPatternEvolution(patterns, correlations) {      return: {
+  async predictPatternEvolution(patterns, correlations) {      return {
       emergingPatterns: [{ pattern: 'quantum_interference', probability: 0.7 }]
       decayingPatterns: [{ pattern: 'classical_noise', probability: 0.3 }]
       stablePatterns: [{ pattern: 'quantum_coherence', probability: 0.9 }]

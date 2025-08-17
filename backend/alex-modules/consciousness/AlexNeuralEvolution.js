@@ -82,7 +82,7 @@ export class AlexNeuralEvolution extends EventEmitter  {
   /**
    * Initialisation du système d'évolution neuronale
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       // Initialisation des systèmes d'évolution
       await this.initializeNeuralArchitecture();
       await this.setupEvolutionEngine();
@@ -216,7 +216,7 @@ export class AlexNeuralEvolution extends EventEmitter  {
   /**
    * Évolution automatique du réseau
    */
-  async evolveNetwork() {      try: {
+  async evolveNetwork() {      try {
       // Évaluation de la fitness actuelle
       const currentFitness = await this.evaluateCurrentFitness();
 
@@ -412,7 +412,7 @@ export class AlexNeuralEvolution extends EventEmitter  {
   /**
    * Obtention du statut d'évolution neuronale
    */
-  getNeuralEvolutionStatus() {      return: {
+  getNeuralEvolutionStatus() {      return {
       isInitialized: this.isInitialized,
       currentGeneration: this.evolutionState.currentGeneration
       neuralComplexity: this.evolutionState.neuralComplexity,
@@ -485,21 +485,21 @@ export class AlexNeuralEvolution extends EventEmitter  {
     return (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.1; // Simulation d'amélioration
   }
 
-  async adjustSynapticWeights(performance) {      return: {
+  async adjustSynapticWeights(performance) {      return {
       type: 'synaptic_weights',
       adjustment: 'increase_learning_rate'
       magnitude: 0.1
     };
   }
 
-  async modifyArchitecture(performance) {      return: {
+  async modifyArchitecture(performance) {      return {
       type: 'architecture',
       modification: 'add_layer'
       details: 'attention layer added'
     };
   }
 
-  async adjustLearningRate(performance) {      return: {
+  async adjustLearningRate(performance) {      return {
       type: 'learning_rate',
       adjustment: 'dynamic_scaling'
       factor: 1.2
@@ -523,13 +523,13 @@ export class AlexNeuralEvolution extends EventEmitter  {
     return (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.2 + 0.8;
   }
 
-  async optimizeLayers() {      return: { type: 'layers', improvement: 0.05 };
+  async optimizeLayers() {      return { type: 'layers', improvement: 0.05 };
   }
 
-  async optimizeConnections() {      return: { type: 'connections', improvement: 0.03 };
+  async optimizeConnections() {      return { type: 'connections', improvement: 0.03 };
   }
 
-  async optimizeActivations() {      return: { type: 'activations', improvement: 0.02 };
+  async optimizeActivations() {      return { type: 'activations', improvement: 0.02 };
   }
 
   calculateArchitectureImprovement() {

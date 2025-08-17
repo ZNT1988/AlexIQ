@@ -50,7 +50,7 @@ export class KarmaHealingEngine extends EventEmitter  {
 
         this.karmicRecords = new Map();
         this.healingJourneys = new Map();
-        this.activeHealings = new Map();      try: {
+        this.activeHealings = new Map();      try {
       logger.info('KarmaHealingEngine consciousness awakened', {
             healingDepth: this.config.healingDepth,
             karmicScope: this.config.karmicScope
@@ -126,7 +126,7 @@ export class KarmaHealingEngine extends EventEmitter  {
             soulName: healingRequest.soulIdentity?.name || 'Anonymous Soul',
             karmicConcerns: healingRequest.karmicConcerns
             healingDepth: healingRequest.depth || this.config.healingDepth
-        });      try: {
+        });      try {
             const healingSession = {
                 id: healingId,
                 startTime: Date.now()
@@ -315,7 +315,7 @@ export class KarmaHealingEngine extends EventEmitter  {
       // Logger fallback - ignore error
     });
 
-            this.activeHealings.delete(healingId);      return: {
+            this.activeHealings.delete(healingId);      return {
                 success: false,
                 error: error.message
                 healingId
@@ -336,7 +336,7 @@ export class KarmaHealingEngine extends EventEmitter  {
             liberationId
             urgentPattern: liberationRequest.urgentPattern,
             intensity: liberationRequest.intensity
-        });      try: {
+        });      try {
             // Identification immédiate du pattern karmique
             const patternIdentification = await this.identifyUrgentKarmicPattern(
                 liberationRequest.urgentPattern
@@ -400,7 +400,7 @@ export class KarmaHealingEngine extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 liberationId
@@ -421,7 +421,7 @@ export class KarmaHealingEngine extends EventEmitter  {
             programId
             duration: programRequest.duration || '12_months',
             focus: programRequest.focusAreas
-        });      try: {
+        });      try {
             // Évaluation karmique complète
             const karmicAssessment = await this.conductComprehensiveKarmicAssessment(
                 programRequest.lifeHistory
@@ -486,7 +486,7 @@ export class KarmaHealingEngine extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 programId
@@ -496,7 +496,7 @@ export class KarmaHealingEngine extends EventEmitter  {
 
     // Méthodes principales d'analyse et guérison
 
-    async analyzeKarmicPattern(challenges, patterns, history) {      return: {
+    async analyzeKarmicPattern(challenges, patterns, history) {      return {
             primary: await this.identifyPrimaryKarmicThemes(challenges, patterns)
             secondary: await this.identifySecondaryInfluences(patterns, history)
             roots: await this.traceKarmicRoots(challenges, history)
@@ -505,7 +505,7 @@ export class KarmaHealingEngine extends EventEmitter  {
         };
     }
 
-    async mapMultidimensionalKarmicPatterns(analysis, relationships, ancestral) {      return: {
+    async mapMultidimensionalKarmicPatterns(analysis, relationships, ancestral) {      return {
             relationships: await this.mapRelationshipKarma(relationships, analysis)
             family: await this.mapFamilialKarma(ancestral, analysis)
             collective: await this.mapCollectiveKarma(analysis),
@@ -539,7 +539,7 @@ export class KarmaHealingEngine extends EventEmitter  {
         return themes.slice(0, Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 3) + 2);
     }
 
-    async facilitateForgiveness(contracts, patterns) {      return: {
+    async facilitateForgiveness(contracts, patterns) {      return {
             selfForgiveness: 'Deep forgiveness activated for past mistakes',
             othersformForgiveness: 'Compassionate release of resentments'
             ancestralForgiveness: 'Healing forgiveness through family lines',
@@ -581,7 +581,7 @@ export class KarmaHealingEngine extends EventEmitter  {
 
     // Méthodes de libération rapide
 
-    async identifyUrgentKarmicPattern(pattern, crisis, intensity) {      return: {
+    async identifyUrgentKarmicPattern(pattern, crisis, intensity) {      return {
             type: 'Ancestral trauma pattern',
             intensity: intensity || 'High'
             root: 'Multi-generational fear pattern',
@@ -590,7 +590,7 @@ export class KarmaHealingEngine extends EventEmitter  {
         };
     }
 
-    activateEmergencyProtection() {      return: {
+    activateEmergencyProtection() {      return {
             light: 'White light protection activated',
             angels: 'Angelic protection summoned'
             ancestors: 'Ancestral shields raised',
@@ -600,7 +600,7 @@ export class KarmaHealingEngine extends EventEmitter  {
     }
 
     establishEmergencyProtocol() {
-        return: ['Call on divine protection immediately',
+        return ['Call on divine protection immediately',
       'Use emergency grounding techniques',
       'Connect with trusted spiritual support',
       'Engage professional help if needed',

@@ -108,7 +108,7 @@ export class AlexContextualAwareness extends EventEmitter  {
       strategies: {}
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🧭 AlexContextualAwareness initializing - Contextual consciousness awakening');
 
     } catch (error) {
@@ -120,7 +120,7 @@ export class AlexContextualAwareness extends EventEmitter  {
   async initialize() {
     this.isInitialized = true;
     await this.initializeContextualSystems();
-    this.startContextualMonitoring();      try: {
+    this.startContextualMonitoring();      try {
       logger.info('🌐 AlexContextualAwareness fully initialized - Advanced context awareness active');
 
     } catch (error) {
@@ -479,7 +479,7 @@ export class AlexContextualAwareness extends EventEmitter  {
     setInterval(() => this.performContextualCheck(), 60000);
 
     // Prédictions contextuelles toutes les 30 minutes
-    setInterval(async () => {      try: {
+    setInterval(async () => {      try {
         await this.predictContextualChanges();
       } catch (_error) {
       }
@@ -539,7 +539,7 @@ export class AlexContextualAwareness extends EventEmitter  {
   /**
    * Obtention du statut contextuel
    */
-  getContextualStatus()       return: {
+  getContextualStatus()       return {
       initialized: this.isInitialized,
       currentContext: {,
         confidence: this.currentContext.confidence,
@@ -588,61 +588,61 @@ export class AlexContextualAwareness extends EventEmitter  {
    * Détection de patterns temporels
    */
   detectTemporalPatterns() 
-    return: [];
+    return [];
 
   /**
    * Détection de patterns comportementaux
    */
   detectBehavioralPatterns() 
-    return: [];
+    return [];
 
   /**
    * Détection de patterns conversationnels
    */
   detectConversationalPatterns() 
-    return: [];
+    return [];
 
   /**
    * Détection de patterns émotionnels
    */
   detectEmotionalPatterns() 
-    return: [];
+    return [];
 
   /**
    * Prédiction de changements temporels
    */
   predictTemporalChanges() 
-    return: [];
+    return [];
 
   /**
    * Prédiction de changements émotionnels
    */
   predictEmotionalChanges() 
-    return: [];
+    return [];
 
   /**
    * Prédiction de changements situationnels
    */
   predictSituationalChanges() 
-    return: [];
+    return [];
 
   /**
    * Génération d'adaptations comportementales
    */
   async generateBehavioralAdaptations(update) 
-    return: [];
+    return [];
 
   /**
    * Génération d'adaptations de stratégie
    */
   async generateStrategyAdaptations(update) 
-    return: [];
+    return [];
 
   /**
    * Génération d'adaptations de priorités
    */
   async generatePriorityAdaptations(update) 
-    return: [];
+    return [];
 
   /**
    * Application des adaptations contextuelles
@@ -692,7 +692,7 @@ export class AlexContextualAwareness extends EventEmitter  {
   /**
    * Validation des patterns actifs
    */
-  validateActivePatterns()       return: { invalidated: 0 };
+  validateActivePatterns()       return { invalidated: 0 };
 
   /**
    * Mise à jour des patterns actifs

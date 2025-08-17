@@ -125,7 +125,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Initialisation AUTHENTIQUE avec SQLite
    */
   async initialize() {
-      try: {
+      try {
       logger.info(
         `🏢 Initializing ${this.moduleName} with authentic SaaS architecture...`,
       );
@@ -175,7 +175,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Connexion SQLite OBLIGATOIRE
    */
   async connectToSQLiteDatabase() {
-      try: {
+      try {
       this.db = await open({
         filename: this.dbPath,
         driver: sqlite3.Database
@@ -412,7 +412,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Restauration état SaaS depuis SQLite
    */
   async restoreSaaSStateFromDatabase() {
-      try: {
+      try {
       // Compter utilisateurs totaux et actifs,
       const userCount = await this.db.get(
         "SELECT COUNT(*) as total FROM users",
@@ -583,7 +583,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
     const tenantId = crypto.randomUUID();
     const userId = crypto.randomUUID();
     const registrationTime = Date.now();
-      try: {
+      try {
       logger.info(`🏢 Registering new tenant: ${tenantData.name}`);
 
       // 1. Validation données,
@@ -626,7 +626,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         plan: tenant.subscription_plan,
         registrationTime: totalTime
       });
-      return: {
+      return {
         tenant: {
           id: tenantId,
           name: tenant.name,
@@ -754,7 +754,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
       status: "active",
       lastActivity: new Date()
     });
-      return: {
+      return {
       id: tenantId,
       name: tenantData.name,
       domain: tenantData.domain,
@@ -789,7 +789,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
     );
 
     this.authMetrics.totalUsers++;
-      return: {
+      return {
       id: userId,
       email: userData.email,
       role: userData.role || "user"
@@ -894,7 +894,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    */
   async authenticateUser(tenantDomain, email, password, deviceInfo = {}) {
     const authStartTime = Date.now();
-      try: {
+      try {
       logger.info(
         `🔐 Authenticating user: ${email} for tenant: ${tenantDomain}`,
       );
@@ -935,7 +935,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
         sessionId: session.id,
         authTime
       });
-      return: {
+      return {
         user: {
           id: user.id,
           email: user.email,
@@ -1199,7 +1199,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
 
     this.authMetrics.activeSessions++;
     this.authMetrics.totalSessions++;
-      return: {
+      return {
       id: sessionId,
       token: jwtToken,
       refreshToken,
@@ -1310,7 +1310,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Nettoyage sessions expirées
    */
   async cleanupExpiredSessions() {
-      try: {
+      try {
       const now = new Date();
 
       // Supprimer sessions expirées de la base,
@@ -1363,7 +1363,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Analyse usage et scaling AUTHENTIQUE
    */
   async analyzeUsageAndScale() {
-      try: {
+      try {
       // Métriques performance système,
       const cpuUsage = await this.getCurrentCPUUsage();
       const memoryUsage = await this.getCurrentMemoryUsage();
@@ -1501,7 +1501,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    */
   async executeScaling(scalingDecision) {
     const startTime = Date.now();
-      try: {
+      try {
       logger.info(
         `⚡ Executing scaling ${scalingDecision.direction}: ${this.scalingState.instanceCount} → ${scalingDecision.recommendedInstances}`,
       );
@@ -1577,7 +1577,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Audit sécurité quotidien AUTHENTIQUE
    */
   async performDailySecurityAudit() {
-      try: {
+      try {
       logger.info("🔒 Starting daily security audit...");
 
       // Analyse tentatives de connexion suspectes,
@@ -1673,7 +1673,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Analyse revenus et churn AUTHENTIQUE
    */
   async analyzeRevenueAndChurn() {
-      try: {
+      try {
       logger.info("💰 Starting revenue and churn analysis...");
 
       // Calcul revenus récurrents mensuels (MRR)
@@ -1787,7 +1787,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Maintenance base données AUTHENTIQUE
    */
   async performDatabaseMaintenance() {
-      try: {
+      try {
       logger.info("🛠️ Starting weekly database maintenance...");
 
       // Nettoyage anciens logs audit (> 1 an)
@@ -1835,7 +1835,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
    * Nettoyage inscription échouée
    */
   async cleanupFailedRegistration(tenantId, userId) {
-      try: {
+      try {
       if (tenantId) {
         await this.db.run("DELETE FROM tenants WHERE id = ?", [tenantId]);
         this.tenantSystem.activeTenants.delete(tenantId);
@@ -1868,7 +1868,7 @@ export class AlexSaaSArchitecture extends EventEmitter  {
     const securityIncidents = await this.db.get(
       'SELECT COUNT(*) as count FROM security_events WHERE created_at > datetime("now", "-7 days") AND event_severity IN ("high", "critical")',
     );
-      return: {
+      return {
       module: this.moduleName,
       version: this.version,
       initialized: this.isInitialized,

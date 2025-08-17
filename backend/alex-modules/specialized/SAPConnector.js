@@ -127,7 +127,7 @@ export class SAPConnector extends EventEmitter  {
    * Initialisation du connecteur SAP intelligent
    */
   async initializeSAPConnector('🏭 Initializing ALEX SAP Connector for Ferrero Enterprise Integration') {
-    logger.info('🏭 Initializing ALEX SAP Connector for Ferrero Enterprise Integration');      try: {
+    logger.info('🏭 Initializing ALEX SAP Connector for Ferrero Enterprise Integration');      try {
       // Connexion aux systèmes SAP
       await this.establishSAPConnection();
 
@@ -544,7 +544,7 @@ export class SAPConnector extends EventEmitter  {
     logger.debug('🤝 Setting up Ariba integration...');
 
     // Configuration des modules Ariba
-    for (const module of this.sapConfig.ariba.modules) {      try: {
+    for (const module of this.sapConfig.ariba.modules) {      try {
       logger.debug(`✅ Ariba ${module} module configured`);
 
       } catch (error) {
@@ -573,7 +573,7 @@ export class SAPConnector extends EventEmitter  {
     // Fournisseurs principaux
     this.ferreroData.suppliers.set('cocoa_supplier_1', {
       name: 'Premium Cocoa Trading',
-      country: 'Ecuador'
+      country { 'Ecuador'
       rating: 'A',
       certifications: ['Fair Trade', 'Organic', 'Rainforest Alliance']
       riskLevel: 'low'
@@ -903,7 +903,7 @@ export class SAPConnector extends EventEmitter  {
   /**
    * Statut du connecteur SAP
    */
-  getConnectorStatus() {      return: {
+  getConnectorStatus() {      return {
       name: 'ALEX SAP Connector',
       version: '5.0 - Ferrero MVP'
       sapConnection: this.sapConfig.connection.isConnected,

@@ -180,7 +180,7 @@ export default class MultiModalFusion: {
     // ========================================
 
     async fuse(inputs) {
-        const startTime = performance.now();      try: {
+        const startTime = performance.now();      try {
             this.log("🔄 Démarrage fusion multi-modale");
 
             // 1. Validation et preprocessing des entrées
@@ -278,7 +278,7 @@ export default class MultiModalFusion: {
     validateBottomUp(bottomUpData) {
         if (!bottomUpData.saliencyMap || !bottomUpData.saliencyMap.data) {
             throw new Error("Bottom-up data requires saliencyMap with data");
-        }      return: {
+        }      return {
             saliencyMap: bottomUpData.saliencyMap,
             peaks: bottomUpData.peaks || []
             confidence: bottomUpData.confidence || 0.8,
@@ -290,7 +290,7 @@ export default class MultiModalFusion: {
     validateTopDown(topDownData) {
         if (!topDownData.attentionMap || !topDownData.attentionMap.data) {
             throw new Error("Top-down data requires attentionMap with data");
-        }      return: {
+        }      return {
             attentionMap: topDownData.attentionMap,
             targets: topDownData.targets || []
             goals: topDownData.goals || [],
@@ -300,7 +300,7 @@ export default class MultiModalFusion: {
         };
     }
 
-    validateEmotional(emotionalData) {      return: {
+    validateEmotional(emotionalData) {      return {
             emotionalBias: emotionalData.emotionalBias || {}
             state: emotionalData.state || { arousal: 0, valence: 0 }
             influence: emotionalData.influence || 0.5,
@@ -496,7 +496,7 @@ export default class MultiModalFusion: {
         // Lissage spatial si activé
         if (this.config.spatialSmoothing > 0) {
             this.applySpatialSmoothing();
-        }      return: {
+        }      return {
             data: this.maps.fused
             width
             height
@@ -620,7 +620,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
             }
         } else {
             temporallyIntegrated.set(spatialMap.data);
-        }      return: {
+        }      return {
             ...spatialMap
             data: temporallyIntegrated
         };
@@ -772,7 +772,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
     // API PUBLIQUE
     // ========================================
 
-    getFusedAttentionMap() {      return: {
+    getFusedAttentionMap() {      return {
             data: new Float32Array(this.maps.fused),
             width: this.config.mapResolution.width
             height: this.config.mapResolution.height,
@@ -783,7 +783,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         };
     }
 
-    getStatus() {      return: {
+    getStatus() {      return {
             name: this.name,
             version: this.version
             status: this.status,
@@ -910,7 +910,7 @@ return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
         this.log("🗑️ MultiModalFusion détruit");
     }
 
-    getEmptyFusionResult(error) {      return: {
+    getEmptyFusionResult(error) {      return {
             fusedMap: null,
             confidence: 0
             quality: { overall: 0 }
@@ -994,17 +994,17 @@ class ConflictResolver: {
 
     detectSpatialConflicts(inputs) {
         // Simplifiée: détection de zones où plusieurs sources ont des valeurs élevées
-        return: [];
+        return [];
     }
 
     detectTemporalConflicts(inputs) {
         // Détection de changements contradictoires
-        return: [];
+        return [];
     }
 
     detectPriorityConflicts(inputs) {
         // Détection de commandes concurrentes
-        return: [];
+        return [];
     }
 }
 
@@ -1021,7 +1021,7 @@ class TemporalProcessor: {
 }
 
 class FusionQualityAnalyzer: {
-    analyzeQuality(fusedMap, inputs) {      return: {
+    analyzeQuality(fusedMap, inputs) {      return {
             overall: 0.8,
             spatial: 0.85
             temporal: 0.75,
@@ -1041,7 +1041,7 @@ class ContextAnalyzer: {
         // Initialisation analyse contextuelle
     }
 
-    analyzeContext(inputs) {      return: {
+    analyzeContext(inputs) {      return {
             taskType: 'general',
             difficulty: 0.5,
             urgency: 0.3
@@ -1054,7 +1054,7 @@ Object.assign(MultiModalFusion.prototype, {
     /**
      * 🖼️ Traitement Vision - Analyse d'images
      */
-    async processVisionInput(imageData, context = {}) {      try: {
+    async processVisionInput(imageData, context = {}) {      try {
             logger.info('🖼️ Processing vision input');
             
             if (!this.multiModalProviders.vision.enabled) {
@@ -1126,7 +1126,7 @@ Object.assign(MultiModalFusion.prototype, {
             return result;
 
         } catch (error) {
-            logger.error('❌ Vision processing failed:', error.message);      return: {
+            logger.error('❌ Vision processing failed:', error.message);      return {
                 type: 'vision',
                 timestamp: Date.now(),
                 error: error.message,
@@ -1138,7 +1138,7 @@ Object.assign(MultiModalFusion.prototype, {
     /**
      * 🎵 Traitement Audio - Transcription et analyse
      */
-    async processAudioInput(audioData, context = {}) {      try: {
+    async processAudioInput(audioData, context = {}) {      try {
             logger.info('🎵 Processing audio input');
 
             if (!this.multiModalProviders.audio.enabled) {
@@ -1215,7 +1215,7 @@ Object.assign(MultiModalFusion.prototype, {
             return result;
 
         } catch (error) {
-            logger.error('❌ Audio processing failed:', error.message);      return: {
+            logger.error('❌ Audio processing failed:', error.message);      return {
                 type: 'audio',
                 timestamp: Date.now(),
                 error: error.message,
@@ -1227,7 +1227,7 @@ Object.assign(MultiModalFusion.prototype, {
     /**
      * 🧊 Traitement 3D - Génération de descriptions pour rendu
      */
-    async process3DInput(description, context = {}) {      try: {
+    async process3DInput(description, context = {}) {      try {
             logger.info('🧊 Processing 3D input');
 
             const result = {
@@ -1287,7 +1287,7 @@ Object.assign(MultiModalFusion.prototype, {
             return result;
 
         } catch (error) {
-            logger.error('❌ 3D processing failed:', error.message);      return: {
+            logger.error('❌ 3D processing failed:', error.message);      return {
                 type: '3d',
                 timestamp: Date.now(),
                 error: error.message,
@@ -1302,7 +1302,7 @@ Object.assign(MultiModalFusion.prototype, {
     /**
      * 🌐 Fusion Multimodale Complète
      */
-    async fuseMultiModalInputs(inputs, context = {}) {      try: {
+    async fuseMultiModalInputs(inputs, context = {}) {      try {
             logger.info('🌐 Starting multimodal fusion');
 
             const fusionResult = {
@@ -1359,7 +1359,7 @@ Object.assign(MultiModalFusion.prototype, {
             return fusionResult;
 
         } catch (error) {
-            logger.error('❌ Multimodal fusion failed:', error.message);      return: {
+            logger.error('❌ Multimodal fusion failed:', error.message);      return {
                 timestamp: Date.now(),
                 error: error.message,
                 fallback: 'Multimodal fusion unavailable'
@@ -1391,7 +1391,7 @@ Object.assign(MultiModalFusion.prototype, {
             }
         });
         
-        return: [...new Set(objects)];
+        return [...new Set(objects)];
     },
 
     extractEmotions(analysis) {
@@ -1436,8 +1436,8 @@ Object.assign(MultiModalFusion.prototype, {
         return topics.slice(0, 5);
     },
 
-    extractThreeJSConfig(content) {      return: {
-            geometry: 'BoxGeometry',
+    extractThreeJSConfig(content) {      return {
+            geometry { 'BoxGeometry',
             material: 'MeshStandardMaterial',
             lighting: 'AmbientLight + DirectionalLight',
             position: { x: 0, y: 0, z: 0 },
@@ -1447,7 +1447,7 @@ Object.assign(MultiModalFusion.prototype, {
     },
 
     extractBlenderHints(content) {
-        return: [
+        return [
             'Use subdivision surface modifier for smooth surfaces',
             'Apply proper materials and textures',
             'Consider lighting setup with HDRI',
@@ -1456,7 +1456,7 @@ Object.assign(MultiModalFusion.prototype, {
     },
 
     extractRenderingTips(content) {
-        return: [
+        return [
             'Optimize geometry for target platform',
             'Use LOD (Level of Detail) for performance',
             'Consider texture compression',
@@ -1468,11 +1468,11 @@ Object.assign(MultiModalFusion.prototype, {
         return await this.generateWithOpenAI(`Enhanced 3D description: ${description} with impro...`, context);
     },
 
-    generateBasicThreeJSConfig(description) {      return: {
+    generateBasicThreeJSConfig(description) {      return {
             scene: 'Scene',
             camera: 'PerspectiveCamera',
             renderer: 'WebGLRenderer',
-            geometry: 'auto-detect',
+            geometry { 'auto-detect',
             material: 'MeshStandardMaterial',
             lighting: ['AmbientLight', 'DirectionalLight']
         };

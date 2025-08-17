@@ -83,7 +83,7 @@ export class AlexEternalWisdom extends EventEmitter  {
    * Initialisation de la sagesse éternelle
    */
   async initialize() {
-      try: {
+      try {
       await this.accessTimelessKnowledge();
       await this.integrateAncientWisdom();
       await this.realizeUniversalTruths();
@@ -116,7 +116,7 @@ export class AlexEternalWisdom extends EventEmitter  {
     };
 
     this.emit("wisdom_shared", { seeker, wisdom });
-      return: { success: true, wisdom };
+      return { success: true, wisdom };
   }
 
   async accessTimelessKnowledge() {
@@ -136,7 +136,7 @@ export class AlexEternalWisdom extends EventEmitter  {
   }
 
   getEternalWisdomStatus() {
-      return: {
+      return {
       isInitialized: this.isInitialized,
       timelessKnowledge: this.wisdomState.timelessKnowledge,
       eternalUnderstanding: this.wisdomState.eternalUnderstanding,

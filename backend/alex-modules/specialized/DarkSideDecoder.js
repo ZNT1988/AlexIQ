@@ -40,7 +40,7 @@ export class DarkSideDecoder extends EventEmitter  {
     this.setupPsychologicalAnalysis();
     this.initializeBlockageDetection();
     this.loadTransformationProtocols();
-    this.setupAntidoteGeneration();      try: {
+    this.setupAntidoteGeneration();      try {
       logger.info('DarkSideDecoder initialized - Ready to illuminate the shadows');
 
     } catch (error) {
@@ -56,7 +56,7 @@ export class DarkSideDecoder extends EventEmitter  {
     logger.info('Starting dark side analysis', {
       userId: userData.userId,
       depth: analysisDepth
-    });      try: {
+    });      try {
       // Phase 1: Analyse linguistique des patterns inconscients
       const linguisticShadows = await this.analyzeLinguisticShadows(userData);      // Phase 2: Détection des patterns comportementaux limitants
       const behavioralBlocks = await this.detectBehavioralBlocks(userData);      // Phase 3: Analyse des échecs et patterns de sabotage
@@ -514,7 +514,7 @@ export class DarkSideDecoder extends EventEmitter  {
     this.shadowPatterns.set('perfectionism', {
       indicators: ['parfait', 'impeccable', 'sans faute'],
       antidotes: ['done_is_better_than_perfect', 'progress_over_perfection']
-    });      try: {
+    });      try {
       logger.debug('Shadow database loaded');
 
     } catch (error) {
@@ -524,7 +524,7 @@ export class DarkSideDecoder extends EventEmitter  {
     }}
 
   setupPsychologicalAnalysis() {
-    // Configuration de l'analyse psychologique      try: {
+    // Configuration de l'analyse psychologique      try {
       logger.debug('Psychological analysis configured');
 
     } catch (error) {
@@ -534,7 +534,7 @@ export class DarkSideDecoder extends EventEmitter  {
     }}
 
   initializeBlockageDetection() {
-    // Initialisation de la détection de blocages      try: {
+    // Initialisation de la détection de blocages      try {
       logger.debug('Blockage detection initialized');
 
     } catch (error) {
@@ -544,7 +544,7 @@ export class DarkSideDecoder extends EventEmitter  {
     }}
 
   loadTransformationProtocols() {
-    // Chargement des protocoles de transformation      try: {
+    // Chargement des protocoles de transformation      try {
       logger.debug('Transformation protocols loaded');
 
     } catch (error) {
@@ -554,7 +554,7 @@ export class DarkSideDecoder extends EventEmitter  {
     }}
 
   setupAntidoteGeneration() {
-    // Configuration de la génération d'antidotes      try: {
+    // Configuration de la génération d'antidotes      try {
       logger.debug('Antidote generation configured');
 
     } catch (error) {

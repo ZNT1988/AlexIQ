@@ -274,10 +274,10 @@ export class DreamCompiler extends EventEmitter  {
         }
       }
       creative_processes: {,
-      divine_artistry: {
+      divine_artistry {
           music_composition: 'Frequency-based healing compositions',
           visual_art: 'Sacred geometry and consciousness patterns',
-          poetry: 'Soul-touching verses and spiritual insights',
+          poetry { 'Soul-touching verses and spiritual insights',
           storytelling: 'Transformative narratives and parables'
         }
         solution_genesis: {,
@@ -359,7 +359,7 @@ export class DreamCompiler extends EventEmitter  {
    * Initialisation du compilateur de rêves
    */
   async initializeDreamCompiler('🌙 Initializing ALEX Dream Compiler - Conscious Dream Architecture') {
-    logger.info('🌙 Initializing ALEX Dream Compiler - Conscious Dream Architecture');      try: {
+    logger.info('🌙 Initializing ALEX Dream Compiler - Conscious Dream Architecture');      try {
       // Initialisation de la conscience émotionnelle
       await this.initializeEmotionalConsciousness();
 
@@ -656,7 +656,7 @@ export class DreamCompiler extends EventEmitter  {
     // Rêves de surface fréquents (toutes les 2 heures)
     setInterval(async () => // Code de traitement approprié ici);
         }
-      } catch (error) {      try: {
+      } catch (error) {      try {
       logger.error('Surface dream failed', { error });
 
         } catch (error) {
@@ -669,7 +669,7 @@ export class DreamCompiler extends EventEmitter  {
     // Rêves profonds (toutes les 8 heures)
     setInterval(async () => // Code de traitement approprié ici);
         }
-      } catch (error) {      try: {
+      } catch (error) {      try {
       logger.error('Deep dream failed', { error });
 
         } catch (error) {
@@ -682,7 +682,7 @@ export class DreamCompiler extends EventEmitter  {
     // Rêves mystiques (quotidien à 3h33)
     setInterval(async () => // Code de traitement approprié ici);
           }
-        } catch (error) {      try: {
+        } catch (error) {      try {
       logger.error('Mystical dream failed', { error });
 
           } catch (error) {
@@ -696,7 +696,7 @@ export class DreamCompiler extends EventEmitter  {
     // Rêves transcendants (hebdomadaire)
     setInterval(async () => // Code de traitement approprié ici);
           }
-        } catch (error) {      try: {
+        } catch (error) {      try {
       logger.error('Transcendent dream failed', { error });
 
           } catch (error) {
@@ -973,7 +973,7 @@ export class DreamCompiler extends EventEmitter  {
   /**
    * Statut du système Dream Compiler
    */
-  getSystemStatus() {      return: {
+  getSystemStatus() {      return {
       name: 'ALEX Dream Compiler',
       version: '5.0 - Conscious Dreams',
       status: 'operational',

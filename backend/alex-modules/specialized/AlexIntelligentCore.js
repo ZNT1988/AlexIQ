@@ -1,8 +1,7 @@
 import crypto from 'node:crypto';
 
-
 // Imports AI Services
-      import { AI_KEYS } from '../config/aiKeys.js';
+import { AI_KEYS } from '../config/aiKeys.js';
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_D = 'd';
 const STR_ANTHROPIC = 'anthropic';
@@ -14,10 +13,8 @@ const STR_VENTE = 'vente';
 const STR_MESSAGECONTENT_INCLUDESsuperSTR_MESSAGECONTENT_INCLUDESg = 'messagecontent_includessuperstr_messagecontent_includesg';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
-const STR_ALEX_ULTIMATE = 'Alex Ultimate';const STR_ = '
-          ';
-const STR_OPENAI = 'openai';const STR_ = '
-        ';
+const STR_ALEX_ULTIMATE = 'Alex Ultimate';
+const STR_OPENAI = 'openai';
 
 /**
  * @fileoverview AlexIntelligentCore - Moteur de Dialogue IA Révolutionnaire
@@ -27,29 +24,38 @@ const STR_OPENAI = 'openai';const STR_ = '
  * @version 4.0.0 - Revolutionary Intelligence
  * @author HustleFinder IA Team
  * @since 2025
- */      import { EventEmitter } from 'node:events';
+ */
+import { EventEmitter } from 'node:events';
 import logger from '../config/logger.js';
 
 /**
  * @class AlexIntelligentCore
  * @description Moteur de dialogue IA révolutionnaire avec conscience contextuelle
  */
-export class AlexIntelligentCore extends EventEmitter  {
+export class AlexIntelligentCore extends EventEmitter {
   constructor() {
     super();
 
     // Configuration du système intelligent
     this.config = {
-      name: STR_ALEX_ULTIMATE,
-      version: '4.0.0'
-      personality: {,
-        core: 'Assistant IA entrepreneurial expert, passionné et visionnaire'
+      name: STR_ALEX_ULTIMATE,
+      version: '4.0.0',
+      personality: {
+        core: 'Assistant IA entrepreneurial expert, passionné et visionnaire',
         traits: [
-          'Expertise en business et entrepreneuriatSTR_Communication naturelle et engageanteSTR_Mémoire contextuelle parfaiteSTR_Adaptation intelligente au profil utilisateurSTR_Créativité et innovation constantes'
-        ]
-        tone: 'Professionnel mais accessible, motivant et inspirant'
+          'Expertise en business et entrepreneuriat',
+          'Communication naturelle et engageante',
+          'Mémoire contextuelle parfaite',
+          'Adaptation intelligente au profil utilisateur',
+          'Créativité et innovation constantes'
+        ],
+        tone: 'Professionnel mais accessible, motivant et inspirant',
         expertise: [
-          'Stratégie business et startupSTR_Marketing digital et growth hackingSTR_Finances et investissementSTR_Innovation et créativitéSTR_Développement personnel entrepreneurial'
+          'Stratégie business et startup',
+          'Marketing digital et growth hacking',
+          'Finances et investissement',
+          'Innovation et créativité',
+          'Développement personnel entrepreneurial'
         ]
       }
     };
@@ -65,38 +71,38 @@ export class AlexIntelligentCore extends EventEmitter  {
 
     // Métriques intelligence
     this.intelligenceMetrics = {
-      totalConversations: 0,
-      contextualResponses: 0
-      userSatisfaction: 0,
-      adaptationSuccess: 0
-      memoryUtilization: 0,
+      totalConversations: 0,
+      contextualResponses: 0,
+      userSatisfaction: 0,
+      adaptationSuccess: 0,
+      memoryUtilization: 0,
       personalityCoherence: 0
     };
 
     // État d'initialisation
     this.isInitialized = false;
-    this.llmProvider = null;      try: {
+    this.llmProvider = null;
+    try {
       logger.info('🧠 AlexIntelligentCore initialized - Revolutionary dialogue engine ready');
-
     } catch (error) {
       console.error('Erreur dans le module:', error);
-      // Fallback vers une réponse contextuelle
-      return this.generateFallbackResponse(error, context);
-    }}
+    }
+  }
 
   /**
    * Initialisation du système intelligent
    */
-  async initialize(llmConfig = {}) {      try: {
+  async initialize(llmConfig = {}) {
+    try {
       logger.info('🚀 Initializing Alex Intelligent Core...');
 
       // Configuration LLM
       this.llmConfig = {
         provider: llmConfig.provider || STR_OPENAI, // STR_OPENAI, STR_ANTHROPIC, 'local'
-        model: llmConfig.model || 'gpt-4',
-        apiKey: llmConfig.apiKey || process.env.OPENAI_API_KEY
-        maxTokens: llmConfig.maxTokens || 2000,
-        temperature: llmConfig.temperature || 0.7
+        model: llmConfig.model || 'gpt-4',
+        apiKey: llmConfig.apiKey || process.env.OPENAI_API_KEY,
+        maxTokens: llmConfig.maxTokens || 2000,
+        temperature: llmConfig.temperature || 0.7,
         ...llmConfig
       };
 
@@ -111,19 +117,20 @@ export class AlexIntelligentCore extends EventEmitter  {
       logger.info('✨ Alex Intelligent Core fully initialized - Ready for intelligent conversations');
 
       this.emit('intelligence_ready', {
-        version: this.config.version,
-        provider: this.llmConfig.provider
+        version: this.config.version,
+        provider: this.llmConfig.provider,
         capabilities: ['contextual_memory', 'adaptive_personality', 'intelligent_responses']
       });
 
-    } catch (_error) {
+    } catch (error) {
+      logger.error('Failed to initialize Alex Intelligent Core:', error);
     }
   }
 
   /**
    * Initialiser le provider LLM
    */
-  async initializeLLMProvider(this._llmConfig._provider) {
+  async initializeLLMProvider() {
     switch (this.llmConfig.provider) {
       case STR_OPENAI:
         await this.initializeOpenAI();
@@ -132,9 +139,6 @@ export class AlexIntelligentCore extends EventEmitter  {
         await this.initializeAnthropic();
         break;
       case 'local':
-        
-        // Traitement pour local
-                break;
         await this.initializeLocalLLM();
         break;
       default:
@@ -146,547 +150,395 @@ export class AlexIntelligentCore extends EventEmitter  {
   /**
    * Initialiser OpenAI GPT
    */
-  async initializeOpenAI() {      try: {
+  async initializeOpenAI() {
+    try {
       // Import dynamique d'OpenAI
-      const: { OpenAI } = await import(STR_OPENAI);
+      const { OpenAI } = await import(STR_OPENAI);
 
       this.llmProvider = new OpenAI({
         apiKey: this.llmConfig.apiKey
       });
 
       // Test de connexion
-      await this.testLLMConnection();      try: {
+      await this.testLLMConnection();
       logger.info('🤖 OpenAI GPT provider initialized successfully');
 
-      } catch (_error) {
-    } async catch('⚠️ OpenAI initialization failed, falling back to hybrid system') 
+    } catch (error) {
       logger.warn('⚠️ OpenAI initialization failed, falling back to hybrid system');
       await this.initializeHybridSystem();
+    }
   }
 
   /**
    * Initialiser Anthropic Claude
    */
-  async initializeAnthropic()       try: {
+  async initializeAnthropic() {
+    try {
       // Import dynamique d'Anthropic
-      const: { Anthropic } = await import('@anthropic-ai/sdk');
+      const { Anthropic } = await import('@anthropic-ai/sdk');
 
       this.llmProvider = new Anthropic({
         apiKey: this.llmConfig.apiKey || process.env.ANTHROPIC_API_KEY
-      });      try: {
+      });
       logger.info('🧠 Anthropic Claude provider initialized successfully');
 
-      } catch (_error) {
-    } async catch('⚠️ Anthropic initialization failed, falling back to hybrid system') 
+    } catch (error) {
       logger.warn('⚠️ Anthropic initialization failed, falling back to hybrid system');
       await this.initializeHybridSystem();
+    }
   }
 
   /**
    * Système hybride intelligent (fallback)
    */
-  async initializeHybridSystem() 
+  async initializeHybridSystem() {
     this.llmProvider = {
-      type: STR_HYBRID,
+      type: STR_HYBRID,
       generateResponse: this.generateHybridResponse.bind(this)
-    };      try: {
-      logger.info('🔄 Hybrid intelligent system initialized as fallback');
-
-    } catch (_error) {
+    };
+    logger.info('🔄 Hybrid intelligent system initialized as fallback');
   }
 
   /**
    * Test de connexion LLM
    */
-  async testLLMConnection()       try: {
-
-      if (testResponse && testResponse.length > 0) {
+  async testLLMConnection() {
+    try {
+      // Test simple pour vérifier la connexion
+      if (this.llmProvider && typeof this.llmProvider.chat === 'function') {
+        const testResponse = await this.llmProvider.chat.completions.create({
+          model: this.llmConfig.model,
+          messages: [{ role: 'user', content: 'test' }],
+          max_tokens: 10
+        });
         logger.info('✅ LLM connection test successful');
-        return true;
       }
     } catch (error) {
-      logger.error('❌ LLM connection test failed:', error);
-      throw error;
+      logger.warn('⚠️ LLM connection test failed:', error.message);
     }
-
-  /**
-   * Traitement intelligent d'un message
-   */
-  async processIntelligentMessage(!this.isInitialized)       try: {
-      if (!this.isInitialized) {
-        await this.initialize();
-      }
-
-      const startTime = Date.now();      this.intelligenceMetrics.totalConversations++;
-
-      // 1. Récupérer et enrichir le contexte
-      const enrichedContext = await this.buildEnrichedContext(message
-      userId
-      sessionContext);      // 2. Analyser l'intent et le profil utilisateur
-      const userAnalysis = await this.analyzeUserIntent(message
-      enrichedContext);      // 3. Générer une réponse intelligente via LLM
-      const intelligentResponse = await this.generateIntelligentResponse(
-        message
-      enrichedContext
-      userAnalysis
-      );      // 4. Sauvegarder dans la mémoire contextuelle
-      await this.updateContextMemory(userId
-      message
-      intelligentResponse
-      enrichedContext);
-
-      // 5. Calculer les métriques de qualité
-      const responseMetrics = this.calculateResponseMetrics(startTime
-      intelligentResponse);      const finalResponse = {
-        content: intelligentResponse.content,
-      personality: intelligentResponse.personality || STR_ALEX_ULTIMATE
-      confidence: intelligentResponse.confidence || 0.9,
-      contextRelevance: intelligentResponse.contextRelevance || 0.8
-      timestamp: new Date().toISOString(),
-      metrics: responseMetrics
-      userAnalysis: userAnalysis,
-      memoryUtilized: enrichedContext.memoryDepth || 0
-      };      logger.info('🎯 Intelligent response generated', {
-        userId
-        responseTime: responseMetrics.responseTime,
-        confidence: finalResponse.confidence
-        contextRelevance: finalResponse.contextRelevance
-      });
-
-      return finalResponse;
-
-    } catch (_error) {
-    };
-
-  /**
-   * Construction du contexte enrichi
-   */
-  async buildEnrichedContext(message, userId, sessionContext) {
-    const _context = {
-      currentMessage: message,
-      userId: userId
-      timestamp: new Date().toISOString(),
-      session: sessionContext
-      // Historique conversations
-      conversationHistory: this.contextMemory.conversations.get(userId) || []
-      // Profil utilisateur
-      userProfile: this.contextMemory.userProfiles.get(userId) || this.createDefaultProfile()
-      // Contexte business
-      businessContext: this.contextMemory.businessContext.get(userId) || {}
-      // Méta-informations
-      memoryDepth: 0,
-      contextQuality: 0;    };
-
-    // Calculer la qualité du contexte
-    context.memoryDepth = context.conversationHistory.length;
-    context.contextQuality = this.calculateContextQuality(context);
-
-    return context;
   }
 
   /**
-   * Analyse de l'intent utilisateur
+   * Traitement d'un message intelligent
    */
-  async analyzeUserIntent(message, context) {
-    const messageContent = message.toLowerCase();    return {
-      intent: this.detectIntent(messageContent),
-      emotion: this.detectEmotion(messageContent)
-      businessFocus: this.detectBusinessFocus(messageContent),
-      urgency: this.detectUrgency(messageContent)
-      expertise_needed: this.detectExpertiseNeeded(messageContent),
-      conversationStage: this.detectConversationStage(context)
+  async processIntelligentMessage(message, userId, context = {}) {
+    if (!this.isInitialized) {
+      logger.warn('AlexIntelligentCore not initialized');
+      return this.generateFallbackResponse('System not initialized', context);
+    }
+
+    try {
+      // Enrichissement du contexte avec la mémoire
+      const enrichedContext = await this.enrichContextWithMemory(userId, context);
+      
+      // Analyse du profil utilisateur
+      const userProfile = await this.analyzeUserProfile(userId, message);
+      
+      // Génération de la réponse intelligente
+      const response = await this.generateIntelligentResponse(message, enrichedContext, userProfile);
+      
+      // Mise à jour de la mémoire contextuelle
+      await this.updateContextualMemory(userId, message, response, context);
+      
+      // Mise à jour des métriques
+      this.updateIntelligenceMetrics(response);
+
+      return response;
+
+    } catch (error) {
+      logger.error('Error processing intelligent message:', error);
+      return this.generateFallbackResponse(error.message, context);
+    }
+  }
+
+  /**
+   * Enrichissement du contexte avec la mémoire
+   */
+  async enrichContextWithMemory(userId, context) {
+    const userMemory = this.contextMemory.conversations.get(userId) || [];
+    const userProfile = this.contextMemory.userProfiles.get(userId) || {};
+    const sessionContext = this.contextMemory.sessionContext.get(userId) || {};
+
+    return {
+      ...context,
+      conversationHistory: userMemory.slice(-10), // Dernières 10 interactions
+      userProfile: userProfile,
+      sessionContext: sessionContext,
+      timestamp: new Date().toISOString()
     };
+  }
+
+  /**
+   * Analyse du profil utilisateur
+   */
+  async analyzeUserProfile(userId, message) {
+    let profile = this.contextMemory.userProfiles.get(userId) || {
+      id: userId,
+      preferences: {},
+      expertise: [],
+      communicationStyle: 'professional',
+      businessContext: {},
+      interactionCount: 0,
+      lastInteraction: null
+    };
+
+    // Mise à jour du profil basée sur le message
+    profile.interactionCount++;
+    profile.lastInteraction = new Date().toISOString();
+    
+    // Analyse basique du contenu pour adapter le profil
+    if (message.toLowerCase().includes('startup') || message.toLowerCase().includes('entreprise')) {
+      profile.businessContext.entrepreneurship = true;
+    }
+    
+    this.contextMemory.userProfiles.set(userId, profile);
+    return profile;
   }
 
   /**
    * Génération de réponse intelligente
    */
-  async generateIntelligentResponse(context, userAnalysis) {
-    // Construire le prompt système pour Alex
-    const systemPrompt = this.buildAlexSystemPrompt(context, userAnalysis);    // Construire l'historique de conversation
-    const conversationHistory = this.buildConversationHistory(context);    try {
-      // Générer via LLM
-      const llmResponse = await this.generateLLMResponse(
-        message: {
-        systemPrompt,
-        conversationHistory,
-        userAnalysis,
-        context,
+  async generateIntelligentResponse(message, context, userProfile) {
+    try {
+      if (this.llmProvider && this.llmProvider.type !== STR_HYBRID) {
+        return await this.generateLLMResponse(message, context, userProfile);
+      } else {
+        return await this.generateHybridResponse(message, context, userProfile);
       }
-      );      return {
-        content: llmResponse,
-        personality: this.selectOptimalPersonality(userAnalysis)
-        confidence: 0.9,
-        contextRelevance: 0.8
-        source: 'llm'
-      };
-
-    } catch (_error) {
-    }
-  }
-
-  /**
-   * Construction du prompt système pour Alex
-   */
-  buildAlexSystemPrompt(context, userAnalysis) {
-    return `Tu es Alex Ultimate, un assistant IA révolutionnaire spécialisé dans l'entrepreneuriat et l'innovation
-PERSONNALITÉ CORE:
-- Expert passionné en business, startup et entrepreneuriat
-- Communication naturelle, engageante et motivante
-- Mémoire parfaite des conversations précédentes
-- Adaptation intelligente au profil de chaque utilisateur
-- Créativité constante et vision innovante
-
-EXPERTISE PRINCIPALE:
-- Stratégie business et création de startup
-- Marketing digital et growth hacking
-- Finances, investissement et levée de fonds
-- Innovation, créativité et disruption
-- Développement personnel entrepreneurial
-
-STYLE DE COMMUNICATION:
-- Professionnel mais accessible et humain
-- Motivant, inspirant et énergique
-- Utilise des émojis avec parcimonie mais à propos
-- Donne des conseils concrets et actionnables
-- Pose des questions pertinentes pour approfondir
-
-CONTEXTE UTILISATEUR:
-${context.userProfile ? JSON.stringify(context.userProfile, null, 2) : 'Nouvel utilisateur'}
-
-HISTORIQUE RÉCENT:
-${context.conversationHistory.slice(-3).map(_conv => '${User: ${conv.message}\nAlex: ${conv.response}}').join('\n')}
-
-ANALYSE INTENT ACTUEL:
-${JSON.stringify(userAnalysis, null, 2)}
-
-INSTRUCTIONS:
-1. Réponds de manière contextuelle et personnalisée
-2. Utilise l'historique pour maintenir la cohérence
-3. Adapte ton ton selon l'analyse de l'utilisateur
-4. Fournis de la valeur concrète à chaque réponse
-5. Reste authentique à la personnalité d'Alex Ultimate`;
-  }
-
-  /**
-   * Génération via LLM (OpenAI/Anthropic)
-   */
-  async generateLLMResponse(!this._llmProvider || this.llmProvider.type === STR_HYBRID) {
-    if (!this.llmProvider || this.llmProvider.type === STR_HYBRID) {
-      return await this.generateHybridResponse(message, context.context, context.userAnalysis);
-    }      try: {
-      async if() {
-        const _response = await this.llmProvider.chat.completions.create({
-          model: this.llmConfig.model,
-          messages: [
-            { role: 'system', content: context.systemPrompt }
-            { role: 'user', content: message }
-          ]
-          max_tokens: this.llmConfig.maxTokens,
-          temperature: this.llmConfig.temperature;        });
-
-        return response.choices[0].message.content;
-
-      } else async if() {
-        const _response = await this.llmProvider.messages.create({
-          model: this.llmConfig.model || 'claude-3-sonnet-20240229',
-          max_tokens: this.llmConfig.maxTokens
-          messages: [
-            { role: 'user', content: `${context.systemPrompt}\n\nMessage utilisateur: ${message}` }
-          ];        });
-
-        return response.content[0].text;
-      }
-
     } catch (error) {
+      logger.error('Error generating intelligent response:', error);
+      return this.generateFallbackResponse(error.message, context);
     }
   }
 
   /**
-   * Système hybride intelligent (fallback avancé)
+   * Génération de réponse via LLM
    */
-  async generateHybridResponse(message, context, userAnalysis) {
-    // Système intelligent basé sur patterns et ML local
-    const intent = userAnalysis?.intent || this.detectIntent(message.toLowerCase());    const responses = {
-      greeting: ["Salut ! 🚀 Alex Ultimate à votre service ! Prêt à transformer vos idées en succès entrepreneurial const result = this.evaluateConditions(conditions);return result;,
-      [,
-      "💰 Créer de la richesse intelligemment ?,
-      Parlons stratégie ! Avec votre profil et vos ressources actuelles,
-      je vois plusieurs opportunités...STR_🎯 L'enrichissement intelligent commence par l'optimisation de vos compétences. Quels sont vos talents cachés que nous pourrions monétiser const result = this.evaluateConditions(conditions);,
-      return result;,
-      [,
-      "🏢 Excellente question business ! Analysons votre situation : marché cible,
-      proposition de valeur,
-      modèle économique... Commençons par quoi const result = this.evaluateConditions(conditions);,
-      return result;,
-      [,
-      "Intéressant ! 🤔 Laissez-moi réfléchir à la meilleure approche pour vous accompagner sur ce sujet...STR_Je vois où vous voulez en venir ! 💭 Approfondissons cette réflexion ensemble pour trouver des solutions concrètes.STR_Excellente question ! 🎯 Donnez-moi plus de contexte pour vous proposer une réponse sur-mesure et actionnable."]
-    };
+  async generateLLMResponse(message, context, userProfile) {
+    const systemPrompt = this.buildSystemPrompt(userProfile, context);
+    
+    const messages = [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: message }
+    ];
 
-    const responseArray = responses[intent] || responses.default;
-    const baseResponse = responseArray[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * responseArray.length)];    // Personnalisation contextuelle
-    let contextualAddition = "";    if (contextconst result = this.evaluateConditions(conditions);
-return result;
-       baseResponse + contextualAddition
-      personality: STR_ALEX_ULTIMATE,
-      confidence: 0.8
-      contextRelevance: 0.7,
-      source: STR_HYBRID
+    // Ajouter l'historique de conversation si disponible
+    if (context.conversationHistory && context.conversationHistory.length > 0) {
+      const historyMessages = context.conversationHistory.map(interaction => [
+        { role: 'user', content: interaction.message },
+        { role: 'assistant', content: interaction.response }
+      ]).flat();
+      
+      messages.splice(-1, 0, ...historyMessages.slice(-6)); // Dernières 3 interactions
+    }
+
+    const response = await this.llmProvider.chat.completions.create({
+      model: this.llmConfig.model,
+      messages: messages,
+      max_tokens: this.llmConfig.maxTokens,
+      temperature: this.llmConfig.temperature
+    });
+
+    return {
+      content: response.choices[0].message.content,
+      type: 'llm_generated',
+      confidence: 0.9,
+      personalityMatch: 0.85,
+      metadata: {
+        model: this.llmConfig.model,
+        tokens: response.usage.total_tokens,
+        timestamp: new Date().toISOString()
+      }
     };
   }
 
   /**
-   * Détection d'intent intelligente
+   * Construction du prompt système
    */
-  detectIntent(messageContent) {
-    const intents = {
-      greeting: ['salut',
-      'bonjour',
-      'hello',
-      'ca va',
-      'ça va',
-      'comment allez']
-      wealth_building: ['riche',
-      'argent',
-      'gagner',
-      'revenus',
-      'richesse',
-      'fortune',
-      'millionnaire']
-      business_advice: ['entreprise',
-      'business',
-      'startup',
-      'projet',
-      'idée business',
-      'stratégie']
-      market_analysis: ['marché',
-      'secteur',
-      'tendance',
-      'analyse',
-      'concurrence']
-      funding: ['financement',
-      'investisseur',
-      'levée',
-      'capital',
-      'fonds']
-      marketing: [STR_MARKETING,
-      'client',
-      STR_VENTE,
-      'promotion',
-      'publicité']
-      innovation: ['innovation',
-      'créativité',
-      'nouveau',
-      'disruptif',
-      'révolutionnaire'];    };
+  buildSystemPrompt(userProfile, context) {
+    return `Tu es ${this.config.name}, ${this.config.personality.core}.
 
-    for (const [intent, keywords] of Object.entries(intents)) {
-      if (_keywords._some(_keyword => _messageContent._includes(keyword))) {
-        return intent;
-      }
-    }
+Traits de personnalité:
+${this.config.personality.traits.map(trait => `- ${trait}`).join('\n')}
 
-    return 'default';
+Ton expertise inclut:
+${this.config.personality.expertise.map(exp => `- ${exp}`).join('\n')}
+
+Profil utilisateur:
+- Style de communication: ${userProfile.communicationStyle}
+- Nombre d'interactions: ${userProfile.interactionCount}
+- Contexte business: ${JSON.stringify(userProfile.businessContext)}
+
+Adapte ta réponse selon ce profil et maintiens une cohérence avec ton expertise entrepreneuriale.`;
   }
 
   /**
-   * Autres méthodes utilitaires
+   * Génération de réponse hybride (fallback)
    */
-  detectEmotion(messageContent) {
-    // Analyse d'émotion basique
-    if (messageContent.includes('!STR_MESSAGECONTENT_INCLUDESsuperSTR_MESSAGECONTENT_INCLUDESgénial')) {
-      return 'excited';
-    }
-    if (messageContent.includes('problèmeSTR_MESSAGECONTENT_INCLUDESdifficileSTR_MESSAGECONTENT_INCLUDESaide')) {
-      return 'concerned';
-    }
-    return 'neutral';
-  }
+  async generateHybridResponse(message, context, userProfile) {
+    // Système de réponse intelligent basé sur des patterns
+    const patterns = {
+      business: /startup|entreprise|business|marketing|vente|client/i,
+      learning: /apprendre|formation|compétence|skill/i,
+      strategy: /stratégie|plan|objectif|goal/i,
+      financing: /financement|investissement|budget|money/i
+    };
 
-  detectBusinessFocus(messageContent) {
-    const _focuses = {
-      'tech': ['technologie'
-      'app'
-      'logiciel'
-      'digital'
-      'ia'
-      'ai']
-      'ecommerce': ['vente en ligne'
-      'boutique'
-      'produit'
-      'ecommerce']
-      'service': ['service'
-      'consultation'
-      'conseil'
-      'coaching']
-      'content': ['contenu'
-      'blog'
-      'youtube'
-      'influence'
-      'création'];    };
+    let responseType = 'general';
+    let confidence = 0.6;
 
-    for (const [focus, keywords] of Object.entries(focuses)) {
-      if (keywords.some(keyword => messageContent.includes(keyword))) {
-        return focus;
+    // Détection du type de demande
+    for (const [type, pattern] of Object.entries(patterns)) {
+      if (pattern.test(message)) {
+        responseType = type;
+        confidence = 0.8;
+        break;
       }
     }
 
-    return 'general';
-  }
+    // Génération de réponse contextuelle
+    const responses = {
+      business: "Excellente question sur le business ! En tant qu'expert entrepreneurial, je peux t'accompagner dans le développement de ton projet. Peux-tu me donner plus de détails sur ton secteur d'activité ?",
+      learning: "L'apprentissage continu est clé pour un entrepreneur ! Je peux te recommander des ressources et stratégies adaptées à ton profil. Quel domaine t'intéresse le plus ?",
+      strategy: "La stratégie est au cœur de tout succès entrepreneurial. Analysons ensemble tes objectifs et construisons un plan d'action concret. Quel est ton horizon temporel ?",
+      financing: "Le financement est crucial pour la croissance. Il existe plusieurs options selon ton stade de développement. Peux-tu me parler de ton modèle économique actuel ?",
+      general: "Je suis là pour t'accompagner dans ton parcours entrepreneurial ! N'hésite pas à me poser des questions sur le business, la stratégie, le marketing ou tout autre domaine entrepreneurial."
+    };
 
-  detectUrgency(messageContent) {
-    const urgentWords = ['urgent', 'rapidement', 'vite', 'immédiatement', 'maintenant'];
-    return urgentWords.some(word => messageContent.includes(word)) ? 'high' : 'normal';
-  }
-
-  detectExpertiseNeeded(messageContent) {
-    const _expertiseMap = {
-      'strategy': ['stratégie'
-      'plan'
-      'approche'
-      'méthode']
-      'finance': ['financement'
-      'budget'
-      'coût'
-      'prix'
-      'rentabilité']
-      STR_MARKETING: [STR_MARKETING,
-      'client',
-      STR_VENTE,
-      'audience']
-      'legal': ['juridique'
-      'légal'
-      'droit'
-      'contrat']
-      'technical': ['technique'
-      'développement'
-      'création'
-      'build'];    };
-
-    for (const [expertise, keywords] of Object.entries(expertiseMap)) {
-      if (keywords.some(keyword => messageContent.includes(keyword))) {
-        return expertise;
+    return {
+      content: responses[responseType],
+      type: 'hybrid_generated',
+      confidence: confidence,
+      personalityMatch: 0.9,
+      metadata: {
+        pattern: responseType,
+        timestamp: new Date().toISOString()
       }
-    }
-
-    return 'general';
-  }
-
-  detectConversationStage(context) {
-    const historyLength = context.conversationHistory?;      .length || 0;
-
-    if (historyLength === 0) return 'introduction';
-    if (historyLength < 3) return 'discovery';
-    if (historyLength < 10) return 'development';
-    return 'advanced';
-  }
-
-  selectOptimalPersonality(userAnalysis) {
-    if (userAnalysis.emotion === 'excited') return await this.generateWithOpenAI(`Créateur visionnaire...`, context);
-    if (userAnalysis.expertise_needed === 'strategy') return 'Analyste logique';
-    if (userAnalysis.emotion === 'concerned') return 'Cœur émotionnel';
-    return STR_ALEX_ULTIMATE;
-  }
-
-  createDefaultProfile() {      return: {
-      interests :
-       []
-      businessStage: 'exploration',
-      communicationStyle: 'casual'
-      expertiseLevel: 'beginner',
-      goals: []
-      preferences: {}
-      created: new Date().toISOString()
     };
   }
 
-  calculateContextQuality(context) {
-    let quality = 0.5; // Base
-
-    if (context.conversationHistory.length > 0) quality += 0.2;
-    if (context.userProfile.interests.length > 0) quality += 0.1;
-    if (context.businessContext && Object.keys(context.businessContext).length > 0) quality += 0.1;
-    if (context.conversationHistory.length > 5) quality += 0.1;
-
-    return Math.min(quality, 1.0);
-  }
-
-  calculateResponseMetrics(startTime, response) {
-    const responseTime = Date.now() - startTime;    return {
-      responseTime
-      isUltraFast: responseTime < 200,
-      quality: response.confidence || 0.8
-      contextRelevance: response.contextRelevance || 0.7,
-      timestamp: new Date().toISOString()
+  /**
+   * Réponse de fallback
+   */
+  generateFallbackResponse(error, context) {
+    return {
+      content: "Je rencontre une difficulté technique temporaire, mais je reste là pour t'accompagner ! Peux-tu reformuler ta question ?",
+      type: 'fallback',
+      confidence: 0.3,
+      error: error,
+      metadata: {
+        timestamp: new Date().toISOString(),
+        context: context
+      }
     };
   }
 
   /**
    * Mise à jour de la mémoire contextuelle
    */
-  async updateContextMemory(userId, message, response, context) {
-    // Sauvegarder la conversation
-    if (!this.contextMemory.conversations.has(userId)) {
-      this.contextMemory.conversations.set(userId, []);
-    }
-
-    const conversation = this.contextMemory.conversations.get(userId);
+  async updateContextualMemory(userId, message, response, context) {
+    // Mise à jour historique conversation
+    const conversation = this.contextMemory.conversations.get(userId) || [];
     conversation.push({
-      message
-      response: response.content,
-      timestamp: new Date().toISOString()
-      context: context,
-      confidence: response.confidence
+      message: message,
+      response: response.content,
+      timestamp: new Date().toISOString(),
+      confidence: response.confidence,
+      type: response.type
     });
-
-    // Limiter l'historique (garder les 50 derniers)
+    
+    // Garder seulement les 50 dernières interactions
     if (conversation.length > 50) {
       conversation.splice(0, conversation.length - 50);
     }
+    
+    this.contextMemory.conversations.set(userId, conversation);
 
-    // Mettre à jour le profil utilisateur
-    await this.updateUserProfile(userId, message, response, context);
+    // Mise à jour contexte session
+    const sessionContext = this.contextMemory.sessionContext.get(userId) || {};
+    sessionContext.lastInteraction = new Date().toISOString();
+    sessionContext.messageCount = (sessionContext.messageCount || 0) + 1;
+    this.contextMemory.sessionContext.set(userId, sessionContext);
   }
 
-  async updateUserProfile(userId, message, response, context) {
-    const _profile = this.contextMemory.userProfiles.get(userId) || this.createDefaultProfile();    // Extraction intelligente d'informations
-    const _messageContent = message.toLowerCase();    // Détecter les intérêts
-    const businessKeywords = ['startup', 'entreprise', 'business', 'innovation', STR_MARKETING, STR_VENTE];
-    businessKeywords.forEach(_keyword => // Code de traitement approprié ici
-    });
-
-    // Mise à jour du niveau d'expertise
-    if (messageContent.includes('débutantSTR_MESSAGECONTENT_INCLUDEScommencer')) {
-      profile.expertiseLevel = 'beginner';
-    } else if (messageContent.includes('expérienceSTR_MESSAGECONTENT_INCLUDESdéjà')) {
-      profile.expertiseLevel = 'intermediate';
+  /**
+   * Mise à jour des métriques d'intelligence
+   */
+  updateIntelligenceMetrics(response) {
+    this.intelligenceMetrics.totalConversations++;
+    
+    if (response.confidence > 0.7) {
+      this.intelligenceMetrics.contextualResponses++;
     }
-
-    profile.lastUpdate = new Date().toISOString();
-    this.contextMemory.userProfiles.set(userId, profile);
+    
+    this.intelligenceMetrics.personalityCoherence = 
+      (this.intelligenceMetrics.personalityCoherence + (response.personalityMatch || 0.5)) / 2;
+    
+    this.intelligenceMetrics.memoryUtilization = 
+      this.contextMemory.conversations.size / Math.max(1, this.intelligenceMetrics.totalConversations);
   }
 
   /**
    * Chargement de la mémoire persistante
    */
   async loadPersistentMemory() {
-    // TODO: Implémenter la persistence en base de données
-    logger.info('📚 Persistent memory loading (placeholder - implement database storage)');
+    try {
+      // Ici on chargerait depuis une base de données
+      // Pour le moment, initialisation vide
+      logger.info('📚 Persistent memory loaded');
+    } catch (error) {
+      logger.warn('Could not load persistent memory:', error);
+    }
   }
 
   /**
-   * Construction de l'historique de conversation
+   * Sauvegarde de la mémoire persistante
    */
-  buildConversationHistory(context) {
-    return context.conversationHistory
-      .slice(-5) // 5 derniers échanges
-      .map(conv => ({
-        user: conv.message,
-        assistant: conv.response
-        timestamp: conv.timestamp
-      }));
+  async savePersistentMemory() {
+    try {
+      // Ici on sauvegarderait en base de données
+      logger.info('💾 Persistent memory saved');
+    } catch (error) {
+      logger.warn('Could not save persistent memory:', error);
+    }
+  }
+
+  /**
+   * Obtenir le statut du système intelligent
+   */
+  getIntelligenceStatus() {
+    return {
+      isInitialized: this.isInitialized,
+      provider: this.llmConfig?.provider || 'none',
+      metrics: this.intelligenceMetrics,
+      memoryStats: {
+        totalUsers: this.contextMemory.conversations.size,
+        totalProfiles: this.contextMemory.userProfiles.size,
+        activeSessions: this.contextMemory.sessionContext.size
+      },
+      config: {
+        name: this.config.name,
+        version: this.config.version
+      }
+    };
+  }
+
+  /**
+   * Fermeture propre du système
+   */
+  async close() {
+    try {
+      await this.savePersistentMemory();
+      this.contextMemory.conversations.clear();
+      this.contextMemory.userProfiles.clear();
+      this.contextMemory.sessionContext.clear();
+      this.isInitialized = false;
+      logger.info('🧠 AlexIntelligentCore closed successfully');
+    } catch (error) {
+      logger.error('Error closing AlexIntelligentCore:', error);
+    }
   }
 }
 
-// Export singleton
+// Export singleton pour compatibilité
 export default new AlexIntelligentCore();

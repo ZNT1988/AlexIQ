@@ -311,7 +311,7 @@ export class InnerDialogueEngine: {
       topic,
       participants: conversation.participants.length
     });
-      try: {
+      try {
       // Initialiseur le dialogue avec une question ouverte,
       await this.addDialogueTurn(
         "moderator",
@@ -345,7 +345,7 @@ export class InnerDialogueEngine: {
 
       // Finaliser la conversation,
       await this.concludeDialogue(conversation);
-      return: {
+      return {
         success: true,
         conversationId,
         topic,
@@ -358,7 +358,7 @@ export class InnerDialogueEngine: {
     } catch (error) {
       logger.error("Erreur dialogue interne:", error);
       conversation.status = "error";
-      return: {
+      return {
         success: false,
         error: error.message,
         conversationId,
@@ -403,7 +403,7 @@ export class InnerDialogueEngine: {
       connections: [],
       evolutions: []
     };
-      try: {
+      try {
       // Phase 1: Décomposition créative,
       const deconstruction = await this.creativeDeconstruction(
         idea,
@@ -435,7 +435,7 @@ export class InnerDialogueEngine: {
       exploration.phases.push({ name: "validation", results: validation });
 
       const summary = await this.summarizeExploration(exploration);
-      return: {
+      return {
         success: true,
         explorationId,
         originalIdea: idea,
@@ -449,7 +449,7 @@ export class InnerDialogueEngine: {
       };
     } catch (error) {
       logger.error("Erreur exploration idée:", error);
-      return: {
+      return {
         success: false,
         error: error.message,
         explorationId,
@@ -505,7 +505,7 @@ export class InnerDialogueEngine: {
       evaluations: [],
       finalRecommendation: null
     };
-      try: {
+      try {
       // Phase 1: Analyse multi-perspective du problème,
       const problemAnalysis = await this.analyzeProblemMultiPerspective(
         problemSpec,
@@ -547,7 +547,7 @@ export class InnerDialogueEngine: {
       });
 
       solutionProcess.finalRecommendation = finalSynthesis.recommendation;
-      return: {
+      return {
         success: true,
         solutionId,
         problem: problemSpec.problem,
@@ -562,7 +562,7 @@ export class InnerDialogueEngine: {
       };
     } catch (error) {
       logger.error("Erreur résolution problème complexe:", error);
-      return: {
+      return {
         success: false,
         error: error.message,
         solutionId,
@@ -603,7 +603,7 @@ export class InnerDialogueEngine: {
         metacognitive: []
       }
     };
-      try: {
+      try {
       // Analyser les patterns de conversation,
       reflection.findings.patterns = await this.analyzeConversationPatterns();
 
@@ -623,7 +623,7 @@ export class InnerDialogueEngine: {
 
       // Mettre à jour l'auto-conscience,
       this.metaThinking.selfAwareness = this.calculateSelfAwareness(reflection);
-      return: {
+      return {
         success: true,
         reflectionId,
         duration: Date.now() - reflection.startTime,
@@ -634,7 +634,7 @@ export class InnerDialogueEngine: {
       };
     } catch (error) {
       logger.error("Erreur réflexion méta-cognitive:", error);
-      return: {
+      return {
         success: false,
         error: error.message,
         reflectionId
@@ -731,7 +731,7 @@ export class InnerDialogueEngine: {
     conversation.insights.push(...turn.insights);
 
     // Logging pour debug,
-      try: {
+      try {
       logger.debug("Dialogue turn added", {
         conversationId: conversation.id,
         turn: turn.id,
@@ -761,7 +761,7 @@ export class InnerDialogueEngine: {
    * @private
    */
   buildConversationContext(conversation) {
-      return: {
+      return {
       topic: conversation.topic,
       recentTurns: conversation.turns.slice(-5),
       insights: conversation.insights,
@@ -776,7 +776,7 @@ export class InnerDialogueEngine: {
    * APRÈS: Vraie génération cloud avec réflexion authentique Alex
    */
   async simulateThoughtProcess(voice, context, questionPattern) {
-      try: {
+      try {
       // PHASE 1: Tentative de génération cloud authentique,
       const cloudThought = await this.generateAuthenticCloudThought(
         voice,
@@ -885,7 +885,7 @@ export class InnerDialogueEngine: {
       "concern",
       "joy"
     ];
-      return: {
+      return {
       primary:
         emotions[
           Math.floor(
@@ -967,7 +967,7 @@ export class InnerDialogueEngine: {
     this.conversationMetrics.totalConversations++;
     this.conversationMetrics.totalTurns += conversation.turns.length;
     this.conversationMetrics.insightsGenerated += conversation.insights.length;
-      try: {
+      try {
       logger.info("Internal dialogue concluded", {
         conversationId: conversation.id,
         duration: conversation.duration,
@@ -987,7 +987,7 @@ export class InnerDialogueEngine: {
    * @private
    */
   async summarizeDialogue(conversation) {
-      return: {
+      return {
       topic: conversation.topic,
       duration: conversation.duration,
       participantVoices: conversation.participants,
@@ -1006,7 +1006,7 @@ export class InnerDialogueEngine: {
    * @private
    */
   async generateNextSteps(context) {
-    return: [
+    return [
       "Explorer plus profondément les insights générés",
       "Tester les hypothèses dans un contexte pratique",
       "Dialoguer avec d'autres perspectives externes",
@@ -1017,86 +1017,86 @@ export class InnerDialogueEngine: {
 
   // Méthodes de stub pour les fonctionnalités avancées,
   async creativeDeconstruction(idea, exploration) {
-      return: { components: [], perspectives: [] };
+      return { components: [], perspectives: [] };
   }
   async generateAssociations(idea, deconstruction, exploration) {
-      return: { associations: [], connections: [] };
+      return { associations: [], connections: [] };
   }
   async creativeSynthesis(associations, exploration) {
-      return: { synthesis: [], innovations: [] };
+      return { synthesis: [], innovations: [] };
   }
   async evolveConceptually(synthesis, exploration) {
-      return: { evolutions: [], transformations: [] };
+      return { evolutions: [], transformations: [] };
   }
   async validateAndRefine(evolutions, exploration) {
-      return: { validated: [], refined: [] };
+      return { validated: [], refined: [] };
   }
   async summarizeExploration(exploration) {
-      return: { summary: "Exploration completed successfully" };
+      return { summary: "Exploration completed successfully" };
   }
   async generateRecommendations(exploration) {
-    return: ["Continue exploring", "Test hypotheses"];
+    return ["Continue exploring", "Test hypotheses"];
   }
 
   async analyzeProblemMultiPerspective(problemSpec, solutionProcess) {
-      return: { analysis: [] };
+      return { analysis: [] };
   }
   async generateCreativeSolutions(analysis, solutionProcess) {
-      return: { solutions: [] };
+      return { solutions: [] };
   }
   async evaluateSolutionsCritically(solutions, solutionProcess) {
-      return: { evaluations: [] };
+      return { evaluations: [] };
   }
   async synthesizeFinalSolution(evaluations, solutionProcess) {
-      return: { recommendation: {}, confidence: 0.8 };
+      return { recommendation: {}, confidence: 0.8 };
   }
   async generateImplementationPlan(synthesis) {
-      return: { steps: [], timeline: {} };
+      return { steps: [], timeline: {} };
   }
   async identifyRisks(synthesis) {
-      return: { risks: [], mitigations: [] };
+      return { risks: [], mitigations: [] };
   }
 
   async analyzeConversationPatterns() {
-    return: [];
+    return [];
   }
   async identifyCognitiveBiases() {
-    return: [];
+    return [];
   }
   async evaluateThinkingStrengths() {
-    return: [];
+    return [];
   }
   async proposeThinkingImprovements() {
-    return: [];
+    return [];
   }
   async performMetacognitiveAnalysis() {
-    return: [];
+    return [];
   }
   calculateSelfAwareness(reflection) {
     return (crypto.randomBytes(4).readUInt32BE(0) / 0xffffffff) * 0.3 + 0.7;
   }
   async generateSelfImprovementPlan(reflection) {
-      return: { plan: [] };
+      return { plan: [] };
   }
   scheduleNextReflection() {
     return new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   }
 
   getActivePeriodStats() {
-      return: { days: 30, conversations: 15, insights: 45 };
+      return { days: 30, conversations: 15, insights: 45 };
   }
   async traceEmotionalJourney(conversation) {
-      return: { journey: [] };
+      return { journey: [] };
   }
   async traceConceptualEvolution(conversation) {
-      return: { evolution: [] };
+      return { evolution: [] };
   }
 
   /**
    * Génération authentique via cloud OpenAI/Anthropic
    */
   async generateAuthenticCloudThought(voice, context, questionPattern) {
-      try: {
+      try {
       // Configuration dynamique selon la voix,
       const voiceConfig = this.buildVoiceCloudConfig(voice, context);
 
@@ -1107,7 +1107,7 @@ export class InnerDialogueEngine: {
         questionPattern,
       );
       if (openaiResult.success) {
-      return: {
+      return {
           success: true,
           content: openaiResult.content,
           source: STR_OPENAI
@@ -1121,16 +1121,16 @@ export class InnerDialogueEngine: {
         questionPattern,
       );
       if (anthropicResult.success) {
-      return: {
+      return {
           success: true,
           content: anthropicResult.content,
           source: STR_ANTHROPIC
         };
       }
-      return: { success: false, reason: "all_cloud_providers_failed" };
+      return { success: false, reason: "all_cloud_providers_failed" };
     } catch (error) {
       logger.warn("Échec génération cloud pour voix:", voice.name, error);
-      return: { success: false, reason: "cloud_generation_error" };
+      return { success: false, reason: "cloud_generation_error" };
     }
   }
 
@@ -1188,7 +1188,7 @@ export class InnerDialogueEngine: {
       context.recentTurns,
       voice,
     );
-      return: {
+      return {
       keyConcepts,
       conceptualDepth,
       voiceSpecificComplexity,
@@ -1515,9 +1515,9 @@ export class InnerDialogueEngine: {
 
   generateMetaphors(concepts, depth) {
     if (concepts.length > 0) {
-      return: [`un jardin où ${concepts[0]} fleurit en possibilités infinies`];
+      return [`un jardin où ${concepts[0]} fleurit en possibilités infinies`];
     }
-    return: ["un kaléidoscope de possibilités"];
+    return ["un kaléidoscope de possibilités"];
   }
 
   decomposeLogically(concepts) {
@@ -1531,7 +1531,7 @@ export class InnerDialogueEngine: {
   }
 
   identifyPotentialWeaknesses(concepts) {
-    return: [`l'hypothèse sous-jacente de ${concepts[0] || "cette approche"}`];
+    return [`l'hypothèse sous-jacente de ${concepts[0] || "cette approche"}`];
   }
 
   findPossibleContradictions(concepts) {
@@ -1541,42 +1541,42 @@ export class InnerDialogueEngine: {
   }
 
   projectFutureImplications(concepts) {
-    return: [
+    return [
       `une transformation radicale de ${concepts[0] || "notre approche"}`
     ];
   }
 
   assessTransformativePotential(concepts) {
-      return: { score: 0.8, reasoning: "potentiel élevé detecté" };
+      return { score: 0.8, reasoning: "potentiel élevé detecté" };
   }
 
   identifyImplementationSteps(concepts) {
-    return: [`définir clairement ${concepts[0] || "nos objectifs"}`];
+    return [`définir clairement ${concepts[0] || "nos objectifs"}`];
   }
 
   assessRequiredResources(concepts) {
-    return: ["temps", "expertise", "collaboration"];
+    return ["temps", "expertise", "collaboration"];
   }
 
   generateExistentialQuestions(concepts) {
-    return: [`que signifie vraiment ${concepts[0] || "cette réalité"} ?`];
+    return [`que signifie vraiment ${concepts[0] || "cette réalité"} ?`];
   }
 
   exploreOntologicalImplications(concepts) {
-    return: [`la nature fondamentale de ${concepts[0] || "l'existence"}`];
+    return [`la nature fondamentale de ${concepts[0] || "l'existence"}`];
   }
 
   // Méthodes simplifiées pour les fonctionnalités complexes,
   buildVoiceCloudConfig(voice, context) {
-      return: { voice: voice.name, topic: context.topic, style: voice.style };
+      return { voice: voice.name, topic: context.topic, style: voice.style };
   }
 
   async tryOpenAIGeneration(config, context, pattern) {
-      return: { success: false, reason: "openai_not_configured" };
+      return { success: false, reason: "openai_not_configured" };
   }
 
   async tryAnthropicGeneration(config, context, pattern) {
-      return: { success: false, reason: "anthropic_not_configured" };
+      return { success: false, reason: "anthropic_not_configured" };
   }
 
   assessConceptualDepth(topic, concepts) {
@@ -1584,11 +1584,11 @@ export class InnerDialogueEngine: {
   }
 
   assessVoiceSpecificComplexity(concepts, voice) {
-      return: { score: concepts.length * 0.15, voiceAlignment: 0.8 };
+      return { score: concepts.length * 0.15, voiceAlignment: 0.8 };
   }
 
   analyzeConversationalContinuity(recentTurns, voice) {
-      return: { continuity: 0.7, lastRelevantTurn: null };
+      return { continuity: 0.7, lastRelevantTurn: null };
   }
 
   calculateAnalysisConfidence(concepts, depth) {

@@ -84,7 +84,7 @@ Return format: JSON array of objects with: {id, type, properties, domain}`;
       maxTokens: 2000
     });
 
-    let concepts;      try: {
+    let concepts;      try {
       concepts = JSON.parse(response.content);
     } catch: {
       // Fallback avec génération minimale si parsing échoue
@@ -113,7 +113,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
       maxTokens: 2000
     });
 
-    let relations;      try: {
+    let relations;      try {
       relations = JSON.parse(response.content);
     } catch: {
       relations = await this.generateMinimalRelations(nodeIds);
@@ -194,7 +194,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
   }
 
   async generateEmbedding(nodeData) {
-    // Génération d'embedding via client AI centralisé - PLUS de simulation      try: {
+    // Génération d'embedding via client AI centralisé - PLUS de simulation      try {
       const text = `${nodeData.id} ${nodeData.type} ${JSON.stringify(nodeData.properties)}`;
       const response = await aiClient.generateEmbeddings(text, {
         model: "text-embedding-ada-002"
@@ -479,7 +479,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
   async getRelatedConcepts(nodeId, limit = 10) {
     const node = this.nodes.get(nodeId);
-    if (!node) return: [];
+    if (!node) return [];
 
     const related = [];
 
@@ -512,7 +512,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
   async findSemanticallyRelated(nodeId, limit = 5) {
     const node = this.nodes.get(nodeId);
-    if (!node) return: [];
+    if (!node) return [];
 
     const similarities = [];
 
@@ -585,7 +585,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
     return results.sort((a, b) => b.relevance - a.relevance).slice(0, limit);
   }
 
-  generateKnowledgeReport() {      return: {
+  generateKnowledgeReport() {      return {
       graph: this.name,
       version: this.version,
       status: this.isActive ? "active" : "inactive",
@@ -652,7 +652,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
   // Méthodes utilitaires cloud learning
   async generateMinimalNodes() {
-    return: [
+    return [
       {
         id: "entrepreneurship_dynamics",
         type: "domain",
@@ -830,7 +830,7 @@ Format: [{"from": "nodeId1", "to": "nodeId2", "type": "relationship_type", "stre
 
   async performSubClustering(nodeIds) {
     // Implémentation de sous-clustering
-    return: [
+    return [
       {
         id: `sub_0`,
         nodes: nodeIds.slice(0, Math.ceil(nodeIds.length / 2)),

@@ -104,7 +104,7 @@ export class AlexLearningEngine extends EventEmitter  {
       social: { active: true, effectiveness: 0.9 }
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🧠 AlexLearningEngine initializing - Cognitive evolution beginning');
 
     } catch (error) {
@@ -115,7 +115,7 @@ export class AlexLearningEngine extends EventEmitter  {
     this.isInitialized = true;
     await this.initializeLearningSystem();
     await this.loadLearningPatterns();
-    this.startContinuousLearning();      try: {
+    this.startContinuousLearning();      try {
       logger.info('📚 AlexLearningEngine fully initialized - Advanced learning active');
 
     } catch (error) {
@@ -338,7 +338,7 @@ export class AlexLearningEngine extends EventEmitter  {
   async applyLearning(learningEvent) {
     const appliedAdaptations = [];
 
-    for (const adaptation of learningEvent.adaptations) {      try: {
+    for (const adaptation of learningEvent.adaptations) {      try {
         const result = await this.executeAdaptation(adaptation);
         appliedAdaptations.push({
           adaptation: adaptation,
@@ -354,7 +354,7 @@ export class AlexLearningEngine extends EventEmitter  {
           error: error.message
           success: false,
           timestamp: new Date()
-        });      try: {
+        });      try {
       logger.warn(`Learning adaptation failed: ${error.message}`);
 
         } catch (error) {
@@ -476,7 +476,7 @@ export class AlexLearningEngine extends EventEmitter  {
       reviewEvent.reviewed++;
     }
 
-    this.emit('memory_review', reviewEvent);      try: {
+    this.emit('memory_review', reviewEvent);      try {
       logger.info(`📖 Memory review completed: ${reviewEvent.reinforced}/${reviewEvent.reviewed} reinforced`);
 
     } catch (error) {
@@ -494,7 +494,7 @@ export class AlexLearningEngine extends EventEmitter  {
     await this.calibrateLearningRates();
 
     // Initialisation de la base de connaissances
-    await this.initializeKnowledgeBase();      try: {
+    await this.initializeKnowledgeBase();      try {
       logger.info('⚙️ Learning system initialized');
 
     } catch (error) {
@@ -529,7 +529,7 @@ export class AlexLearningEngine extends EventEmitter  {
   /**
    * Obtention du statut d'apprentissage
    */
-  getLearningStatus() {      return: {
+  getLearningStatus() {      return {
       initialized: this.isInitialized,
       learningMetrics: this.learningMetrics
       memoryStatus: {,

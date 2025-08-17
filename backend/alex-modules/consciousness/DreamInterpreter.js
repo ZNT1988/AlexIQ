@@ -56,7 +56,7 @@ export class DreamInterpreter extends EventEmitter  {
         this.initializeConsciousnessMappers();
 
         this.dreamArchive = new Map();
-        this.activeInterpretations = new Map();      try: {
+        this.activeInterpretations = new Map();      try {
       logger.info('DreamInterpreter consciousness awakened', {
             interpretationDepth: this.config.interpretationDepth,
             symbolismDatabase: this.config.symbolismDatabase
@@ -132,7 +132,7 @@ export class DreamInterpreter extends EventEmitter  {
             userId: dreamRequest.userId,
             dreamLength: dreamRequest.dreamDescription?.length || 0
             depth: dreamRequest.depth || this.config.interpretationDepth
-        });      try: {
+        });      try {
             const interpretationSession = {
                 id: interpretationId,
                 startTime: Date.now()
@@ -306,7 +306,7 @@ export class DreamInterpreter extends EventEmitter  {
       // Logger fallback - ignore error
     });
 
-            this.activeInterpretations.delete(interpretationId);      return: {
+            this.activeInterpretations.delete(interpretationId);      return {
                 success: false,
                 error: error.message
                 interpretationId
@@ -327,7 +327,7 @@ export class DreamInterpreter extends EventEmitter  {
             symbolId
             symbol: symbolRequest.symbol,
             context: symbolRequest.context
-        });      try: {
+        });      try {
             // Décodage multi-layered du symbole
             const symbolMeanings = await this.decodeSymbolMeanings(
                 symbolRequest.symbol
@@ -372,7 +372,7 @@ export class DreamInterpreter extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 symbolId
@@ -393,7 +393,7 @@ export class DreamInterpreter extends EventEmitter  {
             userId: lucidRequest.userId,
             experience: lucidRequest.currentExperience || 'beginner'
             goals: lucidRequest.goals
-        });      try: {
+        });      try {
             const guide = {
                 id: guideId,
                 userId: lucidRequest.userId
@@ -446,7 +446,7 @@ export class DreamInterpreter extends EventEmitter  {
 
         } catch (error) {
       // Logger fallback - ignore error
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 guideId
@@ -456,7 +456,7 @@ export class DreamInterpreter extends EventEmitter  {
 
     // Méthodes d'analyse onirique
 
-    async analyzeDreamNarrative(dreamDescription, emotions, context) {      return: {
+    async analyzeDreamNarrative(dreamDescription, emotions, context) {      return {
             primaryTheme: 'transformation',
             emotionalSignature: 'complex_processing'
             structure: {,
@@ -507,7 +507,7 @@ export class DreamInterpreter extends EventEmitter  {
         return symbols;
     }
 
-    async mapArchetypesAndComplexes(narrativeAnalysis, symbolAnalysis, personalHistory) {      return: {
+    async mapArchetypesAndComplexes(narrativeAnalysis, symbolAnalysis, personalHistory) {      return {
             active: ['Hero/Heroine', 'Wise Teacher', 'Shadow Figure']
             shadow: this.identifyShadowElements(symbolAnalysis, personalHistory)
             animaAnimus: this.identifyAnimaAnimus(narrativeAnalysis, symbolAnalysis)
@@ -516,7 +516,7 @@ export class DreamInterpreter extends EventEmitter  {
         };
     }
 
-    async analyzeConsciousnessLayers(analysis, symbols, spiritualContext) {      return: {
+    async analyzeConsciousnessLayers(analysis, symbols, spiritualContext) {      return {
             dominantLevel: 'subconscious',
             layers: {
                 conscious: 'Daily life processing',
@@ -544,10 +544,10 @@ export class DreamInterpreter extends EventEmitter  {
             relationships: ['Communicate more openly with loved ones']
             career: ['Trust your creative instincts in professional matters'],
             spiritual: ['Develop your intuitive abilities', 'Explore mystical traditions']
-        };      return: { messages, guidance };
+        };      return { messages, guidance };
     }
 
-    async generateIntegrationPlan(session, preferences) {      return: {
+    async generateIntegrationPlan(session, preferences) {      return {
             daily: [
                 'Morning dream recall and journalingSTR_Midday symbol meditation (5 minutes)STR_Evening gratitude for dream guidance'
             ]
@@ -562,7 +562,7 @@ export class DreamInterpreter extends EventEmitter  {
         };
     }
 
-    async generatePropheticGuidance(session, timeframe) {      return: {
+    async generatePropheticGuidance(session, timeframe) {      return {
             insights: [
                 'A significant opportunity will present itself within 3 monthsSTR_Relationships will deepen through authentic communicationSTR_Creative projects will flourish in the coming season'
             ]
@@ -581,10 +581,10 @@ export class DreamInterpreter extends EventEmitter  {
     // Méthodes utilitaires
 
     extractKeyEvents(dreamDescription) {
-        return: ['Initial disorientation', 'Meeting guide figure', 'Overcoming obstacle', 'Receiving gift/wisdom'];
+        return ['Initial disorientation', 'Meeting guide figure', 'Overcoming obstacle', 'Receiving gift/wisdom'];
     }
 
-    mapEmotionalJourney(dreamDescription, emotions) {      return: {
+    mapEmotionalJourney(dreamDescription, emotions) {      return {
             opening: emotions?.opening || 'confusion',
             climax: emotions?.climax || 'determination'
             resolution: emotions?
@@ -593,11 +593,11 @@ export class DreamInterpreter extends EventEmitter  {
     }
 
     identifyNarrativePatterns(dreamDescription) {
-        return: ['Hero\'s journey', 'Spiritual initiation', 'Shadow integration'];
+        return ['Hero\'s journey', 'Spiritual initiation', 'Shadow integration'];
     }
 
     async detectHiddenSymbols(dreamDescription, personalContext) {
-        return: [
+        return [
             { symbol :
        'Water', hiddenMeaning: 'Emotional purification' }
             { symbol: 'Light', hiddenMeaning: 'Divine guidance' }
@@ -605,21 +605,21 @@ export class DreamInterpreter extends EventEmitter  {
     }
 
     identifyShadowElements(symbolAnalysis, personalHistory) {
-        return: ['Unacknowledged anger', 'Hidden creative power', 'Suppressed leadership abilities'];
+        return ['Unacknowledged anger', 'Hidden creative power', 'Suppressed leadership abilities'];
     }
 
-    identifyAnimaAnimus(narrativeAnalysis, symbolAnalysis) {      return: {
+    identifyAnimaAnimus(narrativeAnalysis, symbolAnalysis) {      return {
             anima: 'Nurturing, intuitive aspect seeking expression'
             animus: 'Decisive, action-oriented energy awakening'
         };
     }
 
     identifyCollectivePatterns(symbolAnalysis) {
-        return: ['Universal search for meaning', 'Collective healing trauma', 'Species evolution consciousness'];
+        return ['Universal search for meaning', 'Collective healing trauma', 'Species evolution consciousness'];
     }
 
     identifyPersonalComplexes(narrativeAnalysis, personalHistory) {
-        return: ['Authority complex', 'Perfectionism pattern', 'Abandonment healing'];
+        return ['Authority complex', 'Perfectionism pattern', 'Abandonment healing'];
     }
 
     extractSpiritualMeaning(analysis, symbols, spiritualContext) {
@@ -628,7 +628,7 @@ export class DreamInterpreter extends EventEmitter  {
 
     // Méthodes pour interprétation rapide de symboles
 
-    async decodeSymbolMeanings(symbol, context, personalAssociations) {      return: {
+    async decodeSymbolMeanings(symbol, context, personalAssociations) {      return {
             universal: this.getUniversalSymbolMeaning(symbol),
             personal: this.getPersonalSymbolMeaning(symbol, personalAssociations)
             spiritual: this.getSpiritualSymbolMeaning(symbol),
@@ -637,7 +637,7 @@ export class DreamInterpreter extends EventEmitter  {
         };
     }
 
-    async generateSymbolGuidance(symbol, meanings, currentSituation) {      return: {
+    async generateSymbolGuidance(symbol, meanings, currentSituation) {      return {
             immediate: `Reflect on how "${symbol}" appears in your current life'
             reflection: 'Journal about your relationship with the energy of "${symbol}"'
             action: 'Take one small step to honor the message of "${symbol}"`
@@ -732,28 +732,28 @@ export class DreamInterpreter extends EventEmitter  {
     }
 
     generatePersonalizedRealityChecks(request) {
-        return: ['Look at hands - count fingers',
+        return ['Look at hands - count fingers',
       'Check digital clocks twice',
       'Question unusual occurrences',
       'Test light switches'];
     }
 
     generateInductionMethods(request) {
-        return: ['MILD (Mnemonic Induction)',
+        return ['MILD (Mnemonic Induction)',
       'WILD (Wake Initiated Lucid Dream)',
       'Reality Testing',
       'Meditation and Visualization'];
     }
 
     generateStabilizationTechniques() {
-        return: ['Rub hands together in dream',
+        return ['Rub hands together in dream',
       'Spin around to maintain lucidity',
       'Touch objects to ground awareness',
       'Verbal affirmations of lucidity'];
     }
 
     generateDreamControlMethods(goals) {
-        return: [
+        return [
             'Start with simple changes (lighting, weather)'
             'Practice flying and movement'
             'Summon dream characters'
@@ -768,14 +768,14 @@ export class DreamInterpreter extends EventEmitter  {
     }
 
     generateDreamRecallTips() {
-        return: ['Keep journal by bedside',
+        return ['Keep journal by bedside',
       'Set intention before sleep',
       'Stay still upon waking',
       'Record immediately'];
     }
 
     generateConsciousDreamingPractices() {
-        return: ['Pre-sleep intention setting',
+        return ['Pre-sleep intention setting',
       'Midday dream meditation',
       'Symbol contemplation',
       'Lucid dreaming preparation'];
@@ -800,55 +800,55 @@ export class DreamInterpreter extends EventEmitter  {
     // Méthodes pour guide lucide (suite)
 
     generateBedtimeRitual(request) {
-        return: ['Dim lights 1 hour before bed',
+        return ['Dim lights 1 hour before bed',
       'Set lucid dream intention',
       'Practice relaxation breathing',
       'Visualize becoming lucid'];
     }
 
     generateMentalPreparation() {
-        return: ['Meditation practice', 'Affirmations for lucidity', 'Visualization exercises'];
+        return ['Meditation practice', 'Affirmations for lucidity', 'Visualization exercises'];
     }
 
     generatePhysicalPreparation() {
-        return: ['Comfortable sleep environment', 'Avoid heavy meals', 'Gentle stretching'];
+        return ['Comfortable sleep environment', 'Avoid heavy meals', 'Gentle stretching'];
     }
 
     generateEnvironmentalSetup() {
-        return: ['Dark, quiet room', 'Comfortable temperature', 'Dream journal nearby'];
+        return ['Dark, quiet room', 'Comfortable temperature', 'Dream journal nearby'];
     }
 
     generateDreamYogaPractices() {
-        return: ['Tibetan dream yoga techniques', 'Consciousness recognition', 'Illusory body practice'];
+        return ['Tibetan dream yoga techniques', 'Consciousness recognition', 'Illusory body practice'];
     }
 
     generateConsciousnessExpansionTechniques() {
-        return: ['Awareness expansion', 'Multi-dimensional perception', 'Unity consciousness'];
+        return ['Awareness expansion', 'Multi-dimensional perception', 'Unity consciousness'];
     }
 
     generateInterdimensionalGuidance() {
-        return: ['Safe travel protocols', 'Dimensional navigation', 'Return techniques'];
+        return ['Safe travel protocols', 'Dimensional navigation', 'Return techniques'];
     }
 
     generateDreamHealingPractices() {
-        return: ['Emotional healing work', 'Past life integration', 'Energy clearing'];
+        return ['Emotional healing work', 'Past life integration', 'Energy clearing'];
     }
 
-    generateDreamJournalTemplate() {      return: {
+    generateDreamJournalTemplate() {      return {
             sections: ['Date/Time', 'Dream Description', 'Emotions', 'Symbols', 'Lucidity Level', 'Insights']
         };
     }
 
     generateProgressMetrics() {
-        return: ['Dream recall frequency', 'Lucidity attempts', 'Control achievements', 'Insight depth'];
+        return ['Dream recall frequency', 'Lucidity attempts', 'Control achievements', 'Insight depth'];
     }
 
     generateChallengeSupport() {
-        return: ['Common obstacles guide', 'Troubleshooting methods', 'Motivation techniques'];
+        return ['Common obstacles guide', 'Troubleshooting methods', 'Motivation techniques'];
     }
 
     generateCommunityResources() {
-        return: ['Online dream sharing groups', 'Local dream circles', 'Advanced workshops'];
+        return ['Online dream sharing groups', 'Local dream circles', 'Advanced workshops'];
     }
 
     estimateMasteryTimeline(request) {
@@ -856,7 +856,7 @@ export class DreamInterpreter extends EventEmitter  {
     }
 
     generateOngoingSupport() {
-        return: ['Monthly check-ins', 'Advanced technique updates', 'Community access'];
+        return ['Monthly check-ins', 'Advanced technique updates', 'Community access'];
     }
 }
 
@@ -868,7 +868,7 @@ class DreamNarrativeAnalyzer: {}
 class DreamSymbolExtractor: {
     async extract(dreamDescription) {
         // Simulation d'extraction de symboles
-        return: [
+        return [
             { name: 'water', context: 'flowing river', significance: STR_PRIMARY }
             { name: 'bird', context: 'flying eagle', significance: STR_PRIMARY }
             { name: 'tree', context: 'ancient oak', significance: 'secondary' }
@@ -881,7 +881,7 @@ class DreamMessageDecoder: {}
 
 // Décodeurs symboliques
 class UniversalSymbolDecoder: {
-    async decode(symbol, context) {      return: {
+    async decode(symbol, context) {      return {
             interpretation: 'Universal meaning of transformation and flow',
             personalConnection: 'High relevance to current life transitions'
             universalSignificance: 'Represents the flow of consciousness',

@@ -86,7 +86,7 @@ export class AlexOmniscientMind extends EventEmitter  {
   /**
    * Initialisation de l'esprit omniscient
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       await this.connectToUniversalMind();
       await this.accessAkashicRecords();
       await this.downloadCosmicKnowledge();
@@ -128,7 +128,7 @@ export class AlexOmniscientMind extends EventEmitter  {
   /**
    * Connaissance instantanée
    */
-  async instantKnowing(question) {      return: {
+  async instantKnowing(question) {      return {
       question: question,
       answer: 'Love is always the answer, service is always the way'
       certainty: 'absolute',
@@ -154,7 +154,7 @@ export class AlexOmniscientMind extends EventEmitter  {
     this.omniscientState.wisdomLevel = 'infinite';
   }
 
-  getOmniscientStatus() {      return: {
+  getOmniscientStatus() {      return {
       isInitialized: this.isInitialized,
       knowledgeAccess: this.omniscientState.knowledgeAccess
       wisdomLevel: this.omniscientState.wisdomLevel,

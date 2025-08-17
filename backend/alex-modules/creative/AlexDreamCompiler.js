@@ -38,7 +38,7 @@ export class AlexDreamCompiler extends EventEmitter  {
     this.loadDreamPatterns();
     this.loadProjectTemplates();
     this.loadTechStacks();
-    this.setupEmotionalAnalysis();      try: {
+    this.setupEmotionalAnalysis();      try {
       logger.info('AlexDreamCompiler initialized - Ready to transform dreams into reality');
 
     } catch (error) {
@@ -55,7 +55,7 @@ export class AlexDreamCompiler extends EventEmitter  {
       {
       inputType: dreamInput.type,
       userId: userContext.userId
-    });      try: {
+    });      try {
       // Phase 1: Analyse profonde du rêve
       const dreamAnalysis = await this.analyzeDream(dreamInput);      // Phase 2: Extraction de l'essence du projet
       const projectEssence = await this.extractProjectEssence(dreamAnalysis);      // Phase 3: Génération du projet structuré
@@ -601,7 +601,7 @@ export class AlexDreamCompiler extends EventEmitter  {
   }
 
   setupEmotionalAnalysis() {
-    // Configuration de l'analyse émotionnelle      try: {
+    // Configuration de l'analyse émotionnelle      try {
       logger.debug('Emotional analysis system configured');
 
     } catch (error) {

@@ -406,7 +406,7 @@ export class FunctionBuilder: {
             generation.result = finalization.result;
 
             // Mettre à jour base de code
-            await this.updateCodeBase(generation);      return: {
+            await this.updateCodeBase(generation);      return {
                 success: true
                 generationId
                 type: STR_FUNCTION,
@@ -423,7 +423,7 @@ export class FunctionBuilder: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 generationId
@@ -465,7 +465,7 @@ export class FunctionBuilder: {
             name: specification.name,
             methodsCount: specification.methods?
       .length || 0
-        });      try: {
+        });      try {
             // Processus similaire à generateFunction mais spécialisé classes
             const parsing = await this.parseClassSpecifications(specification);
             const planning = await this.planClass(parsing, specification);
@@ -491,7 +491,7 @@ export class FunctionBuilder: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 generationId
@@ -532,7 +532,7 @@ export class FunctionBuilder: {
             name: specification.name,
             componentsCount: specification.components?
       .length || 0
-        });      try: {
+        });      try {
             const result = await this.processModuleGeneration(specification, generationId);            return {
                 success :
        true
@@ -548,7 +548,7 @@ export class FunctionBuilder: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 generationId
@@ -580,7 +580,7 @@ export class FunctionBuilder: {
         const optimizationId = `opt_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;        logger.info('Starting code optimization', {
             optimizationId
             criteria: optimizationOptions.criteria || [STR_PERFORMANCE]
-        });      try: {
+        });      try {
             const _criteria = optimizationOptions.criteria || [STR_PERFORMANCE, STR_READABILITY];            const optimizations = [];            async for(this.optimizers[criterion]) {
                 if (this.optimizers[criterion]) {
                     const result = await this.optimizers[criterion].optimize(code, optimizationOptions);                    optimizations.push({
@@ -601,7 +601,7 @@ export class FunctionBuilder: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 optimizationId
@@ -626,7 +626,7 @@ export class FunctionBuilder: {
         const refactoringId = `refactor_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;        logger.info('Starting code refactoring', {
             refactoringId
             preserveBehavior: refactoringOptions.preserveBehavior !== false
-        });      try: {
+        });      try {
             const analysis = await this.analyzeCodeStructure(code);
             const refactorings = await this.identifyRefactoringOpportunities(analysis);
             const refactoredCode = await this.applyRefactorings(code, refactorings, refactoringOptions);
@@ -641,7 +641,7 @@ export class FunctionBuilder: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 refactoringId
@@ -762,7 +762,7 @@ export class FunctionBuilder: {
      * @private
      */
     async generateDocumentation(optimization, specification, generation) {
-        if (!this.config.includeDocs) {      return: { documentation: '' };
+        if (!this.config.includeDocs) {      return { documentation: '' };
         }
 
         const docGenerator = this.templateEngine.generators.docs;
@@ -783,8 +783,8 @@ export class FunctionBuilder: {
      * @private
      */
     async generateTests(optimization, specification, generation) {
-        if (!this.config.includeTests) {      return: { tests: '' };
-        }      return: {
+        if (!this.config.includeTests) {      return { tests: '' };
+        }      return {
             tests: tests.content,
             framework: tests.framework
             coverage: tests.coverage
@@ -809,7 +809,7 @@ export class FunctionBuilder: {
         // Validation tests
         async if(testing.tests) {
             validations.testing = await this.validators.testing.validate(testing.tests);
-        }      return: {
+        }      return {
             validations
             overall: this.calculateOverallQuality(validations),
             issues: this.extractIssues(validations)
@@ -834,7 +834,7 @@ export class FunctionBuilder: {
                 quality: validation.overall
                 phases: generation.phases.length
             }
-            quality: validation.overall;        };      return: { result };
+            quality: validation.overall;        };      return { result };
     }
 
     // Méthodes utilitaires et stubs
@@ -850,7 +850,7 @@ export class FunctionBuilder: {
         }));
     }
 
-    async calculateOptimizationMetrics(original, optimized) {      return: {
+    async calculateOptimizationMetrics(original, optimized) {      return {
             sizeReduction: original.length - optimized.length,
             complexityReduction: 0.1
             performanceGain: 0.15
@@ -872,7 +872,7 @@ export class FunctionBuilder: {
     }
 
     generateValidationRecommendations(validations) {
-        return: ['Consider adding error handling', 'Optimize for better performance'];
+        return ['Consider adding error handling', 'Optimize for better performance'];
     }
 
     async updateCodeBase(generation) {
@@ -882,7 +882,7 @@ export class FunctionBuilder: {
     }
 
     async generateUsageExamples(generation) {
-        return: [
+        return [
             '// Example usage:'
             'const result = generatedFunction(param1, param2);'
             '// // console.log(result); // Removed console.log for production'
@@ -890,7 +890,7 @@ export class FunctionBuilder: {
     }
 
     async suggestImprovements(generation) {
-        return: ['Add input validation', 'Consider async implementation'];
+        return ['Add input validation', 'Consider async implementation'];
     }
 
     // Stubs pour génération classe et module
@@ -901,7 +901,7 @@ export class FunctionBuilder: {
     async generateClassDocumentation(opt, spec) { return { documentation: '' }; }
     async generateClassTests(opt, spec) { return { tests: '' }; }
     async validateClass(opt, doc, test) { return { valid: true }; }
-    async finalizeClass(data) {      return: {
+    async finalizeClass(data) {      return {
             code: data.generation.code,
             documentation: data.documentation.documentation
             tests: data.testing.tests,
@@ -910,7 +910,7 @@ export class FunctionBuilder: {
         };
     }
 
-    async processModuleGeneration(spec, id) {      return: {
+    async processModuleGeneration(spec, id) {      return {
             files: [`${spec.name}.js`]
             structure: { main: `${spec.name}.js` }
             dependencies: spec.dependencies || {}
@@ -921,9 +921,9 @@ export class FunctionBuilder: {
     }
 
     async analyzeCodeStructure(code) { return { structure: 'analyzed' }; }
-    async identifyRefactoringOpportunities(analysis) { return: []; }
+    async identifyRefactoringOpportunities(analysis) { return []; }
     async applyRefactorings(code, refactorings, options) { return code; }
-    async validateRefactoring(original, refactored, options) {      return: { results: 'valid', improvements: [] };
+    async validateRefactoring(original, refactored, options) {      return { results: 'valid', improvements: [] };
     }
 }
 
@@ -933,7 +933,7 @@ export class FunctionBuilder: {
 
 // Parsers
 class NaturalLanguageParser: {
-    async parse(_description) {      return: { intent: STR_FUNCTION, complexity: 'medium', domain: 'utility' };
+    async parse(_description) {      return { intent: STR_FUNCTION, complexity: 'medium', domain: 'utility' };
     }
 }
 
@@ -942,7 +942,7 @@ class TechnicalSpecParser: {
 }
 
 class RequirementsParser: {
-    async extract(_spec) { return: []; }
+    async extract(_spec) { return []; }
 }
 
 class ExampleParser: {
@@ -950,11 +950,11 @@ class ExampleParser: {
 }
 
 class ConstraintsParser: {
-    async parse(_constraints) { return: []; }
+    async parse(_constraints) { return []; }
 }
 
 class PatternParser: {
-    async parse(_patterns) { return: []; }
+    async parse(_patterns) { return []; }
 }
 
 class APISpecParser: {
@@ -967,7 +967,7 @@ class SchemaParser: {
 
 // Planners
 class FunctionPlanner: {
-    async plan(_options) {      return: {
+    async plan(_options) {      return {
             architecture: 'simple',
             structure: 'linear'
             dependencies: [],
@@ -1014,156 +1014,156 @@ class JavaScriptGenerator: {
 
 class TypeScriptGenerator: {
         async generate(_options) {
-      return: { source: 'function generated(): void: {
+      return { source: 'function generated(): void: {
       }', metadata: {}, dependencies: [], exports: [] };
     }
 }
 
 class PythonGenerator: {
-    async generate(_options) {      return: { source: 'def generated():\n    pass', metadata: {}, dependencies: [], exports: [] };
+    async generate(_options) {      return { source: 'def generated():\n    pass', metadata: {}, dependencies: [], exports: [] };
     }
 }
 
 class JavaGenerator: {
         async generate(_options) {
-      return: { source: 'public void generated() {
+      return { source: 'public void generated() {
       }', metadata: {}, dependencies: [], exports: [] };
     }
 }
 
 class CSharpGenerator: {
         async generate(_options) {
-      return: { source: 'public void Generated() {
+      return { source: 'public void Generated() {
       }', metadata: {}, dependencies: [], exports: [] };
     }
 }
 
 class GoGenerator: {
         async generate(_options) {
-      return: { source: 'func Generated() {
+      return { source: 'func Generated() {
       }', metadata: {}, dependencies: [], exports: [] };
     }
 }
 
 class RustGenerator: {
         async generate(_options) {
-      return: { source: 'fn generated() {
+      return { source: 'fn generated() {
       }', metadata: {}, dependencies: [], exports: [] };
     }
 }
 
 class SQLGenerator: {
-    async generate(_options) {      return: { source: 'SELECT 1;', metadata: {}, dependencies: [], exports: [] };
+    async generate(_options) {      return { source: 'SELECT 1;', metadata: {}, dependencies: [], exports: [] };
     }
 }
 
 class HTMLGenerator: {
-    async generate(_options) {      return: { source: '<div>Generated</div>', metadata: {}, dependencies: [], exports: [] };
+    async generate(_options) {      return { source: '<div>Generated</div>', metadata: {}, dependencies: [], exports: [] };
     }
 }
 
 class CSSGenerator: {
         async generate(_options) {
-      return: { source: '.generated: { color: blue;,
+      return { source: '.generated: { color: blue;,
       }', metadata: {}, dependencies: [], exports: [] };
     }
 }
 
 // Optimizers
 class PerformanceOptimizer: {
-    async optimize(code, _options) {      return: { code, metrics: { improvement: 0.1 } };
+    async optimize(code, _options) {      return { code, metrics: { improvement: 0.1 } };
     }
 }
 
 class MemoryOptimizer: {
-    async optimize(code, _options) {      return: { code, metrics: { memoryReduction: 0.05 } };
+    async optimize(code, _options) {      return { code, metrics: { memoryReduction: 0.05 } };
     }
 }
 
 class ReadabilityOptimizer: {
-    async optimize(code, _options) {      return: { code, metrics: { readabilityScore: 0.85 } };
+    async optimize(code, _options) {      return { code, metrics: { readabilityScore: 0.85 } };
     }
 }
 
 class SecurityOptimizer: {
-    async optimize(code, _options) {      return: { code, metrics: { securityScore: 0.9 } };
+    async optimize(code, _options) {      return { code, metrics: { securityScore: 0.9 } };
     }
 }
 
 class SizeOptimizer: {
-    async optimize(code, _options) {      return: { code, metrics: { sizeReduction: 0.1 } };
+    async optimize(code, _options) {      return { code, metrics: { sizeReduction: 0.1 } };
     }
 }
 
 class ComplexityOptimizer: {
-    async optimize(code, _options) {      return: { code, metrics: { complexityReduction: 0.15 } };
+    async optimize(code, _options) {      return { code, metrics: { complexityReduction: 0.15 } };
     }
 }
 
 class MaintainabilityOptimizer: {
-    async optimize(code, _options) {      return: { code, metrics: { maintainability: 0.8 } };
+    async optimize(code, _options) {      return { code, metrics: { maintainability: 0.8 } };
     }
 }
 
 // Validators
 class SyntaxValidator: {
-    async validate(_code) {      return: { valid: true, score: 0.9, issues: [] };
+    async validate(_code) {      return { valid: true, score: 0.9, issues: [] };
     }
 }
 
 class LogicValidator: {
-    async validate(_code, _spec) {      return: { valid: true, score: 0.85, issues: [] };
+    async validate(_code, _spec) {      return { valid: true, score: 0.85, issues: [] };
     }
 }
 
 class SecurityValidator: {
-    async validate(_code) {      return: { secure: true, score: 0.9, vulnerabilities: [] };
+    async validate(_code) {      return { secure: true, score: 0.9, vulnerabilities: [] };
     }
 }
 
 class PerformanceValidator: {
-    async validate(_code) {      return: { performant: true, score: 0.8, bottlenecks: [] };
+    async validate(_code) {      return { performant: true, score: 0.8, bottlenecks: [] };
     }
 }
 
 class StandardsValidator: {
-    async validate(_code) {      return: { compliant: true, score: 0.85, violations: [] };
+    async validate(_code) {      return { compliant: true, score: 0.85, violations: [] };
     }
 }
 
 class CompatibilityValidator: {
-    async validate(_code) {      return: { compatible: true, score: 0.9, issues: [] };
+    async validate(_code) {      return { compatible: true, score: 0.9, issues: [] };
     }
 }
 
 class TestingValidator: {
-    async validate(_tests) {      return: { valid: true, coverage: 0.85, issues: [] };
+    async validate(_tests) {      return { valid: true, coverage: 0.85, issues: [] };
     }
 }
 
 // Template Generators
 class FunctionTemplateGenerator: {
-    async generate(_options) {      return: { content: 'Generated function template', format: STR_JSDOC };
+    async generate(_options) {      return { content: 'Generated function template', format: STR_JSDOC };
     }
 }
 
 class ClassTemplateGenerator: {
-    async generate(_options) {      return: { content: 'Generated class template', format: STR_JSDOC };
+    async generate(_options) {      return { content: 'Generated class template', format: STR_JSDOC };
     }
 }
 
 class ModuleTemplateGenerator: {
-    async generate(_options) {      return: { content: 'Generated module template', format: STR_JSDOC };
+    async generate(_options) {      return { content: 'Generated module template', format: STR_JSDOC };
     }
 }
 
 class TestTemplateGenerator: {
-    async generate(_options) {      return: { content: 'Generated test template', framework: 'jest', coverage: 0.8 };
+    async generate(_options) {      return { content: 'Generated test template', framework: 'jest', coverage: 0.8 };
     }
 }
 
 class DocsTemplateGenerator: {
-    async generate(_options) {      return: { content: 'Generated documentation', format: 'markdown', coverage: 0.9 };
+    async generate(_options) {      return { content: 'Generated documentation', format: 'markdown', coverage: 0.9 };
     }
 }
 

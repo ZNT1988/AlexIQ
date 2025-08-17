@@ -204,7 +204,7 @@ export class AlexGoalMastery extends EventEmitter  {
       focusAreas: ['personal_growth', STR_SKILL_DEVELOPMENT]
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🎯 AlexGoalMastery initializing - Achievement excellence awakening');
 
     } catch (error) {
@@ -217,7 +217,7 @@ export class AlexGoalMastery extends EventEmitter  {
     this.isInitialized = true;
     await this.initializeGoalSystems();
     await this.loadGoalTemplates();
-    this.startGoalMonitoring();      try: {
+    this.startGoalMonitoring();      try {
       logger.info('🏆 AlexGoalMastery fully initialized - Goal mastery active');
 
     } catch (error) {
@@ -522,7 +522,7 @@ export class AlexGoalMastery extends EventEmitter  {
     return await this.generateWithOpenAI(`goal_${Date.now()}_${(crypto.randomBytes(4).readUI...`, context);
   }
 
-  analyzeGoalRequest(goalRequest) {      return: {
+  analyzeGoalRequest(goalRequest) {      return {
       type: this.classifyGoalType(goalRequest),
       scope: this.assessGoalScope(goalRequest)
       complexity: this.assessComplexity(goalRequest),
@@ -554,7 +554,7 @@ export class AlexGoalMastery extends EventEmitter  {
   /**
    * Obtention du statut de maîtrise des objectifs
    */
-  getGoalMasteryStatus() {      return: {
+  getGoalMasteryStatus() {      return {
       initialized: this.isInitialized,
       currentState: this.currentMasteryState
       activeGoals: this.activeGoals.size,

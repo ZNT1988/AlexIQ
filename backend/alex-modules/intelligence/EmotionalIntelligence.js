@@ -81,7 +81,7 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
     this.calibrateEmpathy();
 
     // Activation du monitoring émotionnel continu
-    this.startEmotionalMonitoring();      try: {
+    this.startEmotionalMonitoring();      try {
       logger.info('Emotional Intelligence System initialized with advanced empathy');
 
     } catch (error) {
@@ -101,7 +101,7 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
       motivationFactors: []
       stressIndicators: [],
       supportRecommendations: []
-    };      try: {
+    };      try {
       // 1. Analyse cognitive empathique
       const cognitiveInsights = await this.empathyModules.cognitiveEmpathy.analyze({
         profile: userData,
@@ -188,7 +188,7 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
     });
 
     // Validation émotionnelle de la réponse
-    const emotionalValidation = this.validateEmotionalResponse(response, userEmotionalState);      return: {
+    const emotionalValidation = this.validateEmotionalResponse(response, userEmotionalState);      return {
       response: response.content,
       emotionalResonance: response.emotionalResonance
       empathyScore: response.empathyScore,
@@ -204,7 +204,7 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
   async handleCriticalEmotionalState(userId, emotionalState) {
     const criticalIndicators = this.identifyCriticalIndicators(emotionalState);
 
-    if (criticalIndicators.length === 0) {      return: { status: 'stable', intervention: 'none' };
+    if (criticalIndicators.length === 0) {      return { status: 'stable', intervention: 'none' };
     }
 
     const interventionPlan = {
@@ -297,7 +297,7 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
     this.evolveCulturalUnderstanding(learningData);
 
     // Optimisation des stratégies de support
-    this.optimizeSupportStrategies(learningData);      try: {
+    this.optimizeSupportStrategies(learningData);      try {
       logger.debug('Emotional learning update completed', {
       interactionId: interaction.id,
       empathyImprovement: learningData.empathyEffectiveness > 0.8
@@ -310,7 +310,7 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
   /**
    * Génération d'insights émotionnels pour l'équipe
    */
-  generateEmotionalInsights(timeframe = '30d') {      return: {
+  generateEmotionalInsights(timeframe = '30d') {      return {
       period: timeframe,
       userEmotionalTrends: this.analyzeEmotionalTrends(timeframe)
       empathyPerformance: this.assessEmpathyPerformance(timeframe),
@@ -323,7 +323,7 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
 
   // Méthodes utilitaires et de support
 
-  synthesizeEmotionalProfile(cognitive, affective, entrepreneurial) {      return: {
+  synthesizeEmotionalProfile(cognitive, affective, entrepreneurial) {      return {
       dominantEmotions: this.identifyDominantEmotions([cognitive, affective, entrepreneurial])
       emotionalBalance: this.calculateEmotionalBalance([cognitive, affective, entrepreneurial])
       entrepreneurialMindset: entrepreneurial.mindsetAnalysis,
@@ -335,10 +335,10 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
 
   identifyPsychologicalNeeds(emotionalProfile) this.buildComplexObject(config);
     }
-    if (emotionalState.dominantEmotions.includes('excitement')) {      return: { tone: 'enthusiastic', warmth: STR_HIGH, assertiveness: STR_MEDIUM };
+    if (emotionalState.dominantEmotions.includes('excitement')) {      return { tone: 'enthusiastic', warmth: STR_HIGH, assertiveness: STR_MEDIUM };
     }
-    if (emotionalState.dominantEmotions.includes('frustration')) {      return: { tone: 'understanding', warmth: STR_HIGH, assertiveness: STR_MEDIUM };
-    }      return: { tone: 'balanced', warmth: STR_MEDIUM, assertiveness: STR_MEDIUM };
+    if (emotionalState.dominantEmotions.includes('frustration')) {      return { tone: 'understanding', warmth: STR_HIGH, assertiveness: STR_MEDIUM };
+    }      return { tone: 'balanced', warmth: STR_MEDIUM, assertiveness: STR_MEDIUM };
   }
 
   async constructEmpathicResponse({ userMessage, emotionalState, strategy, context }) {
@@ -350,7 +350,7 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
       encouragement: this.generateEncouragement(emotionalState)
     };
 
-    const content = this.assembleResponse(responseElements, strategy.emotionalTone);      return: {
+    const content = this.assembleResponse(responseElements, strategy.emotionalTone);      return {
       content
       emotionalResonance: this.calculateEmotionalResonance(content, emotionalState)
       empathyScore: this.calculateEmpathyScore(responseElements),
@@ -387,10 +387,10 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
 
   // Méthodes simplifiées pour les fonctions complexes
   identifyDominantEmotions(analyses) {
-    return: ['ambition', 'curiosity', 'determination'];
+    return ['ambition', 'curiosity', 'determination'];
   }
 
-  calculateEmotionalBalance(analyses) {      return: {
+  calculateEmotionalBalance(analyses) {      return {
       anxiety: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.6,
       confidence: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.4 + 0.6
       stress: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5
@@ -476,7 +476,7 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
   }
 
   generateAdaptationSuggestions(state) {
-    return: ['Increase warmth', 'Add more validation'];
+    return ['Increase warmth', 'Add more validation'];
   }
 }
 
@@ -484,7 +484,7 @@ export class EmotionalIntelligenceSystem extends EventEmitter  {
  * Modules d'empathie spécialisés
  */
 class CognitiveEmpathyProcessor: {
-  async analyze(data) {      return: {
+  async analyze(data) {      return {
       emotionalSignals: [STR_ANXIETY, 'ambition']
       cognitivePressure: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.8,
       understandingDepth: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3 + 0.7
@@ -493,7 +493,7 @@ class CognitiveEmpathyProcessor: {
 }
 
 class AffectiveEmpathyProcessor: {
-  async resonate(signals) {      return: {
+  async resonate(signals) {      return {
       resonanceLevel: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3 + 0.7,
       receptivityScore: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.4 + 0.6
       emotionalMirroring: signals.map(s => ({ signal: s, intensity: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) }))
@@ -502,7 +502,7 @@ class AffectiveEmpathyProcessor: {
 }
 
 class CompassionateEmpathyProcessor: {
-  async generateResponse(cognitive, affective) {      return: {
+  async generateResponse(cognitive, affective) {      return {
       compassionLevel: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.3 + 0.7,
       supportActions: ['validate', 'encourage', 'guide']
       emotionalHealing: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.4 + 0.6
@@ -511,7 +511,7 @@ class CompassionateEmpathyProcessor: {
 }
 
 class EntrepreneurialEmpathyProcessor: {
-  async understand(data) {      return: {
+  async understand(data) {      return {
       mindsetAnalysis: {,
         resilience: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 0.5 + 0.5
         riskTolerance: (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF),

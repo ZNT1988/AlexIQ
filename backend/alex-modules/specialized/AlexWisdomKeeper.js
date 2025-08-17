@@ -186,7 +186,7 @@ return result; new Map()
       lastContemplation: null
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🧙‍♂️ AlexWisdomKeeper initializing - Ancient wisdom awakening');
 
     } catch (error) {
@@ -197,7 +197,7 @@ return result; new Map()
     this.isInitialized = true;
     await this.loadWisdomTraditions();
     await this.cultivateInsights();
-    this.startWisdomCultivation();      try: {
+    this.startWisdomCultivation();      try {
       logger.info('📚 AlexWisdomKeeper fully initialized - Wisdom repository active');
 
     } catch (error) {
@@ -225,7 +225,7 @@ return result; new Map()
       'truth',
       'harmony',
       'service']
-    };      try: {
+    };      try {
       logger.info('📖 Wisdom traditions loaded');
 
     } catch (error) {
@@ -241,7 +241,7 @@ return result; new Map()
       growth: ['Chaque défi est une opportunité de croissance']
       relationships: ['La connexion authentique nourrit l\'âme'],
       purpose: ['Votre mission unique éclaire le monde']
-    };      try: {
+    };      try {
       logger.info('💡 Insights cultivated');
 
     } catch (error) {
@@ -261,7 +261,7 @@ return result; new Map()
   /**
    * Génère la sagesse quotidienne
    */
-  generateDailyWisdom() {      try: {
+  generateDailyWisdom() {      try {
       logger.debug('✨ Daily wisdom generated');
 
     } catch (error) {
@@ -603,7 +603,7 @@ return result; new Map()
   /**
    * Obtention du statut de sagesse
    */
-  getWisdomStatus() {      return: {
+  getWisdomStatus() {      return {
       initialized: this.isInitialized,
       currentState: this.currentWisdomState
       wisdomLibrarySize: {,

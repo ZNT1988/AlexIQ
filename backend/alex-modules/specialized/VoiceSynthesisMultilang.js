@@ -74,7 +74,7 @@ const STR_HIGH = 'high';/**
  * const conversation = await voice.generateConversationalSpeech({
  *   messages: dialogueHistory
  *   personality: 'friendly_expert'
- *   culturalContext: { country: 'Japan', formal: true }
+ *   culturalContext: { country { 'Japan', formal: true }
  * }); */
 
 import logger from '../config/logger.js';
@@ -168,7 +168,7 @@ export class VoiceSynthesisMultilang: {
      * @private
      */
     getDefaultVoiceLanguages() {
-        return: [
+        return [
             // Langues majeures avec voix haute qualité
             'fr', 'en', 'es', 'de', 'it', 'pt', 'ru', 'zh', 'ja', 'koSTR_ar', 'hi', 'th', 'vi', 'id', 'tr', 'nl', 'sv', 'da', 'noSTR_fi', 'pl', 'cs', 'hu', 'ro', 'bg', 'hr', 'sk', 'sl', 'et'
             // Langues avec support vocal basique
@@ -443,7 +443,7 @@ export class VoiceSynthesisMultilang: {
             await this.updateSynthesisStatistics(synthesis);
 
             synthesis.endTime = Date.now();
-            synthesis.duration = synthesis.endTime - synthesis.startTime;      return: {
+            synthesis.duration = synthesis.endTime - synthesis.startTime;      return {
                 success: true
                 speechId
                 audio: synthesis.result.audioBuffer,
@@ -463,7 +463,7 @@ export class VoiceSynthesisMultilang: {
             };
 
         } catch (_error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 speechId
@@ -493,7 +493,7 @@ export class VoiceSynthesisMultilang: {
      *     { text: "How can I help you today?", role: STR_ASSISTANT }
      *   ]
      *   personality: 'friendly_professional'
-     *   culturalContext: { country: 'US', formal: false }
+     *   culturalContext: { country { 'US', formal: false }
      * });     */
     async generateConversationalSpeech(conversationRequest) {
         const conversationId = `conv_${Date.now()}_${(crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substr(2, 6)}`;        logger.info('Starting conversational speech generation', {
@@ -555,7 +555,7 @@ export class VoiceSynthesisMultilang: {
             );
 
             conversation.endTime = Date.now();
-            conversation.duration = conversation.endTime - conversation.startTime;      return: {
+            conversation.duration = conversation.endTime - conversation.startTime;      return {
                 success: true
                 conversationId
                 segments: conversation.speechSegments,
@@ -570,7 +570,7 @@ export class VoiceSynthesisMultilang: {
             };
 
         } catch (error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 conversationId
@@ -614,7 +614,7 @@ export class VoiceSynthesisMultilang: {
             personaId
             name: personaRequest.name,
             languages: personaRequest.languages?.length || 0
-        });      try: {
+        });      try {
             const _persona = {
                 id: personaId,
                 name: personaRequest.name
@@ -625,7 +625,7 @@ export class VoiceSynthesisMultilang: {
                 createdAt: new Date().toISOString();            };
 
             // Enregistrer persona pour usage futur
-            await this.registerVoicePersona(persona);      return: {
+            await this.registerVoicePersona(persona);      return {
                 success: true
                 personaId
                 persona: persona,
@@ -633,7 +633,7 @@ export class VoiceSynthesisMultilang: {
             };
 
         } catch (error) {
-    });      return: {
+    });      return {
                 success: false,
                 error: error.message
                 personaId
@@ -680,7 +680,7 @@ export class VoiceSynthesisMultilang: {
         let selectedVoice = request.voice || 'natural_female';        // Validation disponibilité
         if (!voiceModel.voices[selectedVoice]) {
             selectedVoice = Object.keys(voiceModel.voices)[0]; // Fallback
-        }      return: {
+        }      return {
             selectedVoice: selectedVoice,
             voiceModel: voiceModel
             voiceConfig: voiceModel.voices[selectedVoice],
@@ -692,7 +692,7 @@ export class VoiceSynthesisMultilang: {
     async detectTextLanguage(text) { return 'en'; }
     splitIntoSentences(text) { return text.split(/[.!?
       ]+/).filter(s => s.trim()); }
-    async textToPhonemes(text, lang) { return: ['ph', 'o', 'n', 'e', 'm', 's']; }
+    async textToPhonemes(text, lang) { return ['ph', 'o', 'n', 'e', 'm', 's']; }
     detectProsodyMarkers(text) { return { pauses :
        [], emphasis: [] }; }
     extractEmotionalCues(text) { return { emotion: STR_NEUTRAL, intensity: 0.5 }; }
@@ -702,7 +702,7 @@ export class VoiceSynthesisMultilang: {
     async applyEmotionalProcessing(audio, emotion, personality) { return audio; }
     async enhanceProsody(audio, analysis, prosody) { return audio; }
     async postProcessAudio(audio, quality) { return audio; }
-    async finalizeAudioOutput(audio) {      return: {
+    async finalizeAudioOutput(audio) {      return {
             audioBuffer: 'final_audio_buffer',
             format: 'wav'
             quality: STR_HIGH,
@@ -712,11 +712,11 @@ export class VoiceSynthesisMultilang: {
     }
     async updateVoiceCache(request, result) { return true; }
     async updateSynthesisStatistics(synthesis) { return true; }
-    async generateVoiceAlternatives(request) { return: []; }
+    async generateVoiceAlternatives(request) { return []; }
     async generateFallbackAudio(request) { return 'fallback_audio'; }
 
     // Méthodes pour synthèse conversationnelle
-    async buildConversationPersonality(personality, cultural) {      return: { current: personality, final: personality, evolution: [] };
+    async buildConversationPersonality(personality, cultural) {      return { current: personality, final: personality, evolution: [] };
     }
     async detectContextualEmotion(message, index, messages) { return STR_NEUTRAL; }
     async updatePersonalityConsistency(profile, segment, message) { return profile; }
@@ -752,9 +752,9 @@ export class VoiceSynthesisMultilang: {
         };
     }
 
-    getLanguagePhonemes(langCode) { return: []; }
+    getLanguagePhonemes(langCode) { return []; }
     getLanguageProsody(langCode) { return {}; }
-    getLanguageAccents(langCode) { return: []; }
+    getLanguageAccents(langCode) { return []; }
     getVoiceCulturalNuances(langCode) { return {}; }
 }
 

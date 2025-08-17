@@ -192,7 +192,7 @@ export class AlexStrategicThinking extends EventEmitter  {
       innovationPriority: 0.9
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('🎯 AlexStrategicThinking initializing - Strategic mind awakening');
 
     } catch (error) {
@@ -205,7 +205,7 @@ export class AlexStrategicThinking extends EventEmitter  {
     this.isInitialized = true;
     await this.initializeStrategicSystems();
     await this.loadStrategicKnowledge();
-    this.startStrategicMonitoring();      try: {
+    this.startStrategicMonitoring();      try {
       logger.info('🧠 AlexStrategicThinking fully initialized - Strategic intelligence active');
 
     } catch (error) {
@@ -466,7 +466,7 @@ export class AlexStrategicThinking extends EventEmitter  {
    */
   startStrategicMonitoring() {
     // Surveillance des tendances quotidienne
-    setInterval(() => // Code de traitement approprié ici, 604800000);      try: {
+    setInterval(() => // Code de traitement approprié ici, 604800000);      try {
       logger.info('📡 Strategic monitoring activated');
 
     } catch (error) {
@@ -505,7 +505,7 @@ export class AlexStrategicThinking extends EventEmitter  {
   /**
    * Obtention du statut stratégique
    */
-  getStrategicThinkingStatus() {      return: {
+  getStrategicThinkingStatus() {      return {
       initialized: this.isInitialized,
       currentState: this.currentStrategicState
       strategicSessions: this.strategicSessions.length,

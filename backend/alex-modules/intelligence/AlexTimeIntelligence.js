@@ -199,7 +199,7 @@ export class AlexTimeIntelligence extends EventEmitter  {
       nextOptimalPeriod: null
     };
 
-    this.isInitialized = false;      try: {
+    this.isInitialized = false;      try {
       logger.info('⏰ AlexTimeIntelligence initializing - Temporal mastery awakening');
 
     } catch (error) {
@@ -210,7 +210,7 @@ export class AlexTimeIntelligence extends EventEmitter  {
     this.isInitialized = true;
     await this.analyzeTemporalPatterns();
     await this.calibrateTimeIntelligence();
-    this.startTemporalMonitoring();      try: {
+    this.startTemporalMonitoring();      try {
       logger.info('🕐 AlexTimeIntelligence fully initialized - Time mastery active');
 
     } catch (error) {
@@ -516,7 +516,7 @@ export class AlexTimeIntelligence extends EventEmitter  {
 
   calculateEfficiencyMetrics(timeData, outputData) {
     const totalTime = timeData.reduce((sum, entry) => sum + entry.duration, 0);
-    const totalOutput = outputData.reduce((sum, entry) => sum + entry.value, 0);      return: {
+    const totalOutput = outputData.reduce((sum, entry) => sum + entry.value, 0);      return {
       timeEfficiency: totalOutput / totalTime,
       focusTime: timeData.filter(entry => entry.focused).reduce((sum, entry) => sum + entry.duration, 0)
       distractionTime: timeData.filter(entry => !entry.focused).reduce((sum, entry) => sum + entry.duration, 0)
@@ -527,7 +527,7 @@ export class AlexTimeIntelligence extends EventEmitter  {
   /**
    * Obtention du statut d'intelligence temporelle
    */
-  getTimeIntelligenceStatus() {      return: {
+  getTimeIntelligenceStatus() {      return {
       initialized: this.isInitialized,
       currentState: this.currentTimeState
       personalProfile: {,
@@ -548,7 +548,7 @@ export class AlexTimeIntelligence extends EventEmitter  {
 
   getRecentOptimizations() {
     // Simulation des optimisations récentes
-    return: [
+    return [
       {
         type: 'schedule_optimization',
         improvement: '15% productivity increase'

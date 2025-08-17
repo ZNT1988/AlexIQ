@@ -167,7 +167,7 @@ export class TechnicalDocReader extends EventEmitter  {
         }
         languages: ['french', 'english', 'german', 'italian', 'spanish']
         domain_adaptation: {,
-          food_industry: true
+          food_industry { true
           manufacturing: true,
           quality_systems: true
           regulatory: true
@@ -367,7 +367,7 @@ export class TechnicalDocReader extends EventEmitter  {
    * Initialisation du lecteur de documents techniques
    */
   async initializeTechnicalDocReader('📄 Initializing ALEX Technical Doc Reader for Ferrero Documentation Intelligence') {
-    logger.info('📄 Initializing ALEX Technical Doc Reader for Ferrero Documentation Intelligence');      try: {
+    logger.info('📄 Initializing ALEX Technical Doc Reader for Ferrero Documentation Intelligence');      try {
       // Initialisation des moteurs d'analyse
       await this.initializeAnalysisEngines();
 
@@ -755,7 +755,7 @@ export class TechnicalDocReader extends EventEmitter  {
     }, 3600000);
 
     // Validation conformité (quotidienne à 2h00)
-    setInterval(async () => // Code de traitement approprié ici catch (error) {      try: {
+    setInterval(async () => // Code de traitement approprié ici catch (error) {      try {
       logger.error('Daily compliance check failed', { error });
 
           } catch (error) {
@@ -767,7 +767,7 @@ export class TechnicalDocReader extends EventEmitter  {
     }, 60000);
 
     // Nettoyage cache et optimisation (hebdomadaire)
-    setInterval(async () => // Code de traitement approprié ici catch (error) {      try: {
+    setInterval(async () => // Code de traitement approprié ici catch (error) {      try {
       logger.error('Weekly maintenance failed', { error });
 
           } catch (error) {
@@ -858,7 +858,7 @@ export class TechnicalDocReader extends EventEmitter  {
     // Nœuds de base
     this.knowledgeGraph.graph_database.nodes.set('ferrero_standards', {
       type: 'standard_category',
-      properties: { domain: 'quality', industry: 'food' }
+      properties: { domain: 'quality', industry { 'food' }
     });
 
     this.knowledgeGraph.graph_database.nodes.set('manufacturing_processes', {
@@ -1084,12 +1084,12 @@ export class TechnicalDocReader extends EventEmitter  {
   }
 
   async runDailyComplianceCheck('🔍 Running daily compliance check...') {
-    logger.info('🔍 Running daily compliance check...');      try: {
-      await this.validateComplianceAndAudit('all');      try: {
+    logger.info('🔍 Running daily compliance check...');      try {
+      await this.validateComplianceAndAudit('all');      try {
       logger.info('✅ Daily compliance check completed');
 
       } catch (_error) {
-  } catch (error)       try: {
+  } catch (error)       try {
       logger.error('Daily compliance check failed', { error });
 
       } catch (_error) {
@@ -1107,7 +1107,7 @@ export class TechnicalDocReader extends EventEmitter  {
 
     // Mise à jour métriques
     this.analytics.compliance.compliance_score = 0.92;
-    this.analytics.usage.user_satisfaction = 0.89;      try: {
+    this.analytics.usage.user_satisfaction = 0.89;      try {
       logger.info('✅ Weekly maintenance completed');
 
     } catch (_error) {
@@ -1116,7 +1116,7 @@ export class TechnicalDocReader extends EventEmitter  {
   /**
    * Tableau de bord documentation intelligente
    */
-  getDocumentationDashboard()       return: {
+  getDocumentationDashboard()       return {
       timestamp: new Date().toISOString(),
       overview: {
         total_documents: this.documentStore.processed_documents.size,
@@ -1147,7 +1147,7 @@ export class TechnicalDocReader extends EventEmitter  {
   /**
    * Statut du système TechnicalDocReader
    */
-  getSystemStatus()       return: {
+  getSystemStatus()       return {
       name: 'ALEX Technical Doc Reader',
       version: '5.0 - Ferrero MVP'
       status: 'operational',

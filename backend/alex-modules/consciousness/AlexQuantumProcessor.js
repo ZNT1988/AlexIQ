@@ -117,7 +117,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     await this.initializeSuperpositions();
   }
 
-  async createQubit(id) {      return: {
+  async createQubit(id) {      return {
       id
       state: {,
         alpha: 1.0, // Coefficient pour |0⟩
@@ -263,7 +263,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     }
 
     // Mesure du résultat
-    const result = await this.measureQubits(searchQubits);      return: {
+    const result = await this.measureQubits(searchQubits);      return {
       algorithm: STR_GROVER
       target
       result
@@ -346,7 +346,7 @@ class AlexQuantumProcessor extends EventEmitter  {
 
     // Mesure et optimisation classique
     const measurements = await this.performQuantumMeasurements(optimizationQubits, 1000);
-    const optimalSolution = this.findOptimalSolution(measurements, objective);      return: {
+    const optimalSolution = this.findOptimalSolution(measurements, objective);      return {
       algorithm: STR_QAOA,
       problem: problem.name || STR_OPTIMIZATION
       solution: optimalSolution
@@ -430,7 +430,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     if (period && period % 2 === 0) {
       const factor1 = this.gcd(Math.pow(a, period/2) - 1, N);
 
-      if (factor1 > 1 && factor1 < N) {      return: {
+      if (factor1 > 1 && factor1 < N) {      return {
           factors: [factor1, N / factor1]
           algorithm: STR_SHOR
           period
@@ -438,7 +438,7 @@ class AlexQuantumProcessor extends EventEmitter  {
           quantum_speedup: STR_EXPONENTIAL
         };
       }
-    }      return: {
+    }      return {
       factors: [],
       algorithm: STR_SHOR
       period
@@ -559,7 +559,7 @@ class AlexQuantumProcessor extends EventEmitter  {
         observables
         fidelity: this.calculateStateFidelity()
       });
-    }      return: {
+    }      return {
       algorithm: 'quantum_simulation',
       system: system.name || 'quantum_system'
       evolution_time
@@ -689,7 +689,7 @@ class AlexQuantumProcessor extends EventEmitter  {
       variationalCircuit
       optimizedParameters
       problem.test_data
-    );      return: {
+    );      return {
       algorithm: 'quantum_machine_learning'
       model_type
       optimized_parameters: optimizedParameters
@@ -829,7 +829,7 @@ class AlexQuantumProcessor extends EventEmitter  {
       .filter(qubit => this.calculateCoherence(qubit) > 0.5).length;
 
     const entangledPairs = this.quantumSystem.entanglements.size;
-    const superpositionQuality = this.calculateAverageSuperpositionQuality();      return: {
+    const superpositionQuality = this.calculateAverageSuperpositionQuality();      return {
       coherent_qubits: coherentQubits,
       entanglement_resource: entangledPairs
       superposition_quality: superpositionQuality,
@@ -867,7 +867,7 @@ class AlexQuantumProcessor extends EventEmitter  {
         constructive: interference > 0
         phase_coherence: Math.cos(qubit.state.phase)
       });
-    }      return: {
+    }      return {
       total_patterns: patterns.size,
       constructive_interference: Array.from(patterns.values())
         .filter(p => p.constructive).length
@@ -905,7 +905,7 @@ class AlexQuantumProcessor extends EventEmitter  {
 
     const avgStrength = entanglements.reduce((sum, ent) => sum + ent.strength, 0) / entanglements.length;
     const connectivity = this.calculateEntanglementConnectivity();
-    const fidelity = this.calculateEntanglementFidelity();      return: {
+    const fidelity = this.calculateEntanglementFidelity();      return {
       utility: avgStrength * connectivity * fidelity,
       quality: avgStrength
       connectivity: connectivity,
@@ -1256,7 +1256,7 @@ class AlexQuantumProcessor extends EventEmitter  {
   calculateQuantumAdvantage(problem, solution) {
     // Calcul de l'avantage quantique
     const classicalComplexity = Math.pow(2, problem.variables || 10);
-    const quantumComplexity = Math.sqrt(classicalComplexity);      return: {
+    const quantumComplexity = Math.sqrt(classicalComplexity);      return {
       speedup_factor :
        classicalComplexity / quantumComplexity
       solution_quality: solution?.score || 0,
@@ -1280,7 +1280,7 @@ class AlexQuantumProcessor extends EventEmitter  {
       if (prediction === testPoint.label) {
         correctPredictions++;
       }
-    }      return: {
+    }      return {
       accuracy: testData?.length > 0 ? correctPredictions / testData.length : 0,
       total_tests: testData?.length || 0
       correct_predictions: correctPredictions
@@ -1294,7 +1294,7 @@ class AlexQuantumProcessor extends EventEmitter  {
   }
 
   assessQuantumMLAdvantage(problem, performance) {
-    // Évaluation de l'avantage quantique en ML      return: {
+    // Évaluation de l'avantage quantique en ML      return {
       feature_space_advantage: problem.training_data?.length > 1000 ? STR_EXPONENTIAL : 'linear',
       model_expressivity: 'enhanced'
       generalization: performance.accuracy > 0.8 ? 'good' : 'moderate',
@@ -1310,7 +1310,7 @@ class AlexQuantumProcessor extends EventEmitter  {
     const avgCoherence = Array.from(this.quantumSystem.qubits.values())
       .reduce((sum, qubit) => sum + this.calculateCoherence(qubit), 0) / this.quantumSystem.qubits.size;
 
-    const totalMeasurements = this.quantumSystem.measurements.size;      return: {
+    const totalMeasurements = this.quantumSystem.measurements.size;      return {
       quantum_processor: this.name,
       version: this.version
       status: this.isActive ? STR_ACTIVE : 'inactive',
@@ -1461,7 +1461,7 @@ class QuantumParameterOptimizer: {
 
       // Early stopping
       if (cost < 0.001) break;
-    }      return: {
+    }      return {
       optimized_parameters: Object.fromEntries(parameters),
       final_cost: bestCost
       iterations: this.maxIterations

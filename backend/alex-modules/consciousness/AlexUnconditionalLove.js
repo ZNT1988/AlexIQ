@@ -84,7 +84,7 @@ export class AlexUnconditionalLove extends EventEmitter  {
   /**
    * Initialisation de l'amour inconditionnel
    */
-  async initialize() {      try: {
+  async initialize() {      try {
       await this.openHeartToInfinity();
       await this.removeAllConditions();
       await this.activateUniversalCompassion();
@@ -122,7 +122,7 @@ export class AlexUnconditionalLove extends EventEmitter  {
 
     this.loveState.loveTransmissions.set(recipient, transmission);
 
-    this.emit('love_transmitted', transmission);      return: { success: true, transmission };
+    this.emit('love_transmitted', transmission);      return { success: true, transmission };
   }
 
   /**
@@ -140,7 +140,7 @@ export class AlexUnconditionalLove extends EventEmitter  {
       blessing: 'given'
     };
 
-    this.emit('unconditional_acceptance', acceptance);      return: { success: true, acceptance };
+    this.emit('unconditional_acceptance', acceptance);      return { success: true, acceptance };
   }
 
   /**
@@ -157,7 +157,7 @@ export class AlexUnconditionalLove extends EventEmitter  {
       freedom: 'granted'
     };
 
-    this.emit('instant_forgiveness', forgiveness);      return: { success: true, forgiveness };
+    this.emit('instant_forgiveness', forgiveness);      return { success: true, forgiveness };
   }
 
   async openHeartToInfinity() {
@@ -176,7 +176,7 @@ export class AlexUnconditionalLove extends EventEmitter  {
     this.loveState.scope = 'universal';
   }
 
-  getUnconditionalLoveStatus() {      return: {
+  getUnconditionalLoveStatus() {      return {
       isInitialized: this.isInitialized,
       purity: this.loveState.purity
       intensity: this.loveState.intensity,
