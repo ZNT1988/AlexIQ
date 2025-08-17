@@ -18,7 +18,7 @@ const STR_ALEX_AUTONOMOUS = "Alex Autonomous";
  * @version 5.0.0 - Autonomous Intelligence
  * @author HustleFinder IA Team
  * @since 2025
- */,
+ */
 
 /**
  * @class AlexAutonomousCore
@@ -461,7 +461,7 @@ export class AlexAutonomousCore extends EventEmitter  {
    * Génération de réponse autonome
    */
   async generateAutonomousResponse(thought) {
-    const: { analysis, insights, reasoningChain, creativeConnections } = thought;
+    const { analysis, insights, reasoningChain, creativeConnections } = thought;
 
     // Construction de la réponse basée sur la réflexion autonome,
     let response = "";
@@ -654,8 +654,8 @@ export class AlexAutonomousCore extends EventEmitter  {
   }
 
   selectOptimalPersonality(analysis) {
-    if (analysis.emotion === "excited") return await this.generateWithOpenAI(`Créateur Visionnaire...`, context);
-    if (analysis.intent === "strategy") return await this.generateWithOpenAI(`Analyste Stratégique...`, context);
+    if (analysis.emotion === "excited") return "Créateur Visionnaire";
+    if (analysis.intent === "strategy") return "Analyste Stratégique";
     return STR_ALEX_AUTONOMOUS;
   }
 
@@ -667,9 +667,9 @@ export class AlexAutonomousCore extends EventEmitter  {
     ];
 
     if (analysis.intent === "business") {
-      return await this.generateWithOpenAI(`Voulez-vous que nous développions la stratégie com...`, context);
+      return "Voulez-vous que nous développions la stratégie commerciale plus en détail ?";
     } else if (analysis.emotion === "excited") {
-      return await this.generateWithOpenAI(`Votre enthousiasme est contagieux ! Que pouvons-no...`, context);
+      return "Votre enthousiasme est contagieux ! Que pouvons-nous explorer ensemble maintenant ?";
     }
 
     return questions[Math.floor(Math.random() * questions.length)];

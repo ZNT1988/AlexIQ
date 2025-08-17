@@ -1,8 +1,8 @@
 // Owner Identity - Stub pour démarrage
-export class OwnerIdentity: {
-
 // Imports AI Services
-      import { AI_KEYS } from '../config/aiKeys.js';
+import { AI_KEYS } from '../config/aiKeys.js';
+
+export class OwnerIdentity {
   constructor() {
     this.owner = 'HustleFinder User';
   }

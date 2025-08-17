@@ -1688,7 +1688,7 @@ class StoryBuilderEngine {
   }
   
   async extractTheme(concept) {
-    return await this.generateWithOpenAI(`The transformative power and potential of ${concep...`, context);
+    return await this.generateWithOpenAI(`The transformative power and potential of ${concept}`, context);
   }
   
   async determineTone(concept) {
@@ -2044,14 +2044,24 @@ class LanguageStylerEngine {
   }
   
   async complexifyStructure(text, intensity) {
-    // Simulation complexification structure,
+    // Simulation complexification structure
     const sentences = text.split('.');
-    return sentences.map(sentence => {
+    const complexified = [];
+    
+    for (const sentence of sentences) {
       if (Math.random() < intensity && sentence.length > 0) {
-        return await this.generateWithOpenAI(`${sentence.trim()}, thereby enhancing the conceptu...`, context);
+        try {
+          const enhanced = await this.generateWithOpenAI(`${sentence.trim()}, thereby enhancing the conceptual depth and structural complexity`, {});
+          complexified.push(enhanced);
+        } catch (error) {
+          complexified.push(sentence.trim() + ', enhanced with deeper conceptual structure');
+        }
+      } else {
+        complexified.push(sentence);
       }
-      return sentence;
-    }).join('.');
+    }
+    
+    return complexified.join('.');
   }
   
   async addExpressiveness(text, intensity) {
