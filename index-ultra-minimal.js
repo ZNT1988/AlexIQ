@@ -10,6 +10,7 @@ import AlexIntelligentCore from './backend/alex-modules/core/AlexIntelligentCore
 import AlexCreativeEngine from './backend/alex-modules/intelligence/AlexCreativeEngine.js'
 import AlexEmotionalIntelligence from './backend/alex-modules/intelligence/AlexEmotionalIntelligence.js'
 import AlexInfiniteCreator from './backend/alex-modules/consciousness/AlexInfiniteCreator.js'
+import { testInterfaceHTML } from './alex-test-interface-production.js'
 
 const PORT = process.env.PORT || 3003
 
@@ -180,6 +181,14 @@ const server = createServer(async (req, res) => {
         palier3Ready: palier3Initialized
       }
     }))
+    return
+  }
+
+  // Interface de test Alex - accessible via /test
+  if (pathname === '/test' || pathname === '/api/test') {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8')
+    res.writeHead(200)
+    res.end(testInterfaceHTML)
     return
   }
 
