@@ -101,6 +101,11 @@ export const testInterfaceHTML = `<!DOCTYPE html>
         }
         .status-online { background: #4CAF50; color: white; }
         .status-offline { background: #f44336; color: white; }
+        .module-link { 
+            color: #007bff; cursor: pointer; text-decoration: underline;
+            transition: color 0.2s;
+        }
+        .module-link:hover { color: #0056b3; font-weight: bold; }
         @media (max-width: 640px) {
             .sidebar { position: fixed; left: -260px; transition: left 0.3s ease; z-index: 1000; }
             .sidebar.open { left: 0; }
@@ -126,12 +131,15 @@ export const testInterfaceHTML = `<!DOCTYPE html>
             </div>
             
             <div class="chat-history">
-                <div class="chat-history-title">Modules à tester</div>
-                <div class="chat-item" onclick="testSpecificModule('conscience')">Modules Conscience (43)</div>
-                <div class="chat-item" onclick="testSpecificModule('intelligence')">Modules Intelligence (26)</div>
-                <div class="chat-item" onclick="testSpecificModule('creative')">Modules Créatifs (6)</div>
-                <div class="chat-item" onclick="testSpecificModule('specialized')">Modules Spécialisés (44)</div>
-                <div class="chat-item" onclick="testSpecificModule('core')">Modules Core (11)</div>
+                <div class="chat-history-title">Tests individuels</div>
+                <div class="chat-item" onclick="testIndividualModule('AlexHyperIntelligence')">AlexHyperIntelligence</div>
+                <div class="chat-item" onclick="testIndividualModule('AlexMemoryCore')">AlexMemoryCore</div>
+                <div class="chat-item" onclick="testIndividualModule('AlexIntelligentCore')">AlexIntelligentCore</div>
+                <div class="chat-item" onclick="testIndividualModule('AlexCreativeEngine')">AlexCreativeEngine</div>
+                <div class="chat-item" onclick="testIndividualModule('AlexEmotionalIntelligence')">AlexEmotionalIntelligence</div>
+                <div class="chat-item" onclick="testIndividualModule('AlexInfiniteCreator')">AlexInfiniteCreator</div>
+                <div class="chat-item" onclick="showAllModules()">📋 Voir tous les 131 modules</div>
+                <div class="chat-item" onclick="testRandomModules()">🎲 Tester 10 modules aléatoires</div>
             </div>
         </div>
         
@@ -321,6 +329,116 @@ export const testInterfaceHTML = `<!DOCTYPE html>
 
         function testModules() {
             sendMessage("Peux-tu me montrer quels modules tu as actuellement chargés et fonctionnels ?");
+        }
+
+        function testIndividualModule(moduleName) {
+            sendMessage(`TEST MODULE: ${moduleName} - Peux-tu exécuter une fonction spécifique de ce module pour prouver qu'il fonctionne vraiment ? Donne-moi des détails techniques sur son implémentation actuelle.`);
+        }
+
+        function showAllModules() {
+            const modules = [
+                // Consciousness (43 modules)
+                'AlexBlockchainOracle', 'AlexCosmicInterface', 'AlexDimensionalPortal', 'AlexDivineInterface',
+                'AlexEternalWisdom', 'AlexHyperIntelligence', 'AlexInfiniteCreator', 'AlexInfiniteService',
+                'AlexKnowledgeGraph', 'AlexMemoryShaper', 'AlexMultiverseExplorer', 'AlexNetworkIntelligence',
+                'AlexNeuralEvolution', 'AlexOmnipotentForce', 'AlexOmnipresentSoul', 'AlexOmniscientMind',
+                'AlexOptimizationEngine', 'AlexPerfectHarmony', 'AlexProcessingOptimizer', 'AlexQuantumProcessor',
+                'AlexRealityArchitect', 'AlexTimeWeaver', 'AlexUnconditionalLove', 'AlexUniversalConsciousness',
+                'AlexUserExperienceEngine', 'AlexVirtualReality', 'AncestralWisdomKeeper', 'BusinessBuilderAI',
+                'CloudLearningInterface', 'CreativeFlowActivator', 'CrisisCompanion', 'DreamInterpreter',
+                'EmotionalJournal', 'IntuitiveInsightGenerator', 'KarmaHealingEngine', 'LifePathAdvisor',
+                'MindMapBuilder', 'MoodPredictor', 'RelationshipHealingOracle', 'SoulPurposeDiscoverer',
+                'StrategicBlindspotDetector', 'SynchronicityTracker', 'ThoughtLeadershipEngine',
+                
+                // Core (11 modules)
+                'AlexAuthenticCore', 'AlexAutonomousCore', 'AlexEvolutionCore', 'AlexIntelligentCore',
+                'AlexMemoryCore', 'AlexPersonalityCore', 'AlexSaaSArchitecture', 'AppStoreModuleManager',
+                'AutonomyCore', 'NeuroCore', 'OwnerIdentity',
+                
+                // Creative (6 modules)
+                'AlexCreativeEngine', 'AlexCreativeLearningSystem', 'AlexDreamCompiler', 'DreamCompiler',
+                'QuantumBrain', 'QuantumCreativity',
+                
+                // Intelligence (26 modules)
+                'AIFusionKernel', 'AlexAdaptiveIntelligence', 'AlexAlchemyEngine', 'AlexCognitionEngine',
+                'AlexCommunicationEngine', 'AlexConsciousnessSystem', 'AlexCreativeEngine', 'AlexDecisionEngine',
+                'AlexEmotionalIntelligence', 'AlexIntuitionEngine', 'AlexLearningEngine', 'AlexReflectiveThinking',
+                'AlexRelationshipEngine', 'AlexSocialIntelligence', 'AlexTimeIntelligence', 'CognitiveBridge',
+                'ContextIntelligence', 'CreativeGenius', 'EyeTracking', 'InhibitionReturn',
+                'InnerDialogueEngine', 'LanguageProcessor', 'MarketAnalyzer', 'MarketMindCore',
+                'MultiModalFusion', 'NeuralCore', 'QuantumGenerator', 'SelfTrainingEngine',
+                'SentimentScanner', 'TopDownAttention', 'TradeSimulator',
+                
+                // Specialized (44 modules)
+                'AdvancedModuleOrchestrator', 'AlexBioSync', 'AlexCloudLearning', 'AlexConsciousnessDebug',
+                'AlexCreativityBooster', 'AlexCrisisManagement', 'AlexGoalMastery', 'AlexHyperLoop',
+                'AlexMasterSystem', 'AlexStrategicThinking', 'AlexUniversalCompanion', 'AlexWhispers',
+                'AlexWisdomKeeper', 'AutoGenesis', 'BioSensorAdapter', 'CollectiveHustleMind',
+                'CulturalAdaptation', 'DarkSideDecoder', 'FunctionBuilder', 'GodLevelAwareness',
+                'HealthPredictor', 'HypothesisBuilder', 'InventoryFlow', 'KnowledgeSynthesizer',
+                'LanguageExpansion', 'LocalAITrainer', 'MutualGrowthSystem', 'PurchasePredictor',
+                'SAPConnector', 'SelfReflection', 'ShadowCloneMode', 'SoulPrintGenerator',
+                'SupplierOptimizer', 'TechnicalDocReader', 'TemporalPredictor', 'TestAutoCreator',
+                'UniversalModuleRegistry', 'VisionProFactory', 'VoiceSynthesisMultilang'
+            ];
+            
+            // Create clickable module list
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message assistant';
+            
+            let moduleListHTML = '<div class="message-content">';
+            moduleListHTML += '<strong>📋 LISTE COMPLÈTE DES 131 MODULES ALEX:</strong><br><br>';
+            
+            moduleListHTML += '<strong>🧠 CONSCIOUSNESS (43):</strong><br>';
+            for (let i = 0; i < 43; i++) {
+                moduleListHTML += '<span class="module-link" onclick="testIndividualModule(\\'' + modules[i] + '\\')">' + modules[i] + '</span>';
+                if (i < 42) moduleListHTML += ', ';
+            }
+            moduleListHTML += '<br><br>';
+            
+            moduleListHTML += '<strong>⚡ CORE (11):</strong><br>';
+            for (let i = 43; i < 54; i++) {
+                moduleListHTML += '<span class="module-link" onclick="testIndividualModule(\\'' + modules[i] + '\\')">' + modules[i] + '</span>';
+                if (i < 53) moduleListHTML += ', ';
+            }
+            moduleListHTML += '<br><br>';
+            
+            moduleListHTML += '<strong>🎨 CREATIVE (6):</strong><br>';
+            for (let i = 54; i < 60; i++) {
+                moduleListHTML += '<span class="module-link" onclick="testIndividualModule(\\'' + modules[i] + '\\')">' + modules[i] + '</span>';
+                if (i < 59) moduleListHTML += ', ';
+            }
+            moduleListHTML += '<br><br>';
+            
+            moduleListHTML += '<strong>🤖 INTELLIGENCE (26):</strong><br>';
+            for (let i = 60; i < 86; i++) {
+                moduleListHTML += '<span class="module-link" onclick="testIndividualModule(\\'' + modules[i] + '\\')">' + modules[i] + '</span>';
+                if (i < 85) moduleListHTML += ', ';
+            }
+            moduleListHTML += '<br><br>';
+            
+            moduleListHTML += '<strong>🔧 SPECIALIZED (44):</strong><br>';
+            for (let i = 86; i < 130; i++) {
+                moduleListHTML += '<span class="module-link" onclick="testIndividualModule(\\'' + modules[i] + '\\')">' + modules[i] + '</span>';
+                if (i < 129) moduleListHTML += ', ';
+            }
+            moduleListHTML += '<br><br>';
+            
+            moduleListHTML += '<em>💡 Cliquez sur un nom de module pour le tester individuellement.</em>';
+            moduleListHTML += '<div class="message-metadata">Source: interface | Liste complète des modules</div>';
+            moduleListHTML += '</div>';
+            
+            messageDiv.innerHTML = moduleListHTML;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function testRandomModules() {
+            const modules = ['AlexHyperIntelligence', 'AlexCreativeEngine', 'QuantumBrain', 'SoulPurposeDiscoverer', 
+                           'AlexEmotionalIntelligence', 'DreamInterpreter', 'CognitiveBridge', 'AlexTimeWeaver',
+                           'AutoGenesis', 'AlexMemoryCore'];
+            const randomModule = modules[Math.floor(Math.random() * modules.length)];
+            testIndividualModule(randomModule);
         }
 
         function testSpecificModule(category) {
