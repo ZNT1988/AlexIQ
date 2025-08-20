@@ -468,7 +468,11 @@ async function handleRequest(req, res) {
                     }
                     
                     // Phase 1: Analyse contextuelle RÉELLE
-                    const contextAnalysis = await contextEngine.analyzeContext(userMessage, userContext);
+                    const contextAnalysis = await contextEngine.analyzeContext(userMessage, {
+                        ...userContext,
+                        userHistory: userContext.userHistory || [],
+                        sessionId: userContext.sessionId || crypto.randomUUID()
+                    });
                     
                     // Phase 2: Génération réponse intelligente RÉELLE
                     const responseData = await responseGenerator.generateResponse(userMessage, contextAnalysis);
