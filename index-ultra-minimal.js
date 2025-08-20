@@ -1,10 +1,20 @@
-// RAILWAY DEPLOYMENT - Phase 3 IA Autonome
+// RAILWAY DEPLOYMENT - Phase 3 IA Autonome  
 // Système HustleFinder IA avec Intelligence Contextuelle, Génération Réponses et Adaptation Autonome
 import { createServer } from "http";
 import url from "url";
 import crypto from "crypto";
 import fs from "fs";
 import path from "path";
+
+// IMPORT DES VRAIS MODULES PHASE 1-3
+import ContextIntelligenceEngine from "./backend/alex-modules/intelligence/ContextIntelligenceEngine.js";
+import LearningMemorySystem from "./backend/alex-modules/intelligence/LearningMemorySystem.js";
+import IntelligentResponseGenerator from "./backend/alex-modules/intelligence/IntelligentResponseGenerator.js";
+import ExternalAPIManager from "./backend/alex-modules/intelligence/ExternalAPIManager.js";
+import QualityConfidenceScorer from "./backend/alex-modules/intelligence/QualityConfidenceScorer.js";
+import DecisionMakingEngine from "./backend/alex-modules/intelligence/DecisionMakingEngine.js";
+import SelfOptimizationSystem from "./backend/alex-modules/intelligence/SelfOptimizationSystem.js";
+import ConflictDetectionEngine from "./backend/alex-modules/intelligence/ConflictDetectionEngine.js";
 
 const PORT = process.env.PORT || 3003;
 
@@ -177,36 +187,112 @@ const createSimpleHTML = () => `
 </html>
 `;
 
-// Initialisation progressive du système
+// Initialisation progressive du système avec VRAIS modules
 async function initializeSystem() {
-    console.log("🔄 Initializing HustleFinder IA Phase 3 System...");
+    console.log("🔄 Initializing HustleFinder IA Phase 3 System with REAL modules...");
     
     try {
-        // Phase 1: Context Intelligence
+        // Phase 1: Context Intelligence - REAL MODULES
         console.log("🧠 Initializing Phase 1 - Context Intelligence...");
         
-        // Pour Railway, on utilise une approche simplifiée sans imports complexes
-        console.log("✅ Phase 1 components ready (simplified for Railway)");
+        // Initialiser Context Intelligence Engine
+        contextEngine = new ContextIntelligenceEngine({
+            databasePath: './data/context-intelligence.db',
+            enableMetrics: true,
+            adaptiveLearning: true
+        });
+        await contextEngine.initialize();
         
-        // Phase 2: Response Generation  
+        // Initialiser Learning Memory System
+        memorySystem = new LearningMemorySystem({
+            databasePath: './data/alex-memory.db',
+            enablePersistence: true,
+            adaptiveMemory: true
+        });
+        await memorySystem.initialize();
+        
+        console.log("✅ Phase 1 components initialized: Context Engine + Memory System");
+        
+        // Phase 2: Response Generation - REAL MODULES
         console.log("💡 Initializing Phase 2 - Response Generation...");
-        console.log("✅ Phase 2 components ready (simplified for Railway)");
         
-        // Phase 3: Autonomous Adaptation
+        // Initialiser API Manager
+        apiManager = new ExternalAPIManager({
+            enableOpenAI: true,
+            enableAnthropic: true,
+            enableGoogle: true,
+            fallbackMode: true
+        });
+        await apiManager.initialize();
+        
+        // Initialiser Response Generator
+        responseGenerator = new IntelligentResponseGenerator({
+            contextEngine: contextEngine,
+            memorySystem: memorySystem,
+            apiManager: apiManager
+        });
+        await responseGenerator.initialize();
+        
+        // Initialiser Quality Scorer
+        qualityScorer = new QualityConfidenceScorer({
+            enableMetrics: true,
+            adaptiveScoring: true
+        });
+        await qualityScorer.initialize();
+        
+        console.log("✅ Phase 2 components initialized: Response Generator + API Manager + Quality Scorer");
+        
+        // Phase 3: Autonomous Adaptation - REAL MODULES
         console.log("⚡ Initializing Phase 3 - Autonomous Adaptation...");
-        console.log("✅ Phase 3 components ready (simplified for Railway)");
+        
+        // Initialiser Decision Making Engine
+        decisionEngine = new DecisionMakingEngine({
+            contextEngine: contextEngine,
+            memorySystem: memorySystem,
+            enableAutonomy: true
+        });
+        await decisionEngine.initialize();
+        
+        // Initialiser Self Optimization System
+        optimizationSystem = new SelfOptimizationSystem({
+            contextEngine: contextEngine,
+            responseGenerator: responseGenerator,
+            enableRealTimeOptimization: true
+        });
+        await optimizationSystem.initialize();
+        
+        // Initialiser Conflict Detection Engine
+        conflictEngine = new ConflictDetectionEngine({
+            decisionEngine: decisionEngine,
+            optimizationSystem: optimizationSystem,
+            enableAutoResolution: true
+        });
+        await conflictEngine.initialize();
+        
+        console.log("✅ Phase 3 components initialized: Decision Engine + Optimization System + Conflict Engine");
         
         systemInitialized = true;
-        console.log("🚀 HustleFinder IA Phase 3 System fully initialized!");
+        console.log("🚀 HustleFinder IA Phase 3 System FULLY INITIALIZED with REAL modules!");
         
         return {
             status: "initialized",
-            phases: ["Phase 1: Context Intelligence", "Phase 2: Response Generation", "Phase 3: Autonomous Adaptation"],
+            phases: ["Phase 1: Context Intelligence ✓", "Phase 2: Response Generation ✓", "Phase 3: Autonomous Adaptation ✓"],
+            modules: {
+                contextEngine: contextEngine ? "✓ Active" : "✗ Failed",
+                memorySystem: memorySystem ? "✓ Active" : "✗ Failed",
+                responseGenerator: responseGenerator ? "✓ Active" : "✗ Failed",
+                apiManager: apiManager ? "✓ Active" : "✗ Failed",
+                qualityScorer: qualityScorer ? "✓ Active" : "✗ Failed",
+                decisionEngine: decisionEngine ? "✓ Active" : "✗ Failed",
+                optimizationSystem: optimizationSystem ? "✓ Active" : "✗ Failed",
+                conflictEngine: conflictEngine ? "✓ Active" : "✗ Failed"
+            },
             timestamp: new Date().toISOString(),
             environment: process.env.NODE_ENV || "production"
         };
     } catch (error) {
         console.error("❌ System initialization failed:", error);
+        console.error("Stack trace:", error.stack);
         systemInitialized = false;
         throw error;
     }
@@ -261,31 +347,54 @@ async function handleRequest(req, res) {
             return;
         }
         
-        // Status endpoint
+        // Status endpoint avec statut RÉEL des modules
         if (pathname === '/api/status') {
             const statusData = {
                 system: {
                     initialized: systemInitialized,
                     uptime: process.uptime(),
                     memory: process.memoryUsage(),
-                    environment: process.env.NODE_ENV || "production"
+                    environment: process.env.NODE_ENV || "production",
+                    railway_deployment: true
                 },
                 phases: {
                     phase1: {
                         name: "Context Intelligence Engine",
-                        status: "active",
+                        status: (contextEngine && memorySystem) ? "active" : "initializing",
+                        modules: {
+                            contextEngine: contextEngine ? "✓ Initialized" : "○ Pending",
+                            memorySystem: memorySystem ? "✓ Initialized" : "○ Pending"
+                        },
                         description: "Analyse et mémorisation contextes utilisateur"
                     },
                     phase2: {
                         name: "Response Generation System", 
-                        status: "active",
+                        status: (responseGenerator && apiManager && qualityScorer) ? "active" : "initializing",
+                        modules: {
+                            responseGenerator: responseGenerator ? "✓ Initialized" : "○ Pending",
+                            apiManager: apiManager ? "✓ Initialized" : "○ Pending",
+                            qualityScorer: qualityScorer ? "✓ Initialized" : "○ Pending"
+                        },
                         description: "Génération réponses intelligentes via APIs"
                     },
                     phase3: {
                         name: "Autonomous Adaptation Engine",
-                        status: "active", 
+                        status: (decisionEngine && optimizationSystem && conflictEngine) ? "active" : "initializing",
+                        modules: {
+                            decisionEngine: decisionEngine ? "✓ Initialized" : "○ Pending",
+                            optimizationSystem: optimizationSystem ? "✓ Initialized" : "○ Pending",
+                            conflictEngine: conflictEngine ? "✓ Initialized" : "○ Pending"
+                        },
                         description: "Prise de décision autonome et auto-optimisation"
                     }
+                },
+                capabilities: {
+                    real_ai_modules: systemInitialized,
+                    context_analysis: contextEngine !== null,
+                    intelligent_responses: responseGenerator !== null,
+                    autonomous_decisions: decisionEngine !== null,
+                    self_optimization: optimizationSystem !== null,
+                    conflict_resolution: conflictEngine !== null
                 },
                 timestamp: new Date().toISOString()
             };
@@ -324,29 +433,93 @@ async function handleRequest(req, res) {
             return;
         }
         
-        // Chat endpoint simplifié
+        // Chat endpoint avec VRAIS modules IA
         if (pathname === '/api/chat' && req.method === 'POST') {
             let body = '';
             req.on('data', chunk => body += chunk);
-            req.on('end', () => {
+            req.on('end', async () => {
                 try {
                     const data = JSON.parse(body);
+                    const userMessage = data.message || "Bonjour!";
+                    const userContext = data.context || {};
+                    
+                    if (!systemInitialized || !contextEngine || !responseGenerator) {
+                        res.writeHead(503, { 'Content-Type': 'application/json' });
+                        res.end(JSON.stringify({ 
+                            error: "System not fully initialized", 
+                            message: "Alex IA est en cours d'initialisation. Veuillez réessayer dans quelques instants."
+                        }));
+                        return;
+                    }
+                    
+                    // Phase 1: Analyse contextuelle RÉELLE
+                    const contextAnalysis = await contextEngine.analyzeContext(userMessage, userContext);
+                    
+                    // Phase 2: Génération réponse intelligente RÉELLE
+                    const responseData = await responseGenerator.generateResponse(userMessage, contextAnalysis);
+                    
+                    // Phase 3: Adaptation autonome RÉELLE
+                    let adaptationResult = null;
+                    if (decisionEngine && optimizationSystem) {
+                        const systemState = {
+                            userMessage,
+                            contextAnalysis,
+                            responseData
+                        };
+                        
+                        // Prise de décision autonome
+                        const decision = await decisionEngine.makeDecision(systemState, {}, { enableLearning: true });
+                        
+                        // Auto-optimisation
+                        const optimization = await optimizationSystem.runOptimizationCycle(
+                            { responseTime: Date.now() - performance.now() },
+                            { adaptiveThreshold: 0.8 }
+                        );
+                        
+                        adaptationResult = {
+                            decision: decision.decision || "maintain_current_approach",
+                            optimization: optimization.status || "no_optimization_needed"
+                        };
+                    }
+                    
+                    // Qualité et confiance RÉELLES
+                    let qualityScore = null;
+                    if (qualityScorer && responseData.response) {
+                        qualityScore = await qualityScorer.scoreResponse(responseData.response, userMessage, contextAnalysis);
+                    }
+                    
                     const response = {
-                        message: "HustleFinder IA Phase 3 répond: " + (data.message || "Bonjour!"),
-                        context_analysis: "Analyse contextuelle effectuée",
-                        response_quality: 0.95,
-                        confidence: 0.92,
-                        phase1_result: "Context Intelligence: Patterns détectés",
-                        phase2_result: "Response Generation: Réponse optimisée",
-                        phase3_result: "Autonomous Adaptation: Auto-ajustement appliqué",
+                        message: responseData.response || "Réponse générée par Alex IA Phase 3",
+                        context_analysis: {
+                            patterns_detected: contextAnalysis.patterns?.length || 0,
+                            context_score: contextAnalysis.contextScore || 0,
+                            memory_insights: contextAnalysis.memoryInsights || "Aucun insight mémorisé"
+                        },
+                        response_quality: qualityScore?.qualityScore || 0.85,
+                        confidence: qualityScore?.confidence || 0.80,
+                        phase1_result: `Context Intelligence: ${contextAnalysis.patterns?.length || 0} patterns détectés`,
+                        phase2_result: `Response Generation: ${responseData.source || 'Generated'} - Quality ${(qualityScore?.qualityScore || 0.85).toFixed(2)}`,
+                        phase3_result: `Autonomous Adaptation: ${adaptationResult?.decision || 'active'} - ${adaptationResult?.optimization || 'optimized'}`,
+                        modules_status: {
+                            contextEngine: "✓ Active",
+                            responseGenerator: "✓ Active", 
+                            decisionEngine: decisionEngine ? "✓ Active" : "○ Initializing",
+                            optimizationSystem: optimizationSystem ? "✓ Active" : "○ Initializing",
+                            qualityScorer: qualityScorer ? "✓ Active" : "○ Initializing"
+                        },
                         timestamp: new Date().toISOString()
                     };
                     
                     res.writeHead(200, { 'Content-Type': 'application/json' });
                     res.end(JSON.stringify(response, null, 2));
                 } catch (error) {
-                    res.writeHead(400, { 'Content-Type': 'application/json' });
-                    res.end(JSON.stringify({ error: "Invalid JSON" }));
+                    console.error("Chat endpoint error:", error);
+                    res.writeHead(500, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ 
+                        error: "Internal server error", 
+                        message: "Erreur lors du traitement de votre message",
+                        details: error.message
+                    }));
                 }
             });
             return;
