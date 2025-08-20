@@ -303,10 +303,25 @@ async function handleRequest(req, res) {
     const parsedUrl = url.parse(req.url, true);
     const { pathname, query } = parsedUrl;
     
-    // CORS headers
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    // CORS headers pour Vercel → Railway
+    const allowedOrigins = [
+        'https://hustlefinder-ia.vercel.app',
+        'https://*.vercel.app',
+        'http://localhost:5173',
+        'http://localhost:3000',
+        'http://localhost:3003'
+    ];
+    
+    const origin = req.headers.origin;
+    if (allowedOrigins.includes(origin) || origin?.endsWith('.vercel.app')) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    } else {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+    }
+    
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
     
     if (req.method === 'OPTIONS') {
         res.writeHead(200);
