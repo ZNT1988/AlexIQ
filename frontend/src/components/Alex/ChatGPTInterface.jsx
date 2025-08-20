@@ -49,7 +49,7 @@ const ChatGPTInterface = () => {
 
     try {
       // Connexion au backend Alex local
-      const response = await fetch('http://localhost:3003/api/chat', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -32,11 +32,9 @@ export default defineConfig({
     cors: true,
     proxy: {
       "/api": {
-        target: process.env.NODE_ENV === "production" 
-          ? "https://api.alexiq.site" 
-          : "http://localhost:3005",
+        target: "http://localhost:3003",
         changeOrigin: true,
-        secure: true,
+        secure: false,
         rewrite: path => path
       }
     }

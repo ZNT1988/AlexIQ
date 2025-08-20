@@ -84,7 +84,7 @@ Pose-moi n'importe quelle question et tu verras ma véritable autonomie en actio
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:8083/api/ai/chat', {
+      const response = await fetch('/api/chat', {
         method: 'POST'
         headers: {
           'Content-Type': 'application/json'

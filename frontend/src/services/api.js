@@ -10,7 +10,7 @@ const logger = {
   debug: (msg, ...args) => console.debug('[${new Date().toISOString()}] DEBUG:`, msg, ...args)
 };
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8082';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3003';
 const API_TIMEOUT = import.meta.env.VITE_API_TIMEOUT || 10000;
 
 class APIService {

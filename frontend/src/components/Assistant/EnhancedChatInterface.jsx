@@ -81,7 +81,7 @@ const EnhancedChatInterface = () => {
 
     try {
       // Call the backend API
-      const response = await fetch('http://localhost:8081/api/ai/chat', {
+      const response = await fetch('/api/chat', {
         method: 'POST'
         headers: {
           'Content-Type': 'application/json'

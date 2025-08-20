@@ -88,7 +88,7 @@ const AlexUltimateInterface = () => {
 
     try {
       // Appel API vers Alex Ultimate
-      const response = await fetch('http://localhost:8081/api/alex/chat', {
+      const response = await fetch('/api/chat', {
         method: 'POST'
         headers: {
           'Content-Type': 'application/json'
