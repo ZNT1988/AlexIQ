@@ -43,9 +43,7 @@ export function createCacheMiddleware(options = {}) {
         res.set("X-Cache-Key", cacheKey);
         return res.status(parsed.status || 200).json(parsed.data);
       }
-    } catch (error) {
-            
-    }
+    } catch (error) {}
 
     // Cache miss - proceed with request
     res.set("X-Cache", "MISS");
@@ -64,9 +62,7 @@ export function createCacheMiddleware(options = {}) {
         };
                 
         const ttl = intelligentTTL ? calculateIntelligentTTL(req, defaultTTL) : defaultTTL;
-        cache.set(cacheKey, JSON.stringify(cacheData), ttl).catch(err => {
-                    
-        });
+        cache.set(cacheKey, JSON.stringify(cacheData), ttl).catch(err => {});
       }
             
       return originalJson.call(this, data);
@@ -100,9 +96,7 @@ export async function clearCache(pattern = "*") {
     const cache = getRedisCache();
     await cache.flush();
         
-  } catch (error) {
-        
-  }
+  } catch (error) {}
 }
 
 export default createCacheMiddleware;

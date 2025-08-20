@@ -1,5 +1,8 @@
-import crypto from 'crypto';
 
+// Node.js globals
+/* global setInterval */
+
+import crypto from 'crypto';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_WARNING = 'warning';
@@ -12,7 +15,7 @@ const STR_HEALTHY = 'healthy';
  * Surveillance intelligente et monitoring temps réel pour l'écosystème HustleFinder IA
  *
  * @module Monitoring
- * @version 2.0.0
+ * @version 2?.0?.0
  * @author ZNT Team - HustleFinder IA Monitoring
  * @since 2024
  *
@@ -188,7 +191,7 @@ class PerformanceMonitor {
    */
   requestTracker() {
     return (req, res, next) => this.processLongOperation(args) else {
-          this.metrics.requests.errors++;
+          this?.metrics?.requests.errors++;
         }
 
         // Alert on slow responses
@@ -231,18 +234,18 @@ class PerformanceMonitor {
    * monitor.trackDatabaseQuery(Date.now() - startTime);
    */
   trackDatabaseQuery(queryTime) {
-    this.metrics.database.queries++;
-    this.metrics.database.queryTimes.push(queryTime);
+    this?.metrics?.database.queries++;
+    this?.metrics?.database.queryTimes.push(queryTime);
 
     // Keep only last 100 query times
-    if (this.metrics.database.queryTimes.length > 100) {
-      this.metrics.database.queryTimes.shift();
+    if (this?.metrics?.database.queryTimes.length > 100) {
+      this?.metrics?.database.queryTimes.shift();
     }
 
     // Update average
-    this.metrics.database.avgQueryTime =
-      this.metrics.database.queryTimes.reduce((sum, time) => sum + time, 0) /
-      this.metrics.database.queryTimes.length;
+    this?.metrics?.database.avgQueryTime =
+      this?.metrics?.database.queryTimes.reduce((sum, time) => sum + time, 0) /
+      this?.metrics?.database.queryTimes.length;
 
     // Alert on slow queries
     if (queryTime > 2000) { // 2 seconds
@@ -277,22 +280,22 @@ class PerformanceMonitor {
    * }
    */
   trackAIProcessing(processingTime, success = true) {
-    this.metrics.ai.requests++;
+    this?.metrics?.ai.requests++;
 
     if (success) {
-      this.metrics.ai.processingTimes.push(processingTime);
+      this?.metrics?.ai.processingTimes.push(processingTime);
 
       // Keep only last 50 processing times
-      if (this.metrics.ai.processingTimes.length > 50) {
-        this.metrics.ai.processingTimes.shift();
+      if (this?.metrics?.ai.processingTimes.length > 50) {
+        this?.metrics?.ai.processingTimes.shift();
       }
 
       // Update average
-      this.metrics.ai.avgProcessingTime =
-        this.metrics.ai.processingTimes.reduce((sum, time) => sum + time, 0) /
-        this.metrics.ai.processingTimes.length;
+      this?.metrics?.ai.avgProcessingTime =
+        this?.metrics?.ai.processingTimes.reduce((sum, time) => sum + time, 0) /
+        this?.metrics?.ai.processingTimes.length;
     } else {
-      this.metrics.ai.errors++;
+      this?.metrics?.ai.errors++;
     }
 
     // Alert on slow AI processing
@@ -309,17 +312,17 @@ class PerformanceMonitor {
    * @private
    */
   updateResponseTime(duration) {
-    this.metrics.requests.responseTimes.push(duration);
+    this?.metrics?.requests.responseTimes.push(duration);
 
     // Keep only last 100 response times
-    if (this.metrics.requests.responseTimes.length > 100) {
-      this.metrics.requests.responseTimes.shift();
+    if (this?.metrics?.requests.responseTimes.length > 100) {
+      this?.metrics?.requests.responseTimes.shift();
     }
 
     // Update average
-    this.metrics.requests.avgResponseTime =
-      this.metrics.requests.responseTimes.reduce((sum, time) => sum + time, 0) /
-      this.metrics.requests.responseTimes.length;
+    this?.metrics?.requests.avgResponseTime =
+      this?.metrics?.requests.responseTimes.reduce((sum, time) => sum + time, 0) /
+      this?.metrics?.requests.responseTimes.length;
   }
 
   /**
@@ -343,7 +346,7 @@ class PerformanceMonitor {
       if (memUsage.rss > 500 * 1024 * 1024) {
         this.addAlert('high_memory_usage', {
           current: Math.round(memUsage.rss / 1024 / 1024)
-          peak: Math.round(this.metrics.memory.peak / 1024 / 1024)
+          peak: Math.round(this?.metrics?.memory.peak / 1024 / 1024)
         });
       }
 
@@ -374,27 +377,27 @@ class PerformanceMonitor {
     try {
       // Memory check
       const memUsage = process.memoryUsage();
-      health.checks.memory = {
+      health?.checks?.memory = {
         status: memUsage.rss < 500 * 1024 * 1024 ? STR_HEALTHY : STR_WARNING
         usage: Math.round(memUsage.rss / 1024 / 1024) + 'MB'
       };
 
       // Response time check
-      health.checks.responseTime = {
-        status: this.metrics.requests.avgResponseTime < 1000 ? STR_HEALTHY : STR_WARNING
-        avgTime: Math.round(this.metrics.requests.avgResponseTime) + 'ms'
+      health?.checks?.responseTime = {
+        status: this?.metrics?.requests.avgResponseTime < 1000 ? STR_HEALTHY : STR_WARNING
+        avgTime: Math.round(this?.metrics?.requests.avgResponseTime) + 'ms'
       };
 
       // Error rate check
       const errorRate = this.getErrorRate();
-      health.checks.errorRate = {
+      health?.checks?.errorRate = {
         status: errorRate < 0.05 ? STR_HEALTHY : STR_WARNING
         rate: (errorRate * 100).toFixed(2) + '%'
       };
 
       // Cache check
       const cacheStats = cache.getStats();
-      health.checks.cache = {
+      health?.checks?.cache = {
         status: STR_HEALTHY
         hitRate: cacheStats.hitRate
         size: cacheStats.size
@@ -453,11 +456,11 @@ class PerformanceMonitor {
       acknowledged: false
     };
 
-    this.alerts.push(alert);
+    this?.alerts?.push(alert);
 
     // Keep only last 100 alerts
-    if (this.alerts.length > 100) {
-      this.alerts.shift();
+    if (this?.alerts?.length > 100) {
+      this?.alerts?.shift();
     }
 
     try {
@@ -479,8 +482,8 @@ class PerformanceMonitor {
     if (errorRate > 0.1) { // 10% error rate
       this.addAlert('high_error_rate', {
         rate: (errorRate * 100).toFixed(2) + '%'
-        errors: this.metrics.requests.errors
-        total: this.metrics.requests.total
+        errors: this?.metrics?.requests.errors
+        total: this?.metrics?.requests.total
       });
     }
   }
@@ -496,8 +499,8 @@ class PerformanceMonitor {
    * logger.info(`Error rate: ${(errorRate * 100).toFixed(2)}%`);
    */
   getErrorRate() {
-    if (this.metrics.requests.total === 0) return 0;
-    return this.metrics.requests.errors / this.metrics.requests.total;
+    if (this?.metrics?.requests.total === 0) return 0;
+    return this?.metrics?.requests.errors / this?.metrics?.requests.total;
   }
 
   /**
@@ -520,13 +523,13 @@ class PerformanceMonitor {
    * // Dashboard monitoring
    * const metrics = monitor.getMetrics();
    * logger.info(`Uptime: ${Math.round(metrics.uptime/1000)}s');
-   * logger.info('Requests: ${metrics.requests.total}');
-   * logger.info('AI avg time: ${metrics.ai.avgProcessingTime}ms`);
+   * logger.info('Requests: ${metrics?.requests?.total}');
+   * logger.info('AI avg time: ${metrics?.ai?.avgProcessingTime}ms`);
    */
   getMetrics() {
     // Update cache metrics
     const cacheStats = cache.getStats();
-    this.metrics.cache = {
+    this?.metrics?.cache = {
       hits: cacheStats.hits
       misses: cacheStats.misses
       hitRate: parseFloat(cacheStats.hitRate)
@@ -537,7 +540,7 @@ class PerformanceMonitor {
       uptime: Date.now() - this.startTime
       timestamp: new Date().toISOString()
       errorRate: this.getErrorRate()
-      alerts: this.alerts.filter(alert => !alert.acknowledged).length
+      alerts: this?.alerts?.filter(alert => !alert.acknowledged).length
     };
   }
 
@@ -553,7 +556,7 @@ class PerformanceMonitor {
    * const resolvedAlerts = monitor.getAlerts(true); // Acknowledged
    */
   getAlerts(acknowledged = false) {
-    return this.alerts.filter(alert => alert.acknowledged === acknowledged);
+    return this?.alerts?.filter(alert => alert.acknowledged === acknowledged);
   }
 
   /**
@@ -566,7 +569,7 @@ class PerformanceMonitor {
    * monitor.acknowledgeAlert('alert_123456');
    */
   acknowledgeAlert(alertId) {
-    const alert = this.alerts.find(a => a.id === alertId);
+    const alert = this?.alerts?.find(a => a.id === alertId);
     if (alert) {
       alert.acknowledged = true;
       try {

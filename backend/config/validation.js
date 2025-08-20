@@ -1,4 +1,5 @@
 
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_ACTIVE = 'active';
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
@@ -13,7 +14,7 @@ const STR_MARKETPLACE = 'marketplace';
  * Schémas de validation Joi avancés pour l'écosystème HustleFinder IA complet
  *
  * @module Validation
- * @version 2.0.0
+ * @version 2?.0?.0
  * @author ZNT Team - HustleFinder IA Validation
  * @since 2024
  *
@@ -49,12 +50,12 @@ const STR_MARKETPLACE = 'marketplace';
  * @example
  * // Validation utilisateur
  * import { userSchemas } from './validation.js';
- * const { error, value } = userSchemas.register.validate(userData);
+ * const { error, value } = userSchemas?.register?.validate(userData);
  *
  * @example
  * // Validation interaction IA ALEX
  * import { aiSchemas } from './validation.js';
- * const result = aiSchemas.chat.validate({ message: 'Hello ALEX' });
+ * const result = aiSchemas?.chat?.validate({ message: 'Hello ALEX' });
  */
 
 // Enterprise Validation Schemas for HustleFinderIA
@@ -174,13 +175,13 @@ const customValidators = {
  * @example
  * // Validation inscription
  * import { userSchemas } from './validation.js';
- * const { error, value } = userSchemas.register.validate(newUserData);
+ * const { error, value } = userSchemas?.register?.validate(newUserData);
  * if (error) throw new Error('Invalid user data');
  */
 export const userSchemas = {
   register: Joi.object({
     email: Joi.string().pattern(patterns.email).required().messages({
-      'string.pattern.base': 'Please provide a valid email address'
+      'string?.pattern?.base': 'Please provide a valid email address'
     })
     password: Joi.string().custom(customValidators.strongPassword).required().messages({
       STR_PASSWORD_MIN: 'Password must be at least 8 characters long'
@@ -245,8 +246,8 @@ export const userSchemas = {
  * @example
  * // Validation nouvelle idée
  * import { ideaSchemas } from './validation.js';
- * const result = ideaSchemas.create.validate(ideaData);
- * if (result.error) throw new ValidationError(result.error.details);
+ * const result = ideaSchemas?.create?.validate(ideaData);
+ * if (result.error) throw new ValidationError(result?.error?.details);
  */
 export const ideaSchemas = {
   create: Joi.object({
@@ -323,7 +324,7 @@ export const ideaSchemas = {
  * @example
  * // Validation interaction ALEX
  * import { aiSchemas } from './validation.js';
- * const result = aiSchemas.chat.validate({ message: 'Hello ALEX', model: STR_QUANTUM });
+ * const result = aiSchemas?.chat?.validate({ message: 'Hello ALEX', model: STR_QUANTUM });
  */
 export const aiSchemas = {
   chat: Joi.object({
@@ -392,7 +393,7 @@ export const aiSchemas = {
  * @example
  * // Validation nouveau projet
  * import { projectSchemas } from './validation.js';
- * const { error } = projectSchemas.create.validate(projectData);
+ * const { error } = projectSchemas?.create?.validate(projectData);
  */
 export const projectSchemas = {
   create: Joi.object({
@@ -469,7 +470,7 @@ export const projectSchemas = {
  * @example
  * // Validation calcul ROI
  * import { roiSchemas } from './validation.js';
- * const result = roiSchemas.calculate.validate(roiData);
+ * const result = roiSchemas?.calculate?.validate(roiData);
  */
 export const roiSchemas = {
   calculate: Joi.object({
@@ -528,7 +529,7 @@ export const roiSchemas = {
  * @example
  * // Validation pagination
  * import { querySchemas } from './validation.js';
- * const params = querySchemas.pagination.validate(req.query);
+ * const params = querySchemas?.pagination?.validate(req.query);
  */
 export const querySchemas = {
   pagination: Joi.object({

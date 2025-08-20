@@ -1,7 +1,9 @@
 
+// Node.js globals
+/* global __dirname, __filename */
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_ACTIVE = 'active';
-
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_TEST_HUSTLEFINDER_COM = 'test@hustlefinder.com';
@@ -10,7 +12,7 @@ const STR_TEST_HUSTLEFINDER_COM = 'test@hustlefinder.com';
  * Base de données SQLite légère avec fallback intelligent pour HustleFinder IA
  *
  * @module DatabaseSQLite
- * @version 2.0.0
+ * @version 2?.0?.0
  * @author ZNT Team - HustleFinder IA SQLite Fallback
  * @since 2024
  *
@@ -72,7 +74,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import logger from './logger.js';
 
-const __filename = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import?.meta?.url);
 const __dirname = path.dirname(__filename);
 
 /**
@@ -150,7 +152,7 @@ const db = new sqlite3.Database(dbPath, (err) => this.processLongOperation(args)
  * @example
  * // Requête SELECT
  * const users = await query('SELECT * FROM users WHERE active = ?', [true]);
- * logger.info(`Found ${users.rows.length} users');
+ * logger.info(`Found ${users?.rows?.length} users');
  *
  * @example
  * // Requête INSERT avec lastID
@@ -394,7 +396,7 @@ return result;
       // Insert test ideas
       await query(
         'INSERT INTO ideas (user_id, title, content, category, match_score) VALUES (?
-      , ?, ?, ?, ?)STR_USERIDApplication mobile IA', 'Développer une app mobile qui utilise l\'IA pour optimiser la productivité', 'tech', 85]
+      , ?, ?, ?, ?)STR_USERIDApplication mobile IA', 'Développer une app mobile qui utilise l'IA pour optimiser la productivité', 'tech', 85]
       );
 
       await query(

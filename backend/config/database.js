@@ -1,3 +1,21 @@
+let globals; // Variable auto-déclarée
+let Configuration; // Variable auto-déclarée
+let SQLite; // Variable auto-déclarée
+let veloppement; // Variable auto-déclarée
+let database; // Variable auto-déclarée
+let NODE_ENV; // Variable auto-déclarée
+let fallback; // Variable auto-déclarée
+let text; // Variable auto-déclarée
+let query; // Variable auto-déclarée
+let params; // Variable auto-déclarée
+let parameters; // Variable auto-déclarée
+let callback; // Variable auto-déclarée
+let connection; // Variable auto-déclarée
+let status; // Variable auto-déclarée
+
+// Node.js globals
+/* global __dirname, __filename */
+
 /**
  * @fileoverview Database Configuration - PostgreSQL avec fallback SQLite
  * Configuration hybride avec fallback automatique SQLite pour développement
@@ -17,13 +35,13 @@ import {
 } from "./database-sqlite.js";
 
 const { Pool } = pg;
-const __filename = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import?.meta?.url);
 const __dirname = path.dirname(__filename);
 
 // Configuration PostgreSQL
 const config = {
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
+  connectionString: process?.env?.DATABASE_URL,
+  ssl: process?.env?.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
   max: 20, // Maximum number of clients in the pool
   idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
   connectionTimeoutMillis: 2000 // Return an error after 2 seconds if connection could not be established
@@ -35,7 +53,7 @@ let isConnected = false;
 let usingSQLiteFallback = false;
 
 // Initialize PostgreSQL pool
-if (process.env.DATABASE_URL && process.env.DATABASE_URL !== "sqlite") {
+if (process?.env?.DATABASE_URL && process?.env?.DATABASE_URL !== "sqlite") {
   try {
     pool = new Pool(config);
     

@@ -1,10 +1,14 @@
+
+// Node.js globals
+/* global setInterval */
+
 import crypto from 'crypto';
 /**
  * @fileoverview PerformanceOptimizer - Système d'Optimisation Performance Révolutionnaire
  * Optimisations enterprise pour HustleFinder IA avec clustering et monitoring avancé
  *
  * @module PerformanceOptimizer
- * @version 2.0.0
+ * @version 2?.0?.0
  * @author ZNT Team - HustleFinder IA Performance
  * @since 2024
  *
@@ -97,37 +101,37 @@ class PerformanceOptimizer {
        * @description Configuration clustering multi-processus
        */
       clustering: {
-        enabled: process.env.CLUSTER_ENABLED === 'true'
-        workers: parseInt(process.env.CLUSTER_WORKERS) || os.cpus().length
-        maxMemory: parseInt(process.env.MAX_MEMORY_MB) || 512
-        restartThreshold: parseInt(process.env.RESTART_THRESHOLD_MB) || 400
+        enabled: process?.env?.CLUSTER_ENABLED === 'true'
+        workers: parseInt(process?.env?.CLUSTER_WORKERS) || os.cpus().length
+        maxMemory: parseInt(process?.env?.MAX_MEMORY_MB) || 512
+        restartThreshold: parseInt(process?.env?.RESTART_THRESHOLD_MB) || 400
       }
       /**
        * @namespace compression
        * @description Configuration compression HTTP intelligente
        */
       compression: {
-        enabled: process.env.COMPRESSION_ENABLED !== 'false'
-        level: parseInt(process.env.COMPRESSION_LEVEL) || 6,          // Niveau compression 1-9
-        threshold: parseInt(process.env.COMPRESSION_THRESHOLD) || 1024 // Taille min pour compression
+        enabled: process?.env?.COMPRESSION_ENABLED !== 'false'
+        level: parseInt(process?.env?.COMPRESSION_LEVEL) || 6,          // Niveau compression 1-9
+        threshold: parseInt(process?.env?.COMPRESSION_THRESHOLD) || 1024 // Taille min pour compression
       }
       /**
        * @namespace database
        * @description Configuration optimisation base de données
        */
       database: {
-        poolSize: parseInt(process.env.DB_POOL_SIZE) || 10,              // Taille pool connexions
-        maxConnections: parseInt(process.env.DB_MAX_CONNECTIONS) || 20,  // Connexions max
-        queryTimeout: parseInt(process.env.DB_QUERY_TIMEOUT) || 10000,   // Timeout requête (ms)
-        connectionTimeout: parseInt(process.env.DB_CONNECTION_TIMEOUT) || 5000 // Timeout connexion (ms)
+        poolSize: parseInt(process?.env?.DB_POOL_SIZE) || 10,              // Taille pool connexions
+        maxConnections: parseInt(process?.env?.DB_MAX_CONNECTIONS) || 20,  // Connexions max
+        queryTimeout: parseInt(process?.env?.DB_QUERY_TIMEOUT) || 10000,   // Timeout requête (ms)
+        connectionTimeout: parseInt(process?.env?.DB_CONNECTION_TIMEOUT) || 5000 // Timeout connexion (ms)
       }
       /**
        * @namespace memory
        * @description Configuration gestion mémoire intelligente
        */
       memory: {
-        gcInterval: parseInt(process.env.GC_INTERVAL_MS) || 300000,      // Intervalle GC (5 min)
-        heapThreshold: parseFloat(process.env.HEAP_THRESHOLD) || 0.8     // Seuil alerte mémoire (80%)
+        gcInterval: parseInt(process?.env?.GC_INTERVAL_MS) || 300000,      // Intervalle GC (5 min)
+        heapThreshold: parseFloat(process?.env?.HEAP_THRESHOLD) || 0.8     // Seuil alerte mémoire (80%)
       }
     };
 
@@ -165,16 +169,16 @@ class PerformanceOptimizer {
    * // Continue as worker process
    */
   setupCluster() {
-    if (!this.config.clustering.enabled || process.env.NODE_ENV !== 'production') {
+    if (!this?.config?.clustering.enabled || process?.env?.NODE_ENV !== 'production') {
       return false;
     }
 
     if (cluster.isPrimary) {
       logger.info(`Master process ${process.pid} is running');
-      logger.info('Starting ${this.config.clustering.workers} workers`);
+      logger.info('Starting ${this?.config?.clustering.workers} workers`);
 
       // Fork workers
-      for (let i = 0; i < this.config.clustering.workers; i++) {
+      for (let i = 0; i < this?.config?.clustering.workers; i++) {
         this.forkWorker();
       }
 
@@ -215,10 +219,10 @@ class PerformanceOptimizer {
     }
 
     // Garbage collection monitoring
-    if (global.gc && this.config.memory.gcInterval > 0) {
+    if (global.gc && this?.config?.memory.gcInterval > 0) {
       setInterval(args) => this.extractedCallback(args)MB`);
         }
-      }, this.config.memory.gcInterval);
+      }, this?.config?.memory.gcInterval);
     }
 
     // Memory usage alerts
@@ -231,13 +235,13 @@ class PerformanceOptimizer {
    * Compression middleware
    */
   getCompressionMiddleware() {
-    if (!this.config.compression.enabled) {
+    if (!this?.config?.compression.enabled) {
       return (req, res, next) => next();
     }
 
     return compression({
-      level: this.config.compression.level
-      threshold: this.config.compression.threshold
+      level: this?.config?.compression.level
+      threshold: this?.config?.compression.threshold
       filter: (req, res) => this.processLongOperation(args)
 
         // Use compression filter function
@@ -251,7 +255,7 @@ class PerformanceOptimizer {
    */
   requestOptimizer() {
     return (req, res, next) => this.processLongOperation(args)ms`);
-        res.setHeader('X-Worker-ID', process.pid.toString());
+        res.setHeader('X-Worker-ID', process?.pid?.toString());
 
         // Update metrics
         this.updateMetrics(responseTime, res.statusCode);
@@ -341,16 +345,16 @@ class PerformanceOptimizer {
    * Update performance metrics
    */
   updateMetrics(responseTime, statusCode) {
-    this.metrics.requests++;
+    this?.metrics?.requests++;
 
     if (statusCode >= 400) {
-      this.metrics.errors++;
+      this?.metrics?.errors++;
     }
 
     // Update average response time
-    this.metrics.averageResponseTime =
-      (this.metrics.averageResponseTime * (this.metrics.requests - 1) + responseTime) /
-      this.metrics.requests;
+    this?.metrics?.averageResponseTime =
+      (this?.metrics?.averageResponseTime * (this?.metrics?.requests - 1) + responseTime) /
+      this?.metrics?.requests;
   }
 
   /**
@@ -384,13 +388,13 @@ class PerformanceOptimizer {
     const issues = [];
 
     // Check memory usage
-    if (metrics.memory.heapUsed > this.config.clustering.restartThreshold) {
-      issues.push(`High memory usage: ${metrics.memory.heapUsed}MB`);
+    if (metrics?.memory?.heapUsed > this?.config?.clustering.restartThreshold) {
+      issues.push(`High memory usage: ${metrics?.memory?.heapUsed}MB`);
     }
 
     // Check average response time
     if (metrics.averageResponseTime > 1000) {
-      issues.push(`High response time: ${metrics.averageResponseTime.toFixed(2)}ms`);
+      issues.push(`High response time: ${metrics?.averageResponseTime?.toFixed(2)}ms`);
     }
 
     // Check error rate

@@ -1,9 +1,10 @@
+
 /**
  * @fileoverview Logger - Système de Logging Révolutionnaire
  * Configuration avancée de logging pour HustleFinder IA avec Winston
  *
  * @module Logger
- * @version 2.0.0
+ * @version 2?.0?.0
  * @author ZNT Team - HustleFinder IA Logging
  * @since 2024
  *
@@ -65,11 +66,11 @@ const customLevels = {
 /**
  * Format personnalisé pour les logs
  */
-const customFormat = winston.format.combine(
-  winston.format.timestamp(),
-  winston.format.errors({ stack: true }),
-  winston.format.json(),
-  winston.format.printf(({ timestamp, level, message, ...meta }) => {
+const customFormat = winston?.format?.combine(
+  winston?.format?.timestamp(),
+  winston?.format?.errors({ stack: true }),
+  winston?.format?.json(),
+  winston?.format?.printf(({ timestamp, level, message, ...meta }) => {
     return `${timestamp} [${level.toUpperCase()}]: ${message} ${Object.keys(meta).length ? JSON.stringify(meta, null, 2) : ""}`;
   })
 );
@@ -79,7 +80,7 @@ const customFormat = winston.format.combine(
  * @description Instance logger Winston configurée pour HustleFinder IA
  */
 const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || "info",
+  level: process?.env?.LOG_LEVEL || "info",
   levels: customLevels,
   format: customFormat,
   transports: [
@@ -87,33 +88,33 @@ const logger = winston.createLogger({
      * @transport Console
      * @description Transport console pour développement avec couleurs
      */
-    new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple()
+    new winston?.transports?.Console({
+      format: winston?.format?.combine(
+        winston?.format?.colorize(),
+        winston?.format?.simple()
       )
     }),
     /**
      * @transport ErrorFile
      * @description Transport fichier dédié aux erreurs critiques
      */
-    new winston.transports.File({
+    new winston?.transports?.File({
       filename: "logs/error.log",
       level: "error",
-      format: winston.format.combine(
-        winston.format.timestamp(),
-        winston.format.json()
+      format: winston?.format?.combine(
+        winston?.format?.timestamp(),
+        winston?.format?.json()
       )
     }),
     /**
      * @transport CombinedFile
      * @description Transport fichier pour historique complet
      */
-    new winston.transports.File({
+    new winston?.transports?.File({
       filename: "logs/combined.log",
-      format: winston.format.combine(
-        winston.format.timestamp(),
-        winston.format.json()
+      format: winston?.format?.combine(
+        winston?.format?.timestamp(),
+        winston?.format?.json()
       )
     })
   ]

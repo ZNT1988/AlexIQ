@@ -1,0 +1,779 @@
+{
+  "timestamp": "2025-08-18T15:45:42.759Z",
+  "summary": {
+    "totalModules": 172,
+    "fakeAiCount": 27,
+    "corruptedCount": 168,
+    "healthyCount": 1
+  },
+  "mostCorrupted": [
+    {
+      "filepath": "backend/alex-core/AlexMasterSystem.js",
+      "size": 90063,
+      "lines": 2315,
+      "corruptionScore": 880,
+      "corruptionIssues": [
+        "unterminatedStrings: 706",
+        "malformedObjects: 2",
+        "duplicateIds: 55",
+        "regexErrors: 7"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "core"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexBlockchainOracle.js",
+      "size": 88629,
+      "lines": 2987,
+      "corruptionScore": 629,
+      "corruptionIssues": [
+        "unterminatedStrings: 363",
+        "malformedObjects: 8",
+        "duplicateIds: 86"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "consciousness"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexCosmicInterface.js",
+      "size": 79171,
+      "lines": 2215,
+      "corruptionScore": 612,
+      "corruptionIssues": [
+        "unterminatedStrings: 403",
+        "malformedObjects: 2",
+        "duplicateIds: 69"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "consciousness"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexUniversalCompanion.js",
+      "size": 87005,
+      "lines": 1567,
+      "corruptionScore": 568,
+      "corruptionIssues": [
+        "unterminatedStrings: 513",
+        "duplicateIds: 18",
+        "regexErrors: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "hello[,!]"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AlexAutonomousCore.js",
+      "size": 103537,
+      "lines": 2542,
+      "corruptionScore": 477,
+      "corruptionIssues": [
+        "unterminatedStrings: 410",
+        "malformedObjects: 9",
+        "duplicateIds: 19",
+        "regexErrors: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "hello[,!]"
+      ],
+      "category": "core"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\NeuralCore.js",
+      "size": 8862,
+      "lines": 179,
+      "corruptionScore": 270,
+      "corruptionIssues": [
+        "unterminatedStrings: 54",
+        "duplicateIds: 72"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "intelligence"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\NeuroCore.js",
+      "size": 65223,
+      "lines": 1850,
+      "corruptionScore": 268,
+      "corruptionIssues": [
+        "unterminatedStrings: 263",
+        "malformedObjects: 5"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "backend/alex-core/AlexKernel.js",
+      "size": 19820,
+      "lines": 642,
+      "corruptionScore": 264,
+      "corruptionIssues": [
+        "autoVars: 53",
+        "unterminatedStrings: 53",
+        "duplicateIds: 5",
+        "regexErrors: 90"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "core"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\InnerDialogueEngine.js",
+      "size": 53482,
+      "lines": 1643,
+      "corruptionScore": 260,
+      "corruptionIssues": [
+        "unterminatedStrings: 254",
+        "malformedObjects: 6"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "intelligence"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\PurchasePredictor.js",
+      "size": 42899,
+      "lines": 1390,
+      "corruptionScore": 247,
+      "corruptionIssues": [
+        "unterminatedStrings: 212",
+        "malformedObjects: 28",
+        "duplicateIds: 1",
+        "regexErrors: 4"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\HealthPredictor.js",
+      "size": 37266,
+      "lines": 1296,
+      "corruptionScore": 239,
+      "corruptionIssues": [
+        "unterminatedStrings: 160",
+        "malformedObjects: 49",
+        "duplicateIds: 10"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\VisionProFactory.js",
+      "size": 38673,
+      "lines": 1330,
+      "corruptionScore": 239,
+      "corruptionIssues": [
+        "unterminatedStrings: 188",
+        "malformedObjects: 38",
+        "duplicateIds: 2",
+        "regexErrors: 7"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexKnowledgeGraph.js",
+      "size": 26480,
+      "lines": 925,
+      "corruptionScore": 238,
+      "corruptionIssues": [
+        "unterminatedStrings: 116",
+        "malformedObjects: 2",
+        "duplicateIds: 40"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "consciousness"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\BioSensorAdapter.js",
+      "size": 35550,
+      "lines": 1250,
+      "corruptionScore": 238,
+      "corruptionIssues": [
+        "unterminatedStrings: 148",
+        "malformedObjects: 57",
+        "duplicateIds: 11"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AppStoreModuleManager.js",
+      "size": 56349,
+      "lines": 1735,
+      "corruptionScore": 236,
+      "corruptionIssues": [
+        "unterminatedStrings: 227",
+        "malformedObjects: 7",
+        "regexErrors: 2"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "core"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\LanguageProcessor.js",
+      "size": 43856,
+      "lines": 1214,
+      "corruptionScore": 236,
+      "corruptionIssues": [
+        "unterminatedStrings: 179",
+        "malformedObjects: 9",
+        "duplicateIds: 15",
+        "regexErrors: 3"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "hello[,!]",
+        "placeholder"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\TechnicalDocReader.js",
+      "size": 39639,
+      "lines": 1138,
+      "corruptionScore": 235,
+      "corruptionIssues": [
+        "unterminatedStrings: 206",
+        "malformedObjects: 22",
+        "duplicateIds: 1",
+        "regexErrors: 4"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexNetworkIntelligence.js",
+      "size": 59744,
+      "lines": 1522,
+      "corruptionScore": 232,
+      "corruptionIssues": [
+        "unterminatedStrings: 207",
+        "malformedObjects: 6",
+        "duplicateIds: 6",
+        "regexErrors: 1"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "consciousness"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\VoiceSynthesisMultilang.js",
+      "size": 32356,
+      "lines": 1142,
+      "corruptionScore": 224,
+      "corruptionIssues": [
+        "unterminatedStrings: 142",
+        "malformedObjects: 70",
+        "duplicateIds: 4"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "hello[,!]"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\EyeTracking.js",
+      "size": 34582,
+      "lines": 1207,
+      "corruptionScore": 219,
+      "corruptionIssues": [
+        "unterminatedStrings: 97",
+        "malformedObjects: 5",
+        "duplicateIds: 39"
+      ],
+      "isFakeAi": false,
+      "fakeAiIssues": [],
+      "category": "intelligence"
+    }
+  ],
+  "fakeAiModules": [
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AlexAutonomousCore.js",
+      "size": 103537,
+      "lines": 2542,
+      "corruptionScore": 477,
+      "corruptionIssues": [
+        "unterminatedStrings: 410",
+        "malformedObjects: 9",
+        "duplicateIds: 19",
+        "regexErrors: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "hello[,!]"
+      ],
+      "category": "core"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AlexSaaSArchitecture.js",
+      "size": 10031,
+      "lines": 379,
+      "corruptionScore": 41,
+      "corruptionIssues": [
+        "unterminatedStrings: 40",
+        "malformedObjects: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "fake ai"
+      ],
+      "category": "core"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\NeuroCore.js",
+      "size": 24079,
+      "lines": 748,
+      "corruptionScore": 126,
+      "corruptionIssues": [
+        "unterminatedStrings: 118",
+        "malformedObjects: 2",
+        "duplicateIds: 1",
+        "regexErrors: 3"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "core"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\creative\\AlexCreativeEngine.js",
+      "size": 18928,
+      "lines": 694,
+      "corruptionScore": 162,
+      "corruptionIssues": [
+        "unterminatedStrings: 125",
+        "malformedObjects: 25",
+        "duplicateIds: 4"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "creative"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\creative\\AlexCreativeLearningSystem.js",
+      "size": 27407,
+      "lines": 770,
+      "corruptionScore": 155,
+      "corruptionIssues": [
+        "unterminatedStrings: 134",
+        "malformedObjects: 20",
+        "regexErrors: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "creative"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\creative\\QuantumCreativity.js",
+      "size": 16650,
+      "lines": 423,
+      "corruptionScore": 46,
+      "corruptionIssues": [
+        "unterminatedStrings: 43",
+        "malformedObjects: 3"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "creative"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\ContextIntelligence.js",
+      "size": 22356,
+      "lines": 599,
+      "corruptionScore": 130,
+      "corruptionIssues": [
+        "unterminatedStrings: 111",
+        "malformedObjects: 6",
+        "duplicateIds: 3",
+        "regexErrors: 4"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "Hardcoded: return \"Re-bonjour ! Ça fait un moment ! Que puis-...",
+        "Hardcoded: return \"Re-bonjour ! Content de vous revoir. Comme..."
+      ],
+      "category": "intelligence"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\EmotionalIntelligence.js",
+      "size": 20427,
+      "lines": 617,
+      "corruptionScore": 98,
+      "corruptionIssues": [
+        "unterminatedStrings: 87",
+        "malformedObjects: 5",
+        "regexErrors: 6"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "intelligence"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\MultiModalFusion.js",
+      "size": 3699,
+      "lines": 123,
+      "corruptionScore": 13,
+      "corruptionIssues": [
+        "unterminatedStrings: 12",
+        "malformedObjects: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "fake ai"
+      ],
+      "category": "intelligence"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\TopDownAttention.js",
+      "size": 3699,
+      "lines": 123,
+      "corruptionScore": 13,
+      "corruptionIssues": [
+        "unterminatedStrings: 12",
+        "malformedObjects: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "fake ai"
+      ],
+      "category": "intelligence"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexAutonomousCore.js",
+      "size": 24211,
+      "lines": 767,
+      "corruptionScore": 137,
+      "corruptionIssues": [
+        "unterminatedStrings: 125",
+        "malformedObjects: 4",
+        "duplicateIds: 2",
+        "regexErrors: 2"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "hello[,!]",
+        "placeholder"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexCreativeEngine.js",
+      "size": 20031,
+      "lines": 656,
+      "corruptionScore": 155,
+      "corruptionIssues": [
+        "unterminatedStrings: 137",
+        "malformedObjects: 2",
+        "duplicateIds: 4",
+        "regexErrors: 4"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexCreativeLearningSystem.js",
+      "size": 20619,
+      "lines": 642,
+      "corruptionScore": 112,
+      "corruptionIssues": [
+        "unterminatedStrings: 99",
+        "malformedObjects: 4",
+        "duplicateIds: 3"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexUniversalCompanion.js",
+      "size": 87005,
+      "lines": 1567,
+      "corruptionScore": 568,
+      "corruptionIssues": [
+        "unterminatedStrings: 513",
+        "duplicateIds: 18",
+        "regexErrors: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "hello[,!]"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\ContextIntelligence.js",
+      "size": 20248,
+      "lines": 512,
+      "corruptionScore": 114,
+      "corruptionIssues": [
+        "unterminatedStrings: 102",
+        "malformedObjects: 6",
+        "duplicateIds: 1",
+        "regexErrors: 3"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "Hardcoded: return \"Salut ! Je suis Alex, ton assistant IA. Co..."
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\DreamCompiler.js",
+      "size": 15735,
+      "lines": 517,
+      "corruptionScore": 40,
+      "corruptionIssues": [
+        "unterminatedStrings: 39",
+        "malformedObjects: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "fake ai"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\EmotionalIntelligence.js",
+      "size": 19084,
+      "lines": 595,
+      "corruptionScore": 89,
+      "corruptionIssues": [
+        "unterminatedStrings: 77",
+        "malformedObjects: 6",
+        "regexErrors: 6"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\FunctionBuilder.js",
+      "size": 6537,
+      "lines": 233,
+      "corruptionScore": 27,
+      "corruptionIssues": [
+        "unterminatedStrings: 26",
+        "malformedObjects: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "fake ai"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\LanguageProcessor.js",
+      "size": 43856,
+      "lines": 1214,
+      "corruptionScore": 236,
+      "corruptionIssues": [
+        "unterminatedStrings: 179",
+        "malformedObjects: 9",
+        "duplicateIds: 15",
+        "regexErrors: 3"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "hello[,!]",
+        "placeholder"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\NeuroCore.js",
+      "size": 65223,
+      "lines": 1850,
+      "corruptionScore": 268,
+      "corruptionIssues": [
+        "unterminatedStrings: 263",
+        "malformedObjects: 5"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\QuantumCreativity.js",
+      "size": 30354,
+      "lines": 965,
+      "corruptionScore": 136,
+      "corruptionIssues": [
+        "unterminatedStrings: 99",
+        "malformedObjects: 2",
+        "duplicateIds: 11",
+        "regexErrors: 2"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\SupplierOptimizer.js",
+      "size": 3701,
+      "lines": 123,
+      "corruptionScore": 13,
+      "corruptionIssues": [
+        "unterminatedStrings: 12",
+        "malformedObjects: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "fake ai"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\TemporalPredictor.js",
+      "size": 20399,
+      "lines": 631,
+      "corruptionScore": 111,
+      "corruptionIssues": [
+        "unterminatedStrings: 88",
+        "malformedObjects: 22",
+        "regexErrors: 1"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\UniversalModuleRegistry.js",
+      "size": 15100,
+      "lines": 400,
+      "corruptionScore": 75,
+      "corruptionIssues": [
+        "unterminatedStrings: 62",
+        "malformedObjects: 4",
+        "duplicateIds: 3"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\VoiceSynthesisMultilang.js",
+      "size": 32356,
+      "lines": 1142,
+      "corruptionScore": 224,
+      "corruptionIssues": [
+        "unterminatedStrings: 142",
+        "malformedObjects: 70",
+        "duplicateIds: 4"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "hello[,!]"
+      ],
+      "category": "specialized"
+    },
+    {
+      "filepath": "backend/alex-core/AlexMasterSystem.js",
+      "size": 90063,
+      "lines": 2315,
+      "corruptionScore": 880,
+      "corruptionIssues": [
+        "unterminatedStrings: 706",
+        "malformedObjects: 2",
+        "duplicateIds: 55",
+        "regexErrors: 7"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "placeholder"
+      ],
+      "category": "core"
+    },
+    {
+      "filepath": "backend/middleware/antiFakeGuard.js",
+      "size": 1262,
+      "lines": 33,
+      "corruptionScore": 9,
+      "corruptionIssues": [
+        "unterminatedStrings: 9"
+      ],
+      "isFakeAi": true,
+      "fakeAiIssues": [
+        "réponse statique",
+        "default answer",
+        "fake ai"
+      ],
+      "category": "other"
+    }
+  ],
+  "categoryStats": {
+    "other": {
+      "total": 3,
+      "corrupted": 1,
+      "fakeAi": 1
+    },
+    "consciousness": {
+      "total": 43,
+      "corrupted": 43,
+      "fakeAi": 0
+    },
+    "core": {
+      "total": 14,
+      "corrupted": 13,
+      "fakeAi": 4
+    },
+    "creative": {
+      "total": 6,
+      "corrupted": 6,
+      "fakeAi": 3
+    },
+    "intelligence": {
+      "total": 32,
+      "corrupted": 31,
+      "fakeAi": 4
+    },
+    "specialized": {
+      "total": 74,
+      "corrupted": 74,
+      "fakeAi": 15
+    }
+  }
+}

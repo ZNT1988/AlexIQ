@@ -1,0 +1,1883 @@
+{
+  "totalFiles": 134,
+  "fakeFiles": [
+    {
+      "file": "AutoGenesis.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AutoGenesis.js",
+      "fakeScore": 250,
+      "qualityScore": 45,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 23,
+          "examples": [
+            "Template",
+            "Template",
+            "Template"
+          ]
+        },
+        {
+          "type": "Empty Functions",
+          "count": 2,
+          "examples": [
+            "functionsArray, options = {}",
+            "functionsArray, options = {}"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AutoGenesis.js",
+          "type": "Magic Numbers",
+          "count": 4
+        },
+        {
+          "file": "AutoGenesis.js",
+          "type": "Long Functions",
+          "count": 4
+        },
+        {
+          "file": "AutoGenesis.js",
+          "type": "Deep Nesting",
+          "count": 1
+        }
+      ],
+      "size": 17169,
+      "lines": 522,
+      "authenticityScore": 15,
+      "isFake": true
+    },
+    {
+      "file": "LanguageProcessor.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\LanguageProcessor.js",
+      "fakeScore": 220,
+      "qualityScore": 5,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 22,
+          "examples": [
+            "template",
+            "Template",
+            "Template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "LanguageProcessor.js",
+          "type": "Deep Nesting",
+          "count": 1
+        }
+      ],
+      "size": 43856,
+      "lines": 1214,
+      "authenticityScore": 25,
+      "isFake": true
+    },
+    {
+      "file": "AlexDreamCompiler.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexDreamCompiler.js",
+      "fakeScore": 90,
+      "qualityScore": 0,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 9,
+          "examples": [
+            "Template",
+            "Template",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [],
+      "size": 20433,
+      "lines": 555,
+      "authenticityScore": 9,
+      "isFake": true
+    },
+    {
+      "file": "MindMapBuilder.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\MindMapBuilder.js",
+      "fakeScore": 60,
+      "qualityScore": 0,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 6,
+          "examples": [
+            "Template",
+            "Template",
+            "Template"
+          ]
+        }
+      ],
+      "qualityIssues": [],
+      "size": 1422,
+      "lines": 43,
+      "authenticityScore": 7,
+      "isFake": true
+    },
+    {
+      "file": "SentimentScanner.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\SentimentScanner.js",
+      "fakeScore": 60,
+      "qualityScore": 0,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 6,
+          "examples": [
+            "mock",
+            "Mock",
+            "mock"
+          ]
+        }
+      ],
+      "qualityIssues": [],
+      "size": 1449,
+      "lines": 37,
+      "authenticityScore": 2,
+      "isFake": true
+    },
+    {
+      "file": "AlexKnowledgeGraph.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexKnowledgeGraph.js",
+      "fakeScore": 50,
+      "qualityScore": 55,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 5,
+          "examples": [
+            "template",
+            "TEMPLATE",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexKnowledgeGraph.js",
+          "type": "Magic Numbers",
+          "count": 4
+        },
+        {
+          "file": "AlexKnowledgeGraph.js",
+          "type": "Deep Nesting",
+          "count": 7
+        }
+      ],
+      "size": 26480,
+      "lines": 925,
+      "authenticityScore": 8,
+      "isFake": true
+    },
+    {
+      "file": "FunctionBuilder.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\FunctionBuilder.js",
+      "fakeScore": 50,
+      "qualityScore": 10,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 5,
+          "examples": [
+            "fake",
+            "template",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "FunctionBuilder.js",
+          "type": "Magic Numbers",
+          "count": 1
+        },
+        {
+          "file": "FunctionBuilder.js",
+          "type": "Long Functions",
+          "count": 1
+        }
+      ],
+      "size": 6537,
+      "lines": 233,
+      "authenticityScore": 15,
+      "isFake": true
+    },
+    {
+      "file": "AlexBioSync.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexBioSync.js",
+      "fakeScore": 40,
+      "qualityScore": 15,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 4,
+          "examples": [
+            "TODO",
+            "TODO",
+            "TODO"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexBioSync.js",
+          "type": "Magic Numbers",
+          "count": 3
+        }
+      ],
+      "size": 20973,
+      "lines": 488,
+      "authenticityScore": 16,
+      "isFake": true
+    },
+    {
+      "file": "AlexBlockchainOracle.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexBlockchainOracle.js",
+      "fakeScore": 30,
+      "qualityScore": 575,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 3,
+          "examples": [
+            "fake",
+            "template",
+            "fake"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexBlockchainOracle.js",
+          "type": "Magic Numbers",
+          "count": 111
+        },
+        {
+          "file": "AlexBlockchainOracle.js",
+          "type": "Long Functions",
+          "count": 3
+        },
+        {
+          "file": "AlexBlockchainOracle.js",
+          "type": "Deep Nesting",
+          "count": 1
+        }
+      ],
+      "size": 88629,
+      "lines": 2987,
+      "authenticityScore": 35,
+      "isFake": false
+    },
+    {
+      "file": "AlexCosmicInterface.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexCosmicInterface.js",
+      "fakeScore": 30,
+      "qualityScore": 170,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 3,
+          "examples": [
+            "Template",
+            "Template",
+            "Template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexCosmicInterface.js",
+          "type": "Magic Numbers",
+          "count": 22
+        },
+        {
+          "file": "AlexCosmicInterface.js",
+          "type": "Deep Nesting",
+          "count": 12
+        }
+      ],
+      "size": 79171,
+      "lines": 2215,
+      "authenticityScore": 18,
+      "isFake": false
+    },
+    {
+      "file": "AlexAuthenticCore.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AlexAuthenticCore.js",
+      "fakeScore": 30,
+      "qualityScore": 25,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 3,
+          "examples": [
+            "Template",
+            "TEMPLATE",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexAuthenticCore.js",
+          "type": "Magic Numbers",
+          "count": 4
+        },
+        {
+          "file": "AlexAuthenticCore.js",
+          "type": "Deep Nesting",
+          "count": 1
+        }
+      ],
+      "size": 27485,
+      "lines": 845,
+      "authenticityScore": 28,
+      "isFake": false
+    },
+    {
+      "file": "EmotionalIntelligence.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\EmotionalIntelligence.js",
+      "fakeScore": 30,
+      "qualityScore": 35,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 3,
+          "examples": [
+            "fake",
+            "FAKE",
+            "fake"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "EmotionalIntelligence.js",
+          "type": "Magic Numbers",
+          "count": 2
+        },
+        {
+          "file": "EmotionalIntelligence.js",
+          "type": "Deep Nesting",
+          "count": 5
+        }
+      ],
+      "size": 31487,
+      "lines": 929,
+      "authenticityScore": 24,
+      "isFake": false
+    },
+    {
+      "file": "EyeTracking.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\EyeTracking.js",
+      "fakeScore": 30,
+      "qualityScore": 105,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 3,
+          "examples": [
+            "Template",
+            "Template",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "EyeTracking.js",
+          "type": "Magic Numbers",
+          "count": 15
+        },
+        {
+          "file": "EyeTracking.js",
+          "type": "Deep Nesting",
+          "count": 6
+        }
+      ],
+      "size": 34582,
+      "lines": 1207,
+      "authenticityScore": 2,
+      "isFake": true
+    },
+    {
+      "file": "AlexCreativeEngine.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexCreativeEngine.js",
+      "fakeScore": 30,
+      "qualityScore": 55,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 3,
+          "examples": [
+            "fake",
+            "FAKE",
+            "fake"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexCreativeEngine.js",
+          "type": "Magic Numbers",
+          "count": 3
+        },
+        {
+          "file": "AlexCreativeEngine.js",
+          "type": "Deep Nesting",
+          "count": 8
+        }
+      ],
+      "size": 31094,
+      "lines": 953,
+      "authenticityScore": 24,
+      "isFake": false
+    },
+    {
+      "file": "AlexUniversalCompanion.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexUniversalCompanion.js",
+      "fakeScore": 30,
+      "qualityScore": 100,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 3,
+          "examples": [
+            "fake",
+            "FAKE",
+            "fake"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexUniversalCompanion.js",
+          "type": "Magic Numbers",
+          "count": 1
+        },
+        {
+          "file": "AlexUniversalCompanion.js",
+          "type": "Deep Nesting",
+          "count": 19
+        }
+      ],
+      "size": 38585,
+      "lines": 1146,
+      "authenticityScore": 24,
+      "isFake": false
+    },
+    {
+      "file": "AlexWhispers.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexWhispers.js",
+      "fakeScore": 30,
+      "qualityScore": 30,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 3,
+          "examples": [
+            "Template",
+            "template",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexWhispers.js",
+          "type": "Magic Numbers",
+          "count": 6
+        }
+      ],
+      "size": 22642,
+      "lines": 554,
+      "authenticityScore": 19,
+      "isFake": false
+    },
+    {
+      "file": "QuantumCreativity.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\QuantumCreativity.js",
+      "fakeScore": 30,
+      "qualityScore": 60,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 3,
+          "examples": [
+            "fake",
+            "FAKE",
+            "fake"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "QuantumCreativity.js",
+          "type": "Magic Numbers",
+          "count": 3
+        },
+        {
+          "file": "QuantumCreativity.js",
+          "type": "Deep Nesting",
+          "count": 9
+        }
+      ],
+      "size": 35375,
+      "lines": 1067,
+      "authenticityScore": 24,
+      "isFake": false
+    },
+    {
+      "file": "AlexMultiverseExplorer.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexMultiverseExplorer.js",
+      "fakeScore": 20,
+      "qualityScore": 95,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 2,
+          "examples": [
+            "TEMPLATE",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexMultiverseExplorer.js",
+          "type": "Magic Numbers",
+          "count": 13
+        },
+        {
+          "file": "AlexMultiverseExplorer.js",
+          "type": "Deep Nesting",
+          "count": 6
+        }
+      ],
+      "size": 28041,
+      "lines": 767,
+      "authenticityScore": 6,
+      "isFake": false
+    },
+    {
+      "file": "BusinessBuilderAI.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\BusinessBuilderAI.js",
+      "fakeScore": 20,
+      "qualityScore": 0,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 2,
+          "examples": [
+            "Template",
+            "Template"
+          ]
+        }
+      ],
+      "qualityIssues": [],
+      "size": 27458,
+      "lines": 731,
+      "authenticityScore": 20,
+      "isFake": false
+    },
+    {
+      "file": "AlexSaaSArchitecture.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AlexSaaSArchitecture.js",
+      "fakeScore": 20,
+      "qualityScore": 45,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 2,
+          "examples": [
+            "fake",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexSaaSArchitecture.js",
+          "type": "Magic Numbers",
+          "count": 4
+        },
+        {
+          "file": "AlexSaaSArchitecture.js",
+          "type": "Deep Nesting",
+          "count": 5
+        }
+      ],
+      "size": 10031,
+      "lines": 379,
+      "authenticityScore": 25,
+      "isFake": false
+    },
+    {
+      "file": "ContextIntelligence.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\ContextIntelligence.js",
+      "fakeScore": 20,
+      "qualityScore": 45,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 2,
+          "examples": [
+            "fake",
+            "fake"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "ContextIntelligence.js",
+          "type": "Magic Numbers",
+          "count": 1
+        },
+        {
+          "file": "ContextIntelligence.js",
+          "type": "Deep Nesting",
+          "count": 8
+        }
+      ],
+      "size": 31811,
+      "lines": 980,
+      "authenticityScore": 24,
+      "isFake": false
+    },
+    {
+      "file": "MultiModalFusion.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\MultiModalFusion.js",
+      "fakeScore": 20,
+      "qualityScore": 5,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 2,
+          "examples": [
+            "fake",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "MultiModalFusion.js",
+          "type": "Magic Numbers",
+          "count": 1
+        }
+      ],
+      "size": 3699,
+      "lines": 123,
+      "authenticityScore": 12,
+      "isFake": false
+    },
+    {
+      "file": "TopDownAttention.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\TopDownAttention.js",
+      "fakeScore": 20,
+      "qualityScore": 5,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 2,
+          "examples": [
+            "fake",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "TopDownAttention.js",
+          "type": "Magic Numbers",
+          "count": 1
+        }
+      ],
+      "size": 3699,
+      "lines": 123,
+      "authenticityScore": 12,
+      "isFake": false
+    },
+    {
+      "file": "AlexAlchemyEngine.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexAlchemyEngine.js",
+      "fakeScore": 20,
+      "qualityScore": 10,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 2,
+          "examples": [
+            "Template",
+            "Template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexAlchemyEngine.js",
+          "type": "Long Functions",
+          "count": 1
+        },
+        {
+          "file": "AlexAlchemyEngine.js",
+          "type": "Deep Nesting",
+          "count": 1
+        }
+      ],
+      "size": 21283,
+      "lines": 629,
+      "authenticityScore": 10,
+      "isFake": false
+    },
+    {
+      "file": "AlexGoalMastery.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexGoalMastery.js",
+      "fakeScore": 20,
+      "qualityScore": 10,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 2,
+          "examples": [
+            "Template",
+            "Template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexGoalMastery.js",
+          "type": "Magic Numbers",
+          "count": 2
+        }
+      ],
+      "size": 18827,
+      "lines": 539,
+      "authenticityScore": 10,
+      "isFake": false
+    },
+    {
+      "file": "DreamCompiler.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\DreamCompiler.js",
+      "fakeScore": 20,
+      "qualityScore": 35,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 2,
+          "examples": [
+            "fake",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "DreamCompiler.js",
+          "type": "Magic Numbers",
+          "count": 1
+        },
+        {
+          "file": "DreamCompiler.js",
+          "type": "Deep Nesting",
+          "count": 6
+        }
+      ],
+      "size": 15735,
+      "lines": 517,
+      "authenticityScore": 17,
+      "isFake": false
+    },
+    {
+      "file": "SupplierOptimizer.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\SupplierOptimizer.js",
+      "fakeScore": 20,
+      "qualityScore": 5,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 2,
+          "examples": [
+            "fake",
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "SupplierOptimizer.js",
+          "type": "Magic Numbers",
+          "count": 1
+        }
+      ],
+      "size": 3701,
+      "lines": 123,
+      "authenticityScore": 12,
+      "isFake": false
+    },
+    {
+      "file": "AlexDimensionalPortal.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexDimensionalPortal.js",
+      "fakeScore": 10,
+      "qualityScore": 50,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexDimensionalPortal.js",
+          "type": "Magic Numbers",
+          "count": 5
+        },
+        {
+          "file": "AlexDimensionalPortal.js",
+          "type": "Deep Nesting",
+          "count": 5
+        }
+      ],
+      "size": 45561,
+      "lines": 1537,
+      "authenticityScore": 12,
+      "isFake": false
+    },
+    {
+      "file": "AlexInfiniteCreator.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexInfiniteCreator.js",
+      "fakeScore": 10,
+      "qualityScore": 10,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "Template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexInfiniteCreator.js",
+          "type": "Magic Numbers",
+          "count": 2
+        }
+      ],
+      "size": 3129,
+      "lines": 71,
+      "authenticityScore": 7,
+      "isFake": false
+    },
+    {
+      "file": "AlexNetworkIntelligence.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexNetworkIntelligence.js",
+      "fakeScore": 10,
+      "qualityScore": 55,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "TEMPLATE"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexNetworkIntelligence.js",
+          "type": "Magic Numbers",
+          "count": 8
+        },
+        {
+          "file": "AlexNetworkIntelligence.js",
+          "type": "Deep Nesting",
+          "count": 3
+        }
+      ],
+      "size": 59744,
+      "lines": 1522,
+      "authenticityScore": 40,
+      "isFake": false
+    },
+    {
+      "file": "AlexRealityArchitect.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexRealityArchitect.js",
+      "fakeScore": 10,
+      "qualityScore": 20,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexRealityArchitect.js",
+          "type": "Magic Numbers",
+          "count": 2
+        },
+        {
+          "file": "AlexRealityArchitect.js",
+          "type": "Deep Nesting",
+          "count": 2
+        }
+      ],
+      "size": 25330,
+      "lines": 768,
+      "authenticityScore": 10,
+      "isFake": false
+    },
+    {
+      "file": "AlexAutonomousCore.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AlexAutonomousCore.js",
+      "fakeScore": 10,
+      "qualityScore": 70,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "fake"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexAutonomousCore.js",
+          "type": "Magic Numbers",
+          "count": 2
+        },
+        {
+          "file": "AlexAutonomousCore.js",
+          "type": "Deep Nesting",
+          "count": 12
+        }
+      ],
+      "size": 20241,
+      "lines": 648,
+      "authenticityScore": 22,
+      "isFake": false
+    },
+    {
+      "file": "NeuroCore.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\NeuroCore.js",
+      "fakeScore": 10,
+      "qualityScore": 65,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "fake"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "NeuroCore.js",
+          "type": "Magic Numbers",
+          "count": 1
+        },
+        {
+          "file": "NeuroCore.js",
+          "type": "Long Functions",
+          "count": 2
+        },
+        {
+          "file": "NeuroCore.js",
+          "type": "Deep Nesting",
+          "count": 10
+        }
+      ],
+      "size": 25470,
+      "lines": 832,
+      "authenticityScore": 25,
+      "isFake": false
+    },
+    {
+      "file": "MarketAnalyzer.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\MarketAnalyzer.js",
+      "fakeScore": 10,
+      "qualityScore": 0,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "mock"
+          ]
+        }
+      ],
+      "qualityIssues": [],
+      "size": 4077,
+      "lines": 76,
+      "authenticityScore": 2,
+      "isFake": false
+    },
+    {
+      "file": "NeuralCore.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\NeuralCore.js",
+      "fakeScore": 10,
+      "qualityScore": 0,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "Template"
+          ]
+        }
+      ],
+      "qualityIssues": [],
+      "size": 8862,
+      "lines": 179,
+      "authenticityScore": 7,
+      "isFake": false
+    },
+    {
+      "file": "AlexCreativeLearningSystem.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexCreativeLearningSystem.js",
+      "fakeScore": 10,
+      "qualityScore": 5,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "PLACEHOLDER"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexCreativeLearningSystem.js",
+          "type": "Magic Numbers",
+          "count": 1
+        }
+      ],
+      "size": 20619,
+      "lines": 642,
+      "authenticityScore": 16,
+      "isFake": false
+    },
+    {
+      "file": "AlexWisdomKeeper.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexWisdomKeeper.js",
+      "fakeScore": 10,
+      "qualityScore": 10,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "template"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "AlexWisdomKeeper.js",
+          "type": "Magic Numbers",
+          "count": 2
+        }
+      ],
+      "size": 21663,
+      "lines": 476,
+      "authenticityScore": 11,
+      "isFake": false
+    },
+    {
+      "file": "TemporalPredictor.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\TemporalPredictor.js",
+      "fakeScore": 10,
+      "qualityScore": 0,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "placeholder"
+          ]
+        }
+      ],
+      "qualityIssues": [],
+      "size": 20399,
+      "lines": 631,
+      "authenticityScore": 9,
+      "isFake": false
+    },
+    {
+      "file": "UniversalModuleRegistry.js",
+      "path": "C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\UniversalModuleRegistry.js",
+      "fakeScore": 10,
+      "qualityScore": 15,
+      "fakePatterns": [
+        {
+          "type": "Placeholders",
+          "count": 1,
+          "examples": [
+            "placeholder"
+          ]
+        }
+      ],
+      "qualityIssues": [
+        {
+          "file": "UniversalModuleRegistry.js",
+          "type": "Magic Numbers",
+          "count": 1
+        },
+        {
+          "file": "UniversalModuleRegistry.js",
+          "type": "Long Functions",
+          "count": 1
+        },
+        {
+          "file": "UniversalModuleRegistry.js",
+          "type": "Deep Nesting",
+          "count": 1
+        }
+      ],
+      "size": 15100,
+      "lines": 400,
+      "authenticityScore": 19,
+      "isFake": false
+    }
+  ],
+  "qualityIssues": [
+    {
+      "file": "AlexBlockchainOracle.js",
+      "type": "Magic Numbers",
+      "count": 111
+    },
+    {
+      "file": "AlexBlockchainOracle.js",
+      "type": "Long Functions",
+      "count": 3
+    },
+    {
+      "file": "AlexBlockchainOracle.js",
+      "type": "Deep Nesting",
+      "count": 1
+    },
+    {
+      "file": "AlexCosmicInterface.js",
+      "type": "Magic Numbers",
+      "count": 22
+    },
+    {
+      "file": "AlexCosmicInterface.js",
+      "type": "Deep Nesting",
+      "count": 12
+    },
+    {
+      "file": "AlexDimensionalPortal.js",
+      "type": "Magic Numbers",
+      "count": 5
+    },
+    {
+      "file": "AlexDimensionalPortal.js",
+      "type": "Deep Nesting",
+      "count": 5
+    },
+    {
+      "file": "AlexDivineInterface.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexEternalWisdom.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexHyperIntelligence.js",
+      "type": "Magic Numbers",
+      "count": 5
+    },
+    {
+      "file": "AlexHyperIntelligence.js",
+      "type": "Long Functions",
+      "count": 1
+    },
+    {
+      "file": "AlexHyperIntelligence.js",
+      "type": "Deep Nesting",
+      "count": 1
+    },
+    {
+      "file": "AlexInfiniteCreator.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "AlexInfiniteService.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexInfiniteService.js",
+      "type": "Long Functions",
+      "count": 2
+    },
+    {
+      "file": "AlexKnowledgeGraph.js",
+      "type": "Magic Numbers",
+      "count": 4
+    },
+    {
+      "file": "AlexKnowledgeGraph.js",
+      "type": "Deep Nesting",
+      "count": 7
+    },
+    {
+      "file": "AlexMultiverseExplorer.js",
+      "type": "Magic Numbers",
+      "count": 13
+    },
+    {
+      "file": "AlexMultiverseExplorer.js",
+      "type": "Deep Nesting",
+      "count": 6
+    },
+    {
+      "file": "AlexNetworkIntelligence.js",
+      "type": "Magic Numbers",
+      "count": 8
+    },
+    {
+      "file": "AlexNetworkIntelligence.js",
+      "type": "Deep Nesting",
+      "count": 3
+    },
+    {
+      "file": "AlexNeuralEvolution.js",
+      "type": "Magic Numbers",
+      "count": 5
+    },
+    {
+      "file": "AlexOmnipotentForce.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexOmnipresentSoul.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexOmniscientMind.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexOptimizationEngine.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexPerfectHarmony.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexProcessingOptimizer.js",
+      "type": "Magic Numbers",
+      "count": 11
+    },
+    {
+      "file": "AlexProcessingOptimizer.js",
+      "type": "Deep Nesting",
+      "count": 2
+    },
+    {
+      "file": "AlexQuantumProcessor.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexRealityArchitect.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "AlexRealityArchitect.js",
+      "type": "Deep Nesting",
+      "count": 2
+    },
+    {
+      "file": "AlexTimeWeaver.js",
+      "type": "Magic Numbers",
+      "count": 5
+    },
+    {
+      "file": "AlexTimeWeaver.js",
+      "type": "Deep Nesting",
+      "count": 4
+    },
+    {
+      "file": "AlexUnconditionalLove.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "CloudLearningInterface.js",
+      "type": "Magic Numbers",
+      "count": 10
+    },
+    {
+      "file": "CloudLearningInterface.js",
+      "type": "Deep Nesting",
+      "count": 3
+    },
+    {
+      "file": "EmotionalJournal.js",
+      "type": "Deep Nesting",
+      "count": 1
+    },
+    {
+      "file": "LifePathAdvisor.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "SoulPurposeDiscoverer.js",
+      "type": "Deep Nesting",
+      "count": 1
+    },
+    {
+      "file": "AlexAuthenticCore.js",
+      "type": "Magic Numbers",
+      "count": 4
+    },
+    {
+      "file": "AlexAuthenticCore.js",
+      "type": "Deep Nesting",
+      "count": 1
+    },
+    {
+      "file": "AlexAutonomousCore.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "AlexAutonomousCore.js",
+      "type": "Deep Nesting",
+      "count": 12
+    },
+    {
+      "file": "AlexMemoryCore.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "AlexSaaSArchitecture.js",
+      "type": "Magic Numbers",
+      "count": 4
+    },
+    {
+      "file": "AlexSaaSArchitecture.js",
+      "type": "Deep Nesting",
+      "count": 5
+    },
+    {
+      "file": "AppStoreModuleManager.js",
+      "type": "Magic Numbers",
+      "count": 8
+    },
+    {
+      "file": "AppStoreModuleManager.js",
+      "type": "Long Functions",
+      "count": 1
+    },
+    {
+      "file": "NeuroCore.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "NeuroCore.js",
+      "type": "Long Functions",
+      "count": 2
+    },
+    {
+      "file": "NeuroCore.js",
+      "type": "Deep Nesting",
+      "count": 10
+    },
+    {
+      "file": "AIFusionKernel.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "CognitiveBridge.js",
+      "type": "Deep Nesting",
+      "count": 7
+    },
+    {
+      "file": "ContextIntelligence.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "ContextIntelligence.js",
+      "type": "Deep Nesting",
+      "count": 8
+    },
+    {
+      "file": "EmotionalIntelligence.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "EmotionalIntelligence.js",
+      "type": "Deep Nesting",
+      "count": 5
+    },
+    {
+      "file": "EyeTracking.js",
+      "type": "Magic Numbers",
+      "count": 15
+    },
+    {
+      "file": "EyeTracking.js",
+      "type": "Deep Nesting",
+      "count": 6
+    },
+    {
+      "file": "InhibitionReturn.js",
+      "type": "Magic Numbers",
+      "count": 9
+    },
+    {
+      "file": "InhibitionReturn.js",
+      "type": "Deep Nesting",
+      "count": 7
+    },
+    {
+      "file": "MultiModalFusion.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "QuantumGenerator.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "QuantumGenerator.js",
+      "type": "Long Functions",
+      "count": 1
+    },
+    {
+      "file": "QuantumGenerator.js",
+      "type": "No Error Handling",
+      "count": 1
+    },
+    {
+      "file": "TopDownAttention.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "TradeSimulator.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AdvancedModuleOrchestrator.js",
+      "type": "Magic Numbers",
+      "count": 8
+    },
+    {
+      "file": "AlexAdaptiveIntelligence.js",
+      "type": "Magic Numbers",
+      "count": 4
+    },
+    {
+      "file": "AlexAlchemyEngine.js",
+      "type": "Long Functions",
+      "count": 1
+    },
+    {
+      "file": "AlexAlchemyEngine.js",
+      "type": "Deep Nesting",
+      "count": 1
+    },
+    {
+      "file": "AlexBioSync.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "AlexCloudLearning.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexCloudLearning.js",
+      "type": "Deep Nesting",
+      "count": 4
+    },
+    {
+      "file": "AlexCognitionEngine.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexCommunicationEngine.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexConsciousnessDebug.js",
+      "type": "Magic Numbers",
+      "count": 4
+    },
+    {
+      "file": "AlexConsciousnessSystem.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexConsciousnessSystem.js",
+      "type": "Long Functions",
+      "count": 1
+    },
+    {
+      "file": "AlexContextualAwareness.js",
+      "type": "Magic Numbers",
+      "count": 4
+    },
+    {
+      "file": "AlexContextualAwareness.js",
+      "type": "Deep Nesting",
+      "count": 3
+    },
+    {
+      "file": "AlexCreativeEngine.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "AlexCreativeEngine.js",
+      "type": "Deep Nesting",
+      "count": 8
+    },
+    {
+      "file": "AlexCreativeLearningSystem.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexCreativityBooster.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "AlexCrisisManagement.js",
+      "type": "Magic Numbers",
+      "count": 6
+    },
+    {
+      "file": "AlexDecisionEngine.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "AlexEmotionalIntelligence.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexEthicsCore.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "AlexEvolutionCore.js",
+      "type": "Magic Numbers",
+      "count": 6
+    },
+    {
+      "file": "AlexEvolutionCore.js",
+      "type": "Long Functions",
+      "count": 1
+    },
+    {
+      "file": "AlexGoalMastery.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "AlexHyperLoop.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "AlexIntuitionEngine.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "AlexLearningEngine.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "AlexPersonalityCore.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexRelationshipEngine.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "AlexSocialIntelligence.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "AlexStrategicThinking.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "AlexTimeIntelligence.js",
+      "type": "Magic Numbers",
+      "count": 5
+    },
+    {
+      "file": "AlexUniversalCompanion.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "AlexUniversalCompanion.js",
+      "type": "Deep Nesting",
+      "count": 19
+    },
+    {
+      "file": "AlexWhispers.js",
+      "type": "Magic Numbers",
+      "count": 6
+    },
+    {
+      "file": "AlexWisdomKeeper.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "AutoGenesis.js",
+      "type": "Magic Numbers",
+      "count": 4
+    },
+    {
+      "file": "AutoGenesis.js",
+      "type": "Long Functions",
+      "count": 4
+    },
+    {
+      "file": "AutoGenesis.js",
+      "type": "Deep Nesting",
+      "count": 1
+    },
+    {
+      "file": "BioSensorAdapter.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "CulturalAdaptation.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "CulturalAdaptation.js",
+      "type": "Deep Nesting",
+      "count": 4
+    },
+    {
+      "file": "DreamCompiler.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "DreamCompiler.js",
+      "type": "Deep Nesting",
+      "count": 6
+    },
+    {
+      "file": "FunctionBuilder.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "FunctionBuilder.js",
+      "type": "Long Functions",
+      "count": 1
+    },
+    {
+      "file": "GodLevelAwareness.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "HealthPredictor.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "HealthPredictor.js",
+      "type": "Deep Nesting",
+      "count": 2
+    },
+    {
+      "file": "HypothesisBuilder.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "HypothesisBuilder.js",
+      "type": "Deep Nesting",
+      "count": 2
+    },
+    {
+      "file": "InventoryFlow.js",
+      "type": "Magic Numbers",
+      "count": 20
+    },
+    {
+      "file": "InventoryFlow.js",
+      "type": "Deep Nesting",
+      "count": 1
+    },
+    {
+      "file": "KnowledgeSynthesizer.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "KnowledgeSynthesizer.js",
+      "type": "Deep Nesting",
+      "count": 3
+    },
+    {
+      "file": "LanguageProcessor.js",
+      "type": "Deep Nesting",
+      "count": 1
+    },
+    {
+      "file": "LocalAITrainer.js",
+      "type": "Magic Numbers",
+      "count": 2
+    },
+    {
+      "file": "MemoryPalace.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "MutualGrowthSystem.js",
+      "type": "Long Functions",
+      "count": 1
+    },
+    {
+      "file": "MutualGrowthSystem.js",
+      "type": "Deep Nesting",
+      "count": 3
+    },
+    {
+      "file": "PurchasePredictor.js",
+      "type": "Magic Numbers",
+      "count": 25
+    },
+    {
+      "file": "QuantumBrain.js",
+      "type": "Magic Numbers",
+      "count": 6
+    },
+    {
+      "file": "QuantumCreativity.js",
+      "type": "Magic Numbers",
+      "count": 3
+    },
+    {
+      "file": "QuantumCreativity.js",
+      "type": "Deep Nesting",
+      "count": 9
+    },
+    {
+      "file": "SAPConnector.js",
+      "type": "Magic Numbers",
+      "count": 15
+    },
+    {
+      "file": "SelfTrainingEngine.js",
+      "type": "Magic Numbers",
+      "count": 7
+    },
+    {
+      "file": "SoulPrintGenerator.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "SupplierOptimizer.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "TechnicalDocReader.js",
+      "type": "Magic Numbers",
+      "count": 13
+    },
+    {
+      "file": "UniversalModuleRegistry.js",
+      "type": "Magic Numbers",
+      "count": 1
+    },
+    {
+      "file": "UniversalModuleRegistry.js",
+      "type": "Long Functions",
+      "count": 1
+    },
+    {
+      "file": "UniversalModuleRegistry.js",
+      "type": "Deep Nesting",
+      "count": 1
+    },
+    {
+      "file": "VisionProFactory.js",
+      "type": "Magic Numbers",
+      "count": 25
+    },
+    {
+      "file": "VoiceSynthesisMultilang.js",
+      "type": "Magic Numbers",
+      "count": 4
+    },
+    {
+      "file": "VoiceSynthesisMultilang.js",
+      "type": "Deep Nesting",
+      "count": 2
+    }
+  ],
+  "fakeScore": 1410,
+  "qualityScore": 3480
+}

@@ -1,0 +1,3492 @@
+{
+  "timestamp": "2025-08-18T20:23:41.308Z",
+  "summary": {
+    "total": 160,
+    "classifications": {
+      "MIXED": 14,
+      "UNCLEAR": 130,
+      "REAL": 8,
+      "FAKE": 8
+    },
+    "syntaxErrors": 134,
+    "fakeFiles": 21,
+    "topIssues": [
+      [
+        "Await sans async",
+        152
+      ],
+      [
+        "Erreur syntaxe",
+        134
+      ],
+      [
+        "Parenthèses manquantes",
+        128
+      ],
+      [
+        "Deux points mal placés",
+        125
+      ],
+      [
+        "Return malformé",
+        108
+      ]
+    ]
+  },
+  "detailed_analyses": [
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexBlockchainOracle.js",
+      "size": 88629,
+      "lines": 2987,
+      "syntaxValid": false,
+      "fakeScore": 30,
+      "realScore": 40,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexBlockchainOracle.js:6\r",
+        "Virgules orphelines: 5 occurrences",
+        "Deux points mal placés: 75 occurrences",
+        "Try/catch malformés: 4 occurrences",
+        "Return malformé: 30 occurrences",
+        "Identifiants dupliqués: 3 occurrences",
+        "Parenthèses manquantes: 80 occurrences",
+        "Await sans async: 101 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "fake",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexCosmicInterface.js",
+      "size": 79171,
+      "lines": 2215,
+      "syntaxValid": false,
+      "fakeScore": 30,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexCosmicInterface.js:3\r",
+        "Deux points mal placés: 56 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 18 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 70 occurrences",
+        "Await sans async: 35 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template",
+        "Template",
+        "Template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexDimensionalPortal.js",
+      "size": 45561,
+      "lines": 1537,
+      "syntaxValid": false,
+      "fakeScore": 10,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexDimensionalPortal.js:3\r",
+        "Deux points mal placés: 28 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 18 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 47 occurrences",
+        "Await sans async: 125 occurrences"
+      ],
+      "fakeIndicators": [
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexDivineInterface.js",
+      "size": 20059,
+      "lines": 713,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexDivineInterface.js:3\r",
+        "Deux points mal placés: 34 occurrences",
+        "Return malformé: 24 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 15 occurrences",
+        "Await sans async: 26 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexEternalWisdom.js",
+      "size": 4776,
+      "lines": 172,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexEternalWisdom.js:3\r",
+        "Deux points mal placés: 10 occurrences",
+        "Return malformé: 2 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 1 occurrences",
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexHyperIntelligence.js",
+      "size": 21020,
+      "lines": 693,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 160,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexHyperIntelligence.js:3\r",
+        "Deux points mal placés: 20 occurrences",
+        "Return malformé: 3 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 21 occurrences",
+        "Await sans async: 25 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "REAL"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexInfiniteCreator.js",
+      "size": 3129,
+      "lines": 71,
+      "syntaxValid": false,
+      "fakeScore": 10,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexInfiniteCreator.js:33\r",
+        "Await sans async: 14 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexInfiniteService.js",
+      "size": 22954,
+      "lines": 696,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 270,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexInfiniteService.js:4\r",
+        "Deux points mal placés: 29 occurrences",
+        "Return malformé: 12 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 17 occurrences",
+        "Await sans async: 28 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "REAL"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexKnowledgeGraph.js",
+      "size": 26480,
+      "lines": 925,
+      "syntaxValid": false,
+      "fakeScore": 50,
+      "realScore": 70,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexKnowledgeGraph.js:3\r",
+        "Deux points mal placés: 9 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 1 occurrences",
+        "Parenthèses manquantes: 60 occurrences",
+        "Await sans async: 29 occurrences"
+      ],
+      "fakeIndicators": [
+        "template",
+        "TEMPLATE",
+        "template",
+        "template",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexMemoryShaper.js",
+      "size": 1994,
+      "lines": 51,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexMemoryShaper.js:13\r",
+        "Await sans async: 15 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexMultiverseExplorer.js",
+      "size": 28041,
+      "lines": 767,
+      "syntaxValid": false,
+      "fakeScore": 20,
+      "realScore": 5,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexMultiverseExplorer.js:3\r",
+        "Deux points mal placés: 30 occurrences",
+        "Return malformé: 6 occurrences",
+        "Parenthèses manquantes: 23 occurrences",
+        "Await sans async: 34 occurrences"
+      ],
+      "fakeIndicators": [
+        "TEMPLATE",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexNetworkIntelligence.js",
+      "size": 59744,
+      "lines": 1522,
+      "syntaxValid": false,
+      "fakeScore": 10,
+      "realScore": 490,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexNetworkIntelligence.js:3\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 39 occurrences",
+        "Try/catch malformés: 3 occurrences",
+        "Return malformé: 18 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 53 occurrences",
+        "Await sans async: 105 occurrences"
+      ],
+      "fakeIndicators": [
+        "TEMPLATE"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "REAL"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexNeuralEvolution.js",
+      "size": 16946,
+      "lines": 584,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexNeuralEvolution.js:9\r",
+        "Deux points mal placés: 21 occurrences",
+        "Return malformé: 7 occurrences",
+        "Parenthèses manquantes: 13 occurrences",
+        "Await sans async: 23 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexOmnipotentForce.js",
+      "size": 4930,
+      "lines": 163,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexOmnipotentForce.js:10\r",
+        "Deux points mal placés: 8 occurrences",
+        "Return malformé: 4 occurrences",
+        "Parenthèses manquantes: 9 occurrences",
+        "Await sans async: 5 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexOmnipresentSoul.js",
+      "size": 4788,
+      "lines": 149,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexOmnipresentSoul.js:10\r",
+        "Deux points mal placés: 8 occurrences",
+        "Return malformé: 2 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 3 occurrences",
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexOmniscientMind.js",
+      "size": 5270,
+      "lines": 181,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexOmniscientMind.js:8\r",
+        "Deux points mal placés: 11 occurrences",
+        "Return malformé: 2 occurrences",
+        "Parenthèses manquantes: 2 occurrences",
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexOptimizationEngine.js",
+      "size": 8975,
+      "lines": 239,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 25,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexOptimizationEngine.js:7\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 7 occurrences",
+        "Return malformé: 5 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 11 occurrences",
+        "Await sans async: 5 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexPerfectHarmony.js",
+      "size": 5198,
+      "lines": 168,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 5,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexPerfectHarmony.js:8\r",
+        "Deux points mal placés: 10 occurrences",
+        "Return malformé: 3 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 1 occurrences",
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexProcessingOptimizer.js",
+      "size": 24682,
+      "lines": 744,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 35,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexProcessingOptimizer.js:7\r",
+        "Deux points mal placés: 17 occurrences",
+        "Return malformé: 4 occurrences",
+        "Identifiants dupliqués: 4 occurrences",
+        "Parenthèses manquantes: 38 occurrences",
+        "Await sans async: 21 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexQuantumProcessor.js",
+      "size": 3562,
+      "lines": 62,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 40,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexQuantumProcessor.js:19\r",
+        "Await sans async: 10 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexRealityArchitect.js",
+      "size": 25330,
+      "lines": 768,
+      "syntaxValid": false,
+      "fakeScore": 20,
+      "realScore": 5,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexRealityArchitect.js:8\r",
+        "Deux points mal placés: 58 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 33 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 23 occurrences",
+        "Await sans async: 34 occurrences"
+      ],
+      "fakeIndicators": [
+        "template",
+        "return [\",\", \"{\", \"name:\", \"Foundation,\", \"d,\", \"uration:\", \"0.2,\", \"d,\", \"escription:\", \"Dimensional\", \"framework\", \"}\", \"{\", \",\", \"name:\", \"Physics,\", \"d,\", \"uration:\", \"0.3,\", \"d,\", \"escription:\", \"Physical\", \"laws\", \"implementation\", \"}\", \"{\", \",\", \"name:\", \"Consciousness,\", \"d,\", \"uration:\", \"0.2,\", \"d,\", \"escription:\", \"Awareness\", \"architecture\", \"}\", \"{\", \",\", \"name:\", \"Lif\", \"(e,\", \"d,\", \"uration:\", \"0.2,\", \"d,\", \"escription:\", \"Life\", \"systems\", \"activation\", \"})\", \"{\", \",\", \"name:\", \"Testing,\", \"d,\", \"uration:\", \"0.1,\", \"d,\", \"escription:\", \"Reality\", \"validation\", \"}\"];\""
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexTimeWeaver.js",
+      "size": 21793,
+      "lines": 747,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexTimeWeaver.js:9\r",
+        "Deux points mal placés: 42 occurrences",
+        "Return malformé: 20 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 19 occurrences",
+        "Await sans async: 28 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexUnconditionalLove.js",
+      "size": 5857,
+      "lines": 186,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexUnconditionalLove.js:10\r",
+        "Deux points mal placés: 11 occurrences",
+        "Return malformé: 4 occurrences",
+        "Parenthèses manquantes: 5 occurrences",
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexUniversalConsciousness.js",
+      "size": 846,
+      "lines": 19,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexUniversalConsciousness.js:10\r",
+        "Await sans async: 7 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexUserExperienceEngine.js",
+      "size": 883,
+      "lines": 21,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 25,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexUserExperienceEngine.js:9\r"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AlexVirtualReality.js",
+      "size": 1798,
+      "lines": 34,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 5,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\AlexVirtualReality.js:20\r"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\AncestralWisdomKeeper.js",
+      "size": 1379,
+      "lines": 40,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Await sans async: 7 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\BusinessBuilderAI.js",
+      "size": 27458,
+      "lines": 731,
+      "syntaxValid": false,
+      "fakeScore": 30,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\BusinessBuilderAI.js:8\r",
+        "Virgules orphelines: 5 occurrences",
+        "Deux points mal placés: 61 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 11 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 3 occurrences",
+        "Await sans async: 42 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template",
+        "Template",
+        "return [\",\", \"Prototype\", \"minimum\", \"viable\", \"consciousness\", \"productSTR_Build\", \"community\", \"around\", \"shared\", \"valuesSTR_Partner\", \"with\", \"conscious\", \"business\", \"leadersSTR_Test\", \"market\", \"with\", \"purpose-driven\", \"customers,\"];\""
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\CloudLearningInterface.js",
+      "size": 35144,
+      "lines": 1145,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 205,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\CloudLearningInterface.js:3\r",
+        "Virgules orphelines: 3 occurrences",
+        "Deux points mal placés: 14 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 4 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 33 occurrences",
+        "Await sans async: 50 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "REAL"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\CreativeFlowActivator.js",
+      "size": 1182,
+      "lines": 37,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\CrisisCompanion.js",
+      "size": 1274,
+      "lines": 40,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Await sans async: 5 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\DreamInterpreter.js",
+      "size": 1235,
+      "lines": 42,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\DreamInterpreter.js:13\r",
+        "Await sans async: 3 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\EmotionalJournal.js",
+      "size": 41069,
+      "lines": 958,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\EmotionalJournal.js:4\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 50 occurrences",
+        "Return malformé: 13 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 34 occurrences",
+        "Await sans async: 39 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\IntuitiveInsightGenerator.js",
+      "size": 22642,
+      "lines": 659,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\IntuitiveInsightGenerator.js:8\r",
+        "Deux points mal placés: 51 occurrences",
+        "Return malformé: 7 occurrences",
+        "Parenthèses manquantes: 11 occurrences",
+        "Await sans async: 21 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\KarmaHealingEngine.js",
+      "size": 1275,
+      "lines": 38,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Await sans async: 5 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\LifePathAdvisor.js",
+      "size": 39060,
+      "lines": 775,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\LifePathAdvisor.js:4\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 62 occurrences",
+        "Return malformé: 16 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 33 occurrences",
+        "Await sans async: 20 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\MindMapBuilder.js",
+      "size": 1422,
+      "lines": 43,
+      "syntaxValid": true,
+      "fakeScore": 60,
+      "realScore": 0,
+      "issues": [
+        "Await sans async: 8 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "FAKE"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\MoodPredictor.js",
+      "size": 1084,
+      "lines": 38,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\MoodPredictor.js:12\r",
+        "Await sans async: 2 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\RelationshipHealingOracle.js",
+      "size": 1357,
+      "lines": 39,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Await sans async: 6 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\SoulPurposeDiscoverer.js",
+      "size": 26215,
+      "lines": 713,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\SoulPurposeDiscoverer.js:8\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 51 occurrences",
+        "Return malformé: 9 occurrences",
+        "Parenthèses manquantes: 18 occurrences",
+        "Await sans async: 39 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\StrategicBlindspotDetector.js",
+      "size": 1261,
+      "lines": 37,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Await sans async: 5 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\SynchronicityTracker.js",
+      "size": 1289,
+      "lines": 38,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\SynchronicityTracker.js:11\r",
+        "Await sans async: 6 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\consciousness\\ThoughtLeadershipEngine.js",
+      "size": 1562,
+      "lines": 44,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 5,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\consciousness\\ThoughtLeadershipEngine.js:13\r",
+        "Await sans async: 8 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\core\\AlexAuthenticCore.js",
+      "size": 27485,
+      "lines": 845,
+      "syntaxValid": false,
+      "fakeScore": 30,
+      "realScore": 190,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AlexAuthenticCore.js:3\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 11 occurrences",
+        "Return malformé: 5 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 25 occurrences",
+        "Await sans async: 44 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template",
+        "TEMPLATE",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "REAL"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\core\\AlexAutonomousCore.js",
+      "size": 20241,
+      "lines": 648,
+      "syntaxValid": true,
+      "fakeScore": 10,
+      "realScore": 10,
+      "issues": [
+        "Deux points mal placés: 1 occurrences",
+        "Parenthèses manquantes: 24 occurrences",
+        "Await sans async: 17 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\core\\AlexEvolutionCore.js",
+      "size": 31722,
+      "lines": 831,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 205,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AlexEvolutionCore.js:3\r",
+        "Deux points mal placés: 14 occurrences",
+        "Return malformé: 5 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 26 occurrences",
+        "Await sans async: 40 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "REAL"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\core\\AlexIntelligentCore.js",
+      "size": 2814,
+      "lines": 71,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 45,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AlexIntelligentCore.js:23\r",
+        "Await sans async: 26 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\core\\AlexMemoryCore.js",
+      "size": 6226,
+      "lines": 144,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 85,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AlexMemoryCore.js:20\r",
+        "Await sans async: 36 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\core\\AlexPersonalityCore.js",
+      "size": 17325,
+      "lines": 690,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AlexPersonalityCore.js:5\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 32 occurrences",
+        "Return malformé: 4 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 19 occurrences",
+        "Await sans async: 2 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\core\\AlexSaaSArchitecture.js",
+      "size": 10031,
+      "lines": 379,
+      "syntaxValid": true,
+      "fakeScore": 20,
+      "realScore": 0,
+      "issues": [
+        "Deux points mal placés: 1 occurrences",
+        "Parenthèses manquantes: 11 occurrences",
+        "Await sans async: 7 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\core\\AppStoreModuleManager.js",
+      "size": 56349,
+      "lines": 1735,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 230,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AppStoreModuleManager.js:1\r",
+        "Deux points mal placés: 22 occurrences",
+        "Return malformé: 9 occurrences",
+        "Identifiants dupliqués: 3 occurrences",
+        "Parenthèses manquantes: 57 occurrences",
+        "Await sans async: 93 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "REAL"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\core\\AutonomyCore.js",
+      "size": 2714,
+      "lines": 97,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\AutonomyCore.js:10\r",
+        "Deux points mal placés: 1 occurrences",
+        "Return malformé: 1 occurrences",
+        "Parenthèses manquantes: 1 occurrences",
+        "Await sans async: 1 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\core\\NeuroCore.js",
+      "size": 25470,
+      "lines": 832,
+      "syntaxValid": true,
+      "fakeScore": 10,
+      "realScore": 0,
+      "issues": [
+        "Deux points mal placés: 5 occurrences",
+        "Parenthèses manquantes: 34 occurrences",
+        "Await sans async: 20 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\core\\OwnerIdentity.js",
+      "size": 541,
+      "lines": 29,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\core\\OwnerIdentity.js:7\r",
+        "Deux points mal placés: 2 occurrences",
+        "Return malformé: 1 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AIFusionKernel.js",
+      "size": 13779,
+      "lines": 530,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AIFusionKernel.js:6\r",
+        "Deux points mal placés: 9 occurrences",
+        "Return malformé: 2 occurrences",
+        "Parenthèses manquantes: 15 occurrences",
+        "Await sans async: 19 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexAdaptiveIntelligence.js",
+      "size": 18334,
+      "lines": 595,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexAdaptiveIntelligence.js:3\r",
+        "Virgules orphelines: 4 occurrences",
+        "Deux points mal placés: 19 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 1 occurrences",
+        "Parenthèses manquantes: 18 occurrences",
+        "Await sans async: 13 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexAlchemyEngine.js",
+      "size": 21115,
+      "lines": 661,
+      "syntaxValid": false,
+      "fakeScore": 20,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexAlchemyEngine.js:7\r",
+        "Deux points mal placés: 41 occurrences",
+        "Try/catch malformés: 3 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 47 occurrences",
+        "Await sans async: 25 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template",
+        "Template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexCognitionEngine.js",
+      "size": 18288,
+      "lines": 444,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexCognitionEngine.js:7\r",
+        "Deux points mal placés: 17 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Return malformé: 4 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 17 occurrences",
+        "Await sans async: 13 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexCommunicationEngine.js",
+      "size": 24283,
+      "lines": 935,
+      "syntaxValid": false,
+      "fakeScore": 20,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexCommunicationEngine.js:5\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 32 occurrences",
+        "Return malformé: 3 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 13 occurrences",
+        "Await sans async: 51 occurrences"
+      ],
+      "fakeIndicators": [
+        "template",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexConsciousnessSystem.js",
+      "size": 2750,
+      "lines": 67,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexConsciousnessSystem.js:7\r",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 1 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexCreativeEngine.js",
+      "size": 1478,
+      "lines": 39,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexCreativeEngine.js:10\r",
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexDecisionEngine.js",
+      "size": 25058,
+      "lines": 705,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexDecisionEngine.js:7\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 42 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Return malformé: 3 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 17 occurrences",
+        "Await sans async: 10 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexEmotionalIntelligence.js",
+      "size": 19223,
+      "lines": 691,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexEmotionalIntelligence.js:4\r",
+        "Deux points mal placés: 31 occurrences",
+        "Return malformé: 1 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 31 occurrences",
+        "Await sans async: 3 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexIntuitionEngine.js",
+      "size": 17947,
+      "lines": 551,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexIntuitionEngine.js:7\r",
+        "Virgules orphelines: 3 occurrences",
+        "Deux points mal placés: 33 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 3 occurrences",
+        "Parenthèses manquantes: 5 occurrences",
+        "Await sans async: 11 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexLearningEngine.js",
+      "size": 15598,
+      "lines": 551,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexLearningEngine.js:5\r",
+        "Virgules orphelines: 3 occurrences",
+        "Deux points mal placés: 12 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 1 occurrences",
+        "Parenthèses manquantes: 22 occurrences",
+        "Await sans async: 13 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexReflectiveThinking.js",
+      "size": 11397,
+      "lines": 295,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexReflectiveThinking.js:8\r",
+        "Deux points mal placés: 9 occurrences",
+        "Return malformé: 7 occurrences",
+        "Parenthèses manquantes: 14 occurrences",
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexRelationshipEngine.js",
+      "size": 15209,
+      "lines": 525,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexRelationshipEngine.js:12\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 19 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 2 occurrences",
+        "Parenthèses manquantes: 11 occurrences",
+        "Await sans async: 12 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexSocialIntelligence.js",
+      "size": 17450,
+      "lines": 490,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexSocialIntelligence.js:5\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 38 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 2 occurrences",
+        "Parenthèses manquantes: 4 occurrences",
+        "Await sans async: 14 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\AlexTimeIntelligence.js",
+      "size": 17987,
+      "lines": 507,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\AlexTimeIntelligence.js:12\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 42 occurrences",
+        "Return malformé: 2 occurrences",
+        "Parenthèses manquantes: 4 occurrences",
+        "Await sans async: 9 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\CognitiveBridge.js",
+      "size": 35844,
+      "lines": 1199,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\CognitiveBridge.js:7\r",
+        "Deux points mal placés: 76 occurrences",
+        "Return malformé: 48 occurrences",
+        "Parenthèses manquantes: 31 occurrences",
+        "Await sans async: 63 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\ContextIntelligence.js",
+      "size": 31811,
+      "lines": 980,
+      "syntaxValid": true,
+      "fakeScore": 20,
+      "realScore": 0,
+      "issues": [
+        "Deux points mal placés: 4 occurrences",
+        "Parenthèses manquantes: 36 occurrences",
+        "Await sans async: 29 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "fake"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\CreativeGenius.js",
+      "size": 509,
+      "lines": 17,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\EmotionalIntelligence.js",
+      "size": 31487,
+      "lines": 929,
+      "syntaxValid": true,
+      "fakeScore": 30,
+      "realScore": 0,
+      "issues": [
+        "Deux points mal placés: 5 occurrences",
+        "Parenthèses manquantes: 23 occurrences",
+        "Await sans async: 22 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "FAKE",
+        "fake"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\EyeTracking.js",
+      "size": 34582,
+      "lines": 1207,
+      "syntaxValid": false,
+      "fakeScore": 30,
+      "realScore": 5,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\EyeTracking.js:7\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 61 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 28 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 28 occurrences",
+        "Await sans async: 1 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template",
+        "Template",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\InhibitionReturn.js",
+      "size": 26576,
+      "lines": 870,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 25,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\InhibitionReturn.js:7\r",
+        "Deux points mal placés: 26 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 10 occurrences",
+        "Const malformé: 1 occurrences",
+        "Parenthèses manquantes: 34 occurrences",
+        "Await sans async: 3 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\InnerDialogueEngine.js",
+      "size": 53482,
+      "lines": 1643,
+      "syntaxValid": false,
+      "fakeScore": 60,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\InnerDialogueEngine.js:8\r",
+        "Deux points mal placés: 103 occurrences",
+        "Return malformé: 37 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 37 occurrences",
+        "Await sans async: 48 occurrences"
+      ],
+      "fakeIndicators": [
+        "template",
+        "template",
+        "template",
+        "template",
+        "return [\",\", \"Explorer\", \"plus\", \"profondément\", \"les\", \"insights\", \"générés,\", \"Tester\", \"les\", \"hypothèses\", \"dans\", \"un\", \"contexte\", \"pratique,\", \"Dialoguer\", \"avec\", \"dautres\", \"perspectives\", \"externes,\", \"Documenter\", \"et\", \"partager\", \"les\", \"découvertes,\", \"Planifier\", \"une\", \"session\", \"de\", \"suivi\", \"dans\", \"une\", \"semaine,\"];\"   }\"",
+        "return [\"Continue\", \"exploring,\", \"Test\", \"hypotheses\"];\"   }\""
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "FAKE"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\LanguageProcessor.js",
+      "size": 33451,
+      "lines": 1160,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\LanguageProcessor.js:3\r",
+        "Deux points mal placés: 69 occurrences",
+        "Return malformé: 37 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 12 occurrences",
+        "Await sans async: 61 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\MarketAnalyzer.js",
+      "size": 4077,
+      "lines": 76,
+      "syntaxValid": false,
+      "fakeScore": 10,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\MarketAnalyzer.js:17\r",
+        "Await sans async: 2 occurrences"
+      ],
+      "fakeIndicators": [
+        "mock"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\MarketMindCore.js",
+      "size": 1804,
+      "lines": 34,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\MarketMindCore.js:21\r",
+        "Await sans async: 10 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\MultiModalFusion.js",
+      "size": 3699,
+      "lines": 123,
+      "syntaxValid": true,
+      "fakeScore": 20,
+      "realScore": 0,
+      "issues": [
+        "Parenthèses manquantes: 1 occurrences",
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\NeuralCore.js",
+      "size": 8862,
+      "lines": 179,
+      "syntaxValid": false,
+      "fakeScore": 10,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\NeuralCore.js:11\r",
+        "Parenthèses manquantes: 3 occurrences",
+        "Await sans async: 38 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\QuantumGenerator.js",
+      "size": 26271,
+      "lines": 588,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 40,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\QuantumGenerator.js:5\r",
+        "Deux points mal placés: 23 occurrences",
+        "Return malformé: 11 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 16 occurrences",
+        "Await sans async: 21 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\SelfTrainingEngine.js",
+      "size": 22681,
+      "lines": 731,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\SelfTrainingEngine.js:7\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 12 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 5 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 28 occurrences",
+        "Await sans async: 33 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\SentimentScanner.js",
+      "size": 1449,
+      "lines": 37,
+      "syntaxValid": false,
+      "fakeScore": 60,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\intelligence\\SentimentScanner.js:14\r",
+        "Await sans async: 2 occurrences"
+      ],
+      "fakeIndicators": [
+        "mock",
+        "Mock",
+        "mock",
+        "Mock",
+        "mock",
+        "Mock"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "FAKE"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\TopDownAttention.js",
+      "size": 3699,
+      "lines": 123,
+      "syntaxValid": true,
+      "fakeScore": 20,
+      "realScore": 0,
+      "issues": [
+        "Parenthèses manquantes: 1 occurrences",
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\intelligence\\TradeSimulator.js",
+      "size": 2860,
+      "lines": 48,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 5,
+      "issues": [],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AdvancedModuleOrchestrator.js",
+      "size": 15100,
+      "lines": 593,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AdvancedModuleOrchestrator.js:13\r",
+        "Deux points mal placés: 10 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Return malformé: 5 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 27 occurrences",
+        "Await sans async: 8 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexAdaptiveIntelligence.js",
+      "size": 18617,
+      "lines": 577,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexAdaptiveIntelligence.js:3\r",
+        "Virgules orphelines: 4 occurrences",
+        "Deux points mal placés: 19 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 1 occurrences",
+        "Parenthèses manquantes: 15 occurrences",
+        "Await sans async: 13 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexAlchemyEngine.js",
+      "size": 21283,
+      "lines": 629,
+      "syntaxValid": false,
+      "fakeScore": 20,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexAlchemyEngine.js:7\r",
+        "Deux points mal placés: 41 occurrences",
+        "Try/catch malformés: 3 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 38 occurrences",
+        "Await sans async: 25 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template",
+        "Template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexAutonomousCore.js",
+      "size": 24211,
+      "lines": 767,
+      "syntaxValid": false,
+      "fakeScore": 60,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexAutonomousCore.js:3\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 12 occurrences",
+        "Return malformé: 6 occurrences",
+        "Const malformé: 1 occurrences",
+        "Parenthèses manquantes: 20 occurrences",
+        "Await sans async: 21 occurrences"
+      ],
+      "fakeIndicators": [
+        "PLACEHOLDER",
+        "Placeholder",
+        "Placeholder",
+        "Placeholder",
+        "Placeholder",
+        "Placeholder"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "FAKE"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexBioSync.js",
+      "size": 20973,
+      "lines": 488,
+      "syntaxValid": false,
+      "fakeScore": 40,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexBioSync.js:3\r",
+        "Deux points mal placés: 9 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Return malformé: 2 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 25 occurrences",
+        "Await sans async: 16 occurrences"
+      ],
+      "fakeIndicators": [
+        "TODO",
+        "TODO",
+        "TODO",
+        "TODO"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexCloudLearning.js",
+      "size": 13844,
+      "lines": 436,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexCloudLearning.js:3\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 7 occurrences",
+        "Return malformé: 2 occurrences",
+        "Parenthèses manquantes: 17 occurrences",
+        "Await sans async: 5 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexCognitionEngine.js",
+      "size": 18164,
+      "lines": 425,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexCognitionEngine.js:3\r",
+        "Deux points mal placés: 17 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Return malformé: 4 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 16 occurrences",
+        "Await sans async: 13 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexCommunicationEngine.js",
+      "size": 19028,
+      "lines": 715,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexCommunicationEngine.js:5\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 40 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 13 occurrences",
+        "Parenthèses manquantes: 12 occurrences",
+        "Await sans async: 13 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexConsciousnessDebug.js",
+      "size": 16722,
+      "lines": 587,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexConsciousnessDebug.js:3\r",
+        "Deux points mal placés: 22 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 6 occurrences",
+        "Parenthèses manquantes: 15 occurrences",
+        "Await sans async: 8 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexConsciousnessSystem.js",
+      "size": 10833,
+      "lines": 268,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexConsciousnessSystem.js:3\r",
+        "Deux points mal placés: 13 occurrences",
+        "Return malformé: 4 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 11 occurrences",
+        "Await sans async: 1 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexContextualAwareness.js",
+      "size": 20744,
+      "lines": 745,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexContextualAwareness.js:5\r",
+        "Deux points mal placés: 24 occurrences",
+        "Return malformé: 2 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 32 occurrences",
+        "Await sans async: 19 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexCreativeEngine.js",
+      "size": 31094,
+      "lines": 953,
+      "syntaxValid": true,
+      "fakeScore": 30,
+      "realScore": 0,
+      "issues": [
+        "Deux points mal placés: 5 occurrences",
+        "Parenthèses manquantes: 41 occurrences",
+        "Await sans async: 25 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "FAKE",
+        "fake"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexCreativeLearningSystem.js",
+      "size": 20619,
+      "lines": 642,
+      "syntaxValid": false,
+      "fakeScore": 10,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexCreativeLearningSystem.js:3\r",
+        "Virgules orphelines: 3 occurrences",
+        "Deux points mal placés: 24 occurrences",
+        "Return malformé: 14 occurrences",
+        "Parenthèses manquantes: 15 occurrences",
+        "Await sans async: 18 occurrences"
+      ],
+      "fakeIndicators": [
+        "PLACEHOLDER"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexCreativityBooster.js",
+      "size": 21486,
+      "lines": 468,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexCreativityBooster.js:3\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 31 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 11 occurrences",
+        "Await sans async: 8 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexCrisisManagement.js",
+      "size": 19590,
+      "lines": 434,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexCrisisManagement.js:5\r",
+        "Virgules orphelines: 3 occurrences",
+        "Deux points mal placés: 25 occurrences",
+        "Try/catch malformés: 5 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 9 occurrences",
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexDecisionEngine.js",
+      "size": 24993,
+      "lines": 778,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexDecisionEngine.js:3\r",
+        "Deux points mal placés: 42 occurrences",
+        "Return malformé: 8 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 27 occurrences",
+        "Await sans async: 10 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexDreamCompiler.js",
+      "size": 20433,
+      "lines": 555,
+      "syntaxValid": false,
+      "fakeScore": 90,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexDreamCompiler.js:3\r",
+        "Deux points mal placés: 19 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 11 occurrences",
+        "Await sans async: 6 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template",
+        "Template",
+        "template",
+        "Template",
+        "template",
+        "template",
+        "Template",
+        "Template",
+        "Template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "FAKE"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexEmotionalIntelligence.js",
+      "size": 17231,
+      "lines": 511,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexEmotionalIntelligence.js:5\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 24 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 2 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 26 occurrences",
+        "Await sans async: 3 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexEthicsCore.js",
+      "size": 11058,
+      "lines": 316,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexEthicsCore.js:12\r",
+        "Deux points mal placés: 7 occurrences",
+        "Return malformé: 3 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 8 occurrences",
+        "Await sans async: 1 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexEvolutionCore.js",
+      "size": 27188,
+      "lines": 598,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 5,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexEvolutionCore.js:3\r",
+        "Deux points mal placés: 21 occurrences",
+        "Try/catch malformés: 3 occurrences",
+        "Return malformé: 3 occurrences",
+        "Identifiants dupliqués: 4 occurrences",
+        "Parenthèses manquantes: 22 occurrences",
+        "Await sans async: 15 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexGoalMastery.js",
+      "size": 18827,
+      "lines": 539,
+      "syntaxValid": false,
+      "fakeScore": 20,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexGoalMastery.js:3\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 50 occurrences",
+        "Return malformé: 2 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 10 occurrences",
+        "Await sans async: 8 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template",
+        "Template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexHyperLoop.js",
+      "size": 25233,
+      "lines": 701,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 30,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexHyperLoop.js:3\r",
+        "Deux points mal placés: 21 occurrences",
+        "Try/catch malformés: 5 occurrences",
+        "Return malformé: 3 occurrences",
+        "Parenthèses manquantes: 5 occurrences",
+        "Await sans async: 60 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexIntelligentCore.js",
+      "size": 17937,
+      "lines": 524,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 60,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexIntelligentCore.js:3\r",
+        "Deux points mal placés: 17 occurrences",
+        "Return malformé: 5 occurrences",
+        "Const malformé: 2 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 8 occurrences",
+        "Await sans async: 20 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexIntuitionEngine.js",
+      "size": 18140,
+      "lines": 618,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexIntuitionEngine.js:3\r",
+        "Virgules orphelines: 3 occurrences",
+        "Deux points mal placés: 34 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 4 occurrences",
+        "Parenthèses manquantes: 4 occurrences",
+        "Await sans async: 11 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexKernel.js",
+      "size": 1955,
+      "lines": 74,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexKernel.js:10\r",
+        "Deux points mal placés: 2 occurrences",
+        "Return malformé: 2 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexLearningEngine.js",
+      "size": 16318,
+      "lines": 543,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexLearningEngine.js:5\r",
+        "Virgules orphelines: 3 occurrences",
+        "Deux points mal placés: 12 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 1 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 22 occurrences",
+        "Await sans async: 13 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexMasterSystem.js",
+      "size": 441,
+      "lines": 10,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Await sans async: 2 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexMemoryCore.js",
+      "size": 20384,
+      "lines": 684,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexMemoryCore.js:3\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 29 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Return malformé: 1 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 32 occurrences",
+        "Await sans async: 22 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexPersonalityCore.js",
+      "size": 18192,
+      "lines": 630,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexPersonalityCore.js:5\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 31 occurrences",
+        "Return malformé: 4 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 19 occurrences",
+        "Await sans async: 2 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexRelationshipEngine.js",
+      "size": 15597,
+      "lines": 508,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexRelationshipEngine.js:12\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 19 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 2 occurrences",
+        "Parenthèses manquantes: 10 occurrences",
+        "Await sans async: 12 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexSocialIntelligence.js",
+      "size": 17856,
+      "lines": 476,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexSocialIntelligence.js:5\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 38 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 2 occurrences",
+        "Parenthèses manquantes: 4 occurrences",
+        "Await sans async: 14 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexStrategicThinking.js",
+      "size": 17820,
+      "lines": 475,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexStrategicThinking.js:5\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 40 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 1 occurrences",
+        "Parenthèses manquantes: 8 occurrences",
+        "Await sans async: 18 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexTimeIntelligence.js",
+      "size": 18262,
+      "lines": 485,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexTimeIntelligence.js:12\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 42 occurrences",
+        "Return malformé: 2 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 4 occurrences",
+        "Await sans async: 9 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexUniversalCompanion.js",
+      "size": 38585,
+      "lines": 1146,
+      "syntaxValid": true,
+      "fakeScore": 30,
+      "realScore": 0,
+      "issues": [
+        "Deux points mal placés: 7 occurrences",
+        "Parenthèses manquantes: 39 occurrences",
+        "Await sans async: 23 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "FAKE",
+        "fake"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexWhispers.js",
+      "size": 22642,
+      "lines": 554,
+      "syntaxValid": false,
+      "fakeScore": 30,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexWhispers.js:3\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 21 occurrences",
+        "Try/catch malformés: 5 occurrences",
+        "Return malformé: 2 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 11 occurrences",
+        "Await sans async: 40 occurrences"
+      ],
+      "fakeIndicators": [
+        "Template",
+        "template",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AlexWisdomKeeper.js",
+      "size": 21663,
+      "lines": 476,
+      "syntaxValid": false,
+      "fakeScore": 10,
+      "realScore": 5,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AlexWisdomKeeper.js:5\r",
+        "Deux points mal placés: 15 occurrences",
+        "Return malformé: 1 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 18 occurrences",
+        "Await sans async: 11 occurrences"
+      ],
+      "fakeIndicators": [
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AutoGenesis.js",
+      "size": 17169,
+      "lines": 522,
+      "syntaxValid": false,
+      "fakeScore": 230,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AutoGenesis.js:8\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 24 occurrences",
+        "Return malformé: 3 occurrences",
+        "Const malformé: 2 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 16 occurrences",
+        "Await sans async: 22 occurrences"
+      ],
+      "fakeIndicators": [
+        "TODO",
+        "TODO",
+        "Template",
+        "Template",
+        "Template",
+        "template",
+        "Template",
+        "Template",
+        "template",
+        "template",
+        "template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "FAKE"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\AutonomyCore.js",
+      "size": 2877,
+      "lines": 89,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\AutonomyCore.js:10\r",
+        "Deux points mal placés: 1 occurrences",
+        "Return malformé: 1 occurrences",
+        "Parenthèses manquantes: 1 occurrences",
+        "Await sans async: 1 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\BioSensorAdapter.js",
+      "size": 35550,
+      "lines": 1250,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\BioSensorAdapter.js:3\r",
+        "Deux points mal placés: 145 occurrences",
+        "Return malformé: 28 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 5 occurrences",
+        "Await sans async: 30 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\CollectiveHustleMind.js",
+      "size": 21532,
+      "lines": 438,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\CollectiveHustleMind.js:3\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 25 occurrences",
+        "Try/catch malformés: 5 occurrences",
+        "Return malformé: 2 occurrences",
+        "Identifiants dupliqués: 5 occurrences",
+        "Parenthèses manquantes: 10 occurrences",
+        "Await sans async: 85 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\ContextIntelligence.js",
+      "size": 20248,
+      "lines": 512,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 25,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\ContextIntelligence.js:5\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 20 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Return malformé: 6 occurrences",
+        "Identifiants dupliqués: 3 occurrences",
+        "Parenthèses manquantes: 27 occurrences",
+        "Await sans async: 10 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\CulturalAdaptation.js",
+      "size": 32851,
+      "lines": 1123,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 105,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\CulturalAdaptation.js:3\r",
+        "Deux points mal placés: 103 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Return malformé: 17 occurrences",
+        "Parenthèses manquantes: 8 occurrences",
+        "Await sans async: 22 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "REAL"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\DarkSideDecoder.js",
+      "size": 21611,
+      "lines": 521,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 30,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\DarkSideDecoder.js:5\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 26 occurrences",
+        "Try/catch malformés: 5 occurrences",
+        "Return malformé: 1 occurrences",
+        "Parenthèses manquantes: 28 occurrences",
+        "Await sans async: 8 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\DreamCompiler.js",
+      "size": 15735,
+      "lines": 517,
+      "syntaxValid": true,
+      "fakeScore": 20,
+      "realScore": 0,
+      "issues": [
+        "Deux points mal placés: 2 occurrences",
+        "Parenthèses manquantes: 13 occurrences",
+        "Await sans async: 12 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\EmotionalIntelligence.js",
+      "size": 19084,
+      "lines": 595,
+      "syntaxValid": false,
+      "fakeScore": 10,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\EmotionalIntelligence.js:3\r",
+        "Deux points mal placés: 41 occurrences",
+        "Return malformé: 12 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 7 occurrences",
+        "Await sans async: 11 occurrences"
+      ],
+      "fakeIndicators": [
+        "Placeholder"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\FunctionBuilder.js",
+      "size": 6537,
+      "lines": 233,
+      "syntaxValid": true,
+      "fakeScore": 50,
+      "realScore": 0,
+      "issues": [
+        "Deux points mal placés: 1 occurrences",
+        "Parenthèses manquantes: 4 occurrences",
+        "Await sans async: 8 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "template",
+        "template",
+        "Template",
+        "Template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\GodLevelAwareness.js",
+      "size": 39403,
+      "lines": 1219,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\GodLevelAwareness.js:3\r",
+        "Deux points mal placés: 40 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 27 occurrences",
+        "Await sans async: 60 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\HealthPredictor.js",
+      "size": 37266,
+      "lines": 1296,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\HealthPredictor.js:3\r",
+        "Deux points mal placés: 148 occurrences",
+        "Return malformé: 26 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 11 occurrences",
+        "Await sans async: 30 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\HypothesisBuilder.js",
+      "size": 32832,
+      "lines": 1076,
+      "syntaxValid": false,
+      "fakeScore": 20,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\HypothesisBuilder.js:3\r",
+        "Deux points mal placés: 97 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 27 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 8 occurrences",
+        "Await sans async: 25 occurrences"
+      ],
+      "fakeIndicators": [
+        "return [\"Test\", \"empirically,\", \"Gather\", \"more\", \"data\"];\"",
+        "return [\"Plan\", \"follow-up\", \"tests,\", \"Document\", \"results\"];\""
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\InnerDialogueEngine.js",
+      "size": 995,
+      "lines": 22,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Await sans async: 5 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\InventoryFlow.js",
+      "size": 31565,
+      "lines": 963,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 25,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\InventoryFlow.js:3\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 56 occurrences",
+        "Try/catch malformés: 7 occurrences",
+        "Return malformé: 1 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 23 occurrences",
+        "Await sans async: 40 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\KnowledgeSynthesizer.js",
+      "size": 40806,
+      "lines": 1463,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\KnowledgeSynthesizer.js:3\r",
+        "Deux points mal placés: 162 occurrences",
+        "Return malformé: 57 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 13 occurrences",
+        "Await sans async: 46 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\LanguageExpansion.js",
+      "size": 773,
+      "lines": 20,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\LanguageProcessor.js",
+      "size": 43856,
+      "lines": 1214,
+      "syntaxValid": false,
+      "fakeScore": 220,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\LanguageProcessor.js:7\r",
+        "Deux points mal placés: 55 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Const malformé: 1 occurrences",
+        "Identifiants dupliqués: 5 occurrences",
+        "Parenthèses manquantes: 37 occurrences",
+        "Await sans async: 40 occurrences"
+      ],
+      "fakeIndicators": [
+        "placeholder",
+        "placeholder",
+        "placeholder",
+        "placeholder",
+        "placeholder",
+        "placeholder",
+        "placeholder",
+        "placeholder",
+        "placeholder",
+        "placeholder",
+        "template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template",
+        "Template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "FAKE"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\LocalAITrainer.js",
+      "size": 9818,
+      "lines": 258,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 5,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\LocalAITrainer.js:3\r",
+        "Deux points mal placés: 1 occurrences",
+        "Return malformé: 1 occurrences",
+        "Parenthèses manquantes: 4 occurrences",
+        "Await sans async: 1 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\MemoryPalace.js",
+      "size": 3024,
+      "lines": 84,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 50,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\MemoryPalace.js:34\r",
+        "Await sans async: 20 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\MutualGrowthSystem.js",
+      "size": 11841,
+      "lines": 194,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 5,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\MutualGrowthSystem.js:3\r",
+        "Virgules orphelines: 1 occurrences",
+        "Deux points mal placés: 14 occurrences",
+        "Return malformé: 6 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 10 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\NeuroCore.js",
+      "size": 65223,
+      "lines": 1850,
+      "syntaxValid": false,
+      "fakeScore": 130,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\NeuroCore.js:1\r",
+        "Deux points mal placés: 53 occurrences",
+        "Return malformé: 28 occurrences",
+        "Const malformé: 3 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 67 occurrences",
+        "Await sans async: 15 occurrences"
+      ],
+      "fakeIndicators": [
+        "placeholder",
+        "placeholder",
+        "placeholder",
+        "Placeholder",
+        "template",
+        "template",
+        "template",
+        "template",
+        "Template",
+        "template",
+        "Template",
+        "template",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "FAKE"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\PurchasePredictor.js",
+      "size": 42899,
+      "lines": 1390,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\PurchasePredictor.js:3\r",
+        "Virgules orphelines: 5 occurrences",
+        "Deux points mal placés: 132 occurrences",
+        "Try/catch malformés: 3 occurrences",
+        "Return malformé: 2 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 25 occurrences",
+        "Await sans async: 41 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\QuantumBrain.js",
+      "size": 43706,
+      "lines": 1081,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 65,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\QuantumBrain.js:5\r",
+        "Deux points mal placés: 49 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 11 occurrences",
+        "Identifiants dupliqués: 5 occurrences",
+        "Parenthèses manquantes: 38 occurrences",
+        "Await sans async: 52 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\QuantumCreativity.js",
+      "size": 35375,
+      "lines": 1067,
+      "syntaxValid": true,
+      "fakeScore": 30,
+      "realScore": 0,
+      "issues": [
+        "Deux points mal placés: 4 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Parenthèses manquantes: 24 occurrences",
+        "Await sans async: 24 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "FAKE",
+        "fake"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\SAPConnector.js",
+      "size": 28657,
+      "lines": 790,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\SAPConnector.js:3\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 26 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Return malformé: 1 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 20 occurrences",
+        "Await sans async: 32 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\SelfReflection.js",
+      "size": 3051,
+      "lines": 90,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 10,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\SelfReflection.js:3\r",
+        "Deux points mal placés: 2 occurrences",
+        "Return malformé: 2 occurrences",
+        "Parenthèses manquantes: 1 occurrences",
+        "Await sans async: 1 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\SelfTrainingEngine.js",
+      "size": 23056,
+      "lines": 708,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\SelfTrainingEngine.js:3\r",
+        "Virgules orphelines: 2 occurrences",
+        "Deux points mal placés: 11 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 4 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 31 occurrences",
+        "Await sans async: 33 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\ShadowCloneMode.js",
+      "size": 21786,
+      "lines": 541,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 20,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\ShadowCloneMode.js:3\r",
+        "Deux points mal placés: 30 occurrences",
+        "Try/catch malformés: 5 occurrences",
+        "Return malformé: 4 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 7 occurrences",
+        "Await sans async: 52 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\SoulPrintGenerator.js",
+      "size": 19538,
+      "lines": 458,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\SoulPrintGenerator.js:3\r",
+        "Deux points mal placés: 17 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Return malformé: 15 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 7 occurrences",
+        "Await sans async: 3 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\SupplierOptimizer.js",
+      "size": 3701,
+      "lines": 123,
+      "syntaxValid": true,
+      "fakeScore": 20,
+      "realScore": 0,
+      "issues": [
+        "Parenthèses manquantes: 1 occurrences",
+        "Await sans async: 4 occurrences"
+      ],
+      "fakeIndicators": [
+        "fake",
+        "template"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\SynchronicityTracker.js",
+      "size": 19163,
+      "lines": 466,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 35,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\SynchronicityTracker.js:3\r",
+        "Deux points mal placés: 15 occurrences",
+        "Try/catch malformés: 5 occurrences",
+        "Return malformé: 1 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 7 occurrences",
+        "Await sans async: 40 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\TechnicalDocReader.js",
+      "size": 39639,
+      "lines": 1138,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 45,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\TechnicalDocReader.js:3\r",
+        "Virgules orphelines: 3 occurrences",
+        "Deux points mal placés: 114 occurrences",
+        "Try/catch malformés: 5 occurrences",
+        "Return malformé: 2 occurrences",
+        "Identifiants dupliqués: 2 occurrences",
+        "Parenthèses manquantes: 26 occurrences",
+        "Await sans async: 35 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\TemporalPredictor.js",
+      "size": 20399,
+      "lines": 631,
+      "syntaxValid": false,
+      "fakeScore": 10,
+      "realScore": 0,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\TemporalPredictor.js:3\r",
+        "Deux points mal placés: 58 occurrences",
+        "Return malformé: 17 occurrences",
+        "Parenthèses manquantes: 8 occurrences",
+        "Await sans async: 25 occurrences"
+      ],
+      "fakeIndicators": [
+        "placeholder"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\TestAutoCreator.js",
+      "size": 579,
+      "lines": 15,
+      "syntaxValid": true,
+      "fakeScore": 0,
+      "realScore": 0,
+      "issues": [
+        "Await sans async: 3 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": false,
+      "classification": "UNCLEAR"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\UniversalModuleRegistry.js",
+      "size": 15100,
+      "lines": 400,
+      "syntaxValid": false,
+      "fakeScore": 10,
+      "realScore": 40,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\UniversalModuleRegistry.js:6\r",
+        "Deux points mal placés: 4 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 1 occurrences",
+        "Parenthèses manquantes: 13 occurrences",
+        "Await sans async: 8 occurrences"
+      ],
+      "fakeIndicators": [
+        "placeholder"
+      ],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\VisionProFactory.js",
+      "size": 38673,
+      "lines": 1330,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 35,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\VisionProFactory.js:3\r",
+        "Virgules orphelines: 5 occurrences",
+        "Deux points mal placés: 132 occurrences",
+        "Try/catch malformés: 1 occurrences",
+        "Return malformé: 2 occurrences",
+        "Parenthèses manquantes: 24 occurrences",
+        "Await sans async: 37 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "MIXED"
+    },
+    {
+      "path": ".\\backend\\alex-modules\\specialized\\VoiceSynthesisMultilang.js",
+      "size": 32356,
+      "lines": 1142,
+      "syntaxValid": false,
+      "fakeScore": 0,
+      "realScore": 15,
+      "issues": [
+        "Erreur syntaxe: C:\\dev\\HustleFinderIA\\backend\\alex-modules\\specialized\\VoiceSynthesisMultilang.js:3\r",
+        "Deux points mal placés: 144 occurrences",
+        "Try/catch malformés: 2 occurrences",
+        "Return malformé: 16 occurrences",
+        "Identifiants dupliqués: 1 occurrences",
+        "Parenthèses manquantes: 5 occurrences",
+        "Await sans async: 26 occurrences"
+      ],
+      "fakeIndicators": [],
+      "hasRealAPIs": false,
+      "hasRealLogic": false,
+      "hasAuthenticity": true,
+      "classification": "UNCLEAR"
+    }
+  ]
+}

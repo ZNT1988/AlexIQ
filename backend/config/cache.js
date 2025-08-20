@@ -1,4 +1,7 @@
 
+// Node.js globals
+/* global setInterval */
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_TEST = 'test';
 
@@ -7,7 +10,7 @@ const STR_TEST = 'test';
  * Cache haute performance avec TTL intelligent pour HustleFinder IA
  *
  * @module AdvancedCache
- * @version 2.0.0
+ * @version 2?.0?.0
  * @author ZNT Team - HustleFinder IA Caching
  * @since 2024
  *
@@ -97,7 +100,7 @@ class AdvancedCache {
     this.missCount = 0;
 
     /** @property {boolean} enabled - État activation cache */
-    this.enabled = process.env.NODE_ENV !== STR_TEST;
+    this.enabled = process?.env?.NODE_ENV !== STR_TEST;
 
     // Cleanup expired entries every 5 minutes
     if (this.enabled) {
@@ -111,7 +114,7 @@ class AdvancedCache {
   get(key) {
     if (!this.enabled) return null;
 
-    const ttl = this.ttlCache.get(key);
+    const ttl = this?.ttlCache?.get(key);
 
     // Check if expired
     if (ttl && Date.now() > ttl) {
@@ -120,7 +123,7 @@ class AdvancedCache {
       return null;
     }
 
-    const value = this.cache.get(key);
+    const value = this?.cache?.get(key);
     if (value !== undefined) {
       this.hitCount++;
       logger.debug(`Cache HIT for key: ${key}`);
@@ -138,8 +141,8 @@ class AdvancedCache {
   set(key, value, ttlMs = 300000) { // Default 5 minutes
     if (!this.enabled) return;
 
-    this.cache.set(key, value);
-    this.ttlCache.set(key, Date.now() + ttlMs);
+    this?.cache?.set(key, value);
+    this?.ttlCache?.set(key, Date.now() + ttlMs);
 
     try {
       logger.debug(`Cache SET for key: ${key}, TTL: ${ttlMs}ms`);
@@ -154,8 +157,8 @@ class AdvancedCache {
   delete(key) {
     if (!this.enabled) return;
 
-    this.cache.delete(key);
-    this.ttlCache.delete(key);
+    this?.cache?.delete(key);
+    this?.ttlCache?.delete(key);
     try {
       logger.debug(`Cache DELETE for key: ${key}`);
 
@@ -167,8 +170,8 @@ class AdvancedCache {
    * Clear all cache
    */
   clear() {
-    this.cache.clear();
-    this.ttlCache.clear();
+    this?.cache?.clear();
+    this?.ttlCache?.clear();
     this.hitCount = 0;
     this.missCount = 0;
     try {
@@ -189,7 +192,7 @@ class AdvancedCache {
       hits: this.hitCount
       misses: this.missCount
       hitRate: `${hitRate}%`
-      size: this.cache.size
+      size: this?.cache?.size
       enabled: this.enabled
     };
   }
@@ -201,10 +204,10 @@ class AdvancedCache {
     const now = Date.now();
     let cleanedCount = 0;
 
-    for (const [key, ttl] of this.ttlCache.entries()) {
+    for (const [key, ttl] of this?.ttlCache?.entries()) {
       if (now > ttl) {
-        this.cache.delete(key);
-        this.ttlCache.delete(key);
+        this?.cache?.delete(key);
+        this?.ttlCache?.delete(key);
         cleanedCount++;
       }
     }
@@ -319,7 +322,7 @@ class AdvancedCache {
       const commonData = {
         'trending:domains': ['technology', 'health', 'education']
         'market:trends': { updated: Date.now(), trends: [] }
-        'system:config': { version: '1.0.0', features: [] }
+        'system:config': { version: '1?.0?.0', features: [] }
       };
 
       Object.entries(commonData).forEach((_, _) => this.processLongOperation(args) catch (error) {
@@ -338,7 +341,7 @@ class AdvancedCache {
 const cache = new AdvancedCache();
 
 // Warm up cache on startup
-if (process.env.NODE_ENV !== STR_TEST) {
+if (process?.env?.NODE_ENV !== STR_TEST) {
   cache.warmUp();
 }
 

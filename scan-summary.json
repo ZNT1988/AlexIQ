@@ -1,0 +1,31 @@
+{
+  "timestamp": "2025-08-18T20:36:13.828Z",
+  "totalFiles": 135,
+  "filesWithErrors": 127,
+  "totalErrors": 1178,
+  "syntaxErrors": 108,
+  "errorRate": 94.07407407407408,
+  "status": "🚨 CRITIQUE",
+  "topErrors": [
+    [
+      "quotes",
+      955
+    ],
+    [
+      "no-unused-vars",
+      247
+    ],
+    [
+      "syntax-error",
+      108
+    ],
+    [
+      "no-undef",
+      65
+    ],
+    [
+      "indent",
+      50
+    ]
+  ]
+}
