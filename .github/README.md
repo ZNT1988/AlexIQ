@@ -13,7 +13,7 @@
 
 Le fichier `sonar-project.properties` à la racine configure:
 
-- **Project Key**: `NT1988_AlexIQ`
+- **Project Key**: `ZNT1988_AlexIQ`
 - **Organization**: `alexiq`
 - **Sources analysées**: `backend/`, `frontend/src/`
 - **Exclusions**: node_modules, logs, bases de données, fichiers temporaires
@@ -33,7 +33,7 @@ GITHUB_TOKEN: [Auto-généré par GitHub]
 
 1. Allez sur https://sonarcloud.io
 2. Connectez-vous avec GitHub
-3. Créez un nouveau projet avec la clé `NT1988_AlexIQ`
+3. Créez un nouveau projet avec la clé `ZNT1988_AlexIQ`
 4. Configurez l'organisation `alexiq`
 5. Récupérez le token d'authentification
 

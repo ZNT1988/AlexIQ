@@ -50,7 +50,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=NT1988_AlexIQ
+            -Dsonar.projectKey=ZNT1988_AlexIQ
             -Dsonar.organization=alexiq
             -Dsonar.host.url=https://sonarcloud.io
       

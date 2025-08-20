@@ -121,7 +121,7 @@ class CIConfigValidator {
       
       // Validate required properties
       const requiredProperties = [
-        'sonar.projectKey=NT1988_AlexIQ',
+        'sonar.projectKey=ZNT1988_AlexIQ',
         'sonar.organization=alexiq',
         'sonar.sources=backend,frontend/src',
         'sonar.sourceEncoding=UTF-8'
