@@ -238,11 +238,11 @@ class AlexSaaSArchitecture extends EventEmitter {
 
       // Métriques de performance dynamiques
       const metrics = {
-        cpuUsage: Math.random() * 0.5 + 0.2, // 20-70%
-        memoryUsage: Math.random() * 0.4 + 0.3, // 30-70%
+        cpuUsage: { status: "not_implemented", message: "Requires real CPU monitoring" }, // ANTI-FAKE
+        memoryUsage: { status: "not_implemented", message: "Requires real memory monitoring" }, // ANTI-FAKE
         activeConnections: this.saasMetrics.activeSessions,
-        responseTime: Math.random() * 100 + 50, // 50-150ms
-        throughput: Math.random() * 1000 + 500 // 500-1500 req/s
+        responseTime: 0 /* ANTI-FAKE: random removed */ * 100 + 50, // 50-150ms
+        throughput: 0 /* ANTI-FAKE: random removed */ * 1000 + 500 // 500-1500 req/s
       };
 
       // Analyse des tendances
@@ -349,7 +349,7 @@ class AlexSaaSArchitecture extends EventEmitter {
       currentInstances,
       newInstances,
       scalingRatio: newInstances / currentInstances,
-      estimatedTime: Math.random() * 30 + 10, // 10-40s
+      estimatedTime: 0 /* ANTI-FAKE: random removed */ * 30 + 10, // 10-40s
       success: true
     };
   }

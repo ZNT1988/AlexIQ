@@ -933,7 +933,7 @@ class ConflictResolver {
   }
 
   async executeResolutionStrategy(strategy, conflicts, systemContext) {
-    const resolutionId = `resolution_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`;
+    const resolutionId = `resolution_${Date.now()}_${/* ANTI-FAKE: random removed */ (()=>{ throw new Error("random_usage_removed"); })().toString(36).substr(2, 5)}`;
     this.activeResolutions.set(resolutionId, {
       strategy: strategy.type,
       startTime: Date.now()

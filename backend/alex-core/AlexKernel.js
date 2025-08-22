@@ -101,7 +101,7 @@ export class AlexKernel extends EventEmitter {
     
     try {
       logger.info("🔥 AlexKernel initializing with strict anti-fake rules");
-    } catch (error) {
+    } catch (_error) {
       // Logger fallback - no global access
     }
   }
@@ -109,7 +109,7 @@ export class AlexKernel extends EventEmitter {
   setupSystemMetricsCollectors() {
     // CPU Usage - Source: os.loadavg()
     this.metricsCollector.registerCollector(
-      'cpu_usage',
+      "cpu_usage",
       () => {
         const loadAvg = os.loadavg();
         const cpuCount = os.cpus().length;
@@ -121,12 +121,12 @@ export class AlexKernel extends EventEmitter {
           cpuCount
         };
       },
-      'os.loadavg()'
+      "os.loadavg()"
     );
 
     // Memory Usage - Source: os.totalmem(), os.freemem()
     this.metricsCollector.registerCollector(
-      'memory_usage',
+      "memory_usage",
       () => {
         const total = os.totalmem();
         const free = os.freemem();
@@ -139,12 +139,12 @@ export class AlexKernel extends EventEmitter {
           available: free
         };
       },
-      'os.totalmem()/os.freemem()'
+      "os.totalmem()/os.freemem()"
     );
 
     // Process Metrics - Source: process.memoryUsage(), process.cpuUsage()
     this.metricsCollector.registerCollector(
-      'process_metrics',
+      "process_metrics",
       () => {
         const memUsage = process.memoryUsage();
         const cpuUsage = process.cpuUsage();
@@ -163,12 +163,12 @@ export class AlexKernel extends EventEmitter {
           pid: process.pid
         };
       },
-      'process.memoryUsage()/process.cpuUsage()'
+      "process.memoryUsage()/process.cpuUsage()"
     );
 
     // Module Health - Source: this.loadedModules analysis
     this.metricsCollector.registerCollector(
-      'module_health',
+      "module_health",
       async () => {
         const states = [];
         let activeCount = 0;
@@ -177,19 +177,19 @@ export class AlexKernel extends EventEmitter {
         for (const [moduleId, module] of this.loadedModules) {
           try {
             // Try to call module health check if exists
-            const health = typeof module.getHealth === 'function' 
+            const health = typeof module.getHealth === "function" 
               ? await module.getHealth()
               : { status: "unknown", reason: "no_health_check" };
             
             states.push({
               moduleId,
               health,
-              hasHealthCheck: typeof module.getHealth === 'function',
+              hasHealthCheck: typeof module.getHealth === "function",
               timestamp: Date.now()
             });
 
-            if (health.status === 'active') activeCount++;
-            if (health.status === 'healthy') healthyCount++;
+            if (health.status === "active") activeCount++;
+            if (health.status === "healthy") healthyCount++;
           } catch (error) {
             states.push({
               moduleId,
@@ -210,12 +210,12 @@ export class AlexKernel extends EventEmitter {
           moduleStates: states
         };
       },
-      'this.loadedModules.analysis'
+      "this.loadedModules.analysis"
     );
 
     // Consciousness Metrics - Source: interaction complexity analysis
     this.metricsCollector.registerCollector(
-      'consciousness_metrics',
+      "consciousness_metrics",
       () => {
         if (!this.interactionTracker) {
           return {
@@ -276,7 +276,7 @@ export class AlexKernel extends EventEmitter {
           dataFreshness: now - Math.max(...recentInteractions.map(i => i.timestamp))
         };
       },
-      'this.interactionTracker.analysis'
+      "this.interactionTracker.analysis"
     );
   }
 
@@ -286,9 +286,9 @@ export class AlexKernel extends EventEmitter {
 
     // Test des collectors critiques
     try {
-      await this.metricsCollector.collect('cpu_usage', true);
-      await this.metricsCollector.collect('memory_usage', true);
-      await this.metricsCollector.collect('process_metrics', true);
+      await this.metricsCollector.collect("cpu_usage", true);
+      await this.metricsCollector.collect("memory_usage", true);
+      await this.metricsCollector.collect("process_metrics", true);
       
       logger.info("✅ AlexKernel metrics collectors validated - authentic sources active");
     } catch (error) {
@@ -410,9 +410,9 @@ export class AlexKernel extends EventEmitter {
    */
   async performSystemHealthAnalysis() {
     try {
-      const cpuMetrics = await this.metricsCollector.collect('cpu_usage', this.strictMode);
-      const memoryMetrics = await this.metricsCollector.collect('memory_usage', this.strictMode);
-      const processMetrics = await this.metricsCollector.collect('process_metrics', this.strictMode);
+      const cpuMetrics = await this.metricsCollector.collect("cpu_usage", this.strictMode);
+      const memoryMetrics = await this.metricsCollector.collect("memory_usage", this.strictMode);
+      const processMetrics = await this.metricsCollector.collect("process_metrics", this.strictMode);
 
       // Vérification: toutes les métriques doivent être mesurées
       const allMeasured = [cpuMetrics, memoryMetrics, processMetrics]
@@ -504,7 +504,7 @@ export class AlexKernel extends EventEmitter {
    */
   async evaluateAllModuleStates() {
     try {
-      const moduleHealth = await this.metricsCollector.collect('module_health', this.strictMode);
+      const moduleHealth = await this.metricsCollector.collect("module_health", this.strictMode);
 
       if (moduleHealth.status !== "measured" && this.strictMode) {
         throw new Error("Module health metrics unavailable");
@@ -539,7 +539,7 @@ export class AlexKernel extends EventEmitter {
   /**
    * Résolution conflits - SOURCES MESURÉES UNIQUEMENT
    */
-  async resolveModuleConflicts(moduleStates) {
+  async resolveModuleConflicts(_moduleStates) {
     if (this.strictMode) {
       throw new Error("conflict_detection_not_implemented");
     }
@@ -735,12 +735,12 @@ export class AlexKernel extends EventEmitter {
    */
   async calculateDynamicAutonomyLevel() {
     // Register decision tracking collector if not exists
-    if (!this.metricsCollector.collectors.has('decision_metrics')) {
+    if (!this.metricsCollector.collectors.has("decision_metrics")) {
       this.setupDecisionMetricsCollector();
     }
 
     try {
-      const decisionMetrics = await this.metricsCollector.collect('decision_metrics', this.strictMode);
+      const decisionMetrics = await this.metricsCollector.collect("decision_metrics", this.strictMode);
       
       if (decisionMetrics.status !== "measured") {
         if (this.strictMode) {
@@ -868,7 +868,7 @@ export class AlexKernel extends EventEmitter {
     }
 
     this.metricsCollector.registerCollector(
-      'decision_metrics',
+      "decision_metrics",
       () => {
         const now = Date.now();
         const timeWindow = 300000; // 5 minutes
@@ -879,7 +879,7 @@ export class AlexKernel extends EventEmitter {
         const recentAdaptations = this.decisionTracker.adaptations.filter(a => a.timestamp > cutoff);
 
         const totalDecisions = recentDecisions.length;
-        const independentDecisions = recentDecisions.filter(d => d.type === 'independent').length;
+        const independentDecisions = recentDecisions.filter(d => d.type === "independent").length;
         const adaptationEvents = recentAdaptations.length;
         const successfulAdaptations = recentAdaptations.filter(a => a.success).length;
         
@@ -897,7 +897,7 @@ export class AlexKernel extends EventEmitter {
           dataFreshness: now - Math.max(...recentDecisions.map(d => d.timestamp), 0)
         };
       },
-      'this.decisionTracker.analysis'
+      "this.decisionTracker.analysis"
     );
   }
 
@@ -962,7 +962,7 @@ export class AlexKernel extends EventEmitter {
    */
   async calculateConsciousnessLevel() {
     try {
-      const consciousnessMetrics = await this.metricsCollector.collect('consciousness_metrics', this.strictMode);
+      const consciousnessMetrics = await this.metricsCollector.collect("consciousness_metrics", this.strictMode);
       
       if (consciousnessMetrics.status !== "measured") {
         if (this.strictMode) {

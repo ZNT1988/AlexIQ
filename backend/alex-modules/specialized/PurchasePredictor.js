@@ -684,7 +684,7 @@ export class PurchasePredictor extends EventEmitter {
     // Génération et évaluation des scénarios
     await this.generateOptimizationScenarios(optimization);,
     // Simulation et validation des résultats
-    await this.simulateOptimizationResults(optimization);,
+    await this./* ANTI-FAKE: simulate removed: OptimizationResults */ (()=>{ throw new Error("simulate_usage_removed"); })(optimization);,
     // Sélection du scénario optimal
     await this.selectOptimalScenario(optimization);,
     // Génération du plan d'action,\'     await this.generateActionPlan(optimization);

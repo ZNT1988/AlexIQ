@@ -18,6 +18,79 @@ class ResponseSynthesizer {
       maxSourceWeight: config.maxSourceWeight || 0.8,
       minConfidenceThreshold: config.minConfidenceThreshold || 0.6,
       synthesisMethod: config.synthesisMethod || 'weighted_fusion',
+      baseRelevanceWeight: config.baseRelevanceWeight || 0.5,
+      technicalContextBoost: config.technicalContextBoost || 0.3,
+      businessContextBoost: config.businessContextBoost || 0.3,
+      maxTopSources: config.maxTopSources || 2,
+      knowledgeBoost: config.knowledgeBoost || 0.2,
+      maxKnowledgeBoost: config.maxKnowledgeBoost || 0.95,
+      knowledgeBoostIncrement: config.knowledgeBoostIncrement || 0.05,
+      minWordLength: config.minWordLength || 3,
+      minPhraseLength: config.minPhraseLength || 3,
+      maxAdditions: config.maxAdditions || 2,
+      minKnowledgeConfidence: config.minKnowledgeConfidence || 0.5,
+      maxKnowledgePatterns: config.maxKnowledgePatterns || 3,
+      enhancementConfidence: config.enhancementConfidence || 0.6,
+      maxInsights: config.maxInsights || 1,
+      neutralRelevance: config.neutralRelevance || 0.5,
+      lengthFactor: config.lengthFactor || 200,
+      maxSourceDiversity: config.maxSourceDiversity || 3,
+      lengthWeight: config.lengthWeight || 0.2,
+      sourceWeight: config.sourceWeight || 0.2,
+      qualityWeight: config.qualityWeight || 0.3,
+      relevanceWeight: config.relevanceWeight || 0.2,
+      densityWeight: config.densityWeight || 0.1,
+      // Cache configuration
+      cacheConfidenceThreshold: config.cacheConfidenceThreshold || 0.8,
+      cacheQualityThreshold: config.cacheQualityThreshold || 0.7,
+      exactCacheMaxAge: config.exactCacheMaxAge || 3600000,
+      similarCacheMaxAge: config.similarCacheMaxAge || 1800000,
+      similarityThreshold: config.similarityThreshold || 0.8,
+      // Similarity weights
+      typeSimilarityWeight: config.typeSimilarityWeight || 0.4,
+      complexitySimilarityWeight: config.complexitySimilarityWeight || 0.3,
+      keywordSimilarityWeight: config.keywordSimilarityWeight || 0.3,
+      // API configuration
+      defaultApiConfidence: config.defaultApiConfidence || 0.8,
+      // Template confidence levels
+      questionTemplateConfidence: config.questionTemplateConfidence || 0.6,
+      problemTemplateConfidence: config.problemTemplateConfidence || 0.7,
+      requestTemplateConfidence: config.requestTemplateConfidence || 0.6,
+      commandTemplateConfidence: config.commandTemplateConfidence || 0.7,
+      // Knowledge base configuration
+      minKeywordsForKnowledge: config.minKeywordsForKnowledge || 2,
+      knowledgeBaseConfidence: config.knowledgeBaseConfidence || 0.5,
+      sessionSuccessThreshold: config.sessionSuccessThreshold || 0.7,
+      sessionQualityThreshold: config.sessionQualityThreshold || 0.6,
+      maxSuccessfulPatterns: config.maxSuccessfulPatterns || 3,
+      // Quality assessment configuration
+      minResponseLength: config.minResponseLength || 100,
+      defaultSourceQuality: config.defaultSourceQuality || 0.3,
+      defaultSynthesisConfidence: config.defaultSynthesisConfidence || 0.5,
+      defaultContextRelevance: config.defaultContextRelevance || 0.5,
+      completenessWeight: config.completenessWeight || 0.2,
+      synthesisConfidenceWeight: config.synthesisConfidenceWeight || 0.3,
+      relevanceAssessmentWeight: config.relevanceAssessmentWeight || 0.2,
+      maxQualityConfidence: config.maxQualityConfidence || 0.9,
+      qualityConfidenceBoost: config.qualityConfidenceBoost || 0.1,
+      // Cache and stats configuration
+      maxCacheSize: config.maxCacheSize || 100,
+      statsAlpha: config.statsAlpha || 0.1,
+      maxQualityHistorySize: config.maxQualityHistorySize || 100,
+      // Fallback configuration
+      fallbackConfidence: config.fallbackConfidence || 0.1,
+      fallbackQualityScore: config.fallbackQualityScore || 0.2,
+      // Metrics configuration
+      recentQualityCount: config.recentQualityCount || 10,
+      minResponsesForConfidence: config.minResponsesForConfidence || 5,
+      maxMetricsConfidence: config.maxMetricsConfidence || 0.8,
+      confidenceBoostPerResponse: config.confidenceBoostPerResponse || 0.16,
+      estimatedCacheHitRate: config.estimatedCacheHitRate || 0.15,
+      // Trend analysis configuration
+      minQualityHistoryForTrend: config.minQualityHistoryForTrend || 5,
+      trendRecentCount: config.trendRecentCount || 5,
+      trendThreshold: config.trendThreshold || 0.05,
+      trendConfidence: config.trendConfidence || 0.7,
       ...config
     };
   }
@@ -93,14 +166,14 @@ class ResponseSynthesizer {
   synthesizeWeightedFusion(sources, context) {
     // Weight sources by confidence and relevance to context
     const weightedSources = sources.map(source => {
-      let relevanceWeight = 0.5; // Base weight
+      let relevanceWeight = this.config.baseRelevanceWeight;
       
       // Boost weight based on context match
       if (context.patterns?.primaryType === 'TECHNICAL' && source.type === 'technical') {
-        relevanceWeight += 0.3;
+        relevanceWeight += this.config.technicalContextBoost;
       }
       if (context.patterns?.primaryType === 'BUSINESS' && source.type === 'strategic') {
-        relevanceWeight += 0.3;
+        relevanceWeight += this.config.technicalContextBoost;
       }
       
       const finalWeight = Math.min(this.config.maxSourceWeight, source.confidence * relevanceWeight);
@@ -114,7 +187,7 @@ class ResponseSynthesizer {
     // Sort by weight and combine top sources
     const topSources = weightedSources
       .sort((a, b) => b.weight - a.weight)
-      .slice(0, 2); // Top 2 sources
+      .slice(0, this.config.maxTopSources);
 
     if (topSources.length === 1) {
       return {
@@ -154,8 +227,8 @@ class ResponseSynthesizer {
     const enhancedResponse = this.enhanceWithKnowledge(baseResponse, relevantKnowledge, context);
     
     // Boost confidence if knowledge was successfully integrated
-    const knowledgeBoost = Math.min(0.2, relevantKnowledge.length * 0.05);
-    const enhancedConfidence = Math.min(0.95, baseConfidence + knowledgeBoost);
+    const knowledgeBoost = Math.min(this.config.knowledgeBoost, relevantKnowledge.length * this.config.knowledgeBoostIncrement);
+    const enhancedConfidence = Math.min(this.config.maxKnowledgeBoost, baseConfidence + knowledgeBoost);
 
     return {
       response: enhancedResponse,
@@ -173,9 +246,9 @@ class ResponseSynthesizer {
     let currentPhrase = [];
     
     for (const word of secondaryWords) {
-      if (!primaryWords.has(word) && word.length > 3) {
+      if (!primaryWords.has(word) && word.length > this.config.minWordLength) {
         currentPhrase.push(word);
-        if (currentPhrase.length >= 3) {
+        if (currentPhrase.length >= this.config.minPhraseLength) {
           additions.push(currentPhrase.join(' '));
           currentPhrase = [];
         }
@@ -185,7 +258,7 @@ class ResponseSynthesizer {
     }
 
     // Add valuable additions as supplementary information
-    if (additions.length > 0 && additions.length <= 2) {
+    if (additions.length > 0 && additions.length <= this.config.maxAdditions) {
       return `${primary}\n\nAdditional context: ${additions.join('. ')}.`;
     }
 
@@ -205,9 +278,9 @@ class ResponseSynthesizer {
         }
         
         // Require minimum confidence
-        return pattern.confidence >= 0.5;
+        return pattern.confidence >= this.config.minKnowledgeConfidence;
       })
-      .slice(0, 3) // Top 3 relevant patterns
+      .slice(0, this.config.maxKnowledgePatterns)
       .map(pattern => ({
         content: pattern.pattern?.data || 'Knowledge pattern',
         confidence: pattern.confidence,
@@ -218,9 +291,9 @@ class ResponseSynthesizer {
   enhanceWithKnowledge(baseResponse, relevantKnowledge, context) {
     // Simple enhancement: add knowledge-based insights
     const insights = relevantKnowledge
-      .filter(knowledge => knowledge.confidence > 0.6)
+      .filter(knowledge => knowledge.confidence > this.config.enhancementConfidence)
       .map(knowledge => `Based on previous interactions: ${knowledge.content}`)
-      .slice(0, 1); // Max 1 insight to avoid cluttering
+      .slice(0, this.config.maxInsights);
 
     if (insights.length > 0) {
       return `${baseResponse}\n\n${insights[0]}`;
@@ -240,11 +313,11 @@ class ResponseSynthesizer {
 
     // Overall quality score
     indicators.overallQuality = (
-      Math.min(1, indicators.responseLength / 200) * 0.2 + // Length factor
-      Math.min(1, indicators.sourceCount / 3) * 0.2 + // Source diversity
-      indicators.avgSourceConfidence * 0.3 + // Source quality
-      indicators.contextRelevance * 0.2 + // Relevance
-      indicators.informationDensity * 0.1 // Information density
+      Math.min(1, indicators.responseLength / this.config.lengthFactor) * this.config.lengthWeight +
+      Math.min(1, indicators.sourceCount / this.config.maxSourceDiversity) * this.config.sourceWeight +
+      indicators.avgSourceConfidence * this.config.qualityWeight +
+      indicators.contextRelevance * this.config.relevanceWeight +
+      indicators.informationDensity * this.config.densityWeight
     );
 
     return indicators;
@@ -252,7 +325,7 @@ class ResponseSynthesizer {
 
   assessContextRelevance(response, context) {
     if (!context.patterns?.keywords) {
-      return 0.5; // Neutral if no keywords
+      return this.config.neutralRelevance;
     }
 
     const responseWords = new Set(response.toLowerCase().split(/\s+/));
@@ -366,7 +439,7 @@ class IntelligentResponseGenerator extends EventEmitter {
       const qualityAssessment = await this.assessResponseQuality(synthesisResult, context, sources);
 
       // Phase 6: Cache if quality is good
-      if (qualityAssessment.qualityScore > 0.7) {
+      if (qualityAssessment.qualityScore > this.config.cacheQualityThreshold || 0.7) {
         this.cacheResponse(context, synthesisResult, qualityAssessment);
       }
 
@@ -413,8 +486,8 @@ class IntelligentResponseGenerator extends EventEmitter {
       const cached = this.responseCache.get(contextSignature);
       const age = Date.now() - cached.timestamp;
       
-      // Use cache if less than 1 hour old
-      if (age < 3600000) {
+      // Use cache if less than configured age
+      if (age < this.config.exactCacheMaxAge || 3600000) {
         cached.cacheHit = true;
         return cached;
       }
@@ -423,9 +496,9 @@ class IntelligentResponseGenerator extends EventEmitter {
     // Check for similar contexts
     for (const [signature, cached] of this.responseCache) {
       const similarity = this.calculateSignatureSimilarity(contextSignature, signature);
-      if (similarity > 0.8) {
+      if (similarity > this.config.similarityThreshold || 0.8) {
         const age = Date.now() - cached.timestamp;
-        if (age < 1800000) { // 30 minutes for similar contexts
+        if (age < this.config.similarCacheMaxAge || 1800000) {
           cached.cacheHit = true;
           cached.similarity = similarity;
           return cached;
@@ -455,11 +528,11 @@ class IntelligentResponseGenerator extends EventEmitter {
       let similarity = 0;
       
       // Type similarity
-      if (obj1.type === obj2.type) similarity += 0.4;
+      if (obj1.type === obj2.type) similarity += this.config.typeSimilarityWeight || 0.4;
       
       // Complexity similarity
       const complexityDiff = Math.abs(obj1.complexity - obj2.complexity);
-      similarity += Math.max(0, (1 - complexityDiff) * 0.3);
+      similarity += Math.max(0, (1 - complexityDiff) * this.config.complexitySimilarityWeight || 0.3);
       
       // Keyword similarity
       const keywords1 = new Set(obj1.topKeywords);
@@ -468,7 +541,7 @@ class IntelligentResponseGenerator extends EventEmitter {
       const union = new Set([...keywords1, ...keywords2]);
       
       if (union.size > 0) {
-        similarity += (intersection.size / union.size) * 0.3;
+        similarity += (intersection.size / union.size) * this.config.keywordSimilarityWeight || 0.3;
       }
 
       return similarity;
@@ -489,7 +562,7 @@ class IntelligentResponseGenerator extends EventEmitter {
             source: "external_api",
             type: "ai_generated",
             content: apiResponse.content,
-            confidence: apiResponse.quality || 0.8,
+            confidence: apiResponse.quality || this.config.defaultApiConfidence || 0.8,
             responseTime: apiResponse.responseTime || 0
           });
         }
@@ -543,22 +616,22 @@ class IntelligentResponseGenerator extends EventEmitter {
     const templates = {
       QUESTION: {
         content: "I understand you're asking about {topic}. Let me provide you with a comprehensive answer based on the context.",
-        confidence: 0.6,
+        confidence: this.config.questionTemplateConfidence || 0.6,
         type: "template"
       },
       PROBLEM: {
         content: "I see you're experiencing an issue. Let me help you troubleshoot this step by step.",
-        confidence: 0.7,
+        confidence: this.config.problemTemplateConfidence || 0.7,
         type: "template"
       },
       REQUEST: {
         content: "I'd be happy to help you with {topic}. Here's what I recommend.",
-        confidence: 0.6,
+        confidence: this.config.requestTemplateConfidence || 0.6,
         type: "template"
       },
       COMMAND: {
         content: "I'll help you {action}. Here's a step-by-step approach.",
-        confidence: 0.7,
+        confidence: this.config.commandTemplateConfidence || 0.7,
         type: "template"
       }
     };
@@ -586,12 +659,12 @@ class IntelligentResponseGenerator extends EventEmitter {
     // This would integrate with the knowledge base from Phase 1
     // For now, return a placeholder that indicates knowledge-based response capability
     
-    if (context.patterns?.keywords && Object.keys(context.patterns.keywords).length > 2) {
+    if (context.patterns?.keywords && Object.keys(context.patterns.keywords).length > this.config.minKeywordsForKnowledge || 2) {
       return {
         source: "knowledge_base",
         type: "knowledge_enhanced",
         content: `Based on previous interactions and learned patterns, I can help with ${context.patterns.primaryType.toLowerCase()} related queries.`,
-        confidence: 0.5
+        confidence: this.config.knowledgeBaseConfidence || 0.5
       };
     }
 
@@ -605,46 +678,46 @@ class IntelligentResponseGenerator extends EventEmitter {
 
     return knowledgeBase.sessions
       .filter(session => 
-        session.outcomes?.successRate > 0.7 && 
-        session.outcomes?.learningQuality?.score > 0.6
+        session.outcomes?.successRate > this.config.sessionSuccessThreshold || 0.7 && 
+        session.outcomes?.learningQuality?.score > this.config.sessionQualityThreshold || 0.6
       )
-      .slice(0, 3);
+      .slice(0, this.config.maxSuccessfulPatterns || 3);
   }
 
   async assessResponseQuality(synthesisResult, context, sources) {
     const qualityFactors = [];
     
     // Factor 1: Response completeness
-    const completeness = Math.min(1, synthesisResult.response.length / 100); // 100 chars minimum
+    const completeness = Math.min(1, synthesisResult.response.length / (this.config.minResponseLength || 100));
     qualityFactors.push({
       factor: "completeness",
       value: completeness,
-      weight: 0.2
+      weight: this.config.completenessWeight || 0.2
     });
 
     // Factor 2: Source quality
     const sourceQuality = sources.length > 0 
       ? sources.reduce((sum, s) => sum + s.confidence, 0) / sources.length
-      : 0.3;
+      : this.config.defaultSourceQuality || 0.3;
     qualityFactors.push({
       factor: "source_quality",
       value: sourceQuality,
-      weight: 0.3
+      weight: this.config.sourceQualityWeight || 0.3
     });
 
     // Factor 3: Synthesis confidence
     qualityFactors.push({
       factor: "synthesis_confidence",
-      value: synthesisResult.confidence || 0.5,
-      weight: 0.3
+      value: synthesisResult.confidence || this.config.defaultSynthesisConfidence || 0.5,
+      weight: this.config.synthesisConfidenceWeight || 0.3
     });
 
     // Factor 4: Context relevance (from synthesis quality indicators)
-    const contextRelevance = synthesisResult.qualityIndicators?.contextRelevance || 0.5;
+    const contextRelevance = synthesisResult.qualityIndicators?.contextRelevance || this.config.defaultContextRelevance || 0.5;
     qualityFactors.push({
       factor: "context_relevance",
       value: contextRelevance,
-      weight: 0.2
+      weight: this.config.relevanceAssessmentWeight || 0.2
     });
 
     // Calculate weighted quality score

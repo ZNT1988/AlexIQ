@@ -17,10 +17,10 @@ export default class LicorneOrchestrator {
     const now = Date.now();
     const ttl = this.config.metricsTTL;
     const [cpu, mem, procMetrics, modHealth] = await Promise.all([
-      this.kernel.metricsCollector.collect('cpu_usage', this.strictMode),
-      this.kernel.metricsCollector.collect('memory_usage', this.strictMode),
-      this.kernel.metricsCollector.collect('process_metrics', this.strictMode),
-      this.kernel.metricsCollector.collect('module_health', this.strictMode)
+      this.kernel.metricsCollector.collect("cpu_usage", this.strictMode),
+      this.kernel.metricsCollector.collect("memory_usage", this.strictMode),
+      this.kernel.metricsCollector.collect("process_metrics", this.strictMode),
+      this.kernel.metricsCollector.collect("module_health", this.strictMode)
     ]);
     const items = { cpu, mem, procMetrics, modHealth };
     for (const [name, m] of Object.entries(items)) {
@@ -160,7 +160,7 @@ export default class LicorneOrchestrator {
             moduleHealth: snap.modHealth?.source, runtime: { proc: !!this.proc.usage, net: !!this.net.portsOf }
           }
         },
-        confidence: this._computePlanConfidence({ snap, portConflicts, resourceHotspots, runtime }),
+        confidence: this._computePlanConfidence({ snap, portConflicts, resourceHotspots, runtime })
       };
       this.logger.info("[licorne] plan ready", { actions: plan.actions.length });
       return plan;

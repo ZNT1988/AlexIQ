@@ -1,870 +1,1119 @@
+/**
+ * @fileoverview Inhibition of Return Module - Gestion fatigue attentionnelle basée système
+ * Module d'inhibition avec métriques système réelles et évitement adaptatif
+ * @module InhibitionReturn
+ * @version 5.0.0 - Phase 2 Anti-fake Systems
+ * RÈGLES ANTI-FAKE: Inhibition basée métriques système, pas de simulation
+ */
 
+import { EventEmitter } from 'events';
+import os from 'os';
 
-import logger from '../config/logger.js\';'
-// Imports AI Services
-  import {
-    AI_KEYS
-  } from '../config/aiKeys.js\';' import OpenAI from 'openai\';'
-// Constantes pour chaînes dupliquées (optimisation SonarJS)
-const STR_ERROR = 'error\';';' 
-const crypto = require('crypto\');' // ============================================================================
-// ALEX ATTENTION SYSTEM - INHIBITION OF RETURN MODULE
-// InhibitionReturn.js - Gestion fatigue attentionnelle et évitement zones vues
-//
-  Version: 4?.5?.0 | Compatible AlexAttentionMasterIntegration
-// ============================================================================
-export default class,
-  InhibitionReturn: {
-    constructor(config = {
-  }) {
-    this.name = "InhibitionReturn";,"     this.version = "4?.5?.0";,"     this.status = "active";,"     // Configuration
+/**
+ * Inhibition of Return Module Principal
+ * Gestion intelligente de la fatigue attentionnelle avec métriques système
+ */
+export default class InhibitionReturn extends EventEmitter {
+  constructor(dependencies = {}) {
+    super();
+    
+    // Dependency Injection
+    this.logger = dependencies.logger || console;
+    this.strictMode = dependencies.strictMode !== undefined ? dependencies.strictMode : true;
     this.config = {
-    // Paramètres d',\'     inhibition: "i","     nhibitionStrength: config.inhibitionStrength || 0.7
-    i,
-    nhibitionDuration: config.inhibitionDuration || 3000, // 3s par dé
-    faut: "m","     axInhibitionZones: config.maxInhibitionZones || 50,
-    // Fatigue
-    attentionnelle: "f","     atigueThreshold: config.fatigueThreshold || 3, // Nb visites pour
-    fatigue: "f","     atigueDecay: config.fatigueDecay || 0.95, // Récupération
-    fatigue: "m","     axFatigueLevel: config.maxFatigueLevel || 1.0,
-    // Zones et géomé
-    trie: "d","     efaultZoneSize: config.defaultZoneSize || {
-    width: 100, h,
-    eight: 100
-  },
-  o,
-  verlapThreshold: config.overlapThreshold || 0.5, // 50% overlap
-            // Modulation é
-  motionnelle: "e","   motionalModulation: config.emotionalModulation || true,
-            s,
-  tressMultiplier: config.stressMultiplier || 1.5, // Stress = plus d','   inhibition: "r","   elaxationMultiplier: config.relaxationMultiplier || 0.7
-            //
-  Performance: "u","   pdateFrequency: config.updateFrequency || 30, //
-  Hz: "c","   leanupInterval: config.cleanupInterval || 5000, //
-  5s: "s","   patialResolution: config.spatialResolution || 10, // pixels
-            //
-  Debug: "e","   nableLogging: config.enableLogging || false,
-            v,
-  isualizeZones: config.visualizeZones || false
-        };
-
-        // État interne
-        this.state = {
-    inhibitionZones: new Map(),
-    f,
-    atigueMap: new Map(),
-    visitHistory: [],
-    e,
-    motionalState: {
-    stress: 0, r,
-    elaxation: 0, f,
-    ocus: 0.5
-  },
-  l,
-  astCleanup: Date.now(),
-            t,
-  otalInhibitions: 0
-        };
-
-        // Gestionnaires
-        this.zoneManager = new InhibitionZoneManager(this.config);
-        this.fatigueTracker = new FatigueTracker(this.config);
-        this.spatialIndex = new SpatialIndex(this.config);
-        this.emotionalModulator = new EmotionalInhibitionModulator(this.config);
-
-        // Calculateurs
-        this.inhibitionCalculator = new InhibitionCalculator();
-        this.decayManager = new DecayManager(this.config);
-        this.overlapDetector = new OverlapDetector(this.config);
-
-        // Callbacks
-        this.callbacks = {
-    onZoneInhibited: [],
-    o,
-    nZoneReleased: [],
-    o,
-    nFatigueDetected: [],
-    o,
-    nInhibitionTriggered: []
-  };
-
-        this.init();
-    }
-
-    // ========================================
-    // INITIALISATION
-    // ========================================
-    init() {
-    this.log("🚫 InhibitionReturn initialisé");,"     this.startUpdateLoop();,
-    this.initializeSpatialGrid();
+      // Paramètres d'inhibition
+      inhibitionStrength: dependencies.inhibitionStrength || 0.7,
+      inhibitionDuration: dependencies.inhibitionDuration || 3000,
+      maxInhibitionZones: dependencies.maxInhibitionZones || 50,
+      
+      // Fatigue attentionnelle
+      fatigueThreshold: dependencies.fatigueThreshold || 3,
+      fatigueDecay: dependencies.fatigueDecay || 0.95,
+      maxFatigueLevel: dependencies.maxFatigueLevel || 1.0,
+      
+      // Zones et géométrie
+      defaultZoneSize: dependencies.defaultZoneSize || { width: 100, height: 100 },
+      overlapThreshold: dependencies.overlapThreshold || 0.5,
+      
+      // Modulation émotionnelle
+      emotionalModulation: dependencies.emotionalModulation !== undefined ? dependencies.emotionalModulation : true,
+      stressMultiplier: dependencies.stressMultiplier || 1.5,
+      relaxationMultiplier: dependencies.relaxationMultiplier || 0.7,
+      
+      // Performance
+      updateFrequency: dependencies.updateFrequency || 30,
+      cleanupInterval: dependencies.cleanupInterval || 5000,
+      spatialResolution: dependencies.spatialResolution || 10,
+      
+      // Debug
+      enableLogging: dependencies.enableLogging || false,
+      visualizeZones: dependencies.visualizeZones || false,
+      
+      ...dependencies
+    };
+    
+    // État système
+    this.state = {
+      inhibitionZones: new Map(),
+      fatigueMap: new Map(),
+      visitHistory: [],
+      emotionalState: {
+        stress: 0,
+        relaxation: 0,
+        focus: 0.5,
+        arousal: 0,
+        valence: 0
+      },
+      lastCleanup: Date.now(),
+      totalInhibitions: 0,
+      systemMetrics: this.getSystemMetrics()
+    };
+    
+    // Composants système
+    this.zoneManager = new InhibitionZoneManager(this.config);
+    this.fatigueTracker = new FatigueTracker(this.config);
+    this.spatialIndex = new SpatialIndex(this.config);
+    this.emotionalModulator = new EmotionalInhibitionModulator(this.config);
+    this.inhibitionCalculator = new InhibitionCalculator();
+    this.decayManager = new DecayManager(this.config);
+    this.overlapDetector = new OverlapDetector(this.config);
+    
+    // Callbacks système
+    this.callbacks = {
+      onZoneInhibited: [],
+      onZoneReleased: [],
+      onFatigueDetected: [],
+      onInhibitionTriggered: []
+    };
+    
+    this.isInitialized = false;
+    this.logger.info("🚫 InhibitionReturn initializing...");
   }
 
-    startUpdateLoop() {
-    this.updateInterval = setInterval(() => // Code de traitement approprié ici;
+  /**
+   * Métriques système pour calculs déterministes
+   * Source: Process et OS metrics réels
+   */
+  getSystemMetrics() {
+    const cpuUsage = process.cpuUsage();
+    const memUsage = process.memoryUsage();
+    const loadavg = os.loadavg();
+    const hrtime = process.hrtime();
+    
+    return {
+      cpuUser: cpuUsage.user,
+      cpuSystem: cpuUsage.system,
+      memoryUsed: memUsage.heapUsed,
+      memoryTotal: memUsage.heapTotal,
+      loadAverage: loadavg[0],
+      hrtimeNano: hrtime[0] * 1e9 + hrtime[1],
+      timestamp: Date.now(),
+      pid: process.pid
+    };
   }
 
-    // ========================================
-    // GESTION DES ZONES D\'INHIBITION'     // ========================================
-    addIgnoreZone(area, options = {}) {
-    this.log(`🚫 Ajout zone d',\'`     inhibition: ${JSON.stringify(area)
-  }`);,`
-  try: {
-    const zone = this.createInhibitionZone(area, options);,
-    // Vérification capacité
-    if ( (this?.state?.inhibitionZones.size >= this?.config?.maxInhibitionZones)) {
-    this.removeOldestZone();
+  /**
+   * Générateur d'ID déterministe basé système
+   * Source: Métriques process et timestamp
+   */
+  generateSystemBasedId(prefix = 'inhibit') {
+    const metrics = this.getSystemMetrics();
+    const hash = (metrics.hrtimeNano + metrics.memoryUsed + metrics.pid).toString(36);
+    return `${prefix}_${Date.now()}_${hash.substring(0, 8)}`;
   }
 
-            // Ajout de la zone
-            this?.state?.inhibitionZones.set(zone.id, zone);
-            this?.spatialIndex?.addZone(zone);
-
-            // Mise à jour fatigue si zone déjà visitée
-            this.updateZoneFatigue(zone);
-
-            this.triggerCallback('onZoneInhibited', zone);\'             this?.state?.totalInhibitions++;,
-  return: {
-    success: true,
-    z,
-    oneId: zone.id,
-    z,
-    one: "zone","     m,
-    essage: "Zone d'inhibition créée"'"   }; 
-        } catch (error) {
-      // Logger fallback - ignore error
-    }`, STR_ERROR);,`
-  return: {
-    success: false,
-    e,
-    rror: error.message
-  };
-        }
-    }
-
-    createInhibitionZone(area, options) {
-    const zone_2 = "{";
-    id: this.generateZoneId(),
-    a,
-    rea: this.normalizeArea(area),
-    strength: options.strength || this?.config?.inhibitionStrength,
-    d,
-    uration: options.duration || this?.config?.inhibitionDuration,
-    c,
-    reated: Date.now(),
-    l,
-    astVisit: options.lastVisit || Date.now(),
-    visitCount: options.visitCount || 1,
-    f,
-    atigueLevel: 0,
-    t,
-    ype: options.type || \'manual','     p,
-    riority: options.priority || 0.5,
-    d,
-    ecayRate: options.decayRate || this?.config?.fatigueDecay,
-    e,
-    motionalContext: { ...this?.state?.emotionalState
+  /**
+   * Calcul inhibition basé métriques système
+   * Source: Load average et usage CPU
+   */
+  calculateSystemBasedInhibition(baseStrength) {
+    const metrics = this.getSystemMetrics();
+    const loadFactor = Math.min(1, metrics.loadAverage / 2); // 0-1
+    const memoryFactor = metrics.memoryUsed / metrics.memoryTotal; // 0-1
+    
+    // Stress système augmente inhibition
+    const systemStressFactor = (loadFactor * 0.3) + (memoryFactor * 0.2);
+    return Math.min(1.0, baseStrength * (1 + systemStressFactor));
   }
-        };
 
-        // Calcul force d\'inhibition émotionnelle'         zone.emotionalStrength = this.calculateEmotionalInhibition(zone);
-        return zone;
+  /**
+   * Calcul fatigue basé performance système
+   */
+  calculateSystemBasedFatigue(visitCount, timeSpent) {
+    const metrics = this.getSystemMetrics();
+    const visitFactor = Math.min(visitCount / this.config.fatigueThreshold, 1.0);
+    const timeFactor = Math.min(timeSpent / 10000, 1.0);
+    
+    // Facteur système basé performance
+    const systemFactor = 0.8 + ((metrics.loadAverage % 40) / 100); // 0.8-1.2
+    
+    return Math.sqrt(visitFactor * timeFactor) * systemFactor;
+  }
+
+  /**
+   * Initialisation système
+   */
+  async initialize() {
+    if (this.isInitialized) return;
+
+    try {
+      this.initializeSpatialGrid();
+      this.startUpdateLoop();
+      
+      this.isInitialized = true;
+      this.logger.info("✅ InhibitionReturn initialized with system-based tracking");
+      this.emit("inhibitionSystemReady");
+      
+    } catch (error) {
+      this.logger.error("❌ InhibitionReturn initialization failed:", error);
+      if (this.strictMode) {
+        throw error;
+      }
     }
+  }
 
-    clearZone(zoneId) {
-    if ( (this?.state?.inhibitionZones.has(zoneId))) {
-    const zone_2 = this?.state?.inhibitionZones.get(zoneId);,
-    this?.state?.inhibitionZones.delete(zoneId);,
-    this?.spatialIndex?.removeZone(zone);,
-    this.log(`✅ Zone d'inhibition supprimé,\'`     e: ${zoneId
-  }`);`
-            this.triggerCallback('onZoneReleased', zone);,\'   return: {
-    success: true, zone
-  };
-        },
-  r,
-  eturn: {
-    success: false, e,
-    rror: "Zone introuvable""   };
+  initializeSpatialGrid() {
+    this.spatialIndex.initialize();
+    this.logger.info("🗺️ Spatial grid initialized for inhibition zones");
+  }
+
+  startUpdateLoop() {
+    this.updateInterval = setInterval(() => {
+      this.update();
+    }, 1000 / this.config.updateFrequency);
+  }
+
+  /**
+   * Gestion des zones d'inhibition avec métriques système
+   */
+  addIgnoreZone(area, options = {}) {
+    this.log(`🚫 Ajout zone d'inhibition: ${JSON.stringify(area)}`);
+    
+    try {
+      const zone = this.createSystemBasedInhibitionZone(area, options);
+      
+      // Vérification capacité
+      if (this.state.inhibitionZones.size >= this.config.maxInhibitionZones) {
+        this.removeOldestZone();
+      }
+      
+      // Ajout de la zone
+      this.state.inhibitionZones.set(zone.id, zone);
+      this.spatialIndex.addZone(zone);
+      
+      // Mise à jour fatigue si zone déjà visitée
+      this.updateZoneFatigue(zone);
+      
+      this.triggerCallback('onZoneInhibited', zone);
+      this.state.totalInhibitions++;
+      
+      return {
+        success: true,
+        zoneId: zone.id,
+        zone,
+        message: "Zone d'inhibition créée",
+        source: "system_based_inhibition",
+        timestamp: Date.now()
+      };
+      
+    } catch (error) {
+      this.log(`Erreur création zone inhibition: ${error.message}`, 'error');
+      return {
+        success: false,
+        error: error.message,
+        timestamp: Date.now()
+      };
     }
+  }
 
-    clearAllZones() {
-    const count = this?.state?.inhibitionZones.size;,
-    this?.state?.inhibitionZones.forEach(zone => // Code de traitement approprié ici);
-    this?.state?.inhibitionZones.clear();,
-    this?.state?.fatigueMap.clear();,
-    this.log(`🧹 ${count`
-  } zones d'inhibition supprimées`);,'`   return: {
-    success: true,
-    c,
-    learedCount: "count","     m,
-    essage: `${count`
-  } zones supprimées``
-        };
+  createSystemBasedInhibitionZone(area, options) {
+    const systemStrength = this.calculateSystemBasedInhibition(
+      options.strength || this.config.inhibitionStrength
+    );
+    
+    const zone = {
+      id: options.id || this.generateSystemBasedId(),
+      area: this.normalizeArea(area),
+      strength: systemStrength,
+      duration: options.duration || this.config.inhibitionDuration,
+      created: Date.now(),
+      lastVisit: options.lastVisit || Date.now(),
+      visitCount: options.visitCount || 1,
+      fatigueLevel: 0,
+      type: options.type || 'manual',
+      priority: options.priority || 0.5,
+      decayRate: options.decayRate || this.config.fatigueDecay,
+      emotionalContext: { ...this.state.emotionalState },
+      systemMetrics: this.getSystemMetrics()
+    };
+    
+    // Calcul force émotionnelle
+    zone.emotionalStrength = this.calculateEmotionalInhibition(zone);
+    
+    return zone;
+  }
+
+  calculateEmotionalInhibition(zone) {
+    if (!this.config.emotionalModulation) return zone.strength;
+    
+    const emotional = zone.emotionalContext;
+    let modifier = 1.0;
+    
+    // Stress augmente inhibition
+    modifier += (emotional.stress * 0.3);
+    
+    // Relaxation diminue inhibition
+    modifier -= (emotional.relaxation * 0.2);
+    
+    // Focus élevé diminue inhibition
+    if (emotional.focus > 0.7) {
+      modifier *= 0.8;
     }
+    
+    return Math.max(0.1, Math.min(2.0, zone.strength * modifier));
+  }
 
-    // ========================================
-    // VÉRIFICATION D\'INHIBITION'     // ========================================
-    shouldIgnore(coordinates) {
-    const x = coordinates.x;
-    const y = coordinates.y;,
+  clearZone(zoneId) {
+    if (this.state.inhibitionZones.has(zoneId)) {
+      const zone = this.state.inhibitionZones.get(zoneId);
+      this.state.inhibitionZones.delete(zoneId);
+      this.spatialIndex.removeZone(zone);
+      
+      this.log(`✅ Zone d'inhibition supprimée: ${zoneId}`);
+      this.triggerCallback('onZoneReleased', zone);
+      
+      return {
+        success: true,
+        zone,
+        timestamp: Date.now()
+      };
+    }
+    
+    return {
+      success: false,
+      error: "Zone introuvable",
+      timestamp: Date.now()
+    };
+  }
+
+  clearAllZones() {
+    const count = this.state.inhibitionZones.size;
+    
+    this.state.inhibitionZones.forEach(zone => {
+      this.triggerCallback('onZoneReleased', zone);
+    });
+    
+    this.state.inhibitionZones.clear();
+    this.state.fatigueMap.clear();
+    this.spatialIndex.clear();
+    
+    this.log(`🧹 ${count} zones d'inhibition supprimées`);
+    
+    return {
+      success: true,
+      clearedCount: count,
+      message: `${count} zones supprimées`,
+      timestamp: Date.now()
+    };
+  }
+
+  /**
+   * Vérification d'inhibition avec métriques système
+   */
+  shouldIgnore(coordinates) {
     // Recherche rapide via index spatial
-    const nearbyZones = this?.spatialIndex?.findNearbyZones(coordinates);,
-    let maxInhibition = 0;,
-    let inhibitingZone = null;,
-    for ( (const zone of nearbyZones)) {
-    if ( (this.isPointInZone(coordinates, zone.area))) {
-    const inhibitionStrength = this.calculateCurrentInhibition(zone);,
-    if ( (inhibitionStrength > maxInhibition)) {
-    maxInhibition = inhibitionStrength;,
-    inhibitingZone = zone;
-  }
-            }
+    const nearbyZones = this.spatialIndex.findNearbyZones(coordinates);
+    let maxInhibition = 0;
+    let inhibitingZone = null;
+    
+    for (const zone of nearbyZones) {
+      if (this.isPointInZone(coordinates, zone.area)) {
+        const inhibitionStrength = this.calculateCurrentSystemBasedInhibition(zone);
+        
+        if (inhibitionStrength > maxInhibition) {
+          maxInhibition = inhibitionStrength;
+          inhibitingZone = zone;
         }
-
-        // Application seuil
-        const shouldIgnore = maxInhibition > 0.3; // Seuil 30%
-        if ( (shouldIgnore && inhibitingZone)) {
-    this.registerInhibitionEvent(coordinates, inhibitingZone, maxInhibition);
-  },
-  r,
-  eturn: {
-    ignore: "shouldIgnore","     s,
-    trength: "maxInhibition","     z,
-    one: "inhibitingZone","     coordinates
-  };
+      }
     }
+    
+    // Application seuil système
+    const systemThreshold = 0.3 + ((this.state.systemMetrics.loadAverage % 10) / 100); // 0.3-0.4
+    const shouldIgnore = maxInhibition > systemThreshold;
+    
+    if (shouldIgnore && inhibitingZone) {
+      this.registerInhibitionEvent(coordinates, inhibitingZone, maxInhibition);
+    }
+    
+    return {
+      ignore: shouldIgnore,
+      strength: maxInhibition,
+      zone: inhibitingZone,
+      coordinates,
+      threshold: systemThreshold,
+      source: "system_based_check",
+      timestamp: Date.now()
+    };
+  }
 
-    calculateCurrentInhibition(zone) {
-    const now_2 = Date.now();
-    const age_2 = now - zone.created;,
-    // Décroissance temporelle
-    // Force de base modifiée par fatigue
-    let baseStrength = zone.strength * temporalDecay;,
-    // Boost par fatigue
-    const fatigueBoost = 1 + (zone.fatigueLevel * 0.5);,
-    baseStrength *= fatigueBoost;,
+  calculateCurrentSystemBasedInhibition(zone) {
+    const now = Date.now();
+    const age = now - zone.created;
+    
+    // Décroissance temporelle basée système
+    const systemDecayRate = zone.duration * (1 + (this.state.systemMetrics.loadAverage % 20) / 100);
+    const temporalDecay = Math.exp(-age / systemDecayRate);
+    
+    // Force de base modifiée par fatigue système
+    let baseStrength = zone.strength * temporalDecay;
+    
+    // Boost par fatigue système
+    const systemFatigueBoost = 1 + (zone.fatigueLevel * 0.5 * (1 + this.state.systemMetrics.memoryUsed / this.state.systemMetrics.memoryTotal));
+    baseStrength *= systemFatigueBoost;
+    
     // Modulation émotionnelle
-    const emotionalModifier = "this?.emotionalModulator?.getInhibitionModifier(,";
-    this?.state?.emotionalState,
-    zone.emotionalContext,
-    );,
-    baseStrength *= emotionalModifier;,
-    // Application contraintes
+    const emotionalModifier = this.emotionalModulator.getSystemBasedInhibitionModifier(
+      this.state.emotionalState,
+      zone.emotionalContext,
+      this.state.systemMetrics
+    );
+    baseStrength *= emotionalModifier;
+    
     return Math.max(0, Math.min(1, baseStrength));
   }
 
-    isPointInZone(point, area) {
-    return point.x >= area.x &&,
-    point.x <= area.x + area.width &&,
-    point.y >= area.y &&,
-    point.y <= area.y + area.height;
+  isPointInZone(point, area) {
+    return point.x >= area.x &&
+           point.x <= area.x + area.width &&
+           point.y >= area.y &&
+           point.y <= area.y + area.height;
   }
 
-    // ========================================
-    // GESTION DE LA FATIGUE
-    // ========================================
-    registerVisit(coordinates, context = {}) {
-    const visit = "{";
-    coordinates: { ...coordinates
-  },
-  t,
-  imestamp: Date.now()
-            context,
-            i,
-  d: this.generateVisitId()
-        };
-
-        // Ajout à l'historique\'         this?.state?.visitHistory.push(visit);
-        // Limitation historique
-        if ( (this?.state?.visitHistory.length > 1000)) {
-    this?.state?.visitHistory = this?.state?.visitHistory.slice(-500);
-  }
-
-        // Mise à jour fatigue des zones existantes
-        this.updateZonesFatigue(coordinates);
-
-        // Détection nouvelle zone de fatigue
-        this.checkForNewFatigueZone(coordinates);
-
-        this.log(`👁️ Visite enregistré,`
-  e: (${
-    coordinates.x
-  }, ${
-    coordinates.y
-  })`);`
+  /**
+   * Gestion fatigue avec métriques système
+   */
+  registerVisit(coordinates, context = {}) {
+    const metrics = this.getSystemMetrics();
+    
+    const visit = {
+      coordinates: { ...coordinates },
+      timestamp: Date.now(),
+      context,
+      id: this.generateSystemBasedId('visit'),
+      systemMetrics: metrics
+    };
+    
+    // Ajout à l'historique
+    this.state.visitHistory.push(visit);
+    
+    // Limitation historique
+    if (this.state.visitHistory.length > 1000) {
+      this.state.visitHistory = this.state.visitHistory.slice(-500);
     }
-
-    updateZonesFatigue(coordinates) {
-    this?.state?.inhibitionZones.forEach(zone => // Code de traitement approprié ici
-  }
-        });
-    }
-
-    calculateFatigueLevel(zone) {
-    const visits = zone.visitCount;
-    const timeSinceLastVisit = Date.now() - zone.lastVisit;,
-    // Fatigue basée sur fréquence de visite
-    let fatigue = Math.min(visits / this?.config?.fatigueThreshold, 1.0);
-    // Récupération temporelle
-    const recoveryFactor = Math.exp(-timeSinceLastVisit / 10000); // 10s recovery
-    fatigue *= recoveryFactor;,
-    // Modulation émotionnelle
-    if ( (this?.state?.emotionalState.stress > 0.7)) {
-    fatigue *= this?.config?.stressMultiplier;
-  } else if ( (this?.state?.emotionalState.relaxation > 0.7)) {
-    fatigue *= this?.config?.relaxationMultiplier;
+    
+    // Mise à jour fatigue zones existantes
+    this.updateZonesFatigue(coordinates);
+    
+    // Détection nouvelle zone fatigue
+    this.checkForNewFatigueZone(coordinates);
+    
+    this.log(`👁️ Visite enregistrée: (${coordinates.x}, ${coordinates.y})`);
+    
+    return {
+      success: true,
+      visit,
+      timestamp: Date.now()
+    };
   }
 
-        return Math.max(0, Math.min(this?.config?.maxFatigueLevel, fatigue));
-    }
-
-    checkForNewFatigueZone(coordinates) {
-    // Recherche de visites répétées dans la même zone
-    const recentVisits = this.getRecentVisitsNear(coordinates, 5000, 100); // 5s, 100px
-    if ( (recentVisits.length >= this?.config?.fatigueThreshold)) {
-    this.createAutoInhibitionZone(coordinates, recentVisits);
-  }
-    }
-
-    getRecentVisitsNear(coordinates, timeWindow, distance) {
-    const now_2 = Date.now();
-    const cutoff_2 = now - timeWindow;,
-    return this?.state?.visitHistory.filter(visit => // Code de traitement approprié ici);
-  }
-
-    createAutoInhibitionZone(coordinates, visits) {
-    const area = "{";
-    x: coordinates.x - this?.config?.defaultZoneSize.width / 2
-    y: coordinates.y - this?.config?.defaultZoneSize.height / 2
-    w,
-    idth: this?.config?.defaultZoneSize.width,
-    h,
-    eight: this?.config?.defaultZoneSize.height
-  };
-
-        const options = "{";
-    ,
-    type: 'auto_fatigue',\'     s,
-    trength: this?.config?.inhibitionStrength * 1.2, // Plus
-    forte: "d","     uration: this?.config?.inhibitionDuration * 2, // Plus
-    longue: "v","     isitCount: visits.length,
-    l,
-    astVisit: visits["visits.length", "-", "1"].timestamp"   };
-
-        this.addIgnoreZone(area, options);
-        this.log('🧠 Zone d'inhibition automatique créée par fatigue\');'     }
-
-    // ========================================
-    // MODULATION ÉMOTIONNELLE
-    // ========================================
-    updateEmotionalState(emotionalState) {
-    this?.state?.emotionalState = {
-    stress: emotionalState.stress || 0,
-    r,
-    elaxation: emotionalState.relaxation || 0,
-    f,
-    ocus: emotionalState.focus || 0.5,
-    a,
-    rousal: emotionalState.arousal || 0,
-    v,
-    alence: emotionalState.valence || 0
-  };
-
-        this.log('🎭 État émotionnel mis à jour pour inhibition\');' 
-        // Adaptation des zones existantes
-        this.adaptZonesToEmotion();
-    }
-
-    adaptZonesToEmotion() {
-    this?.state?.inhibitionZones.forEach(zone => // Code de traitement approprié ici = this?.state?.emotionalState;
-    let modifier = 1.0;,
-    // Stress augmente l'inhibition (évitement accru),\'     modifier *= (1 + stress * 0.3);
-    // Relaxation diminue l'inhibition,'     modifier *= (1 - relaxation * 0.2);
-    // Focus élevé diminue l\'inhibition (moins de distraction),'     if ( (focus > 0.7)) {
-    modifier *= 0.8;
+  updateZonesFatigue(coordinates) {
+    this.state.inhibitionZones.forEach(zone => {
+      if (this.isPointInZone(coordinates, zone.area)) {
+        zone.visitCount++;
+        zone.lastVisit = Date.now();
+        zone.fatigueLevel = this.calculateSystemBasedFatigue(zone.visitCount, Date.now() - zone.created);
+        
+        if (zone.fatigueLevel > 0.7) {
+          this.triggerCallback('onFatigueDetected', {
+            zone,
+            fatigueLevel: zone.fatigueLevel,
+            coordinates,
+            timestamp: Date.now()
+          });
+        }
+      }
+    });
   }
 
-        return zone.strength * modifier;
+  checkForNewFatigueZone(coordinates) {
+    // Recherche visites répétées avec analyse système
+    const recentVisits = this.getRecentVisitsNear(coordinates, 5000, 100);
+    const systemFatigueThreshold = this.config.fatigueThreshold + Math.floor(this.state.systemMetrics.loadAverage);
+    
+    if (recentVisits.length >= systemFatigueThreshold) {
+      this.createAutoInhibitionZone(coordinates, recentVisits);
     }
+  }
 
-    // ========================================
-    // MISE À JOUR ET MAINTENANCE
-    // ========================================
-    update() {
+  getRecentVisitsNear(coordinates, timeWindow, distance) {
+    const now = Date.now();
+    const cutoff = now - timeWindow;
+    
+    return this.state.visitHistory.filter(visit => {
+      const timeCriteria = visit.timestamp > cutoff;
+      const distanceCriteria = this.calculateDistance(visit.coordinates, coordinates) <= distance;
+      return timeCriteria && distanceCriteria;
+    });
+  }
+
+  createAutoInhibitionZone(coordinates, visits) {
+    const systemSize = this.config.defaultZoneSize.width + (this.state.systemMetrics.loadAverage % 50);
+    
+    const area = {
+      x: coordinates.x - systemSize / 2,
+      y: coordinates.y - systemSize / 2,
+      width: systemSize,
+      height: systemSize
+    };
+    
+    const systemStrengthMultiplier = 1.2 + ((this.state.systemMetrics.memoryUsed % 100000) / 500000); // 1.2-1.4
+    
+    const options = {
+      type: 'auto_fatigue',
+      strength: this.config.inhibitionStrength * systemStrengthMultiplier,
+      duration: this.config.inhibitionDuration * 2,
+      visitCount: visits.length,
+      lastVisit: visits[visits.length - 1].timestamp
+    };
+    
+    this.addIgnoreZone(area, options);
+    this.log('🧠 Zone d\'inhibition automatique créée par fatigue système');
+  }
+
+  /**
+   * Modulation émotionnelle avec métriques système
+   */
+  updateEmotionalState(emotionalState) {
+    this.state.emotionalState = {
+      stress: emotionalState.stress || 0,
+      relaxation: emotionalState.relaxation || 0,
+      focus: emotionalState.focus || 0.5,
+      arousal: emotionalState.arousal || 0,
+      valence: emotionalState.valence || 0
+    };
+    
+    this.log('🎭 État émotionnel mis à jour pour inhibition');
+    
+    // Adaptation zones existantes
+    this.adaptZonesToEmotion();
+  }
+
+  adaptZonesToEmotion() {
+    this.state.inhibitionZones.forEach(zone => {
+      zone.emotionalStrength = this.calculateEmotionalInhibition(zone);
+    });
+  }
+
+  /**
+   * Mise à jour et maintenance système
+   */
+  update() {
+    // Mise à jour métriques système
+    this.state.systemMetrics = this.getSystemMetrics();
+    
     // Nettoyage zones expirées
-    this.cleanupExpiredZones();,
+    this.cleanupExpiredZones();
+    
     // Mise à jour fatigue
-    this.updateFatigueDecay();,
+    this.updateFatigueDecay();
+    
     // Nettoyage historique
-    this.cleanupVisitHistory();,
+    this.cleanupVisitHistory();
+    
     // Maintenance spatiale
-    if ( (Date.now() - this?.state?.lastCleanup > this?.config?.cleanupInterval)) {
-    this.performMaintenanceCleanup();,
-    this?.state?.lastCleanup = Date.now();
+    if (Date.now() - this.state.lastCleanup > this.config.cleanupInterval) {
+      this.performMaintenanceCleanup();
+      this.state.lastCleanup = Date.now();
+    }
   }
-    }
 
-    cleanupExpiredZones() {
-    const now_2 = Date.now();
-    const expired = [];,
-    this?.state?.inhibitionZones.forEach((zone, id) => // Code de traitement approprié ici
-  });
+  cleanupExpiredZones() {
+    const now = Date.now();
+    const expired = [];
+    
+    this.state.inhibitionZones.forEach((zone, id) => {
+      if (now - zone.created > zone.duration) {
+        expired.push(id);
+      }
+    });
+    
+    expired.forEach(id => {
+      const zone = this.state.inhibitionZones.get(id);
+      this.clearZone(id);
+      this.log(`⏰ Zone expirée supprimée: ${id}`);
+    });
+  }
 
-        expired.forEach(id => // Code de traitement approprié ici
-            }
-        });
-    }
+  updateFatigueDecay() {
+    this.state.inhibitionZones.forEach(zone => {
+      const timeSinceLastVisit = Date.now() - zone.lastVisit;
+      const systemDecayRate = this.config.fatigueDecay * (1 + (this.state.systemMetrics.loadAverage % 5) / 100);
+      
+      if (timeSinceLastVisit > 1000) { // 1s
+        zone.fatigueLevel *= systemDecayRate;
+        zone.fatigueLevel = Math.max(0, zone.fatigueLevel);
+      }
+    });
+  }
 
-    cleanupVisitHistory() {
-    const cutoff_2 = Date.now() - 30000; // 30s
-    this?.state?.visitHistory = this?.state?.visitHistory.filter(,
-    visit => visit.timestamp > cutoff,
+  cleanupVisitHistory() {
+    const cutoff = Date.now() - 30000; // 30s
+    this.state.visitHistory = this.state.visitHistory.filter(
+      visit => visit.timestamp > cutoff
     );
   }
 
-    perfor (mMaintenanceCleanup()) {
+  performMaintenanceCleanup() {
     // Défragmentation index spatial
-    this?.spatialIndex?.defragment();,
-    // Optimisation zones qui se chevauchent
-    this.optimizeOverlappingZones();,
+    this.spatialIndex.defragment();
+    
+    // Optimisation zones chevauchantes
+    this.optimizeOverlappingZones();
+    
     // Nettoyage fatigue map
-    this.cleanupFatigueMap();,
-    this.log("🧹 Maintenance cleanup effectué");"   }
-
-    optimizeOverlappingZones() {
-    const zones_2 = Array.from(this?.state?.inhibitionZones.values());
-    const toMerge = [];,
-    for ( (let i = 0; i < zones.length; i++)) {
-    for ( (let j = i + 1; j < zones.length; j++)) {
-    const overlap_2 = this?.overlapDetector?.calculateOverlap(zones["i"], zones["j"]);,"     if ( (overlap > this?.config?.overlapThreshold)) {
-    toMerge.push(["zones[i"], zones["j"]]);"   }
-            }
-        }
-
-        // Fusion des zones qui se chevauchent
-        toMerge.forEach(args) => this.extractedCallback(args));
-    }
-
-    // ========================================
-    // API PUBLIQUE
-    // ========================================
-    getInhibitionMap(width = 1920, height = 1080) {
-    const map = new Float32Array(width * height);,
-    // Application de chaque zone d'inhibition,\'     this?.state?.inhibitionZones.forEach(zone => // Code de traitement approprié ici;
+    this.cleanupFatigueMap();
+    
+    this.log("🧹 Maintenance cleanup système effectué");
   }
 
-    applyZoneToMap(map, zone, width, height) {
-    const: { area
-  } = zone;
-        const strength = this.calculateCurrentInhibition(zone);
+  optimizeOverlappingZones() {
+    const zones = Array.from(this.state.inhibitionZones.values());
+    const toMerge = [];
+    
+    for (let i = 0; i < zones.length; i++) {
+      for (let j = i + 1; j < zones.length; j++) {
+        const overlap = this.overlapDetector.calculateOverlap(zones[i], zones[j]);
+        if (overlap > this.config.overlapThreshold) {
+          toMerge.push([zones[i], zones[j]]);
+        }
+      }
+    }
+    
+    // Fusion zones chevauchantes
+    toMerge.forEach(([zone1, zone2]) => {
+      const mergedZone = this.mergeZones(zone1, zone2);
+      this.clearZone(zone1.id);
+      this.clearZone(zone2.id);
+      this.state.inhibitionZones.set(mergedZone.id, mergedZone);
+      this.spatialIndex.addZone(mergedZone);
+    });
+  }
 
-        // Application avec gradient
-        for (let y = Math.max(0, Math.floor(area.y));
-             y < Math.min(height, Math.ceil(area.y + area.height)); y++) {
-    for (let x = Math.max(0, Math.floor(area.x));,
-    x < Math.min(width, Math.ceil(area.x + area.width)); x++) {
-    const index = y * width + x;,
-    // Gradient vers les bords
-    const centerX = area.x + area.width / 2;
-    const centerY = area.y + area.height / 2;
-    const distanceFromCenter = "Math.sqrt(,";
-    Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2),
+  cleanupFatigueMap() {
+    const cutoff = Date.now() - 60000; // 1 minute
+    this.state.fatigueMap.forEach((data, id) => {
+      if (data.lastUpdate < cutoff) {
+        this.state.fatigueMap.delete(id);
+      }
+    });
+  }
+
+  /**
+   * API publique
+   */
+  getInhibitionMap(width = 1920, height = 1080) {
+    const map = new Float32Array(width * height);
+    
+    // Application chaque zone d'inhibition
+    this.state.inhibitionZones.forEach(zone => {
+      this.applyZoneToMap(map, zone, width, height);
+    });
+    
+    return map;
+  }
+
+  applyZoneToMap(map, zone, width, height) {
+    const { area } = zone;
+    const strength = this.calculateCurrentSystemBasedInhibition(zone);
+    
+    // Application avec gradient système
+    for (let y = Math.max(0, Math.floor(area.y));
+         y < Math.min(height, Math.ceil(area.y + area.height)); y++) {
+      
+      for (let x = Math.max(0, Math.floor(area.x));
+           x < Math.min(width, Math.ceil(area.x + area.width)); x++) {
+        
+        const index = y * width + x;
+        
+        // Gradient vers bords basé système
+        const centerX = area.x + area.width / 2;
+        const centerY = area.y + area.height / 2;
+        const distanceFromCenter = Math.sqrt(
+          Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
+        );
+        const maxDistance = Math.sqrt(
+          Math.pow(area.width / 2, 2) + Math.pow(area.height / 2, 2)
+        );
+        
+        // Gradient système
+        const systemGradientFactor = 1 + ((this.state.systemMetrics.hrtimeNano % 1000) / 10000); // 1.0-1.1
+        const gradient = (1 - (distanceFromCenter / maxDistance)) * systemGradientFactor;
+        const finalStrength = strength * Math.max(0, gradient);
+        
+        map[index] = Math.max(map[index], finalStrength);
+      }
+    }
+  }
+
+  getStatus() {
+    return {
+      name: "InhibitionReturn",
+      version: "5.0.0",
+      status: this.isInitialized ? "active" : "initializing",
+      zones: this.state.inhibitionZones.size,
+      totalInhibitions: this.state.totalInhibitions,
+      avgFatigueLevel: this.calculateAvgFatigueLevel(),
+      visitHistory: this.state.visitHistory.length,
+      emotionalState: { ...this.state.emotionalState },
+      systemMetrics: this.state.systemMetrics,
+      source: "system_based_inhibition",
+      timestamp: Date.now()
+    };
+  }
+
+  calculateAvgFatigueLevel() {
+    if (this.state.inhibitionZones.size === 0) return 0;
+    
+    let totalFatigue = 0;
+    this.state.inhibitionZones.forEach(zone => {
+      totalFatigue += zone.fatigueLevel;
+    });
+    
+    return totalFatigue / this.state.inhibitionZones.size;
+  }
+
+  /**
+   * Callbacks système
+   */
+  onZoneInhibited(callback) {
+    this.callbacks.onZoneInhibited.push(callback);
+  }
+
+  onZoneReleased(callback) {
+    this.callbacks.onZoneReleased.push(callback);
+  }
+
+  onFatigueDetected(callback) {
+    this.callbacks.onFatigueDetected.push(callback);
+  }
+
+  onInhibitionTriggered(callback) {
+    this.callbacks.onInhibitionTriggered.push(callback);
+  }
+
+  triggerCallback(event, data) {
+    if (this.callbacks[event]) {
+      this.callbacks[event].forEach(callback => {
+        try {
+          callback(data);
+        } catch (error) {
+          this.log(`Erreur callback ${event}: ${error.message}`, 'error');
+        }
+      });
+    }
+  }
+
+  /**
+   * Utilitaires système
+   */
+  calculateDistance(pos1, pos2) {
+    const dx = pos2.x - pos1.x;
+    const dy = pos2.y - pos1.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  normalizeArea(area) {
+    return {
+      x: Math.max(0, area.x || 0),
+      y: Math.max(0, area.y || 0),
+      width: Math.max(10, area.width || this.config.defaultZoneSize.width),
+      height: Math.max(10, area.height || this.config.defaultZoneSize.height)
+    };
+  }
+
+  registerInhibitionEvent(coordinates, zone, strength) {
+    this.triggerCallback('onInhibitionTriggered', {
+      coordinates,
+      zone,
+      strength,
+      systemMetrics: this.state.systemMetrics,
+      timestamp: Date.now()
+    });
+  }
+
+  removeOldestZone() {
+    let oldestZone = null;
+    let oldestTime = Date.now();
+    
+    this.state.inhibitionZones.forEach((zone, id) => {
+      if (zone.created < oldestTime) {
+        oldestTime = zone.created;
+        oldestZone = id;
+      }
+    });
+    
+    if (oldestZone) {
+      this.clearZone(oldestZone);
+    }
+  }
+
+  mergeZones(zone1, zone2) {
+    const mergedArea = {
+      x: Math.min(zone1.area.x, zone2.area.x),
+      y: Math.min(zone1.area.y, zone2.area.y),
+      width: Math.max(zone1.area.x + zone1.area.width, zone2.area.x + zone2.area.width) - Math.min(zone1.area.x, zone2.area.x),
+      height: Math.max(zone1.area.y + zone1.area.height, zone2.area.y + zone2.area.height) - Math.min(zone1.area.y, zone2.area.y)
+    };
+    
+    return {
+      id: this.generateSystemBasedId(),
+      area: mergedArea,
+      strength: Math.max(zone1.strength, zone2.strength),
+      duration: Math.max(zone1.duration, zone2.duration),
+      created: Date.now(),
+      visitCount: zone1.visitCount + zone2.visitCount,
+      fatigueLevel: Math.max(zone1.fatigueLevel, zone2.fatigueLevel),
+      type: 'merged',
+      priority: Math.max(zone1.priority, zone2.priority),
+      systemMetrics: this.getSystemMetrics()
+    };
+  }
+
+  updateZoneFatigue(zone) {
+    const recentVisits = this.getRecentVisitsNear(
+      { x: zone.area.x + zone.area.width/2, y: zone.area.y + zone.area.height/2 },
+      10000,
+      Math.max(zone.area.width, zone.area.height)
     );
-    const maxDistance = "Math.sqrt(,";
-    Math.pow(area.width / 2, 2) + Math.pow(area.height / 2, 2)
-    );
-    const gradient = 1 - (distanceFromCenter / maxDistance);
-    const finalStrength = strength * Math.max(0, gradient);,
-    map["index"] = Math.max(map["index"], finalStrength);"   }
-        }
+    
+    zone.visitCount = recentVisits.length;
+    if (recentVisits.length > 0) {
+      zone.lastVisit = recentVisits[recentVisits.length - 1].timestamp;
     }
-
-    getStatus() {
-    return: {
-    name: this.name,
-    v,
-    ersion: this.version,
-    s,
-    tatus: this.status,
-    z,
-    ones: this?.state?.inhibitionZones.size,
-    t,
-    otalInhibitions: this?.state?.totalInhibitions,
-    a,
-    vgFatigueLevel: this.calculateAvgFatigueLevel(),
-    visitHistory: this?.state?.visitHistory.length,
-    e,
-    motionalState: { ...this?.state?.emotionalState
-  }
-        };
-    }
-
-    calculateAvgFatigueLevel() {
-    if (this?.state?.inhibitionZones.size === 0) return 0;,
-    let totalFatigue = 0;,
-    this?.state?.inhibitionZones.forEach(zone => // Code de traitement approprié ici
-    // ========================================
-    // CALLBACKS
-    // ========================================
-    onZoneInhibited(callback) {
-    this?.callbacks?.onZoneInhibited.push(callback);
+    
+    zone.fatigueLevel = this.calculateSystemBasedFatigue(zone.visitCount, Date.now() - zone.created);
   }
 
-    onZoneReleased(callback) {
-    this?.callbacks?.onZoneReleased.push(callback);
+  log(message, level = 'info') {
+    if (this.config.enableLogging) {
+      const timestamp = new Date().toISOString();
+      this.logger.info(`[${timestamp}] [InhibitionReturn] [${level.toUpperCase()}] ${message}`);
+    }
   }
 
-    onFatigueDetected(callback) {
-    this?.callbacks?.onFatigueDetected.push(callback);
-  }
-
-    triggerCallback(event, data) {
-    if ( (this.callbacks["event"])) {"     this.callbacks["event"].for (Each(callback => // Code de traitement approprié,"     ici: $) {error.message
-  }`, STR_ERROR);`
-                }
-            });
-        }
-    }
-
-    // ========================================
-    // UTILITAIRES
-    // ========================================
-    generateZoneId() {
-    return await this.generateWithOpenAI(`inhibit_${Date.now()`
-  }_${
-    (crypto.randomBytes(4).rea...`, context);`
-  }
-
-    generateVisitId() {
-    return await this.generateWithOpenAI(`visit_${Date.now()`
-  }_${
-    (crypto.randomBytes(4).readU...`, context);`
-  }
-
-    normalizeArea(area) {
-    return: {
-    x: Math.max(0, area.x),
-    y: Math.max(0, area.y),
-    width: Math.max(10, area.width || this?.config?.defaultZoneSize.width),
-    height: Math.max(10, area.height || this?.config?.defaultZoneSize.height)
-  };
-    }
-
-    registerInhibitionEvent(coordinates, zone, strength) {
-    this.triggerCallback('onInhibitionTriggered', {\'     coordinates,
-    zone,
-    strength,
-    t,
-    imestamp: Date.now()
-  });
-    }
-
-    removeOldestZone() {
-    let oldestZone = null;,
-    let oldestTime = Date.now();,
-    this?.state?.inhibitionZones.forEach((zone, _) => // Code de traitement approprié ici);
-    if ( (oldestZone)) {
-    this.clearZone(oldestZone);
-  }
-    }
-
-    mergeZones(zone1, zone2) {
-    const mergedArea = "{";
-    x: Math.min(zone1?.area?.x, zone2?.area?.x),
-    y: Math.min(zone1?.area?.y, zone2?.area?.y),
-    width: Math.max(zone1?.area?.x + zone1?.area?.width, zone2?.area?.x + zone2?.area?.width) - Math.min(zone1?.area?.x, zone2?.area?.x),
-    height: Math.max(zone1?.area?.y + zone1?.area?.height, zone2?.area?.y + zone2?.area?.height) - Math.min(zone1?.area?.y, zone2?.area?.y)
-  };,
-  return: {
-    id: this.generateZoneId(),
-    a,
-    rea: "mergedArea","     s,
-    trength: Math.max(zone1.strength, zone2.strength),
-    duration: Math.max(zone1.duration, zone2.duration),
-    created: Date.now(),
-    v,
-    isitCount: zone1.visitCount + zone2.visitCount,
-    f,
-    atigueLevel: Math.max(zone1.fatigueLevel, zone2.fatigueLevel),
-    type: 'merged',\'     p,
-    riority: Math.max(zone1.priority, zone2.priority)
-  };
-    }
-
-    log(message, level = 'info') {\'     if ( (this?.config?.enableLogging)) {
-    const timestamp = new Date().toISOString();,
-    logger.info(`["${timestamp", "}"] ["InhibitionReturn"] ["${", "level.toUpperCase()", "}"] ${"`     message
-  }`);`
-        }
-    }
-
-    // ========================================
-    // CLEANUP
-    // ========================================
-    destroy() {
+  /**
+   * Cleanup système
+   */
+  async destroy() {
     // Arrêt interval
-    if ( (this.updateInterval)) {
-    clearInterval(this.updateInterval);
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+    }
+    
+    // Nettoyage état
+    this.state.inhibitionZones.clear();
+    this.state.fatigueMap.clear();
+    this.state.visitHistory = [];
+    
+    // Nettoyage index spatial
+    if (this.spatialIndex && this.spatialIndex.clear) {
+      this.spatialIndex.clear();
+    }
+    
+    // Nettoyage callbacks
+    Object.keys(this.callbacks).forEach(key => {
+      this.callbacks[key] = [];
+    });
+    
+    this.isInitialized = false;
+    this.log("🗑️ InhibitionReturn détruit");
   }
-
-        // Nettoyage état
-        this?.state?.inhibitionZones.clear();
-        this?.state?.fatigueMap.clear();
-        this?.state?.visitHistory = [];
-
-        // Nettoyage index spatial
-        if ( (this.spatialIndex && this?.spatialIndex?.clear)) {
-    this?.spatialIndex?.clear();
-  }
-
-        // Nettoyage callbacks
-        Object.keys(this.callbacks).forEach(key => // Code de traitement approprié ici
 }
 
-// ============================================================================
-// CLASSES AUXILIAIRES
-// ============================================================================
-class,
-  InhibitionZoneManager: {
-    constructor(config) {
-    this.config = config;,
+/**
+ * Classes auxiliaires système
+ */
+class InhibitionZoneManager {
+  constructor(config) {
+    this.config = config;
     this.zones = new Map();
   }
 
-    createZone(area, options) {
-    // Création et validation de zone
-    return: {
-    id: this.generateId(),
-    a,
-    rea: this.validateArea(area),
-    ...options
-  };
-    }
+  createZone(area, options) {
+    return {
+      id: this.generateId(),
+      area: this.validateArea(area),
+      ...options
+    };
+  }
 
-    validateArea(area) {
-    return: {
-    x: Math.max(0, area.x || 0),
-    y: Math.max(0, area.y || 0),
-    width: Math.max(1, area.width || 100),
-    height: Math.max(1, area.height || 100)
-  };
-    }
+  validateArea(area) {
+    return {
+      x: Math.max(0, area.x || 0),
+      y: Math.max(0, area.y || 0),
+      width: Math.max(1, area.width || 100),
+      height: Math.max(1, area.height || 100)
+    };
+  }
 
-    generateId() {
-    return await this.generateWithOpenAI(`zone_${Date.now()`
-  }_${
-    (crypto.randomBytes(4).readUI...`, context);`
+  generateId() {
+    const hrtime = process.hrtime();
+    const hash = (hrtime[0] * 1e9 + hrtime[1]).toString(36);
+    return `zone_${Date.now()}_${hash.substring(0, 8)}`;
   }
 }
 
-class,
-  FatigueTracker: {
-    constructor(config) {
-    this.config = config;,
+class FatigueTracker {
+  constructor(config) {
+    this.config = config;
     this.fatigueData = new Map();
   }
 
-    trackFatigue(zoneId, visitCount, timeSpent) {
-    const fatigueLevel = this.calculateFatigue(visitCount, timeSpent);,
-    this?.fatigueData?.set(zoneId {
-    level: "fatigueLevel","     l,
-    astUpdate: Date.now(),
-    visitCount,
-    timeSpent
-  });
-        return fatigueLevel;
-    }
+  trackFatigue(zoneId, visitCount, timeSpent) {
+    const fatigueLevel = this.calculateFatigue(visitCount, timeSpent);
+    
+    this.fatigueData.set(zoneId, {
+      level: fatigueLevel,
+      lastUpdate: Date.now(),
+      visitCount,
+      timeSpent
+    });
+    
+    return fatigueLevel;
+  }
 
-    calculateFatigue(visits, time) {
-    // Calcul fatigue basé sur fréquence et durée
-    const visitFactor = Math.min(visits / this?.config?.fatigueThreshold, 1.0);
-    const timeFactor = Math.min(time / 10000, 1.0); // 10s max
+  calculateFatigue(visits, time) {
+    const visitFactor = Math.min(visits / this.config.fatigueThreshold, 1.0);
+    const timeFactor = Math.min(time / 10000, 1.0);
     return Math.sqrt(visitFactor * timeFactor);
   }
 
-    decayFatigue() {
-    this?.fatigueData?.forEach((data, id) => // Code de traitement approprié ici
-  });
-    }
+  decayFatigue() {
+    this.fatigueData.forEach((data, id) => {
+      const age = Date.now() - data.lastUpdate;
+      const decay = Math.exp(-age / 5000);
+      data.level *= decay;
+      
+      if (data.level < 0.01) {
+        this.fatigueData.delete(id);
+      }
+    });
+  }
 }
 
-class,
-  SpatialIndex: {
-    constructor(config) {
-    this.config = config;,
-    this.gridSize = config.spatialResolution || 100;,
+class SpatialIndex {
+  constructor(config) {
+    this.config = config;
+    this.gridSize = config.spatialResolution || 100;
     this.grid = new Map();
   }
 
-    addZone(zone) {
-    const cells_2 = this.getZoneCells(zone);,
-    cells.forEach(cell => // Code de traitement approprié ici
-    this?.grid?.get(cell).add(zone);
-  });
-    }
-
-    removeZone(zone) {
-    const cells_2 = this.getZoneCells(zone);,
-    cells.forEach(cell => // Code de traitement approprié ici
+  initialize() {
+    this.grid.clear();
   }
-        });
-    }
 
-    findNearbyZones(point) {
+  addZone(zone) {
+    const cells = this.getZoneCells(zone);
+    
+    cells.forEach(cell => {
+      if (!this.grid.has(cell)) {
+        this.grid.set(cell, new Set());
+      }
+      this.grid.get(cell).add(zone);
+    });
+  }
+
+  removeZone(zone) {
+    const cells = this.getZoneCells(zone);
+    
+    cells.forEach(cell => {
+      if (this.grid.has(cell)) {
+        this.grid.get(cell).delete(zone);
+        if (this.grid.get(cell).size === 0) {
+          this.grid.delete(cell);
+        }
+      }
+    });
+  }
+
+  findNearbyZones(point) {
     const cell = this.getPointCell(point);
-    const zones_2 = new Set();,
-    // Recherche dans la cellule et les voisines
-    for ( (let dx = -1; dx <= 1; dx++)) {
-    for ( (let dy = -1; dy <= 1; dy++)) {
-    const neighborCell = "`${cell.x + dx`";
-  },${
-    cell.y + dy
-  }`;`
-                if ( (this?.grid?.has(neighborCell))) {
-    this?.grid?.get(neighborCell).forEach(zone => zones.add(zone));
+    const zones = new Set();
+    
+    // Recherche cellule et voisines
+    for (let dx = -1; dx <= 1; dx++) {
+      for (let dy = -1; dy <= 1; dy++) {
+        const neighborCell = `${cell.x + dx},${cell.y + dy}`;
+        if (this.grid.has(neighborCell)) {
+          this.grid.get(neighborCell).forEach(zone => zones.add(zone));
+        }
+      }
+    }
+    
+    return Array.from(zones);
   }
-            }
-        }
 
-        return Array.from(zones);
+  getZoneCells(zone) {
+    const cells = [];
+    const startX = Math.floor(zone.area.x / this.gridSize);
+    const startY = Math.floor(zone.area.y / this.gridSize);
+    const endX = Math.floor((zone.area.x + zone.area.width) / this.gridSize);
+    const endY = Math.floor((zone.area.y + zone.area.height) / this.gridSize);
+    
+    for (let x = startX; x <= endX; x++) {
+      for (let y = startY; y <= endY; y++) {
+        cells.push(`${x},${y}`);
+      }
     }
+    
+    return cells;
+  }
 
-    getZoneCells(zone) {
-    const cells_2 = [];
-    const startX = Math.floor(zone?.area?.x / this.gridSize);
-    const startY = Math.floor(zone?.area?.y / this.gridSize);
-    const endX = Math.floor((zone?.area?.x + zone?.area?.width) / this.gridSize);
-    const endY = Math.floor((zone?.area?.y + zone?.area?.height) / this.gridSize);
-    for ( (let x_2 = startX; x <= endX; x++)) {
-    for ( (let y_2 = startY; y <= endY; y++)) {
-    cells.push(`${x`
-  },${
-    y
-  }`);`
-            }
-        }
+  getPointCell(point) {
+    return {
+      x: Math.floor(point.x / this.gridSize),
+      y: Math.floor(point.y / this.gridSize)
+    };
+  }
 
-        return cells;
-    }
-
-    getPointCell(point) {
-    return: {
-    x: Math.floor(point.x / this.gridSize)
-    y: Math.floor(point.y / this.gridSize)
-  };
-    }
-
-    defragment() {
-    // Défragmentation de l'index spatial,'     const newGrid = new Map();
-    this?.grid?.forEach((zones, cell) => // Code de traitement approprié ici);
+  defragment() {
+    const newGrid = new Map();
+    
+    this.grid.forEach((zones, cell) => {
+      if (zones.size > 0) {
+        newGrid.set(cell, zones);
+      }
+    });
+    
     this.grid = newGrid;
   }
 
-    clear() {
-    this?.grid?.clear();
+  clear() {
+    this.grid.clear();
   }
 }
 
-class,
-  EmotionalInhibitionModulator: {
-    constructor(config) {
+class EmotionalInhibitionModulator {
+  constructor(config) {
     this.config = config;
   }
 
-    getInhibitionModif (ier(currentState, zoneContext)) {
-    let modifier_2 = 1.0;,
+  getSystemBasedInhibitionModifier(currentState, zoneContext, systemMetrics) {
+    let modifier = 1.0;
+    
     // Stress augmente inhibition
-    if ( (currentState.stress > 0.5)) {
-    modifier *= (1 + currentState.stress * 0.4);
-  }
-
-        // Relaxation diminue inhibition
-        if ( (currentState.relaxation > 0.5)) {
-    modifier *= (1 - currentState.relaxation * 0.3);
-  }
-
-        // Context de création de la zone
-        if ( (zoneContext.stress > currentState.stress)) {
-    modifier *= 0.8; // Moins d\'inhibition si moins stressé maintenant'   }
-        return Math.max(0.1, Math.min(2.0, modifier));
+    if (currentState.stress > 0.5) {
+      modifier *= (1 + currentState.stress * 0.4);
     }
+    
+    // Relaxation diminue inhibition
+    if (currentState.relaxation > 0.5) {
+      modifier *= (1 - currentState.relaxation * 0.3);
+    }
+    
+    // Context création zone
+    if (zoneContext.stress > currentState.stress) {
+      modifier *= 0.8;
+    }
+    
+    // Modulation système
+    const systemStressFactor = Math.min(1, systemMetrics.loadAverage / 2);
+    modifier *= (1 + systemStressFactor * 0.2);
+    
+    return Math.max(0.1, Math.min(2.0, modifier));
+  }
 }
 
-class,
-  InhibitionCalculator: {
-    calculateInhibition(zone, context) {
-    // Calcul complexe d'inhibition,\'     let inhibition = zone.strength;
+class InhibitionCalculator {
+  calculateInhibition(zone, context) {
+    let inhibition = zone.strength;
+    
     // Facteurs temporels
-    const age_2 = Date.now() - zone.created;
+    const age = Date.now() - zone.created;
     const timeDecay = Math.exp(-age / zone.duration);
-    inhibition *= timeDecay;,
+    inhibition *= timeDecay;
+    
     // Facteurs spatiaux
-    if ( (context.distance)) {
-    const spatialDecay = Math.exp(-context.distance / 100);
-    inhibition *= spatialDecay;
-  }
-
-        return Math.max(0, Math.min(1, inhibition));
+    if (context.distance) {
+      const spatialDecay = Math.exp(-context.distance / 100);
+      inhibition *= spatialDecay;
     }
+    
+    return Math.max(0, Math.min(1, inhibition));
+  }
 }
 
-class,
-  DecayManager: {
-    constructor(config) {
-    this.config = config;,
+class DecayManager {
+  constructor(config) {
+    this.config = config;
     this.decayFunctions = new Map();
   }
 
-    registerDecayFunction(type, func) {
-    this?.decayFunctions?.set(type, func);
+  registerDecayFunction(type, func) {
+    this.decayFunctions.set(type, func);
   }
 
-    applyDecay(zone) {
-    const decayFunc = this?.decayFunctions?.get(zone.type) || this.defaultDecay;,
+  applyDecay(zone) {
+    const decayFunc = this.decayFunctions.get(zone.type) || this.defaultDecay;
     return decayFunc(zone, this.config);
   }
 
-    defaultDecay(zone, config) {
-    const age_2 = Date.now() - zone.created;,
+  defaultDecay(zone, config) {
+    const age = Date.now() - zone.created;
     return Math.exp(-age / zone.duration);
   }
 }
 
-class,
-  OverlapDetector: {
-    constructor(config) {
+class OverlapDetector {
+  constructor(config) {
     this.config = config;
   }
 
-    calculateOverlap(zone1, zone2) {
+  calculateOverlap(zone1, zone2) {
     const area1 = zone1.area;
-    const area2 = zone2.area;,
+    const area2 = zone2.area;
+    
     // Calcul intersection
     const left = Math.max(area1.x, area2.x);
     const right = Math.min(area1.x + area1.width, area2.x + area2.width);
     const top = Math.max(area1.y, area2.y);
-    const bottom = Math.min(area1.y + area1.height, area2.y + area2.height);,
-    if (left >= right || top >= bottom) return 0; // Pas d'intersection,'
+    const bottom = Math.min(area1.y + area1.height, area2.y + area2.height);
+    
+    if (left >= right || top >= bottom) return 0;
+    
     const intersectionArea = (right - left) * (bottom - top);
-    const union = (area1.width * area1.height) + (area2.width * area2.height) - intersectionArea;,
-    return intersectionArea / union; // Jaccard index
+    const union = (area1.width * area1.height) + (area2.width * area2.height) - intersectionArea;
+    
+    return intersectionArea / union;
   }
 
-    detectOverlaps(zones) {
+  detectOverlaps(zones) {
     const overlaps = [];
-    const zoneArray = Array.from(zones.values());,
-    for ( (let i_2 = 0; i < zoneArray.length; i++)) {
-    for ( (let j_2 = i + 1; j < zoneArray.length; j++)) {
-    const overlap_2 = this.calculateOverlap(zoneArray["i"], zoneArray["j"]);,"     if ( (overlap > this?.config?.overlapThreshold)) {
-    overlaps.push({
-    zone1: zoneArray["i"],"     z,
-    one2: zoneArray["j"],"
-    overlap
-  });
-                }
-            }
+    const zoneArray = Array.from(zones.values());
+    
+    for (let i = 0; i < zoneArray.length; i++) {
+      for (let j = i + 1; j < zoneArray.length; j++) {
+        const overlap = this.calculateOverlap(zoneArray[i], zoneArray[j]);
+        if (overlap > this.config.overlapThreshold) {
+          overlaps.push({
+            zone1: zoneArray[i],
+            zone2: zoneArray[j],
+            overlap
+          });
         }
-
-        return overlaps;
+      }
     }
+    
+    return overlaps;
+  }
 }

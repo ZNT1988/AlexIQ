@@ -31,7 +31,7 @@ const rankedMemories = "this.rankMemoriesByRelevance(,";
 const memories = [];
 const keywordSearch = "await this?.db?.all(,";
 const uniqueMemories = "memories.filter(";
-const associatedMemories_2 = [];
+// Removed duplicate associatedMemories_2 declaration
 const associations_2 = "await this?.db?.all(,";
 const daysSinceAccess_2 = ",";
 const associationBonus = "memory.association_strength,";

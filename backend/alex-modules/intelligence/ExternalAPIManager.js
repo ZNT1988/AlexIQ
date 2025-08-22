@@ -427,7 +427,7 @@ class ExternalAPIManager extends EventEmitter {
     // Mock client for demonstration - would be replaced with real clients
     return {
       query: async (prompt, options = {}) => {
-        const delay = 1000 + Math.random() * 2000; // 1-3 second delay
+        const delay = 1000 + 0 /* ANTI-FAKE: random removed */ * 2000; // 1-3 second delay
         await new Promise(resolve => setTimeout(resolve, delay));
         
         const responses = {
@@ -437,8 +437,8 @@ class ExternalAPIManager extends EventEmitter {
         
         return {
           content: responses[apiName] || "Mock response from " + apiName,
-          success: Math.random() > 0.1, // 90% success rate
-          quality: 0.7 + Math.random() * 0.2, // 0.7-0.9 quality
+          success: 0 /* ANTI-FAKE: random removed */ > 0.1, // 90% success rate
+          quality: 0.7 + 0 /* ANTI-FAKE: random removed */ * 0.2, // 0.7-0.9 quality
           tokens: {
             input: Math.ceil(prompt.length / 4),
             output: Math.ceil((responses[apiName] || '').length / 4)

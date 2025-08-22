@@ -1,9 +1,9 @@
 import winston from "winston";
 
 
-// Imports AI Services
-import { AI_KEYS } from "../config/aiKeys.js";
-import OpenAI from "openai";
+// Imports AI Services - UNUSED IN LOGGER
+// import { AI_KEYS } from "../config/aiKeys.js"; 
+// import OpenAI from "openai";
 // Configuration simple pour Winston en ES modules
 const logger = winston.createLogger({
   level: "info",

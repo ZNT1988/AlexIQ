@@ -1,6 +1,7 @@
 
 
-import crypto from ',\'   node:crypto';'   import {
+import crypto from 'node:crypto';
+import {
 // Imports AI Services
     AI_KEYS
   } from \'../config/aiKeys.js';' import OpenAI from \'openai';'  * @fileoverview LocalAITrainer - Entraîneur IA Local d\'Alex'  * Apprentissage autonome sans dépendance externe

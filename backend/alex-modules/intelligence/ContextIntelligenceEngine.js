@@ -19,6 +19,19 @@ class PatternAnalyzer {
       minPatternLength: config.minPatternLength || 3,
       maxPatternLength: config.maxPatternLength || 50,
       confidenceThreshold: config.confidenceThreshold || 0.6,
+      // Configuration anti-fake
+      maxMatchConfidence: config.maxMatchConfidence || 0.95,
+      baseMatchConfidence: config.baseMatchConfidence || 0.6,
+      matchBonus: config.matchBonus || 0.1,
+      noMatchConfidence: config.noMatchConfidence || 0.3,
+      highKeywordDensity: config.highKeywordDensity || 0.1,
+      highDensityConfidence: config.highDensityConfidence || 0.8,
+      lowDensityConfidence: config.lowDensityConfidence || 0.4,
+      complexityThreshold: config.complexityThreshold || 0.3,
+      complexConfidence: config.complexConfidence || 0.7,
+      simpleConfidence: config.simpleConfidence || 0.5,
+      strictMode: config.strictMode !== false,
+      ttlMs: config.ttlMs || 60000,
       ...config
     };
     
@@ -88,7 +101,7 @@ class PatternAnalyzer {
     const regex = this.patternTypes[primaryType];
     const matches = input.toLowerCase().match(regex);
     
-    return matches ? Math.min(0.95, 0.6 + (matches.length * 0.1)) : 0.3;
+    return matches ? Math.min(this.config.maxMatchConfidence, this.config.baseMatchConfidence + (matches.length * this.config.matchBonus)) : this.config.noMatchConfidence;
   }
 
   extractKeywords(input) {
@@ -147,8 +160,8 @@ class PatternAnalyzer {
   calculateOverallConfidence(patterns) {
     const factors = [
       patterns.typeConfidence,
-      patterns.keywordDensity > 0.1 ? 0.8 : 0.4,
-      patterns.complexityScore > 0.3 ? 0.7 : 0.5,
+      patterns.keywordDensity > this.config.highKeywordDensity ? this.config.highDensityConfidence : this.config.lowDensityConfidence,
+      patterns.complexityScore > this.config.complexityThreshold ? this.config.complexConfidence : this.config.simpleConfidence,
       patterns.intentSignals.signalCount > 0 ? 0.6 : 0.3
     ];
 
@@ -175,8 +188,23 @@ class ContextIntelligenceEngine extends EventEmitter {
     this.contextMemory = new Map(); // In-memory cache
     this.isInitialized = false;
     
-    // Context similarity threshold
-    this.similarityThreshold = this.config.similarityThreshold || 0.7;
+    // Configuration anti-fake pour ContextIntelligenceEngine
+    this.engineConfig = {
+      similarityThreshold: config.similarityThreshold || 0.7,
+      maxHistoryConfidence: config.maxHistoryConfidence || 0.9,
+      historyConfidenceMultiplier: config.historyConfidenceMultiplier || 0.1,
+      highComplexityConfidence: config.highComplexityConfidence || 0.7,
+      lowComplexityConfidence: config.lowComplexityConfidence || 0.4,
+      weightedConfidence: config.weightedConfidence || 0.8,
+      noWeightConfidence: config.noWeightConfidence || 0.3,
+      contextConfidence: config.contextConfidence || 0.8,
+      noContextConfidence: config.noContextConfidence || 0.4,
+      minMemoryConfidence: config.minMemoryConfidence || 0.8,
+      memoryMultiplier: config.memoryMultiplier || 0.08,
+      strictMode: config.strictMode !== false
+    };
+    
+    this.similarityThreshold = this.engineConfig.similarityThreshold;
     
     this.logger.info("🧠 Context Intelligence Engine initializing...");
   }
@@ -473,7 +501,7 @@ class ContextIntelligenceEngine extends EventEmitter {
       patternCount: historyPatterns.length,
       averageComplexity,
       commonTypes,
-      confidence: Math.min(0.9, userHistory.length * 0.1),
+      confidence: Math.min(this.engineConfig.maxHistoryConfidence, userHistory.length * this.engineConfig.historyConfidenceMultiplier),
       source: "user_history_analysis"
     };
   }
@@ -503,7 +531,7 @@ class ContextIntelligenceEngine extends EventEmitter {
     
     // User history complexity factor
     if (historyAnalysis.averageComplexity !== null) {
-      const relativeComplexity = patterns.complexityScore > historyAnalysis.averageComplexity ? 0.7 : 0.4;
+      const relativeComplexity = patterns.complexityScore > historyAnalysis.averageComplexity ? this.engineConfig.highComplexityConfidence : this.engineConfig.lowComplexityConfidence;
       factors.push({
         factor: "relative_complexity",
         value: relativeComplexity,
@@ -518,7 +546,7 @@ class ContextIntelligenceEngine extends EventEmitter {
     return {
       overallComplexity: weightedComplexity,
       factors,
-      confidence: totalWeight > 0 ? 0.8 : 0.3,
+      confidence: totalWeight > 0 ? this.engineConfig.weightedConfidence : this.engineConfig.noWeightConfidence,
       source: "composite_complexity_analysis"
     };
   }
@@ -526,7 +554,7 @@ class ContextIntelligenceEngine extends EventEmitter {
   calculateContextConfidence(patternAnalysis, similarContexts, historyAnalysis) {
     const confidenceFactors = [
       patternAnalysis.confidence || 0.5,
-      similarContexts.length > 0 ? 0.8 : 0.4,
+      similarContexts.length > 0 ? this.engineConfig.contextConfidence : this.engineConfig.noContextConfidence,
       historyAnalysis.confidence || 0.3
     ];
 
@@ -628,7 +656,7 @@ class ContextIntelligenceEngine extends EventEmitter {
       totalUsage: patterns.reduce((sum, p) => sum + p.usageCount, 0),
       mostSuccessfulType: Object.entries(typeDistribution)
         .sort((a, b) => b[1] - a[1])[0]?.[0] || "unknown",
-      confidence: memorySize > 10 ? 0.8 : Math.min(0.8, memorySize * 0.08),
+      confidence: memorySize > 10 ? this.engineConfig.minMemoryConfidence : Math.min(this.engineConfig.minMemoryConfidence, memorySize * this.engineConfig.memoryMultiplier),
       source: "context_intelligence_metrics",
       timestamp: Date.now()
     };

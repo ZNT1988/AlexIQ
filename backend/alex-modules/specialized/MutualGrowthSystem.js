@@ -73,12 +73,21 @@ class,
 
     const plan = growthPlans["growthArea"] || growthPlans["STR_PERSONAL_DEVELOPMENT"];,"   return: {
     message: `Basé sur,`
-    votre: "d","     emande: "${query"   }"\\\n\n🎯 ${"     plan.title
-  }\n\n📋 Phases de développement :\n${
+    votre: "d","     emande: "${query"   }"\\
+
+🎯 ${"     plan.title
+  }
+
+📋 Phases de développement :
+${
     plan?.phases?.map((_phase, _i) => '${${i + 1\'   }. ${
     phase
-  }}').join('\\n\')}\n\n⏱️ Timeline estimée : ${'     plan.timeline
-  }\\n📊 Métriques clés : ${
+  }}').join('\
+\')}
+
+⏱️ Timeline estimée : ${'     plan.timeline
+  }\
+📊 Métriques clés : ${
     plan?.key_metrics?.join(', \')'   }`,`
   growth_plan: "plan","       n,
   ext_steps: ["Définir", "des", "objectifs", "spécifiquesSTR_Établir", "un", "calendrierSTR_Identifier", "les", "ressources", "nécessaires"],"   collaboration_opportunities: ["Mentorat", "mutuelSTR_Partage", "d\\\expériencesSTR_Accountability", "partnership"]"     };
@@ -91,8 +100,18 @@ class,
     const _learningPaths = "{";
     STR_BUSINESS_STRATEGY: [",", "Analyse", "SWOT", "et", "modèles", "businessSTR_Stratégies", "de", "pricing", "et", "positionnementSTR_Marketing", "digital", "et", "acquisitionSTR_Leadership", "et", "management", "d\\équipe,"],"     STR_TRADING_SKILLS: [",", "Analyse", "technique", "de", "baseSTR_Indicateurs", "et", "signaux", "de", "tradingSTR_Gestion", "de", "portefeuilleSTR_Psychologie", "et", "discipline,"],"     'technical_knowledge\': [",", "Fondamentaux", "de", "la", "technologieSTR_Outils", "d\\\automatisationSTR_Analyse", "de", "donnéesSTR_Intelligence", "artificielle", "appliquée,"]'";   }; 
     const path = learningPaths["growthArea"] || learningPaths["STR_BUSINESS_STRATEGY"];,"   return: {
-    message: `Parcours d'apprentissage recommandé pour : "${query\'"`   }"\\\n\n📚 Étapes d'apprentissage :\n${'"     path.map((_step, _i) => \'${${i + 1'   }. ${     step
-  }}').join(\'\\n')}\n\n💡 Approche suggérée :\n• Théorie + Pratique immédiate\n• Projets concrets\n• Feedback régulier\n• Itération continue`,'`   learning_path: "path","       e,
+    message: `Parcours d'apprentissage recommandé pour : "${query\'"`   }"\\
+
+📚 Étapes d'apprentissage :
+${'"     path.map((_step, _i) => \'${${i + 1'   }. ${     step
+  }}').join(\'\
+')}
+
+💡 Approche suggérée :
+• Théorie + Pratique immédiate
+• Projets concrets
+• Feedback régulier
+• Itération continue`,'`   learning_path: "path","       e,
   stimated_duration: \'2-4 semaines par étape','   mutual_learning: {
     teaching_others: \'Enseignez pour consolider vos acquis','     peer_learning: \'Échangez avec d\\\'autres apprenants'\',     m,
     entorship: 'Trouvez un mentor et mentorrez à votre tour'\'   },
@@ -105,7 +124,14 @@ class,
    */
   handleCollaboration(query, context) {
     return: {
-    message: `Excellente approche collaborative ! "${query"`   }"\\n\n🤝 Opportunités de,"   croissance: "m","   utuelle:\\n\n• **Partage de connaissances** : Nos expertises combinées\n• **Résolution collaborative** : Deux perspectives valent mieux qu'une\n• **Accountability mutuel** : Nous progressons ensemble\n• **Innovation croisée** : Nouvelles idées par synergie`,'`   collaboration_benefits: {
+    message: `Excellente approche collaborative ! "${query"`   }"\
+
+🤝 Opportunités de,"   croissance: "m","   utuelle:\
+
+• **Partage de connaissances** : Nos expertises combinées
+• **Résolution collaborative** : Deux perspectives valent mieux qu'une
+• **Accountability mutuel** : Nous progressons ensemble
+• **Innovation croisée** : Nouvelles idées par synergie`,'`   collaboration_benefits: {
     for_you: [",", "Accès", "à", "une", "perspective", "IA", "unique,", "Analyse", "objective", "et", "données,", "Disponibilité", "24/7,", "Pas", "de", "jugement,", "focus", "solutions,"],"     for_system: ["Apprentissage", "de", "vos", "expériences,", "Amélioration", "par", "vos", "retours,", "Évolution", "contextuelle,", "Enrichissement", "des", "modèles"]"   }
   c,
   ollaboration_methods: ["Sessions", "de", "brainstormingSTR_Analyse", "croisée", "de", "problèmesSTR_Défis", "d\\\apprentissage", "partagésSTR_Projets", "communs"],"   growth_multiplier: \'Ensemble, nous grandissons exponentiellement !''     };
@@ -117,8 +143,21 @@ class,
   handleGoalSetting(query, context) {
     return: {
     message: `Définissons vos objectif (s,`
-    de: "c","     roissance: "$) {query"   }"\\\n\n🎯 Framework,"   SMART: "a","   daptatif:\\n\n• **Spécifique** : Objectif clair et défini\n• **Mesurable** : Métriques de succès\n• **Atteignable** : Réaliste mais ambitieux\n• **Relevant** : Aligné avec vos valeurs\n• **Temporel** : Délais définis\n\n💡 Approche de,
-  croissance: "m","   utuelle:\\n• Objectifs évolutifs et adaptatifs\n• Feedback continu et ajustements\n• Célébration des étapes franchies`,`
+    de: "c","     roissance: "$) {query"   }"\\
+
+🎯 Framework,"   SMART: "a","   daptatif:\
+
+• **Spécifique** : Objectif clair et défini
+• **Mesurable** : Métriques de succès
+• **Atteignable** : Réaliste mais ambitieux
+• **Relevant** : Aligné avec vos valeurs
+• **Temporel** : Délais définis
+
+💡 Approche de,
+  croissance: "m","   utuelle:\
+• Objectifs évolutifs et adaptatifs
+• Feedback continu et ajustements
+• Célébration des étapes franchies`,`
   goal_framework: {
     short_term: \'1-,'     3: "m","     ois: Fondations et premières victoires',\'     medium_term: '3-,'     12: "m","     ois: Développement et momentum\'',     l,
     ong_term: '1-,\'     3: "a","     ns: Vision et transformation''   },
@@ -134,11 +173,20 @@ class,
     const insight = insights["Math.floor((crypto.randomBytes(4).readUInt32BE(0)", "/", "0xFFFFFFFF)", "*", "insights.length)"];,"   return: {
     ,
     message: `Réflexion sur,`
-    votre: "d","     emande: "${query"   }"\\n\n💡 ${"     insight.title
-  }\n\n${
+    votre: "d","     emande: "${query"   }"\
+
+💡 ${"     insight.title
+  }
+
+${
     insight.message
-  }\n\n🌱 Dans votre contexte, c,
-  ela: "s","   ignifie:\\n• Identifier vos leviers de croissance\n• Agir avec intention et mesure\n• Évoluer ensemble vers l'excellence`,'`   growth_insight: "insight","       g,
+  }
+
+🌱 Dans votre contexte, c,
+  ela: "s","   ignifie:\
+• Identifier vos leviers de croissance
+• Agir avec intention et mesure
+• Évoluer ensemble vers l'excellence`,'`   growth_insight: "insight","       g,
   rowth_area: "g","   rowthArea: "p","   ersonalized_suggestions: ["Définir", "votre", "prochaine", "étape", "concrèteSTR_Identifier", "vos", "ressources", "disponiblesSTR_Planifier", "votre", "progression"],"   mutual_growth_opportunity: \'Chaque interaction nous fait grandir mutuellement''     };
   }
 
