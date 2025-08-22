@@ -67,10 +67,22 @@ app.use((err, _req, res, next) => {
 
 // ====== API ======
 app.get("/api/health", (_req, res) => {
-  res.json({ ok: true, env: NODE_ENV, port: PORT, ts: Date.now() });
+  res.json({ 
+    ok: true, 
+    service: "Chat IA Simple - Proxy vers APIs officielles",
+    env: NODE_ENV, 
+    port: PORT, 
+    providers: {
+      openai: !!OPENAI_KEY,
+      anthropic: !!ANTHROPIC_KEY,
+      vertex: !!(GCP_SA_JSON && GCP_PROJECT),
+      gemini: !!GOOGLE_API_KEY
+    },
+    ts: Date.now() 
+  });
 });
 
-// Chat réel (ordre de priorité: OpenAI -> Anthropic -> Vertex -> Gemini API). Pas de fake.
+// Chat direct vers APIs officielles - ZERO FAKE, ZERO SIMULATION
 app.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body || {};
@@ -185,5 +197,5 @@ if (NODE_ENV === "production") {
 }
 
 app.listen(PORT, () => {
-  console.log(`✅ HF front+API on http://localhost:${PORT}  (env=${NODE_ENV})`);
+  console.log(`✅ Chat IA Simple - Proxy OpenAI/Anthropic/Google on http://localhost:${PORT} (env=${NODE_ENV})`);
 });
