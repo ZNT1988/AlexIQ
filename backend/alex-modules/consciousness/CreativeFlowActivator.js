@@ -1,48 +1,45 @@
 import { EventEmitter } from "events";
 import logger from "../config/logger.js";
-import os from "os";
 
-class SystemMetrics {
-  static getInstance() {
-    /* eslint-disable no-undef */
-    if (!SystemMetrics.instance) {
-      SystemMetrics.instance = new SystemMetrics();
+/**
+ * CreativeFlowActivator - Module de génération créative
+ */
+export class CreativeFlowActivator extends EventEmitter {
+  constructor(config = {}) {
+    super();
+    this.moduleName = config.moduleName || "CreativeFlowActivator";
+    this.isInitialized = false;
+  }
+
+  async initialize() {
+    this.isInitialized = true;
+    logger.info(`${this.moduleName} initialized`);
+    return { status: 'initialized' };
+  }
+
+  async generateCreativeContent(prompt, options = {}) {
+    if (!this.isInitialized) {
+      throw new Error('Module not initialized');
     }
-    return SystemMetrics.instance;
-  }
-
-  getMemoryUsage() {
-    const memUsage = process.memoryUsage();
-    const totalMem = os.totalmem();
-    const freeMem = os.freemem();
+    
     return {
-      heap: memUsage.heapUsed / memUsage.heapTotal,
-      resident: memUsage.rss / totalMem,
-      external: memUsage.external,
-      system: (totalMem - freeMem) / totalMem
+      id: Date.now(),
+      prompt: prompt,
+      content: `Creative content for: ${prompt}`,
+      type: options.type || 'general',
+      timestamp: new Date().toISOString()
     };
   }
 
-  getCpuUsage() {
-    const cpuUsage = process.cpuUsage();
-    const loadAvg = os.loadavg();
+  async getStatus() {
     return {
-      user: cpuUsage.user,
-      system: cpuUsage.system,
-      load1: loadAvg[0],
-      load5: loadAvg[1],
-      load15: loadAvg[2]
+      module: this.moduleName,
+      initialized: this.isInitialized,
+      timestamp: new Date().toISOString()
     };
   }
 
-  getSystemVariance(baseValue = 0.1) {
-    const memUsage = this.getMemoryUsage();
-    const cpuUsage = this.getCpuUsage();
-    return ((memUsage.heap + cpuUsage.load1) % 100) / 1000 * baseValue;
-  }
-}
-
-class CreativeFlowStateManager {
+export default CreativeFlowActivator;
   constructor(config = {}) {
     this.config = {
       maxFlowStates: config.maxFlowStates || 8,

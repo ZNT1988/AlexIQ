@@ -1,0 +1,29 @@
+{
+  "timestamp": "2025-08-22T14:15:43.370Z",
+  "targets": [
+    "backend",
+    "frontend"
+  ],
+  "contract_version": "strict_fullstack",
+  "backend": {
+    "total_files": 195,
+    "real_count": 153,
+    "flagged_count": 42,
+    "real_percent": 78,
+    "flagged_percent": 22
+  },
+  "frontend": {
+    "total_files": 75,
+    "real_count": 28,
+    "flagged_count": 47,
+    "real_percent": 37,
+    "flagged_percent": 63
+  },
+  "global": {
+    "total_files": 270,
+    "real_count": 181,
+    "flagged_count": 89,
+    "real_percent": 67,
+    "flagged_percent": 33
+  }
+}

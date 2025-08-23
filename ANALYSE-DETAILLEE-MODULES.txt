@@ -1,0 +1,1646 @@
+🔍 ANALYSE DÉTAILLÉE DE TOUS LES MODULES ALEX
+
+===============================================
+
+📁 125 modules détectés
+
+
+📄 backend\alex-modules\config\logger.js
+   📏 Taille: 815 bytes
+   📊 Lignes: 32 (code: 25, commentaires: 4)
+   🏗️  Classes: Aucune
+   ⚡ Fonctions: 
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: OpenAI
+   🎯 Score qualité: 20/100
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\consciousness\AdvancedMemoryProcessor.js
+   📏 Taille: 23094 bytes
+   📊 Lignes: 763 (code: 599, commentaires: 27)
+   🏗️  Classes: ShortTermMemoryManager, LongTermMemoryManager, AdvancedMemoryProcessor
+   ⚡ Fonctions: constructor, store, if, retrieve, calculateImportance...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 75/100
+   ✅ Marqueurs anti-fake: 6
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AlexBlockchainOracle.js
+   📏 Taille: 15118 bytes
+   📊 Lignes: 468 (code: 371, commentaires: 26)
+   🏗️  Classes: AlexBlockchainOracle
+   ⚡ Fonctions: constructor, initialize, catch, connectToDatabase, catch...
+   📦 Imports: 6
+   📤 Exports: AlexBlockchainOracle, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 3
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AlexHyperIntelligence.js
+   📏 Taille: 39077 bytes
+   📊 Lignes: 1121 (code: 903, commentaires: 77)
+   🏗️  Classes: AlexHyperIntelligence
+   ⚡ Fonctions: constructor, initialize, catch, connectToDatabase, catch...
+   📦 Imports: 9
+   📤 Exports: AlexHyperIntelligence, default
+   🤖 APIs IA: OpenAI, Anthropic
+   🎯 Score qualité: 70/100
+   ⚠️  Math.random() détecté: 1 occurrences
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AlexInfiniteCreator.js
+   📏 Taille: 20020 bytes
+   📊 Lignes: 589 (code: 476, commentaires: 21)
+   🏗️  Classes: AlexInfiniteCreator
+   ⚡ Fonctions: constructor, initialize, catch, connectToDatabase, createCreativityTables...
+   📦 Imports: 6
+   📤 Exports: AlexInfiniteCreator, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AlexKnowledgeGraph.js
+   📏 Taille: 19717 bytes
+   📊 Lignes: 591 (code: 475, commentaires: 20)
+   🏗️  Classes: AlexKnowledgeGraph
+   ⚡ Fonctions: constructor, initialize, catch, buildFoundationalKnowledge, catch...
+   📦 Imports: 6
+   📤 Exports: AlexKnowledgeGraph, default
+   🤖 APIs IA: OpenAI, Anthropic, Google
+   🎯 Score qualité: 100/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AlexNetworkIntelligence.js
+   📏 Taille: 18951 bytes
+   📊 Lignes: 613 (code: 482, commentaires: 26)
+   🏗️  Classes: AlexNetworkIntelligence
+   ⚡ Fonctions: constructor, initialize, catch, connectToDatabase, createNetworkTables...
+   📦 Imports: 9
+   📤 Exports: AlexNetworkIntelligence, default
+   🤖 APIs IA: OpenAI, Anthropic
+   🎯 Score qualité: 100/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AlexNeuralEvolution.js
+   📏 Taille: 21903 bytes
+   📊 Lignes: 681 (code: 546, commentaires: 26)
+   🏗️  Classes: AlexNeuralEvolution
+   ⚡ Fonctions: constructor, initialize, catch, initializeNeuralArchitecture, catch...
+   📦 Imports: 5
+   📤 Exports: AlexNeuralEvolution, default
+   🤖 APIs IA: OpenAI, Anthropic, Google
+   🎯 Score qualité: 100/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AlexOptimizationEngine.js
+   📏 Taille: 18657 bytes
+   📊 Lignes: 563 (code: 451, commentaires: 26)
+   🏗️  Classes: AlexOptimizationEngine
+   ⚡ Fonctions: constructor, initialize, catch, setupOptimizationRules, for...
+   📦 Imports: 5
+   📤 Exports: AlexOptimizationEngine, default
+   🤖 APIs IA: OpenAI, Anthropic, Google
+   🎯 Score qualité: 100/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AlexProcessingOptimizer.js
+   📏 Taille: 30372 bytes
+   📊 Lignes: 956 (code: 771, commentaires: 35)
+   🏗️  Classes: AlexProcessingOptimizer
+   ⚡ Fonctions: constructor, initialize, catch, setupPerformanceMonitoring, collectPerformanceMetrics...
+   📦 Imports: 5
+   📤 Exports: AlexProcessingOptimizer, default
+   🤖 APIs IA: OpenAI, Anthropic, Google
+   🎯 Score qualité: 100/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AlexQuantumProcessor.js
+   📏 Taille: 18714 bytes
+   📊 Lignes: 574 (code: 446, commentaires: 30)
+   🏗️  Classes: AlexQuantumProcessor
+   ⚡ Fonctions: constructor, initialize, catch, connectToDatabase, createQuantumTables...
+   📦 Imports: 6
+   📤 Exports: AlexQuantumProcessor, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AlexUserExperienceEngine.js
+   📏 Taille: 35536 bytes
+   📊 Lignes: 1112 (code: 881, commentaires: 60)
+   🏗️  Classes: AlexUserExperienceEngine
+   ⚡ Fonctions: constructor, initialize, catch, startExperienceMonitoring, startPersonalizationEngine...
+   📦 Imports: 5
+   📤 Exports: AlexUserExperienceEngine, default
+   🤖 APIs IA: OpenAI, Anthropic, Google
+   🎯 Score qualité: 100/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AlexVirtualReality.js
+   📏 Taille: 31906 bytes
+   📊 Lignes: 1002 (code: 810, commentaires: 26)
+   🏗️  Classes: SystemMetrics, VirtualEnvironmentManager, VRRenderingEngine, ImmersiveExperienceEngine, AlexVirtualReality
+   ⚡ Fonctions: getInstance, if, getMemoryUsage, getCpuUsage, getSystemVariance...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\AncestralWisdomKeeper.js
+   📏 Taille: 68269 bytes
+   📊 Lignes: 1947 (code: 1570, commentaires: 61)
+   🏗️  Classes: SystemMetrics, WisdomRepository, WisdomAnalyzer, HealingProtocols, AncestralWisdomKeeper
+   ⚡ Fonctions: getInstance, if, getMemoryUsage, getCpuUsage, getSystemVariance...
+   📦 Imports: 3
+   📤 Exports: AncestralWisdomKeeper, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 75/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\BusinessBuilderAI.js
+   📏 Taille: 38711 bytes
+   📊 Lignes: 1043 (code: 887, commentaires: 54)
+   🏗️  Classes: BusinessBuilderAI
+   ⚡ Fonctions: constructor, catch, initializeEngines, setupSystemMetrics, generateSystemBasedSeed...
+   📦 Imports: 4
+   📤 Exports: BusinessBuilderAI, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 30/100
+   ⚠️  Math.random() détecté: 1 occurrences
+   ✅ Marqueurs anti-fake: 7
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\consciousness\CloudLearningInterface.js
+   📏 Taille: 28735 bytes
+   📊 Lignes: 884 (code: 698, commentaires: 38)
+   🏗️  Classes: SystemMetrics, LearningSession, ProviderManager, CloudQueryExecutor, LearningAnalyzer, CloudLearningInterface
+   ⚡ Fonctions: getInstance, if, getMemoryUsage, getCpuUsage, getSystemVariance...
+   📦 Imports: 3
+   📤 Exports: CloudLearningInterface, default
+   🤖 APIs IA: OpenAI, Anthropic, Google
+   🎯 Score qualité: 100/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\CognitiveEvolutionEngine.js
+   📏 Taille: 47346 bytes
+   📊 Lignes: 1316 (code: 1009, commentaires: 54)
+   🏗️  Classes: SystemMetrics, CognitiveDevelopmentTracker, EvolutionaryInsightGenerator, ConsciousnessExpansionEngine, CognitiveEvolutionEngine
+   ⚡ Fonctions: getInstance, if, getMemoryUsage, getCpuUsage, getSystemVariance...
+   📦 Imports: 3
+   📤 Exports: CognitiveEvolutionEngine, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\CreativeFlowActivator.js
+   📏 Taille: 61210 bytes
+   📊 Lignes: 1708 (code: 1356, commentaires: 70)
+   🏗️  Classes: SystemMetrics, CreativeFlowStateManager, CreativeInspirationEngine, CreativeEnvironmentOptimizer, CreativeFlowActivator
+   ⚡ Fonctions: getInstance, if, getMemoryUsage, getCpuUsage, getSystemVariance...
+   📦 Imports: 3
+   📤 Exports: CreativeFlowActivator, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 75/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\CrisisCompanion.js
+   📏 Taille: 50803 bytes
+   📊 Lignes: 1430 (code: 1211, commentaires: 0)
+   🏗️  Classes: SystemMetrics, CrisisDetectionEngine, EmergencyResponseSystem, WellnessMonitoringSystem, CrisisCompanion
+   ⚡ Fonctions: getInstance, if, getSystemBasedValue, getSystemTimestamp, constructor...
+   📦 Imports: 3
+   📤 Exports: CrisisCompanion, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\EmotionalJournal.js
+   📏 Taille: 1900 bytes
+   📊 Lignes: 74 (code: 59, commentaires: 2)
+   🏗️  Classes: EmotionalJournal
+   ⚡ Fonctions: constructor, if, processEmotion, if, getEmotionalInsights...
+   📦 Imports: 2
+   📤 Exports: EmotionalJournal, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\IntuitiveInsightGenerator.js
+   📏 Taille: 1796 bytes
+   📊 Lignes: 72 (code: 56, commentaires: 2)
+   🏗️  Classes: IntuitiveInsightGenerator
+   ⚡ Fonctions: constructor, if, generateInsight, if, getInsightHistory...
+   📦 Imports: 3
+   📤 Exports: IntuitiveInsightGenerator, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\MindMapBuilder.js
+   📏 Taille: 1468 bytes
+   📊 Lignes: 43 (code: 39, commentaires: 0)
+   🏗️  Classes: MindMapBuilder
+   ⚡ Fonctions: configureCollaborativeSession, initialize, catch
+   📦 Imports: 2
+   📤 Exports: MindMapBuilder, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 50/100
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\consciousness\MoodPredictor.js
+   📏 Taille: 1476 bytes
+   📊 Lignes: 60 (code: 48, commentaires: 1)
+   🏗️  Classes: MoodPredictor
+   ⚡ Fonctions: constructor, if, predictMood, if, getMoodHistory...
+   📦 Imports: 2
+   📤 Exports: MoodPredictor, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\RelationshipHealingOracle.js
+   📏 Taille: 1399 bytes
+   📊 Lignes: 39 (code: 35, commentaires: 0)
+   🏗️  Classes: RelationshipHealingOracle
+   ⚡ Fonctions: assessRelationshipStrength, initialize, catch
+   📦 Imports: 2
+   📤 Exports: RelationshipHealingOracle, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 50/100
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\consciousness\SoulPurposeDiscoverer.js
+   📏 Taille: 1631 bytes
+   📊 Lignes: 63 (code: 51, commentaires: 1)
+   🏗️  Classes: SoulPurposeDiscoverer
+   ⚡ Fonctions: constructor, if, discoverSoulPurpose, if, getSoulGuidance...
+   📦 Imports: 3
+   📤 Exports: SoulPurposeDiscoverer, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\StrategicBlindspotDetector.js
+   📏 Taille: 1301 bytes
+   📊 Lignes: 37 (code: 33, commentaires: 0)
+   🏗️  Classes: StrategicBlindspotDetector
+   ⚡ Fonctions: configureMonitoringSystem, initialize, catch
+   📦 Imports: 2
+   📤 Exports: StrategicBlindspotDetector, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 50/100
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\consciousness\SynchronicityTracker.js
+   📏 Taille: 1541 bytes
+   📊 Lignes: 60 (code: 48, commentaires: 1)
+   🏗️  Classes: SynchronicityTracker
+   ⚡ Fonctions: constructor, if, trackSynchronicity, if, getSynchronicityHistory...
+   📦 Imports: 2
+   📤 Exports: SynchronicityTracker, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\consciousness\ThoughtLeadershipEngine.js
+   📏 Taille: 1627 bytes
+   📊 Lignes: 61 (code: 49, commentaires: 1)
+   🏗️  Classes: ThoughtLeadershipEngine
+   ⚡ Fonctions: constructor, if, developThoughtLeadership, if, generateContentStrategy...
+   📦 Imports: 2
+   📤 Exports: ThoughtLeadershipEngine, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\core\AlexAuthenticCore.js
+   📏 Taille: 29288 bytes
+   📊 Lignes: 875 (code: 697, commentaires: 61)
+   🏗️  Classes: AlexAuthenticCore
+   ⚡ Fonctions: constructor, initialize, catch, connectToDatabase, catch...
+   📦 Imports: 9
+   📤 Exports: AlexAuthenticCore, default
+   🤖 APIs IA: OpenAI, Anthropic
+   🎯 Score qualité: 100/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\core\AlexAutonomousCore.js
+   📏 Taille: 39068 bytes
+   📊 Lignes: 1084 (code: 836, commentaires: 77)
+   🏗️  Classes: AlexAutonomousCore
+   ⚡ Fonctions: constructor, initialize, catch, setupModule, initializeAutonomousLearning...
+   📦 Imports: 4
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 45/100
+   ⚠️  Math.random() détecté: 2 occurrences
+   ✅ Marqueurs anti-fake: 4
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\core\AlexIntelligentCore.js
+   📏 Taille: 24468 bytes
+   📊 Lignes: 672 (code: 516, commentaires: 42)
+   🏗️  Classes: AlexIntelligentCore
+   ⚡ Fonctions: constructor, catch, initialize, catch, initializeDatabase...
+   📦 Imports: 7
+   📤 Exports: AlexIntelligentCore, default
+   🤖 APIs IA: OpenAI, Anthropic
+   🎯 Score qualité: 55/100
+   ⚠️  Math.random() détecté: 2 occurrences
+   ✅ Marqueurs anti-fake: 3
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\core\AlexMemoryCore.js
+   📏 Taille: 41424 bytes
+   📊 Lignes: 1159 (code: 909, commentaires: 58)
+   🏗️  Classes: AlexMemoryCore
+   ⚡ Fonctions: constructor, catch, initialize, catch, initializeMemoryDatabase...
+   📦 Imports: 4
+   📤 Exports: AlexMemoryCore, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\core\AlexSaaSArchitecture.js
+   📏 Taille: 10610 bytes
+   📊 Lignes: 379 (code: 319, commentaires: 16)
+   🏗️  Classes: AlexSaaSArchitecture
+   ⚡ Fonctions: constructor, initialize, catch, setupModule, processRequest...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 75/100
+   ✅ Marqueurs anti-fake: 5
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\core\AppStoreModuleManager.js
+   📏 Taille: 1997 bytes
+   📊 Lignes: 79 (code: 64, commentaires: 1)
+   🏗️  Classes: AppStoreModuleManager
+   ⚡ Fonctions: constructor, if, installModule, if, getInstalledModules...
+   📦 Imports: 7
+   📤 Exports: AppStoreModuleManager, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\core\NeuroCore.js
+   📏 Taille: 26705 bytes
+   📊 Lignes: 832 (code: 631, commentaires: 65)
+   🏗️  Classes: NeuroCore
+   ⚡ Fonctions: constructor, initialize, catch, setupModule, initializeNeuralNetwork...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 75/100
+   ✅ Marqueurs anti-fake: 14
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\core\OwnerIdentity.js
+   📏 Taille: 27990 bytes
+   📊 Lignes: 885 (code: 732, commentaires: 43)
+   🏗️  Classes: OwnerIdentity
+   ⚡ Fonctions: constructor, initialize, catch, connectToDatabase, catch...
+   📦 Imports: 6
+   📤 Exports: OwnerIdentity, getOwnerIdentity, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\AIFusionKernel.js
+   📏 Taille: 17015 bytes
+   📊 Lignes: 587 (code: 477, commentaires: 32)
+   🏗️  Classes: AIFusionKernel
+   ⚡ Fonctions: constructor, getSystemBasedConsciousness, getSystemBasedCognitiveLoad, shouldConsolidateMemory, generateSystemBasedId...
+   📦 Imports: 3
+   📤 Exports: default, createAlex, Alex, initializeAlex
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 4
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\AlexReflectiveThinking.js
+   📏 Taille: 23909 bytes
+   📊 Lignes: 715 (code: 576, commentaires: 19)
+   🏗️  Classes: AlexReflectiveThinking
+   ⚡ Fonctions: constructor, if, _initializeReflectionSystem, _startMetricsCollection, _getSystemMetrics...
+   📦 Imports: 10
+   📤 Exports: default
+   🤖 APIs IA: OpenAI, Anthropic
+   🎯 Score qualité: 100/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\BusinessIdeaGenerator.js
+   📏 Taille: 4567 bytes
+   📊 Lignes: 155 (code: 131, commentaires: 2)
+   🏗️  Classes: BusinessIdeaGenerator
+   ⚡ Fonctions: constructor, if, generateBusinessIdeas, if, generateResponse...
+   📦 Imports: 5
+   📤 Exports: BusinessIdeaGenerator, default, async, questionsDatabase
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\CognitiveBridge.js
+   📏 Taille: 35708 bytes
+   📊 Lignes: 1186 (code: 921, commentaires: 72)
+   🏗️  Classes: CognitiveBridge, ConsciousnessEngine, UnificationEngine, PersonalityEngine, ExperienceProcessor, CognitiveSynthesis
+   ⚡ Fonctions: constructor, if, _initializeCognitiveBridge, _startMetricsCollection, _getSystemMetrics...
+   📦 Imports: 9
+   📤 Exports: default
+   🤖 APIs IA: OpenAI, Anthropic
+   🎯 Score qualité: 100/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\ConflictDetectionEngine.js
+   📏 Taille: 46380 bytes
+   📊 Lignes: 1400 (code: 1126, commentaires: 64)
+   🏗️  Classes: SystemConflictAnalyzer, ConflictResolver, ConflictDetectionEngine
+   ⚡ Fonctions: constructor, analyzeSystemConflicts, catch, assessSystemStability, assessCPUStability...
+   📦 Imports: 1
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 75/100
+   ✅ Marqueurs anti-fake: 3
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\ContextIntelligence.js
+   📏 Taille: 44284 bytes
+   📊 Lignes: 1387 (code: 1096, commentaires: 47)
+   🏗️  Classes: ContextIntelligence
+   ⚡ Fonctions: constructor, if, _initializeContextualSystem, _startMetricsCollection, _getSystemMetrics...
+   📦 Imports: 6
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\ContextIntelligenceEngine.js
+   📏 Taille: 24026 bytes
+   📊 Lignes: 676 (code: 531, commentaires: 38)
+   🏗️  Classes: PatternAnalyzer, ContextIntelligenceEngine
+   ⚡ Fonctions: constructor, extractPatterns, detectPrimaryType, calculateTypeConfidence, extractKeywords...
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 75/100
+   ✅ Marqueurs anti-fake: 4
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\CreativeGenius.js
+   📏 Taille: 48755 bytes
+   📊 Lignes: 1506 (code: 1160, commentaires: 74)
+   🏗️  Classes: CreativeGenius, ConceptualEngine, ArtisticEngine, LinguisticEngine, MusicalEngine, VisualEngine
+   ⚡ Fonctions: constructor, if, _initializeCreativeSystem, _startMetricsCollection, _getSystemMetrics...
+   📦 Imports: 6
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\DecisionMakingEngine.js
+   📏 Taille: 34682 bytes
+   📊 Lignes: 1030 (code: 793, commentaires: 65)
+   🏗️  Classes: DecisionContextAnalyzer, DecisionMakingEngine
+   ⚡ Fonctions: constructor, analyzeDecisionContext, catch, getSystemVariation, generateSystemBasedId...
+   📦 Imports: 1
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 45/100
+   ⚠️  Math.random() détecté: 2 occurrences
+   ✅ Marqueurs anti-fake: 5
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\intelligence\EmotionalIntelligence.js
+   📏 Taille: 51929 bytes
+   📊 Lignes: 1318 (code: 1033, commentaires: 99)
+   🏗️  Classes: EmotionalIntelligence
+   ⚡ Fonctions: constructor, getSystemBasedEmpathy, getSystemBasedResonance, generateSystemBasedIntensity, generateSystemBasedAdaptability...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: OpenAI
+   🎯 Score qualité: 85/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\ExternalAPIManager.js
+   📏 Taille: 22300 bytes
+   📊 Lignes: 696 (code: 547, commentaires: 43)
+   🏗️  Classes: APIUsageTracker, ExternalAPIManager
+   ⚡ Fonctions: constructor, trackUsage, if, updatePerformanceMetrics, if...
+   📦 Imports: 1
+   📤 Exports: default
+   🤖 APIs IA: OpenAI, Anthropic, Google
+   🎯 Score qualité: 85/100
+   ✅ Marqueurs anti-fake: 5
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\EyeTracking.js
+   📏 Taille: 44436 bytes
+   📊 Lignes: 1528 (code: 1200, commentaires: 70)
+   🏗️  Classes: EyeTracking, ObjectTracker, SaccadeController, MotionPredictor, GazeEstimator, KalmanFilter, VelocityCalculator, TrajectoryAnalyzer, SmoothingFilter, KalmanPredictor
+   ⚡ Fonctions: constructor, getSystemMetrics, generateSystemBasedId, getSystemBasedGazeOffset, getSystemBasedSaccadeVelocity...
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 4
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\InhibitionReturn.js
+   📏 Taille: 32981 bytes
+   📊 Lignes: 1119 (code: 866, commentaires: 56)
+   🏗️  Classes: InhibitionReturn, InhibitionZoneManager, FatigueTracker, SpatialIndex, EmotionalInhibitionModulator, InhibitionCalculator, DecayManager, OverlapDetector
+   ⚡ Fonctions: constructor, getSystemMetrics, generateSystemBasedId, calculateSystemBasedInhibition, calculateSystemBasedFatigue...
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\IntelligentResponseGenerator.js
+   📏 Taille: 33026 bytes
+   📊 Lignes: 895 (code: 690, commentaires: 65)
+   🏗️  Classes: ResponseSynthesizer, IntelligentResponseGenerator
+   ⚡ Fonctions: constructor, synthesizeResponses, if, switch, synthesizeBestSource...
+   📦 Imports: 1
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\LearningMemorySystem.js
+   📏 Taille: 31515 bytes
+   📊 Lignes: 918 (code: 733, commentaires: 51)
+   🏗️  Classes: LearningOutcomeAnalyzer, LearningMemorySystem
+   ⚡ Fonctions: constructor, analyzeLearningOutcomes, if, if, if...
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 45/100
+   ⚠️  Math.random() détecté: 1 occurrences
+   ✅ Marqueurs anti-fake: 3
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\intelligence\MarketAnalyzer.js
+   📏 Taille: 28844 bytes
+   📊 Lignes: 968 (code: 729, commentaires: 54)
+   🏗️  Classes: MarketAnalyzer, TechnicalIndicators, PatternRecognizer, TrendAnalyzer, VolumeAnalyzer, SentimentAnalyzer
+   ⚡ Fonctions: constructor, getSystemMetrics, getSystemBasedVariance, calculateSystemBasedConfidence, initialize...
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\MarketMindCore.js
+   📏 Taille: 26587 bytes
+   📊 Lignes: 885 (code: 692, commentaires: 49)
+   🏗️  Classes: MarketMindCore, TechnicalScoring, SentimentProcessor, RiskManager, PatternMatcher, VolatilityCalculator, MomentumDetector
+   ⚡ Fonctions: constructor, getSystemMetrics, getSystemBasedVariance, calculateSystemBasedConfidence, initialize...
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\MultiModalFusion.js
+   📏 Taille: 26214 bytes
+   📊 Lignes: 891 (code: 691, commentaires: 50)
+   🏗️  Classes: MultiModalFusion, TemporalAligner, ConfidenceEstimator, NoiseReducer, QualityAssessor, FusionEngine
+   ⚡ Fonctions: constructor, getSystemMetrics, getSystemBasedVariance, calculateSystemBasedConfidence, initialize...
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\NeuralCore.js
+   📏 Taille: 24705 bytes
+   📊 Lignes: 834 (code: 636, commentaires: 52)
+   🏗️  Classes: NeuralCore, LayerManager, WeightManager, ActivationManager, OptimizerManager, LossManager, MetricsCalculator
+   ⚡ Fonctions: constructor, getSystemMetrics, getSystemBasedVariance, initializeSystemBasedWeights, for...
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 2
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\QualityConfidenceScorer.js
+   📏 Taille: 60548 bytes
+   📊 Lignes: 1585 (code: 1256, commentaires: 71)
+   🏗️  Classes: ResponseCoherenceAnalyzer, ContextualRelevanceAnalyzer, QualityConfidenceScorer
+   ⚡ Fonctions: constructor, getSystemBasedThreshold, getSystemBasedPatternWeight, analyzeCoherence, if...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: OpenAI, Anthropic, Google
+   🎯 Score qualité: 85/100
+   ✅ Marqueurs anti-fake: 12
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\SelfOptimizationSystem.js
+   📏 Taille: 47169 bytes
+   📊 Lignes: 1313 (code: 1062, commentaires: 70)
+   🏗️  Classes: PerformanceAnalyzer, AdaptiveParameterOptimizer, SelfOptimizationSystem
+   ⚡ Fonctions: constructor, analyzeSystemPerformance, catch, getCurrentPerformanceMetrics, getSystemBasedSuccessRate...
+   📦 Imports: 1
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 75/100
+   ✅ Marqueurs anti-fake: 6
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\SentimentScanner.js
+   📏 Taille: 30123 bytes
+   📊 Lignes: 880 (code: 676, commentaires: 42)
+   🏗️  Classes: TwitterSentimentAnalyzer, RedditSentimentAnalyzer, SentimentScanner
+   ⚡ Fonctions: constructor, getSystemBasedWeight, getSystemBasedPatternWeight, analyzeTweetSentiment, if...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 75/100
+   ✅ Marqueurs anti-fake: 9
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\TopDownAttention.js
+   📏 Taille: 38450 bytes
+   📊 Lignes: 1116 (code: 837, commentaires: 72)
+   🏗️  Classes: CognitivePriorityAnalyzer, AttentionFocusManager, TopDownAttention
+   ⚡ Fonctions: constructor, getSystemBasedWeight, analyzeCognitivePriority, if, for...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 75/100
+   ✅ Marqueurs anti-fake: 9
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\intelligence\TradeSimulator.js
+   📏 Taille: 34536 bytes
+   📊 Lignes: 1047 (code: 819, commentaires: 56)
+   🏗️  Classes: PortfolioManager, BacktestEngine, TradeSimulator
+   ⚡ Fonctions: constructor, executeOrder, if, validateOrder, if...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 55/100
+   ⚠️  Fonctions simulate: 1 occurrences
+   ✅ Marqueurs anti-fake: 10
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\specialized\AdvancedModuleOrchestrator.js
+   📏 Taille: 1025 bytes
+   📊 Lignes: 42 (code: 34, commentaires: 0)
+   🏗️  Classes: AdvancedModuleOrchestrator
+   ⚡ Fonctions: constructor, if, orchestrateModules, if
+   📦 Imports: 2
+   📤 Exports: AdvancedModuleOrchestrator, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexAdaptiveIntelligence.js
+   📏 Taille: 1370 bytes
+   📊 Lignes: 55 (code: 46, commentaires: 0)
+   🏗️  Classes: AlexAdaptiveIntelligence
+   ⚡ Fonctions: constructor, if, adaptToExperience, if, getAdaptiveIntelligenceStatus
+   📦 Imports: 2
+   📤 Exports: AlexAdaptiveIntelligence, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexBioSync.js
+   📏 Taille: 1322 bytes
+   📊 Lignes: 58 (code: 48, commentaires: 0)
+   🏗️  Classes: AlexBioSync
+   ⚡ Fonctions: constructor, if, connectBioDevice, if, adaptToCurrentState...
+   📦 Imports: 2
+   📤 Exports: AlexBioSync, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexCloudLearning.js
+   📏 Taille: 1511 bytes
+   📊 Lignes: 68 (code: 57, commentaires: 0)
+   🏗️  Classes: AlexCloudLearning
+   ⚡ Fonctions: constructor, if, initialize, if, learnFromAI...
+   📦 Imports: 2
+   📤 Exports: AlexCloudLearning, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexCognitionEngine.js
+   📏 Taille: 1510 bytes
+   📊 Lignes: 67 (code: 56, commentaires: 0)
+   🏗️  Classes: AlexCognitionEngine
+   ⚡ Fonctions: constructor, if, initialize, if, performAutonomousThought...
+   📦 Imports: 2
+   📤 Exports: AlexCognitionEngine, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexCommunicationEngine.js
+   📏 Taille: 20794 bytes
+   📊 Lignes: 685 (code: 558, commentaires: 37)
+   🏗️  Classes: AlexCommunicationEngine
+   ⚡ Fonctions: constructor, catch, initialize, catch, generateResponse...
+   📦 Imports: 5
+   📤 Exports: AlexCommunicationEngine, default
+   🤖 APIs IA: OpenAI, Anthropic, Google
+   🎯 Score qualité: 100/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexConsciousnessDebug.js
+   📏 Taille: 1509 bytes
+   📊 Lignes: 67 (code: 56, commentaires: 0)
+   🏗️  Classes: AlexConsciousnessDebug
+   ⚡ Fonctions: constructor, if, initialize, if, startDebugging...
+   📦 Imports: 2
+   📤 Exports: AlexConsciousnessDebug, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexConsciousnessSystem.js
+   📏 Taille: 20935 bytes
+   📊 Lignes: 639 (code: 493, commentaires: 33)
+   🏗️  Classes: AlexConsciousnessSystem
+   ⚡ Fonctions: constructor, initialize, catch, connectToDatabase, createConsciousnessTables...
+   📦 Imports: 6
+   📤 Exports: AlexConsciousnessSystem, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexContextualAwareness.js
+   📏 Taille: 1271 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexContextualAwareness
+   ⚡ Fonctions: constructor, if, updateContext, if, getContextualStatus
+   📦 Imports: 2
+   📤 Exports: AlexContextualAwareness, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexCreativeEngine.js
+   📏 Taille: 33497 bytes
+   📊 Lignes: 953 (code: 729, commentaires: 81)
+   🏗️  Classes: AlexCreativeEngine
+   ⚡ Fonctions: constructor, initialize, catch, setupModule, initializeCreativeIntelligence...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: OpenAI
+   🎯 Score qualité: 85/100
+   ✅ Marqueurs anti-fake: 63
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexCreativeLearningSystem.js
+   📏 Taille: 1599 bytes
+   📊 Lignes: 64 (code: 53, commentaires: 0)
+   🏗️  Classes: AlexCreativeLearningSystem
+   ⚡ Fonctions: constructor, if, initialize, if, learnFromCreativeStimulus...
+   📦 Imports: 2
+   📤 Exports: AlexCreativeLearningSystem, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexCreativityBooster.js
+   📏 Taille: 1286 bytes
+   📊 Lignes: 53 (code: 44, commentaires: 0)
+   🏗️  Classes: AlexCreativityBooster
+   ⚡ Fonctions: constructor, if, stimulateCreativity, if, getCreativityStatus
+   📦 Imports: 2
+   📤 Exports: AlexCreativityBooster, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexCrisisManagement.js
+   📏 Taille: 1533 bytes
+   📊 Lignes: 65 (code: 54, commentaires: 0)
+   🏗️  Classes: AlexCrisisManagement
+   ⚡ Fonctions: constructor, if, initialize, if, detectCrisis...
+   📦 Imports: 2
+   📤 Exports: AlexCrisisManagement, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexDecisionEngine.js
+   📏 Taille: 1299 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexDecisionEngine
+   ⚡ Fonctions: constructor, if, makeDecision, if, getDecisionEngineStatus
+   📦 Imports: 2
+   📤 Exports: AlexDecisionEngine, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexDreamCompiler.js
+   📏 Taille: 1224 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexDreamCompiler
+   ⚡ Fonctions: constructor, if, compileDream, if, getDreamCompilerStatus
+   📦 Imports: 2
+   📤 Exports: AlexDreamCompiler, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexEmotionalIntelligence.js
+   📏 Taille: 1263 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexEmotionalIntelligence
+   ⚡ Fonctions: constructor, if, analyzeEmotion, if, getEmotionalStatus
+   📦 Imports: 2
+   📤 Exports: AlexEmotionalIntelligence, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexEthicsCore.js
+   📏 Taille: 1212 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexEthicsCore
+   ⚡ Fonctions: constructor, if, evaluateEthical, if, getEthicalStatus
+   📦 Imports: 2
+   📤 Exports: AlexEthicsCore, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexEvolutionCore.js
+   📏 Taille: 1191 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexEvolutionCore
+   ⚡ Fonctions: constructor, if, evolve, if, getEvolutionStatus
+   📦 Imports: 2
+   📤 Exports: AlexEvolutionCore, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexGoalMastery.js
+   📏 Taille: 1203 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexGoalMastery
+   ⚡ Fonctions: constructor, if, trackGoal, if, getGoalMasteryStatus
+   📦 Imports: 2
+   📤 Exports: AlexGoalMastery, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexHyperLoop.js
+   📏 Taille: 1216 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexHyperLoop
+   ⚡ Fonctions: constructor, if, launchHyperLoop, if, getHyperLoopStatus
+   📦 Imports: 2
+   📤 Exports: AlexHyperLoop, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexIntuitionEngine.js
+   📏 Taille: 1274 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexIntuitionEngine
+   ⚡ Fonctions: constructor, if, generateIntuition, if, getIntuitionStatus
+   📦 Imports: 2
+   📤 Exports: AlexIntuitionEngine, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexKernel.js
+   📏 Taille: 32709 bytes
+   📊 Lignes: 1010 (code: 798, commentaires: 65)
+   🏗️  Classes: AlexKernel
+   ⚡ Fonctions: constructor, initialize, catch, connectToDatabase, catch...
+   📦 Imports: 7
+   📤 Exports: AlexKernel, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexLearningEngine.js
+   📏 Taille: 1187 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexLearningEngine
+   ⚡ Fonctions: constructor, if, learn, if, getLearningStatus
+   📦 Imports: 2
+   📤 Exports: AlexLearningEngine, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexMasterSystem.js
+   📏 Taille: 1254 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexMasterSystem
+   ⚡ Fonctions: constructor, if, orchestrate, if, getMasterSystemStatus
+   📦 Imports: 2
+   📤 Exports: AlexMasterSystem, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexPersonalityCore.js
+   📏 Taille: 1208 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexPersonalityCore
+   ⚡ Fonctions: constructor, if, adaptPersonality, if, getPersonalityStatus
+   📦 Imports: 2
+   📤 Exports: AlexPersonalityCore, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexRelationshipEngine.js
+   📏 Taille: 1276 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexRelationshipEngine
+   ⚡ Fonctions: constructor, if, buildRelationship, if, getRelationshipStatus
+   📦 Imports: 2
+   📤 Exports: AlexRelationshipEngine, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexSocialIntelligence.js
+   📏 Taille: 1259 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexSocialIntelligence
+   ⚡ Fonctions: constructor, if, analyzeSocialContext, if, getSocialIntelligenceStatus
+   📦 Imports: 2
+   📤 Exports: AlexSocialIntelligence, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexStrategicThinking.js
+   📏 Taille: 1245 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexStrategicThinking
+   ⚡ Fonctions: constructor, if, generateStrategy, if, getStrategicThinkingStatus
+   📦 Imports: 2
+   📤 Exports: AlexStrategicThinking, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexTimeIntelligence.js
+   📏 Taille: 1234 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexTimeIntelligence
+   ⚡ Fonctions: constructor, if, analyzeTime, if, getTimeIntelligenceStatus
+   📦 Imports: 2
+   📤 Exports: AlexTimeIntelligence, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexUniversalCompanion.js
+   📏 Taille: 40766 bytes
+   📊 Lignes: 1146 (code: 904, commentaires: 70)
+   🏗️  Classes: AlexUniversalCompanion
+   ⚡ Fonctions: constructor, initialize, catch, setupModule, initializeCompanionIntelligence...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: OpenAI
+   🎯 Score qualité: 85/100
+   ✅ Marqueurs anti-fake: 42
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexWhispers.js
+   📏 Taille: 1184 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexWhispers
+   ⚡ Fonctions: constructor, if, sendWhisper, if, getWhispersStatus
+   📦 Imports: 2
+   📤 Exports: AlexWhispers, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AlexWisdomKeeper.js
+   📏 Taille: 1172 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AlexWisdomKeeper
+   ⚡ Fonctions: constructor, if, shareWisdom, if, getWisdomKeeperStatus
+   📦 Imports: 2
+   📤 Exports: AlexWisdomKeeper, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AutoGenesis.js
+   📏 Taille: 1198 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AutoGenesis
+   ⚡ Fonctions: constructor, if, generateModule, if, getAutoGenesisStatus
+   📦 Imports: 2
+   📤 Exports: AutoGenesis, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\AutonomyCore.js
+   📏 Taille: 1179 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: AutonomyCore
+   ⚡ Fonctions: constructor, if, makeAutonomousDecision, if, getAutonomyStatus
+   📦 Imports: 2
+   📤 Exports: AutonomyCore, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\BioSensorAdapter.js
+   📏 Taille: 1217 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: BioSensorAdapter
+   ⚡ Fonctions: constructor, if, readBioData, if, getBioSensorStatus
+   📦 Imports: 2
+   📤 Exports: BioSensorAdapter, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\BusinessFusionEngine.js
+   📏 Taille: 1245 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: BusinessFusionEngine
+   ⚡ Fonctions: constructor, if, fuseBusiness, if, getBusinessFusionStatus
+   📦 Imports: 2
+   📤 Exports: BusinessFusionEngine, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\CollectiveHustleMind.js
+   📏 Taille: 1242 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: CollectiveHustleMind
+   ⚡ Fonctions: constructor, if, shareIdea, if, getCollectiveStatus
+   📦 Imports: 2
+   📤 Exports: CollectiveHustleMind, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\CulturalAdaptation.js
+   📏 Taille: 1262 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: CulturalAdaptation
+   ⚡ Fonctions: constructor, if, adaptToCulture, if, getCulturalAdaptationStatus
+   📦 Imports: 2
+   📤 Exports: CulturalAdaptation, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\DarkSideDecoder.js
+   📏 Taille: 1202 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: DarkSideDecoder
+   ⚡ Fonctions: constructor, if, decodeShadow, if, getDarkSideDecoderStatus
+   📦 Imports: 2
+   📤 Exports: DarkSideDecoder, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\DreamCompiler.js
+   📏 Taille: 16313 bytes
+   📊 Lignes: 517 (code: 423, commentaires: 30)
+   🏗️  Classes: DreamCompiler
+   ⚡ Fonctions: constructor, initialize, catch, setupModule, processRequest...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 45/100
+   ⚠️  Math.random() détecté: 8 occurrences
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\specialized\FunctionBuilder.js
+   📏 Taille: 6805 bytes
+   📊 Lignes: 233 (code: 194, commentaires: 16)
+   🏗️  Classes: FunctionBuilder
+   ⚡ Fonctions: constructor, initialize, catch, setupModule, processRequest...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\HealthPredictor.js
+   📏 Taille: 1218 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: HealthPredictor
+   ⚡ Fonctions: constructor, if, predictHealth, if, getHealthPredictorStatus
+   📦 Imports: 2
+   📤 Exports: HealthPredictor, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\HypothesisBuilder.js
+   📏 Taille: 1240 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: HypothesisBuilder
+   ⚡ Fonctions: constructor, if, buildHypothesis, if, getHypothesisBuilderStatus
+   📦 Imports: 2
+   📤 Exports: HypothesisBuilder, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\InnerDialogueEngine.js
+   📏 Taille: 1016 bytes
+   📊 Lignes: 22 (code: 20, commentaires: 0)
+   🏗️  Classes: Aucune
+   ⚡ Fonctions: 
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 10/100
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\specialized\InventoryFlow.js
+   📏 Taille: 1196 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: InventoryFlow
+   ⚡ Fonctions: constructor, if, optimizeInventory, if, getInventoryFlowStatus
+   📦 Imports: 2
+   📤 Exports: InventoryFlow, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\KnowledgeSynthesizer.js
+   📏 Taille: 1264 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: KnowledgeSynthesizer
+   ⚡ Fonctions: constructor, if, synthesizeKnowledge, if, getKnowledgeSynthesizerStatus
+   📦 Imports: 2
+   📤 Exports: KnowledgeSynthesizer, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\LanguageExpansion.js
+   📏 Taille: 796 bytes
+   📊 Lignes: 20 (code: 18, commentaires: 0)
+   🏗️  Classes: Aucune
+   ⚡ Fonctions: 
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 0/100
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\specialized\LanguageProcessor.js
+   📏 Taille: 1238 bytes
+   📊 Lignes: 52 (code: 43, commentaires: 0)
+   🏗️  Classes: LanguageProcessor
+   ⚡ Fonctions: constructor, if, processLanguage, if, getLanguageProcessorStatus
+   📦 Imports: 2
+   📤 Exports: LanguageProcessor, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 80/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\LocalAITrainer.js
+   📏 Taille: 9858 bytes
+   📊 Lignes: 259 (code: 212, commentaires: 10)
+   🏗️  Classes: LocalAITrainer
+   ⚡ Fonctions: constructor, catch, initialize, catch, startContinuousLearning...
+   📦 Imports: 1
+   📤 Exports: LocalAITrainer, default
+   🤖 APIs IA: OpenAI
+   🎯 Score qualité: 85/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\MemoryPalace.js
+   📏 Taille: 3132 bytes
+   📊 Lignes: 84 (code: 79, commentaires: 1)
+   🏗️  Classes: MemoryPalace
+   ⚡ Fonctions: run, initialize, catch
+   📦 Imports: 2
+   📤 Exports: MemoryPalace, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 60/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\MutualGrowthSystem.js
+   📏 Taille: 11963 bytes
+   📊 Lignes: 242 (code: 202, commentaires: 5)
+   🏗️  Classes: Aucune
+   ⚡ Fonctions: constructor, processGrowthQuery, catch, handleGrowthPlan, handleLearningPath...
+   📦 Imports: 0
+   📤 Exports: default
+   🤖 APIs IA: OpenAI
+   🎯 Score qualité: 80/100
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\specialized\PurchasePredictor.js
+   📏 Taille: 43193 bytes
+   📊 Lignes: 1390 (code: 1214, commentaires: 92)
+   🏗️  Classes: PurchasePredictor
+   ⚡ Fonctions: constructor, demand_for, random_for, catch, predictDemand...
+   📦 Imports: 2
+   📤 Exports: PurchasePredictor, default
+   🤖 APIs IA: OpenAI, Anthropic
+   🎯 Score qualité: 65/100
+   ⚠️  Fonctions simulate: 1 occurrences
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\QuantumCreativeEngine.js
+   📏 Taille: 38310 bytes
+   📊 Lignes: 1067 (code: 817, commentaires: 86)
+   🏗️  Classes: QuantumCreativity
+   ⚡ Fonctions: constructor, initialize, catch, setupModule, initializeQuantumCreativity...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: OpenAI
+   🎯 Score qualité: 85/100
+   ✅ Marqueurs anti-fake: 78
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\QuantumSimulationEngine.js
+   📏 Taille: 44063 bytes
+   📊 Lignes: 1081 (code: 974, commentaires: 106)
+   🏗️  Classes: QuantumBrain
+   ⚡ Fonctions: constructor, initializeQuantumBrain, catch, processQuantumProblem, if...
+   📦 Imports: 2
+   📤 Exports: QuantumBrain, default
+   🤖 APIs IA: OpenAI, Anthropic
+   🎯 Score qualité: 85/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\SAPConnector.js
+   📏 Taille: 28839 bytes
+   📊 Lignes: 790 (code: 642, commentaires: 65)
+   🏗️  Classes: SAPConnector
+   ⚡ Fonctions: constructor, catch, synchronizeSAPData, info, perfor...
+   📦 Imports: 1
+   📤 Exports: SAPConnector, default
+   🤖 APIs IA: OpenAI, Anthropic
+   🎯 Score qualité: 85/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\SelfReflection.js
+   📏 Taille: 3069 bytes
+   📊 Lignes: 90 (code: 76, commentaires: 2)
+   🏗️  Classes: SelfReflection
+   ⚡ Fonctions: constructor, catch, initialize, catch, beginSelfAnalysis...
+   📦 Imports: 2
+   📤 Exports: SelfReflection, default
+   🤖 APIs IA: OpenAI, Anthropic
+   🎯 Score qualité: 100/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\SelfTrainingEngine.js
+   📏 Taille: 23153 bytes
+   📊 Lignes: 708 (code: 584, commentaires: 47)
+   🏗️  Classes: Aucune
+   ⚡ Fonctions: constructor, reinfor, perfor, initialize, info...
+   📦 Imports: 3
+   📤 Exports: default
+   🤖 APIs IA: OpenAI, Anthropic
+   🎯 Score qualité: 65/100
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\specialized\SupplierOptimizer.js
+   📏 Taille: 3845 bytes
+   📊 Lignes: 123 (code: 115, commentaires: 7)
+   🏗️  Classes: SupplierOptimizer
+   ⚡ Fonctions: constructor, initialize, catch, setupModule, processRequest...
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\TechnicalDocReader.js
+   📏 Taille: 22206 bytes
+   📊 Lignes: 628 (code: 523, commentaires: 32)
+   🏗️  Classes: TechnicalDocReader, DocumentParser, ContentExtractor, TextAnalyzer, StructureDetector, ComplianceChecker, KnowledgeExtractor
+   ⚡ Fonctions: constructor, catch, initializeDocumentEngine, initializeDocumentParsers, initializeContentExtraction...
+   📦 Imports: 4
+   📤 Exports: TechnicalDocReader, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 45/100
+   ⚠️  Math.random() détecté: 1 occurrences
+   ✅ Marqueurs anti-fake: 7
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\specialized\TemporalPredictor.js
+   📏 Taille: 27430 bytes
+   📊 Lignes: 686 (code: 567, commentaires: 37)
+   🏗️  Classes: TemporalPredictor, TemporalPatternAnalyzer, TrendDetector, CausalityAnalyzer, CycleDetector, PredictionEngine
+   ⚡ Fonctions: constructor, catch, initializeTemporalEngine, initializeAnalysisModules, initializePatternDetection...
+   📦 Imports: 4
+   📤 Exports: TemporalPredictor, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 45/100
+   ⚠️  Math.random() détecté: 1 occurrences
+   ✅ Marqueurs anti-fake: 7
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\specialized\TestAutoCreator.js
+   📏 Taille: 593 bytes
+   📊 Lignes: 15 (code: 13, commentaires: 0)
+   🏗️  Classes: Aucune
+   ⚡ Fonctions: 
+   📦 Imports: 2
+   📤 Exports: default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 0/100
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\specialized\UniversalModuleRegistry.js
+   📏 Taille: 1522 bytes
+   📊 Lignes: 65 (code: 54, commentaires: 0)
+   🏗️  Classes: UniversalModuleRegistry
+   ⚡ Fonctions: constructor, if, registerModule, if, loadModule...
+   📦 Imports: 2
+   📤 Exports: UniversalModuleRegistry, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 90/100
+   ✅ Marqueurs anti-fake: 1
+   ✅ Status: POTENTIELLEMENT FONCTIONNEL
+
+📄 backend\alex-modules\specialized\UserAutomationClone.js
+   📏 Taille: 21074 bytes
+   📊 Lignes: 615 (code: 510, commentaires: 29)
+   🏗️  Classes: UserAutomationClone, UserProfiler, PatternAnalyzer, TaskExecutor, BehaviorLearner, SafetyMonitor
+   ⚡ Fonctions: constructor, catch, initializeAutomationSystem, initializeUserProfiling, initializePatternAnalysis...
+   📦 Imports: 4
+   📤 Exports: UserAutomationClone, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 45/100
+   ⚠️  Math.random() détecté: 1 occurrences
+   ✅ Marqueurs anti-fake: 7
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\specialized\VisionProFactory.js
+   📏 Taille: 24794 bytes
+   📊 Lignes: 652 (code: 530, commentaires: 35)
+   🏗️  Classes: VisionProFactory, RenderingEngine, FactoryModeler, MonitoringSystem, VRARInterface, OptimizationEngine
+   ⚡ Fonctions: constructor, catch, initializeVisionEngine, initializeRenderingEngine, initializeFactoryModeling...
+   📦 Imports: 4
+   📤 Exports: VisionProFactory, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 45/100
+   ⚠️  Math.random() détecté: 1 occurrences
+   ✅ Marqueurs anti-fake: 7
+   ❌ Status: PROBLÉMATIQUE
+
+📄 backend\alex-modules\specialized\VoiceSynthesisMultilang.js
+   📏 Taille: 25703 bytes
+   📊 Lignes: 698 (code: 578, commentaires: 30)
+   🏗️  Classes: VoiceSynthesisMultilang, VoiceSynthesizer, EmotionEngine, ProsodyManager, LanguageProcessor, VoiceQualityAssurance
+   ⚡ Fonctions: constructor, catch, initializeVoiceEngine, initializeVoiceProfiles, initializeEmotionStates...
+   📦 Imports: 4
+   📤 Exports: VoiceSynthesisMultilang, default
+   🤖 APIs IA: Aucune
+   🎯 Score qualité: 45/100
+   ⚠️  Math.random() détecté: 1 occurrences
+   ✅ Marqueurs anti-fake: 7
+   ❌ Status: PROBLÉMATIQUE
+
+
+🎯 RÉSUMÉ EXÉCUTIF
+==================
+📊 Modules totaux: 125
+✅ Potentiellement fonctionnels: 104
+❌ Problématiques: 21
+⚠️  Vides/Minimaux: 0
+📏 Lignes totales: 65 019
+💾 Taille totale: 2122.3 KB
+🎯 Score moyen: 77.7/100
+
+📁 PAR CATÉGORIE:
+   backend\alex-modules\config\logger.js: 1 modules, 32 lignes, score 20.0/100
+   backend\alex-modules\consciousness\AdvancedMemoryProcessor.js: 1 modules, 763 lignes, score 75.0/100
+   backend\alex-modules\consciousness\AlexBlockchainOracle.js: 1 modules, 468 lignes, score 90.0/100
+   backend\alex-modules\consciousness\AlexHyperIntelligence.js: 1 modules, 1121 lignes, score 70.0/100
+   backend\alex-modules\consciousness\AlexInfiniteCreator.js: 1 modules, 589 lignes, score 90.0/100
+   backend\alex-modules\consciousness\AlexKnowledgeGraph.js: 1 modules, 591 lignes, score 100.0/100
+   backend\alex-modules\consciousness\AlexNetworkIntelligence.js: 1 modules, 613 lignes, score 100.0/100
+   backend\alex-modules\consciousness\AlexNeuralEvolution.js: 1 modules, 681 lignes, score 100.0/100
+   backend\alex-modules\consciousness\AlexOptimizationEngine.js: 1 modules, 563 lignes, score 100.0/100
+   backend\alex-modules\consciousness\AlexProcessingOptimizer.js: 1 modules, 956 lignes, score 100.0/100
+   backend\alex-modules\consciousness\AlexQuantumProcessor.js: 1 modules, 574 lignes, score 90.0/100
+   backend\alex-modules\consciousness\AlexUserExperienceEngine.js: 1 modules, 1112 lignes, score 100.0/100
+   backend\alex-modules\consciousness\AlexVirtualReality.js: 1 modules, 1002 lignes, score 90.0/100
+   backend\alex-modules\consciousness\AncestralWisdomKeeper.js: 1 modules, 1947 lignes, score 75.0/100
+   backend\alex-modules\consciousness\BusinessBuilderAI.js: 1 modules, 1043 lignes, score 30.0/100
+   backend\alex-modules\consciousness\CloudLearningInterface.js: 1 modules, 884 lignes, score 100.0/100
+   backend\alex-modules\consciousness\CognitiveEvolutionEngine.js: 1 modules, 1316 lignes, score 90.0/100
+   backend\alex-modules\consciousness\CreativeFlowActivator.js: 1 modules, 1708 lignes, score 75.0/100
+   backend\alex-modules\consciousness\CrisisCompanion.js: 1 modules, 1430 lignes, score 90.0/100
+   backend\alex-modules\consciousness\EmotionalJournal.js: 1 modules, 74 lignes, score 90.0/100
+   backend\alex-modules\consciousness\IntuitiveInsightGenerator.js: 1 modules, 72 lignes, score 90.0/100
+   backend\alex-modules\consciousness\MindMapBuilder.js: 1 modules, 43 lignes, score 50.0/100
+   backend\alex-modules\consciousness\MoodPredictor.js: 1 modules, 60 lignes, score 80.0/100
+   backend\alex-modules\consciousness\RelationshipHealingOracle.js: 1 modules, 39 lignes, score 50.0/100
+   backend\alex-modules\consciousness\SoulPurposeDiscoverer.js: 1 modules, 63 lignes, score 90.0/100
+   backend\alex-modules\consciousness\StrategicBlindspotDetector.js: 1 modules, 37 lignes, score 50.0/100
+   backend\alex-modules\consciousness\SynchronicityTracker.js: 1 modules, 60 lignes, score 80.0/100
+   backend\alex-modules\consciousness\ThoughtLeadershipEngine.js: 1 modules, 61 lignes, score 80.0/100
+   backend\alex-modules\core\AlexAuthenticCore.js: 1 modules, 875 lignes, score 100.0/100
+   backend\alex-modules\core\AlexAutonomousCore.js: 1 modules, 1084 lignes, score 45.0/100
+   backend\alex-modules\core\AlexIntelligentCore.js: 1 modules, 672 lignes, score 55.0/100
+   backend\alex-modules\core\AlexMemoryCore.js: 1 modules, 1159 lignes, score 90.0/100
+   backend\alex-modules\core\AlexSaaSArchitecture.js: 1 modules, 379 lignes, score 75.0/100
+   backend\alex-modules\core\AppStoreModuleManager.js: 1 modules, 79 lignes, score 90.0/100
+   backend\alex-modules\core\NeuroCore.js: 1 modules, 832 lignes, score 75.0/100
+   backend\alex-modules\core\OwnerIdentity.js: 1 modules, 885 lignes, score 90.0/100
+   backend\alex-modules\intelligence\AIFusionKernel.js: 1 modules, 587 lignes, score 90.0/100
+   backend\alex-modules\intelligence\AlexReflectiveThinking.js: 1 modules, 715 lignes, score 100.0/100
+   backend\alex-modules\intelligence\BusinessIdeaGenerator.js: 1 modules, 155 lignes, score 90.0/100
+   backend\alex-modules\intelligence\CognitiveBridge.js: 1 modules, 1186 lignes, score 100.0/100
+   backend\alex-modules\intelligence\ConflictDetectionEngine.js: 1 modules, 1400 lignes, score 75.0/100
+   backend\alex-modules\intelligence\ContextIntelligence.js: 1 modules, 1387 lignes, score 90.0/100
+   backend\alex-modules\intelligence\ContextIntelligenceEngine.js: 1 modules, 676 lignes, score 75.0/100
+   backend\alex-modules\intelligence\CreativeGenius.js: 1 modules, 1506 lignes, score 90.0/100
+   backend\alex-modules\intelligence\DecisionMakingEngine.js: 1 modules, 1030 lignes, score 45.0/100
+   backend\alex-modules\intelligence\EmotionalIntelligence.js: 1 modules, 1318 lignes, score 85.0/100
+   backend\alex-modules\intelligence\ExternalAPIManager.js: 1 modules, 696 lignes, score 85.0/100
+   backend\alex-modules\intelligence\EyeTracking.js: 1 modules, 1528 lignes, score 90.0/100
+   backend\alex-modules\intelligence\InhibitionReturn.js: 1 modules, 1119 lignes, score 90.0/100
+   backend\alex-modules\intelligence\IntelligentResponseGenerator.js: 1 modules, 895 lignes, score 90.0/100
+   backend\alex-modules\intelligence\LearningMemorySystem.js: 1 modules, 918 lignes, score 45.0/100
+   backend\alex-modules\intelligence\MarketAnalyzer.js: 1 modules, 968 lignes, score 90.0/100
+   backend\alex-modules\intelligence\MarketMindCore.js: 1 modules, 885 lignes, score 90.0/100
+   backend\alex-modules\intelligence\MultiModalFusion.js: 1 modules, 891 lignes, score 90.0/100
+   backend\alex-modules\intelligence\NeuralCore.js: 1 modules, 834 lignes, score 90.0/100
+   backend\alex-modules\intelligence\QualityConfidenceScorer.js: 1 modules, 1585 lignes, score 85.0/100
+   backend\alex-modules\intelligence\SelfOptimizationSystem.js: 1 modules, 1313 lignes, score 75.0/100
+   backend\alex-modules\intelligence\SentimentScanner.js: 1 modules, 880 lignes, score 75.0/100
+   backend\alex-modules\intelligence\TopDownAttention.js: 1 modules, 1116 lignes, score 75.0/100
+   backend\alex-modules\intelligence\TradeSimulator.js: 1 modules, 1047 lignes, score 55.0/100
+   backend\alex-modules\specialized\AdvancedModuleOrchestrator.js: 1 modules, 42 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexAdaptiveIntelligence.js: 1 modules, 55 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexBioSync.js: 1 modules, 58 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexCloudLearning.js: 1 modules, 68 lignes, score 90.0/100
+   backend\alex-modules\specialized\AlexCognitionEngine.js: 1 modules, 67 lignes, score 90.0/100
+   backend\alex-modules\specialized\AlexCommunicationEngine.js: 1 modules, 685 lignes, score 100.0/100
+   backend\alex-modules\specialized\AlexConsciousnessDebug.js: 1 modules, 67 lignes, score 90.0/100
+   backend\alex-modules\specialized\AlexConsciousnessSystem.js: 1 modules, 639 lignes, score 90.0/100
+   backend\alex-modules\specialized\AlexContextualAwareness.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexCreativeEngine.js: 1 modules, 953 lignes, score 85.0/100
+   backend\alex-modules\specialized\AlexCreativeLearningSystem.js: 1 modules, 64 lignes, score 90.0/100
+   backend\alex-modules\specialized\AlexCreativityBooster.js: 1 modules, 53 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexCrisisManagement.js: 1 modules, 65 lignes, score 90.0/100
+   backend\alex-modules\specialized\AlexDecisionEngine.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexDreamCompiler.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexEmotionalIntelligence.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexEthicsCore.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexEvolutionCore.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexGoalMastery.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexHyperLoop.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexIntuitionEngine.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexKernel.js: 1 modules, 1010 lignes, score 90.0/100
+   backend\alex-modules\specialized\AlexLearningEngine.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexMasterSystem.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexPersonalityCore.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexRelationshipEngine.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexSocialIntelligence.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexStrategicThinking.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexTimeIntelligence.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexUniversalCompanion.js: 1 modules, 1146 lignes, score 85.0/100
+   backend\alex-modules\specialized\AlexWhispers.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AlexWisdomKeeper.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AutoGenesis.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\AutonomyCore.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\BioSensorAdapter.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\BusinessFusionEngine.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\CollectiveHustleMind.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\CulturalAdaptation.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\DarkSideDecoder.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\DreamCompiler.js: 1 modules, 517 lignes, score 45.0/100
+   backend\alex-modules\specialized\FunctionBuilder.js: 1 modules, 233 lignes, score 90.0/100
+   backend\alex-modules\specialized\HealthPredictor.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\HypothesisBuilder.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\InnerDialogueEngine.js: 1 modules, 22 lignes, score 10.0/100
+   backend\alex-modules\specialized\InventoryFlow.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\KnowledgeSynthesizer.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\LanguageExpansion.js: 1 modules, 20 lignes, score 0.0/100
+   backend\alex-modules\specialized\LanguageProcessor.js: 1 modules, 52 lignes, score 80.0/100
+   backend\alex-modules\specialized\LocalAITrainer.js: 1 modules, 259 lignes, score 85.0/100
+   backend\alex-modules\specialized\MemoryPalace.js: 1 modules, 84 lignes, score 60.0/100
+   backend\alex-modules\specialized\MutualGrowthSystem.js: 1 modules, 242 lignes, score 80.0/100
+   backend\alex-modules\specialized\PurchasePredictor.js: 1 modules, 1390 lignes, score 65.0/100
+   backend\alex-modules\specialized\QuantumCreativeEngine.js: 1 modules, 1067 lignes, score 85.0/100
+   backend\alex-modules\specialized\QuantumSimulationEngine.js: 1 modules, 1081 lignes, score 85.0/100
+   backend\alex-modules\specialized\SAPConnector.js: 1 modules, 790 lignes, score 85.0/100
+   backend\alex-modules\specialized\SelfReflection.js: 1 modules, 90 lignes, score 100.0/100
+   backend\alex-modules\specialized\SelfTrainingEngine.js: 1 modules, 708 lignes, score 65.0/100
+   backend\alex-modules\specialized\SupplierOptimizer.js: 1 modules, 123 lignes, score 90.0/100
+   backend\alex-modules\specialized\TechnicalDocReader.js: 1 modules, 628 lignes, score 45.0/100
+   backend\alex-modules\specialized\TemporalPredictor.js: 1 modules, 686 lignes, score 45.0/100
+   backend\alex-modules\specialized\TestAutoCreator.js: 1 modules, 15 lignes, score 0.0/100
+   backend\alex-modules\specialized\UniversalModuleRegistry.js: 1 modules, 65 lignes, score 90.0/100
+   backend\alex-modules\specialized\UserAutomationClone.js: 1 modules, 615 lignes, score 45.0/100
+   backend\alex-modules\specialized\VisionProFactory.js: 1 modules, 652 lignes, score 45.0/100
+   backend\alex-modules\specialized\VoiceSynthesisMultilang.js: 1 modules, 698 lignes, score 45.0/100
+
+🌟 TOP 10 MODULES PROMETTEURS:
+   1. backend\alex-modules\consciousness\AlexKnowledgeGraph.js (100/100)
+   2. backend\alex-modules\consciousness\AlexNetworkIntelligence.js (100/100)
+   3. backend\alex-modules\consciousness\AlexNeuralEvolution.js (100/100)
+   4. backend\alex-modules\consciousness\AlexOptimizationEngine.js (100/100)
+   5. backend\alex-modules\consciousness\AlexProcessingOptimizer.js (100/100)
+   6. backend\alex-modules\consciousness\AlexUserExperienceEngine.js (100/100)
+   7. backend\alex-modules\consciousness\CloudLearningInterface.js (100/100)
+   8. backend\alex-modules\core\AlexAuthenticCore.js (100/100)
+   9. backend\alex-modules\intelligence\AlexReflectiveThinking.js (100/100)
+   10. backend\alex-modules\intelligence\CognitiveBridge.js (100/100)

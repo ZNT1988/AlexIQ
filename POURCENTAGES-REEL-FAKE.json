@@ -1,0 +1,108 @@
+{
+  "total": 192,
+  "authentique": {
+    "count": 160,
+    "percent": 83
+  },
+  "fakeIA": {
+    "count": 10,
+    "percent": 5
+  },
+  "embellissement": {
+    "count": 6,
+    "percent": 3
+  },
+  "coquilleVide": {
+    "count": 7,
+    "percent": 4
+  },
+  "erreursCode": {
+    "count": 9,
+    "percent": 5
+  },
+  "avecIA": {
+    "count": 70,
+    "percent": 36
+  },
+  "avecIAAuthentique": {
+    "count": 48,
+    "percent": 25
+  },
+  "totalLines": 87730,
+  "authLines": 61166,
+  "fakeLines": 26564,
+  "biggestProblems": [
+    {
+      "path": "backend/alex-modules/consciousness/CrisisCompanion.js",
+      "lines": 1430,
+      "problems": [
+        "Retour de valeur statique fake"
+      ]
+    },
+    {
+      "path": "backend/alex-modules/intelligence/ConflictDetectionEngine.js",
+      "lines": 1400,
+      "problems": [
+        "Retour de valeur statique fake"
+      ]
+    },
+    {
+      "path": "backend/alex-modules/specialized/PurchasePredictor.js",
+      "lines": 1390,
+      "problems": [
+        "Catch silencieux - erreurs ignorées"
+      ]
+    },
+    {
+      "path": "backend/alex-modules/consciousness/AlexHyperIntelligence.js",
+      "lines": 1121,
+      "problems": [
+        "Math.random() - génération aléatoire fake"
+      ]
+    },
+    {
+      "path": "backend/alex-modules/intelligence/TopDownAttention.js",
+      "lines": 1116,
+      "problems": [
+        "Retour de valeur statique fake"
+      ]
+    },
+    {
+      "path": "backend/alex-modules/core/AlexAutonomousCore.js",
+      "lines": 1084,
+      "problems": [
+        "Math.random() - génération aléatoire fake"
+      ]
+    },
+    {
+      "path": "backend/alex-modules/specialized/QuantumSimulationEngine.js",
+      "lines": 1081,
+      "problems": [
+        "Catch silencieux - erreurs ignorées"
+      ]
+    },
+    {
+      "path": "backend/alex-modules/specialized/QuantumCreativeEngine.js",
+      "lines": 1067,
+      "problems": [
+        "Méthode non implémentée"
+      ]
+    },
+    {
+      "path": "backend/alex-core/AlexKernel.js",
+      "lines": 1066,
+      "problems": [
+        "TODO - code incomplet"
+      ]
+    },
+    {
+      "path": "backend/alex-modules/consciousness/BusinessBuilderAI.js",
+      "lines": 1043,
+      "problems": [
+        "Math.random() - génération aléatoire fake",
+        "placeholder - code non implémenté",
+        "Retour de valeur statique fake"
+      ]
+    }
+  ]
+}

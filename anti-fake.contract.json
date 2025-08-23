@@ -1,0 +1,18 @@
+{
+  "flags": {
+    "math_random": "\\bMath\\.random\\s*\\(",
+    "simulate_call": "\\bsimulate[A-Z]\\w*\\s*\\(",
+    "placeholder": "\\bplaceholder\\b",
+    "static_prediction": "return\\s*['\\\"](normal|high|low)['\\\"]\\s*;",
+    "hardcoded_confidence": "\\bconfidence\\s*:\\s*(0?\\.\\d+|1(?:\\.0+)?)\\b",
+    "bad_eventemitter_import": "import\\s+EventEmitter\\s+from\\s+['\\\"]events['\\\"]",
+    "esm_cjs_mix": "(import|export).*(module\\.exports|require\\()"
+  },
+  "status_policy": {
+    "missing_data": "unknown",
+    "stale_data": "stale", 
+    "not_impl": "not_implemented",
+    "error_on_strict": true
+  },
+  "required_sources": ["os", "process", "real_api_call"]
+}

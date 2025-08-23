@@ -1,0 +1,3228 @@
+[
+  {
+    "path": "backend/.eslintrc.js",
+    "size": 773,
+    "lines": 36,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": []
+  },
+  {
+    "path": "backend/alex-core/AlexKernel.js",
+    "size": 32713,
+    "lines": 1066,
+    "problems": [
+      "TODO - code incomplet"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "MetricsCollector",
+      "constructor",
+      "registerCollector",
+      "collect"
+    ]
+  },
+  {
+    "path": "backend/alex-core/AlexMasterSystem.js",
+    "size": 4008,
+    "lines": 99,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "AlexMasterSystem",
+      "constructor",
+      "measureProcessCpu",
+      "getSystemLoad",
+      "getProcessMemory"
+    ]
+  },
+  {
+    "path": "backend/alex-core/DecisionTracker.js",
+    "size": 1856,
+    "lines": 51,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "DecisionTracker",
+      "constructor",
+      "record",
+      "_gc",
+      "sort"
+    ]
+  },
+  {
+    "path": "backend/alex-core/LicorneOrchestrator.js",
+    "size": 7743,
+    "lines": 184,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "LicorneOrchestrator",
+      "constructor",
+      "snapshot",
+      "return",
+      "buildDependencyGraph"
+    ]
+  },
+  {
+    "path": "backend/alex-core/UniversalModuleRegistry.js",
+    "size": 3967,
+    "lines": 137,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "UniversalModuleRegistry",
+      "constructor",
+      "initialize",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/config/logger.js",
+    "size": 815,
+    "lines": 32,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "CONFIG",
+    "functions": [
+      "import"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AdvancedMemoryProcessor.js",
+    "size": 23061,
+    "lines": 763,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "import",
+      "ShortTermMemoryManager",
+      "constructor",
+      "store"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+    "size": 15031,
+    "lines": 468,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AlexHyperIntelligence.js",
+    "size": 38878,
+    "lines": 1121,
+    "problems": [
+      "Math.random() - génération aléatoire fake"
+    ],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AlexInfiniteCreator.js",
+    "size": 19901,
+    "lines": 589,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AlexKnowledgeGraph.js",
+    "size": 19712,
+    "lines": 591,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Appel API authentique",
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AlexNetworkIntelligence.js",
+    "size": 18883,
+    "lines": 613,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AlexNeuralEvolution.js",
+    "size": 21898,
+    "lines": 681,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AlexOptimizationEngine.js",
+    "size": 18653,
+    "lines": 563,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AlexProcessingOptimizer.js",
+    "size": 30368,
+    "lines": 956,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AlexQuantumProcessor.js",
+    "size": 18616,
+    "lines": 574,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AlexUserExperienceEngine.js",
+    "size": 35532,
+    "lines": 1112,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AlexVirtualReality.js",
+    "size": 31906,
+    "lines": 1002,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "SystemMetrics",
+      "getInstance",
+      "getMemoryUsage",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/AncestralWisdomKeeper.js",
+    "size": 68263,
+    "lines": 1947,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "SystemMetrics",
+      "getInstance",
+      "getMemoryUsage",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/BusinessBuilderAI.js",
+    "size": 38681,
+    "lines": 1043,
+    "problems": [
+      "Math.random() - génération aléatoire fake",
+      "placeholder - code non implémenté",
+      "Retour de valeur statique fake"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/CloudLearningInterface.js",
+    "size": 28735,
+    "lines": 884,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Appel API authentique"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "SystemMetrics",
+      "getInstance",
+      "getMemoryUsage",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/CognitiveEvolutionEngine.js",
+    "size": 47346,
+    "lines": 1316,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "SystemMetrics",
+      "getInstance",
+      "getMemoryUsage",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/CreativeFlowActivator.js",
+    "size": 61204,
+    "lines": 1708,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "SystemMetrics",
+      "getInstance",
+      "getMemoryUsage",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/CrisisCompanion.js",
+    "size": 50799,
+    "lines": 1430,
+    "problems": [
+      "Retour de valeur statique fake"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "SystemMetrics",
+      "getInstance",
+      "getSystemBasedValue",
+      "getSystemTimestamp"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/EmotionalJournal.js",
+    "size": 1892,
+    "lines": 74,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "processEmotion",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/IntuitiveInsightGenerator.js",
+    "size": 1782,
+    "lines": 72,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "generateInsight",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/MindMapBuilder.js",
+    "size": 1464,
+    "lines": 43,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "configureCollaborativeSession",
+      "initialize",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/MoodPredictor.js",
+    "size": 1464,
+    "lines": 60,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "predictMood",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/RelationshipHealingOracle.js",
+    "size": 1395,
+    "lines": 39,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "assessRelationshipStrength",
+      "initialize",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/SoulPurposeDiscoverer.js",
+    "size": 1617,
+    "lines": 63,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "discoverSoulPurpose",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/StrategicBlindspotDetector.js",
+    "size": 1297,
+    "lines": 37,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "configureMonitoringSystem",
+      "initialize",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/SynchronicityTracker.js",
+    "size": 1532,
+    "lines": 60,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "trackSynchronicity",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/ThoughtLeadershipEngine.js",
+    "size": 1618,
+    "lines": 61,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "developThoughtLeadership",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/consciousness/_consciousness-stub.js",
+    "size": 1377,
+    "lines": 53,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONSCIOUSNESS",
+    "functions": [
+      "ConsciousnessModuleStub",
+      "constructor",
+      "initialize",
+      "return",
+      "getHealth"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/core/AlexAuthenticCore.js",
+    "size": 29105,
+    "lines": 875,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CORE",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/core/AlexAutonomousCore.js",
+    "size": 38894,
+    "lines": 1084,
+    "problems": [
+      "Math.random() - génération aléatoire fake"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "CORE",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/core/AlexIntelligentCore.js",
+    "size": 24315,
+    "lines": 672,
+    "problems": [
+      "Math.random() - génération aléatoire fake",
+      "Retour de valeur statique fake"
+    ],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "CORE",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/core/AlexMemoryCore.js",
+    "size": 41312,
+    "lines": 1159,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CORE",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/core/AlexSaaSArchitecture.js",
+    "size": 10568,
+    "lines": 379,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CORE",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/core/AppStoreModuleManager.js",
+    "size": 1991,
+    "lines": 79,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CORE",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "installModule"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/core/NeuroCore.js",
+    "size": 26581,
+    "lines": 832,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CORE",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/core/OwnerIdentity.js",
+    "size": 27799,
+    "lines": 885,
+    "problems": [
+      "Retour de valeur statique fake"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "CORE",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/AIFusionKernel.js",
+    "size": 16829,
+    "lines": 587,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "getSystemBasedConsciousness",
+      "getSystemBasedCognitiveLoad"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/AlexReflectiveThinking.js",
+    "size": 23715,
+    "lines": 715,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "import",
+      "import"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/BusinessIdeaGenerator.js",
+    "size": 4537,
+    "lines": 155,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/CognitiveBridge.js",
+    "size": 35541,
+    "lines": 1186,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "import",
+      "import"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/ConflictDetectionEngine.js",
+    "size": 46325,
+    "lines": 1400,
+    "problems": [
+      "Retour de valeur statique fake"
+    ],
+    "aiFeatures": [],
+    "authentic": false,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "SystemConflictAnalyzer",
+      "constructor",
+      "analyzeSystemConflicts",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/ContextIntelligence.js",
+    "size": 44175,
+    "lines": 1387,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "import",
+      "import"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/ContextIntelligenceEngine.js",
+    "size": 23975,
+    "lines": 676,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "PatternAnalyzer",
+      "constructor",
+      "extractPatterns",
+      "word"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/CreativeGenius.js",
+    "size": 48587,
+    "lines": 1506,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "import",
+      "import"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/DecisionMakingEngine.js",
+    "size": 34623,
+    "lines": 1030,
+    "problems": [
+      "Math.random() - génération aléatoire fake"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "DecisionContextAnalyzer",
+      "constructor",
+      "analyzeDecisionContext",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/EmotionalIntelligence.js",
+    "size": 51708,
+    "lines": 1318,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "getSystemBasedEmpathy",
+      "getSystemBasedResonance"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/ExternalAPIManager.js",
+    "size": 22261,
+    "lines": 696,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "APIUsageTracker",
+      "constructor",
+      "trackUsage",
+      "updatePerformanceMetrics"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/EyeTracking.js",
+    "size": 44265,
+    "lines": 1528,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "getSystemMetrics",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/InhibitionReturn.js",
+    "size": 32838,
+    "lines": 1119,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "getSystemMetrics",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/IntelligentResponseGenerator.js",
+    "size": 32980,
+    "lines": 895,
+    "problems": [
+      "placeholder - code non implémenté"
+    ],
+    "aiFeatures": [],
+    "authentic": false,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "ResponseSynthesizer",
+      "constructor",
+      "synthesizeResponses",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/LearningMemorySystem.js",
+    "size": 31471,
+    "lines": 918,
+    "problems": [
+      "Math.random() - génération aléatoire fake"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "LearningOutcomeAnalyzer",
+      "constructor",
+      "analyzeLearningOutcomes",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/MarketAnalyzer.js",
+    "size": 28758,
+    "lines": 968,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "getSystemMetrics",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/MarketMindCore.js",
+    "size": 26473,
+    "lines": 885,
+    "problems": [
+      "Retour de valeur statique fake"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "getSystemMetrics",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/MultiModalFusion.js",
+    "size": 26100,
+    "lines": 891,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "getSystemMetrics",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/NeuralCore.js",
+    "size": 24590,
+    "lines": 834,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "getSystemMetrics",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/QualityConfidenceScorer.js",
+    "size": 60369,
+    "lines": 1585,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "import",
+      "ResponseCoherenceAnalyzer",
+      "constructor",
+      "getSystemBasedThreshold"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/SelfOptimizationSystem.js",
+    "size": 47107,
+    "lines": 1313,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "PerformanceAnalyzer",
+      "constructor",
+      "analyzeSystemPerformance",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/SentimentScanner.js",
+    "size": 30078,
+    "lines": 880,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "import",
+      "TwitterSentimentAnalyzer",
+      "constructor",
+      "getSystemBasedWeight"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/TopDownAttention.js",
+    "size": 38419,
+    "lines": 1116,
+    "problems": [
+      "Retour de valeur statique fake"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "import",
+      "CognitivePriorityAnalyzer",
+      "constructor",
+      "getSystemBasedWeight"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/intelligence/TradeSimulator.js",
+    "size": 34506,
+    "lines": 1047,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "INTELLIGENCE",
+    "functions": [
+      "import",
+      "import",
+      "PortfolioManager",
+      "constructor",
+      "executeOrder"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AdvancedModuleOrchestrator.js",
+    "size": 1019,
+    "lines": 42,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "orchestrateModules",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexAdaptiveIntelligence.js",
+    "size": 1363,
+    "lines": 55,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "adaptToExperience",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexBioSync.js",
+    "size": 1316,
+    "lines": 58,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "connectBioDevice",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexCloudLearning.js",
+    "size": 1504,
+    "lines": 68,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexCognitionEngine.js",
+    "size": 1504,
+    "lines": 67,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexCommunicationEngine.js",
+    "size": 20687,
+    "lines": 685,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexConsciousnessDebug.js",
+    "size": 1502,
+    "lines": 67,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexConsciousnessSystem.js",
+    "size": 20806,
+    "lines": 639,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexContextualAwareness.js",
+    "size": 1264,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "updateContext",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexCreativeEngine.js",
+    "size": 33286,
+    "lines": 953,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexCreativeLearningSystem.js",
+    "size": 1589,
+    "lines": 64,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexCreativityBooster.js",
+    "size": 1276,
+    "lines": 53,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "stimulateCreativity",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexCrisisManagement.js",
+    "size": 1526,
+    "lines": 65,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexDecisionEngine.js",
+    "size": 1289,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "makeDecision",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexDreamCompiler.js",
+    "size": 1216,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "compileDream",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexEmotionalIntelligence.js",
+    "size": 1255,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "analyzeEmotion",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexEthicsCore.js",
+    "size": 1200,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "evaluateEthical",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexEvolutionCore.js",
+    "size": 1181,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "evolve",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexGoalMastery.js",
+    "size": 1195,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "trackGoal",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexHyperLoop.js",
+    "size": 1205,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "launchHyperLoop",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexIntuitionEngine.js",
+    "size": 1268,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "generateIntuition",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexKernel.js",
+    "size": 32544,
+    "lines": 1010,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexLearningEngine.js",
+    "size": 1181,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "learn",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexMasterSystem.js",
+    "size": 1244,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "orchestrate",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexPersonalityCore.js",
+    "size": 1200,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "adaptPersonality",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexRelationshipEngine.js",
+    "size": 1270,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "buildRelationship",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexSocialIntelligence.js",
+    "size": 1253,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "analyzeSocialContext",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexStrategicThinking.js",
+    "size": 1235,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "generateStrategy",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexTimeIntelligence.js",
+    "size": 1228,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "analyzeTime",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexUniversalCompanion.js",
+    "size": 40550,
+    "lines": 1146,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexWhispers.js",
+    "size": 1176,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "sendWhisper",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AlexWisdomKeeper.js",
+    "size": 1166,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "shareWisdom",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AutoGenesis.js",
+    "size": 1188,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "generateModule",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/AutonomyCore.js",
+    "size": 1173,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "makeAutonomousDecision",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/BioSensorAdapter.js",
+    "size": 1210,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "readBioData",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/BusinessFusionEngine.js",
+    "size": 1239,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "fuseBusiness",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/CollectiveHustleMind.js",
+    "size": 1236,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "shareIdea",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/CulturalAdaptation.js",
+    "size": 1255,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "adaptToCulture",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/DarkSideDecoder.js",
+    "size": 1193,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "decodeShadow",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/DreamCompiler.js",
+    "size": 16251,
+    "lines": 517,
+    "problems": [
+      "Math.random() - génération aléatoire fake"
+    ],
+    "aiFeatures": [],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/FunctionBuilder.js",
+    "size": 6769,
+    "lines": 233,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/HealthPredictor.js",
+    "size": 1208,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "predictHealth",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/HypothesisBuilder.js",
+    "size": 1232,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "buildHypothesis",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/InnerDialogueEngine.js",
+    "size": 1016,
+    "lines": 22,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "voice"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/InventoryFlow.js",
+    "size": 1189,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "optimizeInventory",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/KnowledgeSynthesizer.js",
+    "size": 1256,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "synthesizeKnowledge",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/LanguageExpansion.js",
+    "size": 792,
+    "lines": 20,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/LanguageProcessor.js",
+    "size": 1230,
+    "lines": 52,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "processLanguage",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/LocalAITrainer.js",
+    "size": 9809,
+    "lines": 259,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/MemoryPalace.js",
+    "size": 3128,
+    "lines": 84,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "findAutomaticAssociations",
+      "run",
+      "initialize",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/MutualGrowthSystem.js",
+    "size": 11793,
+    "lines": 242,
+    "problems": [
+      "Catch silencieux - erreurs ignorées"
+    ],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "constructor",
+      "processGrowthQuery",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/PurchasePredictor.js",
+    "size": 42979,
+    "lines": 1390,
+    "problems": [
+      "Catch silencieux - erreurs ignorées"
+    ],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "demand_for",
+      "random_for"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/QuantumCreativeEngine.js",
+    "size": 38057,
+    "lines": 1067,
+    "problems": [
+      "Méthode non implémentée"
+    ],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/QuantumSimulationEngine.js",
+    "size": 43706,
+    "lines": 1081,
+    "problems": [
+      "Catch silencieux - erreurs ignorées"
+    ],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initializeQuantumBrain",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/SAPConnector.js",
+    "size": 28657,
+    "lines": 790,
+    "problems": [
+      "Catch silencieux - erreurs ignorées"
+    ],
+    "aiFeatures": [],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "catch",
+      "synchronizeSAPData"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/SelfReflection.js",
+    "size": 3051,
+    "lines": 90,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/SelfTrainingEngine.js",
+    "size": 23056,
+    "lines": 708,
+    "problems": [
+      "Catch silencieux - erreurs ignorées"
+    ],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "constructor",
+      "reinfor",
+      "perfor",
+      "initialize"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/SupplierOptimizer.js",
+    "size": 3823,
+    "lines": 123,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initialize",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/TechnicalDocReader.js",
+    "size": 22206,
+    "lines": 628,
+    "problems": [
+      "Math.random() - génération aléatoire fake",
+      "placeholder - code non implémenté"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/TemporalPredictor.js",
+    "size": 27430,
+    "lines": 686,
+    "problems": [
+      "placeholder - code non implémenté"
+    ],
+    "aiFeatures": [],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/TestAutoCreator.js",
+    "size": 593,
+    "lines": 15,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/UniversalModuleRegistry.js",
+    "size": 1516,
+    "lines": 65,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "registerModule",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/UserAutomationClone.js",
+    "size": 21074,
+    "lines": 615,
+    "problems": [
+      "Math.random() - génération aléatoire fake",
+      "placeholder - code non implémenté"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/VisionProFactory.js",
+    "size": 24794,
+    "lines": 652,
+    "problems": [
+      "placeholder - code non implémenté"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/alex-modules/specialized/VoiceSynthesisMultilang.js",
+    "size": 25702,
+    "lines": 698,
+    "problems": [
+      "Math.random() - génération aléatoire fake",
+      "placeholder - code non implémenté"
+    ],
+    "aiFeatures": [],
+    "authentic": false,
+    "category": "SPECIALIZED",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/AlexHyperIntelligence.js",
+    "size": 476,
+    "lines": 18,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "AlexHyperIntelligence",
+      "return"
+    ]
+  },
+  {
+    "path": "backend/api/server.js",
+    "size": 19108,
+    "lines": 672,
+    "problems": [
+      "Catch silencieux - erreurs ignorées"
+    ],
+    "aiFeatures": [],
+    "authentic": false,
+    "category": "OTHER",
+    "functions": [
+      "const",
+      "try",
+      "catch",
+      "AlexLicorneServer",
+      "constructor"
+    ]
+  },
+  {
+    "path": "backend/backup/BackupManager.js",
+    "size": 18826,
+    "lines": 665,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "const",
+      "EventEmitter",
+      "constructor",
+      "initializeDatabase",
+      "Database"
+    ]
+  },
+  {
+    "path": "backend/business/RevenueManager.js",
+    "size": 26539,
+    "lines": 878,
+    "problems": [
+      "Retour de valeur statique fake"
+    ],
+    "aiFeatures": [],
+    "authentic": false,
+    "category": "OTHER",
+    "functions": [
+      "EventEmitter",
+      "constructor",
+      "initializeDatabase",
+      "Database",
+      "createRevenueTables"
+    ]
+  },
+  {
+    "path": "backend/cache/cacheManager.js",
+    "size": 167,
+    "lines": 9,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "getRedisCache"
+    ]
+  },
+  {
+    "path": "backend/cache/FallbackCache.js",
+    "size": 9307,
+    "lines": 331,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "FallbackCache",
+      "constructor",
+      "setInterval",
+      "get",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/cache/RedisCache.js",
+    "size": 3009,
+    "lines": 131,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "RedisCache",
+      "constructor",
+      "initializeConnection",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/cluster/ClusterManager.js",
+    "size": 15072,
+    "lines": 486,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initializeMaster",
+      "forkWorkers"
+    ]
+  },
+  {
+    "path": "backend/config/aiKeys.js",
+    "size": 1105,
+    "lines": 29,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "CONFIG",
+    "functions": []
+  },
+  {
+    "path": "backend/config/alexCloudConfig.js",
+    "size": 12221,
+    "lines": 344,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "CONFIG",
+    "functions": [
+      "AlexCloudConfig",
+      "constructor",
+      "try",
+      "catch",
+      "initializeConfig"
+    ]
+  },
+  {
+    "path": "backend/config/cache.js",
+    "size": 9103,
+    "lines": 348,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONFIG",
+    "functions": [
+      "AdvancedCache",
+      "constructor",
+      "property",
+      "property",
+      "property"
+    ]
+  },
+  {
+    "path": "backend/config/database-sqlite.js",
+    "size": 17149,
+    "lines": 516,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONFIG",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "withTransaction",
+      "import"
+    ]
+  },
+  {
+    "path": "backend/config/database.js",
+    "size": 6513,
+    "lines": 233,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONFIG",
+    "functions": [
+      "import",
+      "import",
+      "const",
+      "try",
+      "connect"
+    ]
+  },
+  {
+    "path": "backend/config/logger-simple.js",
+    "size": 702,
+    "lines": 30,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONFIG",
+    "functions": []
+  },
+  {
+    "path": "backend/config/logger.js",
+    "size": 4414,
+    "lines": 159,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONFIG",
+    "functions": [
+      "printf",
+      "constant",
+      "initializeLogsDirectory"
+    ]
+  },
+  {
+    "path": "backend/config/monitoring.js",
+    "size": 20372,
+    "lines": 655,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "CONFIG",
+    "functions": [
+      "property",
+      "property",
+      "property",
+      "PerformanceMonitor",
+      "constructor"
+    ]
+  },
+  {
+    "path": "backend/config/performance.js",
+    "size": 14265,
+    "lines": 453,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "CONFIG",
+    "functions": [
+      "import",
+      "import",
+      "PerformanceOptimizer",
+      "constructor",
+      "property"
+    ]
+  },
+  {
+    "path": "backend/config/validation.js",
+    "size": 23736,
+    "lines": 562,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "CONFIG",
+    "functions": [
+      "import",
+      "const",
+      "import",
+      "constant",
+      "constant"
+    ]
+  },
+  {
+    "path": "backend/core/HustleFinderCore.js",
+    "size": 21928,
+    "lines": 704,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "import",
+      "EventEmitter"
+    ]
+  },
+  {
+    "path": "backend/core/providers/AIClient.js",
+    "size": 1486,
+    "lines": 55,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "AIClient",
+      "constructor"
+    ]
+  },
+  {
+    "path": "backend/diagnostics/AlexCompleteSystemDiagnostics.js",
+    "size": 48028,
+    "lines": 1459,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/diagnostics/AlexSystemDiagnostics.js",
+    "size": 19538,
+    "lines": 577,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "runCompleteDiagnostic",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/eslint.config.js",
+    "size": 4229,
+    "lines": 131,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": []
+  },
+  {
+    "path": "backend/index.js",
+    "size": 9677,
+    "lines": 312,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "import",
+      "use"
+    ]
+  },
+  {
+    "path": "backend/integrations/calendar-integrations.js",
+    "size": 18804,
+    "lines": 685,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "initializeIntegrations",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/jest.config.js",
+    "size": 381,
+    "lines": 17,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "default"
+    ]
+  },
+  {
+    "path": "backend/middleware/antiFakeGuard.js",
+    "size": 1294,
+    "lines": 33,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "MIDDLEWARE",
+    "functions": [
+      "validateAiResponse",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/middleware/auth.js",
+    "size": 5044,
+    "lines": 140,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "MIDDLEWARE",
+    "functions": [
+      "import",
+      "import",
+      "createAuthMiddleware",
+      "returns",
+      "throws"
+    ]
+  },
+  {
+    "path": "backend/middleware/cacheMiddleware.js",
+    "size": 2939,
+    "lines": 102,
+    "problems": [
+      "Catch silencieux - erreurs ignorées"
+    ],
+    "aiFeatures": [],
+    "authentic": false,
+    "category": "MIDDLEWARE",
+    "functions": [
+      "import",
+      "param",
+      "returns",
+      "createCacheMiddleware",
+      "const"
+    ]
+  },
+  {
+    "path": "backend/middleware/enterpriseSecurityMiddleware.js",
+    "size": 12417,
+    "lines": 402,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "MIDDLEWARE",
+    "functions": [
+      "import",
+      "createEnterpriseSecurityMiddleware",
+      "createIntelligentRateLimit",
+      "rateLimit",
+      "createDDoSProtection"
+    ]
+  },
+  {
+    "path": "backend/middleware/errorHandler.js",
+    "size": 18359,
+    "lines": 567,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "MIDDLEWARE",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "get",
+      "param"
+    ]
+  },
+  {
+    "path": "backend/middleware/security.js",
+    "size": 3636,
+    "lines": 133,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "MIDDLEWARE",
+    "functions": [
+      "default"
+    ]
+  },
+  {
+    "path": "backend/monitoring/AlexAutonomyMonitor.js",
+    "size": 17439,
+    "lines": 553,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "MONITORING",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/monitoring/PerformanceMonitor.js",
+    "size": 18543,
+    "lines": 596,
+    "problems": [
+      "placeholder - code non implémenté"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "MONITORING",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "EventEmitter",
+      "constructor"
+    ]
+  },
+  {
+    "path": "backend/monitoring/SystemMonitor.js",
+    "size": 17026,
+    "lines": 591,
+    "problems": [
+      "Catch silencieux - erreurs ignorées"
+    ],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": false,
+    "category": "MONITORING",
+    "functions": [
+      "EventEmitter",
+      "constructor",
+      "initializeDatabase",
+      "Database",
+      "createMonitoringTables"
+    ]
+  },
+  {
+    "path": "backend/prompts/alex-prompts.js",
+    "size": 1211,
+    "lines": 37,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": []
+  },
+  {
+    "path": "backend/routes/advanced-ai.js",
+    "size": 19828,
+    "lines": 500,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "ROUTES",
+    "functions": [
+      "import",
+      "import",
+      "post",
+      "const",
+      "post"
+    ]
+  },
+  {
+    "path": "backend/routes/ai.js",
+    "size": 10005,
+    "lines": 317,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "ROUTES",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "getUserId",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/routes/aiSystem.js",
+    "size": 12898,
+    "lines": 385,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "ROUTES",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "try",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/routes/aiSystemSpecialized.js",
+    "size": 21076,
+    "lines": 506,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "ROUTES",
+    "functions": [
+      "import",
+      "pour",
+      "post",
+      "const",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/routes/assistant.js",
+    "size": 28550,
+    "lines": 787,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "ROUTES",
+    "functions": [
+      "import",
+      "import",
+      "post",
+      "const",
+      "post"
+    ]
+  },
+  {
+    "path": "backend/routes/auth.js",
+    "size": 5296,
+    "lines": 161,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "ROUTES",
+    "functions": [
+      "import",
+      "import",
+      "async",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/routes/ideas.js",
+    "size": 7230,
+    "lines": 251,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "ROUTES",
+    "functions": [
+      "import",
+      "getUserId",
+      "try",
+      "catch",
+      "get"
+    ]
+  },
+  {
+    "path": "backend/routes/monitoring.js",
+    "size": 13237,
+    "lines": 376,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "ROUTES",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "get",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/routes/projects.js",
+    "size": 10205,
+    "lines": 251,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "ROUTES",
+    "functions": [
+      "import",
+      "async",
+      "getUserId",
+      "get",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/routes/real-alex.js",
+    "size": 6002,
+    "lines": 150,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "ROUTES",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "post",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/routes/roi.js",
+    "size": 13128,
+    "lines": 277,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "ROUTES",
+    "functions": [
+      "import",
+      "async",
+      "getUserId",
+      "calculateROI",
+      "switch"
+    ]
+  },
+  {
+    "path": "backend/scripts/init-alex-system.js",
+    "size": 12453,
+    "lines": 429,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA",
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "AlexSystemInitializer",
+      "constructor",
+      "init",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/scripts/pre-start-check.js",
+    "size": 1001,
+    "lines": 57,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "forEach",
+      "else",
+      "else"
+    ]
+  },
+  {
+    "path": "backend/security/EnterpriseSecurityManager.js",
+    "size": 18581,
+    "lines": 593,
+    "problems": [
+      "placeholder - code non implémenté"
+    ],
+    "aiFeatures": [],
+    "authentic": false,
+    "category": "SECURITY",
+    "functions": [
+      "import",
+      "EventEmitter",
+      "constructor",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/server-cluster.js",
+    "size": 4424,
+    "lines": 123,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "try",
+      "catch",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/services/anthropic.js",
+    "size": 617,
+    "lines": 21,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "SERVICES",
+    "functions": [
+      "import",
+      "callAnthropic"
+    ]
+  },
+  {
+    "path": "backend/services/ExternalDataSources.js",
+    "size": 18353,
+    "lines": 513,
+    "problems": [
+      "placeholder - code non implémenté"
+    ],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": false,
+    "category": "SERVICES",
+    "functions": [
+      "ExternalDataSources",
+      "constructor",
+      "try",
+      "catch",
+      "getIntelligentResponse"
+    ]
+  },
+  {
+    "path": "backend/services/google.js",
+    "size": 965,
+    "lines": 26,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "SERVICES",
+    "functions": [
+      "import",
+      "import",
+      "callGemini",
+      "const"
+    ]
+  },
+  {
+    "path": "backend/services/openai.js",
+    "size": 553,
+    "lines": 19,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "SERVICES",
+    "functions": [
+      "import",
+      "callOpenAI"
+    ]
+  },
+  {
+    "path": "backend/services/RateLimiter.js",
+    "size": 6603,
+    "lines": 237,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "SERVICES",
+    "functions": [
+      "RateLimiter",
+      "constructor",
+      "setInterval",
+      "try",
+      "catch"
+    ]
+  },
+  {
+    "path": "backend/tenant/TenantManager.js",
+    "size": 19548,
+    "lines": 681,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "EventEmitter",
+      "constructor",
+      "initializeDatabase",
+      "Database",
+      "createTenantTables"
+    ]
+  },
+  {
+    "path": "backend/test/runner.js",
+    "size": 8264,
+    "lines": 278,
+    "problems": [],
+    "aiFeatures": [
+      "Vraie API IA"
+    ],
+    "authentic": true,
+    "category": "OTHER",
+    "functions": [
+      "import",
+      "import",
+      "import",
+      "TestRunner",
+      "constructor"
+    ]
+  },
+  {
+    "path": "backend/utils/enhancedHealthCheck.js",
+    "size": 9670,
+    "lines": 357,
+    "problems": [],
+    "aiFeatures": [
+      "Vraies métriques système"
+    ],
+    "authentic": true,
+    "category": "UTILS",
+    "functions": [
+      "import",
+      "EnhancedHealthCheck",
+      "constructor",
+      "performFullCheck",
+      "try"
+    ]
+  },
+  {
+    "path": "backend/utils/systemRecovery.js",
+    "size": 4614,
+    "lines": 177,
+    "problems": [],
+    "aiFeatures": [],
+    "authentic": true,
+    "category": "UTILS",
+    "functions": [
+      "SystemRecovery",
+      "constructor",
+      "detectAndRecover",
+      "try",
+      "catch"
+    ]
+  }
+]

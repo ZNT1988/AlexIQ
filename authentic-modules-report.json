@@ -1,0 +1,5033 @@
+{
+  "authentic": [
+    {
+      "path": "backend\\alex-modules\\intelligence\\AlexReflectiveThinking.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.uptime(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "performance\\.(now|mark|measure)\\(",
+          "matches": [
+            "performance.now(",
+            "performance.now(",
+            "performance.now("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import { readFileSync } from 'fs'"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import { join } from 'path'"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 23715
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\CognitiveBridge.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.uptime(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "performance\\.(now|mark|measure)\\(",
+          "matches": [
+            "performance.now(",
+            "performance.now(",
+            "performance.now("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import { readFileSync } from 'fs'"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import { join } from 'path'"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 35541
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AlexKnowledgeGraph.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.cpus("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "fetch\\(",
+          "matches": [
+            "fetch("
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 19712
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\ContextIntelligence.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.uptime(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "performance\\.(now|mark|measure)\\(",
+          "matches": [
+            "performance.now(",
+            "performance.now(",
+            "performance.now("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import { readFileSync } from 'fs'"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import { join } from 'path'"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 44175
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\CreativeGenius.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.uptime(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "performance\\.(now|mark|measure)\\(",
+          "matches": [
+            "performance.now(",
+            "performance.now(",
+            "performance.now("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import { readFileSync } from 'fs'"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import { join } from 'path'"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 48587
+    },
+    {
+      "path": "backend\\scripts\\init-alex-system.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "require(\"fs\""
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "require(\"path\""
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 12453
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AlexNetworkIntelligence.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Set"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 18883
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AlexNeuralEvolution.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.cpus(",
+            "os.cpus("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 21898
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AlexOptimizationEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.cpus(",
+            "os.cpus(",
+            "os.cpus("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 18653
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AlexProcessingOptimizer.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.cpus(",
+            "os.cpus(",
+            "os.cpus("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 30368
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AlexUserExperienceEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.cpus(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 35532
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\CloudLearningInterface.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.totalmem(",
+            "os.freemem(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 28735
+    },
+    {
+      "path": "backend\\alex-modules\\core\\AlexAuthenticCore.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.cpus(",
+            "os.cpus("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 29105
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\QualityConfidenceScorer.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.loadavg(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Set",
+            "new Set",
+            "new Set"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 60369
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\SelfTrainingEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import fs from \\','   node:fs"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import fs from \\','   node:fs/promises';\\' import path from ','   node:path"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 23056
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AdvancedMemoryProcessor.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.loadavg(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "performance\\.(now|mark|measure)\\(",
+          "matches": [
+            "performance.now(",
+            "performance.now(",
+            "performance.now("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 23061
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AlexVirtualReality.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.totalmem(",
+            "os.freemem(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "performance\\.(now|mark|measure)\\(",
+          "matches": [
+            "performance.now(",
+            "performance.now("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 31906
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\BusinessIdeaGenerator.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.uptime(",
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "performance\\.(now|mark|measure)\\(",
+          "matches": [
+            "performance.now(",
+            "performance.now("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 4537
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\SentimentScanner.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.loadavg(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "performance\\.(now|mark|measure)\\(",
+          "matches": [
+            "performance.now(",
+            "performance.now(",
+            "performance.now("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 30078
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\TopDownAttention.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.loadavg(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "performance\\.(now|mark|measure)\\(",
+          "matches": [
+            "performance.now(",
+            "performance.now(",
+            "performance.now("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 38419
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexKernel.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.memoryUsage(",
+            "process.cpuUsage("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import(modulePath"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 32544
+    },
+    {
+      "path": "backend\\monitoring\\SystemMonitor.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.uptime(",
+            "process.memoryUsage(",
+            "process.cpuUsage("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.totalmem(",
+            "os.freemem("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "require(\"fs\""
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "require(\"path\""
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 17026
+    },
+    {
+      "path": "backend\\test\\runner.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import fs from \"fs"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import { fileURLToPath",
+            "import { dirname, join } from \"path\""
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 8264
+    },
+    {
+      "path": "backend\\utils\\enhancedHealthCheck.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.uptime(",
+            "process.memoryUsage("
+          ]
+        },
+        {
+          "pattern": "performance\\.(now|mark|measure)\\(",
+          "matches": [
+            "performance.now(",
+            "performance.now(",
+            "performance.now("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import fs from \"fs\""
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import path from \"path\"",
+            "imported = await import(`file://${modulePath"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 9670
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AlexBlockchainOracle.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 15031
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AlexQuantumProcessor.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 18616
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AncestralWisdomKeeper.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.totalmem(",
+            "os.freemem(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Set"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 68263
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\CognitiveEvolutionEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.totalmem(",
+            "os.freemem(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 47346
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\CreativeFlowActivator.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.totalmem(",
+            "os.freemem(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 61204
+    },
+    {
+      "path": "backend\\alex-modules\\core\\OwnerIdentity.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Set"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 27799
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\EyeTracking.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Set",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 44265
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\InhibitionReturn.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 32838
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\MarketAnalyzer.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 28758
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\MarketMindCore.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 26473
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\MultiModalFusion.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 26100
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexConsciousnessSystem.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 20806
+    },
+    {
+      "path": "backend\\cluster\\ClusterManager.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.cpus(",
+            "os.cpus(",
+            "os.cpus("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 15072
+    },
+    {
+      "path": "backend\\diagnostics\\AlexCompleteSystemDiagnostics.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import fs from 'fs"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import path from 'path'",
+            "Import = await import(modulePath",
+            "import(systemPath"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 48028
+    },
+    {
+      "path": "backend\\services\\RateLimiter.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 6603
+    },
+    {
+      "path": "backend\\alex-core\\AlexMasterSystem.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.cpuUsage(",
+            "process.cpuUsage("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.cpus(",
+            "os.loadavg(",
+            "os.cpus("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 4008
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AlexInfiniteCreator.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 19901
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\CrisisCompanion.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.cpus("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 50799
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\AIFusionKernel.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Set",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 16829
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\EmotionalIntelligence.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 51708
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\NeuralCore.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 24590
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\SelfOptimizationSystem.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.hrtime("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 47107
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexCommunicationEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "fetch\\(",
+          "matches": [
+            "fetch(",
+            "fetch(",
+            "fetch("
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 20687
+    },
+    {
+      "path": "backend\\config\\performance.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.hrtime(",
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.cpus("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 14265
+    },
+    {
+      "path": "backend\\diagnostics\\AlexSystemDiagnostics.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "Import = await import(modulePath"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 19538
+    },
+    {
+      "path": "backend\\alex-core\\LicorneOrchestrator.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 7743
+    },
+    {
+      "path": "backend\\alex-modules\\core\\AppStoreModuleManager.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import fs from \"fs"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import path from \"path\""
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Set"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1991
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\ExternalAPIManager.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 22261
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\LocalAITrainer.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 9809
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\PurchasePredictor.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 42979
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\QuantumSimulationEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 43706
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\SAPConnector.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 28657
+    },
+    {
+      "path": "backend\\api\\server.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Set"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 19108
+    },
+    {
+      "path": "backend\\config\\database.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import { fileURLToPath",
+            "import path from \"path\""
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 6513
+    },
+    {
+      "path": "backend\\config\\monitoring.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 20372
+    },
+    {
+      "path": "backend\\integrations\\calendar-integrations.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 18804
+    },
+    {
+      "path": "backend\\monitoring\\AlexAutonomyMonitor.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import fs from 'fs"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import path from 'path'"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 17439
+    },
+    {
+      "path": "backend\\routes\\monitoring.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.uptime(",
+            "process.memoryUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 13237
+    },
+    {
+      "path": "backend\\scripts\\pre-start-check.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import fs from \"fs\""
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import path from \"path\"",
+            "import { fileURLToPath"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 1001
+    },
+    {
+      "path": "backend\\alex-core\\UniversalModuleRegistry.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import(entry.loadPath"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 3967
+    },
+    {
+      "path": "backend\\backup\\BackupManager.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "require(\"fs\""
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "require(\"path\""
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 18826
+    },
+    {
+      "path": "backend\\cache\\RedisCache.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 3009
+    },
+    {
+      "path": "backend\\routes\\aiSystem.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.uptime("
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 12898
+    },
+    {
+      "path": "backend\\server-cluster.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 4424
+    },
+    {
+      "path": "backend\\services\\anthropic.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "fetch\\(",
+          "matches": [
+            "fetch("
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 617
+    },
+    {
+      "path": "backend\\services\\openai.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "fetch\\(",
+          "matches": [
+            "fetch("
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 553
+    },
+    {
+      "path": "backend\\.eslintrc.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 773
+    },
+    {
+      "path": "backend\\alex-modules\\config\\logger.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 815
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\EmotionalJournal.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1892
+    },
+    {
+      "path": "backend\\alex-modules\\core\\NeuroCore.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 26581
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\ConflictDetectionEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 46325
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\ContextIntelligenceEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Set",
+            "new Map",
+            "new Set"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 23975
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexCreativeEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 33286
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexUniversalCompanion.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 40550
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\FunctionBuilder.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 6769
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\MutualGrowthSystem.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 11793
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\QuantumCreativeEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 38057
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\SelfReflection.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 3051
+    },
+    {
+      "path": "backend\\AlexHyperIntelligence.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 476
+    },
+    {
+      "path": "backend\\cache\\FallbackCache.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 9307
+    },
+    {
+      "path": "backend\\config\\aiKeys.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 1105
+    },
+    {
+      "path": "backend\\config\\alexCloudConfig.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 12221
+    },
+    {
+      "path": "backend\\config\\cache.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 9103
+    },
+    {
+      "path": "backend\\core\\HustleFinderCore.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 21928
+    },
+    {
+      "path": "backend\\core\\providers\\AIClient.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 1486
+    },
+    {
+      "path": "backend\\index.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 9677
+    },
+    {
+      "path": "backend\\middleware\\auth.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 5044
+    },
+    {
+      "path": "backend\\middleware\\enterpriseSecurityMiddleware.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 12417
+    },
+    {
+      "path": "backend\\middleware\\errorHandler.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 18359
+    },
+    {
+      "path": "backend\\middleware\\security.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 3636
+    },
+    {
+      "path": "backend\\services\\google.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": false,
+      "size": 965
+    },
+    {
+      "path": "backend\\tenant\\TenantManager.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 19548
+    },
+    {
+      "path": "backend\\utils\\systemRecovery.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import fs from \"fs\""
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import path from \"path\"",
+            "import(\"file://\" + modulePath"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 4614
+    },
+    {
+      "path": "backend\\alex-core\\DecisionTracker.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1856
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\IntuitiveInsightGenerator.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1782
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\MindMapBuilder.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1464
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\MoodPredictor.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1464
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\RelationshipHealingOracle.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1395
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\SoulPurposeDiscoverer.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1617
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\StrategicBlindspotDetector.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1297
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\SynchronicityTracker.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1532
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\ThoughtLeadershipEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1618
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\_consciousness-stub.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1377
+    },
+    {
+      "path": "backend\\alex-modules\\core\\AlexSaaSArchitecture.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 10568
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexAdaptiveIntelligence.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1363
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexBioSync.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1316
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexCloudLearning.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1504
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexCognitionEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1504
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexConsciousnessDebug.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1502
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexContextualAwareness.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1264
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexCreativeLearningSystem.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1589
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexCreativityBooster.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1276
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexCrisisManagement.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1526
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexDecisionEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1289
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexDreamCompiler.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1216
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexEmotionalIntelligence.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1255
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexEthicsCore.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1200
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexEvolutionCore.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1181
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexGoalMastery.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1195
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexHyperLoop.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1205
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexIntuitionEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1268
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexLearningEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1181
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexMasterSystem.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1244
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexPersonalityCore.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1200
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexRelationshipEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1270
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexSocialIntelligence.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1253
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexStrategicThinking.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1235
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexTimeIntelligence.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1228
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexWhispers.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1176
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AlexWisdomKeeper.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1166
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AutoGenesis.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1188
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AutonomyCore.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1173
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\BioSensorAdapter.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1210
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\BusinessFusionEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1239
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\CollectiveHustleMind.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1236
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\CulturalAdaptation.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1255
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\DarkSideDecoder.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1193
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\HealthPredictor.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1208
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\HypothesisBuilder.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1232
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\InnerDialogueEngine.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1016
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\InventoryFlow.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1189
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\KnowledgeSynthesizer.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1256
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\LanguageExpansion.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 792
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\LanguageProcessor.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1230
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\MemoryPalace.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 3128
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\SupplierOptimizer.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 3823
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\TestAutoCreator.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 593
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\UniversalModuleRegistry.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1516
+    },
+    {
+      "path": "backend\\business\\RevenueManager.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 26539
+    },
+    {
+      "path": "backend\\config\\logger.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import fs from \"fs\""
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 4414
+    },
+    {
+      "path": "backend\\middleware\\cacheMiddleware.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 2939
+    },
+    {
+      "path": "backend\\routes\\ai.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 10005
+    },
+    {
+      "path": "backend\\routes\\aiSystemSpecialized.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 21076
+    },
+    {
+      "path": "backend\\routes\\assistant.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 28550
+    },
+    {
+      "path": "backend\\routes\\real-alex.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 6002
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\AdvancedModuleOrchestrator.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1019
+    },
+    {
+      "path": "backend\\cache\\cacheManager.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 167
+    },
+    {
+      "path": "backend\\config\\logger-simple.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 702
+    },
+    {
+      "path": "backend\\config\\validation.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 23736
+    },
+    {
+      "path": "backend\\eslint.config.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 4229
+    },
+    {
+      "path": "backend\\jest.config.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 381
+    },
+    {
+      "path": "backend\\middleware\\antiFakeGuard.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1294
+    },
+    {
+      "path": "backend\\prompts\\alex-prompts.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 1211
+    },
+    {
+      "path": "backend\\routes\\advanced-ai.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 19828
+    },
+    {
+      "path": "backend\\routes\\ideas.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 7230
+    },
+    {
+      "path": "backend\\routes\\projects.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 10205
+    },
+    {
+      "path": "backend\\routes\\roi.js",
+      "authentic": true,
+      "fakePatterns": [],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 13128
+    }
+  ],
+  "fake": [
+    {
+      "path": "backend\\alex-core\\AlexKernel.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "todo"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.memoryUsage("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.loadavg(",
+            "os.cpus("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 32713
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\AlexHyperIntelligence.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.cpuUsage(",
+            "process.memoryUsage("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 38878
+    },
+    {
+      "path": "backend\\alex-modules\\consciousness\\BusinessBuilderAI.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()"
+          ]
+        },
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.uptime("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 38681
+    },
+    {
+      "path": "backend\\alex-modules\\core\\AlexAutonomousCore.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()",
+            "Math.random()"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.cpuUsage("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.cpus(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 38894
+    },
+    {
+      "path": "backend\\alex-modules\\core\\AlexIntelligentCore.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()",
+            "Math.random()"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 24315
+    },
+    {
+      "path": "backend\\alex-modules\\core\\AlexMemoryCore.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "placeholder",
+            "placeholder",
+            "placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 41312
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\DecisionMakingEngine.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()",
+            "Math.random()"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage(",
+            "process.cpuUsage("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 34623
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\IntelligentResponseGenerator.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Set",
+            "new Set",
+            "new Set"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 32980
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\LearningMemorySystem.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.cpuUsage(",
+            "process.memoryUsage("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 31471
+    },
+    {
+      "path": "backend\\alex-modules\\intelligence\\TradeSimulator.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "simulate[A-Z][a-zA-Z]+\\(",
+          "matches": [
+            "simulateFill("
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.loadavg(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "performance\\.(now|mark|measure)\\(",
+          "matches": [
+            "performance.now(",
+            "performance.now(",
+            "performance.now("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 34506
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\DreamCompiler.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()",
+            "Math.random()",
+            "Math.random()"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 16251
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\TechnicalDocReader.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()"
+          ]
+        },
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "Placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.uptime("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 22206
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\TemporalPredictor.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()"
+          ]
+        },
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "Placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.uptime("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 27430
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\UserAutomationClone.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()"
+          ]
+        },
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "Placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.uptime("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 21074
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\VisionProFactory.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()"
+          ]
+        },
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "Placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.uptime(",
+            "os.cpus("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 24794
+    },
+    {
+      "path": "backend\\alex-modules\\specialized\\VoiceSynthesisMultilang.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "Math\\.random\\(\\)",
+          "matches": [
+            "Math.random()"
+          ]
+        },
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "Placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.cpuUsage(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.loadavg(",
+            "os.uptime("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 25702
+    },
+    {
+      "path": "backend\\config\\database-sqlite.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "import.*from.*['\"]fs['\"]|require\\(['\"]fs['\"]|import.*fs",
+          "matches": [
+            "import fs from 'fs'"
+          ]
+        },
+        {
+          "pattern": "import.*from.*['\"]path['\"]|require\\(['\"]path['\"]|import.*path",
+          "matches": [
+            "import path from 'path'",
+            "import { fileURLToPath"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 17149
+    },
+    {
+      "path": "backend\\monitoring\\PerformanceMonitor.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "Placeholder",
+            "Placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "process\\.(memoryUsage|cpuUsage|hrtime|uptime)\\(",
+          "matches": [
+            "process.memoryUsage(",
+            "process.uptime(",
+            "process.uptime("
+          ]
+        },
+        {
+          "pattern": "os\\.(loadavg|freemem|totalmem|cpus|uptime)\\(",
+          "matches": [
+            "os.totalmem(",
+            "os.freemem(",
+            "os.loadavg("
+          ]
+        },
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 18543
+    },
+    {
+      "path": "backend\\routes\\auth.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "placeholder",
+            "placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": false,
+      "size": 5296
+    },
+    {
+      "path": "backend\\security\\EnterpriseSecurityManager.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": false,
+      "hasSystemMetrics": true,
+      "size": 18581
+    },
+    {
+      "path": "backend\\services\\ExternalDataSources.js",
+      "authentic": false,
+      "fakePatterns": [
+        {
+          "pattern": "placeholder|TODO|FIXME",
+          "matches": [
+            "Placeholder"
+          ]
+        }
+      ],
+      "authenticIndicators": [
+        {
+          "pattern": "Date\\.now\\(\\)",
+          "matches": [
+            "Date.now()",
+            "Date.now()",
+            "Date.now()"
+          ]
+        },
+        {
+          "pattern": "fetch\\(",
+          "matches": [
+            "fetch(",
+            "fetch(",
+            "fetch("
+          ]
+        },
+        {
+          "pattern": "new\\s+(Map|Set|WeakMap|WeakSet)",
+          "matches": [
+            "new Map",
+            "new Map"
+          ]
+        }
+      ],
+      "hasRealAPIs": true,
+      "hasSystemMetrics": true,
+      "size": 18353
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "total": 192,
+    "authentic": 171,
+    "fake": 21,
+    "errors": 0
+  }
+}

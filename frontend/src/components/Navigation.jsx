@@ -1,16 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Home, BarChart3, Lightbulb, Calculator, TestTube } from 'lucide-react';
 
-// Constantes pour chaînes dupliquées (optimisation SonarJS)
 const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: '/STR_LABELAccueil', icon: Home },
-    { path: '/dashboardSTR_LABELDashboard', icon: BarChart3 },
-    { path: '/generatorSTR_LABELGénérateur', icon: Lightbulb },
-    { path: '/calculatorSTR_LABELCalculateur', icon: Calculator },
-    { path: '/testSTR_LABELTest', icon: TestTube }
+    { path: '/', label: 'Accueil', icon: Home },
+    { path: '/dashboard', label: 'Dashboard', icon: BarChart3 },
+    { path: '/generator', label: 'Générateur', icon: Lightbulb },
+    { path: '/calculator', label: 'Calculateur', icon: Calculator },
+    { path: '/test', label: 'Test', icon: TestTube }
   ];
 
   return (
@@ -40,7 +39,7 @@ const Navigation = () => {
                     }`}
                   >
                     <Icon className="h-4 w-4 mr-2" />
-                    {item.path.replace('/STR_LABEL', '').replace('STR_LABEL', '')}
+                    {item.label}
                   </Link>
                 );
               })}

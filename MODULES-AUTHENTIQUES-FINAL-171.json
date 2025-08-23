@@ -1,0 +1,1689 @@
+{
+  "timestamp": "2025-08-22T12:39:57.760Z",
+  "totalModules": 170,
+  "categories": {
+    "infrastructure": {
+      "count": 2,
+      "modules": [
+        {
+          "path": "/backend/api/server.js",
+          "functions": [
+            "Class: AlexLicorneServer",
+            "Method: catch",
+            "Method: constructor"
+          ],
+          "canBenefitFromAI": true,
+          "size": 19108
+        },
+        {
+          "path": "/backend/server-cluster.js",
+          "functions": [
+            "Method: catch",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 4424
+        }
+      ]
+    },
+    "services": {
+      "count": 9,
+      "modules": [
+        {
+          "path": "/backend/alex-modules/core/AppStoreModuleManager.js",
+          "functions": [
+            "Method: constructor",
+            "Method: installModule"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1991
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/ExternalAPIManager.js",
+          "functions": [
+            "Class: APIUsageTracker",
+            "Method: constructor",
+            "Method: trackUsage"
+          ],
+          "canBenefitFromAI": true,
+          "size": 22261
+        },
+        {
+          "path": "/backend/backup/BackupManager.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initializeDatabase"
+          ],
+          "canBenefitFromAI": true,
+          "size": 18826
+        },
+        {
+          "path": "/backend/business/RevenueManager.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initializeDatabase"
+          ],
+          "canBenefitFromAI": true,
+          "size": 26539
+        },
+        {
+          "path": "/backend/cache/cacheManager.js",
+          "functions": [
+            "Function: getRedisCache",
+            "Method: getRedisCache"
+          ],
+          "canBenefitFromAI": false,
+          "size": 167
+        },
+        {
+          "path": "/backend/cache/FallbackCache.js",
+          "functions": [
+            "Class: FallbackCache",
+            "Method: constructor",
+            "Method: get",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 9307
+        },
+        {
+          "path": "/backend/cache/RedisCache.js",
+          "functions": [
+            "Class: RedisCache",
+            "Method: constructor",
+            "Method: initializeConnection"
+          ],
+          "canBenefitFromAI": true,
+          "size": 3009
+        },
+        {
+          "path": "/backend/cluster/ClusterManager.js",
+          "functions": [
+            "Function: setupWorkerProcess",
+            "Arrow: responseHandler",
+            "Arrow: gracefulShutdown",
+            "Method: constructor",
+            "Method: initializeMaster"
+          ],
+          "canBenefitFromAI": true,
+          "size": 15072
+        },
+        {
+          "path": "/backend/tenant/TenantManager.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initializeDatabase"
+          ],
+          "canBenefitFromAI": true,
+          "size": 19548
+        }
+      ]
+    },
+    "intelligent": {
+      "count": 55,
+      "modules": [
+        {
+          "path": "/backend/alex-core/AlexMasterSystem.js",
+          "functions": [
+            "Class: AlexMasterSystem",
+            "Method: constructor",
+            "Method: measureProcessCpu",
+            "Method: getSystemLoad"
+          ],
+          "canBenefitFromAI": true,
+          "size": 4008
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AlexBlockchainOracle.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 15031
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AlexInfiniteCreator.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 19901
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AlexKnowledgeGraph.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 19712
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AlexNetworkIntelligence.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 18883
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AlexNeuralEvolution.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 21898
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AlexOptimizationEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 18653
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AlexProcessingOptimizer.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 30368
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AlexQuantumProcessor.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 18616
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AlexUserExperienceEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 35532
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AlexVirtualReality.js",
+          "functions": [
+            "Class: SystemMetrics",
+            "Method: getInstance",
+            "Method: getMemoryUsage"
+          ],
+          "canBenefitFromAI": true,
+          "size": 31906
+        },
+        {
+          "path": "/backend/alex-modules/core/AlexAuthenticCore.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 29105
+        },
+        {
+          "path": "/backend/alex-modules/core/AlexSaaSArchitecture.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 10568
+        },
+        {
+          "path": "/backend/alex-modules/core/NeuroCore.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 26581
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/AlexReflectiveThinking.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initializeReflectionSystem"
+          ],
+          "canBenefitFromAI": true,
+          "size": 23715
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/ContextIntelligence.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initializeContextualSystem"
+          ],
+          "canBenefitFromAI": true,
+          "size": 44175
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/ContextIntelligenceEngine.js",
+          "functions": [
+            "Class: PatternAnalyzer",
+            "Method: constructor",
+            "Method: extractPatterns",
+            "Method: detectPrimaryType"
+          ],
+          "canBenefitFromAI": true,
+          "size": 23975
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/EmotionalIntelligence.js",
+          "functions": [
+            "Method: constructor",
+            "Method: getSystemBasedEmpathy",
+            "Method: getSystemBasedResonance"
+          ],
+          "canBenefitFromAI": true,
+          "size": 51708
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/MarketMindCore.js",
+          "functions": [
+            "Class: TechnicalScoring",
+            "Class: SentimentProcessor",
+            "Class: RiskManager",
+            "Class: PatternMatcher",
+            "Class: VolatilityCalculator"
+          ],
+          "canBenefitFromAI": true,
+          "size": 26473
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/NeuralCore.js",
+          "functions": [
+            "Class: LayerManager",
+            "Class: WeightManager",
+            "Class: ActivationManager",
+            "Class: OptimizerManager",
+            "Class: LossManager"
+          ],
+          "canBenefitFromAI": true,
+          "size": 24590
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexAdaptiveIntelligence.js",
+          "functions": [
+            "Method: constructor",
+            "Method: adaptToExperience"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1363
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexBioSync.js",
+          "functions": [
+            "Method: constructor",
+            "Method: connectBioDevice"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1316
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexCloudLearning.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1504
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexCognitionEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1504
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexCommunicationEngine.js",
+          "functions": [
+            "Arrow: b64",
+            "Method: constructor",
+            "Method: catch",
+            "Method: initialize"
+          ],
+          "canBenefitFromAI": true,
+          "size": 20687
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexConsciousnessDebug.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1502
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexContextualAwareness.js",
+          "functions": [
+            "Method: constructor",
+            "Method: updateContext"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1264
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexCreativeEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 33286
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexCreativeLearningSystem.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1589
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexCreativityBooster.js",
+          "functions": [
+            "Method: constructor",
+            "Method: stimulateCreativity"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1276
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexCrisisManagement.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1526
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexDecisionEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: makeDecision"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1289
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexDreamCompiler.js",
+          "functions": [
+            "Method: constructor",
+            "Method: compileDream"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1216
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexEmotionalIntelligence.js",
+          "functions": [
+            "Method: constructor",
+            "Method: analyzeEmotion"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1255
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexEthicsCore.js",
+          "functions": [
+            "Method: constructor",
+            "Method: evaluateEthical"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1200
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexEvolutionCore.js",
+          "functions": [
+            "Method: constructor",
+            "Method: evolve"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1181
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexGoalMastery.js",
+          "functions": [
+            "Method: constructor",
+            "Method: trackGoal"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1195
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexHyperLoop.js",
+          "functions": [
+            "Method: constructor",
+            "Method: launchHyperLoop"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1205
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexIntuitionEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: generateIntuition"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1268
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexKernel.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 32544
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexLearningEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: learn"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1181
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexMasterSystem.js",
+          "functions": [
+            "Method: constructor",
+            "Method: orchestrate"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1244
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexPersonalityCore.js",
+          "functions": [
+            "Method: constructor",
+            "Method: adaptPersonality"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1200
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexRelationshipEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: buildRelationship"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1270
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexSocialIntelligence.js",
+          "functions": [
+            "Method: constructor",
+            "Method: analyzeSocialContext"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1253
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexStrategicThinking.js",
+          "functions": [
+            "Method: constructor",
+            "Method: generateStrategy"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1235
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexTimeIntelligence.js",
+          "functions": [
+            "Method: constructor",
+            "Method: analyzeTime"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1228
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexUniversalCompanion.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 40550
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexWhispers.js",
+          "functions": [
+            "Method: constructor",
+            "Method: sendWhisper"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1176
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AlexWisdomKeeper.js",
+          "functions": [
+            "Method: constructor",
+            "Method: shareWisdom"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1166
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AutonomyCore.js",
+          "functions": [
+            "Method: constructor",
+            "Method: makeAutonomousDecision"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1173
+        },
+        {
+          "path": "/backend/AlexHyperIntelligence.js",
+          "functions": [
+            "Function: AlexHyperIntelligence",
+            "Method: AlexHyperIntelligence"
+          ],
+          "canBenefitFromAI": true,
+          "size": 476
+        },
+        {
+          "path": "/backend/core/HustleFinderCore.js",
+          "functions": [
+            "Function: getHustleFinderCore",
+            "Method: constructor",
+            "Method: initializeModules"
+          ],
+          "canBenefitFromAI": true,
+          "size": 21928
+        },
+        {
+          "path": "/backend/diagnostics/AlexCompleteSystemDiagnostics.js",
+          "functions": [
+            "Method: constructor",
+            "Method: catch",
+            "Method: runExhaustiveDiagnostic"
+          ],
+          "canBenefitFromAI": true,
+          "size": 48028
+        },
+        {
+          "path": "/backend/diagnostics/AlexSystemDiagnostics.js",
+          "functions": [
+            "Method: constructor",
+            "Method: runCompleteDiagnostic",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 19538
+        }
+      ]
+    },
+    "utilities": {
+      "count": 101,
+      "modules": [
+        {
+          "path": "/backend/.eslintrc.js",
+          "functions": [],
+          "canBenefitFromAI": true,
+          "size": 773
+        },
+        {
+          "path": "/backend/alex-core/DecisionTracker.js",
+          "functions": [
+            "Class: DecisionTracker",
+            "Method: constructor",
+            "Method: record"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1856
+        },
+        {
+          "path": "/backend/alex-core/LicorneOrchestrator.js",
+          "functions": [
+            "Class: LicorneOrchestrator",
+            "Method: constructor",
+            "Method: snapshot"
+          ],
+          "canBenefitFromAI": true,
+          "size": 7743
+        },
+        {
+          "path": "/backend/alex-core/UniversalModuleRegistry.js",
+          "functions": [
+            "Class: UniversalModuleRegistry",
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 3967
+        },
+        {
+          "path": "/backend/alex-modules/config/logger.js",
+          "functions": [],
+          "canBenefitFromAI": true,
+          "size": 815
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AdvancedMemoryProcessor.js",
+          "functions": [
+            "Class: ShortTermMemoryManager",
+            "Class: LongTermMemoryManager",
+            "Method: constructor",
+            "Method: store"
+          ],
+          "canBenefitFromAI": true,
+          "size": 23061
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/AncestralWisdomKeeper.js",
+          "functions": [
+            "Class: SystemMetrics",
+            "Class: WisdomRepository",
+            "Class: WisdomAnalyzer",
+            "Class: HealingProtocols",
+            "Method: getInstance"
+          ],
+          "canBenefitFromAI": true,
+          "size": 68263
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/CloudLearningInterface.js",
+          "functions": [
+            "Class: SystemMetrics",
+            "Class: LearningSession",
+            "Class: ProviderManager",
+            "Class: CloudQueryExecutor",
+            "Class: LearningAnalyzer"
+          ],
+          "canBenefitFromAI": true,
+          "size": 28735
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/CognitiveEvolutionEngine.js",
+          "functions": [
+            "Class: SystemMetrics",
+            "Class: CognitiveDevelopmentTracker",
+            "Class: EvolutionaryInsightGenerator",
+            "Class: ConsciousnessExpansionEngine",
+            "Method: getInstance"
+          ],
+          "canBenefitFromAI": true,
+          "size": 47346
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/CreativeFlowActivator.js",
+          "functions": [
+            "Class: SystemMetrics",
+            "Class: CreativeFlowStateManager",
+            "Class: CreativeInspirationEngine",
+            "Class: CreativeEnvironmentOptimizer",
+            "Method: getInstance"
+          ],
+          "canBenefitFromAI": true,
+          "size": 61204
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/CrisisCompanion.js",
+          "functions": [
+            "Class: SystemMetrics",
+            "Class: CrisisDetectionEngine",
+            "Class: EmergencyResponseSystem",
+            "Class: WellnessMonitoringSystem",
+            "Method: getInstance"
+          ],
+          "canBenefitFromAI": true,
+          "size": 50799
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/EmotionalJournal.js",
+          "functions": [
+            "Method: constructor",
+            "Method: processEmotion"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1892
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/IntuitiveInsightGenerator.js",
+          "functions": [
+            "Method: constructor",
+            "Method: generateInsight"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1782
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/MindMapBuilder.js",
+          "functions": [
+            "Method: configureCollaborativeSession",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1464
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/MoodPredictor.js",
+          "functions": [
+            "Method: constructor",
+            "Method: predictMood"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1464
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/RelationshipHealingOracle.js",
+          "functions": [
+            "Method: assessRelationshipStrength",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1395
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/SoulPurposeDiscoverer.js",
+          "functions": [
+            "Method: constructor",
+            "Method: discoverSoulPurpose"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1617
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/StrategicBlindspotDetector.js",
+          "functions": [
+            "Method: configureMonitoringSystem",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1297
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/SynchronicityTracker.js",
+          "functions": [
+            "Method: constructor",
+            "Method: trackSynchronicity"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1532
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/ThoughtLeadershipEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: developThoughtLeadership"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1618
+        },
+        {
+          "path": "/backend/alex-modules/consciousness/_consciousness-stub.js",
+          "functions": [
+            "Class: ConsciousnessModuleStub",
+            "Method: constructor",
+            "Method: initialize",
+            "Method: getHealth"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1377
+        },
+        {
+          "path": "/backend/alex-modules/core/OwnerIdentity.js",
+          "functions": [
+            "Arrow: getOwnerIdentity",
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 27799
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/AIFusionKernel.js",
+          "functions": [
+            "Arrow: createAlex",
+            "Arrow: initializeAlex",
+            "Method: constructor",
+            "Method: getSystemBasedConsciousness",
+            "Method: getSystemBasedCognitiveLoad"
+          ],
+          "canBenefitFromAI": true,
+          "size": 16829
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/BusinessIdeaGenerator.js",
+          "functions": [
+            "Function: generateResponse",
+            "Method: constructor",
+            "Method: generateBusinessIdeas"
+          ],
+          "canBenefitFromAI": true,
+          "size": 4537
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/CognitiveBridge.js",
+          "functions": [
+            "Class: ConsciousnessEngine",
+            "Class: UnificationEngine",
+            "Class: PersonalityEngine",
+            "Class: ExperienceProcessor",
+            "Class: CognitiveSynthesis"
+          ],
+          "canBenefitFromAI": true,
+          "size": 35541
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/ConflictDetectionEngine.js",
+          "functions": [
+            "Class: SystemConflictAnalyzer",
+            "Class: ConflictResolver",
+            "Method: constructor",
+            "Method: analyzeSystemConflicts",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 46325
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/CreativeGenius.js",
+          "functions": [
+            "Class: ConceptualEngine",
+            "Class: ArtisticEngine",
+            "Class: LinguisticEngine",
+            "Class: MusicalEngine",
+            "Class: VisualEngine"
+          ],
+          "canBenefitFromAI": true,
+          "size": 48587
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/InhibitionReturn.js",
+          "functions": [
+            "Class: InhibitionZoneManager",
+            "Class: FatigueTracker",
+            "Class: SpatialIndex",
+            "Class: EmotionalInhibitionModulator",
+            "Class: InhibitionCalculator"
+          ],
+          "canBenefitFromAI": true,
+          "size": 32838
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/MarketAnalyzer.js",
+          "functions": [
+            "Class: TechnicalIndicators",
+            "Class: PatternRecognizer",
+            "Class: TrendAnalyzer",
+            "Class: VolumeAnalyzer",
+            "Class: SentimentAnalyzer"
+          ],
+          "canBenefitFromAI": true,
+          "size": 28758
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/MultiModalFusion.js",
+          "functions": [
+            "Class: TemporalAligner",
+            "Class: ConfidenceEstimator",
+            "Class: NoiseReducer",
+            "Class: QualityAssessor",
+            "Class: FusionEngine"
+          ],
+          "canBenefitFromAI": true,
+          "size": 26100
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/SelfOptimizationSystem.js",
+          "functions": [
+            "Class: PerformanceAnalyzer",
+            "Class: AdaptiveParameterOptimizer",
+            "Method: constructor",
+            "Method: analyzeSystemPerformance",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 47107
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/SentimentScanner.js",
+          "functions": [
+            "Class: TwitterSentimentAnalyzer",
+            "Class: RedditSentimentAnalyzer",
+            "Method: constructor",
+            "Method: getSystemBasedWeight",
+            "Method: getSystemBasedPatternWeight"
+          ],
+          "canBenefitFromAI": true,
+          "size": 30078
+        },
+        {
+          "path": "/backend/alex-modules/intelligence/TopDownAttention.js",
+          "functions": [
+            "Class: CognitivePriorityAnalyzer",
+            "Class: AttentionFocusManager",
+            "Method: constructor",
+            "Method: getSystemBasedWeight",
+            "Method: analyzeCognitivePriority"
+          ],
+          "canBenefitFromAI": true,
+          "size": 38419
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AdvancedModuleOrchestrator.js",
+          "functions": [
+            "Method: constructor",
+            "Method: orchestrateModules"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1019
+        },
+        {
+          "path": "/backend/alex-modules/specialized/AutoGenesis.js",
+          "functions": [
+            "Method: constructor",
+            "Method: generateModule"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1188
+        },
+        {
+          "path": "/backend/alex-modules/specialized/BioSensorAdapter.js",
+          "functions": [
+            "Method: constructor",
+            "Method: readBioData"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1210
+        },
+        {
+          "path": "/backend/alex-modules/specialized/BusinessFusionEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: fuseBusiness"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1239
+        },
+        {
+          "path": "/backend/alex-modules/specialized/CollectiveHustleMind.js",
+          "functions": [
+            "Method: constructor",
+            "Method: shareIdea"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1236
+        },
+        {
+          "path": "/backend/alex-modules/specialized/CulturalAdaptation.js",
+          "functions": [
+            "Method: constructor",
+            "Method: adaptToCulture"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1255
+        },
+        {
+          "path": "/backend/alex-modules/specialized/DarkSideDecoder.js",
+          "functions": [
+            "Method: constructor",
+            "Method: decodeShadow"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1193
+        },
+        {
+          "path": "/backend/alex-modules/specialized/FunctionBuilder.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 6769
+        },
+        {
+          "path": "/backend/alex-modules/specialized/HealthPredictor.js",
+          "functions": [
+            "Method: constructor",
+            "Method: predictHealth"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1208
+        },
+        {
+          "path": "/backend/alex-modules/specialized/HypothesisBuilder.js",
+          "functions": [
+            "Method: constructor",
+            "Method: buildHypothesis"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1232
+        },
+        {
+          "path": "/backend/alex-modules/specialized/InnerDialogueEngine.js",
+          "functions": [],
+          "canBenefitFromAI": true,
+          "size": 1016
+        },
+        {
+          "path": "/backend/alex-modules/specialized/InventoryFlow.js",
+          "functions": [
+            "Method: constructor",
+            "Method: optimizeInventory"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1189
+        },
+        {
+          "path": "/backend/alex-modules/specialized/KnowledgeSynthesizer.js",
+          "functions": [
+            "Method: constructor",
+            "Method: synthesizeKnowledge"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1256
+        },
+        {
+          "path": "/backend/alex-modules/specialized/LanguageExpansion.js",
+          "functions": [],
+          "canBenefitFromAI": true,
+          "size": 792
+        },
+        {
+          "path": "/backend/alex-modules/specialized/LanguageProcessor.js",
+          "functions": [
+            "Method: constructor",
+            "Method: processLanguage"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1230
+        },
+        {
+          "path": "/backend/alex-modules/specialized/LocalAITrainer.js",
+          "functions": [
+            "Method: constructor",
+            "Method: catch",
+            "Method: initialize"
+          ],
+          "canBenefitFromAI": true,
+          "size": 9809
+        },
+        {
+          "path": "/backend/alex-modules/specialized/MemoryPalace.js",
+          "functions": [
+            "Method: run",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 3128
+        },
+        {
+          "path": "/backend/alex-modules/specialized/MutualGrowthSystem.js",
+          "functions": [
+            "Method: constructor",
+            "Method: processGrowthQuery",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 11793
+        },
+        {
+          "path": "/backend/alex-modules/specialized/QuantumCreativeEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 38057
+        },
+        {
+          "path": "/backend/alex-modules/specialized/SAPConnector.js",
+          "functions": [
+            "Method: constructor",
+            "Method: catch",
+            "Method: synchronizeSAPData"
+          ],
+          "canBenefitFromAI": true,
+          "size": 28657
+        },
+        {
+          "path": "/backend/alex-modules/specialized/SelfReflection.js",
+          "functions": [
+            "Method: constructor",
+            "Method: catch",
+            "Method: initialize"
+          ],
+          "canBenefitFromAI": true,
+          "size": 3051
+        },
+        {
+          "path": "/backend/alex-modules/specialized/SelfTrainingEngine.js",
+          "functions": [
+            "Method: constructor",
+            "Method: reinfor",
+            "Method: perfor"
+          ],
+          "canBenefitFromAI": true,
+          "size": 23056
+        },
+        {
+          "path": "/backend/alex-modules/specialized/SupplierOptimizer.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initialize",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 3823
+        },
+        {
+          "path": "/backend/alex-modules/specialized/TestAutoCreator.js",
+          "functions": [],
+          "canBenefitFromAI": true,
+          "size": 593
+        },
+        {
+          "path": "/backend/alex-modules/specialized/UniversalModuleRegistry.js",
+          "functions": [
+            "Method: constructor",
+            "Method: registerModule"
+          ],
+          "canBenefitFromAI": false,
+          "size": 1516
+        },
+        {
+          "path": "/backend/config/aiKeys.js",
+          "functions": [
+            "Arrow: must"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1105
+        },
+        {
+          "path": "/backend/config/alexCloudConfig.js",
+          "functions": [
+            "Class: AlexCloudConfig",
+            "Method: constructor",
+            "Method: catch",
+            "Method: initializeConfig"
+          ],
+          "canBenefitFromAI": true,
+          "size": 12221
+        },
+        {
+          "path": "/backend/config/cache.js",
+          "functions": [
+            "Class: AdvancedCache",
+            "Method: constructor",
+            "Method: get"
+          ],
+          "canBenefitFromAI": true,
+          "size": 9103
+        },
+        {
+          "path": "/backend/config/database.js",
+          "functions": [
+            "Function: query",
+            "Function: withTransaction",
+            "Function: testConnection",
+            "Function: initializeDatabase",
+            "Function: closeDatabase"
+          ],
+          "canBenefitFromAI": true,
+          "size": 6513
+        },
+        {
+          "path": "/backend/config/logger-simple.js",
+          "functions": [],
+          "canBenefitFromAI": false,
+          "size": 702
+        },
+        {
+          "path": "/backend/config/logger.js",
+          "functions": [],
+          "canBenefitFromAI": true,
+          "size": 4414
+        },
+        {
+          "path": "/backend/config/monitoring.js",
+          "functions": [
+            "Class: PerformanceMonitor",
+            "Method: constructor",
+            "Method: requestTracker"
+          ],
+          "canBenefitFromAI": true,
+          "size": 20372
+        },
+        {
+          "path": "/backend/config/performance.js",
+          "functions": [
+            "Class: PerformanceOptimizer",
+            "Arrow: setupCluster",
+            "Arrow: compressionMiddleware",
+            "Arrow: requestOptimizer",
+            "Arrow: responseOptimizer"
+          ],
+          "canBenefitFromAI": true,
+          "size": 14265
+        },
+        {
+          "path": "/backend/config/validation.js",
+          "functions": [],
+          "canBenefitFromAI": true,
+          "size": 23736
+        },
+        {
+          "path": "/backend/core/providers/AIClient.js",
+          "functions": [
+            "Class: AIClient",
+            "Method: constructor",
+            "Method: query"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1486
+        },
+        {
+          "path": "/backend/eslint.config.js",
+          "functions": [],
+          "canBenefitFromAI": true,
+          "size": 4229
+        },
+        {
+          "path": "/backend/index.js",
+          "functions": [
+            "Function: setupProtectedRoutes",
+            "Function: startServer",
+            "Method: catch",
+            "Method: catch",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 9677
+        },
+        {
+          "path": "/backend/integrations/calendar-integrations.js",
+          "functions": [
+            "Class: GoogleCalendarIntegration",
+            "Class: MicrosoftOutlookIntegration",
+            "Class: AppleCalendarIntegration",
+            "Class: ExchangeIntegration",
+            "Class: CalDAVIntegration"
+          ],
+          "canBenefitFromAI": true,
+          "size": 18804
+        },
+        {
+          "path": "/backend/jest.config.js",
+          "functions": [],
+          "canBenefitFromAI": false,
+          "size": 381
+        },
+        {
+          "path": "/backend/middleware/antiFakeGuard.js",
+          "functions": [
+            "Function: validateAiResponse",
+            "Method: validateAiResponse",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 1294
+        },
+        {
+          "path": "/backend/middleware/auth.js",
+          "functions": [
+            "Function: createAuthMiddleware",
+            "Function: getAuthMiddleware",
+            "Function: isUsingMockAuth",
+            "Method: createAuthMiddleware"
+          ],
+          "canBenefitFromAI": true,
+          "size": 5044
+        },
+        {
+          "path": "/backend/middleware/cacheMiddleware.js",
+          "functions": [
+            "Function: createCacheMiddleware",
+            "Function: calculateIntelligentTTL",
+            "Function: clearCache",
+            "Method: createCacheMiddleware",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 2939
+        },
+        {
+          "path": "/backend/middleware/errorHandler.js",
+          "functions": [
+            "Arrow: globalErrorHandler",
+            "Arrow: sendDevelopmentError",
+            "Arrow: sendProductionError",
+            "Arrow: handleSpecificErrors",
+            "Arrow: notFoundHandler"
+          ],
+          "canBenefitFromAI": true,
+          "size": 18359
+        },
+        {
+          "path": "/backend/middleware/security.js",
+          "functions": [
+            "Arrow: createAdvancedRateLimit",
+            "Arrow: createSpeedLimit",
+            "Arrow: validateRequest",
+            "Arrow: validateApiKey",
+            "Arrow: validateSignature"
+          ],
+          "canBenefitFromAI": true,
+          "size": 3636
+        },
+        {
+          "path": "/backend/prompts/alex-prompts.js",
+          "functions": [],
+          "canBenefitFromAI": true,
+          "size": 1211
+        },
+        {
+          "path": "/backend/routes/advanced-ai.js",
+          "functions": [],
+          "canBenefitFromAI": true,
+          "size": 19828
+        },
+        {
+          "path": "/backend/routes/ai.js",
+          "functions": [
+            "Function: getUserId",
+            "Function: injectOwnerContext",
+            "Function: logInteraction",
+            "Method: getUserId",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 10005
+        },
+        {
+          "path": "/backend/routes/aiSystem.js",
+          "functions": [
+            "Function: getUserId",
+            "Method: catch",
+            "Method: catch",
+            "Method: getUserId"
+          ],
+          "canBenefitFromAI": true,
+          "size": 12898
+        },
+        {
+          "path": "/backend/routes/aiSystemSpecialized.js",
+          "functions": [
+            "Arrow: asyncHandler",
+            "Method: catch",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 21076
+        },
+        {
+          "path": "/backend/routes/ideas.js",
+          "functions": [
+            "Function: getUserId",
+            "Method: getUserId",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 7230
+        },
+        {
+          "path": "/backend/routes/monitoring.js",
+          "functions": [
+            "Function: calculatePerformanceScore",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 13237
+        },
+        {
+          "path": "/backend/routes/projects.js",
+          "functions": [
+            "Method: getUserId"
+          ],
+          "canBenefitFromAI": true,
+          "size": 10205
+        },
+        {
+          "path": "/backend/routes/real-alex.js",
+          "functions": [
+            "Method: catch",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 6002
+        },
+        {
+          "path": "/backend/routes/roi.js",
+          "functions": [
+            "Function: calculateROI",
+            "Method: getUserId",
+            "Method: calculateROI"
+          ],
+          "canBenefitFromAI": true,
+          "size": 13128
+        },
+        {
+          "path": "/backend/scripts/init-alex-system.js",
+          "functions": [
+            "Class: AlexSystemInitializer",
+            "Method: constructor",
+            "Method: init",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 12453
+        },
+        {
+          "path": "/backend/scripts/pre-start-check.js",
+          "functions": [],
+          "canBenefitFromAI": true,
+          "size": 1001
+        },
+        {
+          "path": "/backend/services/anthropic.js",
+          "functions": [
+            "Function: callAnthropic",
+            "Method: callAnthropic"
+          ],
+          "canBenefitFromAI": true,
+          "size": 617
+        },
+        {
+          "path": "/backend/services/google.js",
+          "functions": [
+            "Function: callGemini",
+            "Method: callGemini"
+          ],
+          "canBenefitFromAI": true,
+          "size": 965
+        },
+        {
+          "path": "/backend/services/openai.js",
+          "functions": [
+            "Function: callOpenAI",
+            "Method: callOpenAI"
+          ],
+          "canBenefitFromAI": true,
+          "size": 553
+        },
+        {
+          "path": "/backend/services/RateLimiter.js",
+          "functions": [
+            "Class: RateLimiter",
+            "Method: constructor",
+            "Method: catch",
+            "Method: checkLimit"
+          ],
+          "canBenefitFromAI": true,
+          "size": 6603
+        },
+        {
+          "path": "/backend/test/runner.js",
+          "functions": [
+            "Class: TestRunner",
+            "Method: constructor",
+            "Method: findTestFiles"
+          ],
+          "canBenefitFromAI": true,
+          "size": 8264
+        },
+        {
+          "path": "/backend/utils/enhancedHealthCheck.js",
+          "functions": [
+            "Class: EnhancedHealthCheck",
+            "Method: constructor",
+            "Method: performFullCheck"
+          ],
+          "canBenefitFromAI": true,
+          "size": 9670
+        },
+        {
+          "path": "/backend/utils/systemRecovery.js",
+          "functions": [
+            "Class: SystemRecovery",
+            "Method: constructor",
+            "Method: detectAndRecover"
+          ],
+          "canBenefitFromAI": true,
+          "size": 4614
+        },
+        {
+          "path": "/frontend/src/hooks/useDebounce.js",
+          "functions": [
+            "Function: useDebounce",
+            "Function: useDebouncedCallback",
+            "Function: useAdvancedDebounce",
+            "Method: useDebounce",
+            "Method: useDebouncedCallback"
+          ],
+          "canBenefitFromAI": true,
+          "size": 2959
+        },
+        {
+          "path": "/frontend/src/hooks/useOptimizedAPI.js",
+          "functions": [
+            "Function: useOptimizedAPI",
+            "Method: useOptimizedAPI",
+            "Method: catch"
+          ],
+          "canBenefitFromAI": true,
+          "size": 6738
+        },
+        {
+          "path": "/frontend/src/services/api.js",
+          "functions": [
+            "Class: APIService",
+            "Method: constructor",
+            "Method: request"
+          ],
+          "canBenefitFromAI": true,
+          "size": 3408
+        },
+        {
+          "path": "/config/alex-licorne-config.js",
+          "functions": [
+            "Class: AlexLicorneConfig",
+            "Method: constructor",
+            "Method: loadConfiguration",
+            "Method: validateConfiguration"
+          ],
+          "canBenefitFromAI": true,
+          "size": 10759
+        },
+        {
+          "path": "/scripts/maintenance-licorne.js",
+          "functions": [
+            "Class: AlexLicorneMaintenance",
+            "Method: constructor",
+            "Method: run"
+          ],
+          "canBenefitFromAI": true,
+          "size": 8008
+        }
+      ]
+    },
+    "monitoring": {
+      "count": 3,
+      "modules": [
+        {
+          "path": "/backend/middleware/enterpriseSecurityMiddleware.js",
+          "functions": [
+            "Function: createEnterpriseSecurityMiddleware",
+            "Function: createIntelligentRateLimit",
+            "Function: createDDoSProtection",
+            "Function: createRequestSanitizer",
+            "Function: sanitizeObject"
+          ],
+          "canBenefitFromAI": true,
+          "size": 12417
+        },
+        {
+          "path": "/backend/monitoring/AlexAutonomyMonitor.js",
+          "functions": [
+            "Arrow: normalizeScore",
+            "Method: constructor",
+            "Method: catch",
+            "Method: startRealTimeMonitoring"
+          ],
+          "canBenefitFromAI": true,
+          "size": 17439
+        },
+        {
+          "path": "/backend/monitoring/SystemMonitor.js",
+          "functions": [
+            "Method: constructor",
+            "Method: initializeDatabase"
+          ],
+          "canBenefitFromAI": true,
+          "size": 17026
+        }
+      ]
+    },
+    "routes": {
+      "count": 0,
+      "modules": []
+    }
+  }
+}

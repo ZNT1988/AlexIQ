@@ -1,6 +1,6 @@
 import { AlexResponse, Conversation, Message } from '@/types';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://api.alexiq.site';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3003';
 
 class ApiClient {
   private abortController: AbortController | null = null;
@@ -28,7 +28,6 @@ class ApiClient {
 
       return await response.json();
     } catch (error) {
-      console.error('API Request failed:', error);
       throw error;
     }
   }
@@ -59,15 +58,8 @@ class ApiClient {
     try {
       const response = await this.sendMessage(messages);
       
-      // Simulate streaming for now since Alex API doesn't support SSE yet
-      const text = response.response;
-      const words = text.split(' ');
-      
-      for (let i = 0; i < words.length; i++) {
-        if (this.abortController.signal.aborted) break;
-        
-        await new Promise(resolve => setTimeout(resolve, 50)); // Simulate typing
-        onChunk(words.slice(0, i + 1).join(' '));
+      if (response.response) {
+        onChunk(response.response);
       }
       
       onComplete();
@@ -83,19 +75,16 @@ class ApiClient {
     }
   }
 
-  // Conversation CRUD (local for now, can be extended to API later)
   async getConversations(): Promise<Conversation[]> {
-    // For now return empty array, will be handled by local storage
     return [];
   }
 
   async saveConversation(conversation: Conversation): Promise<void> {
-    // Local storage implementation will be in the store
-    console.log('Saving conversation:', conversation.id);
+    return;
   }
 
   async deleteConversation(id: string): Promise<void> {
-    console.log('Deleting conversation:', id);
+    return;
   }
 
   async getHealth(): Promise<{ status: string; alex: any }> {
