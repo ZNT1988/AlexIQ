@@ -489,14 +489,17 @@ Réponds toujours de manière naturelle, personnalisée et constructive. Adapte 
   shouldUsePattern() {
     // Décision basée sur métriques système réelles au lieu de Math.random()
     const systemMetrics = this.getSystemMetrics();
-    const cpuFactor = systemMetrics.cpuUsage / 100;
-    const memFactor = systemMetrics.memoryUsage / 100;
+    
+    // Les métriques sont déjà normalisées par getSystemMetrics()
+    const cpuFactor = Math.min(1.0, systemMetrics.cpuUsage); // Assure [0,1]
+    const memFactor = Math.min(1.0, systemMetrics.memoryUsage / 100); // Normalise à [0,1]
     
     // Facteur déterministe basé sur ressources système
     const systemBasedFactor = (cpuFactor + memFactor) / 2;
     
     // Utilise patterns si système est stable (faible utilisation)
-    return systemBasedFactor < this.config.patternSelectionThreshold;
+    const threshold = this.config.patternSelectionThreshold || 0.5;
+    return systemBasedFactor < threshold;
   }
 
   getSystemMetrics() {
