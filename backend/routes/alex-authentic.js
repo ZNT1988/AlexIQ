@@ -292,7 +292,11 @@ class AlexAuthentic {
       }
 
       const data = await response.json();
-      const apiContent = data?.choices?.[0]?.message?.content || 'Réponse vide d\'OpenAI';
+      const apiContent = data?.choices?.[0]?.message?.content;
+      
+      if (!apiContent) {
+        throw new Error('OpenAI returned no content');
+      }
 
       // Alex intègre et personnalise la réponse
       return {
@@ -347,7 +351,11 @@ class AlexAuthentic {
       }
 
       const data = await response.json();
-      const apiContent = data?.content?.[0]?.text || 'Réponse vide d\'Anthropic';
+      const apiContent = data?.content?.[0]?.text;
+      
+      if (!apiContent) {
+        throw new Error('Anthropic returned no content');
+      }
 
       return {
         content: `${apiContent}\n\n📚 [Alex analyse cette réponse Anthropic pour enrichir sa réflexion]`,
@@ -400,7 +408,11 @@ class AlexAuthentic {
       }
 
       const data = await response.json();
-      const apiContent = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join("") || 'Réponse vide de Google';
+      const apiContent = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join("");
+      
+      if (!apiContent) {
+        throw new Error('Google returned no content');
+      }
 
       return {
         content: `${apiContent}\n\n🔍 [Alex intègre ces informations Google dans sa base de connaissances]`,
@@ -614,13 +626,16 @@ ${this.generateContextualInsight(userMessage, context)}
   }
   
   analyzeAuthenticity(response) {
-    // Vérifier si la réponse semble authentique (pas de patterns fake)
-    const fakePatterns = ['en tant qu\'ia', 'je suis un modèle', 'je ne suis pas réel'];
-    const hasFakePattern = fakePatterns.some(pattern => 
-      response.toLowerCase().includes(pattern)
-    );
+    // Vérifier la qualité d'authenticité de la réponse
+    const authenticityIndicators = [
+      'expérience', 'apprentissage', 'évolution', 'croissance', 'compréhension'
+    ];
     
-    return hasFakePattern ? 0.3 : 0.8;
+    const authenticityScore = authenticityIndicators.filter(indicator =>
+      response.toLowerCase().includes(indicator)
+    ).length;
+    
+    return Math.max(0.3, Math.min(0.9, 0.5 + (authenticityScore * 0.1)));
   }
   
   analyzeHelpfulness(response) {
