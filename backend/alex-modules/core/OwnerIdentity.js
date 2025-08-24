@@ -887,7 +887,8 @@ export const getOwnerIdentity = () => {
 
 // Export singleton pour compatibilité
 const defaultInstance = new OwnerIdentity({
-  moduleName: "OwnerIdentity"
+  moduleName: "OwnerIdentity",
+  ownerName: process.env.HF_OWNER_NAME || "Zakaria Housni (ZNT)"
 });
 
 export default defaultInstance;

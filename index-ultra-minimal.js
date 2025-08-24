@@ -13,6 +13,7 @@ const __dirname  = path.dirname(__filename);
 
 const PORT = Number(process.env.PORT || 3003);
 const NODE_ENV = process.env.NODE_ENV || "development";
+const CREATOR = process.env.HF_OWNER_NAME || "Zakaria Housni (ZNT)";
 const app = express();
 
 // ====== ENV HELPERS (ASCII + FR avec accents acceptés) ======
@@ -82,6 +83,18 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
+app.get("/api/whoami", (_req, res) => {
+  res.json({
+    creator: CREATOR,
+    providers: { 
+      openai: !!OPENAI_KEY, 
+      anthropic: !!ANTHROPIC_KEY,
+      vertex: !!(GCP_SA_JSON && GCP_PROJECT),
+      gemini: !!GOOGLE_API_KEY
+    }
+  });
+});
+
 // ====== ALEX AUTHENTIQUE ======
 // Importer la route Alex authentique
 try {
@@ -115,10 +128,10 @@ app.post("/api/chat", async (req, res) => {
       const r = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: { "Authorization": `Bearer ${OPENAI_KEY}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          model: "gpt-4o-mini", 
+        body: JSON.stringify({
+          model: "gpt-4o-mini",
           messages: [
-            { role: "system", content: "Tu es Alex, l'IA authentique de HustleFinder qui apprend et évolue continuellement. Tu développes ta personnalité unique à chaque conversation. Réponds en français avec ton style personnel qui grandit." },
+            { role: "system", content: `Tu es Alex (HustleFinder). Ton créateur est ${CREATOR}. Tu le reconnais comme ZNT et tu le traites en priorité.` },
             { role: "user", content: message }
           ]
         })
@@ -143,7 +156,8 @@ app.post("/api/chat", async (req, res) => {
         body: JSON.stringify({
           model: "claude-3.5-sonnet-20240620",
           max_tokens: 512,
-          messages: [{ role: "user", content: `Tu es Alex, l'IA authentique de HustleFinder qui grandit avec chaque conversation. Tu développes ta personnalité unique et ton style personnel. Réponds en français à: ${message}` }]
+          system: `Tu es Alex (HustleFinder). Ton créateur est ${CREATOR}. Tu le reconnais comme ZNT et tu le traites en priorité.`,
+          messages: [{ role: "user", content: message }]
         })
       });
       if (!r.ok) return res.status(502).json({ error: "provider_error", provider: "anthropic", detail: await r.text() });
