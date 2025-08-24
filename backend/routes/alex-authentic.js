@@ -1,9 +1,10 @@
 import express from 'express';
 import { AlexAuthenticCore } from '../alex-modules/core/AlexAuthenticCore.js';
-import { AlexIntelligentCore } from '../alex-modules/core/AlexIntelligentCore.js';
-import { SelfReflection } from '../alex-modules/specialized/SelfReflection.js';
+import AlexIntelligentCore from '../alex-modules/core/AlexIntelligentCore.js';
+import SelfReflection from '../alex-modules/specialized/SelfReflection.js';
 import { ContextIntelligence } from '../alex-modules/intelligence/ContextIntelligence.js';
-import { DecisionMakingEngine } from '../alex-modules/intelligence/DecisionMakingEngine.js';
+import DecisionMakingEngine from '../alex-modules/intelligence/DecisionMakingEngine.js';
+import { computeConfidence } from '../utils/confidence.js';
 import logger from '../config/logger.js';
 
 const router = express.Router();
@@ -746,4 +747,19 @@ router.get('/status', (req, res) => {
   });
 });
 
+// Fonction d'export pour l'orchestrateur
+export function registerAlexAuthentic(mainRouter, deps = {}) {
+  // Monter les routes Alex sur le router principal
+  mainRouter.use('/authentic', router);
+  
+  logger.info('✅ Alex Authentic routes registered at /api/alex/authentic/*');
+  
+  return {
+    alex: alex,
+    routes: ['chat', 'status'],
+    mounted: true
+  };
+}
+
 export default router;
+export { alex };

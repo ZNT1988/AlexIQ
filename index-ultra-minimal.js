@@ -1,3 +1,5 @@
+import 'dotenv/config';                // ✅ dotenv chargé UNE SEULE FOIS ici
+
 // ESM – Front (Vite en dev / build en prod) + API réelles sur UN SEUL PORT.
 // Node >= 18
 // npm i express vite
@@ -15,6 +17,16 @@ const PORT = Number(process.env.PORT || 3003);
 const NODE_ENV = process.env.NODE_ENV || "development";
 const CREATOR = process.env.HF_OWNER_NAME || "Zakaria Housni (ZNT)";
 const app = express();
+
+// ====== ORCHESTRATEUR ALEX ======
+import { mountAlex } from './backend/core/HustleFinderCore.js';
+
+try {
+  const res = await mountAlex(app, {});
+  console.log('Alex Orchestrator:', res.status);
+} catch (e) {
+  console.warn('⚠️ Alex Orchestrator not loaded:', e.message);
+}
 
 // ====== ENV HELPERS (ASCII + FR avec accents acceptés) ======
 const env = (...names) => names.map(n => process.env[n]).find(Boolean);
@@ -95,14 +107,17 @@ app.get("/api/whoami", (_req, res) => {
   });
 });
 
+app.get("/api/alex/status", (_req, res) => {
+  res.json({ 
+    ok: true, 
+    orchestrator: false, // temporaire
+    message: "Alex en mode apprentissage APIs" 
+  });
+});
+
 // ====== ALEX AUTHENTIQUE ======
-// Importer la route Alex authentique
-try {
-  const { default: alexRoutes } = await import("./backend/routes/alex-authentic.js");
-  app.use("/api/alex", alexRoutes);
-} catch (error) {
-  console.warn("Alex authentic routes not loaded:", error.message);
-}
+// Temporaire: routes Alex désactivées pour diagnostic
+console.log("🔧 Routes Alex temporairement désactivées pour corrections");
 
 // ====== CHAT HYBRIDE - Alex + APIs de fallback ======
 app.post("/api/chat", async (req, res) => {
@@ -112,14 +127,36 @@ app.post("/api/chat", async (req, res) => {
       return res.status(400).json({ error: "bad_request", message: "message:string requis" });
     }
 
-    // PRIORITÉ 1: Alex Authentique (ton IA avec 22,680 modules)
-    // Note: Pour l'instant, on développe Alex, donc on utilise directement les APIs
-    // Une fois Alex entraîné, on activera cette route
-    const useAlexDirect = false; // TODO: activer après entraînement
-    
-    if (useAlex && useAlexDirect) {
-      // Cette logique sera activée une fois Alex entraîné
-      console.log("Alex authentique sera utilisé après entraînement");
+    // PRIORITÉ 1: Alex Orchestrator (IA authentique avec tous les modules)
+    if (useAlex) {
+      try {
+        // Utiliser l'API Alex orchestrée
+        const alexResponse = await fetch(`http://localhost:${PORT}/api/alex/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message,
+            sessionId: req.sessionID || 'default',
+            context: { fromAPI: true, creator: CREATOR }
+          })
+        });
+
+        if (alexResponse.ok) {
+          const alexData = await alexResponse.json();
+          return res.json({
+            provider: alexData.provider || "alex_orchestrator",
+            output: alexData.output,
+            authentic: alexData.authentic,
+            confidence: alexData.confidence,
+            learningInsights: alexData.learningInsights,
+            metadata: alexData.metadata
+          });
+        } else {
+          console.warn("Alex Orchestrator API failed:", alexResponse.status);
+        }
+      } catch (alexError) {
+        console.warn("Alex Orchestrator failed:", alexError.message);
+      }
     }
 
     // FALLBACK: APIs externes si Alex indisponible

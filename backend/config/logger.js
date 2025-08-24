@@ -52,6 +52,12 @@
  */
 
 import winston from "winston";
+import fs from 'fs';
+
+// Create logs directory if it doesn't exist
+if (!fs.existsSync('logs')) {
+  fs.mkdirSync('logs', { recursive: true });
+}
 
 /**
  * Configuration des niveaux de log personnalisés
@@ -88,33 +94,33 @@ const logger = winston.createLogger({
      * @transport Console
      * @description Transport console pour développement avec couleurs
      */
-    new winston?.transports?.Console({
-      format: winston?.format?.combine(
-        winston?.format?.colorize(),
-        winston?.format?.simple()
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple()
       )
     }),
     /**
      * @transport ErrorFile
      * @description Transport fichier dédié aux erreurs critiques
      */
-    new winston?.transports?.File({
+    new winston.transports.File({
       filename: "logs/error.log",
       level: "error",
-      format: winston?.format?.combine(
-        winston?.format?.timestamp(),
-        winston?.format?.json()
+      format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.json()
       )
     }),
     /**
      * @transport CombinedFile
      * @description Transport fichier pour historique complet
      */
-    new winston?.transports?.File({
+    new winston.transports.File({
       filename: "logs/combined.log",
-      format: winston?.format?.combine(
-        winston?.format?.timestamp(),
-        winston?.format?.json()
+      format: winston.format.combine(
+        winston.format.timestamp(),
+        winston.format.json()
       )
     })
   ]
@@ -124,7 +130,7 @@ const logger = winston.createLogger({
  * @function initializeLogsDirectory
  * @description Initialise le répertoire logs si inexistant
  */
-import fs from "fs";
+// fs already imported above
 if (!fs.existsSync("logs")) {
   fs.mkdirSync("logs");
 }

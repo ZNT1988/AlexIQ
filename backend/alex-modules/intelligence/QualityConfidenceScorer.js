@@ -11,11 +11,7 @@ import * as os from 'os';
 import { performance } from 'perf_hooks';
 
 // Helper function for confidence calculation based on freshness and weight
-function computeConfidence(ts, ttlMs = 60000, weight = 1) {
-  const age = Date.now() - (ts || 0);
-  const f = Math.max(0.1, 1 - age / ttlMs);
-  return Math.max(0.1, Math.min(1, f * weight));
-}
+// import { computeConfidence } from relative path
 
 /**
  * Analyseur de cohérence des réponses

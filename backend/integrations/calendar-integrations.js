@@ -69,7 +69,7 @@ export class CalendarIntegrationManager extends EventEmitter {
       // Authentification avec le provider
       const connection = await integration.authenticate(credentials);
 
-      // Test de la connexion
+      // Test de la connexion
       if (!testResult.success) {
         throw new Error(`Connection test failed: ${testResult.error}`);
       }
