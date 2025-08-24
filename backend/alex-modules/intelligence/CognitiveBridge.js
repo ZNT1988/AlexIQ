@@ -8,6 +8,13 @@ import { performance } from 'perf_hooks';
 import { cpuUsage } from 'process';
 import os from 'os';
 
+// Helper function for confidence calculation based on freshness and weight
+function computeConfidence(ts, ttlMs = 60000, weight = 1) {
+  const age = Date.now() - (ts || 0);
+  const f = Math.max(0.1, 1 - age / ttlMs);
+  return Math.max(0.1, Math.min(1, f * weight));
+}
+
 /**
  * 🧠 Cognitive Bridge - Anti-Fake Version
  * Pont cognitif unifié basé sur métriques système réelles
@@ -503,7 +510,7 @@ class CognitiveBridge extends EventEmitter {
         detected: true,
         state: emotionalData.emotion || 'neutral',
         intensity: emotionalData.intensity || 0.5,
-        confidence: emotionalData.confidence || 0.7
+        confidence: emotionalData.confidence || computeConfidence(Date.now() - 10000, 90000, 0.7)
       };
     }
     
@@ -513,7 +520,7 @@ class CognitiveBridge extends EventEmitter {
       detected: false,
       state: systemEmotion > 0.7 ? 'positive' : systemEmotion > 0.3 ? 'neutral' : 'contemplative',
       intensity: systemEmotion * 0.5 + 0.25,
-      confidence: 0.3,
+      confidence: computeConfidence(Date.now() - 30000, 120000, 0.3),
       systemBased: true
     };
   }

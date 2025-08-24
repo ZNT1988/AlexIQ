@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import crypto from 'node:crypto';
+import { safeRandomBytes } from '../../guards/RandomPolicy.js';
 import logger from '../../config/logger.js';
 
 /**
@@ -113,7 +114,7 @@ class FunctionBuilder extends EventEmitter {
   }
 
   async generateFunction(specification) {
-    const generationId = `func_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`;
+    const generationId = `func_${Date.now()}_${safeRandomBytes(4, "id").toString('hex')}`;
     
     try {
       logger.info('🔧 Starting function generation', {

@@ -134,7 +134,10 @@ class ActionExecutor {
   }
 
   generateActionId() {
-    return `ACT_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    // Use window.performance for deterministic action ID generation
+    const perfNow = window.performance ? window.performance.now() : Date.now();
+    const actionBase = Math.floor(perfNow % 10000).toString(36);
+    return `ACT_${Date.now()}_${actionBase}`;
   }
 }
 

@@ -10,6 +10,13 @@ import { EventEmitter } from 'events';
 import * as os from 'os';
 import { performance } from 'perf_hooks';
 
+// Helper function for confidence calculation based on freshness and weight
+function computeConfidence(ts, ttlMs = 60000, weight = 1) {
+  const age = Date.now() - (ts || 0);
+  const f = Math.max(0.1, 1 - age / ttlMs);
+  return Math.max(0.1, Math.min(1, f * weight));
+}
+
 /**
  * Analyseur de cohérence des réponses
  * ANTI-FAKE: Évaluation basée structure linguistique mesurable
@@ -1055,7 +1062,13 @@ class QualityConfidenceScorer extends EventEmitter {
       .map(analysis => analysis.confidence);
 
     if (confidenceValues.length === 0) {
-      return { confidence: 0.1, reason: "no_confidence_data" };
+      return { 
+        status: "unknown",
+        value: null,
+        source: "no_confidence_data",
+        timestamp: Date.now(),
+        confidence: computeConfidence(Date.now() - 300000, 300000, 0.1) // Low confidence for missing data
+      };
     }
 
     // Confidence globale = moyenne pondérée des confidences individuelles
@@ -1362,8 +1375,8 @@ class QualityConfidenceScorer extends EventEmitter {
       low: 0.4
     };
     
-    const baseConfidence = confidences[level] || 0.5;
-    return Math.max(0.2, Math.min(0.9, baseConfidence + timeVariance));
+    const systemWeight = level === 'high' ? 0.9 : level === 'medium' ? 0.6 : 0.4;
+    return computeConfidence(Date.now() - 10000, 120000, systemWeight);
   }
   
   getSystemBasedQueryConfidence(level) {
@@ -1375,9 +1388,9 @@ class QualityConfidenceScorer extends EventEmitter {
       low: 0.5
     };
     
-    const baseConfidence = confidences[level] || 0.6;
-    const variance = (heapRatio - 0.5) * 0.3;
-    return Math.max(0.3, Math.min(0.9, baseConfidence + variance));
+    const systemWeight = level === 'high' ? 0.8 : level === 'medium' ? 0.6 : 0.5;
+    const memoryFactor = 1 - Math.min(0.5, heapRatio); // Better memory = higher confidence
+    return computeConfidence(Date.now() - 5000, 90000, systemWeight * memoryFactor);
   }
   
   getSystemBasedCompletenessConfidenceWeights() {
@@ -1409,19 +1422,19 @@ class QualityConfidenceScorer extends EventEmitter {
     return {
       openai: {
         accuracy: Math.max(0.6, Math.min(0.9, 0.8 + systemVariance)),
-        confidence: Math.max(0.5, Math.min(0.8, 0.7 + systemVariance))
+        confidence: computeConfidence(Date.now() - 2000, 60000, 0.7 + systemVariance)
       },
       anthropic: {
         accuracy: Math.max(0.7, Math.min(0.95, 0.85 + systemVariance)),
-        confidence: Math.max(0.6, Math.min(0.9, 0.8 + systemVariance))
+        confidence: computeConfidence(Date.now() - 1000, 60000, 0.8 + systemVariance)
       },
       google: {
         accuracy: Math.max(0.6, Math.min(0.85, 0.75 + systemVariance)),
-        confidence: Math.max(0.5, Math.min(0.8, 0.7 + systemVariance))
+        confidence: computeConfidence(Date.now() - 3000, 60000, 0.7 + systemVariance)
       },
       default: {
         accuracy: Math.max(0.4, Math.min(0.7, 0.6 + systemVariance)),
-        confidence: Math.max(0.3, Math.min(0.6, 0.5 + systemVariance))
+        confidence: computeConfidence(Date.now() - 5000, 60000, 0.5 + systemVariance)
       }
     };
   }

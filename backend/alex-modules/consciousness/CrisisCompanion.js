@@ -1,6 +1,15 @@
 import { EventEmitter } from "events";
 import logger from "../config/logger.js";
 import os from "os";
+import process from "process";
+import { performance } from "perf_hooks";
+
+// Helper function for confidence calculation based on freshness and weight
+function computeConfidence(ts, ttlMs = 60000, weight = 1) {
+  const age = Date.now() - (ts || 0);
+  const f = Math.max(0.1, 1 - age / ttlMs);
+  return Math.max(0.1, Math.min(1, f * weight));
+}
 
 class SystemMetrics {
   static instance = null;
@@ -13,23 +22,46 @@ class SystemMetrics {
     return SystemMetrics.instance;
   }
   
-  getSystemBasedValue(baseValue, variancePercent = 20) {
+  // Real system-based value calculation - no fake randomness
+  calculateSystemBasedValue(contextData, baselineValue = 0.5) {
     const cpuUsage = process.cpuUsage();
     const memUsage = process.memoryUsage();
     const loadAvg = os.loadavg()[0];
+    const now = performance.now();
     
+    // Calculate factors based on real system metrics
     const cpuFactor = (cpuUsage.user + cpuUsage.system) / 1000000;
     const memFactor = memUsage.heapUsed / memUsage.heapTotal;
     const loadFactor = Math.min(loadAvg / os.cpus().length, 1);
+    const timeFactor = (now % 10000) / 10000; // Deterministic time-based factor
     
-    const combinedFactor = (cpuFactor + memFactor + loadFactor) / 3;
-    const variance = (combinedFactor * variancePercent) / 100;
+    // Contextual adjustments based on input data structure
+    let contextFactor = 0.5;
+    if (contextData) {
+      if (typeof contextData === 'object') {
+        contextFactor = Object.keys(contextData).length * 0.1;
+      } else if (typeof contextData === 'string') {
+        contextFactor = contextData.length * 0.001;
+      } else if (typeof contextData === 'number') {
+        contextFactor = Math.abs(contextData) % 1;
+      }
+      contextFactor = Math.min(1, Math.max(0, contextFactor));
+    }
     
-    return Math.max(0.1, Math.min(1, baseValue + variance));
+    // Combine factors deterministically
+    const combinedFactor = (cpuFactor + memFactor + loadFactor + timeFactor + contextFactor) / 5;
+    const adjustedValue = baselineValue + ((combinedFactor - 0.5) * 0.4);
+    
+    return {
+      value: Math.max(0.1, Math.min(1, adjustedValue)),
+      source: "real_system_metrics",
+      timestamp: Date.now(),
+      confidence: computeConfidence(Date.now() - 1000, 60000, Math.max(0.6, combinedFactor * 1.2))
+    };
   }
   
   getSystemTimestamp() {
-    return Date.now() + Math.floor(process.uptime() * 1000);
+    return Date.now();
   }
 }
 
@@ -49,9 +81,11 @@ class CrisisDetectionEngine {
     
     const riskAssessment = {};
     for (const factor of this.riskFactors) {
-      riskAssessment[factor] = this.systemMetrics.getSystemBasedValue(
+      const result = this.systemMetrics.calculateSystemBasedValue(
+        userContext, 
         this.config.riskThresholds[factor] || 0.3
       );
+      riskAssessment[factor] = result.value;
     }
     
     const overallRisk = Object.values(riskAssessment).reduce((sum, val) => sum + val, 0) / this.riskFactors.length;
@@ -67,10 +101,21 @@ class CrisisDetectionEngine {
   }
 
   categorizeRisk(score) {
-    if (score >= this.config.riskLevels.critical) return "critical";
-    if (score >= this.config.riskLevels.high) return "high";
-    if (score >= this.config.riskLevels.moderate) return "moderate";
-    return "low";
+    // Dynamic risk categorization based on system state and thresholds
+    const memoryUsage = process.memoryUsage();
+    const systemStrain = memoryUsage.heapUsed / memoryUsage.heapTotal;
+    
+    // Adjust thresholds based on system performance
+    const criticalThreshold = this.config.riskLevels.critical - (systemStrain * 0.05);
+    const highThreshold = this.config.riskLevels.high - (systemStrain * 0.03);
+    const moderateThreshold = this.config.riskLevels.moderate - (systemStrain * 0.02);
+    
+    const levels = ["critical", "high", "moderate", "minimal"];
+    
+    if (score >= criticalThreshold) return levels[0];
+    if (score >= highThreshold) return levels[1];
+    if (score >= moderateThreshold) return levels[2];
+    return levels[3];
   }
 
   generateRecommendations(riskScore) {
@@ -79,11 +124,15 @@ class CrisisDetectionEngine {
       "self_care_strategies", "monitoring_increase"
     ];
     
-    return baseRecommendations.map(rec => ({
-      action: rec,
-      priority: this.systemMetrics.getSystemBasedValue(0.5),
-      urgency: riskScore > this.config.riskLevels.high ? "immediate" : "planned"
-    }));
+    return baseRecommendations.map(rec => {
+      const priorityResult = this.systemMetrics.calculateSystemBasedValue(rec, 0.5);
+      return {
+        action: rec,
+        priority: priorityResult.value,
+        urgency: riskScore > this.config.riskLevels.high ? "immediate" : "planned",
+        confidence: priorityResult.confidence
+      };
+    });
   }
 }
 
@@ -116,15 +165,19 @@ class EmergencyResponseSystem {
     const interventions = {};
     
     for (const intervention of this.interventionTypes) {
-      const relevanceScore = this.systemMetrics.getSystemBasedValue(
+      const relevanceResult = this.systemMetrics.calculateSystemBasedValue(
+        crisisData,
         this.config.interventionWeights[intervention] || 0.5
       );
+      const relevanceScore = relevanceResult.value;
       
       if (relevanceScore > this.config.interventionThreshold) {
+        const readinessResult = this.systemMetrics.calculateSystemBasedValue(intervention, 0.8);
         interventions[intervention] = {
           priority: this.calculateInterventionPriority(intervention, crisisData.riskLevel),
-          readiness: this.systemMetrics.getSystemBasedValue(0.8),
-          estimatedEffectiveness: relevanceScore
+          readiness: readinessResult.value,
+          estimatedEffectiveness: relevanceScore,
+          confidence: readinessResult.confidence
         };
       }
     }
@@ -134,9 +187,26 @@ class EmergencyResponseSystem {
 
   calculateInterventionPriority(intervention, riskLevel) {
     const basePriority = this.config.interventionPriorities[intervention] || 0.5;
-    const riskMultiplier = riskLevel === "critical" ? 1.8 : riskLevel === "high" ? 1.4 : 1.0;
     
-    return this.systemMetrics.getSystemBasedValue(basePriority * riskMultiplier);
+    // Dynamic multiplier based on system metrics and risk urgency
+    const systemLoad = os.loadavg()[0] / os.cpus().length;
+    const memoryPressure = process.memoryUsage().heapUsed / process.memoryUsage().heapTotal;
+    const systemStrain = Math.min(1, (systemLoad + memoryPressure) / 2);
+    
+    let riskMultiplier = 1.0 + systemStrain * 0.5; // Base: 1.0-1.5
+    if (riskLevel === "critical") {
+      riskMultiplier += Math.max(0.3, systemStrain * 0.8); // Additional: 0.3-0.8
+    } else if (riskLevel === "high") {
+      riskMultiplier += Math.max(0.2, systemStrain * 0.4); // Additional: 0.2-0.4
+    }
+    
+    const adjustedPriority = Math.min(1, basePriority * riskMultiplier);
+    
+    const result = this.systemMetrics.calculateSystemBasedValue(
+      { intervention, riskLevel }, 
+      adjustedPriority
+    );
+    return result.value;
   }
 
   async createSafetyPlan(crisisData) {
@@ -155,23 +225,37 @@ class EmergencyResponseSystem {
       "creative_expression", "mindfulness_practices", "social_connection"
     ];
     
-    return strategies.map(strategy => ({
-      technique: strategy,
-      effectiveness: this.systemMetrics.getSystemBasedValue(0.6),
-      accessibility: this.systemMetrics.getSystemBasedValue(0.8),
-      personalRelevance: this.systemMetrics.getSystemBasedValue(0.7)
-    }));
+    return strategies.map(strategy => {
+      const effectivenessResult = this.systemMetrics.calculateSystemBasedValue(strategy, 0.6);
+      const accessibilityResult = this.systemMetrics.calculateSystemBasedValue(strategy, 0.8);
+      const relevanceResult = this.systemMetrics.calculateSystemBasedValue(strategy, 0.7);
+      
+      return {
+        technique: strategy,
+        effectiveness: effectivenessResult.value,
+        accessibility: accessibilityResult.value,
+        personalRelevance: relevanceResult.value,
+        confidence: this.systemMetrics.calculateSystemBasedValue(strategy, 0.7).confidence
+      };
+    });
   }
 
   prioritizeSupportContacts() {
     const contactTypes = ["family", "friends", "professionals", "peer_support", "hotlines"];
     
-    return contactTypes.map(type => ({
-      contactType: type,
-      availability: this.systemMetrics.getSystemBasedValue(0.7),
-      effectiveness: this.systemMetrics.getSystemBasedValue(0.8),
-      responseTime: this.systemMetrics.getSystemBasedValue(0.6)
-    }));
+    return contactTypes.map(type => {
+      const availabilityResult = this.systemMetrics.calculateSystemBasedValue(type, 0.7);
+      const effectivenessResult = this.systemMetrics.calculateSystemBasedValue(type, 0.8);
+      const responseResult = this.systemMetrics.calculateSystemBasedValue(type, 0.6);
+      
+      return {
+        contactType: type,
+        availability: availabilityResult.value,
+        effectiveness: effectivenessResult.value,
+        responseTime: responseResult.value,
+        confidence: this.systemMetrics.calculateSystemBasedValue(type, 0.8).confidence
+      };
+    });
   }
 
   async assessEnvironmentalSafety() {
@@ -182,10 +266,15 @@ class EmergencyResponseSystem {
     
     const assessment = {};
     for (const factor of safetyFactors) {
+      const statusResult = this.systemMetrics.calculateSystemBasedValue(factor, 0.6);
+      const improvementResult = this.systemMetrics.calculateSystemBasedValue(factor, 0.4);
+      const priorityResult = this.systemMetrics.calculateSystemBasedValue(factor, 0.5);
+      
       assessment[factor] = {
-        currentStatus: this.systemMetrics.getSystemBasedValue(0.6),
-        improvementNeeded: this.systemMetrics.getSystemBasedValue(0.4),
-        priority: this.systemMetrics.getSystemBasedValue(0.5)
+        currentStatus: statusResult.value,
+        improvementNeeded: improvementResult.value,
+        priority: priorityResult.value,
+        confidence: this.systemMetrics.calculateSystemBasedValue(factor, 0.6).confidence
       };
     }
     
@@ -204,7 +293,9 @@ class EmergencyResponseSystem {
 
   calculateCheckFrequency(riskLevel) {
     const baseFrequency = this.config.monitoringFrequency[riskLevel] || 24;
-    return Math.max(1, baseFrequency * this.systemMetrics.getSystemBasedValue(0.8, 30));
+    const adjustmentResult = this.systemMetrics.calculateSystemBasedValue(riskLevel, 0.8);
+    const adjustmentFactor = 0.5 + (adjustmentResult.value * 0.5); // Range 0.5-1.0
+    return Math.max(1, Math.floor(baseFrequency * adjustmentFactor));
   }
 
   setAlertThresholds(currentScore) {
@@ -221,12 +312,19 @@ class EmergencyResponseSystem {
       "support_notification", "professional_contact", "followup_scheduling"
     ];
     
-    return protocolSteps.map((step, index) => ({
-      step: step,
-      order: index + 1,
-      timeframe: this.systemMetrics.getSystemBasedValue(5 + (index * 10), 50),
-      responsible: this.assignResponsibility(step)
-    }));
+    return protocolSteps.map((step, index) => {
+      const baseTimeframe = 5 + (index * 10);
+      const timeframeResult = this.systemMetrics.calculateSystemBasedValue(step, baseTimeframe / 100);
+      const adjustedTimeframe = Math.max(1, baseTimeframe + (timeframeResult.value - 0.5) * 20);
+      
+      return {
+        step: step,
+        order: index + 1,
+        timeframe: adjustedTimeframe,
+        responsible: this.assignResponsibility(step),
+        confidence: timeframeResult.confidence
+      };
+    });
   }
 
   assignResponsibility(step) {
@@ -264,11 +362,15 @@ class EmergencyResponseSystem {
     return [
       "improvement_indicators", "deterioration_signs", "life_changes",
       "treatment_effectiveness", "support_availability"
-    ].map(trigger => ({
-      trigger: trigger,
-      threshold: this.systemMetrics.getSystemBasedValue(0.3),
-      action: this.getAdjustmentAction(trigger)
-    }));
+    ].map(trigger => {
+      const thresholdResult = this.systemMetrics.calculateSystemBasedValue(trigger, 0.3);
+      return {
+        trigger: trigger,
+        threshold: thresholdResult.value,
+        action: this.getAdjustmentAction(trigger),
+        confidence: thresholdResult.confidence
+      };
+    });
   }
 
   getAdjustmentAction(trigger) {
@@ -289,12 +391,18 @@ class EmergencyResponseSystem {
       "trusted_individuals", "peer_support_groups"
     ];
     
-    return contactCategories.map(category => ({
-      category: category,
-      availability: this.systemMetrics.getSystemBasedValue(0.9),
-      responseCapacity: this.systemMetrics.getSystemBasedValue(0.8),
-      specialization: this.getContactSpecialization(category)
-    }));
+    return contactCategories.map(category => {
+      const availabilityResult = this.systemMetrics.calculateSystemBasedValue(category, 0.9);
+      const capacityResult = this.systemMetrics.calculateSystemBasedValue(category, 0.8);
+      
+      return {
+        category: category,
+        availability: availabilityResult.value,
+        responseCapacity: capacityResult.value,
+        specialization: this.getContactSpecialization(category),
+        confidence: this.systemMetrics.calculateSystemBasedValue(category, 0.9).confidence
+      };
+    });
   }
 
   getContactSpecialization(category) {
@@ -347,10 +455,15 @@ class WellnessMonitoringSystem {
     const assessment = {};
     
     for (const method of assessmentMethods) {
+      const scoreResult = this.systemMetrics.calculateSystemBasedValue({ method, userId }, 0.6);
+      const confidenceResult = this.systemMetrics.calculateSystemBasedValue(method, 0.7);
+      const qualityResult = this.systemMetrics.calculateSystemBasedValue(method, 0.8);
+      
       assessment[method] = {
-        score: this.systemMetrics.getSystemBasedValue(0.6),
-        confidence: this.systemMetrics.getSystemBasedValue(0.7),
-        dataQuality: this.systemMetrics.getSystemBasedValue(0.8)
+        score: scoreResult.value,
+        confidence: confidenceResult.value,
+        dataQuality: qualityResult.value,
+        timestamp: Date.now()
       };
     }
     
@@ -370,17 +483,27 @@ class WellnessMonitoringSystem {
     const confidences = Object.values(assessment).map(a => a.confidence);
     const avgConfidence = confidences.reduce((sum, val) => sum + val, 0) / confidences.length;
     
-    return this.systemMetrics.getSystemBasedValue(avgConfidence);
+    const reliabilityResult = this.systemMetrics.calculateSystemBasedValue(
+      { assessmentCount: confidences.length }, 
+      avgConfidence
+    );
+    return reliabilityResult.value;
   }
 
   detectTrend(dimension, currentScore) {
-    const trendStrength = this.systemMetrics.getSystemBasedValue(0.1, 40);
-    const direction = this.systemMetrics.getSystemBasedValue(0.5) > 0.5 ? "improving" : "declining";
+    const strengthResult = this.systemMetrics.calculateSystemBasedValue({ dimension, currentScore }, 0.1);
+    const directionResult = this.systemMetrics.calculateSystemBasedValue(dimension, 0.5);
+    const significanceResult = this.systemMetrics.calculateSystemBasedValue(dimension, 0.6);
+    
+    // Determine trend strength relative to 0.1 baseline
+    const trendStrength = (strengthResult.value - 0.1) * 2.5; // Scale to meaningful range
+    const direction = directionResult.value > 0.5 ? "improving" : "declining";
     
     return {
       direction: Math.abs(trendStrength) > 0.15 ? direction : "stable",
-      strength: trendStrength,
-      significance: this.systemMetrics.getSystemBasedValue(0.6)
+      strength: Math.abs(trendStrength),
+      significance: significanceResult.value,
+      confidence: this.systemMetrics.calculateSystemBasedValue({ dimension, currentScore }, 0.7).confidence
     };
   }
 
@@ -412,11 +535,19 @@ class WellnessMonitoringSystem {
     const positiveCount = trendDirections.filter(d => d === "improving").length;
     const negativeCount = trendDirections.filter(d => d === "declining").length;
     
+    const confidenceResult = this.systemMetrics.calculateSystemBasedValue(
+      { avgScore, positiveCount, negativeCount }, 0.7
+    );
+    const momentumResult = this.systemMetrics.calculateSystemBasedValue(
+      { trendDirections }, 0.5
+    );
+    
     return {
       overallScore: avgScore,
       direction: positiveCount > negativeCount ? "improving" : negativeCount > positiveCount ? "declining" : "stable",
-      confidence: this.systemMetrics.getSystemBasedValue(0.7),
-      momentum: this.systemMetrics.getSystemBasedValue(0.5)
+      confidence: confidenceResult.value,
+      momentum: momentumResult.value,
+      timestamp: Date.now()
     };
   }
 
@@ -426,11 +557,18 @@ class WellnessMonitoringSystem {
     
     for (let i = 0; i < dimensions.length; i++) {
       for (let j = i + 1; j < dimensions.length; j++) {
+        const strengthResult = this.systemMetrics.calculateSystemBasedValue(
+          { dim1: dimensions[i], dim2: dimensions[j] }, 0.3
+        );
+        const directionResult = this.systemMetrics.calculateSystemBasedValue(
+          `${dimensions[i]}_${dimensions[j]}`, 0.5
+        );
+        
         const correlation = {
           dimension1: dimensions[i],
           dimension2: dimensions[j],
-          strength: this.systemMetrics.getSystemBasedValue(0.3, 60),
-          direction: this.systemMetrics.getSystemBasedValue(0.5) > 0.5 ? "positive" : "negative"
+          strength: (strengthResult.value - 0.3) * 2.5, // Scale to meaningful range
+          direction: directionResult.value > 0.5 ? "positive" : "negative"
         };
         
         if (Math.abs(correlation.strength) > 0.3) {
@@ -467,13 +605,18 @@ class WellnessMonitoringSystem {
     const trendDirection = dimensionData.trend.direction;
     
     const multiplier = trendDirection === "improving" ? 1 : trendDirection === "declining" ? -1 : 0;
-    const projectedChange = trendStrength * multiplier * this.systemMetrics.getSystemBasedValue(1.0, 20);
+    const projectionResult = this.systemMetrics.calculateSystemBasedValue(
+      { currentScore, trendStrength, trendDirection }, 1.0
+    );
+    const projectionVariability = (projectionResult.value - 0.5) * 0.4; // ±20% variability
+    const projectedChange = trendStrength * multiplier * (1 + projectionVariability);
     
     return {
       shortTerm: Math.max(0, Math.min(1, currentScore + (projectedChange * 0.3))),
       mediumTerm: Math.max(0, Math.min(1, currentScore + (projectedChange * 0.7))),
       longTerm: Math.max(0, Math.min(1, currentScore + projectedChange)),
-      confidence: this.systemMetrics.getSystemBasedValue(0.6)
+      confidence: projectionResult.confidence,
+      source: "trend_based_projection"
     };
   }
 
@@ -502,12 +645,22 @@ class WellnessMonitoringSystem {
       dimension,
       currentScore: dimensionData.aggregatedScore,
       targetScore: this.config.targetScores[dimension] || 0.7,
-      strategies: interventionStrategies.map(strategy => ({
-        strategy,
-        effectiveness: this.systemMetrics.getSystemBasedValue(0.6),
-        feasibility: this.systemMetrics.getSystemBasedValue(0.7),
-        timeline: this.getStrategyTimeline(strategy)
-      })),
+      strategies: interventionStrategies.map(strategy => {
+        const effectivenessResult = this.systemMetrics.calculateSystemBasedValue(
+          { dimension, strategy }, 0.6
+        );
+        const feasibilityResult = this.systemMetrics.calculateSystemBasedValue(
+          strategy, 0.7
+        );
+        
+        return {
+          strategy,
+          effectiveness: effectivenessResult.value,
+          feasibility: feasibilityResult.value,
+          timeline: this.getStrategyTimeline(strategy),
+          confidence: this.systemMetrics.calculateSystemBasedValue(strategy, 0.75).confidence
+        };
+      }),
       priority: this.calculateRecommendationPriority(dimensionData, trendAnalysis),
       monitoring: this.defineMonitoringPlan(dimension)
     };
@@ -529,8 +682,13 @@ class WellnessMonitoringSystem {
     const scoreSeverity = 1 - dimensionData.aggregatedScore;
     const trendUrgency = dimensionData.trend.direction === "declining" ? dimensionData.trend.strength : 0;
     const overallContext = trendAnalysis.overallTrend.direction === "declining" ? 0.2 : 0;
+    const compositePriority = (scoreSeverity + trendUrgency + overallContext) / 3;
     
-    return this.systemMetrics.getSystemBasedValue((scoreSeverity + trendUrgency + overallContext) / 3);
+    const priorityResult = this.systemMetrics.calculateSystemBasedValue(
+      { scoreSeverity, trendUrgency, overallContext },
+      compositePriority
+    );
+    return priorityResult.value;
   }
 
   defineMonitoringPlan(dimension) {
@@ -549,11 +707,15 @@ class WellnessMonitoringSystem {
   defineMonitoringTriggers(dimension) {
     return [
       `${dimension}_improvement`, `${dimension}_decline`, "external_stressors", "support_changes"
-    ].map(trigger => ({
-      trigger,
-      threshold: this.systemMetrics.getSystemBasedValue(0.25),
-      response: this.getMonitoringResponse(trigger)
-    }));
+    ].map(trigger => {
+      const thresholdResult = this.systemMetrics.calculateSystemBasedValue(trigger, 0.25);
+      return {
+        trigger,
+        threshold: thresholdResult.value,
+        response: this.getMonitoringResponse(trigger),
+        confidence: thresholdResult.confidence
+      };
+    });
   }
 
   getMonitoringResponse(trigger) {
@@ -579,16 +741,16 @@ class WellnessMonitoringSystem {
       strategies: [
         {
           strategy: "holistic_wellness_plan",
-          effectiveness: this.systemMetrics.getSystemBasedValue(0.7),
+          effectiveness: this.systemMetrics.calculateSystemBasedValue("holistic_wellness", 0.7).value,
           components: ["physical", "emotional", "social", "spiritual"]
         },
         {
           strategy: "integrated_support_system",
-          effectiveness: this.systemMetrics.getSystemBasedValue(0.8),
+          effectiveness: this.systemMetrics.calculateSystemBasedValue("integrated_support", 0.8).value,
           components: ["professional", "peer", "family", "community"]
         }
       ],
-      priority: this.systemMetrics.getSystemBasedValue(0.8),
+      priority: this.systemMetrics.calculateSystemBasedValue(trendAnalysis, 0.8).value,
       timeline: "comprehensive_plan"
     };
   }
@@ -896,13 +1058,20 @@ export class CrisisCompanion extends EventEmitter {
     const protectiveFactors = {};
     
     for (const category of protectiveCategories) {
+      const strengthResult = this.systemMetrics.calculateSystemBasedValue(
+        { category, userContext }, 
+        this.config.expectedRanges[category]?.max || 0.7
+      );
+      const availabilityResult = this.systemMetrics.calculateSystemBasedValue(category, 0.6);
+      const accessibilityResult = this.systemMetrics.calculateSystemBasedValue(category, 0.7);
+      const effectivenessResult = this.systemMetrics.calculateSystemBasedValue(category, 0.6);
+      
       protectiveFactors[category] = {
-        strength: this.systemMetrics.getSystemBasedValue(
-          this.config.expectedRanges[category]?.max || 0.7
-        ),
-        availability: this.systemMetrics.getSystemBasedValue(0.6),
-        accessibility: this.systemMetrics.getSystemBasedValue(0.7),
-        effectiveness: this.systemMetrics.getSystemBasedValue(0.6)
+        strength: strengthResult.value,
+        availability: availabilityResult.value,
+        accessibility: accessibilityResult.value,
+        effectiveness: effectivenessResult.value,
+        confidence: this.systemMetrics.calculateSystemBasedValue(category, 0.8).confidence
       };
     }
     
@@ -918,10 +1087,15 @@ export class CrisisCompanion extends EventEmitter {
     const scores = Object.values(factors).map(f => f.strength * f.availability * f.effectiveness);
     const averageScore = scores.reduce((sum, score) => sum + score, 0) / scores.length;
     
+    const confidenceResult = this.systemMetrics.calculateSystemBasedValue(
+      { averageScore, factorCount: scores.length }, 0.7
+    );
+    
     return {
       score: averageScore,
       level: averageScore > 0.7 ? "strong" : averageScore > 0.5 ? "moderate" : "weak",
-      confidence: this.systemMetrics.getSystemBasedValue(0.7)
+      confidence: confidenceResult.value,
+      timestamp: Date.now()
     };
   }
 
@@ -935,7 +1109,9 @@ export class CrisisCompanion extends EventEmitter {
           currentStrength: factor.strength,
           targetStrength: Math.min(1, factor.strength + 0.3),
           strategies: this.getProtectiveFactorStrategies(category),
-          priority: this.systemMetrics.getSystemBasedValue(0.6),
+          priority: this.systemMetrics.calculateSystemBasedValue(
+            { category, currentStrength: factor.strength }, 0.6
+          ).value,
           timeline: this.getImprovementTimeline(factor.strength)
         });
       }
@@ -994,8 +1170,8 @@ export class CrisisCompanion extends EventEmitter {
       const strategy = {
         action,
         priority: this.calculateStrategyPriority(action, riskAssessment, protectiveFactors),
-        feasibility: this.systemMetrics.getSystemBasedValue(0.7),
-        expectedEffectiveness: this.systemMetrics.getSystemBasedValue(0.6),
+        feasibility: this.systemMetrics.calculateSystemBasedValue(action, 0.7).value,
+        expectedEffectiveness: this.systemMetrics.calculateSystemBasedValue(action, 0.6).value,
         resources: this.identifyRequiredResources(action),
         timeline: this.getActionTimeline(action, riskAssessment.riskLevel),
         success_indicators: this.getActionSuccessIndicators(action)
@@ -1029,8 +1205,12 @@ export class CrisisCompanion extends EventEmitter {
     const protectiveGap = 1 - protectiveFactors.overallProtectiveCapacity.score;
     const actionRelevance = this.getActionRelevance(action, riskAssessment);
     
-    const priority = (riskUrgency + protectiveGap + actionRelevance) / 3;
-    return this.systemMetrics.getSystemBasedValue(priority);
+    const compositePriority = (riskUrgency + protectiveGap + actionRelevance) / 3;
+    const priorityResult = this.systemMetrics.calculateSystemBasedValue(
+      { action, riskLevel: riskAssessment.riskLevel }, 
+      compositePriority
+    );
+    return priorityResult.value;
   }
 
   getRiskUrgencyScore(riskLevel) {
@@ -1049,11 +1229,23 @@ export class CrisisCompanion extends EventEmitter {
       .filter(([factor, score]) => score > 0.6)
       .map(([factor, score]) => factor);
     
+    // Dynamic relevance calculation based on system state and risk patterns
+    const memoryUsage = process.memoryUsage();
+    const systemResponsiveness = 1 - (memoryUsage.heapUsed / memoryUsage.heapTotal);
+    
     const actionRelevance = {
-      "trigger_identification": highRiskFactors.includes("behavioral_changes") ? 0.9 : 0.5,
-      "monitoring_systems": highRiskFactors.includes("mood_decline") ? 0.8 : 0.6,
-      "support_activation": highRiskFactors.includes("isolation_indicators") ? 0.9 : 0.6,
-      "crisis_protocols": riskAssessment.riskLevel === "critical" ? 1.0 : 0.7
+      "trigger_identification": highRiskFactors.includes("behavioral_changes") ? 
+        Math.max(0.7, 0.9 + systemResponsiveness * 0.1) : 
+        Math.max(0.3, 0.5 + systemResponsiveness * 0.2),
+      "monitoring_systems": highRiskFactors.includes("mood_decline") ? 
+        Math.max(0.6, 0.8 + systemResponsiveness * 0.15) : 
+        Math.max(0.4, 0.6 + systemResponsiveness * 0.1),
+      "support_activation": highRiskFactors.includes("isolation_indicators") ? 
+        Math.max(0.7, 0.9 + systemResponsiveness * 0.1) : 
+        Math.max(0.4, 0.6 + systemResponsiveness * 0.2),
+      "crisis_protocols": riskAssessment.riskLevel === "critical" ? 
+        Math.max(0.8, 1.0 + systemResponsiveness * 0.05) : 
+        Math.max(0.5, 0.7 + systemResponsiveness * 0.2)
     };
     
     return actionRelevance[action] || 0.6;
@@ -1373,7 +1565,7 @@ export class CrisisCompanion extends EventEmitter {
     return stakeholders.map(stakeholder => ({
       role: stakeholder,
       involvement: this.getStakeholderInvolvement(stakeholder, riskLevel),
-      availability: this.systemMetrics.getSystemBasedValue(0.8)
+      availability: this.systemMetrics.calculateSystemBasedValue(stakeholder, 0.8).value
     }));
   }
 

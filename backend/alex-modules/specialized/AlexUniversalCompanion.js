@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import crypto from 'crypto';
+import * as os from 'os';
 import logger from '../../config/logger.js';
 
 /**
@@ -1142,13 +1143,13 @@ class AlexUniversalCompanion extends EventEmitter {
   }
 
   getSystemBasedSatisfaction() {
-    const loadavg = require('os').loadavg()[0];
+    const loadavg = os.loadavg()[0];
     const base = Math.max(0, 1 - loadavg / 4);
     return Math.max(0.8, Math.min(1.0, base + 0.8));
   }
 
   getSystemBasedTraitCount() {
-    const cpuCount = require('os').cpus().length;
+    const cpuCount = os.cpus().length;
     const baseCount = Math.max(6, Math.min(14, cpuCount + 2));
     return baseCount;
   }
@@ -1190,7 +1191,7 @@ class AlexUniversalCompanion extends EventEmitter {
   }
 
   getSystemBasedDepth() {
-    const loadavg = require('os').loadavg()[0];
+    const loadavg = os.loadavg()[0];
     const normalized = Math.min(1, loadavg / 2);
     return Math.max(0.5, Math.min(1.0, normalized * 0.5 + 0.5));
   }
@@ -1232,13 +1233,13 @@ class AlexUniversalCompanion extends EventEmitter {
   }
 
   getSystemBasedWarmth() {
-    const cpuCount = require('os').cpus().length;
+    const cpuCount = os.cpus().length;
     const base = (cpuCount % 5) / 25; // 0-0.2
     return Math.max(0.8, Math.min(1.0, base + 0.8));
   }
 
   getSystemBasedPresence() {
-    const loadavg = require('os').loadavg()[1];
+    const loadavg = os.loadavg()[1];
     const base = Math.max(0, 1 - loadavg / 3) * 0.3;
     return Math.max(0.7, Math.min(1.0, base + 0.7));
   }
@@ -1280,7 +1281,7 @@ class AlexUniversalCompanion extends EventEmitter {
   }
 
   getSystemBasedSupportivePresence() {
-    const loadavg = require('os').loadavg()[2];
+    const loadavg = os.loadavg()[2];
     const stability = Math.max(0, 2 - loadavg) / 2;
     return Math.max(0.8, Math.min(1.0, stability * 0.2 + 0.8));
   }

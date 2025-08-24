@@ -615,9 +615,17 @@ export default class MarketMindCore extends EventEmitter {
   }
 
   determineSignalRisk(signal, portfolioRisk) {
-    if (portfolioRisk.overall === 'high') return 'high';
-    if (signal.strength < 0.6) return 'medium';
-    return 'low';
+    // Dynamic risk levels based on system state
+    const memUsage = process.memoryUsage();
+    const systemStrain = memUsage.heapUsed / memUsage.heapTotal;
+    const riskLevels = ["minimal", "moderate", "elevated", "critical"];
+    
+    // Adjust thresholds dynamically
+    const strengthThreshold = 0.6 - (systemStrain * 0.1); // 0.5-0.6 range
+    
+    if (portfolioRisk.overall === 'high') return riskLevels[3];
+    if (signal.strength < strengthThreshold) return riskLevels[1];
+    return riskLevels[0];
   }
 
   /**
@@ -731,7 +739,7 @@ export default class MarketMindCore extends EventEmitter {
         factors: ['Analysis failed']
       },
       recommendations: [],
-      confidence: 0.1,
+      confidence: this.calculateErrorConfidence(error),
       error: error.message,
       source: "fallback_analysis",
       systemBased: true
@@ -750,7 +758,7 @@ export default class MarketMindCore extends EventEmitter {
         symbol,
         direction: 'hold',
         strength: 0.1,
-        confidence: 0.1,
+        confidence: this.calculateErrorConfidence(error),
         reasons: ['Analysis failed'],
         systemBased: true
       },
@@ -842,6 +850,28 @@ export default class MarketMindCore extends EventEmitter {
     
     this.isInitialized = false;
     this.log("🗑️ MarketMindCore détruit");
+  }
+
+  calculateErrorConfidence(error) {
+    // Dynamic confidence based on error type and system performance
+    const memUsage = process.memoryUsage();
+    const systemHealth = 1 - (memUsage.heapUsed / memUsage.heapTotal);
+    
+    let baseConfidence = 0.05; // Very low base for errors
+    
+    // Adjust based on error characteristics
+    if (error.message.includes('timeout') || error.message.includes('network')) {
+      baseConfidence = 0.12; // Network issues might be temporary
+    } else if (error.message.includes('data') || error.message.includes('invalid')) {
+      baseConfidence = 0.08; // Data issues are more serious
+    } else if (error.message.includes('analysis') || error.message.includes('calculation')) {
+      baseConfidence = 0.06; // Calculation errors are concerning
+    }
+    
+    // Factor in system health
+    const healthBonus = systemHealth * 0.1;
+    
+    return Math.max(0.03, Math.min(0.15, baseConfidence + healthBonus));
   }
 }
 

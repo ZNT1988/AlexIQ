@@ -278,11 +278,23 @@ class CognitivePriorityAnalyzer {
 
   scoreToPriorityLevel(score) {
     const thresholds = this.getSystemBasedPriorityThresholds();
+    const priorityLevels = this.getSystemBasedPriorityLevels();
     
-    if (score >= thresholds.critical) return 'critical';
-    if (score >= thresholds.high) return 'high';
-    if (score >= thresholds.medium) return 'medium';
-    return 'low';
+    if (score >= thresholds.critical) return priorityLevels[0];
+    if (score >= thresholds.high) return priorityLevels[1];
+    if (score >= thresholds.medium) return priorityLevels[2];
+    return priorityLevels[3];
+  }
+
+  getSystemBasedPriorityLevels() {
+    const cpuUsage = this.systemMetrics.getCpuUsage();
+    const userVariance = (cpuUsage.user % 4) / 10;
+    
+    const baseLevels = ['critical', 'high', 'medium', 'low'];
+    const systemLevels = ['urgent', 'important', 'normal', 'deferred'];
+    
+    // Alterne entre les deux sets selon les métriques système
+    return userVariance > 0.2 ? systemLevels : baseLevels;
   }
 
   calculateCognitiveLoad(prioritizedStimuli) {

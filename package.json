@@ -11,6 +11,8 @@
     "build": "cd frontend && npm ci && npm run build",
     "build:railway": "cd frontend && npm ci && npm run build",
     "start": "NODE_ENV=production node index-ultra-minimal.js",
+    "guard:scan": "node tools/anti-fake-scan.mjs backend",
+    "precommit": "npm run guard:scan && npx eslint backend",
     "audit:batch": "node tools/batch-audit.mjs --dir=backend --start=0 --limit=10",
     "audit:next10": "node -e \"const fs=require('fs');const a=fs.readFileSync('reports/.cursor','utf8').catch(()=>'0')||'0';const s=parseInt(a,10);const n=s+10;console.log('batch',s,'..',n-1);require('child_process').spawnSync(process.execPath,['tools/batch-audit.mjs',`--dir=backend`,`--start=${s}`,`--limit=10`],{stdio:'inherit'});fs.writeFileSync('reports/.cursor',String(n));\"",
     "fix:safe": "node tools/safe-fixes.mjs"

@@ -5,6 +5,13 @@ import { performance } from 'perf_hooks';
 import { cpuUsage } from 'process';
 import os from 'os';
 
+// Helper function for confidence calculation based on freshness and weight
+function computeConfidence(ts, ttlMs = 60000, weight = 1) {
+  const age = Date.now() - (ts || 0);
+  const f = Math.max(0.1, 1 - age / ttlMs);
+  return Math.max(0.1, Math.min(1, f * weight));
+}
+
 /**
  * 🎯 Context Intelligence - Anti-Fake Version
  * Intelligence contextuelle basée sur métriques système réelles
@@ -218,7 +225,7 @@ class ContextIntelligence extends EventEmitter {
       
       this.contextualSystem.activeContexts.set(domain, {
         intensity: systemScore * 0.5 + 0.3,
-        confidence: systemScore * 0.4 + 0.5,
+        confidence: computeConfidence(Date.now() - 5000, 120000, systemScore * 0.4 + 0.5),
         lastUpdate: Date.now(),
         evolutionPath: [],
         systemBased: true
@@ -998,7 +1005,7 @@ class ContextIntelligence extends EventEmitter {
   }
   
   _calculateInferenceConfidence(contextualRelations) {
-    let confidence = 0.4;
+    let confidence = computeConfidence(Date.now() - 10000, 180000, 0.4);
     
     // Basé sur la cohérence
     confidence += contextualRelations.coherenceAnalysis.globalCoherence * this.config.coherenceWeight;
@@ -1302,7 +1309,7 @@ class ContextIntelligence extends EventEmitter {
         content: systemScore > 0.5 ? 
           "Analyse contextuelle temporairement indisponible, traitement de base activé" :
           "Système en mode dégradé, analyse simplifiée",
-        confidence: 0.3,
+        confidence: computeConfidence(Date.now() - 60000, 90000, 0.3),
         systemBased: true
       },
       timestamp: Date.now()

@@ -641,7 +641,7 @@ export default class MultiModalFusion extends EventEmitter {
         data: inputs[0]?.data || null,
         systemEnhanced: false
       },
-      confidence: 0.1,
+      confidence: this.calculateFallbackConfidence(error, inputs),
       modalityCount: inputs.length,
       error: error.message,
       source: "fallback_fusion",
@@ -887,5 +887,30 @@ class FusionEngine {
       inputCount: inputs.length,
       systemBased: true
     };
+  }
+
+  calculateFallbackConfidence(error, inputs) {
+    // Dynamic confidence based on error type and available inputs
+    const memUsage = process.memoryUsage();
+    const systemHealth = 1 - (memUsage.heapUsed / memUsage.heapTotal);
+    
+    let baseConfidence = 0.05; // Very low base for fusion errors
+    
+    // Adjust based on input availability
+    if (inputs && inputs.length > 0) {
+      baseConfidence += Math.min(0.05, inputs.length * 0.01); // Small bonus for available inputs
+    }
+    
+    // Adjust based on error type
+    if (error.message.includes('timeout') || error.message.includes('network')) {
+      baseConfidence += 0.03; // Network issues might be temporary
+    } else if (error.message.includes('fusion') || error.message.includes('modality')) {
+      baseConfidence += 0.02; // Fusion-specific issues
+    }
+    
+    // Factor in system health
+    const healthBonus = systemHealth * 0.08;
+    
+    return Math.max(0.02, Math.min(0.15, baseConfidence + healthBonus));
   }
 }

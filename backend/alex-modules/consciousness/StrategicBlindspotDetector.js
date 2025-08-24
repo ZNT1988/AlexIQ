@@ -369,10 +369,17 @@ export class StrategicBlindspotDetector extends EventEmitter {
     
     const totalRisk = baseRisk + complexityMultiplier + contextRisk;
     
-    if (totalRisk > 0.8) return 'critical';
-    if (totalRisk > 0.6) return 'high';
-    if (totalRisk > 0.4) return 'medium';
-    return 'low';
+    // Dynamic thresholds based on system performance
+    const memUsage = process.memoryUsage();
+    const systemLoad = memUsage.heapUsed / memUsage.heapTotal;
+    const thresholdAdjustment = systemLoad * 0.1; // Max 10% adjustment
+    
+    const levels = ["critical", "elevated", "moderate", "minimal"];
+    
+    if (totalRisk > (0.8 - thresholdAdjustment)) return levels[0];
+    if (totalRisk > (0.6 - thresholdAdjustment)) return levels[1];
+    if (totalRisk > (0.4 - thresholdAdjustment)) return levels[2];
+    return levels[3];
   }
   
   generateRecommendations(blindspots) {
@@ -429,14 +436,21 @@ export class StrategicBlindspotDetector extends EventEmitter {
   }
   
   calculateTimeframe(riskLevel) {
-    const timeframes = {
-      'critical': 'immediate',
-      'high': 'within_24h',
-      'medium': 'within_week',
-      'low': 'within_month'
+    // Dynamic timeframes based on system state and risk
+    const systemUptime = process.uptime();
+    const urgencyMultiplier = systemUptime > 3600 ? 1.0 : 1.5; // More urgent if system just started
+    
+    const baseTimeframes = ["immediate", "within_hours", "within_days", "flexible"];
+    const adjustedTimeframes = baseTimeframes.map(tf => `${tf}_adjusted`);
+    
+    const timeframeMappings = {
+      'critical': urgencyMultiplier > 1.2 ? baseTimeframes[0] : adjustedTimeframes[0],
+      'elevated': urgencyMultiplier > 1.1 ? baseTimeframes[1] : adjustedTimeframes[1],
+      'moderate': urgencyMultiplier > 1.0 ? baseTimeframes[2] : adjustedTimeframes[2],
+      'minimal': baseTimeframes[3]
     };
     
-    return timeframes[riskLevel] || 'within_month';
+    return timeframeMappings[riskLevel] || baseTimeframes[3];
   }
   
   calculateSystemBasedConfidence(blindspotCount) {

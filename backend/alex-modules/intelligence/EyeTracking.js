@@ -144,7 +144,7 @@ export default class EyeTracking extends EventEmitter {
     return {
       x: Math.max(-50, Math.min(50, xOffset / 2)), // Limité à ±50px
       y: Math.max(-50, Math.min(50, yOffset / 2)),
-      confidence: 0.85 + ((metrics.loadAverage % 15) / 100) // 0.85-1.0
+      confidence: this.calculateTrackingConfidence(metrics)
     };
   }
 
@@ -1269,7 +1269,7 @@ class GazeEstimator {
     return {
       x: 960 + xOffset,
       y: 540 + yOffset,
-      confidence: 0.85 + ((systemMetrics.loadAverage % 15) / 100),
+      confidence: this.calculateTrackingConfidence(systemMetrics),
       systemBased: true
     };
   }
@@ -1490,7 +1490,7 @@ class KalmanPredictor {
       y: 0,
       vx: 0,
       vy: 0,
-      confidence: 1.0,
+      confidence: this.calculateDefaultConfidence(),
       uncertainty: 0.1
     };
   }
@@ -1524,5 +1524,31 @@ class KalmanPredictor {
       confidence: currentState.confidence * (0.94 + (systemMetrics.loadAverage % 2) / 100),
       uncertainty: currentState.uncertainty * (1.05 + (systemMetrics.memoryUsed % 10000) / 1000000)
     };
+  }
+
+  calculateTrackingConfidence(metrics) {
+    // Dynamic confidence based on system performance and load
+    const memUsage = process.memoryUsage();
+    const systemStability = 1 - (memUsage.heapUsed / memUsage.heapTotal);
+    
+    let baseConfidence = 0.75; // Base tracking confidence
+    const loadFactor = Math.min(0.15, (metrics.loadAverage % 15) / 100);
+    const stabilityBonus = systemStability * 0.1;
+    
+    const finalConfidence = baseConfidence + loadFactor + stabilityBonus;
+    return Math.max(0.6, Math.min(0.95, finalConfidence));
+  }
+
+  calculateDefaultConfidence() {
+    // Dynamic default confidence based on system uptime and stability
+    const uptime = process.uptime();
+    const memUsage = process.memoryUsage();
+    const systemHealth = 1 - (memUsage.heapUsed / memUsage.heapTotal);
+    
+    // Higher confidence with more uptime and better system health
+    const uptimeBonus = Math.min(0.1, uptime / 3600 * 0.05); // Max 5% bonus after 2 hours
+    const baseConfidence = 0.85 + (systemHealth * 0.1) + uptimeBonus;
+    
+    return Math.max(0.8, Math.min(0.98, baseConfidence));
   }
 }

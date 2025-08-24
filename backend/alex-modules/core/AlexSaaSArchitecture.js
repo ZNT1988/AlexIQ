@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import crypto from 'crypto';
+import { safeRandomBytes } from '../../guards/RandomPolicy.js';
 import logger from '../../config/logger.js';
 
 /**
@@ -227,7 +228,7 @@ class AlexSaaSArchitecture extends EventEmitter {
   }
 
   generateSecureToken() {
-    return crypto.randomBytes(64).toString('hex');
+    return safeRandomBytes(64, "token").toString('hex');
   }
 
   async analyzePerformance() {

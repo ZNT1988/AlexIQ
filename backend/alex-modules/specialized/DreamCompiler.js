@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import crypto from 'crypto';
+import * as os from 'os';
 import logger from '../../config/logger.js';
 
 /**
@@ -546,7 +547,7 @@ class DreamCompiler extends EventEmitter {
   }
 
   getSystemBasedConfidence() {
-    const loadavg = require('os').loadavg()[0];
+    const loadavg = os.loadavg()[0];
     const base = Math.max(0, 2 - loadavg) / 2; // Higher load = lower confidence
     return Math.max(0.6, Math.min(1.0, base * 0.4 + 0.6));
   }

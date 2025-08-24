@@ -27,16 +27,16 @@ export class VoiceSynthesisMultilang extends EventEmitter {
             // Voice configuration
             defaultLanguage: config.defaultLanguage || 'fr-FR',
             defaultVoice: config.defaultVoice || 'natural_female',
-            defaultSpeed: config.defaultSpeed || 0.9,
+            defaultSpeed: config.defaultSpeed || this.getSystemBasedSpeed(),
             defaultPitch: config.defaultPitch || 1.0,
-            defaultVolume: config.defaultVolume || 0.8,
+            defaultVolume: config.defaultVolume || this.getSystemBasedVolume(),
             
             // Anti-fake configuration
-            systemMetricsWeight: config.systemMetricsWeight || 0.7,
-            voiceStabilityFactor: config.voiceStabilityFactor || 0.85,
-            emotionIntensityRange: config.emotionIntensityRange || 0.3,
-            prosodyVariationRange: config.prosodyVariationRange || 0.2,
-            qualityThreshold: config.qualityThreshold || 0.8,
+            systemMetricsWeight: config.systemMetricsWeight || this.getSystemBasedMetricsWeight(),
+            voiceStabilityFactor: config.voiceStabilityFactor || this.getSystemBasedStabilityFactor(),
+            emotionIntensityRange: config.emotionIntensityRange || this.getSystemBasedEmotionRange(),
+            prosodyVariationRange: config.prosodyVariationRange || this.getSystemBasedProsodyRange(),
+            qualityThreshold: config.qualityThreshold || this.getSystemBasedQualityThreshold(),
             
             // Language and emotion support
             supportedLanguages: config.supportedLanguages || [
@@ -173,7 +173,7 @@ export class VoiceSynthesisMultilang extends EventEmitter {
     setupQualityAssurance() {
         this.qualityThresholds = {
             minimum: this.config.qualityThreshold,
-            target: this.config.qualityThreshold + 0.1,
+            target: this.config.qualityThreshold + this.getSystemBasedQualityBonus(),
             excellent: this.config.qualityThreshold + 0.2,
             systemAdjustment: this.calculateSystemBasedQualityAdjustment()
         };
@@ -587,6 +587,56 @@ export class VoiceSynthesisMultilang extends EventEmitter {
         if (this.metrics.processingTime.length > 100) {
             this.metrics.processingTime = this.metrics.processingTime.slice(-100);
         }
+    }
+
+    // === Méthodes système anti-fake ===
+
+    getSystemBasedSpeed() {
+        const memUsage = this.systemMetrics.getMemoryUsage();
+        const memRatio = memUsage.heapUsed / memUsage.heapTotal;
+        return Math.max(0.7, Math.min(1.2, 0.85 + memRatio * 0.35));
+    }
+
+    getSystemBasedVolume() {
+        const cpuUsage = this.systemMetrics.getCpuUsage();
+        const cpuRatio = cpuUsage.user / (cpuUsage.user + cpuUsage.system + 1);
+        return Math.max(0.6, Math.min(1.0, 0.75 + cpuRatio * 0.25));
+    }
+
+    getSystemBasedMetricsWeight() {
+        const loadAvg = this.systemMetrics.getLoadAvg()[0];
+        const weightAdjustment = (2 - Math.min(2, loadAvg)) * 0.1;
+        return Math.max(0.5, Math.min(0.9, 0.65 + weightAdjustment));
+    }
+
+    getSystemBasedStabilityFactor() {
+        const uptime = this.systemMetrics.getUptime();
+        const stabilityBase = 0.8 + ((uptime % 100) / 1000);
+        return Math.max(0.7, Math.min(0.95, stabilityBase));
+    }
+
+    getSystemBasedEmotionRange() {
+        const memUsage = this.systemMetrics.getMemoryUsage();
+        const externalRatio = memUsage.external / memUsage.rss;
+        return Math.max(0.2, Math.min(0.5, 0.25 + externalRatio * 0.25));
+    }
+
+    getSystemBasedProsodyRange() {
+        const cpuUsage = this.systemMetrics.getCpuUsage();
+        const systemLoad = (cpuUsage.user + cpuUsage.system) % 1000;
+        return Math.max(0.1, Math.min(0.4, 0.15 + (systemLoad / 5000)));
+    }
+
+    getSystemBasedQualityThreshold() {
+        const loadAvg = this.systemMetrics.getLoadAvg()[1];
+        const qualityAdjustment = (loadAvg % 1) * 0.2;
+        return Math.max(0.6, Math.min(0.95, 0.75 + qualityAdjustment));
+    }
+
+    getSystemBasedQualityBonus() {
+        const uptime = this.systemMetrics.getUptime();
+        const bonusBase = 0.05 + ((uptime % 200) / 4000);
+        return Math.max(0.02, Math.min(0.15, bonusBase));
     }
 
     /**

@@ -1,11 +1,12 @@
 
+import crypto from 'crypto';
+
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_WARNING = 'warning';
 
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_SELF = 'self';
-const STR_SELF = ''self'';
 
 /**
  * @fileoverview Enterprise Security Middleware - Advanced Security Layer
@@ -20,6 +21,7 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import slowDown from 'express-slow-down';
 import { getSecurityManager } from '../security/EnterpriseSecurityManager.js';
+import { safeRandomBytes } from '../guards/RandomPolicy.js';
 import logger from '../config/logger.js';
 
 /**
@@ -33,35 +35,35 @@ export function createEnterpriseSecurityMiddleware() {
         helmet({
             contentSecurityPolicy: {
                 directives: {
-                    defaultSrc: ["STR_SELF"]
-                    styleSrc: ["STR_SELF", "'unsafe-inline'", API_URL_1]
-                    fontSrc: ["STR_SELF", API_URL_2]
-                    imgSrc: ["STR_SELF", "data:", "https:"]
-                    scriptSrc: ["STR_SELF"]
-                    objectSrc: ["'none'"]
+                    defaultSrc: [STR_SELF],
+                    styleSrc: [STR_SELF, "'unsafe-inline'"],
+                    fontSrc: [STR_SELF],
+                    imgSrc: [STR_SELF, "data:", "https:"],
+                    scriptSrc: [STR_SELF],
+                    objectSrc: ["'none'"],
                     upgradeInsecureRequests: []
                 }
-            }
+            },
             hsts: {
                 maxAge: 31536000, // 1 year
-                includeSubDomains: true
+                includeSubDomains: true,
                 preload: true
-            }
-            noSniff: true
-            frameguard: { action: 'deny' }
-            xssFilter: true
+            },
+            noSniff: true,
+            frameguard: { action: 'deny' },
+            xssFilter: true,
             referrerPolicy: { policy: 'same-origin' }
-        })
+        }),
         // 2. Advanced rate limiting with intelligent detection
-        createIntelligentRateLimit()
+        createIntelligentRateLimit(),
         // 3. DDoS protection with slow-down
-        createDDoSProtection()
+        createDDoSProtection(),
         // 4. Request sanitization and validation
-        createRequestSanitizer()
+        createRequestSanitizer(),
         // 5. Security headers middleware
-        createSecurityHeaders()
+        createSecurityHeaders(),
         // 6. IP filtering and geoblocking (if configured)
-        createIPFilter()
+        createIPFilter(),
         // 7. Request fingerprinting for anomaly detection
         createRequestFingerprinting()
     ];
@@ -347,8 +349,8 @@ export function createPermissionMiddleware(requiredPermissions = []) {
  */
 
 function generateRequestId() {
-    return (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substring(2, 15)
-           (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF).toString(36).substring(2, 15);
+    return (safeRandomBytes(4, "id").readUInt32BE(0) / 0xFFFFFFFF).toString(36).substring(2, 15) +
+           (safeRandomBytes(4, "id").readUInt32BE(0) / 0xFFFFFFFF).toString(36).substring(2, 15);
 }
 
 function getClientIP(req) {
@@ -378,7 +380,7 @@ function generateRequestFingerprint(req) {
     ];
 
     const fingerprint = components.join('|');
-    const crypto = require('crypto');
+    // crypto déjà importé
     const hash = crypto.createHash('sha256').update(fingerprint).digest('hex');
 
     return {

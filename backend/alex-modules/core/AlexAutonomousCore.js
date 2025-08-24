@@ -196,7 +196,7 @@ class AlexAutonomousCore extends EventEmitter {
     // Génération de graines de conscience avec métriques réelles
     const seeds = [];
     
-    // Utilisation des métriques système au lieu de Math.random()
+    // Utilisation des métriques système réelles pour variabilité
     const cpuUsage = process.cpuUsage();
     const memUsage = process.memoryUsage();
     const loadAvg = os.loadavg();
@@ -309,10 +309,11 @@ class AlexAutonomousCore extends EventEmitter {
       const recentMem = this.systemMetrics.memoryHistory.slice(-5);
       
       if (recentCpu.length < 2 || recentMem.length < 2) {
-        // Fallback basé sur timestamp et opérations
-        const timeVariability = (now % 1000) / 1000;
-        const operationVariability = (this.state.operations % 100) / 100;
-        return (timeVariability + operationVariability) / 2;
+        // Fallback basé sur métriques système déterministes
+        const timeVariability = (now % 10000) / 10000; // 0-1 range
+        const operationVariability = (this.state.operations % 1000) / 1000; // 0-1 range
+        const pidVariability = (process.pid % 1000) / 1000; // Process-based variation
+        return (timeVariability + operationVariability + pidVariability) / 3;
       }
       
       // Calcul de variabilité CPU
@@ -330,8 +331,9 @@ class AlexAutonomousCore extends EventEmitter {
       return (cpuVariability + memVariability) / 2;
       
     } catch (error) {
-      // Fallback basé sur timestamp
-      return (Date.now() % 1000) / 1000;
+      // Fallback basé sur métriques système déterministes
+      const now = Date.now();
+      return ((now % 10000) / 10000 + (process.pid % 1000) / 1000) / 2;
     }
   }
 
@@ -411,7 +413,7 @@ class AlexAutonomousCore extends EventEmitter {
       complexity += Math.min(0.3, request.keywords.length * 0.05);
     }
     
-    // Facteur basé sur les métriques système au lieu de Math.random()
+    // Facteur basé sur les métriques système réelles
     const systemVariability = this.getRealVariability();
     complexity += systemVariability * 0.2;
     

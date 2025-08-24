@@ -1,4 +1,6 @@
 
+import crypto from 'crypto';
+
 // Node.js globals
 /* global setInterval */
 
@@ -304,7 +306,6 @@ class AdvancedCache {
    * Generate hash for cache key
    */
   generateHash(input) {
-    const crypto = require('crypto');
     return crypto.createHash('sha256').update(JSON.stringify(input)).digest('hex').substring(0, 16);
   }
 

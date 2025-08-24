@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import crypto from 'crypto';
+import os from 'os';
 import logger from '../../config/logger.js';
 
 /**
@@ -194,19 +195,19 @@ class EmotionalIntelligence extends EventEmitter {
   }
 
   generateSystemBasedPatternCount() {
-    const loadavg = require('os').loadavg();
+    const loadavg = os.loadavg();
     const systemValue = Math.floor((loadavg[0] * 1000) % 6) + 4;
     return systemValue; // 4-9
   }
 
   generateSystemBasedPatternIntensity() {
-    const totalMem = require('os').totalmem();
+    const totalMem = os.totalmem();
     const systemValue = (totalMem % 101) / 100;
     return Math.min(1.0, systemValue);
   }
 
   generateSystemBasedPatternAdaptability() {
-    const freeMem = require('os').freemem();
+    const freeMem = os.freemem();
     const systemValue = ((freeMem % 41) + 60) / 100;
     return Math.min(1.0, systemValue); // 0.6-1.0
   }
@@ -217,19 +218,19 @@ class EmotionalIntelligence extends EventEmitter {
   }
 
   generateSystemBasedConfidence() {
-    const cpuCount = require('os').cpus().length;
+    const cpuCount = os.cpus().length;
     const systemValue = ((cpuCount * 15) % 41) / 100 + 0.6;
     return Math.min(1.0, systemValue); // 0.6-1.0
   }
 
   generateSystemBasedEmotionConfidence() {
-    const uptime = Math.floor(require('os').uptime());
+    const uptime = Math.floor(os.uptime());
     const systemValue = ((uptime % 31) + 70) / 100;
     return Math.min(1.0, systemValue); // 0.7-1.0
   }
 
   generateSystemBasedAuthenticityFactor() {
-    const platform = require('os').platform();
+    const platform = os.platform();
     const systemValue = (platform.length * 3.7 % 21) / 100;
     return Math.min(0.2, systemValue);
   }
@@ -259,37 +260,37 @@ class EmotionalIntelligence extends EventEmitter {
   }
 
   generateSystemBasedResonanceQuality() {
-    const loadavg = require('os').loadavg();
+    const loadavg = os.loadavg();
     const systemValue = ((loadavg[1] * 100) % 31) / 100 + 0.7;
     return Math.min(1.0, systemValue); // 0.7-1.0
   }
 
   generateSystemBasedSimilarityBoost() {
-    const totalMem = require('os').totalmem();
+    const totalMem = os.totalmem();
     const systemValue = (totalMem % 11) / 100;
     return Math.min(0.1, systemValue);
   }
 
   generateSystemBasedImpact() {
-    const freeMem = require('os').freemem();
+    const freeMem = os.freemem();
     const systemValue = ((freeMem % 41) + 60) / 100;
     return Math.min(1.0, systemValue); // 0.6-1.0
   }
 
   generateSystemBasedRelevance() {
-    const cpuCount = require('os').cpus().length;
+    const cpuCount = os.cpus().length;
     const systemValue = ((cpuCount * 10 % 31) + 70) / 100;
     return Math.min(1.0, systemValue); // 0.7-1.0
   }
 
   generateSystemBasedAwarenessLevel() {
-    const uptime = Math.floor(require('os').uptime());
+    const uptime = Math.floor(os.uptime());
     const systemValue = ((uptime % 41) + 60) / 100;
     return Math.min(1.0, systemValue); // 0.6-1.0
   }
 
   generateSystemBasedSituationalAdaptation() {
-    const platform = require('os').platform();
+    const platform = os.platform();
     const systemValue = ((platform.length * 7) % 31) / 100 + 0.7;
     return Math.min(1.0, systemValue); // 0.7-1.0
   }
@@ -319,37 +320,37 @@ class EmotionalIntelligence extends EventEmitter {
   }
 
   generateSystemBasedCrossCulturalEmpathy() {
-    const loadavg = require('os').loadavg();
+    const loadavg = os.loadavg();
     const systemValue = ((loadavg[2] * 100) % 41) / 100 + 0.6;
     return Math.min(1.0, systemValue); // 0.6-1.0
   }
 
   generateSystemBasedAdaptabilityLevel() {
-    const totalMem = require('os').totalmem();
+    const totalMem = os.totalmem();
     const systemValue = ((totalMem % 41) + 60) / 100;
     return Math.min(1.0, systemValue); // 0.6-1.0
   }
 
   generateSystemBasedCulturalResonance() {
-    const freeMem = require('os').freemem();
+    const freeMem = os.freemem();
     const systemValue = ((freeMem % 51) + 50) / 100;
     return Math.min(1.0, systemValue); // 0.5-1.0
   }
 
   generateSystemBasedTemporalAwareness() {
-    const cpuCount = require('os').cpus().length;
+    const cpuCount = os.cpus().length;
     const systemValue = ((cpuCount * 5 % 31) + 70) / 100;
     return Math.min(1.0, systemValue); // 0.7-1.0
   }
 
   generateSystemBasedContextualPersistence() {
-    const uptime = Math.floor(require('os').uptime());
+    const uptime = Math.floor(os.uptime());
     const systemValue = ((uptime % 41) + 60) / 100;
     return Math.min(1.0, systemValue); // 0.6-1.0
   }
 
   generateSystemBasedResponseTimeliness() {
-    const platform = require('os').platform();
+    const platform = os.platform();
     const systemValue = ((platform.length * 11) % 31) / 100 + 0.7;
     return Math.min(1.0, systemValue); // 0.7-1.0
   }
@@ -379,37 +380,37 @@ class EmotionalIntelligence extends EventEmitter {
   }
 
   generateSystemBasedValidationAuthenticity() {
-    const loadavg = require('os').loadavg();
+    const loadavg = os.loadavg();
     const systemValue = ((loadavg[0] * 100) % 21) / 100 + 0.8;
     return Math.min(1.0, systemValue); // 0.8-1.0
   }
 
   generateSystemBasedSupportLevel() {
-    const totalMem = require('os').totalmem();
+    const totalMem = os.totalmem();
     const systemValue = ((totalMem % 41) + 60) / 100;
     return Math.min(1.0, systemValue); // 0.6-1.0
   }
 
   generateSystemBasedSustainability() {
-    const freeMem = require('os').freemem();
+    const freeMem = os.freemem();
     const systemValue = ((freeMem % 31) + 70) / 100;
     return Math.min(1.0, systemValue); // 0.7-1.0
   }
 
   generateSystemBasedSincerity() {
-    const cpuCount = require('os').cpus().length;
+    const cpuCount = os.cpus().length;
     const systemValue = ((cpuCount * 3 % 21) + 80) / 100;
     return Math.min(1.0, systemValue); // 0.8-1.0
   }
 
   generateSystemBasedPresence() {
-    const uptime = Math.floor(require('os').uptime());
+    const uptime = Math.floor(os.uptime());
     const systemValue = ((uptime % 31) + 70) / 100;
     return Math.min(1.0, systemValue); // 0.7-1.0
   }
 
   generateSystemBasedEffectiveness() {
-    const platform = require('os').platform();
+    const platform = os.platform();
     const systemValue = ((platform.length * 13) % 31) / 100 + 0.7;
     return Math.min(1.0, systemValue); // 0.7-1.0
   }

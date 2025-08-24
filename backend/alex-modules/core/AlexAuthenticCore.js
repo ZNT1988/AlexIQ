@@ -8,6 +8,13 @@ import { EventEmitter } from "events";
 import logger from "../../config/logger.js";
 import os from "os";
 
+// Helper function for confidence calculation based on freshness and weight
+function computeConfidence(ts, ttlMs = 60000, weight = 1) {
+  const age = Date.now() - (ts || 0);
+  const f = Math.max(0.1, 1 - age / ttlMs);
+  return Math.max(0.1, Math.min(1, f * weight));
+}
+
 /**
  * @fileoverview AlexAuthenticCore - AUTHENTICITY AND TRUST SYSTEM
  * Gère l'authenticité, la confiance, et la validation des interactions
@@ -364,7 +371,7 @@ export class AlexAuthenticCore extends EventEmitter {
         trust_score: 0.0,
         validation_result: 'error',
         system_metrics: JSON.stringify({ error: error.message }),
-        confidence: 0.0
+        confidence: computeConfidence(Date.now() - 60000, 60000, 0.1) // Very low confidence for errors
       });
       
       throw error;

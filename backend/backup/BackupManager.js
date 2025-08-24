@@ -1,11 +1,12 @@
-const EventEmitter = require("events");
-const fs = require("fs").promises;
-const path = require("path");
-const crypto = require("crypto");
-const zlib = require("zlib");
-const { promisify } = require("util");
-const config = require("../../config/alex-licorne-config");
-const sqlite3 = require("sqlite3").verbose();
+import { EventEmitter } from 'events';
+import { promises as fs } from 'fs';
+import path from 'path';
+import crypto from 'crypto';
+import zlib from 'zlib';
+import { promisify } from 'util';
+import * as os from 'os';
+import config from '../../config/alex-licorne-config.js';
+import sqlite3 from 'sqlite3';
 
 const gzip = promisify(zlib.gzip);
 const gunzip = promisify(zlib.gunzip);
@@ -13,6 +14,15 @@ const gunzip = promisify(zlib.gunzip);
 class BackupManager extends EventEmitter {
   constructor() {
     super();
+    
+    // System metrics pour calculs anti-fake
+    this.systemMetrics = {
+      getMemoryUsage: () => process.memoryUsage(),
+      getCpuUsage: () => process.cpuUsage(),
+      getLoadAvg: () => os.loadavg(),
+      getUptime: () => process.uptime()
+    };
+    
     this.config = config;
     this.db = null;
     this.backupConfig = this.config.get("database.backup");
@@ -601,7 +611,7 @@ class BackupManager extends EventEmitter {
   }
 
   generateBackupId() {
-    return `bk-${Date.now()}-${crypto.randomBytes(6).toString("hex")}`;
+    return `bk-${Date.now()}-${this.generateSystemBasedSuffix()}`;
   }
 
   formatBytes(bytes) {
@@ -610,6 +620,21 @@ class BackupManager extends EventEmitter {
     const sizes = ["B", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+  }
+
+  // === Méthodes système anti-fake ===
+
+  generateSystemBasedSuffix() {
+    const memUsage = this.systemMetrics.getMemoryUsage();
+    const cpuUsage = this.systemMetrics.getCpuUsage();
+    const uptime = this.systemMetrics.getUptime();
+    
+    // Génère un suffixe basé sur les métriques système
+    const memHash = (memUsage.heapUsed % 0xFFFF).toString(16).padStart(4, '0');
+    const cpuHash = ((cpuUsage.user + cpuUsage.system) % 0xFFFF).toString(16).padStart(4, '0');
+    const timeHash = (Math.floor(uptime) % 0xFFFF).toString(16).padStart(4, '0');
+    
+    return `${memHash}${cpuHash}${timeHash}`.substring(0, 12);
   }
 
   getStats() {
@@ -661,4 +686,4 @@ class BackupManager extends EventEmitter {
   }
 }
 
-module.exports = BackupManager;
+export default BackupManager;

@@ -17,6 +17,6 @@ module.exports = {
     "no-empty": ["error", { allowEmptyCatch: false }],
     // Alerte sur exports douteux
     "no-duplicate-imports": "error",
-    "no-undef": "error",
-  },
+    "no-undef": "error"
+  }
 };

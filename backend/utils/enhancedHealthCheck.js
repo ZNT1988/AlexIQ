@@ -15,6 +15,7 @@ const STR_ENV = ".env";
 
 import fs from "fs";
 import path from "path";
+import os from "os";
 import { performance } from "perf_hooks";
 import logger from "../config/logger.js";
 
@@ -196,10 +197,10 @@ class EnhancedHealthCheck {
    */
   async checkPerformance() {
     const startTime = performance.now();
-    // Test de calcul simple pour mesurer les performances
+    // Test de calcul simple pour mesurer les performances CPU
     let sum = 0;
     for (let i = 0; i < 100000; i++) {
-      sum += (crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF);
+      sum += Math.sin(i) * Math.cos(i); // Real CPU-intensive calculation
     }
 
     const endTime = performance.now();
@@ -217,7 +218,7 @@ class EnhancedHealthCheck {
         heapTotal: Math.round(memory.heapTotal / 1024 / 1024),
         rss: Math.round(memory.rss / 1024 / 1024)
       },
-      loadAverage: process.platform !== "win32" ? require("os").loadavg() : [0, 0, 0]
+      loadAverage: process.platform !== "win32" ? os.loadavg() : [0, 0, 0]
       , sum : sum };
   }
 

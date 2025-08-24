@@ -102,7 +102,29 @@ export default [
       "no-unsafe-negation": STR_ERROR,
       "no-unsafe-finally": STR_ERROR,
       "no-unreachable": STR_ERROR,
-      "no-fallthrough": STR_ERROR
+      "no-fallthrough": STR_ERROR,
+      // Anti-fake rules - bannir Math.random et crypto.randomBytes
+      "no-restricted-syntax": [
+        STR_ERROR,
+        {
+          selector:
+            "CallExpression[callee.object.name='Math'][callee.property.name='random']",
+          message: "Math.random() interdit: utilisez des métriques mesurées."
+        },
+        // crypto.randomBytes hors usages autorisés
+        {
+          selector:
+            "CallExpression[callee.object.name='crypto'][callee.property.name='randomBytes']",
+          message:
+            "crypto.randomBytes() interdit ici: utilisez guards/safeRandomBytes() avec un purpose autorisé."
+        },
+        {
+          selector:
+            "CallExpression[callee.name='randomBytes']",
+          message:
+            "randomBytes() interdit ici: utilisez guards/safeRandomBytes() avec un purpose autorisé."
+        }
+      ]
     }
   },
   {

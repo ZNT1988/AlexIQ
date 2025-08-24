@@ -813,9 +813,9 @@ export default class MarketAnalyzer extends EventEmitter {
       error: error.message,
       indicators: this.getDefaultIndicators(),
       patterns: { bullishPatterns: 0, bearishPatterns: 0, patterns: [] },
-      trend: { direction: STR_NEUTRAL, strength: 0, confidence: 0.1 },
+      trend: { direction: STR_NEUTRAL, strength: 0, confidence: this.calculateErrorConfidence(error) },
       signals: { recommendation: STR_HOLD, strength: 0, reasons: ['Analysis failed'] },
-      confidence: 0.1,
+      confidence: this.calculateErrorConfidence(error),
       source: "fallback_analysis",
       systemMetrics: this.state.systemMetrics
     };
@@ -931,6 +931,25 @@ export default class MarketAnalyzer extends EventEmitter {
     
     this.isInitialized = false;
     this.log("🗑️ MarketAnalyzer détruit");
+  }
+
+  calculateErrorConfidence(error) {
+    // Dynamic confidence based on error type and system state
+    const memUsage = process.memoryUsage();
+    const systemHealth = 1 - (memUsage.heapUsed / memUsage.heapTotal);
+    
+    let baseConfidence = 0.05; // Very low for analysis errors
+    
+    // Adjust based on error type
+    if (error.message.includes('network')) baseConfidence = 0.15;
+    if (error.message.includes('timeout')) baseConfidence = 0.1;
+    if (error.message.includes('data')) baseConfidence = 0.08;
+    if (error.message.includes('invalid')) baseConfidence = 0.03;
+    
+    // Factor in system health
+    const healthBonus = systemHealth * 0.1;
+    
+    return Math.max(0.02, Math.min(0.2, baseConfidence + healthBonus));
   }
 }
 

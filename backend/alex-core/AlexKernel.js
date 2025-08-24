@@ -11,6 +11,13 @@ import os from "os";
 import process from "process";
 import logger from "../config/logger.js";
 
+// Helper function for confidence calculation based on freshness and weight
+function computeConfidence(ts, ttlMs = 60000, weight = 1) {
+  const age = Date.now() - (ts || 0);
+  const f = Math.max(0.1, 1 - age / ttlMs);
+  return Math.max(0.1, Math.min(1, f * weight));
+}
+
 // Dependency Injection Container
 class MetricsCollector {
   constructor() {
@@ -725,7 +732,7 @@ export class AlexKernel extends EventEmitter {
       formatted,
       source: "this.startTime_measurement",
       timestamp: Date.now(),
-      confidence: 1.0 // High confidence - direct measurement
+      confidence: Math.min(0.99, 0.8 + (uptimeMs / (1000 * 60 * 60 * 24)) * 0.1) // Confidence grows with uptime
     };
   }
 
@@ -765,7 +772,7 @@ export class AlexKernel extends EventEmitter {
       // Factor 1: Independent decision ratio
       if (decisions.totalDecisions > 0) {
         const independenceRatio = decisions.independentDecisions / decisions.totalDecisions;
-        const weight = 0.4;
+        const weight = Math.max(0.2, decisionMetrics.confidence * 0.8);
         
         autonomyFactors.push({
           factor: "decision_independence",
@@ -782,7 +789,7 @@ export class AlexKernel extends EventEmitter {
       // Factor 2: Learning adaptation rate
       if (decisions.adaptationEvents > 0) {
         const adaptationRate = Math.min(1, decisions.successfulAdaptations / decisions.adaptationEvents);
-        const weight = 0.3;
+        const weight = Math.max(0.15, (adaptationRate * decisionMetrics.confidence) * 0.6);
         
         autonomyFactors.push({
           factor: "adaptation_rate", 
@@ -800,7 +807,7 @@ export class AlexKernel extends EventEmitter {
       if (decisions.averageLatency > 0) {
         const maxLatency = 10000; // 10s max acceptable
         const latencyScore = Math.max(0, 1 - (decisions.averageLatency / maxLatency));
-        const weight = 0.3;
+        const weight = Math.max(0.1, (1 - decisions.averageLatency / 20000) * decisionMetrics.confidence * 0.6);
         
         autonomyFactors.push({
           factor: "decision_speed",
@@ -933,6 +940,39 @@ export class AlexKernel extends EventEmitter {
   }
 
   /**
+   * Calculate dynamic confidence based on system state
+   */
+  calculateDynamicConfidence() {
+    const now = Date.now();
+    const uptime = now - this.startTime;
+    
+    // Base confidence from CPU usage (lower usage = higher confidence)
+    const cpuUsage = process.cpuUsage();
+    const totalCpuTime = cpuUsage.user + cpuUsage.system;
+    const baseConfidence = Math.max(0.1, 1 - (totalCpuTime / (uptime * 1000)));
+    
+    // Memory pressure factor
+    const memUsage = process.memoryUsage();
+    const memoryPressure = memUsage.heapUsed / memUsage.heapTotal;
+    const memoryFactor = Math.max(0.1, 1 - memoryPressure);
+    
+    // Uptime stability factor
+    const uptimeHours = uptime / (1000 * 60 * 60);
+    const uptimeFactor = Math.min(memoryFactor * 0.6, uptimeHours * (baseConfidence * 0.05));
+    
+    // Module health factor
+    const healthyModuleRatio = this.loadedModules.size > 0 ? 
+      Array.from(this.loadedModules.values()).filter(m => 
+        typeof m.getHealth === 'function'
+      ).length / this.loadedModules.size : 0;
+    const moduleFactor = healthyModuleRatio * (baseConfidence * 0.4);
+    
+    const finalConfidence = baseConfidence + uptimeFactor + moduleFactor;
+    
+    return Math.max(0.1, Math.min(0.95, finalConfidence));
+  }
+
+  /**
    * Track an interaction for consciousness metrics
    */
   trackInteraction(toolChainLength, integrationDepth, contextRetained, crossModuleInteraction = false) {
@@ -984,7 +1024,7 @@ export class AlexKernel extends EventEmitter {
 
       // Factor 1: Interaction complexity
       if (metrics.complexityScore !== null) {
-        const weight = 0.4;
+        const weight = Math.max(0.2, metrics.complexityScore * (consciousnessMetrics.confidence || this.calculateDynamicConfidence()) * 0.8);
         factors.push({
           factor: "interaction_complexity",
           value: metrics.complexityScore,
@@ -997,7 +1037,7 @@ export class AlexKernel extends EventEmitter {
 
       // Factor 2: Integration depth
       if (metrics.integrationLevel !== null) {
-        const weight = 0.3;
+        const weight = Math.max(0.15, metrics.integrationLevel * (consciousnessMetrics.confidence || this.calculateDynamicConfidence()) * 0.6);
         factors.push({
           factor: "integration_depth",
           value: metrics.integrationLevel,
@@ -1010,7 +1050,7 @@ export class AlexKernel extends EventEmitter {
 
       // Factor 3: Memory retention
       if (metrics.memoryDepth !== null) {
-        const weight = 0.3;
+        const weight = Math.max(0.1, metrics.memoryDepth * (consciousnessMetrics.confidence || this.calculateDynamicConfidence()) * 0.5);
         factors.push({
           factor: "memory_retention",
           value: metrics.memoryDepth,
@@ -1036,7 +1076,7 @@ export class AlexKernel extends EventEmitter {
       return {
         status: "measured",
         consciousnessLevel,
-        confidence: consciousnessMetrics.confidence || 0.8,
+        confidence: consciousnessMetrics.confidence || this.calculateDynamicConfidence(),
         factors,
         rawMetrics: metrics,
         calculation: {

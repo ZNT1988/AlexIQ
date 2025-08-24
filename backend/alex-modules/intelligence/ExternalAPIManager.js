@@ -205,7 +205,7 @@ class APIUsageTracker {
       return {
         status: "single_option",
         selectedAPI: availableAPIs[0],
-        confidence: 0.7,
+        confidence: this.calculateAPIConfidence(availableAPIs[0]),
         reason: "only_available_api"
       };
     }
@@ -681,6 +681,26 @@ class ExternalAPIManager extends EventEmitter {
       overallHealth: Object.values(results).every(r => r.status === "healthy") ? "healthy" : "degraded",
       timestamp: Date.now()
     };
+  }
+
+  calculateAPIConfidence(apiName) {
+    // Dynamic confidence based on API performance and system state
+    const memUsage = process.memoryUsage();
+    const systemStability = 1 - (memUsage.heapUsed / memUsage.heapTotal);
+    
+    // Get API metrics if available
+    const metrics = this.getPerformanceMetrics(apiName, 1000);
+    let baseConfidence = 0.5; // Base confidence
+    
+    // Adjust based on API performance
+    if (metrics && metrics.successRate) {
+      baseConfidence = Math.max(0.3, metrics.successRate);
+    }
+    
+    // Factor in system stability
+    const finalConfidence = Math.min(0.9, baseConfidence + (systemStability * 0.2));
+    
+    return Math.max(0.1, finalConfidence);
   }
 
   async shutdown() {

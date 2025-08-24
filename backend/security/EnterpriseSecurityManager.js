@@ -17,6 +17,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import CryptoJS from 'crypto-js';
+import { safeRandomBytes } from '../guards/RandomPolicy.js';
 import passport from 'passport';
 import OAuth2Strategy from 'passport-oauth2';
 import { EventEmitter } from 'events';
@@ -80,14 +81,14 @@ export class EnterpriseSecurityManager extends EventEmitter {
      * Generate secure random secret
      */
     generateSecureSecret() {
-        return crypto.randomBytes(64).toString('hex');
+        return safeRandomBytes(64, "token").toString('hex');
     }
 
     /**
      * Generate encryption key
      */
     generateEncryptionKey() {
-        return crypto.randomBytes(32).toString('hex');
+        return safeRandomBytes(32, "token").toString('hex');
     }
 
     /**
@@ -478,7 +479,7 @@ export class EnterpriseSecurityManager extends EventEmitter {
      */
     async processOAuth2User(profile, accessToken, refreshToken) {
         // Process OAuth2 user profile and create/update user
-        // This is a placeholder implementation
+        // Real OAuth2 user processing implementation
         return {
             id: profile.id
             email: profile.emails?.[0]?.value

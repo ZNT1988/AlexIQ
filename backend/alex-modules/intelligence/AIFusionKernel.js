@@ -7,6 +7,7 @@
  */
 
 import crypto from 'crypto';
+import os from 'os';
 import { EventEmitter } from 'events';
 import logger from '../../config/logger.js';
 
@@ -101,7 +102,7 @@ class AIFusionKernel extends EventEmitter {
 
   generateSystemBasedId() {
     const hrtime = process.hrtime();
-    const loadavg = require('os').loadavg();
+    const loadavg = os.loadavg();
     const hash = (hrtime[0] + hrtime[1] + Math.floor(loadavg[0] * 1000)).toString(36);
     return Date.now() + parseInt(hash.substring(0, 8), 36);
   }
@@ -284,8 +285,8 @@ class AIFusionKernel extends EventEmitter {
   }
 
   getEmotionalComplexity() {
-    const loadavg = require('os').loadavg();
-    return Math.min(1, loadavg[0] / require('os').cpus().length);
+    const loadavg = os.loadavg();
+    return Math.min(1, loadavg[0] / os.cpus().length);
   }
 
   /**

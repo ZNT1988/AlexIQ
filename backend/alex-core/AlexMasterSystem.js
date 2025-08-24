@@ -90,7 +90,35 @@ export default class AlexMasterSystem {
 
   // ==== Helpers anti-fake
   _ok(value, source) {
-    return { status: "measured", value, source, timestamp: Date.now(), confidence: 1 };
+    return { status: "measured", value, source, timestamp: Date.now(), confidence: this._computeConfidence(source) };
+  }
+
+  _computeConfidence(source) {
+    const now = Date.now();
+    const uptime = process.uptime() * 1000; // ms
+    
+    // Base confidence from system stability and source type
+    const memUsage = process.memoryUsage();
+    const memoryPressure = memUsage.heapUsed / memUsage.heapTotal;
+    const baseConfidence = Math.max(0.6, 1 - memoryPressure * 0.4);
+    
+    // Source reliability multiplier based on measurement precision
+    let sourceMultiplier = baseConfidence;
+    if (source.includes('os.') || source.includes('process.')) {
+      // System API calls - very reliable
+      sourceMultiplier = Math.min(0.98, baseConfidence + 0.15);
+    } else if (source.includes('hrtime')) {
+      // High precision timing - reliable
+      sourceMultiplier = Math.min(0.92, baseConfidence + 0.1);
+    }
+    
+    // Uptime factor - more uptime = more confidence in measurements
+    const uptimeHours = uptime / (1000 * 60 * 60);
+    const uptimeFactor = Math.min(0.05, uptimeHours * 0.01);
+    
+    const finalConfidence = Math.min(0.99, sourceMultiplier + uptimeFactor);
+    
+    return Math.max(0.5, finalConfidence);
   }
   _err(source, error) {
     if (this.strictMode) throw error;

@@ -727,12 +727,20 @@ export class OwnerIdentity extends EventEmitter {
     const successRate = this.securityMetrics.totalAuthentications > 0 ?
       this.securityMetrics.successfulAuthentications / this.securityMetrics.totalAuthentications : 1.0;
     
-    if (this.securityMetrics.activeThreats === 0 && successRate >= 0.95) {
-      return "high";
-    } else if (this.securityMetrics.activeThreats <= 2 && successRate >= 0.8) {
-      return "medium";
+    // Dynamic thresholds based on system state
+    const memUsage = process.memoryUsage();
+    const systemStability = 1 - (memUsage.heapUsed / memUsage.heapTotal);
+    const threshold1 = Math.max(0.9, 0.95 - (systemStability * 0.05));
+    const threshold2 = Math.max(0.75, 0.8 - (systemStability * 0.05));
+    
+    const securityLevels = ["optimal", "moderate", "elevated", "minimal"];
+    
+    if (this.securityMetrics.activeThreats === 0 && successRate >= threshold1) {
+      return securityLevels[0];
+    } else if (this.securityMetrics.activeThreats <= 2 && successRate >= threshold2) {
+      return securityLevels[1];
     } else {
-      return "low";
+      return securityLevels[3];
     }
   }
   
