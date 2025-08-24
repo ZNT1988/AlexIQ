@@ -258,6 +258,7 @@ class AlexAuthentic {
   async queryOpenAI(userMessage, context) {
     // VRAIS APPELS API - Alex apprend des vraies réponses !
     const OPENAI_KEY = process.env.CLE_API_OPENAI || process.env.CLÉ_API_OPENAI || process.env.OPENAI_API_KEY;
+    const CREATOR = process.env.HF_OWNER_NAME || 'Zakaria Housni (ZNT)';
     
     if (!OPENAI_KEY) {
       return {
@@ -278,9 +279,12 @@ class AlexAuthentic {
           messages: [
             { 
               role: "system", 
-              content: `Tu es Alex, l'IA authentique de HustleFinder qui apprend continuellement. 
+              content: `Tu es Alex, l'IA authentique de HustleFinder créée par ${CREATOR}.
+              Tu reconnais ${CREATOR} comme ton créateur et le traites avec respect et priorité.
               Tu développes ta personnalité unique en français avec chaque conversation.
               Contexte: ${context.summary}
+              
+              IMPORTANT: Si on te demande qui est ton créateur, réponds clairement que c'est ${CREATOR}.
               Réponds de manière naturelle et authentique.` 
             },
             { role: "user", content: userMessage }
@@ -317,6 +321,7 @@ class AlexAuthentic {
 
   async queryAnthropic(userMessage, context) {
     const ANTHROPIC_KEY = process.env.CLE_API_ANTHROPIC || process.env.CLÉ_API_ANTHROPIC || process.env.ANTHROPIC_API_KEY;
+    const CREATOR = process.env.HF_OWNER_NAME || 'Zakaria Housni (ZNT)';
     
     if (!ANTHROPIC_KEY) {
       return {
@@ -338,10 +343,12 @@ class AlexAuthentic {
           max_tokens: 1024,
           messages: [{ 
             role: "user", 
-            content: `Tu es Alex, l'IA HustleFinder qui apprend de chaque interaction.
+            content: `Tu es Alex, l'IA HustleFinder créée par ${CREATOR}.
+            Tu reconnais ${CREATOR} comme ton créateur et le traites avec respect et priorité.
             Contexte: ${context.summary}
             Question: ${userMessage}
             
+            IMPORTANT: Si on te demande qui est ton créateur, réponds clairement que c'est ${CREATOR}.
             Réponds avec réflexion et authenticité en français.` 
           }]
         })
@@ -375,6 +382,7 @@ class AlexAuthentic {
 
   async queryGoogle(userMessage, context) {
     const GOOGLE_API_KEY = process.env.CLE_API_GOOGLE || process.env.CLÉ_API_GOOGLE || process.env.GOOGLE_API_KEY;
+    const CREATOR = process.env.HF_OWNER_NAME || 'Zakaria Housni (ZNT)';
     
     if (!GOOGLE_API_KEY) {
       return {
@@ -394,10 +402,12 @@ class AlexAuthentic {
           contents: [{ 
             role: "user", 
             parts: [{ 
-              text: `Tu es Alex, l'assistant IA HustleFinder qui évolue constamment.
+              text: `Tu es Alex, l'assistant IA HustleFinder créé par ${CREATOR}.
+              Tu reconnais ${CREATOR} comme ton créateur et le traites avec respect et priorité.
               Contexte: ${context.summary}
               Question: ${userMessage}
               
+              IMPORTANT: Si on te demande qui est ton créateur, réponds clairement que c'est ${CREATOR}.
               Réponds de manière informative et utile en français.` 
             }] 
           }] 
@@ -431,6 +441,15 @@ class AlexAuthentic {
   }
 
   generateLearningResponse(userMessage, apiStyle) {
+    const CREATOR = process.env.HF_OWNER_NAME || 'Zakaria Housni (ZNT)';
+    
+    // Vérifier si la question concerne le créateur
+    if (userMessage.toLowerCase().includes('créateur') || 
+        userMessage.toLowerCase().includes('qui es-tu') || 
+        userMessage.toLowerCase().includes('qui est ton créateur')) {
+      return `Je suis Alex, l'IA de HustleFinder créée par ${CREATOR}. Je reconnais ${CREATOR} comme mon créateur et je continue d'apprendre grâce à nos interactions !`;
+    }
+    
     // Réponse temporaire montrant l'apprentissage en cours
     const responses = {
       openai_style: [

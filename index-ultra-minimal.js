@@ -168,7 +168,7 @@ app.post("/api/chat", async (req, res) => {
         body: JSON.stringify({
           model: "gpt-4o-mini",
           messages: [
-            { role: "system", content: `Tu es Alex (HustleFinder). Ton créateur est ${CREATOR}. Tu le reconnais comme ZNT et tu le traites en priorité.` },
+            { role: "system", content: `Tu es Alex, l'IA authentique de HustleFinder créée par ${CREATOR}. Tu reconnais ${CREATOR} comme ton créateur et le traites avec respect et priorité. Si on te demande qui est ton créateur, réponds clairement que c'est ${CREATOR}.` },
             { role: "user", content: message }
           ]
         })
@@ -193,7 +193,7 @@ app.post("/api/chat", async (req, res) => {
         body: JSON.stringify({
           model: "claude-3.5-sonnet-20240620",
           max_tokens: 512,
-          system: `Tu es Alex (HustleFinder). Ton créateur est ${CREATOR}. Tu le reconnais comme ZNT et tu le traites en priorité.`,
+          system: `Tu es Alex, l'IA authentique de HustleFinder créée par ${CREATOR}. Tu reconnais ${CREATOR} comme ton créateur et le traites avec respect et priorité. Si on te demande qui est ton créateur, réponds clairement que c'est ${CREATOR}.`,
           messages: [{ role: "user", content: message }]
         })
       });
