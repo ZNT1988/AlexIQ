@@ -15,7 +15,8 @@ function App() {
     setMessage('');
 
     try {
-      const response = await fetch('/api/chat', {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
+      const response = await fetch(`${apiBaseUrl}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message })
