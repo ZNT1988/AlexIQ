@@ -82,25 +82,66 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
-// Chat direct vers APIs officielles - ZERO FAKE, ZERO SIMULATION
+// ====== ALEX AUTHENTIQUE ======
+// Importer la route Alex authentique
+try {
+  const { default: alexRoutes } = await import("./backend/routes/alex-authentic.js");
+  app.use("/api/alex", alexRoutes);
+} catch (error) {
+  console.warn("Alex authentic routes not loaded:", error.message);
+}
+
+// ====== CHAT HYBRIDE - Alex + APIs de fallback ======
 app.post("/api/chat", async (req, res) => {
   try {
-    const { message } = req.body || {};
+    const { message, useAlex = true } = req.body || {};
     if (!message || typeof message !== "string") {
       return res.status(400).json({ error: "bad_request", message: "message:string requis" });
     }
 
+    // PRIORITÉ 1: Alex Authentique (ton IA avec 22,680 modules)
+    if (useAlex) {
+      try {
+        const alexResponse = await fetch(`http://localhost:${PORT}/api/alex/chat`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message, sessionId: req.sessionId || "default" })
+        });
+        
+        if (alexResponse.ok) {
+          const alexData = await alexResponse.json();
+          return res.json({
+            provider: "alex",
+            output: alexData.alex,
+            personality: alexData.personality,
+            confidence: alexData.confidence,
+            authentic: true,
+            learningInsights: alexData.learningInsights
+          });
+        }
+      } catch (error) {
+        console.warn("Alex fallback to external APIs:", error.message);
+      }
+    }
+
+    // FALLBACK: APIs externes si Alex indisponible
     // 1) OpenAI
     if (OPENAI_KEY) {
       const r = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
         headers: { "Authorization": `Bearer ${OPENAI_KEY}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ model: "gpt-4o-mini", messages: [{ role: "user", content: message }] })
+        body: JSON.stringify({ 
+          model: "gpt-4o-mini", 
+          messages: [
+            { role: "system", content: "Tu es Alex, l'assistant IA de HustleFinder. Réponds en français de manière naturelle et authentique." },
+            { role: "user", content: message }
+          ]
+        })
       });
       if (!r.ok) return res.status(502).json({ error: "provider_error", provider: "openai", detail: await r.text() });
       const j = await r.json();
       const out = j?.choices?.[0]?.message?.content ?? null;
-      const response = { provider: "openai", output: out };
+      const response = { provider: "openai_fallback", output: out, authentic: false };
       if (process.env.DEBUG === "1") response.raw = j;
       return res.json(response);
     }
@@ -117,52 +158,18 @@ app.post("/api/chat", async (req, res) => {
         body: JSON.stringify({
           model: "claude-3.5-sonnet-20240620",
           max_tokens: 512,
-          messages: [{ role: "user", content: message }]
+          messages: [{ role: "user", content: `Tu es Alex, l'assistant IA de HustleFinder. Réponds en français: ${message}` }]
         })
       });
       if (!r.ok) return res.status(502).json({ error: "provider_error", provider: "anthropic", detail: await r.text() });
       const j = await r.json();
       const out = j?.content?.[0]?.text ?? null;
-      const response = { provider: "anthropic", output: out };
+      const response = { provider: "anthropic_fallback", output: out, authentic: false };
       if (process.env.DEBUG === "1") response.raw = j;
       return res.json(response);
     }
 
-    // 3) Vertex AI (Service Account JSON)
-    if (GCP_SA_JSON && GCP_PROJECT && GCP_LOCATION && VERTEX_MODEL) {
-      const accessToken = await googleAccessTokenFromServiceAccount(GCP_SA_JSON);
-      const url = `https://${GCP_LOCATION}-aiplatform.googleapis.com/v1/projects/${GCP_PROJECT}/locations/${GCP_LOCATION}/publishers/google/models/${VERTEX_MODEL}:generateContent`;
-      const r = await fetch(url, {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${accessToken}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: message }] }] })
-      });
-      if (!r.ok) return res.status(502).json({ error: "provider_error", provider: "vertex", detail: await r.text() });
-      const j = await r.json();
-      const text = j?.candidates?.[0]?.content?.parts?.map(p => p.text).join("") ?? null;
-      const response = { provider: "vertex", output: text };
-      if (process.env.DEBUG === "1") response.raw = j;
-      return res.json(response);
-    }
-
-    // 4) Gemini API (clé simple)
-    if (GOOGLE_API_KEY) {
-      const model = VERTEX_MODEL || "gemini-1.5-pro";
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GOOGLE_API_KEY}`;
-      const r = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents: [{ role: "user", parts: [{ text: message }] }] })
-      });
-      if (!r.ok) return res.status(502).json({ error: "provider_error", provider: "gemini", detail: await r.text() });
-      const j = await r.json();
-      const text = j?.candidates?.[0]?.content?.parts?.map(p => p.text).join("") ?? null;
-      const response = { provider: "gemini", output: text };
-      if (process.env.DEBUG === "1") response.raw = j;
-      return res.json(response);
-    }
-
-    return res.status(503).json({ error: "not_configured", message: "Aucune clé configurée (OpenAI/Anthropic/Vertex/Gemini)." });
+    return res.status(503).json({ error: "not_configured", message: "Alex indisponible et aucune clé API configurée." });
   } catch (e) {
     console.error(e);
     return res.status(500).json({ error: "internal", message: "Erreur traitement /api/chat" });
