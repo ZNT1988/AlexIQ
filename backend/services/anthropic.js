@@ -1,21 +1,11 @@
-// backend/services/anthropic.js
-import fetch from "node-fetch";
-import { AI_KEYS } from "../config/aiKeys.js";
+import { anthropic } from "../lib/aiClients.js";
 
-export async function callAnthropic(prompt) {
-  const r = await fetch(API_URL_1, {
-    method: "POST",
-    headers: {
-      "x-api-key": AI_KEYS.ANTHROPIC,
-      "anthropic-version": "2023-06-01",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      model: "claude-3-5-sonnet-20240620",
-      max_tokens: 600,
-      messages: [{ role: "user", content: String(prompt ?? "") }]
-    })
+export async function chatAnthropic(messages, model = "claude-3.5-sonnet-20240620", system = "", options = {}) {
+  if (!anthropic) throw new Error("anthropic_not_configured");
+  const r = await anthropic.messages.create({
+    model, system, max_tokens: options.max_tokens ?? 1024, messages
   });
-  const j = await r.json();
-  return j?.content?.[0]?.text ?? "";
+  return r.content?.[0]?.text ?? "";
 }
+
+export default { chatAnthropic };

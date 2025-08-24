@@ -1,19 +1,9 @@
-// backend/services/openai.js
-import fetch from "node-fetch";
-import { AI_KEYS } from "../config/aiKeys.js";
+import { openai } from "../lib/aiClients.js";
 
-export async function callOpenAI(prompt) {
-  const r = await fetch(API_URL_1, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${AI_KEYS.OPENAI}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: String(prompt ?? "") }]
-    })
-  });
-  const j = await r.json();
-  return j?.choices?.[0]?.message?.content ?? "";
+export async function chatOpenAI(messages, model = "gpt-4o-mini", options = {}) {
+  if (!openai) throw new Error("openai_not_configured");
+  const r = await openai.chat.completions.create({ model, messages, ...options });
+  return r.choices?.[0]?.message?.content ?? "";
 }
+
+export default { chatOpenAI };
