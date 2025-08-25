@@ -21,21 +21,53 @@ const AlexUltimateInterface = () => {
 
     try {
       const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
-      const response = await fetch(`${apiBaseUrl}/api/alex/authentic/chat`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage.content })
-      });
-
-      const data = await response.json();
       
-      if (data.success && data.data.response) {
-        const aiMessage = { 
-          role: 'assistant', 
-          content: data.data.response,
-          provider: 'Alex Railway'
-        };
-        setConversation(prev => [...prev, aiMessage]);
+      // Détection demande d'image
+      const isImageRequest = /génère|créé|fais|dessine|image|photo|picture|draw/i.test(userMessage.content) && 
+                            /chat|chaton|mignon|cute|cat|animal|dessin|art/i.test(userMessage.content);
+      
+      if (isImageRequest) {
+        const response = await fetch(`${apiBaseUrl}/api/images`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            prompt: userMessage.content,
+            size: "1024x1024",
+            style: "realistic"
+          })
+        });
+
+        const data = await response.json();
+        
+        if (data.image_url) {
+          const aiMessage = { 
+            role: 'assistant', 
+            content: `Voici votre image générée !`,
+            image: data.image_url,
+            provider: 'Alex + DALL-E'
+          };
+          setConversation(prev => [...prev, aiMessage]);
+        } else {
+          throw new Error('Image generation failed');
+        }
+      } else {
+        // Chat normal
+        const response = await fetch(`${apiBaseUrl}/api/chat`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userMessage.content })
+        });
+
+        const data = await response.json();
+        
+        if (data.output) {
+          const aiMessage = { 
+            role: 'assistant', 
+            content: data.output,
+            provider: data.provider
+          };
+          setConversation(prev => [...prev, aiMessage]);
+        }
       }
     } catch (error) {
       const errorMessage = { 
@@ -90,6 +122,16 @@ const AlexUltimateInterface = () => {
                 {msg.role === 'user' ? <User className="w-4 h-4 mr-2 mt-1" /> : <Bot className="w-4 h-4 mr-2 mt-1" />}
                 <div>
                   <p className="whitespace-pre-wrap">{msg.content}</p>
+                  {msg.image && (
+                    <div className="mt-2">
+                      <img 
+                        src={msg.image} 
+                        alt="Generated image" 
+                        className="max-w-full h-auto rounded-lg border border-gray-300"
+                        style={{ maxHeight: '400px' }}
+                      />
+                    </div>
+                  )}
                   {msg.provider && (
                     <p className="text-xs mt-1 opacity-75">via {msg.provider}</p>
                   )}
