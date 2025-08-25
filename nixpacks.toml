@@ -4,7 +4,7 @@ NODE_ENV = "production"
 PORT = "3003"
 
 [phases.install]
-cmds = ["npm ci --quiet --ignore-scripts"]
+cmds = ["npm ci --quiet"]
 
 [phases.build]  
 cmds = ["npm run build:railway"]
