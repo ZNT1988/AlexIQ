@@ -108,11 +108,8 @@ app.get("/api/health", (_req, res) => {
 app.get("/api/alex/status", (_req, res) => {
   res.json({ 
     ok: true, 
-    service: "Alex IA - Railway Healthcheck",
-    status: "healthy",
-    env: NODE_ENV, 
-    port: PORT,
-    ts: Date.now() 
+    orchestrator: false, // temporaire
+    message: "Alex en mode apprentissage APIs" 
   });
 });
 
@@ -120,19 +117,11 @@ app.get("/api/whoami", (_req, res) => {
   res.json({
     creator: CREATOR,
     providers: { 
-      openai: !!OPENAI_KEY, 
-      anthropic: !!ANTHROPIC_KEY,
-      vertex: !!(GCP_SA_JSON && GCP_PROJECT),
+      openai: !!OPENAI_API_KEY, 
+      anthropic: !!ANTHROPIC_API_KEY,
+      vertex: !!(GOOGLE_APPLICATION_CREDENTIALS_JSON && GOOGLE_PROJECT_ID),
       gemini: !!GOOGLE_API_KEY
     }
-  });
-});
-
-app.get("/api/alex/status", (_req, res) => {
-  res.json({ 
-    ok: true, 
-    orchestrator: false, // temporaire
-    message: "Alex en mode apprentissage APIs" 
   });
 });
 
@@ -483,7 +472,7 @@ export function createUltraMinimalRoutes() {
 if (NODE_ENV === "production") {
   const distDir = path.resolve(__dirname, "frontend", "dist");
   app.use(express.static(distDir));
-  app.get("*", async (_req, res) => {
+  app.get("/*", async (_req, res) => {
     const html = await fs.readFile(path.join(distDir, "index.html"), "utf-8");
     res.setHeader("Content-Type", "text/html");
     res.send(html);
@@ -496,7 +485,7 @@ if (NODE_ENV === "production") {
     appType: "spa"
   });
   app.use(vite.middlewares);
-  app.get("*", async (req, res, next) => {
+  app.get("/*", async (req, res, next) => {
     try {
       const url = req.originalUrl;
       let html = await fs.readFile(path.resolve(__dirname, "frontend", "index.html"), "utf-8");
