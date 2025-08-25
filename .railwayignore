@@ -1,0 +1,46 @@
+# Railway ignore - Déploiement backend seulement
+
+# Frontend (déployé sur Vercel)
+frontend/
+frontend/**/*
+
+# Development files
+*.md
+README*
+reports/
+logs/
+.git/
+.github/
+
+# Backup files  
+*.backup
+*.backup-*
+backend/package.json.backup
+backend/package-lock.json.backup
+
+# Test files
+test/
+tests/
+*.test.js
+jest.config.js
+
+# Generated files
+generated_media/
+data/*.db
+backend/data/*.db
+
+# Development tools
+tools/
+scripts/
+eslint*
+biome.json
+.eslintrc*
+
+# Other deployments
+vercel.json
+Dockerfile*
+docker-compose*
+
+# Cache
+node_modules/.cache/
+.cache/

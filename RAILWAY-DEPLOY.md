@@ -7,6 +7,10 @@
 2. Clés API OpenAI et Anthropic 
 3. Git repository connecté
 
+## ⚠️ **PROBLÈME RÉSOLU** - Conflit package.json
+**Issue:** Railway était confus par 2 fichiers package.json (root vs backend)
+**Solution:** Suppression du backend/package.json conflictuel - Railway utilise maintenant ROOT uniquement
+
 ### 🚀 Steps de Déploiement
 
 #### 1️⃣ **Créer un Nouveau Projet Railway**

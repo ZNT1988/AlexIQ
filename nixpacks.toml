@@ -4,10 +4,10 @@ NODE_ENV = "production"
 PORT = "3003"
 
 [phases.install]
-cmds = ["npm ci --quiet"]
+cmds = ["npm ci --quiet --ignore-scripts"]
 
 [phases.build]  
 cmds = ["npm run build:railway"]
 
 [start]
-cmd = "npm start"
+cmd = "node index-ultra-minimal.js"

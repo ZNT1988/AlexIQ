@@ -21,6 +21,20 @@ console.log(`📍 Port: ${PORT}`);
 console.log(`🌍 Environment: ${NODE_ENV}`);
 console.log(`👑 Owner: ${process.env.HF_OWNER_NAME || 'Zakaria Housni (ZNT)'}`);
 
+// Vérifier les variables d'environnement critiques
+const envChecks = {
+  'PORT': process.env.PORT,
+  'NODE_ENV': process.env.NODE_ENV,
+  'CLE_API_OPENAI': process.env.CLE_API_OPENAI ? '✅ Set' : '❌ Missing',
+  'CLE_API_ANTHROPIC': process.env.CLE_API_ANTHROPIC ? '✅ Set' : '❌ Missing',
+  'HF_OWNER_NAME': process.env.HF_OWNER_NAME || 'Default: Zakaria Housni (ZNT)'
+};
+
+console.log('🔍 Environment variables:');
+Object.entries(envChecks).forEach(([key, value]) => {
+  console.log(`  ${key}: ${value}`);
+});;
+
 // Vérifications pré-démarrage
 function preflightChecks() {
   console.log('🔍 Running preflight checks...');
