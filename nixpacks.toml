@@ -10,4 +10,4 @@ cmds = ["npm ci --quiet"]
 cmds = ["npm run build:railway"]
 
 [start]
-cmd = "node index-ultra-minimal.js"
+cmd = "node index-test-railway.js"
