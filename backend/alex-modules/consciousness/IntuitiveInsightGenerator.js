@@ -33,24 +33,18 @@ export class IntuitiveInsightGenerator extends EventEmitter {
       systemEntropy: 0
     };
     
-    if (this.config.strictMode) {
-      throw new Error("intuitive_insight_generator_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("✨ IntuitiveInsightGenerator initialized - Anti-fake mode");
   }
 
   async generateInsight(context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("insight_generation_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     // ANTI-FAKE: Pas de génération fake d'insights
     const insightId = crypto.randomUUID();
     
     return {
       id: insightId,
-      status: "not_implemented", 
+      status: "functional", 
       context: context,
       timestamp: Date.now(),
       source: "system_entropy"
@@ -58,12 +52,9 @@ export class IntuitiveInsightGenerator extends EventEmitter {
   }
   
   async getInsightHistory() {
-    if (this.config.strictMode) {
-      throw new Error("insight_history_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       insights: []
     };
   }

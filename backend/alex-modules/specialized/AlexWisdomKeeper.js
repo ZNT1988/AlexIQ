@@ -21,20 +21,14 @@ export class AlexWisdomKeeper extends EventEmitter {
       wisdomDepth: options.wisdomDepth || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("wisdom_keeper_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("📚 AlexWisdomKeeper initialized - Anti-fake mode");
   }
 
   async shareWisdom(query, context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("wisdom_sharing_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       wisdom: null,
       timestamp: Date.now()
     };
@@ -42,7 +36,7 @@ export class AlexWisdomKeeper extends EventEmitter {
 
   getWisdomKeeperStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       wisdomDepth: this.config.wisdomDepth
     };

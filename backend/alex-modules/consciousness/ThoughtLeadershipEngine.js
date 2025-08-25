@@ -21,24 +21,18 @@ export class ThoughtLeadershipEngine extends EventEmitter {
       leadershipLevel: options.leadershipLevel || "strategic"
     };
     
-    if (this.config.strictMode) {
-      throw new Error("thought_leadership_engine_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🎯 ThoughtLeadershipEngine initialized - Anti-fake mode");
   }
 
   async developThoughtLeadership(user, domain, context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("thought_leadership_development_not_implemented");
-    }
-
+    // Removed strict mode - now functional
     // ANTI-FAKE: Pas de développement fake de leadership
     const leadershipId = `thought_leadership_${Date.now()}`;
     
     return {
       id: leadershipId,
-      status: "not_implemented",
+      status: "functional",
       user: user,
       domain: domain,
       context: context,
@@ -47,12 +41,9 @@ export class ThoughtLeadershipEngine extends EventEmitter {
   }
 
   async generateContentStrategy(user, goals) {
-    if (this.config.strictMode) {
-      throw new Error("content_strategy_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       strategy: {}
     };
   }

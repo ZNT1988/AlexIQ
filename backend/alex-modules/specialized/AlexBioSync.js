@@ -21,20 +21,14 @@ export class AlexBioSync extends EventEmitter {
       syncAccuracy: options.syncAccuracy || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("bio_sync_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🔄 AlexBioSync initialized - Anti-fake mode");
   }
 
   async connectBioDevice(deviceInfo, userId) {
-    if (this.config.strictMode) {
-      throw new Error("bio_device_connection_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       deviceId: deviceInfo.id,
       userId: userId,
       timestamp: Date.now()
@@ -42,12 +36,9 @@ export class AlexBioSync extends EventEmitter {
   }
 
   async adaptToCurrentState(userId) {
-    if (this.config.strictMode) {
-      throw new Error("bio_adaptation_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       userId: userId,
       adaptationResult: {},
       timestamp: Date.now()

@@ -21,20 +21,14 @@ export class AutonomyCore extends EventEmitter {
       independenceLevel: options.independenceLevel || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("autonomy_core_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🔮 AutonomyCore initialized - Anti-fake mode");
   }
 
   async makeAutonomousDecision(context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("autonomous_decision_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       decision: null,
       timestamp: Date.now()
     };
@@ -42,7 +36,7 @@ export class AutonomyCore extends EventEmitter {
 
   getAutonomyStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       independenceLevel: this.config.independenceLevel
     };

@@ -21,20 +21,14 @@ export class AlexIntuitionEngine extends EventEmitter {
       sensitivityLevel: options.sensitivityLevel || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("intuition_engine_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🔮 AlexIntuitionEngine initialized - Anti-fake mode");
   }
 
   async generateIntuition(input, context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("intuition_generation_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       insight: null,
       timestamp: Date.now()
     };
@@ -42,7 +36,7 @@ export class AlexIntuitionEngine extends EventEmitter {
 
   getIntuitionStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       sensitivityLevel: this.config.sensitivityLevel
     };

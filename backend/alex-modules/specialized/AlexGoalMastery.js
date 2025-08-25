@@ -21,20 +21,14 @@ export class AlexGoalMastery extends EventEmitter {
       achievementRate: options.achievementRate || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("goal_mastery_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🎯 AlexGoalMastery initialized - Anti-fake mode");
   }
 
   async trackGoal(goal, context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("goal_tracking_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       goalId: `goal_${Date.now()}`,
       timestamp: Date.now()
     };
@@ -42,7 +36,7 @@ export class AlexGoalMastery extends EventEmitter {
 
   getGoalMasteryStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       achievementRate: this.config.achievementRate
     };

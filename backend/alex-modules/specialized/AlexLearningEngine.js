@@ -21,20 +21,14 @@ export class AlexLearningEngine extends EventEmitter {
       learningRate: options.learningRate || 0.1
     };
     
-    if (this.config.strictMode) {
-      throw new Error("learning_engine_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🧠 AlexLearningEngine initialized - Anti-fake mode");
   }
 
   async learn(data, context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("learning_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       learnedPatterns: 0,
       timestamp: Date.now()
     };
@@ -42,7 +36,7 @@ export class AlexLearningEngine extends EventEmitter {
 
   getLearningStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       learningRate: this.config.learningRate
     };

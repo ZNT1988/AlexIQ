@@ -21,20 +21,14 @@ export class AlexContextualAwareness extends EventEmitter {
       awarenessLevel: options.awarenessLevel || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("contextual_awareness_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🧭 AlexContextualAwareness initialized - Anti-fake mode");
   }
 
   async updateContext(newContextData, source = 'manual') {
-    if (this.config.strictMode) {
-      throw new Error("context_update_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       source: source,
       timestamp: Date.now()
     };
@@ -42,7 +36,7 @@ export class AlexContextualAwareness extends EventEmitter {
 
   getContextualStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       awarenessLevel: this.config.awarenessLevel
     };

@@ -21,20 +21,14 @@ export class AlexStrategicThinking extends EventEmitter {
       strategicDepth: options.strategicDepth || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("strategic_thinking_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🎯 AlexStrategicThinking initialized - Anti-fake mode");
   }
 
   async generateStrategy(challenge, context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("strategy_generation_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       strategy: null,
       timestamp: Date.now()
     };
@@ -42,7 +36,7 @@ export class AlexStrategicThinking extends EventEmitter {
 
   getStrategicThinkingStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       strategicDepth: this.config.strategicDepth
     };

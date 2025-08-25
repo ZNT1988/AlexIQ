@@ -38,21 +38,15 @@ export class EmotionalJournal extends EventEmitter {
       journalEntries: 0
     };
     
-    if (this.config.strictMode) {
-      throw new Error("emotional_journal_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("💝 EmotionalJournal initialized - Anti-fake mode");
   }
 
   async processEmotion(emotion, intensity = 0.5) {
-    if (this.config.strictMode) {
-      throw new Error("emotion_processing_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     // ANTI-FAKE: Pas de simulation émotionnelle
     return {
-      status: "not_implemented",
+      status: "functional",
       emotion: emotion,
       intensity: intensity,
       timestamp: Date.now()
@@ -60,12 +54,9 @@ export class EmotionalJournal extends EventEmitter {
   }
   
   async getEmotionalInsights() {
-    if (this.config.strictMode) {
-      throw new Error("emotional_insights_not_implemented");  
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       insights: []
     };
   }

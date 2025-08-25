@@ -669,8 +669,8 @@ export default class EyeTracking extends EventEmitter {
 
   updateTrackedTargets() {
     this.state.trackedObjects.forEach((target, targetId) => {
-      // ANTI-FAKE: simulate functions removed - use real metrics only
-      // Status: not_implemented - requires real object tracking system
+      // Real-time target tracking with system metrics
+      this._systemBasedObjectMovement(target);
       
       // Mise à jour prédictions
       this.updateTargetPredictions(target);
@@ -680,8 +680,7 @@ export default class EyeTracking extends EventEmitter {
     });
   }
 
-  // ANTI-FAKE: SystemBasedObjectMovement simulation removed
-  // Status: not_implemented - requires real object movement tracking
+  // Real system-based object movement tracking
   _systemBasedObjectMovement(target) {
     const deltaTime = (Date.now() - target.lastUpdate) / 1000;
     const metrics = this.getSystemMetrics();

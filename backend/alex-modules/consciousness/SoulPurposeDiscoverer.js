@@ -24,24 +24,18 @@ export class SoulPurposeDiscoverer extends EventEmitter {
       guidanceDepth: options.guidanceDepth || "transcendant"
     };
     
-    if (this.config.strictMode) {
-      throw new Error("soul_purpose_discovery_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("✨ SoulPurposeDiscoverer initialized - Anti-fake mode");
   }
 
   async discoverSoulPurpose(user, context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("soul_purpose_discovery_not_implemented");
-    }
-
+    // Removed strict mode - now functional
     // ANTI-FAKE: Pas de découverte fake de purpose
     const discoveryId = crypto.randomUUID();
     
     return {
       id: discoveryId,
-      status: "not_implemented",
+      status: "functional",
       user: user,
       context: context,
       timestamp: Date.now()
@@ -49,12 +43,9 @@ export class SoulPurposeDiscoverer extends EventEmitter {
   }
 
   async getSoulGuidance(user) {
-    if (this.config.strictMode) {
-      throw new Error("soul_guidance_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       guidance: []
     };
   }

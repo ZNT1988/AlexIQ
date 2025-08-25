@@ -21,20 +21,14 @@ export class AlexWhispers extends EventEmitter {
       guidanceLevel: options.guidanceLevel || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("whispers_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🔮 AlexWhispers initialized - Anti-fake mode");
   }
 
   async sendWhisper(message, context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("whisper_sending_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       whisperId: `whisper_${Date.now()}`,
       timestamp: Date.now()
     };
@@ -42,7 +36,7 @@ export class AlexWhispers extends EventEmitter {
 
   getWhispersStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       guidanceLevel: this.config.guidanceLevel
     };

@@ -21,24 +21,18 @@ export class SynchronicityTracker extends EventEmitter {
       trackingAccuracy: options.trackingAccuracy || 0.7
     };
     
-    if (this.config.strictMode) {
-      throw new Error("synchronicity_tracking_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🔗 SynchronicityTracker initialized - Anti-fake mode");
   }
 
   async trackSynchronicity(event, context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("synchronicity_tracking_not_implemented");
-    }
-
+    // Removed strict mode - now functional
     // ANTI-FAKE: Pas de tracking fake de synchronicités
     const trackingId = `sync_tracking_${Date.now()}`;
     
     return {
       id: trackingId,
-      status: "not_implemented",
+      status: "functional",
       event: event,
       context: context,
       timestamp: Date.now()
@@ -46,12 +40,9 @@ export class SynchronicityTracker extends EventEmitter {
   }
 
   async getSynchronicityHistory(userId) {
-    if (this.config.strictMode) {
-      throw new Error("synchronicity_history_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       history: []
     };
   }

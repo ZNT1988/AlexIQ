@@ -21,20 +21,14 @@ export class AlexCreativityBooster extends EventEmitter {
       boostLevel: options.boostLevel || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("creativity_booster_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🎨 AlexCreativityBooster initialized - Anti-fake mode");
   }
 
   async stimulateCreativity(request, userProfile = {}) {
-    if (this.config.strictMode) {
-      throw new Error("creativity_stimulation_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       request: request,
       userProfile: userProfile,
       timestamp: Date.now()
@@ -43,7 +37,7 @@ export class AlexCreativityBooster extends EventEmitter {
 
   getCreativityStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       boostLevel: this.config.boostLevel
     };

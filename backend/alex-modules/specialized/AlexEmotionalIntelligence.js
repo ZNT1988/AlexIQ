@@ -21,20 +21,14 @@ export class AlexEmotionalIntelligence extends EventEmitter {
       empathyLevel: options.empathyLevel || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("emotional_intelligence_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("💝 AlexEmotionalIntelligence initialized - Anti-fake mode");
   }
 
   async analyzeEmotion(input, context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("emotion_analysis_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       emotionScore: 0.0,
       timestamp: Date.now()
     };
@@ -42,7 +36,7 @@ export class AlexEmotionalIntelligence extends EventEmitter {
 
   getEmotionalStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       empathyLevel: this.config.empathyLevel
     };

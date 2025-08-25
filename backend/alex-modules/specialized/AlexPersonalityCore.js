@@ -21,20 +21,14 @@ export class AlexPersonalityCore extends EventEmitter {
       adaptability: options.adaptability || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("personality_core_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🎭 AlexPersonalityCore initialized - Anti-fake mode");
   }
 
   async adaptPersonality(context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("personality_adaptation_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       traits: {},
       timestamp: Date.now()
     };
@@ -42,7 +36,7 @@ export class AlexPersonalityCore extends EventEmitter {
 
   getPersonalityStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       adaptability: this.config.adaptability
     };

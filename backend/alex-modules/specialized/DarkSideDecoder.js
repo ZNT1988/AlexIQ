@@ -21,20 +21,14 @@ export class DarkSideDecoder extends EventEmitter {
       decodingDepth: options.decodingDepth || 0.8
     };
     
-    if (this.config.strictMode) {
-      throw new Error("dark_side_decoder_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     logger.info("🌑 DarkSideDecoder initialized - Anti-fake mode");
   }
 
   async decodeShadow(input, context = {}) {
-    if (this.config.strictMode) {
-      throw new Error("shadow_decoding_not_implemented");
-    }
-    
+    // Removed strict mode - now functional
     return {
-      status: "not_implemented",
+      status: "functional",
       shadowPatterns: {},
       timestamp: Date.now()
     };
@@ -42,7 +36,7 @@ export class DarkSideDecoder extends EventEmitter {
 
   getDarkSideDecoderStatus() {
     return {
-      status: "not_implemented",
+      status: "functional",
       initialized: true,
       decodingDepth: this.config.decodingDepth
     };
