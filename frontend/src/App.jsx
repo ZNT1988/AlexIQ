@@ -1,13 +1,9 @@
 import React from 'react';
-import AlexUltimateInterface from './components/Alex/AlexUltimateInterface.jsx';
+import ChatGPTInterface from './components/ChatGPTInterface.jsx';
 import './App.css';
 
 function App() {
-  return (
-    <div className="min-h-screen bg-gray-100">
-      <AlexUltimateInterface />
-    </div>
-  );
+  return <ChatGPTInterface />;
 }
 
 export default App;
