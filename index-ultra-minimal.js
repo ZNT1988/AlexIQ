@@ -1,7 +1,7 @@
 import 'dotenv/config';                // ✅ dotenv chargé UNE SEULE FOIS ici
 
 // ESM – Front (Vite en dev / build en prod) + API réelles sur UN SEUL PORT.
-// Node >= 18
+// Node >= 18 - Updated for Railway deploy
 // npm i express vite
 
 import express from "express";
