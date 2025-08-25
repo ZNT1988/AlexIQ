@@ -3,6 +3,10 @@
   "version": "2.0.0",
   "type": "module",
   "description": "HustleFinder IA Backend with Alex Orchestrator - Railway Deploy",
+  "engines": {
+    "node": "20.x",
+    "npm": ">=10.0.0"
+  },
   "main": "index-ultra-minimal.js",
   "scripts": {
     "start": "node index-alex-railway.js",
