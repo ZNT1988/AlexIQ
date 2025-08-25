@@ -103,6 +103,18 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
+// Railway healthcheck endpoint (legacy)
+app.get("/api/alex/status", (_req, res) => {
+  res.json({ 
+    ok: true, 
+    service: "Alex IA - Railway Healthcheck",
+    status: "healthy",
+    env: NODE_ENV, 
+    port: PORT,
+    ts: Date.now() 
+  });
+});
+
 app.get("/api/whoami", (_req, res) => {
   res.json({
     creator: CREATOR,
