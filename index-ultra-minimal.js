@@ -20,12 +20,15 @@ const CREATOR = process.env.HF_OWNER_NAME || "Zakaria Housni (ZNT)";
 const app = express();
 
 // ====== ORCHESTRATEUR ALEX RÉACTIVÉ ======
+console.log('🚀 Starting Alex Orchestrator initialization...');
 try {
   const { mountAlex } = await import('./backend/core/HustleFinderCore.js');
   const res = await mountAlex(app, {});
-  console.log('✅ Alex Orchestrator loaded:', res.status);
+  console.log('✅ Alex Orchestrator loaded successfully:', res.status);
+  console.log('🎯 Alex modules are now ACTIVE and ready!');
 } catch (e) {
-  console.warn('⚠️ Alex Orchestrator failed:', e.message);
+  console.error('❌ Alex Orchestrator failed to load:', e.message);
+  console.error('📍 Stack trace:', e.stack?.split('\n')?.[0]);
   console.warn('🔧 Server will continue without Alex modules');
 }
 
