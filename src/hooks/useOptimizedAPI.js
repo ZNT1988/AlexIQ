@@ -3,12 +3,13 @@ import { useState, useCallback, useRef, useMemo } from 'react';
 
 // Constantes pour chaînes dupliquées (optimisation SonarJS)
 const STR_GET = 'GET';
+const STR_POST = 'POST';
 // Cache pour les requêtes API
 const logger = {
-  info: (msg, ...args) => console.log(`[${new Date().toISOString()}] INFO:', msg, ...args)
-  warn: (msg, ...args) => console.warn('[${new Date().toISOString()}] WARN:', msg, ...args)
-  error: (msg, ...args) => console.error('[${new Date().toISOString()}] ERROR:', msg, ...args)
-  debug: (msg, ...args) => console.debug('[${new Date().toISOString()}] DEBUG:`, msg, ...args)
+  info: (msg, ...args) => console.log(`[${new Date().toISOString()}] INFO:`, msg, ...args),
+  warn: (msg, ...args) => console.warn(`[${new Date().toISOString()}] WARN:`, msg, ...args),
+  error: (msg, ...args) => console.error(`[${new Date().toISOString()}] ERROR:`, msg, ...args),
+  debug: (msg, ...args) => console.debug(`[${new Date().toISOString()}] DEBUG:`, msg, ...args)
 };
 
 const requestCache = new Map();
@@ -16,8 +17,8 @@ const pendingRequests = new Map();
 
 // Configuration par défaut
 const DEFAULT_CONFIG = {
-  timeout: 10000
-  retries: 3
+  timeout: 10000,
+  retries: 3,
   cacheTime: 5 * 60 * 1000, // 5 minutes
   retryDelay: 1000
 };
@@ -31,8 +32,9 @@ export function useOptimizedAPI(baseURL = import.meta.env.VITE_API_BASE_URL || '
   const cleanCache = useCallback(() => {
     const now = Date.now();
     for (const [key, value] of requestCache.entries()) {
-      if (now - value.timestamp > DEFAULT_CONFIG.cacheTime) { requestCache.delete(key);
-      ; return; }
+      if (now - value.timestamp > DEFAULT_CONFIG.cacheTime) {
+        requestCache.delete(key);
+      }
     }
   }, []);
 
@@ -84,12 +86,12 @@ export function useOptimizedAPI(baseURL = import.meta.env.VITE_API_BASE_URL || '
 
     const requestPromise = retryWithBackoff(async () => {
       const config = {
-        method: STR_GET
+        method: STR_GET,
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
           ...options.headers
-        }
-        signal: abortControllerRef.current.signal
+        },
+        signal: abortControllerRef.current.signal,
         ...options
       };
 
@@ -116,7 +118,7 @@ export function useOptimizedAPI(baseURL = import.meta.env.VITE_API_BASE_URL || '
       // Mettre en cache le résultat pour les requêtes GET
       if (options.method === STR_GET || !options.method) {
         requestCache.set(cacheKey, {
-          data
+          data,
           timestamp: Date.now()
         });
       }
@@ -127,13 +129,16 @@ export function useOptimizedAPI(baseURL = import.meta.env.VITE_API_BASE_URL || '
 
       return data;
     } catch (err) {
-      // Logger fallback - ignore error
-    }:`, err);
-
-        } catch (error) {
-    // Logger fallback - ignore error
-  }}
-
+      setLoading(false);
+      setError(err.message);
+      pendingRequests.delete(cacheKey);
+      
+      try {
+        logger.error('API request failed:', err);
+      } catch (error) {
+        // Logger fallback - ignore error
+      }
+      
       throw err;
     }
   }, [baseURL, retryWithBackoff, getCacheKey, cleanCache]);
@@ -141,61 +146,61 @@ export function useOptimizedAPI(baseURL = import.meta.env.VITE_API_BASE_URL || '
   // Fonctions spécialisées avec mémoization
   const apiMethods = useMemo(() => ({
     // Health check
-    health: () => request('/health')
+    health: () => request('/health'),
     // AI Chat avec debouncing
     chatWithAI: (message, type = 'chat', context = {}) =>
       request('/api/ai/chat', {
-        method: STR_POST
+        method: STR_POST,
         body: { message, type, context }
-      })
+      }),
     // Ideas API
     getIdeas: (params = {}) => {
       const query = new URLSearchParams(params).toString();
-      return request(`/api/ideas${query ? '${?${query}}' : ''}`);
+      return request(`/api/ideas${query ? `?${query}` : ''}`);
     }
     createIdea: (ideaData) =>
       request('/api/ideas', {
-        method: STR_POST
+        method: STR_POST,
         body: ideaData
-      })
+      }),
     updateIdea: (id, ideaData) =>
       request(`/api/ideas/${id}`, {
-        method: 'PUT'
+        method: 'PUT',
         body: ideaData
-      })
+      }),
     deleteIdea: (id) =>
       request(`/api/ideas/${id}`, {
         method: 'DELETE'
-      })
+      }),
     // Projects API
     getProjects: (params = {}) => {
       const query = new URLSearchParams(params).toString();
-      return request(`/api/projects${query ? '${?${query}}' : ''}`);
+      return request(`/api/projects${query ? `?${query}` : ''}`);
     }
     createProject: (projectData) =>
       request('/api/projects', {
-        method: STR_POST
+        method: STR_POST,
         body: projectData
-      })
+      }),
     // ROI API
     getROICalculations: (params = {}) => {
       const query = new URLSearchParams(params).toString();
-      return request(`/api/roi${query ? '${?${query}}' : ''}`);
+      return request(`/api/roi${query ? `?${query}` : ''}`);
     }
     createROICalculation: (roiData) =>
       request('/api/roi', {
-        method: STR_POST
+        method: STR_POST,
         body: roiData
-      })
+      }),
     // AI Advanced features
     generateIdeas: (prompt, preferences = {}) =>
       request('/api/ai/generate-ideas', {
-        method: STR_POST
+        method: STR_POST,
         body: { prompt, preferences }
-      })
+      }),
     analyzeMarket: (data) =>
       request('/api/ai/market-analysis', {
-        method: STR_POST
+        method: STR_POST,
         body: data
       })
   }), [request]);
@@ -216,10 +221,10 @@ export function useOptimizedAPI(baseURL = import.meta.env.VITE_API_BASE_URL || '
   }, []);
 
   return {
-    loading
-    error
-    cancel
-    clearCache
+    loading,
+    error,
+    cancel,
+    clearCache,
     ...apiMethods
   };
 }
