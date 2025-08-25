@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "node index-ultra-minimal.js",
-    "build": "cd frontend && npm ci && npm run build",
+    "build": "npm install && cd frontend && npm install && npm run build",
     "build:railway": "echo 'Frontend build skipped in Railway - backend only deployment' && exit 0",
     "start": "node railway-start.js",
     "guard:scan": "node tools/anti-fake-scan.mjs backend",
