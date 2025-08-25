@@ -11,7 +11,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'https://api.alexiq.site',
+        target: 'https://hustlefinderiu-production.up.railway.app',
         changeOrigin: true,
         secure: true
       }

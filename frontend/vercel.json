@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://api.alexiq.site/api/$1"
+      "destination": "https://hustlefinderiu-production.up.railway.app/api/$1"
     }
   ]
 }
