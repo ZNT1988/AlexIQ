@@ -305,3 +305,34 @@
     width: 100%;
   }
 }
+/* Image générée par Alex */
+.generated-image {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.alex-generated-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.alex-generated-image:hover {
+  transform: scale(1.02);
+}
+
+.image-caption {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+.input-help {
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+  margin-top: 4px;
+}

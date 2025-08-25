@@ -212,6 +212,85 @@ app.post("/api/chat", async (req, res) => {
   }
 });
 
+// ====== DALL-E IMAGE GENERATION ======
+app.post("/api/images", async (req, res) => {
+  try {
+    const { prompt, size = "1024x1024", style = "vivid", n = 1 } = req.body || {};
+    
+    if (!prompt || typeof prompt !== "string") {
+      return res.status(400).json({ 
+        error: "bad_request", 
+        message: "prompt:string requis" 
+      });
+    }
+
+    // Vérifier si OpenAI est configuré
+    if (!OPENAI_KEY) {
+      return res.status(503).json({ 
+        error: "not_configured", 
+        message: "Clé API OpenAI requise pour la génération d'images" 
+      });
+    }
+
+    console.log(`🎨 Génération d'image DALL-E: "${prompt}"`);
+
+    const response = await fetch("https://api.openai.com/v1/images/generations", {
+      method: "POST",
+      headers: { 
+        "Authorization": `Bearer ${OPENAI_KEY}`, 
+        "Content-Type": "application/json" 
+      },
+      body: JSON.stringify({
+        model: "dall-e-3",
+        prompt: prompt,
+        size: size,
+        style: style,
+        n: n,
+        quality: "standard"
+      })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Erreur DALL-E:", errorText);
+      return res.status(502).json({ 
+        error: "dalle_error", 
+        detail: errorText 
+      });
+    }
+
+    const data = await response.json();
+    const imageUrl = data.data?.[0]?.url;
+
+    if (!imageUrl) {
+      return res.status(500).json({ 
+        error: "no_image", 
+        message: "Aucune image générée" 
+      });
+    }
+
+    console.log(`✅ Image DALL-E générée avec succès`);
+
+    return res.json({
+      success: true,
+      provider: "alex_dalle3", 
+      imageUrl: imageUrl,
+      prompt: prompt,
+      size: size,
+      style: style,
+      authentic: true,
+      creator: "Zakaria Housni (ZNT) - Alex peut maintenant créer des images !"
+    });
+
+  } catch (error) {
+    console.error("Erreur génération image:", error);
+    return res.status(500).json({ 
+      error: "internal", 
+      message: "Erreur traitement /api/images" 
+    });
+  }
+});
+
 // ====== FRONT (même port) ======
 if (NODE_ENV === "production") {
   const distDir = path.resolve(__dirname, "frontend", "dist");
