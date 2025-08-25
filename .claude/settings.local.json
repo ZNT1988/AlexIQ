@@ -31,7 +31,8 @@
     "deny": [],
     "defaultMode": "acceptEdits",
     "additionalDirectories": [
-      "C:\\c\\dev\\HustleFinderIA"
+      "C:\\c\\dev\\HustleFinderIA",
+      "C:\\c\\dev"
     ]
   }
 }
