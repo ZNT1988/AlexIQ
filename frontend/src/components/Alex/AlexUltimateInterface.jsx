@@ -21,7 +21,7 @@ const AlexUltimateInterface = () => {
 
     try {
       const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
-      const response = await fetch(`${apiBaseUrl}/api/chat`, {
+      const response = await fetch(`${apiBaseUrl}/api/alex/authentic/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userMessage.content })
@@ -29,11 +29,11 @@ const AlexUltimateInterface = () => {
 
       const data = await response.json();
       
-      if (data.output) {
+      if (data.success && data.data.response) {
         const aiMessage = { 
           role: 'assistant', 
-          content: data.output,
-          provider: data.provider 
+          content: data.data.response,
+          provider: 'Alex Railway'
         };
         setConversation(prev => [...prev, aiMessage]);
       }

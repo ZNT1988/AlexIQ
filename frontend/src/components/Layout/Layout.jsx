@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from './Header';
-import Sidebar from './Sidebar';
+import ModernSidebar from './ModernSidebar';
 import './Layout.css';
 
 const Layout = ({ children, user, onLogin, onSignup, onLogout }) => {
@@ -57,14 +57,10 @@ const Layout = ({ children, user, onLogin, onSignup, onLogout }) => {
       />
       
       <div className="layout-main">
-        <Sidebar
-          conversations={conversations}
-          currentConversation={currentConversation}
-          onSelectConversation={handleSelectConversation}
-          onNewChat={handleNewChat}
-          onDeleteConversation={handleDeleteConversation}
-          isCollapsed={isCollapsed}
-          onToggleCollapse={() => setIsCollapsed(!isCollapsed)}
+        <ModernSidebar
+          isOpen={!isCollapsed}
+          onClose={() => setIsCollapsed(true)}
+          currentUser={user}
         />
         
         <main className={`main-content ${isCollapsed ? 'sidebar-collapsed' : ''}`}>

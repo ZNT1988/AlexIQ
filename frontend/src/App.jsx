@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Layout from './components/Layout/Layout';
-import SimpleChatInterface from './components/SimpleChatInterfaceWithImages.jsx';
+import AlexUltimateInterface from './components/Alex/AlexUltimateInterface.jsx';
 import './App.css';
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
       onSignup={handleSignup}
       onLogout={handleLogout}
     >
-      <SimpleChatInterface />
+      <AlexUltimateInterface />
     </Layout>
   );
 }
