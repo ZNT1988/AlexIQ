@@ -17,6 +17,8 @@ const __dirname  = path.dirname(__filename);
 const PORT = Number(process.env.PORT || 3000);
 const NODE_ENV = process.env.NODE_ENV || "development";
 const CREATOR = process.env.HF_OWNER_NAME || "Zakaria Housni (ZNT)";
+console.log('🔍 DEBUG Railway - PORT env var:', process.env.PORT);
+console.log('🔍 DEBUG Railway - Final PORT:', PORT);
 const app = express();
 
 // ====== ORCHESTRATEUR ALEX RÉACTIVÉ ======
@@ -87,6 +89,18 @@ app.use((err, _req, res, next) => {
     return res.status(400).json({ error: "invalid_json", message: "Malformed JSON body" });
   }
   next(err);
+});
+
+// ====== ROOT ENDPOINT FOR RAILWAY HEALTH CHECK ======
+app.get('/', (req, res) => {
+  res.json({
+    service: 'HustleFinder IA API',
+    status: 'Active',
+    timestamp: Date.now(),
+    port: PORT,
+    creator: CREATOR,
+    node_env: NODE_ENV
+  });
 });
 
 // ====== API ======
