@@ -3,6 +3,10 @@
     {
       "source": "/api/(.*)",
       "destination": "https://api.alexiq.site/api/$1"
+    },
+    {
+      "source": "/((?!api).*)",
+      "destination": "/index.html"
     }
   ]
 }
