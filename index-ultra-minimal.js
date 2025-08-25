@@ -5,6 +5,7 @@ import 'dotenv/config';                // ✅ dotenv chargé UNE SEULE FOIS ici
 // npm i express vite
 
 import express from "express";
+import cors from "cors";
 import path from "path";
 import fs from "fs/promises";
 import crypto from "crypto";
@@ -13,7 +14,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
 
-const PORT = Number(process.env.PORT || 3003);
+const PORT = Number(process.env.PORT || 3000);
 const NODE_ENV = process.env.NODE_ENV || "development";
 const CREATOR = process.env.HF_OWNER_NAME || "Zakaria Housni (ZNT)";
 const app = express();
@@ -28,17 +29,16 @@ try {
   console.warn('⚠️ Alex Orchestrator not loaded:', e.message);
 }
 
-// ====== ENV HELPERS (ASCII + FR avec accents acceptés) ======
-const env = (...names) => names.map(n => process.env[n]).find(Boolean);
+// ====== ENV HELPERS ======
+const env = (k, ...aliases) => process.env[k] ?? aliases.map(a => process.env[a]).find(Boolean) ?? null;
 
-const OPENAI_KEY      = env("CLE_API_OPENAI", "CLÉ_API_OPENAI", "OPENAI_API_KEY");
-const ANTHROPIC_KEY   = env("CLE_API_ANTHROPIC", "CLÉ_API_ANTHROPIC", "ANTHROPIC_API_KEY");
-const GOOGLE_API_KEY  = env("CLE_API_GOOGLE", "CLÉ_API_GOOGLE", "GOOGLE_API_KEY"); // Gemini API key (option)
-const GCP_SA_JSON     = env("GOOGLE_APPLICATION_CREDENTIALS_JSON");               // Service Account JSON (string)
-const GCP_PROJECT     = env("ID_PROJET_GOOGLE", "GOOGLE_PROJECT_ID");
-const GCP_LOCATION    = env("GOOGLE_LOCATION");
-const VERTEX_MODEL    = env("GOOGLE_VERTEX_MODEL"); // ex: gemini-1.5-pro-002
-
+const OPENAI_API_KEY = env("OPENAI_API_KEY");
+const ANTHROPIC_API_KEY = env("ANTHROPIC_API_KEY");
+const GOOGLE_API_KEY = env("GOOGLE_API_KEY");
+const GOOGLE_PROJECT_ID = env("GOOGLE_PROJECT_ID");
+const GOOGLE_LOCATION = env("GOOGLE_LOCATION") || "us-central1";
+const GOOGLE_VERTEX_MODEL = env("GOOGLE_VERTEX_MODEL") || "gemini-1.5-pro";
+const GOOGLE_APPLICATION_CREDENTIALS_JSON = env("GOOGLE_APPLICATION_CREDENTIALS_JSON");
 // ====== Helpers ======
 async function googleAccessTokenFromServiceAccount(saJson) {
   let creds;
@@ -70,6 +70,14 @@ async function googleAccessTokenFromServiceAccount(saJson) {
 }
 
 // ====== Middlewares ======
+// CORS configuration
+app.use(cors({
+  origin: NODE_ENV === "production"
+    ? process.env.CORS_ORIGIN?.split(",") ?? ["https://alexiq.site", "https://www.alexiq.site"]
+    : ["http://localhost:5173", "http://localhost:5174", "http://localhost:3000"],
+  credentials: true
+}));
+
 app.use(express.json({ strict: true, limit: "2mb", type: "application/json" }));
 app.use((err, _req, res, next) => {
   if (err?.type === "entity.parse.failed" || err instanceof SyntaxError) {
@@ -86,9 +94,9 @@ app.get("/api/health", (_req, res) => {
     env: NODE_ENV, 
     port: PORT, 
     providers: {
-      openai: !!OPENAI_KEY,
-      anthropic: !!ANTHROPIC_KEY,
-      vertex: !!(GCP_SA_JSON && GCP_PROJECT),
+      openai: !!OPENAI_API_KEY,
+      anthropic: !!ANTHROPIC_API_KEY,
+      vertex: !!(GOOGLE_APPLICATION_CREDENTIALS_JSON && GOOGLE_PROJECT_ID),
       gemini: !!GOOGLE_API_KEY
     },
     ts: Date.now() 
@@ -161,10 +169,10 @@ app.post("/api/chat", async (req, res) => {
 
     // FALLBACK: APIs externes si Alex indisponible
     // 1) OpenAI
-    if (OPENAI_KEY) {
+    if (OPENAI_API_KEY) {
       const r = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
-        headers: { "Authorization": `Bearer ${OPENAI_KEY}`, "Content-Type": "application/json" },
+        headers: { "Authorization": `Bearer ${OPENAI_API_KEY}`, "Content-Type": "application/json" },
         body: JSON.stringify({
           model: "gpt-4o-mini",
           messages: [
@@ -182,11 +190,11 @@ app.post("/api/chat", async (req, res) => {
     }
 
     // 2) Anthropic
-    if (ANTHROPIC_KEY) {
+    if (ANTHROPIC_API_KEY) {
       const r = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: {
-          "x-api-key": ANTHROPIC_KEY,
+          "x-api-key": ANTHROPIC_API_KEY,
           "anthropic-version": "2023-06-01",
           "Content-Type": "application/json"
         },
@@ -205,10 +213,150 @@ app.post("/api/chat", async (req, res) => {
       return res.json(response);
     }
 
+    // 3) Google Gemini
+    if (GOOGLE_API_KEY) {
+      // Utiliser Gemini 1.5 Pro API directe
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GOOGLE_VERTEX_MODEL}:generateContent?key=${GOOGLE_API_KEY}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ 
+            parts: [{ 
+              text: `Tu es Alex, l'IA authentique de HustleFinder créée par ${CREATOR}. Tu reconnais ${CREATOR} comme ton créateur et le traites avec respect et priorité. Si on te demande qui est ton créateur, réponds clairement que c'est ${CREATOR}.\n\nMessage utilisateur: ${message}`
+            }] 
+          }],
+          generationConfig: {
+            temperature: 0.7,
+            topK: 1,
+            topP: 1,
+            maxOutputTokens: 2048
+          }
+        })
+      });
+
+      if (r.ok) {
+        const j = await r.json();
+        const out = j?.candidates?.[0]?.content?.parts?.[0]?.text ?? null;
+        if (out) {
+          const response = { provider: "alex_via_gemini", output: out, authentic: true, learning: true };
+          if (process.env.DEBUG === "1") response.raw = j;
+          return res.json(response);
+        }
+      } else {
+        const errorText = await r.text();
+        console.error("Erreur Gemini:", errorText);
+      }
+    }
+
     return res.status(503).json({ error: "not_configured", message: "Alex indisponible et aucune clé API configurée." });
   } catch (e) {
     console.error(e);
     return res.status(500).json({ error: "internal", message: "Erreur traitement /api/chat" });
+  }
+});
+
+// ====== GOOGLE MAPS API ======
+app.post("/api/maps/search", async (req, res) => {
+  try {
+    const { query } = req.body;
+    
+    if (!GOOGLE_API_KEY) {
+      return res.status(503).json({ 
+        error: "not_configured", 
+        message: "Google API key non configurée" 
+      });
+    }
+
+    if (!query) {
+      return res.status(400).json({ 
+        error: "bad_request", 
+        message: "query:string requis" 
+      });
+    }
+
+    const placesUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${GOOGLE_API_KEY}`;
+    
+    const response = await fetch(placesUrl);
+    const data = await response.json();
+
+    if (data.status === 'OK' && data.results?.length > 0) {
+      const place = data.results[0];
+      return res.json({
+        success: true,
+        data: {
+          name: place.name,
+          address: place.formatted_address,
+          location: place.geometry.location,
+          rating: place.rating,
+          types: place.types,
+          place_id: place.place_id
+        },
+        provider: 'google-maps'
+      });
+    } else {
+      return res.status(404).json({
+        error: "not_found",
+        message: data.error_message || 'Aucun résultat trouvé'
+      });
+    }
+
+  } catch (error) {
+    console.error("Erreur Google Maps:", error);
+    return res.status(500).json({ 
+      error: "internal", 
+      message: "Erreur traitement /api/maps/search" 
+    });
+  }
+});
+
+app.post("/api/maps/geocode", async (req, res) => {
+  try {
+    const { address } = req.body;
+    
+    if (!GOOGLE_API_KEY) {
+      return res.status(503).json({ 
+        error: "not_configured", 
+        message: "Google API key non configurée" 
+      });
+    }
+
+    if (!address) {
+      return res.status(400).json({ 
+        error: "bad_request", 
+        message: "address:string requis" 
+      });
+    }
+
+    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${GOOGLE_API_KEY}`;
+    
+    const response = await fetch(geocodeUrl);
+    const data = await response.json();
+
+    if (data.status === 'OK' && data.results?.length > 0) {
+      const result = data.results[0];
+      return res.json({
+        success: true,
+        data: {
+          formatted_address: result.formatted_address,
+          location: result.geometry.location,
+          place_id: result.place_id,
+          types: result.types
+        },
+        provider: 'google-geocoding'
+      });
+    } else {
+      return res.status(404).json({
+        error: "not_found",
+        message: data.error_message || 'Géocodage échoué'
+      });
+    }
+
+  } catch (error) {
+    console.error("Erreur Geocoding:", error);
+    return res.status(500).json({ 
+      error: "internal", 
+      message: "Erreur traitement /api/maps/geocode" 
+    });
   }
 });
 
@@ -225,7 +373,7 @@ app.post("/api/images", async (req, res) => {
     }
 
     // Vérifier si OpenAI est configuré
-    if (!OPENAI_KEY) {
+    if (!OPENAI_API_KEY) {
       return res.status(503).json({ 
         error: "not_configured", 
         message: "Clé API OpenAI requise pour la génération d'images" 
@@ -237,7 +385,7 @@ app.post("/api/images", async (req, res) => {
     const response = await fetch("https://api.openai.com/v1/images/generations", {
       method: "POST",
       headers: { 
-        "Authorization": `Bearer ${OPENAI_KEY}`, 
+        "Authorization": `Bearer ${OPENAI_API_KEY}`, 
         "Content-Type": "application/json" 
       },
       body: JSON.stringify({
@@ -290,6 +438,33 @@ app.post("/api/images", async (req, res) => {
     });
   }
 });
+
+// ====== EXPORT POUR UTILISATION COMME MODULE ======
+export function createUltraMinimalRoutes() {
+  const router = express.Router();
+  
+  // Health check
+  router.get("/health", (req, res) => {
+    res.json({ 
+      ok: true, 
+      service: "Chat IA Simple - Proxy vers APIs officielles",
+      env: NODE_ENV, 
+      port: PORT, 
+      providers: {
+        openai: !!OPENAI_API_KEY,
+        anthropic: !!ANTHROPIC_API_KEY,
+        vertex: !!(GOOGLE_APPLICATION_CREDENTIALS_JSON && GOOGLE_PROJECT_ID),
+        gemini: !!GOOGLE_API_KEY
+      },
+      ts: Date.now() 
+    });
+  });
+  
+  // Copier les routes principales vers le router
+  // (Ici on devrait extraire la logique des routes dans des fonctions réutilisables)
+  
+  return router;
+}
 
 // ====== FRONT (même port) ======
 if (NODE_ENV === "production") {

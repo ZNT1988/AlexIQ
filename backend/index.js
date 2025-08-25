@@ -84,7 +84,7 @@ app.use(limiter);
 // CORS configuration
 app.use(cors({
   origin: process.env.NODE_ENV === STR_PRODUCTION
-    ? process.env.CORS_ORIGIN?.split(",") || [API_URL_1, API_URL_2]
+    ? process.env.CORS_ORIGIN?.split(",") || ["https://hustle-finder-ia.vercel.app", "https://alexiq-frontend.vercel.app"]
     : ["http://localhost:5173", "http://localhost:5174", "http://localhost:5176", "http://localhost:5177", "http://localhost:3000"],
   credentials: true
 }));
@@ -212,7 +212,7 @@ async function setupProtectedRoutes() {
   try {
     // Configuration Alex direct (sans auth complexe pour test)
     app.use("/api/ideas", ideasRoutes);
-    app.use("/api/ai", aiRoutes); // Routes AI avec reconnaissance propriétaire intégrée
+    app.use(["/api/ai", "/api"], aiRoutes); // Routes AI montées sur /api/ai et /api pour compatibilité frontend
     // app.use('/api/ai-system', authMiddleware, aiSystemRoutes); // Temporairement désactivé
     // app.use('/api/ai-system', authMiddleware, aiSystemSpecializedRoutes); // Temporairement désactivé
     // app.use('/api/assistant', authMiddleware, assistantRoutes); // Temporairement désactivé

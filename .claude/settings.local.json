@@ -26,7 +26,8 @@
       "Bash(timeout:*)",
       "Bash(pkill:*)",
       "Bash(PORT=3004 timeout 15s node index-palier1.js)",
-      "Bash(PORT=3012 timeout 10s node index-ultra-minimal.js)"
+      "Bash(PORT=3012 timeout 10s node index-ultra-minimal.js)",
+      "Bash(taskkill:*)"
     ],
     "deny": [],
     "defaultMode": "acceptEdits",

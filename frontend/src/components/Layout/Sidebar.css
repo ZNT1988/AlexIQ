@@ -1,0 +1,264 @@
+/* Sidebar style Claude/ChatGPT */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 64px;
+  bottom: 0;
+  width: 280px;
+  background: #f7f7f8;
+  border-right: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease;
+  z-index: 50;
+}
+
+.sidebar.collapsed {
+  width: 64px;
+}
+
+/* Header de la sidebar */
+.sidebar-header {
+  padding: 16px;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.new-chat-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  color: #374151;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.new-chat-btn:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.collapse-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.collapse-btn:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.collapsed .new-chat-btn {
+  width: 40px;
+  justify-content: center;
+  padding: 8px;
+}
+
+.collapsed .new-chat-btn span {
+  display: none;
+}
+
+/* Liste des conversations */
+.conversations-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.empty-state {
+  padding: 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.conversation-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  group: true;
+}
+
+.conversation-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.conversation-item.active {
+  background: #667eea;
+  color: white;
+}
+
+.conversation-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.conversation-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.conversation-icon .icon {
+  width: 100%;
+  height: 100%;
+  color: currentColor;
+}
+
+.conversation-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.conversation-title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.conversation-date {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.delete-btn {
+  width: 20px;
+  height: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: currentColor;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.conversation-item:hover .delete-btn {
+  display: flex;
+}
+
+.delete-btn:hover {
+  opacity: 1;
+  background: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+}
+
+.conversation-item.active .delete-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+/* Footer de la sidebar */
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.upgrade-prompt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.upgrade-prompt:hover {
+  transform: translateY(-1px);
+}
+
+.upgrade-icon {
+  font-size: 20px;
+}
+
+.upgrade-text {
+  flex: 1;
+}
+
+.upgrade-text div:first-child {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.upgrade-subtitle {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+/* Icons */
+.icon {
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .sidebar.collapsed {
+    width: 280px;
+  }
+}
+
+/* Scrollbar styling */
+.conversations-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.conversations-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.conversations-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+.conversations-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
