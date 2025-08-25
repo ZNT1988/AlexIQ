@@ -1,9 +1,13 @@
 [variables]
 NODE_VERSION = "22.12.0"
 NODE_ENV = "production"
+PORT = "3003"
 
 [phases.install]
-cmds = ["npm ci --omit=dev --quiet"]
+cmds = ["npm ci --quiet"]
+
+[phases.build]  
+cmds = ["npm run build:railway"]
 
 [start]
-cmd = "node index-ultra-minimal.js"
+cmd = "npm start"

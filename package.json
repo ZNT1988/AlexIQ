@@ -9,8 +9,8 @@
   "scripts": {
     "dev": "node index-ultra-minimal.js",
     "build": "cd frontend && npm ci && npm run build",
-    "build:railway": "cd frontend && npm ci && npm run build",
-    "start": "NODE_ENV=production node index-ultra-minimal.js",
+    "build:railway": "echo 'Frontend build skipped in Railway - backend only deployment' && exit 0",
+    "start": "node railway-start.js",
     "guard:scan": "node tools/anti-fake-scan.mjs backend",
     "precommit": "npm run guard:scan && npx eslint backend",
     "audit:batch": "node tools/batch-audit.mjs --dir=backend --start=0 --limit=10",
@@ -18,9 +18,14 @@
     "fix:safe": "node tools/safe-fixes.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.0",
     "@vercel/speed-insights": "^1.2.0",
     "dotenv": "^17.2.1",
     "express": "^4.19.2",
-    "vite": "^7.1.3"
+    "openai": "^4.77.0",
+    "sqlite3": "^5.1.7",
+    "uuid": "^11.1.0",
+    "vite": "^7.1.3",
+    "winston": "^3.14.2"
   }
 }
