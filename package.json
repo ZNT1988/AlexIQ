@@ -8,6 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "build:vercel": "vite build --outDir dist",
+    "build:railway": "echo 'No build needed for Node.js server'",
     "start": "node index-ultra-minimal.js",
     "test": "vitest",
     "test:ui": "vitest --ui",
