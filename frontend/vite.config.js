@@ -3,24 +3,31 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
+  // Base path for Vercel deployment
+  base: "/",
   // Test configuration
   test: {
     globals: true,
     environment: "jsdom",
     setupFiles: "./src/test/setup.js"
   },
-  // Build optimizations
+  // Build optimizations for Vercel
   build: {
-    target: "es2022",
+    target: "es2020",
     minify: "esbuild",
-    sourcemap: true,
+    sourcemap: false,
+    outDir: "dist",
+    assetsDir: "assets",
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ["react", "react-dom"],
           routing: ["react-router-dom"],
           ui: ["framer-motion", "lucide-react"]
-        }
+        },
+        assetFileNames: "assets/[name]-[hash].[ext]",
+        chunkFileNames: "assets/[name]-[hash].js",
+        entryFileNames: "assets/[name]-[hash].js"
       }
     }
   },

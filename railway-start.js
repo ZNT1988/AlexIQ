@@ -87,13 +87,8 @@ async function start() {
     console.log('🎯 Loading Alex Ultra Minimal...');
     
     // Charger dynamiquement le serveur principal
-    const { default: startServer } = await import('./index-ultra-minimal.js');
-    
-    if (typeof startServer === 'function') {
-      global.alexServer = await startServer();
-    } else {
-      console.log('🔄 Alex server already started via import');
-    }
+    await import('./index-ultra-minimal.js');
+    console.log('🔄 Alex server started via import');
     
     console.log(`🌟 HustleFinder IA Alex is LIVE on Railway!`);
     console.log(`📡 Health check: http://localhost:${PORT}/api/alex/status`);
