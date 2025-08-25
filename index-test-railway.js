@@ -3,6 +3,18 @@ import express from 'express';
 
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
+console.log('🔍 DEBUG Railway - PORT env var:', process.env.PORT);
+console.log('🔍 DEBUG Railway - Final PORT:', PORT);
+
+// Root endpoint for Railway health check
+app.get('/', (req, res) => {
+  res.json({
+    service: 'HustleFinder IA API',
+    status: 'Railway Test Active',
+    timestamp: Date.now(),
+    port: PORT
+  });
+});
 
 // Test endpoint simple
 app.get('/api/health', (req, res) => {

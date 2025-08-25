@@ -1,7 +1,6 @@
 [variables]
 NODE_VERSION = "22.11.0"
 NODE_ENV = "production"
-PORT = "3003"
 
 [phases.install]
 cmds = ["npm ci --quiet"]
