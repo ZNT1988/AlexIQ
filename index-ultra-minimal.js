@@ -2,7 +2,7 @@ import 'dotenv/config';                // ✅ dotenv chargé UNE SEULE FOIS ici
 
 // ESM – Front (Vite en dev / build en prod) + API réelles sur UN SEUL PORT.
 // Node >= 18 - Updated for Railway deploy
-// npm i express vite
+// npm i express vite cors compression
 
 import express from "express";
 import cors from "cors";
@@ -19,7 +19,7 @@ const NODE_ENV = process.env.NODE_ENV || "development";
 const CREATOR = process.env.HF_OWNER_NAME || "Zakaria Housni (ZNT)";
 const app = express();
 
-// ====== ORCHESTRATEUR ALEX ======
+// ====== ORCHESTRATEUR ALEX RÉACTIVÉ ======
 try {
   const { mountAlex } = await import('./backend/core/HustleFinderCore.js');
   const res = await mountAlex(app, {});
@@ -27,7 +27,6 @@ try {
 } catch (e) {
   console.warn('⚠️ Alex Orchestrator failed:', e.message);
   console.warn('🔧 Server will continue without Alex modules');
-  // Server continues without Alex but with basic APIs
 }
 
 // ====== ENV HELPERS ======
@@ -40,6 +39,7 @@ const GOOGLE_PROJECT_ID = env("GOOGLE_PROJECT_ID");
 const GOOGLE_LOCATION = env("GOOGLE_LOCATION") || "us-central1";
 const GOOGLE_VERTEX_MODEL = env("GOOGLE_VERTEX_MODEL") || "gemini-1.5-pro";
 const GOOGLE_APPLICATION_CREDENTIALS_JSON = env("GOOGLE_APPLICATION_CREDENTIALS_JSON");
+
 // ====== Helpers ======
 async function googleAccessTokenFromServiceAccount(saJson) {
   let creds;
@@ -71,7 +71,6 @@ async function googleAccessTokenFromServiceAccount(saJson) {
 }
 
 // ====== Middlewares ======
-// CORS configuration
 app.use(cors({
   origin: NODE_ENV === "production"
     ? process.env.CORS_ORIGIN?.split(",") ?? ["https://alexiq.site", "https://www.alexiq.site"]
@@ -104,15 +103,6 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
-// Railway healthcheck endpoint (legacy)
-app.get("/api/alex/status", (_req, res) => {
-  res.json({ 
-    ok: true, 
-    orchestrator: false, // temporaire
-    message: "Alex en mode apprentissage APIs" 
-  });
-});
-
 app.get("/api/whoami", (_req, res) => {
   res.json({
     creator: CREATOR,
@@ -125,9 +115,13 @@ app.get("/api/whoami", (_req, res) => {
   });
 });
 
-// ====== ALEX AUTHENTIQUE ======
-// Temporaire: routes Alex désactivées pour diagnostic
-console.log("🔧 Routes Alex temporairement désactivées pour corrections");
+app.get("/api/alex/status", (_req, res) => {
+  res.json({ 
+    ok: true, 
+    orchestrator: false, 
+    message: "Alex en mode apprentissage APIs" 
+  });
+});
 
 // ====== CHAT HYBRIDE - Alex + APIs de fallback ======
 app.post("/api/chat", async (req, res) => {
@@ -441,60 +435,32 @@ app.post("/api/images", async (req, res) => {
   }
 });
 
-// ====== EXPORT POUR UTILISATION COMME MODULE ======
-export function createUltraMinimalRoutes() {
-  const router = express.Router();
-  
-  // Health check
-  router.get("/health", (req, res) => {
-    res.json({ 
-      ok: true, 
-      service: "Chat IA Simple - Proxy vers APIs officielles",
-      env: NODE_ENV, 
-      port: PORT, 
-      providers: {
-        openai: !!OPENAI_API_KEY,
-        anthropic: !!ANTHROPIC_API_KEY,
-        vertex: !!(GOOGLE_APPLICATION_CREDENTIALS_JSON && GOOGLE_PROJECT_ID),
-        gemini: !!GOOGLE_API_KEY
-      },
-      ts: Date.now() 
-    });
-  });
-  
-  // Copier les routes principales vers le router
-  // (Ici on devrait extraire la logique des routes dans des fonctions réutilisables)
-  
-  return router;
-}
-
-// ====== FRONT (même port) ======
+// ====== FRONT - Version simplifiée sans Vite problématique ======
 if (NODE_ENV === "production") {
   const distDir = path.resolve(__dirname, "frontend", "dist");
+  console.log("📁 Serving static files from:", distDir);
   app.use(express.static(distDir));
-  app.get("/*", async (_req, res) => {
-    const html = await fs.readFile(path.join(distDir, "index.html"), "utf-8");
-    res.setHeader("Content-Type", "text/html");
-    res.send(html);
+  
+  // Route catch-all simple sans problème path-to-regexp
+  app.get("/", async (_req, res) => {
+    try {
+      const html = await fs.readFile(path.join(distDir, "index.html"), "utf-8");
+      res.setHeader("Content-Type", "text/html");
+      res.send(html);
+    } catch (e) {
+      res.status(404).send("Frontend not built - run npm run build in frontend/");
+    }
   });
 } else {
-  const { createServer: createViteServer } = await import("vite");
-  const vite = await createViteServer({
-    root: path.resolve(__dirname, "frontend"),
-    server: { middlewareMode: true },
-    appType: "spa"
-  });
-  app.use(vite.middlewares);
-  app.get("/*", async (req, res, next) => {
-    try {
-      const url = req.originalUrl;
-      let html = await fs.readFile(path.resolve(__dirname, "frontend", "index.html"), "utf-8");
-      html = await vite.transformIndexHtml(url, html);
-      res.status(200).setHeader("Content-Type", "text/html").end(html);
-    } catch (e) { next(e); }
-  });
+  // Mode développement : servir uniquement les APIs
+  console.log("🔧 Mode développement : APIs seulement (frontend sur port séparé)");
+  console.log("📝 Pour le frontend, lance : cd frontend && npm run dev");
 }
 
 app.listen(PORT, () => {
-  console.log(`✅ Chat IA Simple - Proxy OpenAI/Anthropic/Google on http://localhost:${PORT} (env=${NODE_ENV})`);
+  console.log(`✅ AlexIQ Server running on http://localhost:${PORT} (${NODE_ENV})`);
+  console.log(`📊 API Status: /api/health`);
+  console.log(`💬 Chat API: POST /api/chat`);
+  console.log(`🗺️  Maps API: POST /api/maps/search`);
+  console.log(`🎨 Images API: POST /api/images`);
 });
