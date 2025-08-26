@@ -11,9 +11,11 @@ const AppRouter = () => {
     <Routes>
       <Route path="/" element={<ChatGPT />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/AlexChat" element={<AlexChat />} />
       <Route path="/chat" element={<ChatGPT />} />
       <Route path="/chatgpt" element={<ChatGPT />} />
+      <Route path="/login" element={<ChatGPT />} />
+      <Route path="/signup" element={<ChatGPT />} />
+      <Route path="/dashboard" element={<ChatGPT />} />
       <Route path="*" element={<ChatGPT />} />
     </Routes>
   );

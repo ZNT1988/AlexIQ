@@ -274,7 +274,7 @@ app.post("/api/alex/feedback", (req, res) => {
 
 // ====== FRONTEND STATIC FILES ======
 if (NODE_ENV === "production") {
-  const distDir = path.resolve(__dirname, "frontend", "dist");
+  const distDir = path.resolve(__dirname, "dist");
   console.log("📁 Serving frontend from:", distDir);
   
   app.use(express.static(distDir));
@@ -287,7 +287,8 @@ if (NODE_ENV === "production") {
     
     res.sendFile(path.join(distDir, "index.html"), (err) => {
       if (err) {
-        res.status(500).json({ error: 'Frontend not available' });
+        console.error('Frontend serve error:', err);
+        res.status(404).send('Page not found - Frontend not available');
       }
     });
   });
