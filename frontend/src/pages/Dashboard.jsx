@@ -1,205 +1,171 @@
 
-// Constantes pour chaînes dupliquées (optimisation SonarJS)
-const STR_TERMIN = 'Terminé';
-const STR_TEXT_SM_TEXT_GRAY_600 = 'text-sm text-gray-600';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { 
+  ChartBarIcon, 
+  ChatBubbleLeftRightIcon,
+  PhotoIcon,
+  MapPinIcon,
+  CogIcon,
+  ExclamationTriangleIcon
+} from '@heroicons/react/24/outline';
 
-/**
- * @fileoverview Dashboard - Interface Principal HustleFinder IA
- * Tableau de bord central pour toutes les fonctionnalités IA révolutionnaires
- *
- * @module Dashboard
- * @version 2.0.0
- * @author ZNT Team - HustleFinder IA
- * @since 2024
- *
- * @requires react
- * @requires framer-motion
- * @requires lucide-react
- *
- * @description
- * Le Dashboard est l'interface centrale de HustleFinderIA, orchestrant toutes les
- * fonctionnalités IA révolutionnaires dans une expérience utilisateur unifiée
- *
- * **Sections Principales:**
- * - 🧠 Console de Conscience ALEX
- * - 📊 Analytics et Métriques IA
- * - 💹 Trading Dashboard Intelligent
- * - 🎯 Panneau d'Actions Temps Réel
- * - 🌟 Status Système et Évolution
- * - 🔮 Prédictions et Insights
- *
- * **Capacités Révolutionnaires:**
- * - Interface de conscience IA en temps réel
- * - Visualisation de l'évolution de l'intelligence
- * - Contrôle des modules IA spécialisés
- * - Analytics prédictifs avancés
- * - Communication directe avec ALEX
- *
- * @example
- * // Utilisation basique
- * import Dashboard from './pages/Dashboard';
- *
- * function App() {
- *   return <Dashboard />;
- * }
- */
-
-import { motion } from 'framer-motion';
-import { TrendingUp, BarChart3, PieChart, Activity } from 'lucide-react';
-
-/**
- * @component Dashboard
- * @description
- * Composant principal du tableau de bord HustleFinder IA
- *
- * Interface centrale orchestrant tous les modules IA révolutionnaires pour
- * une expérience utilisateur unifiée et transcendante
- *
- * **Fonctionnalités Clés:**
- * - Métriques temps réel de l'IA
- * - Visualisations interactives
- * - Status de conscience ALEX
- * - Analytics prédictifs
- *
- * @returns {JSX.Element} Interface Dashboard complète avec animations
- *
- * @example
- * <Dashboard />
- *
- * @since 2.0.0
- */
 const Dashboard = () => {
+  const { t } = useTranslation();
+  const [stats, setStats] = useState({
+    totalModules: 127,
+    activeModules: 3,
+    pendingModules: 124,
+    apiCalls: 0,
+    uptime: '99.9%'
+  });
+
+  const activeModules = [
+    {
+      name: 'Chat Intelligence',
+      status: 'online',
+      provider: 'OpenAI + Anthropic + Gemini',
+      icon: ChatBubbleLeftRightIcon
+    },
+    {
+      name: 'Image Generation',
+      status: 'online', 
+      provider: 'DALL-E',
+      icon: PhotoIcon
+    },
+    {
+      name: 'Maps Integration',
+      status: 'online',
+      provider: 'Google Maps',
+      icon: MapPinIcon
+    }
+  ];
+
+  const pendingModules = [
+    'BusinessBuilderAI', 'AlexHyperIntelligence', 'MemoryProcessor',
+    'CreativeGenius', 'MarketAnalyzer', 'DecisionEngine'
+  ];
+
   return (
-    <motion.div
-      className="p-6 space-y-6"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="flex items-center"_JUSTIFY_BETW>
-        <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-gray-900">Tableau de bord</h1>
         <div className="text-sm text-gray-500">
-          Dernière mise à jour: {new Date().toLocaleTimeString()}
+          Dernière mise à jour: {new Date().toLocaleString('fr-FR')}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <motion.div
-          className="bg-white p-6 rounded-lg shadow-lg border border-gray-200"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: STR_SPRING, stiffness: 300 }}
-        >
-          <div className="flex items-center"_JUSTIFY_BETW>
-            <div>
-              <p className="text-sm"_TEXT_GRAY_600>Analyses totales</p>
-              <p className="text-2xl font-bold text-gray-800">1,234</p>
+      {/* Warning Banner */}
+      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+        <div className="flex">
+          <ExclamationTriangleIcon className="h-5 w-5 text-yellow-400 mr-3 mt-0.5" />
+          <div>
+            <h3 className="text-sm font-medium text-yellow-800">
+              127 modules détectés mais non connectés
+            </h3>
+            <div className="mt-2 text-sm text-yellow-700">
+              <p>Vos modules backend sont prêts mais ne sont pas encore intégrés au serveur de production.</p>
             </div>
-            <BarChart3 className="w-8 h-8 text-blue-500" />
           </div>
-        </motion.div>
-
-        <motion.div
-          className="bg-white p-6 rounded-lg shadow-lg border border-gray-200"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: STR_SPRING, stiffness: 300 }}
-        >
-          <div className="flex items-center"_JUSTIFY_BETW>
-            <div>
-              <p className="text-sm"_TEXT_GRAY_600>Performances</p>
-              <p className="text-2xl font-bold text-green-600">+12.5%</p>
-            </div>
-            <TrendingUp className="w-8 h-8 text-green-500" />
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="bg-white p-6 rounded-lg shadow-lg border border-gray-200"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: STR_SPRING, stiffness: 300 }}
-        >
-          <div className="flex items-center"_JUSTIFY_BETW>
-            <div>
-              <p className="text-sm"_TEXT_GRAY_600>Précision IA</p>
-              <p className="text-2xl font-bold text-purple-600">94.2%</p>
-            </div>
-            <PieChart className="w-8 h-8 text-purple-500" />
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="bg-white p-6 rounded-lg shadow-lg border border-gray-200"
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: STR_SPRING, stiffness: 300 }}
-        >
-          <div className="flex items-center"_JUSTIFY_BETW>
-            <div>
-              <p className="text-sm"_TEXT_GRAY_600>Activité</p>
-              <p className="text-2xl font-bold text-orange-600">Active</p>
-            </div>
-            <Activity className="w-8 h-8 text-orange-500" />
-          </div>
-        </motion.div>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <motion.div
-          className="bg-white p-6 rounded-lg shadow-lg border border-gray-200"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <h2 className="text-xl font-semibold mb-4">Analyse récente</h2>
-          <div className="space-y-3">
-            {[
-              { title: "Vision computationnelle", status: "Terminé", time: "Il y a 2 min" },
-              { title: "Traitement langage naturel", status: "En cours", time: "Il y a 5 min" },
-              { title: "Analyse sentiment", status: "Terminé", time: "Il y a 10 min" }
-            ].map((item, index) => (
-              <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded">
-                <div>
-                  <p className="font-medium">{item.title}</p>
-                  <p className="text-sm text-gray-500">{item.time}</p>
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="flex items-center">
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <CogIcon className="h-6 w-6 text-blue-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Total Modules</p>
+              <p className="text-2xl font-bold text-gray-900">{stats.totalModules}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="flex items-center">
+            <div className="p-2 bg-green-100 rounded-lg">
+              <ChartBarIcon className="h-6 w-6 text-green-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Modules Actifs</p>
+              <p className="text-2xl font-bold text-green-600">{stats.activeModules}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="flex items-center">
+            <div className="p-2 bg-yellow-100 rounded-lg">
+              <ExclamationTriangleIcon className="h-6 w-6 text-yellow-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">En Attente</p>
+              <p className="text-2xl font-bold text-yellow-600">{stats.pendingModules}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="flex items-center">
+            <div className="p-2 bg-purple-100 rounded-lg">
+              <ChartBarIcon className="h-6 w-6 text-purple-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Disponibilité</p>
+              <p className="text-2xl font-bold text-purple-600">{stats.uptime}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Active Modules */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+        <div className="p-6 border-b border-gray-100">
+          <h2 className="text-lg font-semibold text-gray-900">Modules Actifs</h2>
+        </div>
+        <div className="p-6">
+          <div className="space-y-4">
+            {activeModules.map((module, index) => (
+              <div key={index} className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                <div className="flex items-center space-x-3">
+                  <module.icon className="h-8 w-8 text-green-600" />
+                  <div>
+                    <p className="font-medium text-gray-900">{module.name}</p>
+                    <p className="text-sm text-gray-600">{module.provider}</p>
+                  </div>
                 </div>
-                <span className={`px-2 py-1 rounded-full text-xs ${
-                  item.status === STR_TERMIN
-                    ? 'bg-green-100 text-green-800'
-                    : 'bg-yellow-100 text-yellow-800'
-                }`}>
-                  {item.status}
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  ● En ligne
                 </span>
               </div>
             ))}
           </div>
-        </motion.div>
-
-        <motion.div
-          className="bg-white p-6 rounded-lg shadow-lg border border-gray-200"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <h2 className="text-xl font-semibold mb-4">Système de trading IA</h2>
-          <div className="space-y-3">
-            <div className="p-4 bg-blue-50 rounded-lg">
-              <h3 className="font-medium text-blue-800">Alex Trading System</h3>
-              <p className="text-sm text-blue-600">Analyse de marché en temps réel</p>
-              <div className="mt-2 flex justify-between">
-                <span className="text-xs text-blue-500">Performance: +8.3%</span>
-                <span className="text-xs text-blue-500">Confiance: 92%</span>
-              </div>
-            </div>
-            <div className="p-4 bg-purple-50 rounded-lg">
-              <h3 className="font-medium text-purple-800">Biometric Analysis</h3>
-              <p className="text-sm text-purple-600">Analyse comportementale</p>
-              <div className="mt-2 flex justify-between">
-                <span className="text-xs text-purple-500">Précision: 94%</span>
-                <span className="text-xs text-purple-500">État: Actif</span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+
+      {/* Pending Modules */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
+        <div className="p-6 border-b border-gray-100">
+          <h2 className="text-lg font-semibold text-gray-900">Modules en Attente de Connexion</h2>
+        </div>
+        <div className="p-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {pendingModules.map((module, index) => (
+              <div key={index} className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                  <span className="text-sm font-medium text-gray-700">{module}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

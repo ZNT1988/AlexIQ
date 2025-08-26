@@ -1,0 +1,66 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "chat": "Chat Alex",
+    "dashboard": "Tableau de bord",
+    "community": "Communauté",
+    "settings": "Paramètres",
+    "logout": "Déconnexion"
+  },
+  "homepage": {
+    "title": "AlexIQ - Intelligence Artificielle Authentique",
+    "subtitle": "127 modules d'IA pour automatiser et optimiser vos processus",
+    "cta_start": "Commencer maintenant",
+    "cta_login": "Se connecter",
+    "modules_title": "Modules Intelligents",
+    "stats": {
+      "modules": "Modules IA",
+      "apis": "APIs Actives",
+      "uptime": "Disponibilité",
+      "support": "Support"
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "last_updated": "Dernière mise à jour",
+    "warning_title": "127 modules détectés mais non connectés",
+    "warning_text": "Vos modules backend sont prêts mais ne sont pas encore intégrés au serveur de production.",
+    "stats": {
+      "total_modules": "Total Modules",
+      "active_modules": "Modules Actifs",
+      "pending_modules": "En Attente",
+      "availability": "Disponibilité"
+    },
+    "active_modules_title": "Modules Actifs",
+    "pending_modules_title": "Modules en Attente de Connexion"
+  },
+  "chat": {
+    "title": "Chat avec Alex",
+    "subtitle": "Assistant IA intelligent et authentique",
+    "placeholder": "Tapez votre message...",
+    "send": "Envoyer",
+    "thinking": "Alex réfléchit...",
+    "hello": "Bonjour ! Je suis Alex",
+    "intro": "Posez-moi n'importe quelle question pour commencer la conversation."
+  },
+  "auth": {
+    "login": {
+      "title": "Connexion à AlexIQ",
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "remember": "Se souvenir de moi",
+      "forgot": "Mot de passe oublié ?",
+      "submit": "Se connecter",
+      "create_account": "créez un nouveau compte"
+    },
+    "signup": {
+      "title": "Créer un compte AlexIQ",
+      "name": "Nom complet",
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "submit": "Créer le compte",
+      "have_account": "Déjà inscrit ?",
+      "login_link": "Se connecter"
+    }
+  }
+}

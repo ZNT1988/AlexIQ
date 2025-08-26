@@ -1,0 +1,66 @@
+{
+  "navigation": {
+    "home": "Home",
+    "chat": "Alex Chat",
+    "dashboard": "Dashboard",
+    "community": "Community",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "homepage": {
+    "title": "AlexIQ - Authentic Artificial Intelligence",
+    "subtitle": "127 AI modules to automate and optimize your processes",
+    "cta_start": "Get Started",
+    "cta_login": "Sign In",
+    "modules_title": "Intelligent Modules",
+    "stats": {
+      "modules": "AI Modules",
+      "apis": "Active APIs",
+      "uptime": "Uptime",
+      "support": "Support"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "last_updated": "Last updated",
+    "warning_title": "127 modules detected but not connected",
+    "warning_text": "Your backend modules are ready but not yet integrated into the production server.",
+    "stats": {
+      "total_modules": "Total Modules",
+      "active_modules": "Active Modules",
+      "pending_modules": "Pending",
+      "availability": "Availability"
+    },
+    "active_modules_title": "Active Modules",
+    "pending_modules_title": "Modules Pending Connection"
+  },
+  "chat": {
+    "title": "Chat with Alex",
+    "subtitle": "Intelligent and authentic AI assistant",
+    "placeholder": "Type your message...",
+    "send": "Send",
+    "thinking": "Alex is thinking...",
+    "hello": "Hello! I am Alex",
+    "intro": "Ask me any question to start the conversation."
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in to AlexIQ",
+      "email": "Email address",
+      "password": "Password",
+      "remember": "Remember me",
+      "forgot": "Forgot password?",
+      "submit": "Sign in",
+      "create_account": "create a new account"
+    },
+    "signup": {
+      "title": "Create AlexIQ account",
+      "name": "Full name",
+      "email": "Email address",
+      "password": "Password",
+      "submit": "Create account",
+      "have_account": "Already registered?",
+      "login_link": "Sign in"
+    }
+  }
+}
