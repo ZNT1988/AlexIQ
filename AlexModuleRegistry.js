@@ -11,6 +11,11 @@ import { logMemory, checkMemorySafety, memoryAwareDelay, forceGarbageCollection 
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Modules désactivés via env vars pour éviter OOM crashes
+const DISABLED = new Set(
+  (process.env.ALEX_DISABLE_MODULES || "").split(",").map(s => s.trim()).filter(Boolean)
+);
+
 class AlexModuleRegistry {
   constructor() {
     this.modules = new Map();
@@ -23,8 +28,8 @@ class AlexModuleRegistry {
     };
     this.initialized = false;
     
-    // Concurrency control for module loading
-    this.limit = pLimit(4); // Maximum 4 modules loading simultaneously
+    // SÉRIEL pour éviter OOM - plus de concurrency
+    this.limit = pLimit(1); // Chargement séquentiel strict
     this.loadingStats = {
       total: 0,
       loaded: 0,
@@ -43,11 +48,21 @@ class AlexModuleRegistry {
       
       const modulesPath = path.join(__dirname, 'backend', 'alex-modules');
       
-      // Charger chaque catégorie avec profiling mémoire
+      // WATCHDOG initial
+      console.log(`🎯 Disabled modules: ${Array.from(DISABLED).join(', ') || 'none'}`);
+      
+      // Charger chaque catégorie avec profiling mémoire STRICTE
       for (const category of ['consciousness', 'core', 'intelligence', 'specialized', 'config']) {
         const categoryMemory = logMemory(`category_${category}_start`);
+        console.log(`📁 START category ${category} - Memory: ${JSON.stringify(this.getMemory())}`);
         
         await this.loadCategory(category, path.join(modulesPath, category));
+        
+        // FORCE GC après chaque catégorie
+        if (global.gc) {
+          global.gc();
+          console.log(`♻️ GC forced after ${category}`);
+        }
         
         const afterCategoryMemory = logMemory(`category_${category}_end`, categoryMemory);
         this.loadingStats.memorySnapshots.push({ 
@@ -56,13 +71,16 @@ class AlexModuleRegistry {
         });
         
         // Check memory safety and pause if needed
-        const safety = checkMemorySafety();
-        if (!safety.safe) {
-          console.log(`⚠️ Memory pressure detected after ${category}, forcing GC...`);
+        const mem = this.getMemory();
+        console.log(`📊 END category ${category} - Memory: ${JSON.stringify(mem)}`);
+        
+        if (mem.rss > 1400 || mem.heapUsed > 1000) { // Stricter limits
+          console.log(`🚨 CRITICAL Memory after ${category}, forcing aggressive GC...`);
           forceGarbageCollection();
-          await memoryAwareDelay(1000);
+          if (global.gc) global.gc(); // Double GC
+          await memoryAwareDelay(2000); // Longer pause
         } else {
-          await memoryAwareDelay(100); // Small delay between categories
+          await memoryAwareDelay(200); // Pause between categories
         }
       }
       
@@ -129,16 +147,36 @@ class AlexModuleRegistry {
   async safeLoadModule(category, filename, filePath) {
     const moduleName = path.basename(filename, '.js');
     
+    // Check si module disabled
+    if (DISABLED.has(moduleName)) {
+      console.warn(`⏭️ Skip module (disabled): ${moduleName}`);
+      this.loadingStats.loaded++; // Count as success but skipped
+      return { skipped: true, name: moduleName };
+    }
+    
     try {
+      // Watchdog mémoire AVANT chargement
+      const mem = this.getMemory();
+      if (mem.rss > 1200 || mem.heapUsed > 800) { // MB limits
+        console.warn(`🚨 Memory HIGH before ${moduleName}: RSS=${mem.rss}MB, Heap=${mem.heapUsed}MB`);
+        forceGarbageCollection(); // Force GC avant
+        await memoryAwareDelay(500);
+      }
+      
       // Memory snapshot before loading module
       const beforeMemory = logMemory(`module_${moduleName}_start`);
       
       const result = await this.loadModule(category, filename, filePath);
       
+      // FORCE GC après chaque module
+      if (global.gc) {
+        global.gc();
+      }
+      
       // Memory snapshot after loading module
       const afterMemory = logMemory(`module_${moduleName}_end`, beforeMemory);
       
-      if (result) {
+      if (result && !result.skipped) {
         this.loadingStats.loaded++;
       } else {
         this.loadingStats.failed++;
@@ -152,6 +190,15 @@ class AlexModuleRegistry {
       logMemory(`module_${moduleName}_error`);
       return null;
     }
+  }
+
+  getMemory() {
+    const { rss, heapUsed, heapTotal } = process.memoryUsage();
+    return {
+      rss: Math.round(rss / 1024 / 1024),
+      heapUsed: Math.round(heapUsed / 1024 / 1024),
+      heapTotal: Math.round(heapTotal / 1024 / 1024)
+    };
   }
 
   async loadModule(category, filename, filePath) {
