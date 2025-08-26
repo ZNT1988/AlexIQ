@@ -5,7 +5,7 @@
   "description": "HustleFinder IA Backend with Alex Orchestrator - Railway Deploy",
   "main": "index-ultra-minimal.js",
   "scripts": {
-    "start": "node index-ultra-minimal.js",
+    "start": "node index-railway-minimal.js",
     "dev": "node index-ultra-minimal.js",
     "build": "echo 'Backend ready - no build required'",
     "build:railway": "npm install --production",
@@ -41,7 +41,7 @@
     "nodemon": "^3.1.7"
   },
   "engines": {
-    "node": ">=20.0.0",
+    "node": "20.18.0",
     "npm": ">=9.0.0"
   },
   "keywords": [
