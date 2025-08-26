@@ -133,25 +133,6 @@ app.get("/api/alex/status", (_req, res) => {
   });
 });
 
-// ====== ALEX STATUS API ======
-app.get("/api/alex/status", (_req, res) => {
-  res.json({
-    ok: true,
-    orchestrator: false, // Bypass mode
-    bypass_mode: true,
-    providers: {
-      openai: !!env('OPENAI_API_KEY', 'CLE_API_OPENAI'),
-      anthropic: !!env('ANTHROPIC_API_KEY', 'CLE_API_ANTHROPIC'),
-      google: !!env('GOOGLE_API_KEY', 'CLE_API_GOOGLE')
-    },
-    modules: {
-      total: 125,
-      active: 0, // Bypass mode
-      message: "Modules available via direct API"
-    }
-  });
-});
-
 // ====== CHAT HYBRIDE - Alex + APIs de fallback ======
 app.post("/api/chat", async (req, res) => {
   try {
@@ -506,9 +487,9 @@ if (NODE_ENV === "production") {
   app.use(express.static(distDir));
   
   // Route catch-all SPA pour toutes les routes non-API
-  app.get("/:path(*)", async (req, res) => {
+  app.get("*", async (req, res) => {
     // Si c'est une route API, passer au suivant (404)
-    if (req.params.path && req.params.path.startsWith('api/')) {
+    if (req.path.startsWith('/api/')) {
       return res.status(404).json({ error: 'API endpoint not found' });
     }
     
