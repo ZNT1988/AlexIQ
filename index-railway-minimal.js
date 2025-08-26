@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import alexRegistry from "./AlexModuleRegistry.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname  = path.dirname(__filename);
@@ -45,10 +46,20 @@ app.get("/api/health", (req, res) => {
 
 // ====== ALEX STATUS ======
 app.get("/api/alex/status", (req, res) => {
+  const stats = alexRegistry.getCategoryStats();
+  const totalModules = alexRegistry.modules.size;
+  const initializedCount = Array.from(alexRegistry.modules.values())
+    .filter(m => m.initialized).length;
+
   res.json({
     ok: true,
     orchestrator: true,
     mode: "production_real_ai",
+    modules: {
+      total: totalModules,
+      initialized: initializedCount,
+      categories: stats
+    },
     providers: {
       openai: !!process.env.OPENAI_API_KEY,
       anthropic: !!process.env.ANTHROPIC_API_KEY,
@@ -56,7 +67,7 @@ app.get("/api/alex/status", (req, res) => {
       maps: !!process.env.GOOGLE_API_KEY
     },
     authentic: true,
-    message: "Vraies APIs intégrées - Zero fake AI"
+    message: `${totalModules} modules authentiques connectés`
   });
 });
 
@@ -272,6 +283,82 @@ app.post("/api/alex/feedback", (req, res) => {
   });
 });
 
+// ====== MODULES API ======
+app.get("/api/modules/list", (req, res) => {
+  try {
+    const modules = alexRegistry.getAllModules();
+    res.json({
+      success: true,
+      total: modules.length,
+      modules: modules
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+app.get("/api/modules/categories", (req, res) => {
+  try {
+    const stats = alexRegistry.getCategoryStats();
+    res.json({
+      success: true,
+      categories: stats
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+app.post("/api/modules/execute/:moduleName/:methodName", async (req, res) => {
+  try {
+    const { moduleName, methodName } = req.params;
+    const args = req.body.args || [];
+    
+    const result = await alexRegistry.executeModule(moduleName, methodName, ...args);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+app.get("/api/modules/info/:moduleName", (req, res) => {
+  try {
+    const { moduleName } = req.params;
+    const moduleInfo = alexRegistry.getModuleInfo(moduleName);
+    
+    if (!moduleInfo) {
+      return res.status(404).json({
+        success: false,
+        error: "Module non trouvé"
+      });
+    }
+    
+    res.json({
+      success: true,
+      module: {
+        name: moduleName,
+        category: moduleInfo.category,
+        initialized: moduleInfo.initialized,
+        methods: alexRegistry.getModuleMethods(moduleInfo.instance)
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
 // ====== FRONTEND STATIC FILES ======
 if (NODE_ENV === "production") {
   const distDir = path.resolve(__dirname, "dist");
@@ -304,9 +391,22 @@ app.use((err, req, res, next) => {
 });
 
 // ====== START SERVER ======
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`✅ Alex Railway Minimal running on port ${PORT}`);
   console.log(`🌍 Environment: ${NODE_ENV}`);
   console.log(`🤖 Interface ChatGPT ready !`);
   console.log(`⚡ Memory: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB`);
+  
+  // Charger tous les modules authentiques
+  console.log('🚀 Chargement des modules Alex...');
+  const result = await alexRegistry.loadAllModules();
+  
+  if (result.success) {
+    console.log(`✅ ${result.totalModules} modules Alex connectés !`);
+    result.categories.forEach(cat => {
+      console.log(`   📁 ${cat.name}: ${cat.count} modules`);
+    });
+  } else {
+    console.error('❌ Erreur chargement modules:', result.error);
+  }
 });
