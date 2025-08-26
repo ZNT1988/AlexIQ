@@ -40,6 +40,4 @@ export class AlexNetworkIntelligence extends EventEmitter {
   }
 }
 
-export default new AlexNetworkIntelligence({
-  moduleName: "AlexNetworkIntelligence"
-});
+export default AlexNetworkIntelligence;

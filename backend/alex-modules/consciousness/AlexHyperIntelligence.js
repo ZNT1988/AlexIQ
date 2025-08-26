@@ -39,6 +39,4 @@ export class AlexHyperIntelligence extends EventEmitter {
   }
 }
 
-export default new AlexHyperIntelligence({
-  moduleName: "AlexHyperIntelligence"
-});
+export default AlexHyperIntelligence;

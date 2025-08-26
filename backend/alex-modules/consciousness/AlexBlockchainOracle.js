@@ -40,7 +40,5 @@ export class AlexBlockchainOracle extends EventEmitter {
   }
 }
 
-// Export singleton pour compatibilité
-export default new AlexBlockchainOracle({
-  moduleName: "AlexBlockchainOracle"
-});
+// Export class pour compatibilité registry
+export default AlexBlockchainOracle;

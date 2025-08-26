@@ -40,6 +40,4 @@ export class AlexInfiniteCreator extends EventEmitter {
   }
 }
 
-export default new AlexInfiniteCreator({
-  moduleName: "AlexInfiniteCreator"
-});
+export default AlexInfiniteCreator;
