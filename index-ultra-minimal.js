@@ -21,19 +21,11 @@ console.log('🔍 DEBUG Railway - PORT env var:', process.env.PORT);
 console.log('🔍 DEBUG Railway - Final PORT:', PORT);
 const app = express();
 
-// ====== ORCHESTRATEUR ALEX RÉACTIVÉ ======
-console.log('🚀 Starting Alex Orchestrator initialization...');
+// ====== ALEX ORCHESTRATOR - BYPASS MODE ======
+console.log('⚡ Alex Orchestrator in bypass mode (avoiding path-to-regexp crash)');
 let alexMounted = false;
-try {
-  const { mountAlex } = await import('./backend/core/HustleFinderCore.js');
-  const res = await mountAlex(app, {});
-  alexMounted = true;
-  console.log('✅ Alex Orchestrator loaded successfully:', res.status);
-  console.log('🎯 Alex modules are now ACTIVE and ready!');
-} catch (e) {
-  console.error('❌ Alex Orchestrator failed to load:', e.message);
-  console.warn('🔧 Server will continue in fallback mode');
-}
+// Temporarily disabled due to path-to-regexp error: 
+// Alex modules will be available via direct API calls
 
 // ====== ENV HELPERS ======
 const env = (k, ...aliases) => process.env[k] ?? aliases.map(a => process.env[a]).find(Boolean) ?? null;
@@ -138,6 +130,25 @@ app.get("/api/alex/status", (_req, res) => {
     ok: true, 
     orchestrator: false, 
     message: "Alex en mode apprentissage APIs" 
+  });
+});
+
+// ====== ALEX STATUS API ======
+app.get("/api/alex/status", (_req, res) => {
+  res.json({
+    ok: true,
+    orchestrator: false, // Bypass mode
+    bypass_mode: true,
+    providers: {
+      openai: !!env('OPENAI_API_KEY', 'CLE_API_OPENAI'),
+      anthropic: !!env('ANTHROPIC_API_KEY', 'CLE_API_ANTHROPIC'),
+      google: !!env('GOOGLE_API_KEY', 'CLE_API_GOOGLE')
+    },
+    modules: {
+      total: 125,
+      active: 0, // Bypass mode
+      message: "Modules available via direct API"
+    }
   });
 });
 
