@@ -47,17 +47,20 @@ app.get("/api/health", (req, res) => {
 app.get("/api/alex/status", (req, res) => {
   res.json({
     ok: true,
-    orchestrator: false,
-    mode: "minimal_railway",
+    orchestrator: true,
+    mode: "production_real_ai",
     providers: {
       openai: !!process.env.OPENAI_API_KEY,
-      anthropic: !!process.env.ANTHROPIC_API_KEY
+      anthropic: !!process.env.ANTHROPIC_API_KEY,
+      google: !!process.env.GOOGLE_API_KEY,
+      maps: !!process.env.GOOGLE_API_KEY
     },
-    message: "APIs fonctionnelles en mode minimal"
+    authentic: true,
+    message: "Vraies APIs intégrées - Zero fake AI"
   });
 });
 
-// ====== CHAT API ======
+// ====== CHAT API avec vraies APIs ======
 app.post("/api/chat", async (req, res) => {
   try {
     const { message } = req.body || {};
@@ -71,13 +74,125 @@ app.post("/api/chat", async (req, res) => {
 
     console.log('💬 Chat message:', message.slice(0, 50));
 
-    // Réponse simple fonctionnelle
-    res.json({
-      id: `msg_${Date.now()}`,
-      output: `Alex (mode minimal): J'ai bien reçu votre message: "${message}". Le système fonctionne correctement. Interface ChatGPT active !`,
-      provider: "alex_minimal",
-      confidence: 0.9,
-      timestamp: Date.now()
+    // 1) OpenAI GPT-4
+    const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+    if (OPENAI_API_KEY) {
+      try {
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${OPENAI_API_KEY}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            messages: [
+              { role: "system", content: "Tu es Alex, l'IA authentique de HustleFinder. Réponds de manière naturelle et intelligente." },
+              { role: "user", content: message }
+            ],
+            max_tokens: 500
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const output = data.choices?.[0]?.message?.content;
+          if (output) {
+            return res.json({
+              id: `msg_${Date.now()}`,
+              output: output,
+              provider: "alex_via_openai",
+              authentic: true,
+              timestamp: Date.now()
+            });
+          }
+        }
+      } catch (openaiError) {
+        console.error('OpenAI error:', openaiError);
+      }
+    }
+
+    // 2) Anthropic Claude fallback
+    const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+    if (ANTHROPIC_API_KEY) {
+      try {
+        const response = await fetch("https://api.anthropic.com/v1/messages", {
+          method: "POST",
+          headers: {
+            "x-api-key": ANTHROPIC_API_KEY,
+            "anthropic-version": "2023-06-01",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            model: "claude-3.5-sonnet-20240620",
+            max_tokens: 500,
+            system: "Tu es Alex, l'IA authentique de HustleFinder. Réponds de manière naturelle et intelligente.",
+            messages: [{ role: "user", content: message }]
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const output = data.content?.[0]?.text;
+          if (output) {
+            return res.json({
+              id: `msg_${Date.now()}`,
+              output: output,
+              provider: "alex_via_anthropic", 
+              authentic: true,
+              timestamp: Date.now()
+            });
+          }
+        }
+      } catch (anthropicError) {
+        console.error('Anthropic error:', anthropicError);
+      }
+    }
+
+    // 3) Google Gemini fallback
+    const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+    if (GOOGLE_API_KEY) {
+      try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${GOOGLE_API_KEY}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ 
+              parts: [{ 
+                text: `Tu es Alex, l'IA authentique de HustleFinder. Réponds de manière naturelle et intelligente.\n\nMessage: ${message}`
+              }] 
+            }],
+            generationConfig: {
+              temperature: 0.7,
+              topK: 1,
+              topP: 1,
+              maxOutputTokens: 500
+            }
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const output = data.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (output) {
+            return res.json({
+              id: `msg_${Date.now()}`,
+              output: output,
+              provider: "alex_via_gemini",
+              authentic: true,
+              timestamp: Date.now()
+            });
+          }
+        }
+      } catch (geminiError) {
+        console.error('Gemini error:', geminiError);
+      }
+    }
+
+    // 4) Si aucune API n'est disponible
+    return res.status(503).json({
+      error: "no_ai_provider",
+      message: "Aucune clé API configurée (OpenAI, Anthropic ou Google requise)"
     });
 
   } catch (error) {

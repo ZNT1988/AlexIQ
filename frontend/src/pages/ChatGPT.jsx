@@ -1,8 +1,8 @@
 import React from 'react';
-import ChatGPTInterface from '../components/Alex/ChatGPTInterface';
+import ModernChatGPT from '../components/ModernChatGPT';
 
 const ChatGPT = () => {
-  return <ChatGPTInterface />;
+  return <ModernChatGPT />;
 };
 
 export default ChatGPT;
