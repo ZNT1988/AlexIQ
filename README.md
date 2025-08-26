@@ -48,6 +48,47 @@ Dans Render Dashboard > Environment:
 - `NODE_ENV` = `production`
 - `ALEX_DISABLE_MODULES` = `AlexNeuralEvolution,AlexProcessingOptimizer`
 
+## 🧠 Lazy Loading System (Anti-OOM)
+
+Le système de lazy loading a été implémenté pour éviter les crashes OOM pendant l'initialisation :
+
+### Modules avec Lazy Loading
+- `AlexNeuralEvolution.js` - Charge le modèle neural seulement lors du premier `run()`
+- `AlexOptimizationEngine.js` - Charge les données d'optimisation à la demande
+- `AlexProcessingOptimizer.js` - Initialise les caches/pools seulement si nécessaire
+
+### Nouvelle Interface Module
+```javascript
+// Initialisation ultra-légère (obligatoire)
+await module.initialize(); // ~1-2MB max
+
+// Chargement lourd seulement si nécessaire
+await module.run('operation', ...args); // Charge automatiquement le modèle
+
+// Libération mémoire (optionnel)
+module.dispose(); // Libère bigModel = null
+```
+
+### Variables de Debug Mémoire
+```bash
+# Désactiver modules lourds pendant développement
+ALEX_DISABLE_MODULES="AlexNeuralEvolution,AlexOptimizationEngine,AlexProcessingOptimizer"
+
+# Mode debug mémoire (logs détaillés)
+DEBUG_MEMORY=true
+
+# Seuil mémoire critique (MB)
+MEMORY_LIMIT_MB=1400
+HEAP_LIMIT_MB=1000
+```
+
+### Watchdog Mémoire
+Le système surveille automatiquement :
+- **RSS > 1400MB** → Stop chargement + nettoyage d'urgence
+- **Heap > 1000MB** → Force garbage collection
+- **Load > 80%** → Pause entre modules
+- **Emergency cleanup** → `dispose()` tous les modules lourds
+
 ## 🧠 Système de Modules
 
 ### Architecture de Chargement STABILISÉE

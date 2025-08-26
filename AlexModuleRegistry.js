@@ -236,12 +236,14 @@ class AlexModuleRegistry {
         instance: moduleInstance,
         category,
         filename,
-        initialized: false
+        initialized: false,
+        hasRun: false,
+        hasDispose: typeof moduleInstance.dispose === 'function'
       });
       
       this.categories[category].push(moduleName);
       
-      // Initialiser si possible
+      // Initialiser si possible (lightweight init only)
       if (typeof moduleInstance.initialize === 'function') {
         try {
           await moduleInstance.initialize();
@@ -329,6 +331,72 @@ class AlexModuleRegistry {
     };
   }
 
+  // New method to dispose heavy module data
+  async disposeModuleData(moduleName) {
+    const moduleInfo = this.modules.get(moduleName);
+    
+    if (!moduleInfo || !moduleInfo.hasDispose) {
+      return { success: false, reason: 'No dispose method available' };
+    }
+
+    try {
+      moduleInfo.instance.dispose();
+      moduleInfo.hasRun = false;
+      
+      return {
+        success: true,
+        module: moduleName,
+        timestamp: new Date().toISOString()
+      };
+    } catch (error) {
+      return {
+        success: false,
+        module: moduleName,
+        error: error.message,
+        timestamp: new Date().toISOString()
+      };
+    }
+  }
+
+  // Emergency memory cleanup
+  async emergencyMemoryCleanup() {
+    console.log('🚨 Emergency memory cleanup initiated...');
+    const beforeMemory = logMemory('emergency_cleanup_start');
+    let cleaned = 0;
+    
+    // Dispose heavy modules first
+    for (const [moduleName, moduleInfo] of this.modules.entries()) {
+      if (moduleInfo.hasDispose && moduleInfo.hasRun) {
+        try {
+          moduleInfo.instance.dispose();
+          moduleInfo.hasRun = false;
+          cleaned++;
+        } catch (error) {
+          console.warn(`⚠️ Failed to dispose ${moduleName}:`, error.message);
+        }
+      }
+    }
+    
+    // Force garbage collection
+    forceGarbageCollection();
+    if (global.gc) {
+      global.gc();
+    }
+    
+    const afterMemory = logMemory('emergency_cleanup_end', beforeMemory);
+    const memoryFreed = beforeMemory.heapUsed - afterMemory.heapUsed;
+    
+    console.log(`🧹 Emergency cleanup: ${cleaned} modules disposed, ${memoryFreed}MB freed`);
+    
+    return {
+      success: true,
+      modulesDisposed: cleaned,
+      memoryFreed,
+      before: beforeMemory,
+      after: afterMemory
+    };
+  }
+
   async executeModule(moduleName, methodName, ...args) {
     const moduleInfo = this.modules.get(moduleName);
     
@@ -338,6 +406,31 @@ class AlexModuleRegistry {
 
     const { instance } = moduleInfo;
     
+    // Use 'run' method if available (new lazy-loaded modules)
+    if (methodName === 'run' && typeof instance.run === 'function') {
+      try {
+        const result = await instance.run(...args);
+        this.modules.get(moduleName).hasRun = true;
+        
+        return {
+          success: true,
+          module: moduleName,
+          method: 'run',
+          result,
+          timestamp: new Date().toISOString()
+        };
+      } catch (error) {
+        return {
+          success: false,
+          module: moduleName,
+          method: 'run',
+          error: error.message,
+          timestamp: new Date().toISOString()
+        };
+      }
+    }
+    
+    // Fallback to traditional method execution
     if (typeof instance[methodName] !== 'function') {
       throw new Error(`Méthode ${methodName} non trouvée dans ${moduleName}`);
     }
@@ -367,4 +460,18 @@ class AlexModuleRegistry {
 
 // Export singleton
 const alexRegistry = new AlexModuleRegistry();
+
+// Graceful shutdown handler
+process.on('SIGINT', async () => {
+  console.log('\n🛑 Graceful shutdown initiated...');
+  await alexRegistry.emergencyMemoryCleanup();
+  process.exit(0);
+});
+
+process.on('SIGTERM', async () => {
+  console.log('\n🛑 SIGTERM received, cleaning up...');
+  await alexRegistry.emergencyMemoryCleanup();
+  process.exit(0);
+});
+
 export default alexRegistry;
