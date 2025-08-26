@@ -164,8 +164,8 @@ if (NODE_ENV === "production") {
   
   app.use(express.static(distDir));
   
-  // SPA FALLBACK - SIMPLE
-  app.get("*", (req, res) => {
+  // SPA FALLBACK - SIMPLE (Express 5 compatible)
+  app.get(/^\/(?!api\/).*/, (req, res) => {
     if (req.path.startsWith('/api/')) {
       return res.status(404).json({ error: 'API not found' });
     }

@@ -486,8 +486,8 @@ if (NODE_ENV === "production") {
   console.log("📁 Serving static files from:", distDir);
   app.use(express.static(distDir));
   
-  // Route catch-all SPA pour toutes les routes non-API
-  app.get("*", async (req, res) => {
+  // Route catch-all SPA pour toutes les routes non-API (Express 5 compatible)
+  app.get(/^\/(?!api\/).*/, async (req, res) => {
     // Si c'est une route API, passer au suivant (404)
     if (req.path.startsWith('/api/')) {
       return res.status(404).json({ error: 'API endpoint not found' });
