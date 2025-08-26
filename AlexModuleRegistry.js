@@ -74,12 +74,22 @@ class AlexModuleRegistry {
       
       const totalMemoryGrowth = endMemory.heapUsed - startMemory.heapUsed;
       
-      console.log(`✅ ${this.modules.size} modules chargés avec succès`);
+      // Résumé final
+      const totalAttempted = this.loadingStats.total;
+      const totalLoaded = this.loadingStats.loaded;
+      const totalFailed = this.loadingStats.failed;
+      const successRate = totalAttempted > 0 ? ((totalLoaded / totalAttempted) * 100).toFixed(1) : 0;
+      
+      console.log(`🧩 Résumé modules: ${totalLoaded}/${totalAttempted} OK (${successRate}%), ${totalFailed} erreurs`);
       console.log(`📊 Croissance mémoire: +${totalMemoryGrowth}MB heap`);
       
       return {
         success: true,
         totalModules: this.modules.size,
+        totalAttempted,
+        totalLoaded,
+        totalFailed,
+        successRate: parseFloat(successRate),
         memoryGrowth: totalMemoryGrowth,
         loadingStats: this.loadingStats,
         categories: Object.keys(this.categories).map(cat => ({
@@ -145,9 +155,9 @@ class AlexModuleRegistry {
   }
 
   async loadModule(category, filename, filePath) {
+    const moduleName = path.basename(filename, '.js');
+    
     try {
-      const moduleName = path.basename(filename, '.js');
-      
       // Convert Windows path to file:// URL for ES6 import
       const fileUrl = process.platform === 'win32' 
         ? `file:///${filePath.replace(/\\/g, '/')}`
@@ -161,35 +171,49 @@ class AlexModuleRegistry {
                          moduleFile[moduleName] || 
                          Object.values(moduleFile).find(exp => typeof exp === 'function');
       
-      if (ModuleClass) {
-        // Instancier le module
-        const moduleInstance = new ModuleClass({ moduleName });
-        
-        // L'enregistrer
-        this.modules.set(moduleName, {
-          instance: moduleInstance,
-          category,
-          filename,
-          initialized: false
-        });
-        
-        this.categories[category].push(moduleName);
-        
-        // Initialiser si possible
-        if (typeof moduleInstance.initialize === 'function') {
-          try {
-            await moduleInstance.initialize();
-            this.modules.get(moduleName).initialized = true;
-          } catch (initError) {
-            console.warn(`⚠️ Initialisation ${moduleName} échouée:`, initError.message);
-          }
+      if (!ModuleClass) {
+        console.warn(`⚠️ Pas de classe trouvée dans ${moduleName}`);
+        return false;
+      }
+
+      // Instancier le module avec options spéciales pour certains modules
+      const moduleOptions = { 
+        moduleName,
+        memoryProvider: global.AlexMemory ?? null // Pour AdvancedMemoryProcessor
+      };
+      
+      const moduleInstance = new ModuleClass(moduleOptions);
+      
+      // L'enregistrer
+      this.modules.set(moduleName, {
+        instance: moduleInstance,
+        category,
+        filename,
+        initialized: false
+      });
+      
+      this.categories[category].push(moduleName);
+      
+      // Initialiser si possible
+      if (typeof moduleInstance.initialize === 'function') {
+        try {
+          await moduleInstance.initialize();
+          this.modules.get(moduleName).initialized = true;
+        } catch (initError) {
+          console.warn(`⚠️ Initialisation ${moduleName} échouée:`, initError.message);
+          // Continue anyway - module is loaded but not initialized
         }
-        
-        console.log(`✅ Module ${moduleName} chargé (${category})`);
+      } else {
+        // Mark as initialized if no initialize method
+        this.modules.get(moduleName).initialized = true;
       }
       
+      console.log(`✅ Module ${moduleName} chargé (${category})`);
+      return true;
+      
     } catch (error) {
-      console.error(`❌ Erreur chargement ${filename}:`, error.message);
+      console.error(`❌ Erreur chargement ${moduleName}:`, error.message);
+      return false;
     }
   }
 
