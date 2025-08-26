@@ -6,6 +6,8 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import pLimit from 'p-limit';
+import { logMemory, checkMemorySafety, memoryAwareDelay, forceGarbageCollection } from './helpers/memory.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -20,25 +22,66 @@ class AlexModuleRegistry {
       config: []
     };
     this.initialized = false;
+    
+    // Concurrency control for module loading
+    this.limit = pLimit(4); // Maximum 4 modules loading simultaneously
+    this.loadingStats = {
+      total: 0,
+      loaded: 0,
+      failed: 0,
+      memorySnapshots: []
+    };
   }
 
   async loadAllModules() {
     console.log('🚀 AlexModuleRegistry: Chargement des 127 modules...');
     
     try {
+      // Initial memory snapshot
+      const startMemory = logMemory('registry_start');
+      this.loadingStats.memorySnapshots.push({ phase: 'start', snapshot: startMemory });
+      
       const modulesPath = path.join(__dirname, 'backend', 'alex-modules');
       
-      // Charger chaque catégorie
+      // Charger chaque catégorie avec profiling mémoire
       for (const category of ['consciousness', 'core', 'intelligence', 'specialized', 'config']) {
+        const categoryMemory = logMemory(`category_${category}_start`);
+        
         await this.loadCategory(category, path.join(modulesPath, category));
+        
+        const afterCategoryMemory = logMemory(`category_${category}_end`, categoryMemory);
+        this.loadingStats.memorySnapshots.push({ 
+          phase: `category_${category}`, 
+          snapshot: afterCategoryMemory 
+        });
+        
+        // Check memory safety and pause if needed
+        const safety = checkMemorySafety();
+        if (!safety.safe) {
+          console.log(`⚠️ Memory pressure detected after ${category}, forcing GC...`);
+          forceGarbageCollection();
+          await memoryAwareDelay(1000);
+        } else {
+          await memoryAwareDelay(100); // Small delay between categories
+        }
       }
       
       this.initialized = true;
+      
+      // Final memory snapshot
+      const endMemory = logMemory('registry_complete', startMemory);
+      this.loadingStats.memorySnapshots.push({ phase: 'complete', snapshot: endMemory });
+      
+      const totalMemoryGrowth = endMemory.heapUsed - startMemory.heapUsed;
+      
       console.log(`✅ ${this.modules.size} modules chargés avec succès`);
+      console.log(`📊 Croissance mémoire: +${totalMemoryGrowth}MB heap`);
       
       return {
         success: true,
         totalModules: this.modules.size,
+        memoryGrowth: totalMemoryGrowth,
+        loadingStats: this.loadingStats,
         categories: Object.keys(this.categories).map(cat => ({
           name: cat,
           count: this.categories[cat].length
@@ -47,6 +90,7 @@ class AlexModuleRegistry {
       
     } catch (error) {
       console.error('❌ Erreur chargement modules:', error);
+      logMemory('registry_error');
       return { success: false, error: error.message };
     }
   }
@@ -57,13 +101,46 @@ class AlexModuleRegistry {
       const jsFiles = files.filter(file => file.endsWith('.js'));
       
       console.log(`📁 Chargement catégorie ${categoryName}: ${jsFiles.length} modules`);
+      this.loadingStats.total += jsFiles.length;
       
-      for (const file of jsFiles) {
-        await this.loadModule(categoryName, file, path.join(categoryPath, file));
-      }
+      // Load modules with concurrency limit
+      const loadPromises = jsFiles.map(file => 
+        this.limit(() => this.safeLoadModule(categoryName, file, path.join(categoryPath, file)))
+      );
+      
+      // Wait for all modules in this category to load
+      await Promise.allSettled(loadPromises);
       
     } catch (error) {
       console.error(`❌ Erreur chargement catégorie ${categoryName}:`, error);
+    }
+  }
+
+  async safeLoadModule(category, filename, filePath) {
+    const moduleName = path.basename(filename, '.js');
+    
+    try {
+      // Memory snapshot before loading module
+      const beforeMemory = logMemory(`module_${moduleName}_start`);
+      
+      const result = await this.loadModule(category, filename, filePath);
+      
+      // Memory snapshot after loading module
+      const afterMemory = logMemory(`module_${moduleName}_end`, beforeMemory);
+      
+      if (result) {
+        this.loadingStats.loaded++;
+      } else {
+        this.loadingStats.failed++;
+      }
+      
+      return result;
+      
+    } catch (error) {
+      console.error(`❌ Erreur chargement ${filename}:`, error.message);
+      this.loadingStats.failed++;
+      logMemory(`module_${moduleName}_error`);
+      return null;
     }
   }
 
@@ -165,6 +242,20 @@ class AlexModuleRegistry {
     }
     
     return stats;
+  }
+
+  getLoadingStats() {
+    return {
+      ...this.loadingStats,
+      successRate: this.loadingStats.total > 0 ? 
+        (this.loadingStats.loaded / this.loadingStats.total) * 100 : 0,
+      memoryProfile: this.loadingStats.memorySnapshots.map(({ phase, snapshot }) => ({
+        phase,
+        heapUsed: snapshot.heapUsed,
+        rss: snapshot.rss,
+        timestamp: snapshot.timestamp
+      }))
+    };
   }
 
   async executeModule(moduleName, methodName, ...args) {

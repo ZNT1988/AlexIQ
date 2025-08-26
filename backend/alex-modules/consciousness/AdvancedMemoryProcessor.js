@@ -8,8 +8,8 @@
 
 import { EventEmitter } from "events";
 import * as os from "os";
-/* eslint-disable no-undef */
 import { performance } from "perf_hooks";
+import { getMemoryUsage, safeMemorySnapshot } from "../../../helpers/memory.js";
 
 /**
  * Gestionnaire de mémoire à court terme - Anti-fake
@@ -24,7 +24,7 @@ class ShortTermMemoryManager {
     };
 
     this.systemMetrics = systemMetrics || {
-      getMemoryUsage: () => process.memoryUsage(),
+      getMemoryUsage: () => getMemoryUsage(systemMetrics),
       getCpuUsage: () => process.cpuUsage(),
       getLoadAvg: () => os.loadavg(),
       getUptime: () => process.uptime(),
@@ -126,9 +126,14 @@ class ShortTermMemoryManager {
   }
 
   getSystemBasedCapacity() {
-    const memUsage = this.systemMetrics.getMemoryUsage();
-    const availableRatio = (memUsage.heapTotal - memUsage.heapUsed) / memUsage.heapTotal;
-    return Math.max(100, Math.min(10000, Math.round(1000 + availableRatio * 9000)));
+    try {
+      const memUsage = this.systemMetrics.getMemoryUsage();
+      const availableRatio = (memUsage.heapTotal - memUsage.heapUsed) / memUsage.heapTotal;
+      return Math.max(100, Math.min(10000, Math.round(1000 + availableRatio * 9000)));
+    } catch (error) {
+      console.warn('getSystemBasedCapacity fallback:', error.message);
+      return 1000; // Safe fallback
+    }
   }
 
   getSystemBasedRetentionTime() {
@@ -156,7 +161,7 @@ class LongTermMemoryManager {
     };
 
     this.systemMetrics = systemMetrics || {
-      getMemoryUsage: () => process.memoryUsage(),
+      getMemoryUsage: () => getMemoryUsage(systemMetrics),
       getCpuUsage: () => process.cpuUsage(),
       getLoadAvg: () => os.loadavg(),
       getUptime: () => process.uptime()
@@ -390,9 +395,14 @@ class LongTermMemoryManager {
   }
 
   getSystemBasedImportanceThreshold() {
-    const memUsage = this.systemMetrics.getMemoryUsage();
-    const memRatio = memUsage.heapUsed / memUsage.heapTotal;
-    return Math.max(0.5, Math.min(0.9, 0.7 + (memRatio - 0.5) * 0.4));
+    try {
+      const memUsage = this.systemMetrics.getMemoryUsage();
+      const memRatio = memUsage.heapUsed / memUsage.heapTotal;
+      return Math.max(0.5, Math.min(0.9, 0.7 + (memRatio - 0.5) * 0.4));
+    } catch (error) {
+      console.warn('getSystemBasedImportanceThreshold fallback:', error.message);
+      return 0.7; // Safe fallback
+    }
   }
 
   getSystemBasedHash(str) {
@@ -421,7 +431,7 @@ class AdvancedMemoryProcessor extends EventEmitter {
 
     // Métriques système pour tous les calculs mémoire
     this.systemMetrics = dependencies.systemMetrics || {
-      getMemoryUsage: () => process.memoryUsage(),
+      getMemoryUsage: () => getMemoryUsage(dependencies.systemMetrics),
       getCpuUsage: () => process.cpuUsage(),
       getLoadAvg: () => os.loadavg(),
       getUptime: () => process.uptime(),
@@ -723,9 +733,14 @@ class AdvancedMemoryProcessor extends EventEmitter {
   }
 
   getSystemBasedConsolidationThreshold() {
-    const memUsage = this.systemMetrics.getMemoryUsage();
-    const memRatio = memUsage.heapUsed / memUsage.heapTotal;
-    return Math.max(1, Math.min(10, 3 + memRatio * 7));
+    try {
+      const memUsage = this.systemMetrics.getMemoryUsage();
+      const memRatio = memUsage.heapUsed / memUsage.heapTotal;
+      return Math.max(1, Math.min(10, 3 + memRatio * 7));
+    } catch (error) {
+      console.warn('getSystemBasedConsolidationThreshold fallback:', error.message);
+      return 3; // Safe fallback
+    }
   }
 
   getSystemBasedHighImportanceThreshold() {
@@ -735,9 +750,14 @@ class AdvancedMemoryProcessor extends EventEmitter {
   }
 
   getSystemBasedMaxLongTermItems() {
-    const memUsage = this.systemMetrics.getMemoryUsage();
-    const availableRatio = (memUsage.heapTotal - memUsage.heapUsed) / memUsage.heapTotal;
-    return Math.max(1000, Math.min(100000, Math.round(10000 + availableRatio * 90000)));
+    try {
+      const memUsage = this.systemMetrics.getMemoryUsage();
+      const availableRatio = (memUsage.heapTotal - memUsage.heapUsed) / memUsage.heapTotal;
+      return Math.max(1000, Math.min(100000, Math.round(10000 + availableRatio * 90000)));
+    } catch (error) {
+      console.warn('getSystemBasedMaxLongTermItems fallback:', error.message);
+      return 10000; // Safe fallback
+    }
   }
 
   getSystemBasedMaxSearchResults() {
