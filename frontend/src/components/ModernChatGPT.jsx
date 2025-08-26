@@ -38,7 +38,9 @@ const ModernChatGPT = () => {
                    type === 'maps' ? { query: messageText } :
                    { message: messageText, provider: selectedProvider };
 
-      const response = await fetch(endpoint, {
+      // En production: même serveur, en dev: proxy Vite
+      const baseURL = import.meta.env.PROD ? '' : '';
+      const response = await fetch(`${baseURL}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)

@@ -7,8 +7,8 @@
   "scripts": {
     "start": "node index-railway-minimal.js",
     "dev": "node index-ultra-minimal.js",
-    "build": "echo 'Backend ready - no build required'",
-    "build:railway": "npm install --production",
+    "build": "cd frontend && npm install && npm run build && cd .. && cp -r frontend/dist . || xcopy /s /e frontend\\dist . && echo 'Frontend built and copied'",
+    "build:railway": "cd frontend && npm install && npm run build && cd .. && cp -r frontend/dist . || xcopy /s /e frontend\\dist .",
     "test": "echo 'Tests not implemented yet'",
     "check-deps": "node -e \"console.log('Dependencies check...'); import('./index-ultra-minimal.js');\""
   },
