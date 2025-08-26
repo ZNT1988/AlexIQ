@@ -23,12 +23,12 @@ Pour éviter les crashes OOM (Out Of Memory) durant le chargement des 127 module
 
 #### Production Railway/Render
 ```bash
-NODE_OPTIONS="--max-old-space-size=8192"
+NODE_OPTIONS="--max-old-space-size=16384"
 ```
 
 #### Développement Local  
 ```bash
-NODE_OPTIONS="--max-old-space-size=8192 --expose-gc"
+NODE_OPTIONS="--max-old-space-size=16384 --expose-gc"
 ```
 
 #### Debugging Mémoire

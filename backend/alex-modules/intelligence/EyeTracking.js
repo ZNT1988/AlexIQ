@@ -144,7 +144,7 @@ export default class EyeTracking extends EventEmitter {
     return {
       x: Math.max(-50, Math.min(50, xOffset / 2)), // Limité à ±50px
       y: Math.max(-50, Math.min(50, yOffset / 2)),
-      confidence: this.calculateTrackingConfidence(metrics)
+      confidence: this.calculateTrackingConfidence ? this.calculateTrackingConfidence(metrics) : 0.75
     };
   }
 
@@ -1268,7 +1268,7 @@ class GazeEstimator {
     return {
       x: 960 + xOffset,
       y: 540 + yOffset,
-      confidence: this.calculateTrackingConfidence(systemMetrics),
+      confidence: this.calculateTrackingConfidence ? this.calculateTrackingConfidence(systemMetrics) : 0.75,
       systemBased: true
     };
   }
