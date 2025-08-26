@@ -22,7 +22,7 @@ const DEFAULT_CONFIG = {
   retryDelay: 1000
 };
 
-export function useOptimizedAPI(baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3003') {
+export function useOptimizedAPI(baseURL = import.meta.env.VITE_API_BASE_URL ?? '') {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const abortControllerRef = useRef(null);
