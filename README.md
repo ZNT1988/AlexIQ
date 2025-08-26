@@ -36,23 +36,26 @@ NODE_OPTIONS="--max-old-space-size=16384 --expose-gc"
 NODE_OPTIONS="--max-old-space-size=2048 --expose-gc --inspect"
 ```
 
-### Configuration Railway
+### Configuration Railway CRITIQUE
 Dans Railway Dashboard > Variables:
-- `NODE_OPTIONS` = `--max-old-space-size=1536`
+- `NODE_OPTIONS` = `--max-old-space-size=1536 --enable-source-maps --expose-gc`
 - `NODE_ENV` = `production`
+- `ALEX_DISABLE_MODULES` = `AlexNeuralEvolution,AlexProcessingOptimizer`
 
-### Configuration Render
+### Configuration Render CRITIQUE  
 Dans Render Dashboard > Environment:
-- `NODE_OPTIONS` = `--max-old-space-size=1536`
+- `NODE_OPTIONS` = `--max-old-space-size=1536 --enable-source-maps --expose-gc`
 - `NODE_ENV` = `production`
+- `ALEX_DISABLE_MODULES` = `AlexNeuralEvolution,AlexProcessingOptimizer`
 
 ## 🧠 Système de Modules
 
-### Architecture de Chargement
-- **Concurrence limitée**: Maximum 4 modules chargés simultanément (p-limit)
-- **Profiling mémoire**: Monitoring RSS/Heap à chaque étape
-- **Sécurité mémoire**: Fallbacks et garbage collection forcée
-- **Chargement progressif**: Délais adaptatifs selon pression mémoire
+### Architecture de Chargement STABILISÉE
+- **Chargement séquentiel**: 1 seul module à la fois (p-limit=1) 
+- **Watchdog mémoire**: Seuils RSS<1200MB, Heap<800MB
+- **Disable suspects**: ALEX_DISABLE_MODULES env var
+- **Force GC**: --expose-gc après chaque module + catégorie
+- **Profiling détaillé**: Memory tracking temps réel
 
 ### Catégories de Modules
 - **consciousness**: 28 modules (BusinessBuilderAI, MoodPredictor, etc.)
