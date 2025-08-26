@@ -1,6 +1,6 @@
 {
   "name": "hustlefinder-ia-backend",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "type": "module",
   "description": "HustleFinder IA Backend with Alex Orchestrator - Railway Deploy",
   "main": "index-ultra-minimal.js",
