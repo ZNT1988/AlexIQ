@@ -11,9 +11,10 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: process.env.VITE_API_URL || 'http://localhost:3000',
+        target: process.env.VITE_API_URL || 'http://localhost:3003', // ✅ Port correct pour backend optimisé
         changeOrigin: true,
-        secure: false
+        secure: false,
+        rewrite: (path) => path // Keep /api prefix
       }
     }
   }
