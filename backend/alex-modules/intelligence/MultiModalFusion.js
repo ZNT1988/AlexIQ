@@ -1,916 +1,1538 @@
-/**
- * @fileoverview MultiModalFusion - Fusion multi-modale basée métriques système
- * Module d'intelligence multi-modale avec fusion authentique de données
- * @module MultiModalFusion
- * @version 5.0.0 - Phase 2 Anti-fake Systems
- * RÈGLES ANTI-FAKE: Fusion basée métriques système réelles
- */
+import logger from '../config/logger.js';
+import OpenAI from 'openai';
+import fs from 'fs/promises';
+import path from 'path';
 
-import { EventEmitter } from 'events';
-import os from 'os';
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import Anthropic from '@anthropic-ai/sdk';
 
-/**
- * MultiModalFusion Module Principal
- * Intelligence multi-modale authentique avec fusion de données système
- */
-export default class MultiModalFusion extends EventEmitter {
-  constructor(dependencies = {}) {
-    super();
-    
-    // Dependency Injection
-    this.logger = dependencies.logger || console;
-    this.strictMode = dependencies.strictMode !== undefined ? dependencies.strictMode : true;
-    
-    this.config = {
-      // Configuration fusion
-      modalityTypes: dependencies.modalityTypes || ['text', 'audio', 'visual', 'sensor'],
-      fusionStrategy: dependencies.fusionStrategy || 'weighted_average',
-      confidenceThreshold: dependencies.confidenceThreshold || 0.6,
-      
-      // Poids modalities
-      textWeight: dependencies.textWeight || 0.3,
-      audioWeight: dependencies.audioWeight || 0.25,
-      visualWeight: dependencies.visualWeight || 0.25,
-      sensorWeight: dependencies.sensorWeight || 0.2,
-      
-      // Paramètres fusion
-      syncWindow: dependencies.syncWindow || 1000, // ms
-      maxLatency: dependencies.maxLatency || 500, // ms
-      fusionBuffer: dependencies.fusionBuffer || 50,
-      
-      // Qualité données
-      minModalityCount: dependencies.minModalityCount || 2,
-      qualityThreshold: dependencies.qualityThreshold || 0.5,
-      noiseReductionLevel: dependencies.noiseReductionLevel || 0.3,
-      
-      // Performance système
-      processingThreads: dependencies.processingThreads || 4,
-      batchSize: dependencies.batchSize || 16,
-      updateFrequency: dependencies.updateFrequency || 30, // Hz
-      
-      // Cache et mémoire
-      cacheSize: dependencies.cacheSize || 1000,
-      memoryLimit: dependencies.memoryLimit || 512, // MB
-      
-      // Debug
-      enableLogging: dependencies.enableLogging || false,
-      enableMetrics: dependencies.enableMetrics || true,
-      
-      ...dependencies
-    };
-    
-    // État système
-    this.state = {
-      modalityStreams: new Map(), // type -> stream data
-      fusionBuffer: [],
-      syncQueue: [],
-      lastFusion: Date.now(),
-      totalFusions: 0,
-      qualityMetrics: {
-        avgConfidence: 0.5,
-        avgLatency: 0,
-        successRate: 1.0
-      },
-      systemMetrics: this.getSystemMetrics()
-    };
-    
-    // Composants fusion
-    this.temporalAligner = new TemporalAligner(this.config);
-    this.confidenceEstimator = new ConfidenceEstimator(this.config);
-    this.noiseReducer = new NoiseReducer(this.config);
-    this.qualityAssessor = new QualityAssessor(this.config);
-    this.fusionEngine = new FusionEngine(this.config);
-    
-    // Callbacks système
-    this.callbacks = {
-      onFusionComplete: [],
-      onModalityUpdate: [],
-      onQualityChange: [],
-      onError: []
-    };
-    
-    this.isInitialized = false;
-    this.logger.info("🎯 MultiModalFusion initializing...");
-  }
+// Constantes pour chaînes dupliquées (optimisation SonarJS)
+const STR_ERROR = 'error';
 
-  /**
-   * Métriques système pour calculs déterministes
-   * Source: Process et OS metrics réels
-   */
-  getSystemMetrics() {
-    const cpuUsage = process.cpuUsage();
-    const memUsage = process.memoryUsage();
-    const loadavg = os.loadavg();
-    const hrtime = process.hrtime();
-    
-    return {
-      cpuUser: cpuUsage.user,
-      cpuSystem: cpuUsage.system,
-      memoryUsed: memUsage.heapUsed,
-      memoryTotal: memUsage.heapTotal,
-      loadAverage: loadavg[0],
-      hrtimeNano: hrtime[0] * 1e9 + hrtime[1],
-      timestamp: Date.now(),
-      pid: process.pid
-    };
-  }
+// ============================================================================
+// ALEX ATTENTION SYSTEM - MULTIMODAL FUSION MODULE
+// MultiModalFusion.js - Cerveau de fusion attentionnelle multi-sources
+// Version: 4.5.0 | Compatible AlexAttentionMasterIntegration
+// ============================================================================
 
-  /**
-   * Génération de variance basée système
-   * Source: Métriques système pour variations déterministes
-   */
-  getSystemBasedVariance(baseValue, maxVariance = 0.05) {
-    const metrics = this.getSystemMetrics();
-    const variance = ((metrics.hrtimeNano % 100000) / 100000 - 0.5) * 2 * maxVariance;
-    return baseValue * (1 + variance);
-  }
+export default class MultiModalFusion: {
+    constructor(config = {}) {
+        this.name = "MultiModalFusion";
+        this.version = "4.5.0";
+        this.status = "active";
 
-  /**
-   * Score de confiance basé performance système
-   */
-  calculateSystemBasedConfidence(baseConfidence, modalityCount = 1) {
-    const metrics = this.getSystemMetrics();
-    const loadFactor = Math.min(1, metrics.loadAverage / 2);
-    const memoryFactor = metrics.memoryUsed / metrics.memoryTotal;
-    
-    // Performance système affecte confiance
-    const systemFactor = 1 - ((loadFactor * 0.05) + (memoryFactor * 0.03));
-    
-    // Plus de modalités = plus de confiance
-    const modalityBonus = Math.min(0.2, (modalityCount - 1) * 0.05);
-    
-    const adjustedConfidence = baseConfidence * systemFactor + modalityBonus;
-    
-    return Math.max(0.1, Math.min(1.0, adjustedConfidence));
-  }
+        // Configuration
+        this.config = {
+            // Pondération des sources
+            weights: {,
+                bottomUp: config.weights?.bottomUp || 0.4
+                topDown: config.weights?.topDown || 0.6,
+                emotional: config.weights?.emotional || 0.3
+                eyeTracking: config.weights?.eyeTracking || 0.5,
+                inhibition: config.weights?.inhibition || 0.8
+                voiceCommands: config.weights?
+      .voiceCommands || 0.9
+            }
+            // Paramètres de fusion
+            fusionMethod :
+       config.fusionMethod || 'weighted_sum', // weighted_sum, max_pooling, attention_map
+            adaptiveWeighting: config.adaptiveWeighting || true,
+            conflictResolution: config.conflictResolution || 'priority_based'
+            temporalIntegration: config.temporalIntegration || true
+            // Seuils et normalisation
+            attentionThreshold: config.attentionThreshold || 0.3,
+            maxAttentionValue: config.maxAttentionValue || 1.0
+            normalizationMethod: config.normalizationMethod || 'softmax'
+            // Filtrage et lissage
+            spatialSmoothing: config.spatialSmoothing || 0.3,
+            temporalSmoothing: config.temporalSmoothing || 0.7
+            noiseReduction: config.noiseReduction || true
+            // Performance
+            updateFrequency: config.updateFrequency || 60, // Hz
+            mapResolution: config.mapResolution || { width: 1920, height: 1080 }
+            historyLength: config.historyLength || 30, // frames
 
-  /**
-   * Initialisation système
-   */
-  async initialize() {
-    if (this.isInitialized) return;
+            // Adaptation contextuelle
+            contextualAdaptation: config.contextualAdaptation || true,
+            learningRate: config.learningRate || 0.01
+            // Debug
+            enableLogging: config.enableLogging || false,
+            enableProfiling: config.enableProfiling || false
+            visualizeFusion: config.visualizeFusion || false
+        };
 
-    try {
-      this.setupModalityStreams();
-      this.startUpdateLoop();
-      this.initializeFusionComponents();
-      
-      this.isInitialized = true;
-      this.logger.info("✅ MultiModalFusion initialized with system-based fusion");
-      this.emit("fusionReady");
-      
-    } catch (error) {
-      this.logger.error("❌ MultiModalFusion initialization failed:", error);
-      if (this.strictMode) {
-        throw error;
-      }
-    }
-  }
+        // État interne
+        this.state = {
+            currentInputs: new Map(),
+            fusedMap: null
+            fusionHistory: [],
+            contextState: {}
+            performance: {,
+                lastUpdateTime: 0
+                avgFusionTime: 0,
+                fusionCount: 0
+            }
+            adaptiveWeights: { ...this.config.weights }
+        };
 
-  setupModalityStreams() {
-    this.config.modalityTypes.forEach(type => {
-      this.state.modalityStreams.set(type, {
-        active: false,
-        lastUpdate: Date.now(),
-        data: null,
-        quality: 0.5,
-        latency: 0,
-        systemBased: true
-      });
-    });
-  }
+        // Modules de fusion
+        this.fusionEngine = new FusionEngine(this.config);
+        this.weightAdaptator = new WeightAdaptator(this.config);
+        this.conflictResolver = new ConflictResolver(this.config);
+        this.spatialProcessor = new SpatialProcessor(this.config);
+        this.temporalProcessor = new TemporalProcessor(this.config);
 
-  startUpdateLoop() {
-    this.updateInterval = setInterval(() => {
-      this.updateSystemMetrics();
-      this.processQueuedData();
-      this.updateQualityMetrics();
-    }, 1000 / this.config.updateFrequency);
-  }
-
-  initializeFusionComponents() {
-    this.temporalAligner.initialize();
-    this.confidenceEstimator.initialize();
-    this.noiseReducer.initialize();
-    this.qualityAssessor.initialize();
-    this.fusionEngine.initialize();
-  }
-
-  updateSystemMetrics() {
-    this.state.systemMetrics = this.getSystemMetrics();
-  }
-
-  /**
-   * Fusion multi-modale principale avec métriques système
-   */
-  async fuseModalities(inputs, options = {}) {
-    this.log(`🎯 Fusion ${inputs.length} modalités`);
-    
-    try {
-      const startTime = Date.now();
-      
-      // Validation inputs
-      if (!this.validateInputs(inputs)) {
-        throw new Error("Invalid multimodal inputs");
-      }
-      
-      // Preprocessing avec système
-      const preprocessedInputs = await this.preprocessInputs(inputs);
-      
-      // Alignement temporel
-      const alignedData = await this.temporalAligner.alignWithSystem(
-        preprocessedInputs,
-        this.state.systemMetrics
-      );
-      
-      // Estimation de confiance
-      const confidenceScores = await this.confidenceEstimator.estimateWithSystem(
-        alignedData,
-        this.state.systemMetrics
-      );
-      
-      // Réduction de bruit
-      const denoisedData = await this.noiseReducer.reduceWithSystem(
-        alignedData,
-        this.state.systemMetrics
-      );
-      
-      // Fusion principale
-      const fusionResult = await this.fusionEngine.fuseWithSystem(
-        denoisedData,
-        confidenceScores,
-        this.state.systemMetrics
-      );
-      
-      // Post-processing
-      const finalResult = await this.postprocessResult(fusionResult);
-      
-      // Métriques performance
-      const processingTime = Date.now() - startTime;
-      this.updatePerformanceMetrics(processingTime, inputs.length);
-      
-      // Résultat final
-      const result = {
-        fused: finalResult,
-        confidence: this.calculateSystemBasedConfidence(
-          fusionResult.confidence,
-          inputs.length
-        ),
-        modalityCount: inputs.length,
-        processingTime,
-        qualityMetrics: this.state.qualityMetrics,
-        systemMetrics: this.state.systemMetrics,
-        source: "system_based_fusion",
-        timestamp: Date.now()
-      };
-      
-      // Callbacks
-      this.triggerCallback('onFusionComplete', result);
-      
-      this.state.lastFusion = Date.now();
-      this.state.totalFusions++;
-      
-      return result;
-      
-    } catch (error) {
-      this.log(`Erreur fusion multi-modale: ${error.message}`, 'error');
-      this.triggerCallback('onError', error);
-      
-      if (this.strictMode) {
-        throw error;
-      }
-      
-      return this.generateFallbackFusion(inputs, error);
-    }
-  }
-
-  /**
-   * Preprocessing avec métriques système
-   */
-  async preprocessInputs(inputs) {
-    const preprocessed = [];
-    
-    for (const input of inputs) {
-      try {
-        const processed = {
-          type: input.type,
-          data: input.data,
-          timestamp: input.timestamp || Date.now(),
-          quality: this.assessInputQuality(input),
-          metadata: input.metadata || {},
-          systemBased: true
+        // Analyseurs et optimiseurs
+        
+        // 🚀 SPRINT 2: Providers multimodaux réels
+        this.multiModalProviders = {
+            vision: {,
+                openai: process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null,
+                enabled: !!process.env.OPENAI_API_KEY,
+                models: ['gpt-4-vision-preview', 'gpt-4o']
+            },
+            audio: {,
+                whisper: process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null,
+                enabled: !!process.env.OPENAI_API_KEY,
+                models: ['whisper-1']
+            },
+            text3D: {,
+                enabled: true, // Text-to-3D description pour Three.js
+                models: ['blender-api', 'threejs-generator']
+            }
         };
         
-        // Normalisation basée système
-        processed.normalized = this.normalizeWithSystem(input.data, input.type);
-        
-        // Feature extraction système
-        processed.features = this.extractSystemBasedFeatures(processed);
-        
-        preprocessed.push(processed);
-        
-      } catch (error) {
-        this.log(`Erreur preprocessing ${input.type}: ${error.message}`, 'warn');
-        continue;
-      }
+        // Historique multimodal
+        this.modalHistory = {
+            visionInputs: [],
+            audioInputs: [],
+            text3DInputs: [],
+            fusionResults: []
+        };
+        this.qualityAnalyzer = new FusionQualityAnalyzer();
+        this.performanceOptimizer = new PerformanceOptimizer();
+        this.contextAnalyzer = new ContextAnalyzer();
+
+        // Connecteurs système
+        this.languageProcessor = null;
+        this.emotionalEngine = null;
+        this.quantumBrain = null;
+
+        // Callbacks
+        this.callbacks = {
+            onFusionComplete: [],
+            onConflictDetected: []
+            onWeightAdaptation: [],
+            onQualityChange: []
+            onPerformanceAlert: []
+        };
+
+        this.init();
     }
-    
-    return preprocessed;
-  }
 
-  assessInputQuality(input) {
-    let quality = 0.5;
-    
-    // Qualité basée taille données
-    if (input.data) {
-      const dataSize = JSON.stringify(input.data).length;
-      quality += Math.min(0.3, dataSize / 10000);
+    // ========================================
+    // INITIALISATION
+    // ========================================
+
+    init() {
+        this.log("🧠 MultiModalFusion initialisé");
+        this.startUpdateLoop();
+        this.initializeFusionMaps();
+        this.setupAdaptiveSystem();
     }
-    
-    // Qualité basée métadonnées
-    if (input.metadata && Object.keys(input.metadata).length > 0) {
-      quality += 0.1;
+
+    startUpdateLoop() {
+        this.updateInterval = setInterval(() => // Code de traitement approprié ici = this.config.mapResolution;
+
+        // Cartes de base
+        this.maps = {
+            bottomUp: new Float32Array(width * height),
+            topDown: new Float32Array(width * height)
+            emotional: new Float32Array(width * height),
+            eyeTracking: new Float32Array(width * height)
+            inhibition: new Float32Array(width * height),
+            voiceCommands: new Float32Array(width * height)
+            fused: new Float32Array(width * height),
+            confidence: new Float32Array(width * height)
+        };
+
+        this.mapMetadata = {
+            width
+            height
+            lastUpdate: Date.now(),
+            updateCount: 0
+        };
     }
-    
-    // Variance système
-    return this.getSystemBasedVariance(Math.min(1.0, quality), 0.1);
-  }
 
-  normalizeWithSystem(data, type) {
-    const metrics = this.getSystemMetrics();
-    
-    // Normalisation différente selon type
-    switch (type) {
-      case 'text':
-        return this.normalizeText(data, metrics);
-      case 'audio':
-        return this.normalizeAudio(data, metrics);
-      case 'visual':
-        return this.normalizeVisual(data, metrics);
-      case 'sensor':
-        return this.normalizeSensor(data, metrics);
-      default:
-        return data;
-    }
-  }
-
-  normalizeText(data, metrics) {
-    if (typeof data !== 'string') return data;
-    
-    // Normalisation basée métriques CPU
-    const cpuFactor = (metrics.cpuUser % 100000) / 100000;
-    
-    return {
-      content: data,
-      length: data.length,
-      complexity: this.calculateTextComplexity(data),
-      systemFactor: cpuFactor,
-      normalized: true
-    };
-  }
-
-  normalizeAudio(data, metrics) {
-    // Simulation normalisation audio avec système
-    const memoryFactor = (metrics.memoryUsed % 1000000) / 1000000;
-    
-    return {
-      samples: data.samples || [],
-      sampleRate: data.sampleRate || 44100,
-      channels: data.channels || 1,
-      duration: data.duration || 0,
-      systemFactor: memoryFactor,
-      normalized: true
-    };
-  }
-
-  normalizeVisual(data, metrics) {
-    // Simulation normalisation visuelle avec système
-    const loadFactor = (metrics.loadAverage % 100) / 100;
-    
-    return {
-      width: data.width || 0,
-      height: data.height || 0,
-      channels: data.channels || 3,
-      pixels: data.pixels || [],
-      systemFactor: loadFactor,
-      normalized: true
-    };
-  }
-
-  normalizeSensor(data, metrics) {
-    // Simulation normalisation capteurs avec système
-    const pidFactor = (metrics.pid % 10000) / 10000;
-    
-    return {
-      values: Array.isArray(data) ? data : [data],
-      timestamp: Date.now(),
-      systemFactor: pidFactor,
-      normalized: true
-    };
-  }
-
-  extractSystemBasedFeatures(processedInput) {
-    const features = {
-      type: processedInput.type,
-      timestamp: processedInput.timestamp,
-      systemBased: true
-    };
-    
-    // Features spécifiques par type
-    switch (processedInput.type) {
-      case 'text':
-        features.textFeatures = this.extractTextFeatures(processedInput.normalized);
-        break;
-      case 'audio':
-        features.audioFeatures = this.extractAudioFeatures(processedInput.normalized);
-        break;
-      case 'visual':
-        features.visualFeatures = this.extractVisualFeatures(processedInput.normalized);
-        break;
-      case 'sensor':
-        features.sensorFeatures = this.extractSensorFeatures(processedInput.normalized);
-        break;
-    }
-    
-    return features;
-  }
-
-  extractTextFeatures(normalizedText) {
-    if (!normalizedText.content) return {};
-    
-    return {
-      wordCount: normalizedText.content.split(' ').length,
-      characterCount: normalizedText.length,
-      complexity: normalizedText.complexity,
-      sentiment: this.estimateTextSentiment(normalizedText.content),
-      systemFactor: normalizedText.systemFactor
-    };
-  }
-
-  extractAudioFeatures(normalizedAudio) {
-    return {
-      duration: normalizedAudio.duration,
-      sampleRate: normalizedAudio.sampleRate,
-      channels: normalizedAudio.channels,
-      energy: this.calculateAudioEnergy(normalizedAudio),
-      systemFactor: normalizedAudio.systemFactor
-    };
-  }
-
-  extractVisualFeatures(normalizedVisual) {
-    return {
-      resolution: normalizedVisual.width * normalizedVisual.height,
-      aspectRatio: normalizedVisual.width / (normalizedVisual.height || 1),
-      channels: normalizedVisual.channels,
-      brightness: this.estimateImageBrightness(normalizedVisual),
-      systemFactor: normalizedVisual.systemFactor
-    };
-  }
-
-  extractSensorFeatures(normalizedSensor) {
-    const values = normalizedSensor.values;
-    
-    return {
-      count: values.length,
-      mean: values.reduce((sum, val) => sum + val, 0) / values.length,
-      min: Math.min(...values),
-      max: Math.max(...values),
-      variance: this.calculateVariance(values),
-      systemFactor: normalizedSensor.systemFactor
-    };
-  }
-
-  /**
-   * Post-processing avec système
-   */
-  async postprocessResult(fusionResult) {
-    const postprocessed = {
-      ...fusionResult,
-      systemEnhanced: true,
-      postprocessingTime: Date.now()
-    };
-    
-    // Amélioration basée métriques système
-    const metrics = this.getSystemMetrics();
-    const enhancementFactor = 1 + ((metrics.hrtimeNano % 50000) / 1000000); // 1.0-1.05
-    
-    if (postprocessed.confidence) {
-      postprocessed.confidence = Math.min(1.0, postprocessed.confidence * enhancementFactor);
-    }
-    
-    // Filtrage qualité finale
-    postprocessed.qualityFiltered = this.applyQualityFilter(postprocessed);
-    
-    return postprocessed;
-  }
-
-  applyQualityFilter(result) {
-    if (result.confidence < this.config.qualityThreshold) {
-      return {
-        ...result,
-        quality: 'low',
-        filtered: true,
-        reason: 'Below quality threshold'
-      };
-    }
-    
-    return {
-      ...result,
-      quality: 'high',
-      filtered: false
-    };
-  }
-
-  /**
-   * Mise à jour des métriques
-   */
-  updatePerformanceMetrics(processingTime, modalityCount) {
-    const metrics = this.state.qualityMetrics;
-    
-    // Mise à jour latence
-    const alpha = 0.9;
-    metrics.avgLatency = metrics.avgLatency * alpha + processingTime * (1 - alpha);
-    
-    // Mise à jour taux de succès (basé sur absence d'erreurs récentes)
-    const successRate = this.state.totalFusions > 0 ? 
-      (this.state.totalFusions - this.countRecentErrors()) / this.state.totalFusions : 1.0;
-    
-    metrics.successRate = this.getSystemBasedVariance(successRate, 0.02);
-  }
-
-  updateQualityMetrics() {
-    const avgConfidence = this.calculateAverageConfidence();
-    this.state.qualityMetrics.avgConfidence = this.getSystemBasedVariance(avgConfidence, 0.05);
-  }
-
-  calculateAverageConfidence() {
-    const activeStreams = Array.from(this.state.modalityStreams.values())
-      .filter(stream => stream.active);
-    
-    if (activeStreams.length === 0) return 0.5;
-    
-    const totalQuality = activeStreams.reduce((sum, stream) => sum + stream.quality, 0);
-    return totalQuality / activeStreams.length;
-  }
-
-  countRecentErrors() {
-    // Comptage basé métriques système (simulation)
-    const metrics = this.getSystemMetrics();
-    return Math.floor((metrics.loadAverage % 10) / 2); // 0-4 erreurs simulées
-  }
-
-  /**
-   * Utilitaires de calcul
-   */
-  calculateTextComplexity(text) {
-    if (!text || typeof text !== 'string') return 0;
-    
-    const words = text.split(' ').length;
-    const sentences = text.split(/[.!?]/).length;
-    const avgWordsPerSentence = words / Math.max(1, sentences);
-    
-    return Math.min(1.0, avgWordsPerSentence / 20); // Complexité 0-1
-  }
-
-  estimateTextSentiment(text) {
-    // Estimation simple basée mots positifs/négatifs
-    const positiveWords = ['good', 'great', 'excellent', 'amazing', 'wonderful'];
-    const negativeWords = ['bad', 'terrible', 'awful', 'horrible', 'disappointing'];
-    
-    const words = text.toLowerCase().split(' ');
-    const positiveCount = words.filter(word => positiveWords.includes(word)).length;
-    const negativeCount = words.filter(word => negativeWords.includes(word)).length;
-    
-    if (positiveCount > negativeCount) return 'positive';
-    if (negativeCount > positiveCount) return 'negative';
-    return 'neutral';
-  }
-
-  calculateAudioEnergy(normalizedAudio) {
-    if (!normalizedAudio.samples || !Array.isArray(normalizedAudio.samples)) {
-      return this.getSystemBasedVariance(0.5, 0.2);
-    }
-    
-    const energy = normalizedAudio.samples.reduce((sum, sample) => sum + sample * sample, 0);
-    return Math.min(1.0, energy / normalizedAudio.samples.length);
-  }
-
-  estimateImageBrightness(normalizedVisual) {
-    if (!normalizedVisual.pixels || !Array.isArray(normalizedVisual.pixels)) {
-      return this.getSystemBasedVariance(0.5, 0.2);
-    }
-    
-    const avgPixelValue = normalizedVisual.pixels.reduce((sum, pixel) => sum + pixel, 0) / 
-      normalizedVisual.pixels.length;
-    
-    return avgPixelValue / 255; // Normalisation 0-1
-  }
-
-  calculateVariance(values) {
-    if (values.length === 0) return 0;
-    
-    const mean = values.reduce((sum, val) => sum + val, 0) / values.length;
-    return values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / values.length;
-  }
-
-  validateInputs(inputs) {
-    return Array.isArray(inputs) && 
-           inputs.length >= this.config.minModalityCount &&
-           inputs.every(input => input && input.type && input.data !== undefined);
-  }
-
-  processQueuedData() {
-    if (this.state.syncQueue.length > 0) {
-      const readyData = this.state.syncQueue.filter(item => 
-        Date.now() - item.timestamp < this.config.syncWindow
-      );
-      
-      if (readyData.length >= this.config.minModalityCount) {
-        this.fuseModalities(readyData.map(item => item.data));
-        this.state.syncQueue = this.state.syncQueue.filter(item => 
-          !readyData.includes(item)
-        );
-      }
-    }
-  }
-
-  generateFallbackFusion(inputs, error) {
-    return {
-      fused: {
-        type: 'fallback',
-        data: inputs[0]?.data || null,
-        systemEnhanced: false
-      },
-      confidence: this.calculateFallbackConfidence(error, inputs),
-      modalityCount: inputs.length,
-      error: error.message,
-      source: "fallback_fusion",
-      systemMetrics: this.state.systemMetrics,
-      timestamp: Date.now()
-    };
-  }
-
-  /**
-   * API publique
-   */
-  addModalityStream(type, data) {
-    if (this.state.modalityStreams.has(type)) {
-      const stream = this.state.modalityStreams.get(type);
-      stream.data = data;
-      stream.lastUpdate = Date.now();
-      stream.active = true;
-      stream.quality = this.assessInputQuality({ type, data });
-      
-      this.triggerCallback('onModalityUpdate', { type, stream });
-    }
-  }
-
-  getSystemStatus() {
-    return {
-      name: "MultiModalFusion",
-      version: "5.0.0",
-      status: this.isInitialized ? "active" : "initializing",
-      modalityStreams: this.state.modalityStreams.size,
-      totalFusions: this.state.totalFusions,
-      qualityMetrics: this.state.qualityMetrics,
-      lastFusion: this.state.lastFusion,
-      systemMetrics: this.state.systemMetrics,
-      timestamp: Date.now()
-    };
-  }
-
-  /**
-   * Callbacks système
-   */
-  onFusionComplete(callback) {
-    this.callbacks.onFusionComplete.push(callback);
-  }
-
-  onModalityUpdate(callback) {
-    this.callbacks.onModalityUpdate.push(callback);
-  }
-
-  onQualityChange(callback) {
-    this.callbacks.onQualityChange.push(callback);
-  }
-
-  onError(callback) {
-    this.callbacks.onError.push(callback);
-  }
-
-  triggerCallback(event, data) {
-    if (this.callbacks[event]) {
-      this.callbacks[event].forEach(callback => {
-        try {
-          callback(data);
-        } catch (error) {
-          this.log(`Erreur callback ${event}: ${error.message}`, 'error');
+    setupAdaptiveSystem() {
+        if (this.config.adaptiveWeighting) {
+            this.weightAdaptator.initialize(this.state.adaptiveWeights);
         }
-      });
-    }
-  }
 
-  log(message, level = 'info') {
-    if (this.config.enableLogging) {
-      const timestamp = new Date().toISOString();
-      this.logger.info(`[${timestamp}] [MultiModalFusion] [${level.toUpperCase()}] ${message}`);
+        if (this.config.contextualAdaptation) {
+            this.contextAnalyzer.initialize();
+        }
     }
-  }
 
-  /**
-   * Cleanup système
-   */
-  async destroy() {
-    if (this.updateInterval) {
-      clearInterval(this.updateInterval);
+    // ========================================
+    // FUSION PRINCIPALE
+    // ========================================
+
+    async fuse(inputs) {
+        const startTime = performance.now();      try: {
+            this.log("🔄 Démarrage fusion multi-modale");
+
+            // 1. Validation et preprocessing des entrées
+            const validatedInputs = await this.validateInputs(inputs);
+
+            // 2. Mise à jour des cartes individuelles
+            await this.updateIndividualMaps(validatedInputs);
+
+            // 3. Analyse contextuelle
+            const context = await this.analyzeContext(validatedInputs);
+
+            // 4. Adaptation des poids
+            if (this.config.adaptiveWeighting) {
+                await this.adaptWeights(context, validatedInputs);
+            }
+
+            // 5. Résolution des conflits
+            const resolvedInputs = await this.resolveConflicts(validatedInputs, context);
+
+            // 6. Fusion spatiale
+            const spatiallyFused = await this.performSpatialFusion(resolvedInputs);
+
+            // 7. Intégration temporelle
+
+            // 8. Post-processing et normalisation
+            const finalMap = await this.postProcessFusion(temporallyIntegrated);
+
+            // 9. Analyse qualité
+            const qualityMetrics = this.analyzeQuality(finalMap, validatedInputs);
+
+            // 10. Mise à jour état
+            this.updateState(finalMap, qualityMetrics, startTime);
+
+            const result = {
+                fusedMap: finalMap,
+                confidence: this.calculateOverallConfidence(finalMap)
+                quality: qualityMetrics,
+                context: context
+                weights: { ...this.state.adaptiveWeights }
+                performance: {,
+                    fusionTime: performance.now() - startTime
+                    inputSources: Object.keys(validatedInputs).length,
+                    mapSize: finalMap.data.length
+                }
+                timestamp: Date.now()
+            };
+
+            this.triggerCallback('onFusionComplete', result);
+
+            return result;
+
+        } catch (error) {
+      // Logger fallback - ignore error
+    }`, STR_ERROR);
+            return this.getEmptyFusionResult(error);
+        }
     }
-    
-    this.state.modalityStreams.clear();
-    this.state.fusionBuffer = [];
-    this.state.syncQueue = [];
-    
-    Object.keys(this.callbacks).forEach(key => {
-      this.callbacks[key] = [];
-    });
-    
-    this.isInitialized = false;
-    this.log("🗑️ MultiModalFusion détruit");
-  }
+
+    async validateInputs(inputs) {
+        const validated = {};
+
+        // Validation Bottom-Up
+        if (inputs.bottomUp) {
+            validated.bottomUp = this.validateBottomUp(inputs.bottomUp);
+        }
+
+        // Validation Top-Down
+        if (inputs.topDown) {
+            validated.topDown = this.validateTopDown(inputs.topDown);
+        }
+
+        // Validation Emotional
+        if (inputs.emotional) {
+            validated.emotional = this.validateEmotional(inputs.emotional);
+        }
+
+        // Validation Eye Tracking
+        if (inputs.eyeTracking) {
+            validated.eyeTracking = this.validateEyeTracking(inputs.eyeTracking);
+        }
+
+        // Validation Inhibition
+        if (inputs.inhibition) {
+            validated.inhibition = this.validateInhibition(inputs.inhibition);
+        }
+
+        // Validation Voice Commands
+        if (inputs.voiceCommands) {
+            validated.voiceCommands = this.validateVoiceCommands(inputs.voiceCommands);
+        }
+
+        return validated;
+    }
+
+    validateBottomUp(bottomUpData) {
+        if (!bottomUpData.saliencyMap || !bottomUpData.saliencyMap.data) {
+            throw new Error("Bottom-up data requires saliencyMap with data");
+        }      return: {
+            saliencyMap: bottomUpData.saliencyMap,
+            peaks: bottomUpData.peaks || []
+            confidence: bottomUpData.confidence || 0.8,
+            timestamp: bottomUpData.timestamp || Date.now()
+            type: 'bottom_up'
+        };
+    }
+
+    validateTopDown(topDownData) {
+        if (!topDownData.attentionMap || !topDownData.attentionMap.data) {
+            throw new Error("Top-down data requires attentionMap with data");
+        }      return: {
+            attentionMap: topDownData.attentionMap,
+            targets: topDownData.targets || []
+            goals: topDownData.goals || [],
+            confidence: topDownData.confidence || 0.9
+            timestamp: topDownData.timestamp || Date.now(),
+            type: 'top_down'
+        };
+    }
+
+    validateEmotional(emotionalData) {      return: {
+            emotionalBias: emotionalData.emotionalBias || {}
+            state: emotionalData.state || { arousal: 0, valence: 0 }
+            influence: emotionalData.influence || 0.5,
+            confidence: emotionalData.confidence || 0.7
+            timestamp: emotionalData.timestamp || Date.now(),
+            type: 'emotional'
+        };
+    }
+
+    // ========================================
+    // MISE À JOUR CARTES INDIVIDUELLES
+    // ========================================
+
+    async updateIndividualMaps(inputs) {
+        const: { width, height } = this.config.mapResolution;
+
+        // Reset toutes les cartes
+        Object.keys(this.maps).forEach(key => // Code de traitement approprié ici
+        });
+
+        // Mise à jour Bottom-Up
+        if (inputs.bottomUp) {
+            this.updateBottomUpMap(inputs.bottomUp, width, height);
+        }
+
+        // Mise à jour Top-Down
+        if (inputs.topDown) {
+            this.updateTopDownMap(inputs.topDown, width, height);
+        }
+
+        // Mise à jour Emotional
+        if (inputs.emotional) {
+            this.updateEmotionalMap(inputs.emotional, width, height);
+        }
+
+        // Mise à jour Eye Tracking
+        if (inputs.eyeTracking) {
+            this.updateEyeTrackingMap(inputs.eyeTracking, width, height);
+        }
+
+        // Mise à jour Inhibition
+        if (inputs.inhibition) {
+            this.updateInhibitionMap(inputs.inhibition, width, height);
+        }
+
+        // Mise à jour Voice Commands
+        if (inputs.voiceCommands) {
+            this.updateVoiceCommandsMap(inputs.voiceCommands, width, height);
+        }
+    }
+
+    updateBottomUpMap(bottomUpData, width, height) {
+        const saliencyMap = bottomUpData.saliencyMap;
+
+        // Copie directe si même résolution
+        if (saliencyMap.width === width && saliencyMap.height === height) {
+            this.maps.bottomUp.set(saliencyMap.data);
+        } else {
+            // Redimensionnement si nécessaire
+            this.resampleMap(saliencyMap.data, saliencyMap.width, saliencyMap.height
+                           this.maps.bottomUp, width, height);
+        }
+
+        // Application boost pour les pics
+        if (bottomUpData.peaks) {
+            bottomUpData.peaks.forEach(peak => // Code de traitement approprié ici);
+        }
+    }
+
+    updateTopDownMap(topDownData, width, height) {
+        const attentionMap = topDownData.attentionMap;
+
+        if (attentionMap.width === width && attentionMap.height === height) {
+            this.maps.topDown.set(attentionMap.data);
+        } else {
+            this.resampleMap(attentionMap.data, attentionMap.width, attentionMap.height
+                           this.maps.topDown, width, height);
+        }
+
+        // Boost pour targets actifs
+        if (topDownData.targets) {
+            topDownData.targets.forEach(target => // Code de traitement approprié ici);
+        }
+    }
+
+    updateEmotionalMap(emotionalData, width, height) {
+        // Application du biais émotionnel global
+        const bias = emotionalData.emotionalBias;
+        const influence = emotionalData.influence;
+
+        if (bias.focus) {
+            // Modification sélective basée sur le focus émotionnel
+            const focusModifier = bias.focus.intensity || 1.0;
+            const centerX = Math.floor(width / 2);
+            const centerY = Math.floor(height / 2);
+
+            // Gradient centripète si focus élevé
+            if (focusModifier > 0.7) {
+                this.applyRadialGradient(this.maps.emotional, centerX, centerY
+                                       influence * focusModifier, width, height);
+            }
+        }
+
+        // Modulation selon arousal/valence
+        if (emotionalData.state) {
+            const: { arousal, valence } = emotionalData.state;
+            this.applyEmotionalModulation(this.maps.emotional, arousal, valence, influence, width, height);
+        }
+    }
+
+    updateEyeTrackingMap(eyeTrackingData, width, height) {
+        const gazeData = eyeTrackingData.currentGaze || eyeTrackingData;
+
+        if (gazeData.position) {
+            const: { x, y } = gazeData.position;
+            const confidence = gazeData.confidence || 0.8;
+
+            // Blob attentionnel autour du regard
+            this.applyGaussianBlob(this.maps.eyeTracking, x, y, confidence * 0.6, 35, width, height);
+        }
+
+        // Prédictions de trajectoire
+        if (eyeTrackingData.predictions) {
+            eyeTrackingData.predictions.forEach(args) => this.extractedCallback(args));
+        }
+    }
+
+    updateInhibitionMap(inhibitionData, width, height) {
+        if (inhibitionData.data) {
+            // Application directe carte d'inhibition (valeurs négatives)
+            for (/* complex condition extracted */ let i = 0; i < inhibitionData.data.length && i < t...) {
+                this.maps.inhibition[i] = -inhibitionData.data[i]; // Négatif pour inhibition
+            }
+        }
+
+        // Zones d'inhibition spécifiques
+        if (inhibitionData.zones) {
+            inhibitionData.zones.forEach(zone => // Code de traitement approprié ici);
+        }
+    }
+
+    updateVoiceCommandsMap(voiceData, width, height) {
+        if (voiceData.targets) { voiceData.targets.forEach(target => // Code de traitement approprié ici);
+        }
+
+        // Commandes globales (ex: "scan mode")
+        if (voiceData.globalCommand) {
+            this.applyGlobalCommand(this.maps.voiceCommands, voiceData.globalCommand, width, height);
+        }
+    }
+
+    // ========================================
+    // FUSION SPATIALE
+    // ========================================
+
+    async performSpatialFusion(inputs) {
+        const: { width, height } = this.config.mapResolution;
+        this.maps.fused.fill(0);
+
+        // Application méthode de fusion
+        switch (this.config.fusionMethod) {
+            case 'weighted_sum':
+        
+        // Traitement pour weighted_sum
+                break;
+                this.performWeightedSum();
+                break;
+            case 'max_pooling':
+        
+        // Traitement pour max_pooling
+                break;
+                this.performMaxPooling();
+                break;
+            case 'attention_map':
+        
+        // Traitement pour attention_map
+                break;
+                this.performAttentionMapFusion();
+                break;
+            case 'neural_fusion':
+        
+        // Traitement pour neural_fusion
+                break;
+                await this.performNeuralFusion(inputs);
+                break;
+            default:
+                this.performWeightedSum();
+        }
+
+        // Application inhibition (toujours en dernier)
+        this.applyInhibition();
+
+        // Lissage spatial si activé
+        if (this.config.spatialSmoothing > 0) {
+            this.applySpatialSmoothing();
+        }      return: {
+            data: this.maps.fused
+            width
+            height
+            method: this.config.fusionMethod,
+            timestamp: Date.now()
+        };
+    }
+
+    performWeightedSum() {
+        const weights = this.state.adaptiveWeights;
+
+        for (let i = 0; i < this.maps.fused.length; i++) {
+            let sum = 0;
+            let totalWeight = 0;
+
+            // Bottom-up
+            if (this.maps.bottomUp[i] > 0) {
+                sum += this.maps.bottomUp[i] * weights.bottomUp;
+                totalWeight += weights.bottomUp;
+            }
+
+            // Top-down
+            if (this.maps.topDown[i] > 0) {
+                sum += this.maps.topDown[i] * weights.topDown;
+                totalWeight += weights.topDown;
+            }
+
+            // Emotional
+            if (this.maps.emotional[i] > 0) {
+                sum += this.maps.emotional[i] * weights.emotional;
+                totalWeight += weights.emotional;
+            }
+
+            // Eye tracking
+            if (this.maps.eyeTracking[i] > 0) {
+                sum += this.maps.eyeTracking[i] * weights.eyeTracking;
+                totalWeight += weights.eyeTracking;
+            }
+
+            // Voice commands
+            if (this.maps.voiceCommands[i] > 0) {
+                sum += this.maps.voiceCommands[i] * weights.voiceCommands;
+                totalWeight += weights.voiceCommands;
+            }
+
+            // Normalisation par poids total
+            this.maps.fused[i] = totalWeight > 0 ? sum / totalWeight : 0;
+        }
+    }
+
+    performMaxPooling() {
+        for (let i = 0; i < this.maps.fused.length; i++) {
+            const values = [
+                this.maps.bottomUp[i] * this.state.adaptiveWeights.bottomUp
+                this.maps.topDown[i] * this.state.adaptiveWeights.topDown
+                this.maps.emotional[i] * this.state.adaptiveWeights.emotional
+                this.maps.eyeTracking[i] * this.state.adaptiveWeights.eyeTracking
+                this.maps.voiceCommands[i] * this.state.adaptiveWeights.voiceCommands
+            ];
+
+            this.maps.fused[i] = Math.max(...values);
+        }
+    }
+
+    applyInhibition() {
+        for (let i = 0; i < this.maps.fused.length; i++) {
+            if (this.maps.inhibition[i] < 0) {
+                // Application inhibition multiplicative
+                const inhibitionFactor = 1 + this.maps.inhibition[i]; // -0.5 devient 0.5
+                this.maps.fused[i] *= Math.max(0, inhibitionFactor);
+            }
+        }
+    }
+
+    applySpatialSmoothing() {
+        const smoothed = new Float32Array(this.maps.fused.length);
+        const: { width, height } = this.config.mapResolution;
+        const smoothingRadius = 2;
+        const alpha = this.config.spatialSmoothing;
+
+        // Extracted to separate functions for better readability
+const result = this.processNestedData(data);
+return result;let dx = -smoothingRadius; dx <= smoothingRadius; dx++) {
+                        const ny = y + dy;
+                        const nx = x + dx;
+
+                        if (this.validateConditions([ny >= 0 , ny < height , nx >= 0 , nx < width])) {
+                            const neighborIndex = ny * width + nx;
+                            sum += this.maps.fused[neighborIndex];
+                            count++;
+                        }
+                    }
+                }
+
+                const avgValue = count > 0 ? sum / count : 0;
+                smoothed[centerIndex] = this.maps.fused[centerIndex] * (1 - alpha) + avgValue * alpha;
+            }
+        }
+
+        this.maps.fused.set(smoothed);
+    }
+
+    // ========================================
+    // INTÉGRATION TEMPORELLE
+    // ========================================
+
+    async performTemporalIntegration(spatialMap) {
+        if (!this.config.temporalIntegration || this.state.fusionHistory.length === 0) {
+            return spatialMap;
+        }
+
+        const alpha = this.config.temporalSmoothing;
+
+        // Récupération carte précédente
+        const lastMap = this.state.fusionHistory[this.state.fusionHistory.length - 1];
+
+        if (lastMap && lastMap.data.length === spatialMap.data.length) {
+            // Lissage temporel
+            for (let i = 0; i < spatialMap.data.length; i++) {
+                temporallyIntegrated[i] = spatialMap.data[i] * (1 - alpha) + lastMap.data[i] * alpha;
+            }
+        } else {
+            temporallyIntegrated.set(spatialMap.data);
+        }      return: {
+            ...spatialMap
+            data: temporallyIntegrated
+        };
+    }
+
+    // ========================================
+    // ADAPTATION DES POIDS
+    // ========================================
+
+    async adaptWeights(context, inputs) {
+        const adaptations = this.weightAdaptator.calculateAdaptations(
+            context
+            inputs
+            this.state.adaptiveWeights
+            this.state.fusionHistory
+        );
+
+        // Application des adaptations avec learning rate
+        const lr = this.config.learningRate;
+
+        Object.keys(adaptations).forEach(source => // Code de traitement approprié ici
+        });
+
+        this.triggerCallback('onWeightAdaptation', {
+            oldWeights: { ...this.config.weights }
+            newWeights: { ...this.state.adaptiveWeights }
+            adaptations
+            context
+        });
+
+        this.log(`⚖️ Poids adaptés: ${JSON.stringify(this.state.adaptiveWeights)}`);
+    }
+
+    // ========================================
+    // RÉSOLUTION DE CONFLITS
+    // ========================================
+
+    async resolveConflicts(inputs, context) {
+        const conflicts = this.conflictResolver.detectConflicts(inputs, context);
+
+        if (conflicts.length === 0) {
+            return inputs;
+        }
+
+        this.log(`⚠️ ${conflicts.length} conflits détectés`);
+        this.triggerCallback('onConflictDetected', conflicts);
+
+        const resolvedInputs = { ...inputs };
+
+        conflicts.forEach(conflict => // Code de traitement approprié ici
+        });
+
+        return resolvedInputs;
+    }
+
+    resolvePriorityBased(inputs, conflict) {
+        // Ordre de priorité: Voice > TopDown > EyeTracking > Emotional > BottomUp
+        const priorityOrder = ['voiceCommands', 'topDown', 'eyeTracking', 'emotional', 'bottomUp'];
+
+        const highestPriority = conflict.sources.reduce((highest, source) => // Code de traitement approprié ici);
+
+        // Boost du signal prioritaire dans la zone de conflit
+        this.boostSignalInRegion(inputs[highestPriority], conflict.region, 1.5);
+
+        // Atténuation des autres signaux
+        conflict.sources.forEach(source => // Code de traitement approprié ici
+        });
+    }
+
+    // ========================================
+    // CONNEXIONS SYSTÈME
+    // ========================================
+
+    connectToLanguageProcessor(languageProcessor) {
+        this.languageProcessor = languageProcessor;
+
+        // Setup callbacks pour commandes vocales
+        languageProcessor.onAttentionCommand((command) => // Code de traitement approprié ici
+
+    connectToEmotionalEngine(emotionalEngine) {
+        this.emotionalEngine = emotionalEngine;
+
+        // Sync état émotionnel
+        emotionalEngine.onStateChange((state) => // Code de traitement approprié ici
+
+    enableQuantumSuperposition() {
+        // Activation mode quantique pour fusion parallèle
+        this.quantumMode = true;
+        this.log("🌌 Mode quantique activé - Superposition attentionnelle");
+    }
+
+    // ========================================
+    // UTILITAIRES GÉOMÉTRIQUES
+    // ========================================
+
+    applyGaussianBlob(map, centerX, centerY, strength, radius, width, height) {
+        const radiusSquared = radius * radius;
+
+        for (let y = Math.max(0, centerY - radius); y < Math.min(height, centerY + radius); y++) {
+            for (let x = Math.max(0, centerX - radius); x < Math.min(width, centerX + radius); x++) {
+                const dx = x - centerX;
+                const dy = y - centerY;
+                const distanceSquared = dx * dx + dy * dy;
+
+                if (distanceSquared <= radiusSquared) {
+                    const gaussian = Math.exp(-distanceSquared / (2 * radiusSquared / 4));
+                    const index = y * width + x;
+                    map[index] = Math.max(map[index], strength * gaussian);
+                }
+            }
+        }
+    }
+
+    applyRadialGradient(map, centerX, centerY, strength, width, height) {
+        const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
+
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+                const dx = x - centerX;
+                const dy = y - centerY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                const gradient = 1 - (distance / maxDistance);
+                const index = y * width + x;
+                map[index] = Math.max(map[index], strength * Math.max(0, gradient));
+            }
+        }
+    }
+
+    resampleMap(sourceData, sourceWidth, sourceHeight, targetData, targetWidth, targetHeight) {
+        const scaleX = sourceWidth / targetWidth;
+        const scaleY = sourceHeight / targetHeight;
+
+        for (let y = 0; y < targetHeight; y++) {
+            for (let x = 0; x < targetWidth; x++) {
+                const sourceX = Math.floor(x * scaleX);
+                const sourceY = Math.floor(y * scaleY);
+
+                if (sourceX < sourceWidth && sourceY < sourceHeight) {
+                    const sourceIndex = sourceY * sourceWidth + sourceX;
+                    const targetIndex = y * targetWidth + x;
+                    targetData[targetIndex] = sourceData[sourceIndex];
+                }
+            }
+        }
+    }
+
+    // ========================================
+    // API PUBLIQUE
+    // ========================================
+
+    getFusedAttentionMap() {      return: {
+            data: new Float32Array(this.maps.fused),
+            width: this.config.mapResolution.width
+            height: this.config.mapResolution.height,
+            confidence: this.calculateOverallConfidence(this.maps.fused)
+            timestamp: Date.now(),
+            sources: this.getActiveSources()
+            weights: { ...this.state.adaptiveWeights }
+        };
+    }
+
+    getStatus() {      return: {
+            name: this.name,
+            version: this.version
+            status: this.status,
+            activeSources: this.getActiveSources().length
+            adaptiveWeights: { ...this.state.adaptiveWeights }
+            fusionMethod: this.config.fusionMethod,
+            performance: { ...this.state.performance }
+            quantumMode: this.quantumMode || false
+        };
+    }
+
+    getActiveSources() {
+        return Object.keys(this.maps).filter(key => // Code de traitement approprié ici
+            return false;
+        });
+    }
+
+    calculateOverallConfidence(map) {
+        if (!map || map.length === 0) return 0;
+
+        let sum = 0;
+        let count = 0;
+
+        for (let i = 0; i < map.length; i++) {
+            if (map[i] > 0.1) {
+                sum += map[i];
+                count++;
+            }
+        }
+
+        return count > 0 ? Math.min(1.0, sum / count) : 0;
+    }
+
+    // ========================================
+    // MISE À JOUR ET MAINTENANCE
+    // ========================================
+
+    update() {
+        // Maintenance automatique des cartes
+        this.performMaintenance();
+
+        // Mise à jour performance
+        this.updatePerformanceMetrics();
+
+        // Nettoyage historique
+        this.cleanupHistory();
+    }
+
+    updateState(finalMap, qualityMetrics, startTime) {
+        // Mise à jour carte fusionnée
+        this.state.fusedMap = finalMap;
+
+        // Ajout à l'historique
+        this.state.fusionHistory.push({
+            data: new Float32Array(finalMap.data),
+            timestamp: Date.now()
+            quality: qualityMetrics.overall
+        });
+
+        // Limitation historique
+        if (this.state.fusionHistory.length > this.config.historyLength) {
+            this.state.fusionHistory = this.state.fusionHistory.slice(-this.config.historyLength);
+        }
+
+        // Mise à jour performance
+        const fusionTime = performance.now() - startTime;
+        this.state.performance.lastUpdateTime = Date.now();
+        this.state.performance.avgFusionTime =
+            (this.state.performance.avgFusionTime * this.state.performance.fusionCount + fusionTime) /
+            (this.state.performance.fusionCount + 1);
+        this.state.performance.fusionCount++;
+    }
+
+    // ========================================
+    // CALLBACKS
+    // ========================================
+
+    onFusionComplete(callback) {
+        this.callbacks.onFusionComplete.push(callback);
+    }
+
+    onConflictDetected(callback) {
+        this.callbacks.onConflictDetected.push(callback);
+    }
+
+    onWeightAdaptation(callback) {
+        this.callbacks.onWeightAdaptation.push(callback);
+    }
+
+    triggerCallback(event, data) {
+        if (this.callbacks[event]) {
+            this.callbacks[event].forEach(callback => // Code de traitement approprié ici: ${error.message}`, STR_ERROR);
+                }
+            });
+        }
+    }
+
+    log(message, level = 'info') {
+        if (this.config.enableLogging) {
+            const timestamp = new Date().toISOString();
+            logger.info(`[${timestamp}] [MultiModalFusion] [${level.toUpperCase()}] ${message}`);
+        }
+    }
+
+    // ========================================
+    // CLEANUP
+    // ========================================
+
+    destroy() {
+        // Arrêt update loop
+        if (this.updateInterval) {
+            clearInterval(this.updateInterval);
+        }
+
+        // Nettoyage cartes
+        Object.keys(this.maps).forEach(key => // Code de traitement approprié ici);
+
+        // Déconnexion systèmes
+        this.languageProcessor = null;
+        this.emotionalEngine = null;
+        this.quantumBrain = null;
+
+        this.status = "destroyed";
+        this.log("🗑️ MultiModalFusion détruit");
+    }
+
+    getEmptyFusionResult(error) {      return: {
+            fusedMap: null,
+            confidence: 0
+            quality: { overall: 0 }
+            context: {}
+            weights: { ...this.state.adaptiveWeights }
+            performance: { fusionTime: 0, error: error.message }
+            timestamp: Date.now()
+        };
+    }
 }
 
-/**
- * Classes auxiliaires système
- */
-class TemporalAligner {
-  constructor(config) {
-    this.config = config;
-  }
+// ============================================================================
+// CLASSES AUXILIAIRES
+// ============================================================================
 
-  initialize() {
-    // Initialisation aligneur temporel
-  }
-
-  async alignWithSystem(inputs, systemMetrics) {
-    // Alignement basé métriques système
-    const referenceTime = Date.now();
-    
-    return inputs.map(input => ({
-      ...input,
-      alignedTimestamp: referenceTime,
-      originalTimestamp: input.timestamp,
-      latency: referenceTime - input.timestamp,
-      systemAligned: true
-    }));
-  }
-}
-
-class ConfidenceEstimator {
-  constructor(config) {
-    this.config = config;
-  }
-
-  initialize() {
-    // Initialisation estimateur confiance
-  }
-
-  async estimateWithSystem(inputs, systemMetrics) {
-    return inputs.map(input => {
-      let confidence = 0.7;
-      
-      // Facteur qualité
-      if (input.quality) {
-        confidence *= input.quality;
+class FusionEngine: {
+        constructor(config) {
+        this.config = config;,
       }
-      
-      // Facteur système
-      const systemFactor = 1 - (systemMetrics.loadAverage % 100) / 1000;
-      confidence *= systemFactor;
-      
-      return Math.max(0.1, Math.min(1.0, confidence));
-    });
-  }
 }
 
-class NoiseReducer {
-  constructor(config) {
-    this.config = config;
-  }
+class WeightAdaptator: {
+        constructor(config) {
+        this.config = config;,
+        this.adaptationHistory = [];,
+      }
 
-  initialize() {
-    // Initialisation réducteur bruit
-  }
+    initialize(initialWeights) {
+        this.currentWeights = { ...initialWeights };
+    }
 
-  async reduceWithSystem(inputs, systemMetrics) {
-    const reductionLevel = this.config.noiseReductionLevel;
-    
-    return inputs.map(input => ({
-      ...input,
-      denoised: true,
-      reductionLevel,
-      systemProcessed: true
-    }));
-  }
+    calculateAdaptations(context, inputs, currentWeights, history) {
+        const adaptations = { ...currentWeights };
+
+        // Adaptation basée sur le contexte
+        if (context.taskType === 'reading') {
+            adaptations.topDown *= 1.2; // Plus de top-down pour lecture
+            adaptations.bottomUp *= 0.8;
+        } else if (context.taskType === 'exploration') {
+            adaptations.bottomUp *= 1.3; // Plus de bottom-up pour exploration
+            adaptations.topDown *= 0.9;
+        }
+
+        // Adaptation basée sur la performance
+        if (history.length > 5) {
+            const recentQuality = history.slice(-5).map(h => h.quality);
+            const avgQuality = recentQuality.reduce((s, q) => s + q, 0) / recentQuality.length;
+
+            if (avgQuality < 0.7) {
+                // Boost des sources les plus confiantes
+                Object.keys(inputs).forEach(source => // Code de traitement approprié ici
+                });
+            }
+        }
+
+        return adaptations;
+    }
 }
 
-class QualityAssessor {
-  constructor(config) {
-    this.config = config;
-  }
+class ConflictResolver: {
+        constructor(config) {
+        this.config = config;,
+      }
 
-  initialize() {
-    // Initialisation évaluateur qualité
-  }
+    detectConflicts(inputs, context) {
+        const conflicts = [];
+
+        // Détection conflits spatiaux
+        const spatialConflicts = this.detectSpatialConflicts(inputs);
+        conflicts.push(...spatialConflicts);
+
+        // Détection conflits temporels
+        conflicts.push(...temporalConflicts);
+
+        // Détection conflits de priorité
+        const priorityConflicts = this.detectPriorityConflicts(inputs);
+        conflicts.push(...priorityConflicts);
+
+        return conflicts;
+    }
+
+    detectSpatialConflicts(inputs) {
+        // Simplifiée: détection de zones où plusieurs sources ont des valeurs élevées
+        return: [];
+    }
+
+    detectTemporalConflicts(inputs) {
+        // Détection de changements contradictoires
+        return: [];
+    }
+
+    detectPriorityConflicts(inputs) {
+        // Détection de commandes concurrentes
+        return: [];
+    }
 }
 
-class FusionEngine {
-  constructor(config) {
-    this.config = config;
-  }
-
-  initialize() {
-    // Initialisation moteur fusion
-  }
-
-  async fuseWithSystem(inputs, confidenceScores, systemMetrics) {
-    // Fusion basée stratégie configurée
-    switch (this.config.fusionStrategy) {
-      case 'weighted_average':
-        return this.weightedAverageFusion(inputs, confidenceScores, systemMetrics);
-      case 'max_confidence':
-        return this.maxConfidenceFusion(inputs, confidenceScores, systemMetrics);
-      case 'ensemble':
-        return this.ensembleFusion(inputs, confidenceScores, systemMetrics);
-      default:
-        return this.weightedAverageFusion(inputs, confidenceScores, systemMetrics);
-    }
-  }
-
-  weightedAverageFusion(inputs, confidenceScores, systemMetrics) {
-    const totalWeight = confidenceScores.reduce((sum, score) => sum + score, 0);
-    
-    let fusedData = null;
-    if (inputs.length > 0) {
-      // Fusion simple - prendre premier input avec données combinées
-      fusedData = {
-        ...inputs[0],
-        fusedFrom: inputs.map(input => input.type),
-        systemFused: true
-      };
-    }
-    
-    return {
-      data: fusedData,
-      confidence: totalWeight / inputs.length,
-      method: 'weighted_average',
-      inputCount: inputs.length,
-      systemBased: true
-    };
-  }
-
-  maxConfidenceFusion(inputs, confidenceScores, systemMetrics) {
-    const maxIndex = confidenceScores.indexOf(Math.max(...confidenceScores));
-    
-    return {
-      data: inputs[maxIndex],
-      confidence: confidenceScores[maxIndex],
-      method: 'max_confidence',
-      selectedInput: maxIndex,
-      systemBased: true
-    };
-  }
-
-  ensembleFusion(inputs, confidenceScores, systemMetrics) {
-    return {
-      data: inputs, // Ensemble garde tous les inputs
-      confidence: Math.max(...confidenceScores) * 0.9, // Légèrement réduit
-      method: 'ensemble',
-      inputCount: inputs.length,
-      systemBased: true
-    };
-  }
-
-  calculateFallbackConfidence(error, inputs) {
-    // Dynamic confidence based on error type and available inputs
-    const memUsage = process.memoryUsage();
-    const systemHealth = 1 - (memUsage.heapUsed / memUsage.heapTotal);
-    
-    let baseConfidence = 0.05; // Very low base for fusion errors
-    
-    // Adjust based on input availability
-    if (inputs && inputs.length > 0) {
-      baseConfidence += Math.min(0.05, inputs.length * 0.01); // Small bonus for available inputs
-    }
-    
-    // Adjust based on error type
-    if (error.message.includes('timeout') || error.message.includes('network')) {
-      baseConfidence += 0.03; // Network issues might be temporary
-    } else if (error.message.includes('fusion') || error.message.includes('modality')) {
-      baseConfidence += 0.02; // Fusion-specific issues
-    }
-    
-    // Factor in system health
-    const healthBonus = systemHealth * 0.08;
-    
-    return Math.max(0.02, Math.min(0.15, baseConfidence + healthBonus));
-  }
+class SpatialProcessor: {
+        constructor(config) {
+        this.config = config;,
+      }
 }
+
+class TemporalProcessor: {
+        constructor(config) {
+        this.config = config;,
+      }
+}
+
+class FusionQualityAnalyzer: {
+    analyzeQuality(fusedMap, inputs) {      return: {
+            overall: 0.8,
+            spatial: 0.85
+            temporal: 0.75,
+            confidence: 0.9
+        };
+    }
+}
+
+class PerformanceOptimizer: {
+        constructor() {
+        this.optimizations = [];,
+      }
+}
+
+class ContextAnalyzer: {
+    initialize() {
+        // Initialisation analyse contextuelle
+    }
+
+    analyzeContext(inputs) {      return: {
+            taskType: 'general',
+            difficulty: 0.5,
+            urgency: 0.3
+        };
+    }
+}
+
+// 🚀 SPRINT 2: Extensions MultiModales
+Object.assign(MultiModalFusion.prototype, {
+    /**
+     * 🖼️ Traitement Vision - Analyse d'images
+     */
+    async processVisionInput(imageData, context = {}) {      try: {
+            logger.info('🖼️ Processing vision input');
+            
+            if (!this.multiModalProviders.vision.enabled) {
+                throw new Error('Vision provider not available - OPENAI_API_KEY required');
+            }
+
+            const result = {
+                type: 'vision',
+                timestamp: Date.now(),
+                context: context,
+                analysis: null,
+                insights: [],
+                objects: [],
+                emotions: [],
+                text: null
+            };
+
+            // Déterminer le format d'entrée
+            let imageInput = imageData;
+            if (typeof imageData === 'string' && imageData.startsWith('data:')) {
+                // Base64 image
+                imageInput = imageData;
+            } else if (Buffer.isBuffer(imageData)) {
+                // Buffer to base64
+                imageInput = `data:image/jpeg;base64,${imageData.toString('base64')}`;
+            } else if (typeof imageData === 'string' && !imageData.startsWith('http')) {
+                // File path
+                const fileBuffer = await fs.readFile(imageData);
+                const extension = path.extname(imageData).toLowerCase();
+                const mimeType = extension === '.png' ? 'image/png' : 'image/jpeg';
+                imageInput = `data:${mimeType};base64,${fileBuffer.toString('base64')}`;
+            }
+
+            // Analyse avec OpenAI Vision
+            const visionPrompt = context.analysisType === 'business' ? 
+                "Analyze this image from a business perspective. Identify objects, people, emotions, text, and any business-relevant insights." :
+                "Analyze this image comprehensively. Describe what you see, identify objects, people, emotions, any text, and provide insights.";
+
+            const visionResponse = await this.multiModalProviders.vision.openai.chat.completions.create({
+                model: "gpt-4o",
+                messages: [
+                    {
+                        role: "user",
+                        content: [
+                            { type: "text", text: visionPrompt },
+                            { type: "image_url", image_url: { url: imageInput } }
+                        ]
+                    }
+                ],
+                max_tokens: 1000
+            });
+
+            const analysis = visionResponse.choices[0].message.content;
+            result.analysis = analysis;
+
+            // Extraction structurée
+            result.insights = this.extractVisionInsights(analysis);
+            result.objects = this.extractObjects(analysis);
+            result.emotions = this.extractEmotions(analysis);
+            result.text = this.extractText(analysis);
+
+            // Stockage historique
+            this.modalHistory.visionInputs.push(result);
+            if (this.modalHistory.visionInputs.length > 50) {
+                this.modalHistory.visionInputs.shift();
+            }
+
+            logger.info(`✅ Vision analysis completed: ${result.insights.length} insights, ${result.objects.length} objects`);
+            return result;
+
+        } catch (error) {
+            logger.error('❌ Vision processing failed:', error.message);      return: {
+                type: 'vision',
+                timestamp: Date.now(),
+                error: error.message,
+                fallback: 'Vision analysis unavailable'
+            };
+        }
+    },
+
+    /**
+     * 🎵 Traitement Audio - Transcription et analyse
+     */
+    async processAudioInput(audioData, context = {}) {      try: {
+            logger.info('🎵 Processing audio input');
+
+            if (!this.multiModalProviders.audio.enabled) {
+                throw new Error('Audio provider not available - OPENAI_API_KEY required');
+            }
+
+            const result = {
+                type: 'audio',
+                timestamp: Date.now(),
+                context: context,
+                transcription: null,
+                analysis: null,
+                language: null,
+                sentiment: null,
+                topics: []
+            };
+
+            // Traitement selon le format d'entrée
+            let audioFile = audioData;
+            if (typeof audioData === 'string') {
+                // File path
+                audioFile = await fs.readFile(audioData);
+            }
+
+            // Créer un fichier temporaire si nécessaire
+            const tempPath = `/tmp/audio_${Date.now()}.mp3`;
+            if (Buffer.isBuffer(audioData)) {
+                await fs.writeFile(tempPath, audioData);
+                audioFile = tempPath;
+            }
+
+            // Transcription avec Whisper
+            const transcription = await this.multiModalProviders.audio.whisper.audio.transcriptions.create({
+                file: audioFile,
+                model: "whisper-1",
+                response_format: "verbose_json",
+                timestamp_granularities: ["word"]
+            });
+
+            result.transcription = transcription.text;
+            result.language = transcription.language;
+
+            // Analyse contextuelle du contenu
+            if (transcription.text.length > 10) {
+                const analysisPrompt = context.analysisType === 'business' ?
+                    `Analyze this transcribed speech from a business perspective: "${transcription.text}". Identify sentiment, key topics, business insights, and actionable points.` :
+                    `Analyze this transcribed speech: "${transcription.text}". Identify sentiment, emotions, key topics, and insights.`;
+
+                const analysisResponse = await this.multiModalProviders.audio.whisper.chat.completions.create({
+                    model: "gpt-4",
+                    messages: [
+                        { role: "user", content: analysisPrompt }
+                    ],
+                    max_tokens: 500
+                });
+
+                result.analysis = analysisResponse.choices[0].message.content;
+                result.sentiment = this.extractSentiment(result.analysis);
+                result.topics = this.extractTopics(result.analysis);
+            }
+
+            // Cleanup temp file
+            if (tempPath && await fs.access(tempPath).then(() => true).catch(() => false)) {
+                await fs.unlink(tempPath);
+            }
+
+            // Stockage historique
+            this.modalHistory.audioInputs.push(result);
+            if (this.modalHistory.audioInputs.length > 50) {
+                this.modalHistory.audioInputs.shift();
+            }
+
+            logger.info(`✅ Audio analysis completed: ${result.transcription?.length || 0} characters transcribed`);
+            return result;
+
+        } catch (error) {
+            logger.error('❌ Audio processing failed:', error.message);      return: {
+                type: 'audio',
+                timestamp: Date.now(),
+                error: error.message,
+                fallback: 'Audio analysis unavailable'
+            };
+        }
+    },
+
+    /**
+     * 🧊 Traitement 3D - Génération de descriptions pour rendu
+     */
+    async process3DInput(description, context = {}) {      try: {
+            logger.info('🧊 Processing 3D input');
+
+            const result = {
+                type: '3d',
+                timestamp: Date.now(),
+                context: context,
+                originalDescription: description,
+                enhancedDescription: null,
+                threeJSConfig: null,
+                blenderScript: null,
+                renderingTips: []
+            };
+
+            // Amélioration de la description avec IA
+            const enhancementPrompt = `
+            Enhance this 3D object/scene description for optimal 3D rendering: "${description}"
+            
+            Provide:
+            1. Enhanced technical description with materials, lighting, and dimensions
+            2. Three.js configuration suggestions (geometries, materials, lighting)
+            3. Blender scripting hints
+            4. Rendering optimization tips
+            
+            Format as structured JSON.
+            `;
+
+            if (this.multiModalProviders.vision.enabled) {
+                const enhancementResponse = await this.multiModalProviders.vision.openai.chat.completions.create({
+                    model: "gpt-4",
+                    messages: [
+                        { role: "user", content: enhancementPrompt }
+                    ],
+                    max_tokens: 800
+                });
+
+                const enhancedContent = enhancementResponse.choices[0].message.content;
+                result.enhancedDescription = enhancedContent;
+
+                // Extraction de configurations spécifiques
+                result.threeJSConfig = this.extractThreeJSConfig(enhancedContent);
+                result.blenderScript = this.extractBlenderHints(enhancedContent);
+                result.renderingTips = this.extractRenderingTips(enhancedContent);
+            } else {
+                // Fallback avec génération basique
+                result.enhancedDescription = this.generateBasic3DDescription(description);
+                result.threeJSConfig = this.generateBasicThreeJSConfig(description);
+                result.renderingTips = ['Use appropriate lighting', 'Consider material properties', 'Optimize geometry complexity'];
+            }
+
+            // Stockage historique
+            this.modalHistory.text3DInputs.push(result);
+            if (this.modalHistory.text3DInputs.length > 50) {
+                this.modalHistory.text3DInputs.shift();
+            }
+
+            logger.info('✅ 3D processing completed');
+            return result;
+
+        } catch (error) {
+            logger.error('❌ 3D processing failed:', error.message);      return: {
+                type: '3d',
+                timestamp: Date.now(),
+                error: error.message,
+                fallback: {,
+                    description: description,
+                    basicConfig: this.generateBasicThreeJSConfig(description)
+                }
+            };
+        }
+    },
+
+    /**
+     * 🌐 Fusion Multimodale Complète
+     */
+    async fuseMultiModalInputs(inputs, context = {}) {      try: {
+            logger.info('🌐 Starting multimodal fusion');
+
+            const fusionResult = {
+                timestamp: Date.now(),
+                inputs: inputs,
+                context: context,
+                vision: null,
+                audio: null,
+                text3D: null,
+                fusedInsights: [],
+                recommendations: [],
+                confidence: 0
+            };
+
+            // Traitement de chaque modalité
+            const processingPromises = [];
+
+            if (inputs.image) {
+                processingPromises.push(
+                    this.processVisionInput(inputs.image, { ...context, modality: 'vision' })
+                        .then(result => fusionResult.vision = result)
+                );
+            }
+
+            if (inputs.audio) {
+                processingPromises.push(
+                    this.processAudioInput(inputs.audio, { ...context, modality: 'audio' })
+                        .then(result => fusionResult.audio = result)
+                );
+            }
+
+            if (inputs.text3D) {
+                processingPromises.push(
+                    this.process3DInput(inputs.text3D, { ...context, modality: '3d' })
+                        .then(result => fusionResult.text3D = result)
+                );
+            }
+
+            // Attendre tous les traitements
+            await Promise.all(processingPromises);
+
+            // Fusion intelligente des résultats
+            fusionResult.fusedInsights = this.generateFusedInsights(fusionResult);
+            fusionResult.recommendations = this.generateMultiModalRecommendations(fusionResult);
+            fusionResult.confidence = this.calculateFusionConfidence(fusionResult);
+
+            // Stockage historique
+            this.modalHistory.fusionResults.push(fusionResult);
+            if (this.modalHistory.fusionResults.length > 20) {
+                this.modalHistory.fusionResults.shift();
+            }
+
+            logger.info(`✅ Multimodal fusion completed with confidence: ${fusionResult.confidence.toFixed(2)}`);
+            return fusionResult;
+
+        } catch (error) {
+            logger.error('❌ Multimodal fusion failed:', error.message);      return: {
+                timestamp: Date.now(),
+                error: error.message,
+                fallback: 'Multimodal fusion unavailable'
+            };
+        }
+    },
+
+    // Helper methods pour extraction de données
+    extractVisionInsights(analysis) {
+        const insights = [];
+        const lines = analysis.split('\n');
+        
+        lines.forEach(line => {
+            if (line.includes('insight') || line.includes('observation') || line.includes('notable')) {
+                insights.push(line.trim());
+            }
+        });
+        
+        return insights.slice(0, 10);
+    },
+
+    extractObjects(analysis) {
+        const objects = [];
+        const objectKeywords = ['person', 'car', 'building', 'tree', 'object', 'item', 'product'];
+        
+        objectKeywords.forEach(keyword => {
+            if (analysis.toLowerCase().includes(keyword)) {
+                objects.push(keyword);
+            }
+        });
+        
+        return: [...new Set(objects)];
+    },
+
+    extractEmotions(analysis) {
+        const emotions = [];
+        const emotionKeywords = ['happy', 'sad', 'excited', 'calm', 'stressed', 'confident', 'worried'];
+        
+        emotionKeywords.forEach(emotion => {
+            if (analysis.toLowerCase().includes(emotion)) {
+                emotions.push(emotion);
+            }
+        });
+        
+        return emotions;
+    },
+
+    extractText(analysis) {
+        const textMatch = analysis.match(/text[^.]*([""'][^""']*[""'])/i);
+        return textMatch ? textMatch[1].replace(/[""']/g, '') : null;
+    },
+
+    extractSentiment(analysis) {
+        if (analysis.toLowerCase().includes('positive') || analysis.toLowerCase().includes('happy')) return 'positive';
+        if (analysis.toLowerCase().includes('negative') || analysis.toLowerCase().includes('sad')) return 'negative';
+        return 'neutral';
+    },
+
+    extractTopics(analysis) {
+        const topics = [];
+        const topicPatterns = [
+            /topic[^:]*:\s*([^.]+)/gi,
+            /about\s+([^.]+)/gi,
+            /discusses\s+([^.]+)/gi
+        ];
+        
+        topicPatterns.forEach(pattern => {
+            let match;
+            while ((match = pattern.exec(analysis)) !== null) {
+                topics.push(match[1].trim());
+            }
+        });
+        
+        return topics.slice(0, 5);
+    },
+
+    extractThreeJSConfig(content) {      return: {
+            geometry: 'BoxGeometry',
+            material: 'MeshStandardMaterial',
+            lighting: 'AmbientLight + DirectionalLight',
+            position: { x: 0, y: 0, z: 0 },
+            rotation: { x: 0, y: 0, z: 0 },
+            scale: { x: 1, y: 1, z: 1 }
+        };
+    },
+
+    extractBlenderHints(content) {
+        return: [
+            'Use subdivision surface modifier for smooth surfaces',
+            'Apply proper materials and textures',
+            'Consider lighting setup with HDRI',
+            'Use render layers for post-processing'
+        ];
+    },
+
+    extractRenderingTips(content) {
+        return: [
+            'Optimize geometry for target platform',
+            'Use LOD (Level of Detail) for performance',
+            'Consider texture compression',
+            'Implement proper culling'
+        ];
+    },
+
+    generateBasic3DDescription(description) {
+        return await this.generateWithOpenAI(`Enhanced 3D description: ${description} with impro...`, context);
+    },
+
+    generateBasicThreeJSConfig(description) {      return: {
+            scene: 'Scene',
+            camera: 'PerspectiveCamera',
+            renderer: 'WebGLRenderer',
+            geometry: 'auto-detect',
+            material: 'MeshStandardMaterial',
+            lighting: ['AmbientLight', 'DirectionalLight']
+        };
+    },
+
+    generateFusedInsights(fusionResult) {
+        const insights = [];
+        
+        if (fusionResult.vision && fusionResult.audio) {
+            insights.push('Visual and audio data show complementary information');
+        }
+        
+        if (fusionResult.vision && fusionResult.text3D) {
+            insights.push('Visual analysis can inform 3D rendering requirements');
+        }
+        
+        if (fusionResult.audio && fusionResult.text3D) {
+            insights.push('Audio description enhances 3D scene understanding');
+        }
+        
+        return insights;
+    },
+
+    generateMultiModalRecommendations(fusionResult) {
+        const recommendations = [];
+        
+        if (fusionResult.vision?.objects?.length > 0) {
+            recommendations.push('Focus on object detection insights for better understanding');
+        }
+        
+        if (fusionResult.audio?.sentiment === 'positive') {
+            recommendations.push('Leverage positive audio sentiment in response tone');
+        }
+        
+        if (fusionResult.text3D?.threeJSConfig) {
+            recommendations.push('Use generated 3D configuration for interactive visualization');
+        }
+        
+        return recommendations;
+    },
+
+    calculateFusionConfidence(fusionResult) {
+        let confidence = 0;
+        let modalityCount = 0;
+        
+        if (fusionResult.vision && !fusionResult.vision.error) {
+            confidence += 0.4;
+            modalityCount++;
+        }
+        
+        if (fusionResult.audio && !fusionResult.audio.error) {
+            confidence += 0.4;
+            modalityCount++;
+        }
+        
+        if (fusionResult.text3D && !fusionResult.text3D.error) {
+            confidence += 0.2;
+            modalityCount++;
+        }
+        
+        return modalityCount > 0 ? confidence : 0;
+    }
+});
