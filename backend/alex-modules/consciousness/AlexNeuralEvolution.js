@@ -13,11 +13,6 @@ export class AlexNeuralEvolution extends EventEmitter {
     this.initialized = false;
     this.db = null;
     
-    // Lazy loading flags
-    this.heavyDataLoaded = false;
-    this.bigModel = null;
-    this.neuralDataset = null;
-    
     // Configuration anti-fake avec injection de dépendances
     this.config = {
       learningVelocity: config.learningVelocity || 0.8,
@@ -78,98 +73,77 @@ export class AlexNeuralEvolution extends EventEmitter {
 
   async initialize() {
     try {
-      logger.info("🔄 AlexNeuralEvolution: Lightweight initialization...");
+      logger.info("Initializing Alex Neural Evolution...");
       
+      // Initialize SQLite database
+      this.db = await open({
+        filename: "./data/neural_evolution.db",
+        driver: sqlite3.Database
+      });
+
+      await this.db.exec(`
+        CREATE TABLE IF NOT EXISTS neural_architectures (
+          id TEXT PRIMARY KEY,
+          generation INTEGER NOT NULL,
+          architecture_data TEXT NOT NULL,
+          fitness_score REAL DEFAULT 0.0,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS evolution_history (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          generation INTEGER NOT NULL,
+          operation_type TEXT NOT NULL,
+          parameters TEXT,
+          fitness_improvement REAL DEFAULT 0.0,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS neural_mutations (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          generation INTEGER NOT NULL,
+          mutation_type TEXT NOT NULL,
+          source_architecture TEXT,
+          result_architecture TEXT,
+          impact_score REAL DEFAULT 0.0,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS adaptation_events (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          trigger_type TEXT NOT NULL,
+          performance_metrics TEXT,
+          adaptation_response TEXT,
+          success_rate REAL DEFAULT 0.0,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS api_evolution_metrics (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          api_provider TEXT NOT NULL,
+          operation TEXT NOT NULL,
+          tokens_used INTEGER DEFAULT 0,
+          response_time_ms INTEGER DEFAULT 0,
+          evolution_impact REAL DEFAULT 0.0,
+          success BOOLEAN DEFAULT 1,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+      `);
+
       this.initialized = true;
-      logger.info("✅ AlexNeuralEvolution: Ready for lazy loading");
-      
-    } catch (error) {
-      logger.error("❌ AlexNeuralEvolution initialization failed:", error);
-      this.initialized = true; // Continue anyway
-    }
-  }
-
-  async ensureModel() {
-    if (this.heavyDataLoaded) {
-      return true; // Already loaded
-    }
-
-    try {
-      logger.info("🧠 AlexNeuralEvolution: Loading heavy neural model...");
-      
-      // Initialize SQLite database only when needed
-      if (!this.db) {
-        this.db = await open({
-          filename: "./data/neural_evolution.db",
-          driver: sqlite3.Database
-        });
-
-        await this.db.exec(`
-          CREATE TABLE IF NOT EXISTS neural_architectures (
-            id TEXT PRIMARY KEY,
-            generation INTEGER NOT NULL,
-            architecture_data TEXT NOT NULL,
-            fitness_score REAL DEFAULT 0.0,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS evolution_history (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            generation INTEGER NOT NULL,
-            operation_type TEXT NOT NULL,
-            parameters TEXT,
-            fitness_improvement REAL DEFAULT 0.0,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS neural_mutations (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            generation INTEGER NOT NULL,
-            mutation_type TEXT NOT NULL,
-            source_architecture TEXT,
-            result_architecture TEXT,
-            impact_score REAL DEFAULT 0.0,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS adaptation_events (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            trigger_type TEXT NOT NULL,
-            performance_metrics TEXT,
-            adaptation_response TEXT,
-            success_rate REAL DEFAULT 0.0,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS api_evolution_metrics (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            api_provider TEXT NOT NULL,
-            operation TEXT NOT NULL,
-            tokens_used INTEGER DEFAULT 0,
-            response_time_ms INTEGER DEFAULT 0,
-            evolution_impact REAL DEFAULT 0.0,
-            success BOOLEAN DEFAULT 1,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-        `);
-      }
-
-      // Load heavy neural model data
       await this.initializeNeuralArchitecture();
       await this.setupEvolutionEngine();
       this.startEvolutionCycle();
       
-      this.heavyDataLoaded = true;
-      logger.info("✅ AlexNeuralEvolution: Heavy model loaded successfully");
-      return true;
+      logger.info("✅ Alex Neural Evolution initialized successfully");
       
     } catch (error) {
-      logger.error("❌ AlexNeuralEvolution model loading failed:", error);
-      return false;
+      logger.error("❌ Failed to initialize Alex Neural Evolution:", error);
+      throw error;
     }
   }
 
@@ -248,37 +222,6 @@ export class AlexNeuralEvolution extends EventEmitter {
       await this.optimizeArchitecture();
       await this.consolidateMemory();
     }, 60000); // Every minute
-  }
-
-  async run(operation = 'evolve', ...args) {
-    if (!this.initialized) {
-      throw new Error('AlexNeuralEvolution not initialized');
-    }
-
-    // Ensure model is loaded before any operations
-    const modelReady = await this.ensureModel();
-    if (!modelReady) {
-      return { success: false, error: 'Failed to load neural model' };
-    }
-
-    switch (operation) {
-      case 'evolve':
-        return await this.evolveNetwork();
-      case 'adapt':
-        return await this.adaptRealTime(args[0], args[1]);
-      case 'generate':
-        return await this.generateNewNeurons(args[0], args[1]);
-      case 'prune':
-        return await this.pruneConnections();
-      case 'optimize':
-        return await this.optimizeArchitecture();
-      case 'consolidate':
-        return await this.consolidateMemory();
-      case 'status':
-        return this.getNeuralEvolutionStatus();
-      default:
-        return { success: false, error: 'Unknown operation' };
-    }
   }
 
   async evolveNetwork() {
@@ -727,26 +670,7 @@ export class AlexNeuralEvolution extends EventEmitter {
     };
   }
 
-  dispose() {
-    // Clear heavy data
-    this.bigModel = null;
-    this.neuralDataset = null;
-    this.heavyDataLoaded = false;
-    
-    // Clear evolution state
-    if (this.evolutionState) {
-      this.evolutionState.neuralArchitecture.clear();
-      this.evolutionState.mutations.clear();
-      this.evolutionState.fitness.clear();
-      this.evolutionState.adaptations = [];
-      this.evolutionState.evolutionHistory = [];
-    }
-
-    logger.info('🗑️ AlexNeuralEvolution: Heavy data disposed');
-  }
-
   async shutdown() {
-    this.dispose();
     if (this.db) {
       await this.db.close();
     }

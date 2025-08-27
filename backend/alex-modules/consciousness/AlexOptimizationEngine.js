@@ -13,11 +13,6 @@ export class AlexOptimizationEngine extends EventEmitter {
     this.initialized = false;
     this.db = null;
     
-    // Lazy loading flags
-    this.heavyDataLoaded = false;
-    this.optimizationModel = null;
-    this.performanceDataset = null;
-    
     // Configuration anti-fake
     this.config = {
       loadThreshold: config.loadThreshold || 0.7,
@@ -54,98 +49,77 @@ export class AlexOptimizationEngine extends EventEmitter {
 
   async initialize() {
     try {
-      logger.info("🔄 AlexOptimizationEngine: Lightweight initialization...");
+      logger.info("Initializing Alex Optimization Engine...");
       
+      // Initialize SQLite database
+      this.db = await open({
+        filename: "./data/optimization_engine.db",
+        driver: sqlite3.Database
+      });
+
+      await this.db.exec(`
+        CREATE TABLE IF NOT EXISTS performance_metrics (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          timestamp INTEGER NOT NULL,
+          response_time REAL DEFAULT 0.0,
+          memory_usage REAL DEFAULT 0.0,
+          accuracy_rate REAL DEFAULT 0.0,
+          user_satisfaction REAL DEFAULT 0.0,
+          throughput REAL DEFAULT 0.0,
+          error_rate REAL DEFAULT 0.0,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS optimization_rules (
+          id TEXT PRIMARY KEY,
+          target_value REAL NOT NULL,
+          action TEXT NOT NULL,
+          priority TEXT DEFAULT 'medium',
+          is_active BOOLEAN DEFAULT 1,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS optimization_results (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          optimization_type TEXT NOT NULL,
+          improvement_percentage REAL DEFAULT 0.0,
+          action_taken TEXT,
+          success BOOLEAN DEFAULT 1,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS user_optimizations (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          user_id TEXT NOT NULL,
+          optimization_data TEXT,
+          efficiency_score REAL DEFAULT 0.0,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS resource_utilization (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          cpu_usage REAL DEFAULT 0.0,
+          memory_usage REAL DEFAULT 0.0,
+          response_time REAL DEFAULT 0.0,
+          efficiency_score REAL DEFAULT 1.0,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+      `);
+
       this.initialized = true;
-      logger.info("✅ AlexOptimizationEngine: Ready for lazy loading");
-      
-    } catch (error) {
-      logger.error("❌ AlexOptimizationEngine initialization failed:", error);
-      this.initialized = true; // Continue anyway
-    }
-  }
-
-  async ensureModel() {
-    if (this.heavyDataLoaded) {
-      return true; // Already loaded
-    }
-
-    try {
-      logger.info("🔧 AlexOptimizationEngine: Loading optimization model...");
-      
-      // Initialize SQLite database only when needed
-      if (!this.db) {
-        this.db = await open({
-          filename: "./data/optimization_engine.db",
-          driver: sqlite3.Database
-        });
-
-        await this.db.exec(`
-          CREATE TABLE IF NOT EXISTS performance_metrics (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            timestamp INTEGER NOT NULL,
-            response_time REAL DEFAULT 0.0,
-            memory_usage REAL DEFAULT 0.0,
-            accuracy_rate REAL DEFAULT 0.0,
-            user_satisfaction REAL DEFAULT 0.0,
-            throughput REAL DEFAULT 0.0,
-            error_rate REAL DEFAULT 0.0,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS optimization_rules (
-            id TEXT PRIMARY KEY,
-            target_value REAL NOT NULL,
-            action TEXT NOT NULL,
-            priority TEXT DEFAULT 'medium',
-            is_active BOOLEAN DEFAULT 1,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS optimization_results (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            optimization_type TEXT NOT NULL,
-            improvement_percentage REAL DEFAULT 0.0,
-            action_taken TEXT,
-            success BOOLEAN DEFAULT 1,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS user_optimizations (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id TEXT NOT NULL,
-            optimization_data TEXT,
-            efficiency_score REAL DEFAULT 0.0,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS resource_utilization (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            cpu_usage REAL DEFAULT 0.0,
-            memory_usage REAL DEFAULT 0.0,
-            response_time REAL DEFAULT 0.0,
-            efficiency_score REAL DEFAULT 1.0,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-        `);
-      }
-
-      // Load optimization rules and start continuous optimization
       await this.setupOptimizationRules();
       this.startContinuousOptimization();
       
-      this.heavyDataLoaded = true;
-      logger.info("✅ AlexOptimizationEngine: Model loaded successfully");
-      return true;
+      logger.info("✅ Alex Optimization Engine initialized successfully");
       
     } catch (error) {
-      logger.error("❌ AlexOptimizationEngine model loading failed:", error);
-      return false;
+      logger.error("❌ Failed to initialize Alex Optimization Engine:", error);
+      throw error;
     }
   }
 
@@ -173,32 +147,6 @@ export class AlexOptimizationEngine extends EventEmitter {
     setInterval(async () => {
       await this.runOptimizationCycle();
     }, 30000); // Every 30 seconds
-  }
-
-  async run(operation = 'optimize', ...args) {
-    if (!this.initialized) {
-      throw new Error('AlexOptimizationEngine not initialized');
-    }
-
-    // Ensure model is loaded before any operations
-    const modelReady = await this.ensureModel();
-    if (!modelReady) {
-      return { success: false, error: 'Failed to load optimization model' };
-    }
-
-    switch (operation) {
-      case 'optimize':
-      case 'cycle':
-        return await this.runOptimizationCycle();
-      case 'report':
-        return await this.generateOptimizationReport();
-      case 'user':
-        return await this.optimizeForUser(args[0], args[1]);
-      case 'stats':
-        return await this.getOptimizationStats();
-      default:
-        return { success: false, error: 'Unknown operation' };
-    }
   }
 
   async runOptimizationCycle() {
@@ -604,26 +552,7 @@ export class AlexOptimizationEngine extends EventEmitter {
     };
   }
 
-  dispose() {
-    // Clear heavy data
-    this.optimizationModel = null;
-    this.performanceDataset = null;
-    this.heavyDataLoaded = false;
-    
-    // Clear optimization state
-    if (this.performanceMetrics) {
-      this.performanceMetrics.clear();
-    }
-    if (this.optimizationRules) {
-      this.optimizationRules.clear();
-    }
-    this.improvementSuggestions = [];
-
-    logger.info('🗑️ AlexOptimizationEngine: Heavy data disposed');
-  }
-
   async shutdown() {
-    this.dispose();
     if (this.db) {
       await this.db.close();
     }

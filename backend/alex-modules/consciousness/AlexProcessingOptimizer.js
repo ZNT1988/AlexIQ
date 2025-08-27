@@ -13,11 +13,6 @@ export class AlexProcessingOptimizer extends EventEmitter {
     this.initialized = false;
     this.db = null;
     
-    // Lazy loading flags
-    this.heavyDataLoaded = false;
-    this.processingModel = null;
-    this.optimizationDataset = null;
-    
     // Configuration anti-fake
     this.config = {
       efficiency: config.efficiency || 0.9,
@@ -99,103 +94,82 @@ export class AlexProcessingOptimizer extends EventEmitter {
 
   async initialize() {
     try {
-      logger.info("🔄 AlexProcessingOptimizer: Lightweight initialization...");
+      logger.info("Initializing Alex Processing Optimizer...");
       
+      // Initialize SQLite database
+      this.db = await open({
+        filename: "./data/processing_optimizer.db",
+        driver: sqlite3.Database
+      });
+
+      await this.db.exec(`
+        CREATE TABLE IF NOT EXISTS performance_metrics (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          timestamp INTEGER NOT NULL,
+          cpu_usage REAL DEFAULT 0.0,
+          memory_usage REAL DEFAULT 0.0,
+          response_time REAL DEFAULT 0.0,
+          throughput REAL DEFAULT 0.0,
+          error_rate REAL DEFAULT 0.0,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS cache_statistics (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          level TEXT NOT NULL,
+          hits INTEGER DEFAULT 0,
+          misses INTEGER DEFAULT 0,
+          evictions INTEGER DEFAULT 0,
+          size INTEGER DEFAULT 0,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS load_balancing_stats (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          current_load INTEGER DEFAULT 0,
+          max_capacity INTEGER DEFAULT 1000,
+          utilization REAL DEFAULT 0.0,
+          queue_sizes TEXT,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS resource_pools (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          pool_name TEXT NOT NULL,
+          pool_size INTEGER DEFAULT 0,
+          used_resources INTEGER DEFAULT 0,
+          available_resources INTEGER DEFAULT 0,
+          efficiency REAL DEFAULT 0.0,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS optimization_events (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          optimization_type TEXT NOT NULL,
+          trigger_reason TEXT,
+          impact TEXT,
+          success BOOLEAN DEFAULT 1,
+          system_metrics TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+      `);
+
       this.initialized = true;
-      logger.info("✅ AlexProcessingOptimizer: Ready for lazy loading");
-      
-    } catch (error) {
-      logger.error("❌ AlexProcessingOptimizer initialization failed:", error);
-      this.initialized = true; // Continue anyway
-    }
-  }
-
-  async ensureModel() {
-    if (this.heavyDataLoaded) {
-      return true; // Already loaded
-    }
-
-    try {
-      logger.info("🚀 AlexProcessingOptimizer: Loading processing model...");
-      
-      // Initialize SQLite database only when needed
-      if (!this.db) {
-        this.db = await open({
-          filename: "./data/processing_optimizer.db",
-          driver: sqlite3.Database
-        });
-
-        await this.db.exec(`
-          CREATE TABLE IF NOT EXISTS performance_metrics (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            timestamp INTEGER NOT NULL,
-            cpu_usage REAL DEFAULT 0.0,
-            memory_usage REAL DEFAULT 0.0,
-            response_time REAL DEFAULT 0.0,
-            throughput REAL DEFAULT 0.0,
-            error_rate REAL DEFAULT 0.0,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS cache_statistics (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            level TEXT NOT NULL,
-            hits INTEGER DEFAULT 0,
-            misses INTEGER DEFAULT 0,
-            evictions INTEGER DEFAULT 0,
-            size INTEGER DEFAULT 0,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS load_balancing_stats (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            current_load INTEGER DEFAULT 0,
-            max_capacity INTEGER DEFAULT 1000,
-            utilization REAL DEFAULT 0.0,
-            queue_sizes TEXT,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS resource_pools (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            pool_name TEXT NOT NULL,
-            pool_size INTEGER DEFAULT 0,
-            used_resources INTEGER DEFAULT 0,
-            available_resources INTEGER DEFAULT 0,
-            efficiency REAL DEFAULT 0.0,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-
-          CREATE TABLE IF NOT EXISTS optimization_events (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            optimization_type TEXT NOT NULL,
-            trigger_reason TEXT,
-            impact TEXT,
-            success BOOLEAN DEFAULT 1,
-            system_metrics TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-          );
-        `);
-      }
-
-      // Load heavy processing components
       await this.setupPerformanceMonitoring();
       await this.initializeIntelligentCache();
       await this.configureLoadBalancing();
       await this.startResourceOptimization();
       await this.initializeLoadPrediction();
       
-      this.heavyDataLoaded = true;
-      logger.info("✅ AlexProcessingOptimizer: Model loaded successfully");
-      return true;
+      logger.info("✅ Alex Processing Optimizer initialized successfully");
       
     } catch (error) {
-      logger.error("❌ AlexProcessingOptimizer model loading failed:", error);
-      return false;
+      logger.error("❌ Failed to initialize Alex Processing Optimizer:", error);
+      throw error;
     }
   }
 
@@ -203,36 +177,6 @@ export class AlexProcessingOptimizer extends EventEmitter {
     setInterval(async () => {
       await this.collectPerformanceMetrics();
     }, 30000); // Every 30 seconds
-  }
-
-  async run(operation = 'optimize', ...args) {
-    if (!this.initialized) {
-      throw new Error('AlexProcessingOptimizer not initialized');
-    }
-
-    // Ensure model is loaded before any operations
-    const modelReady = await this.ensureModel();
-    if (!modelReady) {
-      return { success: false, error: 'Failed to load processing model' };
-    }
-
-    switch (operation) {
-      case 'optimize':
-      case 'collect':
-        return await this.collectPerformanceMetrics();
-      case 'cache':
-        return await this.getCache(args[0]);
-      case 'setCache':
-        return await this.setCache(args[0], args[1], args[2]);
-      case 'report':
-        return this.generateOptimizationReport();
-      case 'suggestions':
-        return await this.getOptimizationSuggestions();
-      case 'stats':
-        return await this.getProcessingStats();
-      default:
-        return { success: false, error: 'Unknown operation' };
-    }
   }
 
   async collectPerformanceMetrics() {
@@ -1001,33 +945,7 @@ export class AlexProcessingOptimizer extends EventEmitter {
     };
   }
 
-  dispose() {
-    // Clear heavy data
-    this.processingModel = null;
-    this.optimizationDataset = null;
-    this.heavyDataLoaded = false;
-    
-    // Clear processing state
-    if (this.intelligentCache) {
-      this.intelligentCache.level1.clear();
-      this.intelligentCache.level2.clear();
-      this.intelligentCache.level3.clear();
-    }
-    if (this.loadBalancer) {
-      this.loadBalancer.queues.high = [];
-      this.loadBalancer.queues.medium = [];
-      this.loadBalancer.queues.low = [];
-    }
-    if (this.resourceOptimizer) {
-      this.resourceOptimizer.pools.clear();
-      this.resourceOptimizer.allocations.clear();
-    }
-
-    logger.info('🗑️ AlexProcessingOptimizer: Heavy data disposed');
-  }
-
   async shutdown() {
-    this.dispose();
     if (this.db) {
       await this.db.close();
     }
