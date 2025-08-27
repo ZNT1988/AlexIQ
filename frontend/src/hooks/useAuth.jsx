@@ -23,106 +23,57 @@ export const AuthProvider = ({ children }) => {
       
       setUser(demoUser);
       setLoading(false);
-      return;
       
-      /* ORIGINAL AUTH CODE - Re-enable when backend ready
-      const token = localStorage.getItem('auth_token');
-      if (!token) {
-        setLoading(false);
-        return;
-      }
-
-      // Verify token with backend
-      const response = await fetch('/api/auth/verify', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-
-      if (response.ok) {
-        const userData = await response.json();
-        setUser(userData.user);
-      */
-      } else {
-        localStorage.removeItem('auth_token');
-      }
     } catch (error) {
       console.error('Auth check failed:', error);
-      localStorage.removeItem('auth_token');
-    } finally {
+      setUser(null);
       setLoading(false);
     }
   };
 
   const login = async (email, password) => {
+    // 🚀 DEMO MODE: Simulate login success
     setLoading(true);
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('auth_token', data.token);
-        setUser(data.user);
-        return { success: true };
-      } else {
-        const error = await response.json();
-        return { success: false, error: error.message };
-      }
-    } catch (error) {
-      return { success: false, error: 'Connection error' };
-    } finally {
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      const demoUser = {
+        id: 'demo-user',
+        email: email,
+        name: 'Demo User',
+        role: 'user'
+      };
+      
+      setUser(demoUser);
+      localStorage.setItem('auth_token', 'demo-token');
       setLoading(false);
+      return { success: true, user: demoUser };
+      
+    } catch (error) {
+      console.error('Login failed:', error);
+      setLoading(false);
+      return { success: false, error: 'Login failed' };
     }
   };
 
-  const register = async (name, email, password) => {
-    setLoading(true);
-    try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, email, password })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('auth_token', data.token);
-        setUser(data.user);
-        return { success: true };
-      } else {
-        const error = await response.json();
-        return { success: false, error: error.message };
-      }
-    } catch (error) {
-      return { success: false, error: 'Connection error' };
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const logout = () => {
-    localStorage.removeItem('auth_token');
+  const logout = async () => {
     setUser(null);
+    localStorage.removeItem('auth_token');
   };
 
   const value = {
     user,
     loading,
     login,
-    register,
-    logout,
-    checkAuth
+    logout
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {
