@@ -12,6 +12,20 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuth = async () => {
     try {
+      // 🚀 DEMO MODE: Bypass auth temporarily 
+      // TODO: Remove this when backend auth is implemented
+      const demoUser = {
+        id: 'demo-user',
+        email: 'demo@alexiq.site', 
+        name: 'Demo User',
+        role: 'user'
+      };
+      
+      setUser(demoUser);
+      setLoading(false);
+      return;
+      
+      /* ORIGINAL AUTH CODE - Re-enable when backend ready
       const token = localStorage.getItem('auth_token');
       if (!token) {
         setLoading(false);
@@ -28,6 +42,7 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const userData = await response.json();
         setUser(userData.user);
+      */
       } else {
         localStorage.removeItem('auth_token');
       }
