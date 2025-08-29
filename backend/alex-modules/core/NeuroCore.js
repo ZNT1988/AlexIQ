@@ -2,6 +2,24 @@ import { EventEmitter } from 'events';
 import crypto from 'crypto';
 import logger from '../../config/logger.js';
 
+// Memory management defaults for OOM prevention
+const MEMORY_DEFAULTS = {
+  intervalMs: 5000,                    // cycle de pensée
+  softLimitMB: 256,                   // prune dès qu'on dépasse  
+  hardLimitMB: 384,                   // coupe l'apprentissage
+  maxItems: {
+    shortTerm: 300,                   // bornes strictes mémoire court terme
+    longTerm: 100,                    // bornes strictes mémoire long terme  
+    patterns: 200,                    // bornes patterns
+    connections: 1000,                // bornes connexions
+    neurons: 500                      // bornes neurones par couche
+  },
+  ttlMs: {
+    shortTerm: 5 * 60 * 1000,        // 5min TTL mémoire courte
+    patterns: 10 * 60 * 1000,        // 10min TTL patterns
+  },
+};
+
 /**
  * NeuroCore - Module Alex IA Core Neural
  * Intelligence authentique - 0% fake AI - 100% logique dynamique
@@ -13,12 +31,18 @@ class NeuroCore extends EventEmitter {
     super();
     this.config = {
       name: 'NeuroCore',
-      type: 'core',
+      type: 'core', 
       version: '3.0.0',
       authentic: true,
       neural: true,
+      ...MEMORY_DEFAULTS,
       ...config
     };
+    
+    // Memory management flags
+    this._isStopping = false;
+    this._intervals = [];
+    this._memoryGuardActive = true;
     this.state = {
       initialized: false,
       active: false,
@@ -36,12 +60,20 @@ class NeuroCore extends EventEmitter {
       activations: new Map(),
       backpropagation: new Map()
     };
-    // Mémoire neuronale dynamique
+    // Mémoire neuronale dynamique (avec limites)
     this.neuralMemory = {
       shortTerm: new Map(),
       longTerm: new Map(),
       patterns: new Map(),
       associations: new Map()
+    };
+    
+    // Métriques de gestion mémoire
+    this.memoryMetrics = {
+      cycles: 0,
+      prunes: 0,
+      lastPruneReason: null,
+      lastMemoryCheck: Date.now()
     };
     // Capacités de traitement neuronal
     this.neuralCapabilities = {
@@ -63,19 +95,28 @@ class NeuroCore extends EventEmitter {
   }
 
   async initialize() {
+    if (this.state.initialized) return { success: true, initialized: true };
+    
     try {
+      this._isStopping = false;
       this.state.initialized = true;
       this.state.active = true;
       this.state.lastUpdate = Date.now();
+      
       await this.setupModule();
       await this.initializeNeuralNetwork();
       await this.bootstrapNeuralActivity();
+      
+      // Start memory guard cycle
+      this._startMemoryGuard();
+      
       this.emit('module-ready', {
         name: this.config.name,
         type: this.config.type,
         neuralActivity: this.state.neuralActivity,
         timestamp: Date.now()
       });
+      
       logger.info(`✅ ${this.config.name} - Réseau neuronal initialisé avec succès`);
       return {
         success: true,
@@ -799,9 +840,11 @@ class NeuroCore extends EventEmitter {
   }
 
   getStatus() {
+    const memUsage = process.memoryUsage();
+    
     return {
-      name: this.config.name,
-      type: this.config.type,
+      module: this.config.name,
+      version: this.config.version,
       initialized: this.state.initialized,
       active: this.state.active,
       uptime: Date.now() - (this.state.lastUpdate - 1000),
@@ -819,23 +862,119 @@ class NeuroCore extends EventEmitter {
           .reduce((total, layer) => total + layer.neurons.length, 0)
       },
       memory: {
+        heapUsedMB: Math.round(memUsage.heapUsed / 1024 / 1024),
+        rssMB: Math.round(memUsage.rss / 1024 / 1024),
         shortTerm: this.neuralMemory.shortTerm.size,
         longTerm: this.neuralMemory.longTerm.size,
-        patterns: this.neuralMemory.patterns.size
-      }
+        patterns: this.neuralMemory.patterns.size,
+        associations: this.neuralMemory.associations.size
+      },
+      memoryMetrics: this.memoryMetrics,
+      intervals: this._intervals.length
     };
   }
 
   async stop() {
-    if (this._isStopping) return;
+    if (this._isStopping) return { stopped: true };
     this._isStopping = true;
+    
+    // Clear all intervals
+    this._intervals.forEach(clearInterval);
+    this._intervals = [];
     
     this.state.active = false;
     this.state.initialized = false;
     
-    // Clear neural memory to prevent memory leaks
+    // Deep memory cleanup to prevent OOM
+    this._deepMemoryCleanup();
+    
+    this.emit('module-shutdown', { 
+      name: this.config.name,
+      finalNeuralActivity: this.state.neuralActivity,
+      finalCapabilities: this.neuralCapabilities,
+      memoryMetrics: this.memoryMetrics
+    });
+    
+    logger.info(`🔄 ${this.config.name} - Réseau neuronal arrêté avec activité finale: ${this.state.neuralActivity.toFixed(3)}`);
+    return { stopped: true };
+  }
+
+  async shutdown() {
+    await this.stop();
+  }
+
+  // ========== MEMORY MANAGEMENT METHODS ==========
+  
+  _startMemoryGuard() {
+    if (!this._memoryGuardActive) return;
+    
+    const guardInterval = setInterval(() => {
+      if (this._isStopping) return;
+      this._memoryGuardCheck();
+      this.memoryMetrics.cycles++;
+    }, this.config.intervalMs);
+    
+    this._intervals.push(guardInterval);
+    logger.info(`🛡️ ${this.config.name} - Memory guard activ\u00e9`);
+  }
+
+  _memoryGuardCheck() {
+    const memUsage = process.memoryUsage();
+    const heapUsedMB = Math.round(memUsage.heapUsed / 1024 / 1024);
+    this.memoryMetrics.lastMemoryCheck = Date.now();
+
+    // Soft limit: light pruning
+    if (heapUsedMB >= this.config.softLimitMB) {
+      this._lightPrune('soft_limit');
+      logger.info(`⚠️  ${this.config.name} - Soft limit atteinte: ${heapUsedMB}MB`);
+    }
+
+    // Hard limit: aggressive cleanup
+    if (heapUsedMB >= this.config.hardLimitMB) {
+      this._hardBrake('hard_limit');
+      logger.warn(`🔴 ${this.config.name} - Hard limit atteinte: ${heapUsedMB}MB - arr\u00eat apprentissage`);
+    }
+  }
+
+  _lightPrune(reason = 'maintenance') {
+    // Trim neural memory collections
+    this._trimMap(this.neuralMemory.shortTerm, this.config.maxItems.shortTerm);
+    this._trimMap(this.neuralMemory.longTerm, this.config.maxItems.longTerm); 
+    this._trimMap(this.neuralMemory.patterns, this.config.maxItems.patterns);
+    
+    // TTL cleanup
+    this._pruneTTL(this.neuralMemory.shortTerm, this.config.ttlMs.shortTerm);
+    this._pruneTTL(this.neuralMemory.patterns, this.config.ttlMs.patterns);
+    
+    this.memoryMetrics.prunes++;
+    this.memoryMetrics.lastPruneReason = reason;
+    
+    logger.info(`🧹 ${this.config.name} - Light prune effectu\u00e9: ${reason}`);
+  }
+
+  _hardBrake(reason = 'emergency') {
+    // Stop learning cycles immediately  
+    this._intervals.forEach(clearInterval);
+    this._intervals = [];
+    
+    // Aggressive cleanup
+    this._trimMap(this.neuralMemory.shortTerm, Math.floor(this.config.maxItems.shortTerm / 2));
+    this._trimMap(this.neuralMemory.longTerm, Math.floor(this.config.maxItems.longTerm / 2));
+    this._trimMap(this.neuralMemory.patterns, Math.floor(this.config.maxItems.patterns / 2));
+    
+    // Clear associations completely (can be rebuilt)
+    this.neuralMemory.associations.clear();
+    
+    this.memoryMetrics.prunes++;
+    this.memoryMetrics.lastPruneReason = reason;
+    
+    logger.warn(`🛑 ${this.config.name} - Hard brake effectu\u00e9: ${reason} - red\u00e9marrage manuel requis`);
+  }
+
+  _deepMemoryCleanup() {
+    // Complete cleanup for stop()
     this.neuralMemory.shortTerm.clear();
-    this.neuralMemory.longTerm.clear();
+    this.neuralMemory.longTerm.clear(); 
     this.neuralMemory.patterns.clear();
     this.neuralMemory.associations.clear();
     
@@ -846,17 +985,45 @@ class NeuroCore extends EventEmitter {
     this.neuralArchitecture.activations.clear();
     this.neuralArchitecture.backpropagation.clear();
     
-    this.emit('module-shutdown', { 
-      name: this.config.name,
-      finalNeuralActivity: this.state.neuralActivity,
-      finalCapabilities: this.neuralCapabilities
-    });
-    
-    logger.info(`🔄 ${this.config.name} - Réseau neuronal arrêté avec activité finale: ${this.state.neuralActivity.toFixed(3)}`);
+    logger.info(`🧽 ${this.config.name} - Deep memory cleanup effectu\u00e9`);
   }
 
-  async shutdown() {
-    await this.stop();
+  _trimMap(map, maxSize) {
+    if (!map || typeof map.size !== 'number') return;
+    if (map.size <= maxSize) return;
+    
+    const toDelete = map.size - maxSize;
+    const keys = Array.from(map.keys());
+    
+    // Delete oldest entries (assuming insertion order)
+    for (let i = 0; i < toDelete; i++) {
+      map.delete(keys[i]);
+    }
+  }
+
+  _pruneTTL(map, ttlMs) {
+    if (!map || !ttlMs) return;
+    const now = Date.now();
+    
+    for (const [key, value] of map.entries()) {
+      if (value && value.timestamp && (now - value.timestamp) > ttlMs) {
+        map.delete(key);
+      }
+    }
+  }
+
+  // Manual restart method for after hard brake
+  async restart() {
+    if (!this._isStopping && this._intervals.length > 0) {
+      logger.info(`${this.config.name} - D\u00e9j\u00e0 actif`);
+      return { restarted: false, reason: 'already_active' };
+    }
+    
+    this._isStopping = false;
+    this._startMemoryGuard();
+    
+    logger.info(`\ud83d\udd04 ${this.config.name} - Red\u00e9marrage manuel effectu\u00e9`);
+    return { restarted: true };
   }
 }
 
