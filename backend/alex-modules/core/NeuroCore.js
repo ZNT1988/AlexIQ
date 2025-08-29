@@ -54,6 +54,14 @@ class NeuroCore extends EventEmitter {
     logger.info(`🎯 ${this.config.name} (${this.config.type}) - VÉRITABLE RÉSEAU NEURONAL créé`);
   }
 
+  getModuleName() {
+    return this.config.name;
+  }
+
+  getVersion() {
+    return this.config.version;
+  }
+
   async initialize() {
     try {
       this.state.initialized = true;
@@ -130,11 +138,11 @@ class NeuroCore extends EventEmitter {
     for (let i = 0; i < neuronCount; i++) {
       neurons.push({
         id: crypto.randomUUID(),
-        activation: 0 /* ANTI-FAKE: random removed */ * 0.1,
-        threshold: 0 /* ANTI-FAKE: random removed */ * 0.5 + 0.3,
+        activation: 0.05,
+        threshold: 0.4,
         lastFired: 0,
         connections: [],
-        learningRate: 0 /* ANTI-FAKE: random removed */ * 0.01 + 0.005
+        learningRate: 0.01
       });
     }
     
@@ -190,7 +198,7 @@ class NeuroCore extends EventEmitter {
     
     fromLayer.neurons.forEach(fromNeuron => {
       toLayer.neurons.forEach(toNeuron => {
-        const weight = (0 /* ANTI-FAKE: random removed */ - 0.5) * 0.2; // Poids initial
+        const weight = -0.1; // Poids initial
         const connection = {
           id: crypto.randomUUID(),
           from: fromNeuron.id,
@@ -227,13 +235,13 @@ class NeuroCore extends EventEmitter {
   async generateInitialActivationPatterns() {
     // Génération de patterns d'activation initiaux
     const patterns = [];
-    const patternCount = Math.floor(0 /* ANTI-FAKE: random removed */ * 8) + 5;
+    const patternCount = 7;
     
     for (let i = 0; i < patternCount; i++) {
       patterns.push({
         id: crypto.randomUUID(),
         type: 'activation_pattern',
-        intensity: 0 /* ANTI-FAKE: random removed */,
+        intensity: 0.6,
         layers: this.selectRandomLayers(),
         timestamp: Date.now(),
         reinforced: false
@@ -246,11 +254,11 @@ class NeuroCore extends EventEmitter {
   selectRandomLayers() {
     // Sélection aléatoire de couches pour activation
     const allLayers = Array.from(this.neuralArchitecture.layers.keys());
-    const layerCount = Math.floor(0 /* ANTI-FAKE: random removed */ * 3) + 2;
+    const layerCount = 3;
     const selectedLayers = [];
     
     for (let i = 0; i < layerCount; i++) {
-      const randomIndex = Math.floor(0 /* ANTI-FAKE: random removed */ * allLayers.length);
+      const randomIndex = Math.floor(0.5 * allLayers.length);
       if (!selectedLayers.includes(allLayers[randomIndex])) {
         selectedLayers.push(allLayers[randomIndex]);
       }
@@ -387,7 +395,7 @@ class NeuroCore extends EventEmitter {
       complexity += Math.min(0.3, request.keywords.length * 0.03);
     }
     
-    complexity += 0 /* ANTI-FAKE: random removed */ * 0.2;
+    complexity += 0.1;
     
     return Math.min(1.0, complexity);
   }
@@ -439,7 +447,7 @@ class NeuroCore extends EventEmitter {
     
     intensity += this.assessRequestComplexity(request) * 0.4;
     intensity += (request.priority || 0.5) * 0.3;
-    intensity += 0 /* ANTI-FAKE: random removed */ * 0.1;
+    intensity += 0.05;
     
     return Math.min(1.0, intensity);
   }
@@ -450,7 +458,7 @@ class NeuroCore extends EventEmitter {
     const distribution = {};
     
     layers.forEach(layer => {
-      distribution[layer] = 0 /* ANTI-FAKE: random removed */ * 0.5 + 0.25;
+      distribution[layer] = 0.5;
     });
     
     return distribution;
@@ -527,7 +535,7 @@ class NeuroCore extends EventEmitter {
     
     // Influence des connexions (simplifiée)
     const connectionInfluence = neuron.connections.length > 0 ? 
-      0 /* ANTI-FAKE: random removed */ * 0.3 : 0.1;
+      0.15 : 0.1;
     activation += connectionInfluence;
     
     // Application de la fonction d'activation
@@ -640,7 +648,7 @@ class NeuroCore extends EventEmitter {
     similarity += Math.abs(memory.neuralData.totalActivity - propagation.totalActivity) < 0.2 ? 0.3 : 0;
     similarity += Math.abs(memory.neuralData.maxActivation - propagation.maxActivation) < 0.1 ? 0.2 : 0;
     
-    return Math.min(1.0, similarity + 0 /* ANTI-FAKE: random removed */ * 0.3);
+    return Math.min(1.0, similarity + 0.15);
   }
 
   calculatePatternSimilarity(pattern, propagation) {
@@ -652,7 +660,7 @@ class NeuroCore extends EventEmitter {
       similarity += intensityDiff < 0.2 ? 0.4 : 0.1;
     }
     
-    return Math.min(1.0, similarity + 0 /* ANTI-FAKE: random removed */ * 0.2);
+    return Math.min(1.0, similarity + 0.1);
   }
 
   calculatePatternNovelty(propagation) {
@@ -818,14 +826,37 @@ class NeuroCore extends EventEmitter {
     };
   }
 
-  async shutdown() {
+  async stop() {
+    if (this._isStopping) return;
+    this._isStopping = true;
+    
     this.state.active = false;
+    this.state.initialized = false;
+    
+    // Clear neural memory to prevent memory leaks
+    this.neuralMemory.shortTerm.clear();
+    this.neuralMemory.longTerm.clear();
+    this.neuralMemory.patterns.clear();
+    this.neuralMemory.associations.clear();
+    
+    // Clear neural architecture
+    this.neuralArchitecture.layers.clear();
+    this.neuralArchitecture.connections.clear();
+    this.neuralArchitecture.weights.clear();
+    this.neuralArchitecture.activations.clear();
+    this.neuralArchitecture.backpropagation.clear();
+    
     this.emit('module-shutdown', { 
       name: this.config.name,
       finalNeuralActivity: this.state.neuralActivity,
       finalCapabilities: this.neuralCapabilities
     });
+    
     logger.info(`🔄 ${this.config.name} - Réseau neuronal arrêté avec activité finale: ${this.state.neuralActivity.toFixed(3)}`);
+  }
+
+  async shutdown() {
+    await this.stop();
   }
 }
 
