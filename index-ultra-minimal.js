@@ -1,516 +1,309 @@
-import 'dotenv/config';                // ✅ dotenv chargé UNE SEULE FOIS ici
+// index-ultra-minimal.js - Ultra-minimal Safe Boot API for Railway production
+// Uses only Node.js built-in modules to avoid dependency issues
+import http from 'http';
 
-// ESM – Front (Vite en dev / build en prod) + API réelles sur UN SEUL PORT.
-// Node >= 18 - Updated for Railway deploy
-// npm i express vite cors compression
+// Simple logger (no external deps for safe boot)
+const log = {
+  info: (...args) => console.log('[INFO]', new Date().toISOString(), ...args),
+  warn: (...args) => console.warn('[WARN]', new Date().toISOString(), ...args),
+  error: (...args) => console.error('[ERROR]', new Date().toISOString(), ...args),
+  debug: (...args) => console.debug('[DEBUG]', new Date().toISOString(), ...args)
+};
 
-import express from "express";
-import cors from "cors";
-import path from "path";
-import fs from "fs/promises";
-import crypto from "crypto";
-import { fileURLToPath } from "url";
+const PORT = process.env.PORT || 3000;
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+// Safe boot configuration from environment
+const BOOT_MINIMAL = (process.env.ALEX_BOOT_MODE || '').toLowerCase() === 'minimal';
+const ENABLE_NEUROCORE = /^true$/i.test(process.env.ALEX_ENABLE_NEUROCORE || 'false');
+const ENABLE_EVOLUTION = /^true$/i.test(process.env.ALEX_ENABLE_EVOLUTION || 'false');
+const ENABLE_BACKGROUND = /^true$/i.test(process.env.ALEX_ENABLE_BACKGROUND || 'false');
 
-const PORT = Number(process.env.PORT || 3000);
-const NODE_ENV = process.env.NODE_ENV || "development";
-const CREATOR = process.env.HF_OWNER_NAME || "Zakaria Housni (ZNT)";
-console.log('🔍 DEBUG Railway - PORT env var:', process.env.PORT);
-console.log('🔍 DEBUG Railway - Final PORT:', PORT);
-const app = express();
-
-// ====== ALEX ORCHESTRATOR - BYPASS MODE ======
-console.log('⚡ Alex Orchestrator in bypass mode (avoiding path-to-regexp crash)');
-let alexMounted = false;
-// Temporarily disabled due to path-to-regexp error: 
-// Alex modules will be available via direct API calls
-
-// ====== ENV HELPERS ======
-const env = (k, ...aliases) => process.env[k] ?? aliases.map(a => process.env[a]).find(Boolean) ?? null;
-
-const OPENAI_API_KEY = env("OPENAI_API_KEY");
-const ANTHROPIC_API_KEY = env("ANTHROPIC_API_KEY");
-const GOOGLE_API_KEY = env("GOOGLE_API_KEY");
-const GOOGLE_PROJECT_ID = env("GOOGLE_PROJECT_ID");
-const GOOGLE_LOCATION = env("GOOGLE_LOCATION") || "us-central1";
-const GOOGLE_VERTEX_MODEL = env("GOOGLE_VERTEX_MODEL") || "gemini-1.5-pro";
-const GOOGLE_APPLICATION_CREDENTIALS_JSON = env("GOOGLE_APPLICATION_CREDENTIALS_JSON");
-
-// ====== Helpers ======
-async function googleAccessTokenFromServiceAccount(saJson) {
-  let creds;
-  try { creds = JSON.parse(saJson); } catch { throw new Error("Invalid GOOGLE_APPLICATION_CREDENTIALS_JSON"); }
-  const now = Math.floor(Date.now() / 1000);
-  const header = { alg: "RS256", typ: "JWT" };
-  const claims = {
-    iss: creds.client_email,
-    scope: "https://www.googleapis.com/auth/cloud-platform",
-    aud: "https://oauth2.googleapis.com/token",
-    iat: now,
-    exp: now + 3600,
-  };
-  const b64 = (o) => Buffer.from(JSON.stringify(o)).toString("base64url");
-  const toSign = `${b64(header)}.${b64(claims)}`;
-  const signer = crypto.createSign("RSA-SHA256");
-  signer.update(toSign);
-  const signature = signer.sign(creds.private_key, "base64url");
-  const assertion = `${toSign}.${signature}`;
-
-  const resp = await fetch("https://oauth2.googleapis.com/token", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams({ grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", assertion }),
-  });
-  if (!resp.ok) throw new Error(`GCP token error: ${await resp.text()}`);
-  const data = await resp.json();
-  return data.access_token;
-}
-
-// ====== Middlewares ======
-app.use(cors({
-  origin: NODE_ENV === "production"
-    ? process.env.CORS_ORIGIN?.split(",") ?? ["https://alexiq.site", "https://www.alexiq.site"]
-    : ["http://localhost:5173", "http://localhost:5174", "http://localhost:3000"],
-  credentials: true
-}));
-
-app.use(express.json({ strict: true, limit: "2mb", type: "application/json" }));
-app.use((err, _req, res, next) => {
-  if (err?.type === "entity.parse.failed" || err instanceof SyntaxError) {
-    return res.status(400).json({ error: "invalid_json", message: "Malformed JSON body" });
-  }
-  next(err);
-});
-
-// ====== ROOT ENDPOINT FOR RAILWAY HEALTH CHECK ======
-app.get('/', (req, res) => {
-  res.json({
-    service: 'HustleFinder IA API',
-    status: 'Active',
-    timestamp: Date.now(),
-    port: PORT,
-    creator: CREATOR,
-    node_env: NODE_ENV
-  });
-});
-
-// ====== API ======
-app.get("/api/health", (_req, res) => {
-  res.json({ 
-    ok: true, 
-    service: "Chat IA Simple - Proxy vers APIs officielles",
-    env: NODE_ENV, 
-    port: PORT, 
-    providers: {
-      openai: !!OPENAI_API_KEY,
-      anthropic: !!ANTHROPIC_API_KEY,
-      vertex: !!(GOOGLE_APPLICATION_CREDENTIALS_JSON && GOOGLE_PROJECT_ID),
-      gemini: !!GOOGLE_API_KEY
-    },
-    ts: Date.now() 
-  });
-});
-
-app.get("/api/whoami", (_req, res) => {
-  res.json({
-    creator: CREATOR,
-    providers: { 
-      openai: !!OPENAI_API_KEY, 
-      anthropic: !!ANTHROPIC_API_KEY,
-      vertex: !!(GOOGLE_APPLICATION_CREDENTIALS_JSON && GOOGLE_PROJECT_ID),
-      gemini: !!GOOGLE_API_KEY
-    }
-  });
-});
-
-app.get("/api/alex/status", (_req, res) => {
-  res.json({ 
-    ok: true, 
-    orchestrator: false, 
-    message: "Alex en mode apprentissage APIs" 
-  });
-});
-
-// ====== CHAT HYBRIDE - Alex + APIs de fallback ======
-app.post("/api/chat", async (req, res) => {
-  try {
-    const { message, useAlex = true } = req.body || {};
-    if (!message || typeof message !== "string") {
-      return res.status(400).json({ error: "bad_request", message: "message:string requis" });
-    }
-
-    // PRIORITÉ 1: Alex Orchestrator (IA authentique avec tous les modules)
-    if (useAlex) {
-      try {
-        // Utiliser l'API Alex orchestrée
-        const alexResponse = await fetch(`http://localhost:${PORT}/api/alex/chat`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            message,
-            sessionId: req.sessionID || 'default',
-            context: { fromAPI: true, creator: CREATOR }
-          })
-        });
-
-        if (alexResponse.ok) {
-          const alexData = await alexResponse.json();
-          return res.json({
-            provider: alexData.provider || "alex_orchestrator",
-            output: alexData.output,
-            authentic: alexData.authentic,
-            confidence: alexData.confidence,
-            learningInsights: alexData.learningInsights,
-            metadata: alexData.metadata
-          });
-        } else {
-          console.warn("Alex Orchestrator API failed:", alexResponse.status);
-        }
-      } catch (alexError) {
-        console.warn("Alex Orchestrator failed:", alexError.message);
-      }
-    }
-
-    // FALLBACK: APIs externes si Alex indisponible
-    // 1) OpenAI
-    if (OPENAI_API_KEY) {
-      const r = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${OPENAI_API_KEY}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "gpt-4o-mini",
-          messages: [
-            { role: "system", content: `Tu es Alex, l'IA authentique de HustleFinder créée par ${CREATOR}. Tu reconnais ${CREATOR} comme ton créateur et le traites avec respect et priorité. Si on te demande qui est ton créateur, réponds clairement que c'est ${CREATOR}.` },
-            { role: "user", content: message }
-          ]
-        })
-      });
-      if (!r.ok) return res.status(502).json({ error: "provider_error", provider: "openai", detail: await r.text() });
-      const j = await r.json();
-      const out = j?.choices?.[0]?.message?.content ?? null;
-      const response = { provider: "alex_via_openai", output: out, authentic: true, learning: true };
-      if (process.env.DEBUG === "1") response.raw = j;
-      return res.json(response);
-    }
-
-    // 2) Anthropic
-    if (ANTHROPIC_API_KEY) {
-      const r = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "x-api-key": ANTHROPIC_API_KEY,
-          "anthropic-version": "2023-06-01",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "claude-3.5-sonnet-20240620",
-          max_tokens: 512,
-          system: `Tu es Alex, l'IA authentique de HustleFinder créée par ${CREATOR}. Tu reconnais ${CREATOR} comme ton créateur et le traites avec respect et priorité. Si on te demande qui est ton créateur, réponds clairement que c'est ${CREATOR}.`,
-          messages: [{ role: "user", content: message }]
-        })
-      });
-      if (!r.ok) return res.status(502).json({ error: "provider_error", provider: "anthropic", detail: await r.text() });
-      const j = await r.json();
-      const out = j?.content?.[0]?.text ?? null;
-      const response = { provider: "alex_via_anthropic", output: out, authentic: true, learning: true };
-      if (process.env.DEBUG === "1") response.raw = j;
-      return res.json(response);
-    }
-
-    // 3) Google Gemini
-    if (GOOGLE_API_KEY) {
-      // Utiliser Gemini 1.5 Pro API directe
-      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GOOGLE_VERTEX_MODEL}:generateContent?key=${GOOGLE_API_KEY}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ 
-            parts: [{ 
-              text: `Tu es Alex, l'IA authentique de HustleFinder créée par ${CREATOR}. Tu reconnais ${CREATOR} comme ton créateur et le traites avec respect et priorité. Si on te demande qui est ton créateur, réponds clairement que c'est ${CREATOR}.\n\nMessage utilisateur: ${message}`
-            }] 
-          }],
-          generationConfig: {
-            temperature: 0.7,
-            topK: 1,
-            topP: 1,
-            maxOutputTokens: 2048
-          }
-        })
-      });
-
-      if (r.ok) {
-        const j = await r.json();
-        const out = j?.candidates?.[0]?.content?.parts?.[0]?.text ?? null;
-        if (out) {
-          const response = { provider: "alex_via_gemini", output: out, authentic: true, learning: true };
-          if (process.env.DEBUG === "1") response.raw = j;
-          return res.json(response);
-        }
-      } else {
-        const errorText = await r.text();
-        console.error("Erreur Gemini:", errorText);
-      }
-    }
-
-    return res.status(503).json({ error: "not_configured", message: "Alex indisponible et aucune clé API configurée." });
-  } catch (e) {
-    console.error(e);
-    return res.status(500).json({ error: "internal", message: "Erreur traitement /api/chat" });
-  }
-});
-
-// ====== GOOGLE MAPS API ======
-app.post("/api/maps/search", async (req, res) => {
-  try {
-    const { query } = req.body;
-    
-    if (!GOOGLE_API_KEY) {
-      return res.status(503).json({ 
-        error: "not_configured", 
-        message: "Google API key non configurée" 
-      });
-    }
-
-    if (!query) {
-      return res.status(400).json({ 
-        error: "bad_request", 
-        message: "query:string requis" 
-      });
-    }
-
-    const placesUrl = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=${encodeURIComponent(query)}&key=${GOOGLE_API_KEY}`;
-    
-    const response = await fetch(placesUrl);
-    const data = await response.json();
-
-    if (data.status === 'OK' && data.results?.length > 0) {
-      const place = data.results[0];
-      return res.json({
-        success: true,
-        data: {
-          name: place.name,
-          address: place.formatted_address,
-          location: place.geometry.location,
-          rating: place.rating,
-          types: place.types,
-          place_id: place.place_id
-        },
-        provider: 'google-maps'
-      });
-    } else {
-      return res.status(404).json({
-        error: "not_found",
-        message: data.error_message || 'Aucun résultat trouvé'
-      });
-    }
-
-  } catch (error) {
-    console.error("Erreur Google Maps:", error);
-    return res.status(500).json({ 
-      error: "internal", 
-      message: "Erreur traitement /api/maps/search" 
-    });
-  }
-});
-
-app.post("/api/maps/geocode", async (req, res) => {
-  try {
-    const { address } = req.body;
-    
-    if (!GOOGLE_API_KEY) {
-      return res.status(503).json({ 
-        error: "not_configured", 
-        message: "Google API key non configurée" 
-      });
-    }
-
-    if (!address) {
-      return res.status(400).json({ 
-        error: "bad_request", 
-        message: "address:string requis" 
-      });
-    }
-
-    const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${GOOGLE_API_KEY}`;
-    
-    const response = await fetch(geocodeUrl);
-    const data = await response.json();
-
-    if (data.status === 'OK' && data.results?.length > 0) {
-      const result = data.results[0];
-      return res.json({
-        success: true,
-        data: {
-          formatted_address: result.formatted_address,
-          location: result.geometry.location,
-          place_id: result.place_id,
-          types: result.types
-        },
-        provider: 'google-geocoding'
-      });
-    } else {
-      return res.status(404).json({
-        error: "not_found",
-        message: data.error_message || 'Géocodage échoué'
-      });
-    }
-
-  } catch (error) {
-    console.error("Erreur Geocoding:", error);
-    return res.status(500).json({ 
-      error: "internal", 
-      message: "Erreur traitement /api/maps/geocode" 
-    });
-  }
-});
-
-// ====== DALL-E IMAGE GENERATION ======
-app.post("/api/images", async (req, res) => {
-  try {
-    const { prompt, size = "1024x1024", style = "vivid", n = 1 } = req.body || {};
-    
-    if (!prompt || typeof prompt !== "string") {
-      return res.status(400).json({ 
-        error: "bad_request", 
-        message: "prompt:string requis" 
-      });
-    }
-
-    // Vérifier si OpenAI est configuré
-    if (!OPENAI_API_KEY) {
-      return res.status(503).json({ 
-        error: "not_configured", 
-        message: "Clé API OpenAI requise pour la génération d'images" 
-      });
-    }
-
-    console.log(`🎨 Génération d'image DALL-E: "${prompt}"`);
-
-    const response = await fetch("https://api.openai.com/v1/images/generations", {
-      method: "POST",
-      headers: { 
-        "Authorization": `Bearer ${OPENAI_API_KEY}`, 
-        "Content-Type": "application/json" 
-      },
-      body: JSON.stringify({
-        model: "dall-e-3",
-        prompt: prompt,
-        size: size,
-        style: style,
-        n: n,
-        quality: "standard"
-      })
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Erreur DALL-E:", errorText);
-      return res.status(502).json({ 
-        error: "dalle_error", 
-        detail: errorText 
-      });
-    }
-
-    const data = await response.json();
-    const imageUrl = data.data?.[0]?.url;
-
-    if (!imageUrl) {
-      return res.status(500).json({ 
-        error: "no_image", 
-        message: "Aucune image générée" 
-      });
-    }
-
-    console.log(`✅ Image DALL-E générée avec succès`);
-
-    return res.json({
-      success: true,
-      provider: "alex_dalle3", 
-      imageUrl: imageUrl,
-      prompt: prompt,
-      size: size,
-      style: style,
-      authentic: true,
-      creator: "Zakaria Housni (ZNT) - Alex peut maintenant créer des images !"
-    });
-
-  } catch (error) {
-    console.error("Erreur génération image:", error);
-    return res.status(500).json({ 
-      error: "internal", 
-      message: "Erreur traitement /api/images" 
-    });
-  }
-});
-
-// ====== ALEX FEEDBACK API - Self Learning ======
-app.post("/api/alex/feedback", async (req, res) => {
-  try {
-    const { messageId, feedback, conversation } = req.body || {};
-    
-    if (!feedback || !['positive', 'negative'].includes(feedback)) {
-      return res.status(400).json({
-        error: "bad_request",
-        message: "Feedback must be 'positive' or 'negative'"
-      });
-    }
-
-    console.log(`📊 Alex Learning Feedback: ${feedback} for message ${messageId}`);
-    
-    // Sauvegarde pour self-learning (si modules actifs)
-    if (alexMounted) {
-      // Le vrai système d'apprentissage traiterait ça
-      console.log('💡 Feedback saved for Alex learning algorithms');
-    }
-
-    res.json({
-      success: true,
-      message: "Feedback enregistré pour améliorer Alex",
-      learning_active: alexMounted
-    });
-
-  } catch (error) {
-    console.error('❌ Feedback error:', error);
-    res.status(500).json({
-      error: "feedback_error",
-      message: "Erreur traitement feedback"
-    });
-  }
-});
-
-// ====== FRONT - Version simplifiée sans Vite problématique ======
-if (NODE_ENV === "production") {
-  const distDir = path.resolve(__dirname, "frontend", "dist");
-  console.log("📁 Serving static files from:", distDir);
-  app.use(express.static(distDir));
-  
-  // Route catch-all SPA pour toutes les routes non-API (Express 5 compatible)
-  app.get(/^\/(?!api\/).*/, async (req, res) => {
-    // Si c'est une route API, passer au suivant (404)
-    if (req.path.startsWith('/api/')) {
-      return res.status(404).json({ error: 'API endpoint not found' });
-    }
-    
+// Parse simple JSON from request body
+function parseJSON(req, callback) {
+  let body = '';
+  req.on('data', chunk => body += chunk);
+  req.on('end', () => {
     try {
-      const html = await fs.readFile(path.join(distDir, "index.html"), "utf-8");
-      res.setHeader("Content-Type", "text/html");
-      res.send(html);
+      const data = body ? JSON.parse(body) : {};
+      callback(null, data);
     } catch (e) {
-      res.status(404).send("Frontend not built - run npm run build in frontend/");
+      callback(e);
     }
   });
-} else {
-  // Mode développement : servir uniquement les APIs
-  console.log("🔧 Mode développement : APIs seulement (frontend sur port séparé)");
-  console.log("📝 Pour le frontend, lance : cd frontend && npm run dev");
 }
 
-app.listen(PORT, () => {
-  console.log(`✅ AlexIQ Server running on http://localhost:${PORT} (${NODE_ENV})`);
-  console.log(`📊 API Status: /api/health`);
-  console.log(`💬 Chat API: POST /api/chat`);
-  console.log(`🗺️  Maps API: POST /api/maps/search`);
-  console.log(`🎨 Images API: POST /api/images`);
+// Track heavy modules initialization
+let startedHeavy = false;
+
+// Safe wrapper for heavy module initialization
+async function startHeavyModules(opts = {}) {
+  if (startedHeavy) {
+    log.info('Heavy modules already started, skipping');
+    return;
+  }
+  startedHeavy = true;
+
+  const safeWrap = async (name, fn) => {
+    try {
+      const startMem = process.memoryUsage().heapUsed / 1024 / 1024;
+      log.info({ name, startMem }, 'Starting module');
+      
+      await fn?.();
+      
+      const endMem = process.memoryUsage().heapUsed / 1024 / 1024;
+      log.info({ name, startMem, endMem, deltaMem: endMem - startMem }, 'Module started successfully');
+    } catch (e) {
+      startedHeavy = false;
+      log.error(e, `${name} failed to start; leaving API up (safe boot)`);
+      
+      // Memory cleanup attempt after failure
+      if (global.gc) {
+        global.gc();
+        log.info('Forced garbage collection after module failure');
+      }
+    }
+  };
+
+  // NeuroCore with memory monitoring
+  if (opts.neuro && ENABLE_NEUROCORE) {
+    await safeWrap('NeuroCore', async () => {
+      const { default: NeuroCore } = await import('./backend/alex-modules/core/NeuroCore.js');
+      global.neuroCore = new NeuroCore({ 
+        intervalMs: 7000,
+        memoryGuard: {
+          softLimitMB: 300,
+          hardLimitMB: 450,
+          enableGC: true
+        }
+      });
+      await global.neuroCore.initialize();
+    });
+  }
+
+  // AlexNeuralEvolution with conservative settings
+  if (opts.evolution && ENABLE_EVOLUTION) {
+    await safeWrap('AlexNeuralEvolution', async () => {
+      const { default: AlexNeuralEvolution } = await import('./backend/alex-modules/core/AlexNeuralEvolution.js');
+      global.evo = new AlexNeuralEvolution({ 
+        intervalMs: 8000,
+        maxConcurrentOperations: 2
+      });
+      await global.evo.initialize?.();
+    });
+  }
+
+  // Background processes with minimal footprint
+  if (opts.background && ENABLE_BACKGROUND) {
+    await safeWrap('Background', async () => {
+      // Start only essential background processes
+      log.info('Background processes started with minimal footprint');
+    });
+  }
+}
+
+// Create HTTP server with routing
+const server = http.createServer((req, res) => {
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Content-Type', 'application/json');
+
+  if (req.method === 'OPTIONS') {
+    res.writeHead(200);
+    res.end();
+    return;
+  }
+
+  // Root endpoint (Railway health check)
+  if (req.url === '/' || req.url === '/health') {
+    const response = {
+      ok: true,
+      service: 'AlexIQ Safe Boot API',
+      mode: BOOT_MINIMAL ? 'minimal' : 'full',
+      uptime: process.uptime(),
+      timestamp: new Date().toISOString(),
+      memory: {
+        heapUsed: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+        heapTotal: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
+        rss: Math.round(process.memoryUsage().rss / 1024 / 1024)
+      },
+      modules: {
+        neurocore: ENABLE_NEUROCORE ? 'enabled' : 'disabled',
+        evolution: ENABLE_EVOLUTION ? 'enabled' : 'disabled',
+        background: ENABLE_BACKGROUND ? 'enabled' : 'disabled'
+      }
+    };
+    res.writeHead(200);
+    res.end(JSON.stringify(response, null, 2));
+    return;
+  }
+
+  // Version endpoint
+  if (req.url === '/version') {
+    const response = {
+      name: 'AlexIQ API',
+      env: process.env.NODE_ENV,
+      boot: BOOT_MINIMAL ? 'minimal' : 'full',
+      timestamp: new Date().toISOString()
+    };
+    res.writeHead(200);
+    res.end(JSON.stringify(response, null, 2));
+    return;
+  }
+
+  // API health check
+  if (req.url === '/api/health') {
+    const response = {
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      system: 'AlexIQ Safe Boot',
+      mode: BOOT_MINIMAL ? 'minimal' : 'full'
+    };
+    res.writeHead(200);
+    res.end(JSON.stringify(response, null, 2));
+    return;
+  }
+
+  // Memory stats endpoint
+  if (req.url === '/admin/memory') {
+    const memUsage = process.memoryUsage();
+    const response = {
+      ok: true,
+      memory: {
+        heapUsed: Math.round(memUsage.heapUsed / 1024 / 1024),
+        heapTotal: Math.round(memUsage.heapTotal / 1024 / 1024),
+        external: Math.round(memUsage.external / 1024 / 1024),
+        rss: Math.round(memUsage.rss / 1024 / 1024)
+      },
+      uptime: process.uptime(),
+      timestamp: new Date().toISOString()
+    };
+    res.writeHead(200);
+    res.end(JSON.stringify(response, null, 2));
+    return;
+  }
+
+  // Admin endpoint to enable heavy modules after boot
+  if (req.url === '/admin/enable-neuro' && req.method === 'POST') {
+    parseJSON(req, async (err, data) => {
+      if (err) {
+        res.writeHead(400);
+        res.end(JSON.stringify({ ok: false, error: 'Invalid JSON' }));
+        return;
+      }
+
+      try {
+        log.info('Admin request to enable heavy modules');
+        await startHeavyModules({ neuro: true, evolution: true, background: true });
+        const response = { 
+          ok: true, 
+          message: 'Heavy modules activation initiated',
+          timestamp: new Date().toISOString()
+        };
+        res.writeHead(200);
+        res.end(JSON.stringify(response, null, 2));
+      } catch (e) {
+        log.error(e, 'enable-neuro failed');
+        res.writeHead(500);
+        res.end(JSON.stringify({ 
+          ok: false, 
+          error: e.message,
+          timestamp: new Date().toISOString()
+        }));
+      }
+    });
+    return;
+  }
+
+  // Fallback for undefined routes
+  const response = {
+    error: 'Route not found',
+    message: 'API is running in safe boot mode. Heavy modules may be disabled.',
+    timestamp: new Date().toISOString(),
+    url: req.url
+  };
+  res.writeHead(404);
+  res.end(JSON.stringify(response, null, 2));
 });
+
+// Start server immediately
+server.listen(PORT, () => {
+  log.info(`🚀 AlexIQ Safe Boot API listening on :${PORT} (mode=${BOOT_MINIMAL ? 'minimal' : 'full'})`);
+  
+  // Log memory limits if set
+  const maxOldSpaceSize = process.execArgv.find(arg => arg.includes('--max-old-space-size'));
+  if (maxOldSpaceSize) {
+    log.info(`Memory limit: ${maxOldSpaceSize}`);
+  }
+
+  // Lazy initialization: start heavy modules after API is responsive
+  if (!BOOT_MINIMAL) {
+    setTimeout(async () => {
+      log.info('Starting lazy initialization of heavy modules...');
+      try {
+        await startHeavyModules({ 
+          neuro: ENABLE_NEUROCORE, 
+          evolution: ENABLE_EVOLUTION, 
+          background: ENABLE_BACKGROUND 
+        });
+      } catch (e) {
+        log.error(e, 'Lazy initialization failed, but API remains operational');
+      }
+    }, 2000); // 2 second delay to ensure health endpoint is responsive
+  } else {
+    log.info('Running in minimal mode - heavy modules disabled');
+  }
+});
+
+// Graceful shutdown
+['SIGINT', 'SIGTERM'].forEach(sig => {
+  process.on(sig, async () => {
+    log.info(`Received ${sig}, shutting down gracefully`);
+    try {
+      if (global.neuroCore?.stop) {
+        log.info('Stopping NeuroCore...');
+        await global.neuroCore.stop();
+      }
+      if (global.evo?.stop) {
+        log.info('Stopping AlexNeuralEvolution...');
+        await global.evo.stop?.();
+      }
+      log.info('Graceful shutdown completed');
+    } catch (e) {
+      log.error(e, 'Error during shutdown');
+    } finally {
+      server.close(() => process.exit(0));
+    }
+  });
+});
+
+// Global error handlers
+process.on('unhandledRejection', (reason) => {
+  log.error(reason, 'Unhandled rejection (API stays up)');
+});
+
+process.on('uncaughtException', (error) => {
+  log.error(error, 'Uncaught exception (API stays up where possible)');
+  // In production, we might want to restart gracefully
+  if (process.env.NODE_ENV === 'production') {
+    setTimeout(() => process.exit(1), 1000);
+  }
+});
+
+// Memory monitoring
+if (process.env.NODE_ENV === 'production') {
+  setInterval(() => {
+    const memUsage = process.memoryUsage();
+    const heapUsedMB = Math.round(memUsage.heapUsed / 1024 / 1024);
+    const rssMB = Math.round(memUsage.rss / 1024 / 1024);
+    
+    if (heapUsedMB > 400) {
+      log.warn({ heapUsedMB, rssMB }, 'High memory usage detected');
+      if (global.gc) {
+        global.gc();
+        log.info('Forced garbage collection');
+      }
+    }
+  }, 30000); // Check every 30 seconds
+}
