@@ -10,4 +10,4 @@ CONFIG_VARS_UPDATED=true
 # Environment Variables Required:
 # NODE_OPTIONS=--max-old-space-size=1536 --enable-source-maps --expose-gc
 # ALEX_DISABLE_MODULES=AlexNeuralEvolution,AlexProcessingOptimizer
-# NODE_ENV=production
+# NODE_ENV=production# Railway deployment trigger Sat, Aug 30, 2025 12:25:39 AM
