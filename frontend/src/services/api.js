@@ -14,7 +14,7 @@ const logger = {
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 
   (import.meta.env.DEV 
     ? '' // Use proxy in development (vite proxy handles /api)
-    : window.location.origin // Production: same origin
+    : 'https://api.alexiq.site' // Production: Railway API URL
   );
 const API_TIMEOUT = import.meta.env.VITE_API_TIMEOUT || 10000;
 
@@ -57,7 +57,7 @@ class APIService {
   // Ideas API
   async getIdeas(params = {}) {
     const query = new URLSearchParams(params).toString();
-    return this.request(`/api/ideas${query ? '${?${query}}' : ''}`);
+    return this.request(`/api/ideas${query ? `?${query}` : ''}`);
   }
 
   async createIdea(ideaData) {
@@ -83,7 +83,7 @@ class APIService {
   // Projects API
   async getProjects(params = {}) {
     const query = new URLSearchParams(params).toString();
-    return this.request(`/api/projects${query ? '${?${query}}' : ''}`);
+    return this.request(`/api/projects${query ? `?${query}` : ''}`);
   }
 
   async createProject(projectData) {
@@ -96,7 +96,7 @@ class APIService {
   // ROI API
   async getROICalculations(params = {}) {
     const query = new URLSearchParams(params).toString();
-    return this.request(`/api/roi${query ? '${?${query}}' : ''}`);
+    return this.request(`/api/roi${query ? `?${query}` : ''}`);
   }
 
   async createROICalculation(roiData) {

@@ -11,10 +11,15 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: process.env.VITE_API_URL || 'http://localhost:3003', // ✅ Port correct pour backend optimisé
+        target: process.env.VITE_API_URL || 'https://api.alexiq.site', // Railway API URL for development
         changeOrigin: true,
-        secure: false,
+        secure: true,
         rewrite: (path) => path // Keep /api prefix
+      },
+      '/health': {
+        target: process.env.VITE_API_URL || 'https://api.alexiq.site',
+        changeOrigin: true,
+        secure: true
       }
     }
   }
