@@ -1,0 +1,13 @@
+[Unit]
+Description=💾 Alex Database Backup Timer
+Documentation=https://github.com/znt1988/alexiq
+Requires=alex-backup.service
+
+[Timer]
+# Backup quotidien à 3h du matin
+OnCalendar=daily
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

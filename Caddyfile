@@ -1,0 +1,96 @@
+# 🌐 CADDY CONFIGURATION - Alex HustleFinder AI
+# Reverse proxy avec TLS automatique et rate limiting
+
+alex.hustlefinder.ai {
+    # TLS automatique avec Let's Encrypt
+    
+    # Rate limiting global
+    rate_limit {
+        zone static_ip {
+            key {http.request.remote_host}
+            events 100
+            window 1m
+        }
+    }
+    
+    # Headers de sécurité
+    header {
+        # Security headers
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy strict-origin-when-cross-origin
+        
+        # CORS (ajuster selon le frontend)
+        Access-Control-Allow-Origin "https://app.hustlefinder.ai"
+        Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Access-Control-Allow-Headers "Content-Type, Authorization"
+        
+        # Performance
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        
+        # Cache pour les assets statiques
+        Cache-Control "public, max-age=3600" *.js *.css *.png *.jpg *.svg
+    }
+    
+    # Health check endpoint (pour monitoring)
+    handle /health {
+        reverse_proxy 127.0.0.1:3000
+        header Cache-Control "no-cache, no-store, must-revalidate"
+    }
+    
+    # API endpoints
+    handle /api/* {
+        reverse_proxy 127.0.0.1:3000 {
+            # Health check du backend
+            health_uri /health
+            health_interval 30s
+            health_timeout 5s
+        }
+    }
+    
+    # Root et autres routes
+    handle {
+        reverse_proxy 127.0.0.1:3000 {
+            # Configuration load balancing (si plusieurs instances)
+            health_uri /health
+            health_interval 30s
+            health_timeout 5s
+        }
+    }
+    
+    # Compression
+    encode gzip
+    
+    # Logs d'accès
+    log {
+        output file /var/log/caddy/alex.log {
+            roll_size 100mb
+            roll_keep 5
+            roll_keep_for 720h
+        }
+        format json
+        level INFO
+    }
+}
+
+# Configuration pour staging (Dell)
+staging.alex.hustlefinder.ai {
+    reverse_proxy 127.0.0.1:3001
+    
+    # Rate limit plus permissif pour les tests
+    rate_limit {
+        zone staging {
+            key {http.request.remote_host}
+            events 500
+            window 1m
+        }
+    }
+    
+    encode gzip
+    
+    log {
+        output file /var/log/caddy/alex-staging.log
+        format json
+    }
+}

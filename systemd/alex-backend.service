@@ -1,0 +1,50 @@
+[Unit]
+Description=🤖 Alex HustleFinder AI Backend
+Documentation=https://github.com/znt1988/alexiq
+After=network.target
+Wants=network.target
+
+[Service]
+Type=forking
+User=alex
+Group=alex
+WorkingDirectory=/var/www/alex
+
+# Variables d'environnement
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=HOST=0.0.0.0
+EnvironmentFile=-/var/www/alex/.env
+
+# Commande de démarrage via PM2
+ExecStart=/usr/local/bin/pm2 start /var/www/alex/ecosystem.config.js --env production --no-daemon
+ExecReload=/usr/local/bin/pm2 reload /var/www/alex/ecosystem.config.js --env production
+ExecStop=/usr/local/bin/pm2 kill
+
+# Restart policy
+Restart=always
+RestartSec=10
+StartLimitInterval=60s
+StartLimitBurst=3
+
+# Process limits
+LimitNOFILE=65536
+LimitNPROC=4096
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/alex /var/log/alex /var/backups/alex
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=alex-backend
+
+[Install]
+WantedBy=multi-user.target
