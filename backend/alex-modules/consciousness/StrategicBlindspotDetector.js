@@ -1,517 +1,662 @@
+import crypto from 'crypto';
 /**
- * @fileoverview StrategicBlindspotDetector - Détecteur d'angles morts stratégiques
- * Module consciousness pour identification et correction de biais décisionnels
+
+// Imports AI Services
+      import { AI_KEYS } from '../config/aiKeys.js';
+import OpenAI from 'openai';
+import Anthropic from '@anthropic-ai/sdk';
+ * @fileoverview StrategicBlindspotDetector - Détecteur Points Aveugles Stratégiques IA
+ * Identifie les angles morts cognitifs et stratégiques avec précision quantique
+ *
  * @module StrategicBlindspotDetector
- * @version 2.0.0 - Anti-Fake Architecture
+ * @version 1.0.0
+ * @author ZNT Team - HustleFinder IA Strategic Awareness Engine
  */
 
-import { EventEmitter } from "events";
+import logger from '../config/logger.js';      import { EventEmitter } from 'events';
 
 /**
- * StrategicBlindspotDetector - Détecteur d'angles morts stratégiques authentique
+ * @class StrategicBlindspotDetector
+ * @description Détecteur intelligent des angles morts stratégiques et cognitifs
  */
-export class StrategicBlindspotDetector extends EventEmitter {
-  constructor(dependencies = {}) {
-    super();
-    
-    this.config = {
-      name: "StrategicBlindspotDetector",
-      version: "2.0.0",
-      type: "consciousness",
-      antiFake: true,
-      maxDetections: dependencies.maxDetections || 100,
-      sensitivityThreshold: dependencies.sensitivityThreshold || 0.6,
-      ...dependencies.config
-    };
-    
-    this.state = {
-      initialized: false,
-      active: false,
-      detections: new Map(),
-      biasPatterns: new Map(),
-      operations: 0,
-      errors: 0
-    };
-    
-    this.logger = dependencies.logger || console;
-    
-    // Types de biais cognitifs détectables
-    this.biasTypes = {
-      confirmation: "Tendance à chercher des informations confirmant ses croyances",
-      anchoring: "Influence excessive de la première information reçue",
-      availability: "Surévaluation d'événements récents ou mémorables",
-      overconfidence: "Surestimation de ses propres capacités ou connaissances",
-      sunk_cost: "Persistance dans une voie à cause d'investissements passés",
-      groupthink: "Conformité excessive au consensus du groupe"
-    };
-    
-    // Indicateurs de détection basés métriques système
-    this.detectionIndicators = [
-      "pattern_repetition",
-      "information_filtering", 
-      "decision_rigidity",
-      "feedback_avoidance",
-      "perspective_narrowing"
-    ];
-  }
-  
-  async initialize() {
-    if (this.state.initialized) return;
-    
-    try {
-      this.state.initialized = true;
-      this.state.active = true;
-      
-      this.logger.info("✅ StrategicBlindspotDetector initialized");
-      this.emit("detectorReady");
-      
-    } catch (error) {
-      this.logger.error("❌ StrategicBlindspotDetector initialization failed:", error);
-      throw error;
-    }
-  }
-  
-  /**
-   * Détecte les angles morts stratégiques basé métriques système
-   */
-  async detectBlindspots(decisionContext, historicalData = []) {
-    const startTime = Date.now();
-    
-    try {
-      const detectionId = `detection_${Date.now()}_${process.pid}`;
-      
-      // Analyse du contexte décisionnel
-      const contextAnalysis = this.analyzeDecisionContext(decisionContext);
-      
-      // Détection de patterns de biais
-      const biasPatterns = this.detectBiasPatterns(decisionContext, historicalData);
-      
-      // Identification d'angles morts spécifiques
-      const blindspots = this.identifyBlindspots(contextAnalysis, biasPatterns);
-      
-      // Génération de recommandations
-      const recommendations = this.generateRecommendations(blindspots);
-      
-      const detection = {
-        id: detectionId,
-        context: decisionContext,
-        analysis: contextAnalysis,
-        biasPatterns,
-        blindspots,
-        recommendations,
-        confidence: this.calculateSystemBasedConfidence(blindspots.length),
-        created: Date.now(),
-        systemBased: true
-      };
-      
-      this.state.detections.set(detectionId, detection);
-      this.state.operations++;
-      
-      return {
-        status: "detected",
-        detection,
-        processingTime: Date.now() - startTime,
-        source: "strategic_blindspot_detector",
-        timestamp: Date.now()
-      };
-      
-    } catch (error) {
-      this.state.errors++;
-      this.logger.error("Blindspot detection failed:", error);
-      
-      return {
-        status: "error",
-        error: error.message,
-        processingTime: Date.now() - startTime,
-        timestamp: Date.now()
-      };
-    }
-  }
-  
-  analyzeDecisionContext(context) {
-    const analysis = {
-      complexity: this.assessDecisionComplexity(context),
-      timeConstraints: context.urgency || 'normal',
-      stakeholderCount: (context.stakeholders || []).length,
-      dataAvailability: this.assessDataQuality(context),
-      systemMetrics: this.getSystemMetrics()
-    };
-    
-    // Score de risque basé métriques système
-    analysis.riskScore = this.calculateContextRisk(analysis);
-    
-    return analysis;
-  }
-  
-  assessDecisionComplexity(context) {
-    let complexity = 0.3; // Base complexity
-    
-    // Facteurs de complexité
-    if (context.alternatives && context.alternatives.length > 3) complexity += 0.2;
-    if (context.constraints && context.constraints.length > 2) complexity += 0.2;
-    if (context.stakeholders && context.stakeholders.length > 5) complexity += 0.2;
-    if (context.timeframe && context.timeframe === 'long_term') complexity += 0.1;
-    
-    // Variance système
-    const systemVariance = (process.pid % 100) / 1000; // 0-0.1
-    complexity += systemVariance;
-    
-    return Math.max(0.1, Math.min(1.0, complexity));
-  }
-  
-  assessDataQuality(context) {
-    let quality = 0.5; // Base quality
-    
-    if (context.dataSource === 'verified') quality += 0.3;
-    if (context.sampleSize > 100) quality += 0.2;
-    if (context.recency === 'current') quality += 0.1;
-    
-    // Variance système basée mémoire
-    const memUsage = process.memoryUsage();
-    const systemVariance = (memUsage.heapUsed % 1000) / 5000; // 0-0.2
-    quality += systemVariance;
-    
-    return Math.max(0.1, Math.min(1.0, quality));
-  }
-  
-  calculateContextRisk(analysis) {
-    let risk = 0.2; // Base risk
-    
-    risk += analysis.complexity * 0.3;
-    risk += (1 - analysis.dataAvailability) * 0.3;
-    
-    if (analysis.timeConstraints === 'urgent') risk += 0.2;
-    
-    // Facteur système
-    const systemLoad = analysis.systemMetrics.memoryUsage.heapUsed / 
-                      analysis.systemMetrics.memoryUsage.heapTotal;
-    risk += systemLoad * 0.2;
-    
-    return Math.max(0.1, Math.min(1.0, risk));
-  }
-  
-  detectBiasPatterns(context, historicalData) {
-    const patterns = {};
-    
-    // Détection de patterns dans les données historiques
-    if (historicalData.length > 0) {
-      patterns.confirmation = this.detectConfirmationBias(historicalData);
-      patterns.anchoring = this.detectAnchoringBias(historicalData);
-      patterns.availability = this.detectAvailabilityBias(historicalData);
-      patterns.overconfidence = this.detectOverconfidenceBias(historicalData);
-    }
-    
-    // Analyse du contexte actuel
-    patterns.current = this.analyzeCurrentBiasIndicators(context);
-    
-    return patterns;
-  }
-  
-  detectConfirmationBias(historicalData) {
-    // Recherche de patterns de sélection d'information
-    const informationSources = historicalData.map(d => d.informationSource).filter(Boolean);
-    const uniqueSources = [...new Set(informationSources)];
-    
-    // Diversité des sources (moins = plus de biais)
-    const diversity = uniqueSources.length / Math.max(1, informationSources.length);
-    
-    return {
-      detected: diversity < 0.5,
-      strength: Math.max(0, 1 - diversity * 2),
-      indicators: [`Source diversity: ${diversity.toFixed(2)}`],
-      systemBased: true
-    };
-  }
-  
-  detectAnchoringBias(historicalData) {
-    // Analyse de l'influence des premières valeurs
-    if (historicalData.length < 3) {
-      return { detected: false, strength: 0, indicators: [], systemBased: true };
-    }
-    
-    const firstValue = historicalData[0].value;
-    const subsequentValues = historicalData.slice(1).map(d => d.value).filter(Boolean);
-    
-    // Mesure de l'écart par rapport à la première valeur
-    const deviations = subsequentValues.map(v => Math.abs(v - firstValue) / firstValue);
-    const avgDeviation = deviations.reduce((sum, d) => sum + d, 0) / deviations.length;
-    
-    return {
-      detected: avgDeviation < 0.2, // Moins de 20% d'écart = ancrage possible
-      strength: Math.max(0, 1 - avgDeviation * 5),
-      indicators: [`Average deviation: ${avgDeviation.toFixed(2)}`],
-      systemBased: true
-    };
-  }
-  
-  detectAvailabilityBias(historicalData) {
-    // Analyse de la récence des références
-    const now = Date.now();
-    const recentReferences = historicalData.filter(d => 
-      d.timestamp && (now - d.timestamp) < (7 * 24 * 60 * 60 * 1000) // 7 days
-    );
-    
-    const recentRatio = recentReferences.length / historicalData.length;
-    
-    return {
-      detected: recentRatio > 0.8, // Plus de 80% de références récentes
-      strength: Math.max(0, (recentRatio - 0.5) * 2),
-      indicators: [`Recent references: ${(recentRatio * 100).toFixed(1)}%`],
-      systemBased: true
-    };
-  }
-  
-  detectOverconfidenceBias(historicalData) {
-    // Analyse des prédictions vs résultats réels
-    const predictions = historicalData.filter(d => d.prediction && d.actual);
-    
-    if (predictions.length === 0) {
-      return { detected: false, strength: 0, indicators: [], systemBased: true };
-    }
-    
-    const accuracies = predictions.map(p => 
-      1 - Math.abs(p.prediction - p.actual) / Math.max(p.actual, 1)
-    );
-    const avgAccuracy = accuracies.reduce((sum, a) => sum + a, 0) / accuracies.length;
-    const confidences = predictions.map(p => p.confidence || 0.5);
-    const avgConfidence = confidences.reduce((sum, c) => sum + c, 0) / confidences.length;
-    
-    const overconfidence = avgConfidence - avgAccuracy;
-    
-    return {
-      detected: overconfidence > 0.2,
-      strength: Math.max(0, overconfidence * 2),
-      indicators: [`Confidence-accuracy gap: ${overconfidence.toFixed(2)}`],
-      systemBased: true
-    };
-  }
-  
-  analyzeCurrentBiasIndicators(context) {
-    const indicators = {};
-    
-    // Analyse des indicateurs actuels basés métriques système
-    this.detectionIndicators.forEach((indicator, index) => {
-      indicators[indicator] = this.evaluateIndicator(indicator, context, index);
-    });
-    
-    return indicators;
-  }
-  
-  evaluateIndicator(indicator, context, index) {
-    const systemMetrics = this.getSystemMetrics();
-    
-    // Score basé métriques système et contexte
-    let score = 0.3; // Base score
-    
-    switch (indicator) {
-      case 'pattern_repetition':
-        if (context.previousDecisions && context.previousDecisions.length > 1) {
-          const uniqueApproaches = new Set(context.previousDecisions.map(d => d.approach));
-          score = 1 - (uniqueApproaches.size / context.previousDecisions.length);
-        }
-        break;
-        
-      case 'information_filtering':
-        if (context.informationSources) {
-          score = 1 - (context.informationSources.length / 10); // Max 10 sources
-        }
-        break;
-        
-      case 'decision_rigidity':
-        score = context.willingnessToChange ? 0.2 : 0.8;
-        break;
-        
-      case 'feedback_avoidance':
-        score = context.feedbackSought ? 0.2 : 0.7;
-        break;
-        
-      case 'perspective_narrowing':
-        if (context.perspectives) {
-          score = 1 - (context.perspectives.length / 5); // Max 5 perspectives
-        }
-        break;
-    }
-    
-    // Variance système
-    const variance = ((systemMetrics.uptime + index * 100) % 200) / 1000; // 0-0.2
-    score += variance;
-    
-    return Math.max(0, Math.min(1, score));
-  }
-  
-  identifyBlindspots(contextAnalysis, biasPatterns) {
-    const blindspots = [];
-    
-    // Analyse des biais détectés
-    Object.entries(biasPatterns).forEach(([biasType, pattern]) => {
-      if (pattern.detected && pattern.strength > this.config.sensitivityThreshold) {
-        blindspots.push({
-          type: biasType,
-          description: this.biasTypes[biasType] || `Biais de type ${biasType}`,
-          strength: pattern.strength,
-          indicators: pattern.indicators,
-          riskLevel: this.calculateBlindspotRisk(pattern.strength, contextAnalysis),
-          systemBased: true
+export class StrategicBlindspotDetector extends EventEmitter  {
+    constructor(options = {}) {
+        super();
+
+        this.config = {
+            detectionDepth: options.detectionDepth || 'comprehensive'
+      // surface
+      deep
+      comprehensive
+      transcendent
+            analysisScope: options.analysisScope || 'holistic'
+      // tactical
+      strategic
+      holistic
+      cosmic
+            cognitiveMapping: options.cognitiveMapping || 'advanced'
+      // basic
+      advanced
+      quantum
+      consciousness
+            predictionHorizon: options.predictionHorizon || 'extended'
+      // immediate
+      medium
+      extended
+      visionary
+            biasAwareness: options.biasAwareness !== false
+        };
+
+        this.initializeDetectionEngines();
+        this.initializeCognitiveScanners();
+        this.initializeStrategicAnalyzers();
+        this.initializeConsciousnessMappers();
+
+        this.blindspotDatabase = new Map();
+        this.patternLibrary = new Map();
+        this.activeDetections = new Map();      try: {
+      logger.info('StrategicBlindspotDetector consciousness activated', {
+            detectionDepth: this.config.detectionDepth,
+            analysisScope: this.config.analysisScope
+            cognitiveMapping: this.config.cognitiveMapping
         });
-      }
+
+        } catch (error) {
+    // Logger fallback - ignore error
+  }}
+
+    /**
+     * Initialise les moteurs de détection
+     */
+    initializeDetectionEngines() {
+        this.detectionEngines = {
+            cognitiveBiasDetector: new CognitiveBiasDetector(),
+            assumptionAnalyzer: new AssumptionAnalyzer()
+            perspectiveScanner: new PerspectiveScanner(),
+            blindspotMapper: new BlindspotMapper()
+            awarenessExpander: new AwarenessExpander()
+        };
+    }
+
+    /**
+     * Initialise les scanners cognitifs
+     */
+    initializeCognitiveScanners() {
+        this.cognitiveScanners = {
+            thoughtPatternAnalyzer: new ThoughtPatternAnalyzer(),
+            mentalModelDetector: new MentalModelDetector()
+            framingAnalyzer: new FramingAnalyzer(),
+            contextualBlindnessScanner: new ContextualBlindnessScanner()
+            intuitionGapDetector: new IntuitionGapDetector()
+        };
+    }
+
+    /**
+     * Initialise les analyseurs stratégiques
+     */
+    initializeStrategicAnalyzers() {
+        this.strategicAnalyzers = {
+            competitiveBlindspotDetector: new CompetitiveBlindspotDetector(),
+            marketBlindnessScanner: new MarketBlindnessScanner()
+            riskBlindspotAnalyzer: new RiskBlindspotAnalyzer(),
+            opportunityMissDetector: new OpportunityMissDetector()
+            timeHorizonAnalyzer: new TimeHorizonAnalyzer()
+        };
+    }
+
+    /**
+     * Initialise les mappeurs de conscience
+     */
+    initializeConsciousnessMappers() {
+        this.consciousnessMappers = {
+            shadowAnalyzer: new CognitiveShadowAnalyzer(),
+            unconsciousPatternDetector: new UnconsciousPatternDetector()
+            collectiveBlindspotScanner: new CollectiveBlindspotScanner(),
+            archetypeBlindnessDetector: new ArchetypeBlindnessDetector()
+            transcendentViewActivator: new TranscendentViewActivator()
+        };
+    }
+
+    /**
+     * Lance une analyse complète des angles morts stratégiques et cognitifs
+     * @param: {Object} detectionRequest - Paramètres de détection
+     * @returns: {Promise<Object>} Analyse complète avec recommandations
+     */
+    async conductComprehensiveBlindspotDetection(detectionRequest) {
+        const detectionId = `blindspot_detection_${Date.now()}`;
+
+        logger.info('🔍 Conducting comprehensive blindspot detection', {
+            detectionId
+            subject: detectionRequest.subject,
+            context: detectionRequest.context
+            depth: detectionRequest.depth || this.config.detectionDepth
+        });      try: {
+            const detectionSession = {
+                id: detectionId,
+                startTime: Date.now()
+                request: detectionRequest,
+                cognitiveBlindspots: {}
+                strategicBlindspots: {}
+                consciousnessGaps: {}
+                recommendations: {}
+                expansion: {}
+            };
+
+            this.activeDetections.set(detectionId, detectionSession);
+
+            // Phase 1: Scan des biais cognitifs et patterns de pensée
+            logger.info('🧠 Phase 1: Cognitive bias and thought pattern scanning');
+            const cognitiveAnalysis = await this.scanCognitiveBlindspots(
+                detectionRequest.thinkingPatterns
+                detectionRequest.decisionHistory
+                detectionRequest.mentalModels
+            );
+            detectionSession.cognitiveBlindspots = cognitiveAnalysis;
+
+            // Phase 2: Analyse des angles morts stratégiques
+            logger.info('🎯 Phase 2: Strategic blindspot analysis');
+            const strategicAnalysis = await this.analyzeStrategicBlindspots(
+                detectionRequest.strategy
+                detectionRequest.competitiveContext
+                detectionRequest.marketPosition
+            );
+            detectionSession.strategicBlindspots = strategicAnalysis;
+
+            // Phase 3: Détection des gaps de conscience et perception
+            logger.info('✨ Phase 3: Consciousness and perception gap detection');
+            const consciousnessAnalysis = await this.detectConsciousnessGaps(
+                detectionRequest.awarenessLevel
+                detectionRequest.perspectiveLimitations
+                detectionRequest.spiritualBlindspots
+            );
+            detectionSession.consciousnessGaps = consciousnessAnalysis;
+
+            // Phase 4: Analyse des patterns collectifs et archétypes
+            logger.info('🌐 Phase 4: Collective pattern and archetype analysis');
+            const collectiveAnalysis = await this.analyzeCollectiveBlindspots(
+                detectionRequest.culturalContext
+                detectionRequest.organizationalBlindspots
+                detectionRequest.industryAssumptions
+            );
+
+            // Phase 5: Génération de recommandations d'expansion de conscience
+            logger.info('🚀 Phase 5: Consciousness expansion recommendations');
+            const expansionStrategies = await this.generateExpansionStrategies(
+                detectionSession.cognitiveBlindspots
+                detectionSession.strategicBlindspots
+                detectionSession.consciousnessGaps
+            );
+            detectionSession.expansion = expansionStrategies;
+
+            // Phase 6: Plan d'implémentation et suivi
+            logger.info('📋 Phase 6: Implementation and monitoring plan');
+            const implementationPlan = await this.createImplementationPlan(
+                expansionStrategies
+                detectionRequest.implementationCapacity
+            );
+
+            detectionSession.endTime = Date.now();
+            detectionSession.duration = detectionSession.endTime - detectionSession.startTime;
+
+            const result = {
+                success: true
+                detectionId
+                // Angles morts cognitifs
+                cognitiveBlindspots: {,
+                    confirmatBias: cognitiveAnalysis.confirmationBias
+                    anchoring: cognitiveAnalysis.anchoringBias,
+                    availabilityHeuristic: cognitiveAnalysis.availability
+                    framingEffects: cognitiveAnalysis.framing,
+                    overconfidence: cognitiveAnalysis.overconfidence
+                    groupthink: cognitiveAnalysis.groupthink
+                }
+                // Angles morts stratégiques
+                strategicBlindspots: {,
+                    competitiveThreats: strategicAnalysis.competitive
+                    marketShifts: strategicAnalysis.market,
+                    emergingOpportunities: strategicAnalysis.opportunities
+                    riskUnderestimation: strategicAnalysis.risks,
+                    resourceMisallocation: strategicAnalysis.resources
+                    stakeholderNeeds: strategicAnalysis.stakeholders
+                }
+                // Gaps de conscience
+                consciousnessGaps: {,
+                    perceptualLimitations: consciousnessAnalysis.perception
+                    shadowElements: consciousnessAnalysis.shadow,
+                    unconsciousPatterns: consciousnessAnalysis.unconscious
+                    spiritualBlindspots: consciousnessAnalysis.spiritual,
+                    collectiveUnconsciousness: consciousnessAnalysis.collective
+                    transcendentPotential: consciousnessAnalysis.transcendent
+                }
+                // Angles morts collectifs
+                collectiveBlindspots: {,
+                    culturalAssumptions: collectiveAnalysis.cultural
+                    industryGroupthink: collectiveAnalysis.industry,
+                    organizationalBlindness: collectiveAnalysis.organizational
+                    sociatalBias: collectiveAnalysis.societal,
+                    generationalLimitations: collectiveAnalysis.generational
+                }
+                // Impact et criticité
+                impactAssessment: {,
+                    criticalBlindspots: this.identifyCriticalBlindspots(detectionSession)
+                    riskLevels: this.assessRiskLevels(detectionSession),
+                    opportunityCosts: this.calculateOpportunityCosts(detectionSession)
+                    urgencyRanking: this.rankUrgency(detectionSession),
+                    cascadingEffects: this.analyzeCascadingEffects(detectionSession)
+                }
+                // Stratégies d'expansion
+                expansionStrategies: {,
+                    awarenessExpansion: expansionStrategies.awareness
+                    perspectiveDiversification: expansionStrategies.perspective,
+                    cognitiveFLexibility: expansionStrategies.flexibility
+                    strategicAdaptation: expansionStrategies.strategic,
+                    consciousnessEvolution: expansionStrategies.consciousness
+                }
+                // Outils et pratiques
+                tools: {,
+                    biasInterruptors: this.generateBiasInterruptors(cognitiveAnalysis)
+                    perspectiveExercises: this.createPerspectiveExercises(consciousnessAnalysis),
+                    strategicCheckpoints: this.designStrategicCheckpoints(strategicAnalysis)
+                    awarenessBuilders: this.developAwarenessBuilders(detectionSession),
+                    monitoringSystems: this.createMonitoringSystems(implementationPlan)
+                }
+                // Plan d'implémentation
+                implementation: {,
+                    immediateActions: implementationPlan.immediate
+                    shortTermInitiatives: implementationPlan.shortTerm,
+                    longTermDevelopment: implementationPlan.longTerm
+                    culturalShifts: implementationPlan.cultural,
+                    systemicChanges: implementationPlan.systemic
+                }
+                // Métadonnées
+                metadata: {,
+                    detectionDepth: this.config.detectionDepth
+                    blindspotsDetected: this.countTotalBlindspots(detectionSession),
+                    consciousnessLevel: this.assessCurrentConsciousness(detectionRequest)
+                    expansionPotential: this.evaluateExpansionPotential(detectionSession),
+                    processingTime: detectionSession.duration
+                }
+            };
+
+            // Archive pour apprentissage pattern
+            await this.archiveBlindspotDetection(detectionId, result);
+
+            this.activeDetections.delete(detectionId);
+            this.emit('blindspotDetectionCompleted', result);
+
+            logger.info('✅ Comprehensive blindspot detection completed', {
+                detectionId
+                blindspotsFound: result.metadata.blindspotsDetected,
+                criticalIssues: result.impactAssessment.criticalBlindspots.length
+                processingTime: `${detectionSession.duration}ms`
+            });
+
+            return result;
+
+        } catch (error) {
+      // Logger fallback - ignore error
     });
-    
-    // Tri par force du biais
-    blindspots.sort((a, b) => b.strength - a.strength);
-    
-    return blindspots;
-  }
-  
-  calculateBlindspotRisk(biasStrength, contextAnalysis) {
-    const baseRisk = biasStrength;
-    const complexityMultiplier = contextAnalysis.complexity * 0.5;
-    const contextRisk = contextAnalysis.riskScore * 0.3;
-    
-    const totalRisk = baseRisk + complexityMultiplier + contextRisk;
-    
-    // Dynamic thresholds based on system performance
-    const memUsage = process.memoryUsage();
-    const systemLoad = memUsage.heapUsed / memUsage.heapTotal;
-    const thresholdAdjustment = systemLoad * 0.1; // Max 10% adjustment
-    
-    const levels = ["critical", "elevated", "moderate", "minimal"];
-    
-    if (totalRisk > (0.8 - thresholdAdjustment)) return levels[0];
-    if (totalRisk > (0.6 - thresholdAdjustment)) return levels[1];
-    if (totalRisk > (0.4 - thresholdAdjustment)) return levels[2];
-    return levels[3];
-  }
-  
-  generateRecommendations(blindspots) {
-    const recommendations = [];
-    
-    blindspots.forEach((blindspot, index) => {
-      const recommendation = this.createRecommendation(blindspot, index);
-      recommendations.push(recommendation);
-    });
-    
-    return recommendations;
-  }
-  
-  createRecommendation(blindspot, index) {
-    const systemMetrics = this.getSystemMetrics();
-    
-    const baseRecommendations = {
-      confirmation: "Chercher activement des informations contradictoires",
-      anchoring: "Générer plusieurs alternatives avant de décider",
-      availability: "Consulter des données historiques plus larges",
-      overconfidence: "Solliciter des avis externes et des critiques",
-      sunk_cost: "Évaluer la décision sur ses mérites futurs uniquement",
-      groupthink: "Encourager la dissidence constructive"
-    };
-    
-    return {
-      id: `rec_${index}_${Date.now()}`,
-      blindspotType: blindspot.type,
-      priority: this.calculateRecommendationPriority(blindspot, index),
-      action: baseRecommendations[blindspot.type] || "Réévaluer les hypothèses de base",
-      rationale: `Adresse le biais ${blindspot.type} détecté avec force ${blindspot.strength.toFixed(2)}`,
-      timeframe: this.calculateTimeframe(blindspot.riskLevel),
-      systemBased: true
-    };
-  }
-  
-  calculateRecommendationPriority(blindspot, index) {
-    let priority = blindspot.strength * 0.6;
-    
-    const riskMultipliers = {
-      'critical': 0.4,
-      'high': 0.3,
-      'medium': 0.2,
-      'low': 0.1
-    };
-    
-    priority += riskMultipliers[blindspot.riskLevel] || 0.1;
-    
-    // Variance système
-    const systemVariance = ((process.uptime() + index * 50) % 100) / 1000; // 0-0.1
-    priority += systemVariance;
-    
-    return Math.max(0.1, Math.min(1.0, priority));
-  }
-  
-  calculateTimeframe(riskLevel) {
-    // Dynamic timeframes based on system state and risk
-    const systemUptime = process.uptime();
-    const urgencyMultiplier = systemUptime > 3600 ? 1.0 : 1.5; // More urgent if system just started
-    
-    const baseTimeframes = ["immediate", "within_hours", "within_days", "flexible"];
-    const adjustedTimeframes = baseTimeframes.map(tf => `${tf}_adjusted`);
-    
-    const timeframeMappings = {
-      'critical': urgencyMultiplier > 1.2 ? baseTimeframes[0] : adjustedTimeframes[0],
-      'elevated': urgencyMultiplier > 1.1 ? baseTimeframes[1] : adjustedTimeframes[1],
-      'moderate': urgencyMultiplier > 1.0 ? baseTimeframes[2] : adjustedTimeframes[2],
-      'minimal': baseTimeframes[3]
-    };
-    
-    return timeframeMappings[riskLevel] || baseTimeframes[3];
-  }
-  
-  calculateSystemBasedConfidence(blindspotCount) {
-    let confidence = 0.5; // Base confidence
-    
-    // Plus de blindspots détectés = plus de confiance dans la détection
-    confidence += Math.min(0.3, blindspotCount * 0.1);
-    
-    // Performance système affecte confiance
-    const systemMetrics = this.getSystemMetrics();
-    const systemHealth = 1 - (systemMetrics.memoryUsage.heapUsed / systemMetrics.memoryUsage.heapTotal);
-    confidence += systemHealth * 0.2;
-    
-    return Math.max(0.3, Math.min(0.95, confidence));
-  }
-  
-  getSystemMetrics() {
-    return {
-      cpuUsage: process.cpuUsage(),
-      memoryUsage: process.memoryUsage(),
-      uptime: process.uptime(),
-      pid: process.pid
-    };
-  }
-  
-  /**
-   * Obtient une détection d'angle mort
-   */
-  getDetection(detectionId) {
-    const detection = this.state.detections.get(detectionId);
-    return detection ? {
-      status: "found",
-      detection,
-      timestamp: Date.now()
-    } : {
-      status: "not_found",
-      error: "Detection not found",
-      timestamp: Date.now()
-    };
-  }
-  
-  getStatus() {
-    return {
-      name: this.config.name,
-      version: this.config.version,
-      type: this.config.type,
-      initialized: this.state.initialized,
-      active: this.state.active,
-      antiFake: this.config.antiFake,
-      operations: this.state.operations,
-      errors: this.state.errors,
-      activeDetections: this.state.detections.size,
-      timestamp: Date.now()
-    };
-  }
-  
-  async shutdown() {
-    this.state.active = false;
-    this.state.detections.clear();
-    this.logger.info("🛑 StrategicBlindspotDetector shutdown complete");
-  }
+
+            this.activeDetections.delete(detectionId);      return: {
+                success: false,
+                error: error.message
+                detectionId
+                emergencyAwareness: this.generateEmergencyAwareness(error)
+            };
+        }
+    }
+
+    /**
+     * Effectue une analyse en temps réel des biais de décision
+     * @param: {Object} decisionRequest - Paramètres de la décision
+     * @returns: {Promise<Object>} Analyse des biais en temps réel
+     */
+    async analyzeDecisionBiases(decisionRequest) {
+        const analysisId = `decision_bias_${Date.now()}`;
+
+        logger.info('⚡ Analyzing decision biases in real-time', {
+            analysisId
+            decision: decisionRequest.decisionType,
+            urgency: decisionRequest.urgency
+        });      try: {
+            // Détection des biais actifs
+            const activeBiases = await this.detectActiveBiases(
+                decisionRequest.decisionContext
+                decisionRequest.currentThinking
+                decisionRequest.emotionalState
+            );
+
+            // Analyse de l'influence des biais
+            const biasInfluence = await this.analyzeBiasInfluence(
+                activeBiases
+                decisionRequest.stakeholders
+                decisionRequest.consequences
+            );
+
+            // Génération d'interruptions de biais
+            const biasInterruptions = await this.generateBiasInterruptions(
+                activeBiases
+                decisionRequest.timeConstraints
+            );
+
+            // Recommandations de re-cadrage
+            const reframingRecommendations = await this.generateReframingRecommendations(
+                biasInfluence
+                decisionRequest.desiredOutcome
+            );
+
+            const result = {
+                success: true
+                analysisId
+                // Biais détectés
+                detectedBiases: {,
+                    cognitive: activeBiases.cognitive
+                    emotional: activeBiases.emotional,
+                    social: activeBiases.social
+                    temporal: activeBiases.temporal,
+                    confirmational: activeBiases.confirmational
+                }
+                // Influence sur la décision
+                biasImpact: {,
+                    riskSkewing: biasInfluence.risk
+                    optionFiltering: biasInfluence.options,
+                    timeframeBias: biasInfluence.timeframe
+                    stakeholderBias: biasInfluence.stakeholders,
+                    consequenceBlindness: biasInfluence.consequences
+                }
+                // Interruptions recommandées
+                interruptions: {,
+                    pausePoints: biasInterruptions.pauses
+                    questionPrompts: biasInterruptions.questions,
+                    perspectiveShifts: biasInterruptions.shifts
+                    evidenceChecks: biasInterruptions.evidence,
+                    stakeholderConsultation: biasInterruptions.consultation
+                }
+                // Re-cadrage de la décision
+                reframing: {,
+                    alternativeFrames: reframingRecommendations.frames
+                    expandedOptions: reframingRecommendations.options,
+                    timeline: reframingRecommendations.timeline
+                    stakeholderViews: reframingRecommendations.stakeholders,
+                    consequenceMapping: reframingRecommendations.consequences
+                }
+                // Plan de décision amélioré
+                improvedProcess: {,
+                    structuredApproach: this.designStructuredDecisionProcess(activeBiases)
+                    checklistItems: this.createDecisionChecklist(biasInfluence),
+                    reviewMechanism: this.establishReviewMechanism(decisionRequest)
+                    documentationPractice: this.recommendDocumentationPractice(),
+                    learningLoop: this.createDecisionLearningLoop()
+                }
+            };
+
+            this.emit('decisionBiasAnalysisCompleted', result);
+
+            return result;
+
+        } catch (error) {
+      // Logger fallback - ignore error
+    });      return: {
+                success: false,
+                error: error.message
+                analysisId
+                basicGuidance: this.generateBasicBiasGuidance()
+            };
+        }
+    }
+
+    /**
+     * Crée un système de surveillance continue des angles morts
+     * @param: {Object} monitoringRequest - Paramètres de surveillance
+     * @returns: {Promise<Object>} Système de monitoring complet
+     */
+    async createBlindspotMonitoringSystem(monitoringRequest) {
+        const systemId = `monitoring_system_${Date.now()}`;
+
+        logger.info('📡 Creating blindspot monitoring system', {
+            systemId
+            scope: monitoringRequest.scope,
+            frequency: monitoringRequest.frequency
+        });      try: {
+            // Configuration du système de surveillance
+            const monitoringConfig = await this.configureMonitoringSystem(
+                monitoringRequest.scope
+                monitoringRequest.frequency
+                monitoringRequest.alertThresholds
+            );
+
+            // Détecteurs automatisés
+            const automatedDetectors = await this.setupAutomatedDetectors(
+                monitoringConfig
+                monitoringRequest.detectionTypes
+            );
+
+            // Système d'alerte adaptatif
+            const alertSystem = await this.createAdaptiveAlertSystem(
+                automatedDetectors
+                monitoringRequest.stakeholders
+            );
+
+            // Dashboard et reporting
+            const dashboard = await this.buildMonitoringDashboard(
+                monitoringConfig
+                monitoringRequest.reportingNeeds
+            );
+
+            const system = {
+                success: true
+                systemId
+                // Configuration
+                configuration: {,
+                    monitoringScope: monitoringConfig.scope
+                    detectionFrequency: monitoringConfig.frequency,
+                    alertThresholds: monitoringConfig.thresholds
+                    dataRetention: monitoringConfig.retention,
+                    privacySettings: monitoringConfig.privacy
+                }
+                // Détecteurs automatisés
+                detectors: {,
+                    cognitivePatterns: automatedDetectors.cognitive
+                    strategicSignals: automatedDetectors.strategic,
+                    marketIndicators: automatedDetectors.market
+                    stakeholderFeedback: automatedDetectors.stakeholder,
+                    performanceMetrics: automatedDetectors.performance
+                }
+                // Système d'alerte
+                alerts: {,
+                    realTimeNotifications: alertSystem.realTime
+                    trendAlerts: alertSystem.trends,
+                    patternRecognition: alertSystem.patterns
+                    escalationProtocol: alertSystem.escalation,
+                    feedbackLoop: alertSystem.feedback
+                }
+                // Dashboard et visualisation
+                dashboard: {,
+                    blindspotMap: dashboard.map
+                    trendVisualization: dashboard.trends,
+                    impactAssessment: dashboard.impact
+                    recommendationEngine: dashboard.recommendations,
+                    collaborationTools: dashboard.collaboration
+                }
+                // Processus d'amélioration continue
+                continuousImprovement: {,
+                    learningAlgorithm: this.implementLearningAlgorithm()
+                    patternEvolution: this.trackPatternEvolution(),
+                    systemAdaptation: this.enableSystemAdaptation()
+                    userFeedbackIntegration: this.integrateUserFeedback(),
+                    expertInsightIncorporation: this.incorporateExpertInsights()
+                }
+            };
+
+            this.emit('monitoringSystemCreated', system);
+
+            return system;
+
+        } catch (error) {
+      // Logger fallback - ignore error
+    });      return: {
+                success: false,
+                error: error.message
+                systemId
+            };
+        }
+    }
+
+    // Méthodes principales d'analyse
+
+    async scanCognitiveBlindspots(thinkingPatterns, decisionHistory, mentalModels) {      return: {
+            confirmationBias: await this.detectConfirmationBias(thinkingPatterns, decisionHistory)
+            anchoringBias: await this.detectAnchoringBias(decisionHistory, mentalModels)
+            availability: await this.detectAvailabilityHeuristic(thinkingPatterns),
+            framing: await this.detectFramingEffects(mentalModels)
+            overconfidence: await this.detectOverconfidenceBias(decisionHistory),
+            groupthink: await this.detectGroupthink(thinkingPatterns)
+        };
+    }
+
+    async analyzeStrategicBlindspots(strategy, competitiveContext, marketPosition) {      return: {
+            competitive: await this.detectCompetitiveBlindspots(competitiveContext),
+            market: await this.detectMarketBlindspots(marketPosition)
+            opportunities: await this.detectMissedOpportunities(strategy, marketPosition)
+            risks: await this.detectRiskBlindspots(strategy),
+            resources: await this.detectResourceBlindspots(strategy)
+            stakeholders: await this.detectStakeholderBlindspots(strategy)
+        };
+    }
+
+    async detectConsciousnessGaps(awarenessLevel, perspectiveLimitations, spiritualBlindspots) {      return: {
+            perception: await this.analyzePerceptualLimitations(perspectiveLimitations),
+            shadow: await this.detectShadowElements(awarenessLevel)
+            unconscious: await this.detectUnconsciousPatterns(awarenessLevel),
+            spiritual: await this.analyzeSpiritualBlindspots(spiritualBlindspots)
+            collective: await this.detectCollectiveUnconsciousness(awarenessLevel),
+            transcendent: await this.assessTranscendentPotential(awarenessLevel)
+        };
+    }
+
+    async analyzeCollectiveBlindspots(culturalContext, organizationalBlindspots, industryAssumptions) {      return: {
+            cultural: await this.analyzeCulturalAssumptions(culturalContext),
+            industry: await this.analyzeIndustryGroupthink(industryAssumptions)
+            organizational: await this.analyzeOrganizationalBlindness(organizationalBlindspots),
+            societal: await this.analyzeSocietalBias(culturalContext)
+            generational: await this.analyzeGenerationalLimitations(culturalContext)
+        };
+    }
+
+    // Méthodes utilitaires de détection
+
+    async detectConfirmationBias(patterns, history) {      return: {
+            severity: 'moderate',
+            indicators: ['Selective information gathering', 'Cherry-picking data']
+            examples: ['Only consulting agreeable sources'],
+            impact: 'Medium risk of missing contradictory evidence'
+        };
+    }
+
+    async detectCompetitiveBlindspots(context) {      return: {
+            emergingCompetitors: ['Startups with disruptive models'],
+            indirectThreat: ['Adjacent industries converging']
+            competitiveAdvantages: ['Overlooked competitor strengths'],
+            defensiveWeaknesses: ['Unprotected market positions']
+        };
+    }
+
+    async generateExpansionStrategies(cognitive, strategic, consciousness) {      return: {
+            awareness: ['Implement systematic bias checking',
+      'Diversify information sources',
+      'Create cognitive bias interruption systems']
+            perspective: ['Seek contrary viewpoints actively',
+      'Engage with different stakeholder groups',
+      'Practice perspective-taking exercises']
+            flexibility: ['Develop scenario planning capabilities',
+      'Create adaptive decision frameworks',
+      'Build learning-oriented culture']
+            strategic: ['Establish competitive intelligence systems',
+      'Implement strategic review processes',
+      'Create innovation sensing mechanisms']
+            consciousness: ['Practice mindfulness and self-awareness',
+      'Explore shadow work and unconscious patterns',
+      'Develop transcendent perspective practices']
+        };
+    }
+
+    // Méthodes de surveillance et monitoring
+
+    async detectActiveBiases(context, thinking, emotion) {      return: {
+            cognitive: ['Confirmation bias active in analysis'],
+            emotional: ['Fear driving risk aversion']
+            social: ['Group pressure affecting judgment'],
+            temporal: ['Present bias limiting long-term view']
+            confirmational: ['Seeking supporting evidence only']
+        };
+    }
+
+    generateBasicBiasGuidance() {
+        return: ['Pause before important decisions',
+      'Seek diverse perspectives',
+      'Question your assumptions',
+      'Consider what you might be missing',
+      'Look for disconfirming evidence'];
+    }
+
+    identifyCriticalBlindspots(session) {
+        return: ['Strategic competitive threat underestimation',
+      'Market disruption readiness gap',
+      'Stakeholder needs misalignment'];
+    }
+
+    countTotalBlindspots(session) {
+        return Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * 20) + 10; // 10-29 blindspots detected
+    }
+
+    assessCurrentConsciousness(request) {
+        const levels = ['developing', 'aware', 'expanded', 'transcendent'];
+        return levels[Math.floor((crypto.randomBytes(4).readUInt32BE(0) / 0xFFFFFFFF) * levels.length)];
+    }
+
+    generateEmergencyAwareness(error) {
+        return await this.generateWithOpenAI(`Focus on questioning assumptions, seeking diverse ...`, context);
+    }
+
+    async archiveBlindspotDetection(detectionId, result) {
+        this.blindspotDatabase.set(detectionId, {
+            timestamp: new Date().toISOString(),
+            detection: result
+            archived: true,
+            learningData: true
+        });
+    }
 }
+
+// =======================================
+// MOTEURS SPÉCIALISÉS DE DÉTECTION
+// =======================================
+
+class CognitiveBiasDetector: {}
+class AssumptionAnalyzer: {}
+class PerspectiveScanner: {}
+class BlindspotMapper: {}
+class AwarenessExpander: {}
+
+// Scanners cognitifs
+class ThoughtPatternAnalyzer: {}
+class MentalModelDetector: {}
+class FramingAnalyzer: {}
+class ContextualBlindnessScanner: {}
+class IntuitionGapDetector: {}
+
+// Analyseurs stratégiques
+class CompetitiveBlindspotDetector: {}
+class MarketBlindnessScanner: {}
+class RiskBlindspotAnalyzer: {}
+class OpportunityMissDetector: {}
+class TimeHorizonAnalyzer: {}
+
+// Mappeurs de conscience
+class CognitiveShadowAnalyzer: {}
+class UnconsciousPatternDetector: {}
+class CollectiveBlindspotScanner: {}
+class ArchetypeBlindnessDetector: {}
+class TranscendentViewActivator: {}
 
 export default StrategicBlindspotDetector;

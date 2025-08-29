@@ -1,0 +1,16 @@
+[Unit]
+Description=💾 Alex Database Backup Service
+Documentation=https://github.com/znt1988/alexiq
+
+[Service]
+Type=oneshot
+User=alex
+Group=alex
+
+# Commande de backup
+ExecStart=/var/www/alex/scripts/backup-db.sh
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=alex-backup

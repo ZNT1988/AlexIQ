@@ -1,0 +1,143 @@
+name: 🚀 Deploy Alex HustleFinder AI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  test:
+    name: 🧪 Tests & Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: 🔧 Install dependencies
+      run: npm ci
+      
+    - name: 🏥 Health check
+      run: node backend/health.js
+      
+    - name: 🔬 Run smoke tests
+      run: |
+        node backend/smoke-test-owneridentity.js
+        node backend/smoke-test-alexauthenticcore.js  
+        node backend/smoke-test-alexintelligentcore.js
+        node backend/smoke-test-autonomycore.js
+        
+    - name: 📊 Run comprehensive tests
+      run: node backend/run-all-smoke-tests.js
+
+  deploy-staging:
+    name: 🧑‍💻 Deploy Staging
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🚀 Deploy to staging
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.STAGING_HOST }}
+        username: ${{ secrets.STAGING_USER }}
+        key: ${{ secrets.STAGING_SSH_KEY }}
+        script: |
+          cd /var/www/alex-staging
+          git pull origin main
+          npm ci
+          node backend/run-all-smoke-tests.js
+          pm2 reload ecosystem.config.js --env staging
+          echo "✅ Staging deployed successfully"
+
+  deploy-production:
+    name: 🏭 Deploy Production
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🚀 Deploy to Tour A
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.TOUR_A_HOST }}
+        username: ${{ secrets.PROD_USER }}
+        key: ${{ secrets.PROD_SSH_KEY }}
+        script: |
+          cd /var/www/alex
+          git pull origin main
+          npm ci
+          node backend/health.js
+          pm2 reload ecosystem.config.js --env production
+          echo "✅ Tour A deployed successfully"
+          
+    - name: 🚀 Deploy to Tour B
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.TOUR_B_HOST }}
+        username: ${{ secrets.PROD_USER }}
+        key: ${{ secrets.PROD_SSH_KEY }}
+        script: |
+          cd /var/www/alex
+          git pull origin main
+          npm ci
+          node backend/health.js  
+          pm2 reload ecosystem.config.js --env production
+          echo "✅ Tour B deployed successfully"
+          
+    - name: 🔍 Post-deployment verification
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.TOUR_A_HOST }}
+        username: ${{ secrets.PROD_USER }}
+        key: ${{ secrets.PROD_SSH_KEY }}
+        script: |
+          # Vérifier que les services sont up
+          sleep 10
+          curl -f http://localhost:3000/health || exit 1
+          echo "✅ Health check passed"
+          
+          # Vérifier les logs pour erreurs critiques
+          if tail -20 /var/log/alex/error.log | grep -i "fatal\|critical"; then
+            echo "❌ Critical errors found in logs"
+            exit 1
+          fi
+          
+          echo "🎯 Production deployment successful"
+
+  backup:
+    name: 💾 Backup Database
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: deploy-production
+    
+    steps:
+    - name: 🗄️ Trigger backup
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{ secrets.TOUR_A_HOST }}
+        username: ${{ secrets.PROD_USER }}
+        key: ${{ secrets.PROD_SSH_KEY }}
+        script: |
+          /var/www/alex/scripts/backup-db.sh
+          echo "💾 Database backup completed"
