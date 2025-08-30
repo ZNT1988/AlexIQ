@@ -20,24 +20,16 @@ const AlexUltimateInterface = () => {
     setMessage('');
 
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || '';
-      
       // Détection demande d'image
       const isImageRequest = /génère|créé|fais|dessine|image|photo|picture|draw/i.test(userMessage.content) && 
                             /chat|chaton|mignon|cute|cat|animal|dessin|art/i.test(userMessage.content);
       
       if (isImageRequest) {
-        const response = await fetch(`${apiBaseUrl}/api/images`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            prompt: userMessage.content,
-            size: "1024x1024",
-            style: "realistic"
-          })
+        const { generateImage } = await import('../../lib/api.ts');
+        const data = await generateImage(userMessage.content, {
+          size: "1024x1024",
+          style: "realistic"
         });
-
-        const data = await response.json();
         
         if (data.image_url) {
           const aiMessage = { 
@@ -51,20 +43,15 @@ const AlexUltimateInterface = () => {
           throw new Error('Image generation failed');
         }
       } else {
-        // Chat normal
-        const response = await fetch(`${apiBaseUrl}/api/chat`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userMessage.content })
-        });
-
-        const data = await response.json();
+        // Chat normal avec Alex
+        const { chat } = await import('../../lib/api.ts');
+        const data = await chat({ message: userMessage.content });
         
         if (data.output) {
           const aiMessage = { 
             role: 'assistant', 
             content: data.output,
-            provider: data.provider
+            provider: data.provider || 'Alex IQ'
           };
           setConversation(prev => [...prev, aiMessage]);
         }
