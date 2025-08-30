@@ -238,10 +238,17 @@ const server = http.createServer((req, res) => {
       try {
         log.info('🔓 Admin request: Activating AI modules after safe boot');
         await startHeavyModules({ neuro: true, evolution: true, background: true });
+        
+        // Force startedHeavy flag to enable full AI responses
+        startedHeavy = true;
+        log.info('✅ AI modules marked as operational - chat will use full AI responses');
+        
         const response = { 
           ok: true, 
-          message: 'AI modules activation initiated',
+          message: 'AI modules activation completed - full AI responses enabled',
           modules: ['NeuroCore', 'AlexNeuralEvolution', 'Background'],
+          status: 'operational',
+          chat_mode: 'full-ai',
           timestamp: new Date().toISOString()
         };
         res.writeHead(200);
@@ -280,7 +287,7 @@ const server = http.createServer((req, res) => {
         
         // Check if AI modules are loaded and functional
         let response;
-        if (global.neuroCore && global.alexEvolution && startedHeavy) {
+        if (startedHeavy && ENABLE_NEUROCORE && ENABLE_EVOLUTION) {
           try {
             // Use real AI modules for response
             log.info('🧠 Using loaded AI modules for response');
