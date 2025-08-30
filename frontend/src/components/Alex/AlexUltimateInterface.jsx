@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Send, User, Bot, Copy, ThumbsUp, ThumbsDown } from 'lucide-react';
+import '../../styles/theme.css';
 
 const AlexUltimateInterface = () => {
   const [message, setMessage] = useState('');
@@ -68,107 +69,92 @@ const AlexUltimateInterface = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen max-w-6xl mx-auto bg-white shadow-lg">
-      {/* Header Alex */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4">
-        <div className="flex items-center justify-between">
+    <div className="app-shell">
+      <header className="topbar">
+        <div className="brand">
+          <div className="brand-badge" />
           <div>
-            <h1 className="text-2xl font-bold">Alex IQ</h1>
-            <p className="text-blue-100">Assistant IA Authentique</p>
-          </div>
-          <div className="text-right">
-            <div className="text-sm opacity-75">Railway Optimized</div>
-            <div className="text-xs opacity-50">Tous modules actifs</div>
+            <h1>Alex IQ</h1>
+            <small>Assistant IA Authentique • Safe Boot</small>
           </div>
         </div>
-      </div>
-      
-      <div className="flex-1 flex flex-col">
-      <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50">
-        {conversation.length === 0 && (
-          <div className="flex flex-col items-center justify-center h-full text-center">
-            <div className="text-6xl mb-4">🤖</div>
-            <h2 className="text-2xl font-bold text-gray-700 mb-2">Bonjour ! Je suis Alex</h2>
-            <p className="text-gray-500 max-w-md">
-              Assistant IA avec plus de 118 modules spécialisés. 
-              Posez-moi n'importe quelle question pour commencer !
-            </p>
-          </div>
-        )}
-        
-        {conversation.map((msg, index) => (
-          <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-lg px-4 py-3 rounded-lg shadow-sm ${
-              msg.role === 'user' 
-                ? 'bg-blue-600 text-white' 
-                : msg.role === 'error'
-                ? 'bg-red-100 border border-red-200 text-red-800'
-                : 'bg-white border border-gray-200 text-gray-800'
-            }`}>
-              <div className="flex items-start">
-                {msg.role === 'user' ? <User className="w-4 h-4 mr-2 mt-1" /> : <Bot className="w-4 h-4 mr-2 mt-1" />}
-                <div>
-                  <p className="whitespace-pre-wrap">{msg.content}</p>
-                  {msg.image && (
-                    <div className="mt-2">
-                      <img 
-                        src={msg.image} 
-                        alt="Generated image" 
-                        className="max-w-full h-auto rounded-lg border border-gray-300"
-                        style={{ maxHeight: '400px' }}
-                      />
-                    </div>
-                  )}
-                  {msg.provider && (
-                    <p className="text-xs mt-1 opacity-75">via {msg.provider}</p>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-        
-        {loading && (
-          <div className="flex justify-start">
-            <div className="bg-white border border-gray-200 px-4 py-3 rounded-lg shadow-sm">
-              <div className="flex items-center">
-                <Bot className="w-4 h-4 mr-2 text-blue-600" />
-                <div className="flex items-center space-x-1">
-                  <div className="animate-bounce w-2 h-2 bg-blue-600 rounded-full"></div>
-                  <div className="animate-bounce w-2 h-2 bg-blue-600 rounded-full" style={{animationDelay: '0.1s'}}></div>
-                  <div className="animate-bounce w-2 h-2 bg-blue-600 rounded-full" style={{animationDelay: '0.2s'}}></div>
-                  <span className="ml-2 text-gray-600">Alex réfléchit...</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        
-        <div ref={messagesEndRef} />
-      </div>
+        <div style={{display:'flex', gap:10, alignItems:'center'}}>
+          <span className="tag">Railway Optimized</span>
+          <span className="tag">Tous modules actifs (progressif)</span>
+        </div>
+      </header>
 
-      <div className="border-t bg-white p-4">
-        <div className="flex space-x-3">
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && !loading && sendMessage()}
-            placeholder="Posez votre question à Alex..."
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            disabled={loading}
-          />
-          <button
-            onClick={sendMessage}
-            disabled={loading || !message.trim()}
-            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center space-x-2"
-          >
-            <Send className="w-4 h-4" />
-            <span className="hidden sm:inline">Envoyer</span>
-          </button>
+      <section className="hero-section">
+        <div className="hero-content">
+          <div>
+            <h2 className="hero-title">Bonjour — je suis <span className="hero-accent">Alex</span></h2>
+            <p className="hero-desc">IA authentique. 0% fake. 100% logique dynamique. Interface premium.</p>
+          </div>
+          <div className="tag">v1 • Design Suite</div>
         </div>
-      </div>
-      </div>
+      </section>
+
+      <main className="panel">
+        <div className="messages">
+          {conversation.length === 0 && (
+            <div className="bubble ai">
+              🤖 Assistant IA avec plus de 118 modules spécialisés. Posez-moi n'importe quelle question pour commencer !
+            </div>
+          )}
+          
+          {conversation.map((msg, index) => (
+            <div key={index} className={`bubble ${msg.role}`}>
+              {msg.content}
+              {msg.image && (
+                <div style={{marginTop: '12px'}}>
+                  <img 
+                    src={msg.image} 
+                    alt="Generated image" 
+                    style={{maxWidth: '100%', height: 'auto', borderRadius: '8px', border: '1px solid var(--border)'}}
+                  />
+                </div>
+              )}
+              {msg.provider && (
+                <div style={{fontSize: '11px', marginTop: '6px', color: 'var(--muted)'}}>via {msg.provider}</div>
+              )}
+            </div>
+          ))}
+          
+          {loading && (
+            <div className="bubble ai">
+              <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                <div style={{display: 'flex', gap: '3px'}}>
+                  <div className="animate-bounce" style={{width: '6px', height: '6px', backgroundColor: 'var(--accent)', borderRadius: '50%'}}></div>
+                  <div className="animate-bounce" style={{width: '6px', height: '6px', backgroundColor: 'var(--accent)', borderRadius: '50%', animationDelay: '0.1s'}}></div>
+                  <div className="animate-bounce" style={{width: '6px', height: '6px', backgroundColor: 'var(--accent)', borderRadius: '50%', animationDelay: '0.2s'}}></div>
+                </div>
+                <span style={{color: 'var(--muted)'}}>Alex réfléchit...</span>
+              </div>
+            </div>
+          )}
+          
+          <div ref={messagesEndRef} />
+        </div>
+
+        <div className="composer">
+          <div className="composer-inner">
+            <input
+              placeholder="Écris un message à Alex…"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && !loading && sendMessage()}
+              disabled={loading}
+            />
+            <button 
+              className="btn" 
+              onClick={sendMessage}
+              disabled={loading || !message.trim()}
+            >
+              Envoyer
+            </button>
+          </div>
+        </div>
+      </main>
     </div>
   );
 };
