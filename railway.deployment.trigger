@@ -11,3 +11,4 @@ CONFIG_VARS_UPDATED=true
 # NODE_OPTIONS=--max-old-space-size=1536 --enable-source-maps --expose-gc
 # ALEX_DISABLE_MODULES=AlexNeuralEvolution,AlexProcessingOptimizer
 # NODE_ENV=production# Railway deployment trigger Sat, Aug 30, 2025 12:25:39 AM
+# Force Railway redeploy Sat, Aug 30, 2025 11:54:53 AM
