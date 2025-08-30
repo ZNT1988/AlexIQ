@@ -267,9 +267,9 @@ const server = http.createServer((req, res) => {
   res.end(JSON.stringify(response, null, 2));
 });
 
-// Démarrage immédiat du serveur
-server.listen(PORT, () => {
-  log.info(`🚀 Alex IQ Safe Boot API listening on port ${PORT}`);
+// Démarrage immédiat du serveur  
+server.listen(PORT, '0.0.0.0', () => {
+  log.info(`🚀 Alex IQ Safe Boot API listening on port ${PORT} (0.0.0.0)`);
   log.info(`🌐 Mode: ${BOOT_MINIMAL ? 'SAFE BOOT (AI modules load after stability)' : 'FULL (immediate AI loading)'}`);
   log.info(`📊 Health check: http://localhost:${PORT}/health`);
   
