@@ -1,5 +1,6 @@
-// index-ultra-minimal.js - Ultra-minimal Safe Boot API for Railway production
+// index-ultra-minimal.js - Ultra-minimal Safe Boot API for Railway production  
 // Uses only Node.js built-in modules to avoid dependency issues
+// SAFE BOOT MODE - NO OOM CRASHES - Updated: 2025-08-30
 import http from 'http';
 
 // Simple logger (no external deps for safe boot)
