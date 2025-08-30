@@ -1,67 +1,24 @@
 {
-  "name": "hustlefinder-ia-backend",
-  "version": "2.1.0",
-  "type": "module",
-  "description": "HustleFinder IA Backend with Alex Orchestrator - Railway Deploy",
+  "name": "alexiq-backend",
+  "version": "1.0.0",
+  "description": "Alex IQ - Authentic AI Backend with 167+ modules, Safe Boot Loader for Railway production",
   "main": "index-ultra-minimal.js",
+  "type": "module",
   "scripts": {
-    "start": "node index-railway-minimal.js",
-    "dev": "node index-ultra-minimal.js",
-    "build": "cd frontend && npm install && npm run build && cd .. && cp -r frontend/dist . || xcopy /s /e frontend\\dist . && echo 'Frontend built and copied'",
-    "build:railway": "cd frontend && npm install && npm run build && cd .. && cp -r frontend/dist . || xcopy /s /e frontend\\dist .",
-    "test": "echo 'Tests not implemented yet'",
-    "check-deps": "node -e \"console.log('Dependencies check...'); import('./index-ultra-minimal.js');\""
+    "start": "node --max-old-space-size=1024 index-ultra-minimal.js",
+    "dev": "node --max-old-space-size=1024 index-ultra-minimal.js",
+    "build": "echo 'No build step needed - Safe Boot Loader ready'",
+    "test": "node --test backend/tests/"
   },
-  "dependencies": {
-    "@anthropic-ai/sdk": "^0.30.1",
-    "@google-cloud/aiplatform": "^3.30.0",
-    "bcryptjs": "^2.4.3",
-    "compression": "^1.8.1",
-    "cors": "^2.8.5",
-    "crypto-js": "^4.2.0",
-    "dotenv": "^16.4.0",
-    "express": "^5.1.0",
-    "express-rate-limit": "^7.4.0",
-    "express-slow-down": "^2.0.3",
-    "fs-extra": "^11.2.0",
-    "helmet": "^7.1.0",
-    "joi": "^17.13.0",
-    "jsonwebtoken": "^9.0.2",
-    "lodash": "^4.17.21",
-    "multer": "^1.4.5-lts.1",
-    "node-fetch": "^3.3.2",
-    "openai": "^4.67.3",
-    "p-limit": "^7.1.0",
-    "sharp": "^0.33.5",
-    "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7",
-    "uuid": "^11.0.3",
-    "winston": "^3.15.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.7"
-  },
-  "engines": {
-    "node": "20.18.0",
-    "npm": ">=9.0.0"
-  },
-  "keywords": [
-    "hustlefinder",
-    "ia",
-    "alex",
-    "orchestrator",
-    "ai",
-    "backend",
-    "api"
-  ],
+  "keywords": ["ai", "backend", "alexiq", "hustlefinder", "authentic-ai"],
   "author": "Zakaria Housni (ZNT)",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/hustlefinder/hustlefinder-ia"
+  "engines": {
+    "node": ">=18.0.0"
   },
-  "bugs": {
-    "url": "https://github.com/hustlefinder/hustlefinder-ia/issues"
-  },
-  "homepage": "https://alexiq.site"
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  }
 }
