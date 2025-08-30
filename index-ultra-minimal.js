@@ -62,6 +62,31 @@ function parseJSON(req, callback) {
   });
 }
 
+// AlexMasterSystem instance (chargé dynamiquement)
+let alexMasterSystem = null;
+
+// Fonction pour charger et initialiser AlexMasterSystem
+async function initializeAlexMasterSystem() {
+  try {
+    log.info('🎛️ Initializing Alex Master System...');
+    const { AlexMasterSystem } = await import('./backend/alex-modules/core/AlexMasterSystem.js');
+    
+    alexMasterSystem = new AlexMasterSystem({
+      maxEventsPerSecond: 5, // Conservative en safe-boot
+      debugMode: true,
+      enableIntelligentCore: ENABLE_NEUROCORE,
+      enableAuthenticCore: true,
+      enableSelfLearning: ENABLE_EVOLUTION
+    });
+    
+    log.info('✅ Alex Master System initialized');
+    return true;
+  } catch (error) {
+    log.error('❌ Failed to initialize Alex Master System:', error.message);
+    return false;
+  }
+}
+
 // Track du chargement des modules lourds
 let startedHeavy = false;
 
@@ -401,11 +426,109 @@ Comment puis-je vous assister aujourd'hui ?`;
     return;
   }
 
+  // API Learn endpoint - Apprentissage authentique Alex
+  if (req.url === '/api/learn' && req.method === 'POST') {
+    parseJSON(req, async (err, data) => {
+      if (err) {
+        res.writeHead(400);
+        res.end(JSON.stringify({ accepted: false, reason: 'invalid_json', error: 'Invalid JSON' }));
+        return;
+      }
+
+      try {
+        log.info(`📚 Learning event: ${data.type} from session ${(data.sessionId || '').slice(-8)}`);
+
+        // Initialiser MasterSystem si pas encore fait
+        if (!alexMasterSystem) {
+          const initialized = await initializeAlexMasterSystem();
+          if (!initialized) {
+            res.writeHead(503);
+            res.end(JSON.stringify({
+              accepted: false,
+              reason: 'learning_system_unavailable',
+              message: 'Alex learning system could not be initialized'
+            }));
+            return;
+          }
+        }
+
+        // Extraire IP client
+        const clientIP = req.headers['x-forwarded-for']?.split(',')[0] || 
+                         req.headers['x-real-ip'] || 
+                         req.connection?.remoteAddress || 
+                         'unknown';
+
+        // Ingérer via MasterSystem
+        const result = await alexMasterSystem.ingestFrontEvent(data, clientIP);
+        
+        if (result.accepted) {
+          const stats = alexMasterSystem.getStats();
+          res.writeHead(200);
+          res.end(JSON.stringify({
+            accepted: true,
+            eventId: result.eventId,
+            pendingJobs: stats.totalEvents,
+            message: 'Event ingested successfully - Alex is learning!'
+          }, null, 2));
+        } else {
+          res.writeHead(400);
+          res.end(JSON.stringify({
+            accepted: false,
+            reason: result.reason,
+            message: 'Event rejected - check format and rate limits'
+          }, null, 2));
+        }
+
+      } catch (error) {
+        log.error('❌ Learn endpoint error:', error.message);
+        res.writeHead(500);
+        res.end(JSON.stringify({ 
+          accepted: false,
+          reason: 'internal_error',
+          error: error.message,
+          timestamp: new Date().toISOString()
+        }));
+      }
+    });
+    return;
+  }
+
+  // API Learn Stats endpoint
+  if (req.url === '/api/learn/stats' && req.method === 'GET') {
+    try {
+      if (!alexMasterSystem) {
+        res.writeHead(503);
+        res.end(JSON.stringify({
+          ok: false,
+          error: 'learning_system_not_initialized'
+        }));
+        return;
+      }
+
+      const stats = alexMasterSystem.getStats();
+      res.writeHead(200);
+      res.end(JSON.stringify({
+        ok: true,
+        learningStats: stats,
+        timestamp: new Date().toISOString()
+      }, null, 2));
+
+    } catch (error) {
+      log.error('❌ Learn stats error:', error.message);
+      res.writeHead(500);
+      res.end(JSON.stringify({
+        ok: false,
+        error: error.message
+      }));
+    }
+    return;
+  }
+
   // Fallback pour routes non définies
   const response = {
     error: 'Route not found',
     message: 'Alex IQ API is running in safe boot mode. AI modules may be loading progressively.',
-    available_endpoints: ['/', '/health', '/api/health', '/api/chat', '/api/images', '/admin/memory', '/admin/enable-ai', '/version'],
+    available_endpoints: ['/', '/health', '/api/health', '/api/chat', '/api/images', '/api/learn', '/api/learn/stats', '/admin/memory', '/admin/enable-ai', '/version'],
     timestamp: new Date().toISOString(),
     requested_url: req.url
   };

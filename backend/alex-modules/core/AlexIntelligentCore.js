@@ -714,6 +714,360 @@ Réponds toujours de manière naturelle, personnalisée et constructive. Adapte 
     return total / this.conversationHistory.length;
   }
 
+  /**
+   * Apprendre depuis un événement d'interaction utilisateur
+   * Transforme feedback/correction en signal d'apprentissage léger
+   * @param {Object} event - Événement du MasterSystem
+   */
+  async learnFromInteraction(event) {
+    if (!this.initialized || !this.db) {
+      logger.warn('❌ Cannot learn - IntelligentCore not initialized');
+      return;
+    }
+
+    try {
+      logger.info('🧠 Learning from interaction', {
+        type: event.type,
+        sessionId: event.sessionId.slice(-8),
+        hasRating: !!event.rating,
+        hasCorrection: !!event.correction
+      });
+
+      // 1. Journaliser dans SQLite (table: interaction_feedback)
+      await this.logInteractionFeedback(event);
+
+      // 2. Ajuster heuristiques selon le type d'événement
+      await this.adjustHeuristics(event);
+
+      // 3. Mettre à jour les compteurs d'intentions
+      await this.updateIntentStats(event);
+
+      // 4. Émettre événement d'apprentissage
+      this.emit('learning_event', {
+        type: event.type,
+        processed: true,
+        timestamp: Date.now()
+      });
+
+    } catch (error) {
+      logger.error('❌ Error learning from interaction:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Journaliser le feedback d'interaction dans la base de données
+   * @param {Object} event
+   */
+  async logInteractionFeedback(event) {
+    try {
+      // Créer la table si elle n'existe pas
+      await this.db.exec(`
+        CREATE TABLE IF NOT EXISTS interaction_feedback (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          event_id TEXT,
+          session_id TEXT,
+          user_id TEXT,
+          event_type TEXT NOT NULL,
+          ai_response_id TEXT,
+          rating INTEGER,
+          feedback_label TEXT,
+          correction_before TEXT,
+          correction_after TEXT,
+          event_text TEXT,
+          client_ip TEXT,
+          timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+      `);
+
+      // Insérer le feedback
+      await this.db.run(`
+        INSERT INTO interaction_feedback (
+          event_id, session_id, user_id, event_type, ai_response_id, 
+          rating, feedback_label, correction_before, correction_after, 
+          event_text, client_ip, timestamp
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `, [
+        event.eventId,
+        event.sessionId,
+        event.userId || null,
+        event.type,
+        event.aiResponseId || null,
+        event.rating || null,
+        event.label || null,
+        event.correction?.before || null,
+        event.correction?.after || null,
+        event.text || null,
+        event.clientIP || null,
+        new Date().toISOString()
+      ]);
+
+      logger.info('📝 Interaction feedback logged to database');
+
+    } catch (error) {
+      logger.error('❌ Error logging interaction feedback:', error);
+    }
+  }
+
+  /**
+   * Ajuster les heuristiques selon le feedback
+   * @param {Object} event
+   */
+  async adjustHeuristics(event) {
+    try {
+      switch (event.type) {
+        case 'rating':
+          await this.adjustFromRating(event);
+          break;
+        
+        case 'feedback':
+          await this.adjustFromFeedback(event);
+          break;
+        
+        case 'correction':
+          await this.adjustFromCorrection(event);
+          break;
+        
+        case 'message':
+          await this.adjustFromMessage(event);
+          break;
+      }
+    } catch (error) {
+      logger.error('❌ Error adjusting heuristics:', error);
+    }
+  }
+
+  /**
+   * Ajustement depuis rating (1-5 étoiles)
+   * @param {Object} event
+   */
+  async adjustFromRating(event) {
+    const rating = event.rating;
+    
+    if (rating >= 4) {
+      // Bon rating → augmenter responseQuality et mastery
+      this.responseQuality = Math.min(1.0, this.responseQuality + 0.02);
+      
+      // Identifier le domaine associé si possible
+      const domain = event.meta?.domain || 'general';
+      await this.updateDomainMastery(domain, 0.01);
+      
+      logger.info(`📈 Positive rating (${rating}) - Quality improved`);
+      
+    } else if (rating <= 2) {
+      // Mauvais rating → diminuer prior sur ce pattern
+      this.responseQuality = Math.max(0.1, this.responseQuality - 0.01);
+      
+      // Stocker exemple de conflit pour éviter répétition
+      if (event.text) {
+        await this.storeConflictExample(event.text, 'low_rating');
+      }
+      
+      logger.info(`📉 Negative rating (${rating}) - Quality adjusted`);
+    }
+  }
+
+  /**
+   * Ajustement depuis label feedback
+   * @param {Object} event
+   */
+  async adjustFromFeedback(event) {
+    const label = event.label;
+    
+    switch (label) {
+      case 'helpful':
+        this.responseQuality = Math.min(1.0, this.responseQuality + 0.015);
+        break;
+        
+      case 'not_helpful':
+        this.responseQuality = Math.max(0.1, this.responseQuality - 0.01);
+        break;
+        
+      case 'hallucination':
+        // Forte pénalité pour hallucination
+        this.responseQuality = Math.max(0.05, this.responseQuality - 0.05);
+        if (event.text) {
+          await this.storeConflictExample(event.text, 'hallucination');
+        }
+        break;
+        
+      case 'to_improve':
+        this.responseQuality = Math.max(0.2, this.responseQuality - 0.005);
+        break;
+    }
+    
+    logger.info(`🏷️ Feedback "${label}" processed - Quality: ${this.responseQuality.toFixed(3)}`);
+  }
+
+  /**
+   * Ajustement depuis correction utilisateur
+   * @param {Object} event
+   */
+  async adjustFromCorrection(event) {
+    const { before, after } = event.correction;
+    
+    try {
+      // Créer table corrections si nécessaire
+      await this.db.exec(`
+        CREATE TABLE IF NOT EXISTS pattern_corrections (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          before_text TEXT NOT NULL,
+          after_text TEXT NOT NULL,
+          session_id TEXT,
+          timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+          applied_count INTEGER DEFAULT 0
+        );
+      `);
+      
+      // Stocker la paire correction
+      await this.db.run(`
+        INSERT INTO pattern_corrections (before_text, after_text, session_id)
+        VALUES (?, ?, ?)
+      `, [before, after, event.sessionId]);
+      
+      // Ajuster légèrement la qualité
+      this.responseQuality = Math.max(0.2, this.responseQuality - 0.008);
+      
+      logger.info('✏️ Correction stored for future reference');
+      
+    } catch (error) {
+      logger.error('❌ Error processing correction:', error);
+    }
+  }
+
+  /**
+   * Ajustement depuis message simple (engagement)
+   * @param {Object} event
+   */
+  async adjustFromMessage(event) {
+    // Message = engagement positif léger
+    this.responseQuality = Math.min(1.0, this.responseQuality + 0.001);
+    
+    // Incrémenter compteur conversations
+    const domain = event.meta?.domain || 'general';
+    await this.incrementDomainConversations(domain);
+  }
+
+  /**
+   * Mettre à jour les stats d'intention
+   * @param {Object} event
+   */
+  async updateIntentStats(event) {
+    try {
+      const intent = event.meta?.intent || 'unknown';
+      
+      // Créer table si nécessaire
+      await this.db.exec(`
+        CREATE TABLE IF NOT EXISTS intent_stats (
+          intent TEXT PRIMARY KEY,
+          total_count INTEGER DEFAULT 0,
+          positive_feedback INTEGER DEFAULT 0,
+          negative_feedback INTEGER DEFAULT 0,
+          last_update DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+      `);
+      
+      // Déterminer si feedback positif/négatif
+      let isPositive = false, isNegative = false;
+      
+      if (event.type === 'rating' && event.rating >= 4) isPositive = true;
+      if (event.type === 'rating' && event.rating <= 2) isNegative = true;
+      if (event.type === 'feedback' && ['helpful'].includes(event.label)) isPositive = true;
+      if (event.type === 'feedback' && ['not_helpful', 'hallucination'].includes(event.label)) isNegative = true;
+      
+      // Mettre à jour stats
+      await this.db.run(`
+        INSERT INTO intent_stats (intent, total_count, positive_feedback, negative_feedback, last_update)
+        VALUES (?, 1, ?, ?, ?)
+        ON CONFLICT(intent) DO UPDATE SET
+          total_count = total_count + 1,
+          positive_feedback = positive_feedback + ?,
+          negative_feedback = negative_feedback + ?,
+          last_update = ?
+      `, [
+        intent, 
+        isPositive ? 1 : 0, 
+        isNegative ? 1 : 0, 
+        new Date().toISOString(),
+        isPositive ? 1 : 0,
+        isNegative ? 1 : 0,
+        new Date().toISOString()
+      ]);
+      
+    } catch (error) {
+      logger.error('❌ Error updating intent stats:', error);
+    }
+  }
+
+  /**
+   * Stocker exemple de conflit pour éviter répétition
+   * @param {string} text
+   * @param {string} type
+   */
+  async storeConflictExample(text, type) {
+    try {
+      await this.db.exec(`
+        CREATE TABLE IF NOT EXISTS conflict_examples (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          text TEXT NOT NULL,
+          conflict_type TEXT NOT NULL,
+          timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+      `);
+      
+      await this.db.run(`
+        INSERT INTO conflict_examples (text, conflict_type)
+        VALUES (?, ?)
+      `, [text, type]);
+      
+    } catch (error) {
+      logger.error('❌ Error storing conflict example:', error);
+    }
+  }
+
+  /**
+   * Mettre à jour mastery d'un domaine
+   * @param {string} domain
+   * @param {number} delta
+   */
+  async updateDomainMastery(domain, delta) {
+    try {
+      await this.db.run(`
+        INSERT INTO domain_expertise (domain, mastery_level, conversation_count, success_rate, last_update)
+        VALUES (?, ?, 1, 0.5, ?)
+        ON CONFLICT(domain) DO UPDATE SET
+          mastery_level = CASE 
+            WHEN mastery_level + ? > 1.0 THEN 1.0
+            WHEN mastery_level + ? < 0.0 THEN 0.0
+            ELSE mastery_level + ?
+          END,
+          last_update = ?
+      `, [domain, 0.5 + delta, new Date().toISOString(), delta, delta, delta, new Date().toISOString()]);
+      
+    } catch (error) {
+      logger.error('❌ Error updating domain mastery:', error);
+    }
+  }
+
+  /**
+   * Incrémenter compteur conversations d'un domaine
+   * @param {string} domain
+   */
+  async incrementDomainConversations(domain) {
+    try {
+      await this.db.run(`
+        INSERT INTO domain_expertise (domain, mastery_level, conversation_count, success_rate, last_update)
+        VALUES (?, 0.5, 1, 0.5, ?)
+        ON CONFLICT(domain) DO UPDATE SET
+          conversation_count = conversation_count + 1,
+          last_update = ?
+      `, [domain, new Date().toISOString(), new Date().toISOString()]);
+      
+    } catch (error) {
+      logger.error('❌ Error incrementing domain conversations:', error);
+    }
+  }
+
   async cleanup() {
     if (this.db) {
       await this.db.close();
