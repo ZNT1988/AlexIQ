@@ -35,6 +35,7 @@ const log = {
 const PORT = process.env.PORT || 3000;
 log.info(`🔌 Railway PORT env var: ${process.env.PORT || 'undefined'}`);
 log.info(`🔌 Using PORT: ${PORT}`);
+log.info(`🔌 All env vars:`, Object.keys(process.env).filter(k => k.includes('RAILWAY')));
 
 // Configuration Safe Boot depuis variables d'environnement Railway
 const BOOT_MINIMAL = (process.env.ALEX_BOOT_MODE || '').toLowerCase() === 'minimal';
