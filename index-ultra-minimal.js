@@ -31,8 +31,10 @@ const log = {
   debug: (...args) => console.debug(`[DEBUG] ${new Date().toISOString()}`, ...args)
 };
 
-// Port Railway (dynamique) ou 3000 en local
+// Port Railway (dynamique) ou 3000 en local  
 const PORT = process.env.PORT || 3000;
+log.info(`🔌 Railway PORT env var: ${process.env.PORT || 'undefined'}`);
+log.info(`🔌 Using PORT: ${PORT}`);
 
 // Configuration Safe Boot depuis variables d'environnement Railway
 const BOOT_MINIMAL = (process.env.ALEX_BOOT_MODE || '').toLowerCase() === 'minimal';
