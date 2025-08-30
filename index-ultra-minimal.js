@@ -145,7 +145,10 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Endpoint racine + health check (répond TOUJOURS immédiatement)
+  // Log toutes les requêtes pour debug Railway
+  log.info(`📨 Request: ${req.method} ${req.url} from ${req.headers['x-forwarded-for'] || req.connection.remoteAddress}`);
+
+  // Endpoint racine + health check (répond TOUJOURS immédiatement)  
   if (req.url === '/' || req.url === '/health') {
     const response = {
       ok: true,
