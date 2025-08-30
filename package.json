@@ -8,6 +8,7 @@
     "start": "node --max-old-space-size=1024 index-ultra-minimal.js",
     "dev": "node --max-old-space-size=1024 index-ultra-minimal.js",
     "build": "echo 'No build step needed - Safe Boot Loader ready'",
+    "build:railway": "echo 'Safe Boot Loader ready for Railway production'",
     "test": "node --test backend/tests/"
   },
   "keywords": ["ai", "backend", "alexiq", "hustlefinder", "authentic-ai"],
