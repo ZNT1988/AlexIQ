@@ -259,11 +259,98 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // API Chat endpoint
+  if (req.url === '/api/chat' && req.method === 'POST') {
+    parseJSON(req, async (err, data) => {
+      if (err) {
+        res.writeHead(400);
+        res.end(JSON.stringify({ ok: false, error: 'Invalid JSON' }));
+        return;
+      }
+
+      try {
+        const message = data.message || data.text || data.prompt;
+        if (!message) {
+          res.writeHead(400);
+          res.end(JSON.stringify({ ok: false, error: 'Message is required' }));
+          return;
+        }
+
+        log.info(`💬 Chat request: "${message.substring(0, 50)}..."`);
+        
+        // Response simple en safe boot mode
+        const response = {
+          ok: true,
+          output: `Bonjour ! Je suis Alex IQ en mode safe-boot. Votre message "${message}" a bien été reçu. Les modules IA complets sont en cours de chargement...`,
+          provider: 'Alex IQ Safe Boot',
+          timestamp: new Date().toISOString(),
+          mode: 'safe-boot'
+        };
+        
+        res.writeHead(200);
+        res.end(JSON.stringify(response, null, 2));
+      } catch (error) {
+        log.error('❌ Chat endpoint error:', error.message);
+        res.writeHead(500);
+        res.end(JSON.stringify({ 
+          ok: false, 
+          error: error.message,
+          timestamp: new Date().toISOString()
+        }));
+      }
+    });
+    return;
+  }
+
+  // API Images endpoint
+  if (req.url === '/api/images' && req.method === 'POST') {
+    parseJSON(req, async (err, data) => {
+      if (err) {
+        res.writeHead(400);
+        res.end(JSON.stringify({ ok: false, error: 'Invalid JSON' }));
+        return;
+      }
+
+      try {
+        const prompt = data.prompt;
+        if (!prompt) {
+          res.writeHead(400);
+          res.end(JSON.stringify({ ok: false, error: 'Prompt is required' }));
+          return;
+        }
+
+        log.info(`🎨 Image request: "${prompt.substring(0, 50)}..."`);
+        
+        // Response en safe boot mode
+        const response = {
+          ok: false,
+          error: 'Image generation not available in safe boot mode',
+          message: 'Please activate AI modules via /admin/enable-ai for full image generation capabilities',
+          prompt: prompt,
+          timestamp: new Date().toISOString(),
+          mode: 'safe-boot'
+        };
+        
+        res.writeHead(503);
+        res.end(JSON.stringify(response, null, 2));
+      } catch (error) {
+        log.error('❌ Images endpoint error:', error.message);
+        res.writeHead(500);
+        res.end(JSON.stringify({ 
+          ok: false, 
+          error: error.message,
+          timestamp: new Date().toISOString()
+        }));
+      }
+    });
+    return;
+  }
+
   // Fallback pour routes non définies
   const response = {
     error: 'Route not found',
     message: 'Alex IQ API is running in safe boot mode. AI modules may be loading progressively.',
-    available_endpoints: ['/', '/health', '/api/health', '/admin/memory', '/version'],
+    available_endpoints: ['/', '/health', '/api/health', '/api/chat', '/api/images', '/admin/memory', '/admin/enable-ai', '/version'],
     timestamp: new Date().toISOString(),
     requested_url: req.url
   };
