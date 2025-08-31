@@ -1,9 +1,9 @@
 import crypto from "crypto";
-import sqlite3 from "sqlite3";
-import { open } from "sqlite";
+import Database from "better-sqlite3";
 import { EventEmitter } from "events";
 import logger from "../../config/logger.js";
 import os from "os";
+import path from "path";
 
 /**
  * @fileoverview OwnerIdentity - IDENTITY AND OWNERSHIP MANAGEMENT SYSTEM
@@ -34,7 +34,8 @@ export class OwnerIdentity extends EventEmitter {
     this.version = "3.0.0";
     
     // Base de données SQLite pour identité et permissions
-    this.dbPath = config.dbPath || `./data/${this.moduleName.toLowerCase()}_identity.db`;
+    const DATA_DIR = process.env.LEARN_DATA_DIR || process.cwd();
+    this.dbPath = config.dbPath || path.join(DATA_DIR, "owner-identity.db");
     this.db = null;
     
     // Configuration identité propriétaire
@@ -152,10 +153,9 @@ export class OwnerIdentity extends EventEmitter {
    */
   async connectToDatabase() {
     try {
-      this.db = await open({
-        filename: this.dbPath,
-        driver: sqlite3.Database
-      });
+      this.db = new Database(this.dbPath);
+      this.db.pragma('journal_mode = WAL');
+      this.db.pragma('synchronous = NORMAL');
       
       logger.info(`📊 Identity database connected: ${this.dbPath}`);
     } catch (error) {
@@ -168,83 +168,46 @@ export class OwnerIdentity extends EventEmitter {
    * Création des tables d'identité
    */
   async createIdentityTables() {
-    const tables = [
-      // Table propriétaires/utilisateurs
-      `CREATE TABLE IF NOT EXISTS alex_owners (
-        id TEXT PRIMARY KEY,
-        name TEXT NOT NULL,
-        email TEXT UNIQUE,
-        role TEXT NOT NULL DEFAULT 'owner',
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        last_login DATETIME,
-        login_count INTEGER DEFAULT 0,
-        is_active BOOLEAN DEFAULT 1
-      )`,
-      
-      // Table sessions sécurisées
-      `CREATE TABLE IF NOT EXISTS alex_sessions (
-        id TEXT PRIMARY KEY,
-        owner_id TEXT NOT NULL,
-        ip_address TEXT,
-        user_agent TEXT,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        expires_at DATETIME NOT NULL,
-        last_activity DATETIME DEFAULT CURRENT_TIMESTAMP,
-        is_active BOOLEAN DEFAULT 1,
-        session_data TEXT,
-        FOREIGN KEY (owner_id) REFERENCES alex_owners (id)
-      )`,
-      
-      // Table permissions et autorisations
-      `CREATE TABLE IF NOT EXISTS alex_permissions (
+    // Tables simplifiées pour test rapide - version better-sqlite3
+    this.db.exec(`
+      CREATE TABLE IF NOT EXISTS owners (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        owner_id TEXT NOT NULL,
-        resource TEXT NOT NULL,
-        action TEXT NOT NULL,
-        granted BOOLEAN DEFAULT 1,
-        granted_by TEXT,
-        granted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        expires_at DATETIME,
-        FOREIGN KEY (owner_id) REFERENCES alex_owners (id)
-      )`,
+        name TEXT UNIQUE,
+        alias TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      );
       
-      // Table audit des accès
-      `CREATE TABLE IF NOT EXISTS alex_access_audit (
+      CREATE TABLE IF NOT EXISTS roles (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        owner_id TEXT,
-        session_id TEXT,
-        action TEXT NOT NULL,
-        resource TEXT,
-        ip_address TEXT,
-        user_agent TEXT,
-        success BOOLEAN NOT NULL,
-        error_message TEXT,
+        owner_id INTEGER,
+        role TEXT DEFAULT 'owner',
+        FOREIGN KEY (owner_id) REFERENCES owners (id)
+      );
+      
+      CREATE TABLE IF NOT EXISTS audit (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        owner_id INTEGER,
+        action TEXT,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-        system_metrics TEXT
-      )`,
-      
-      // Table événements de sécurité
-      `CREATE TABLE IF NOT EXISTS alex_security_events (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        event_type TEXT NOT NULL,
-        severity TEXT NOT NULL,
-        description TEXT NOT NULL,
-        ip_address TEXT,
-        owner_id TEXT,
-        session_id TEXT,
-        system_metrics TEXT,
-        resolved BOOLEAN DEFAULT 0,
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-        resolution_time DATETIME
-      )`
-    ];
+        FOREIGN KEY (owner_id) REFERENCES owners (id)
+      );
+    `);
     
-    for (const tableSQL of tables) {
-      await this.db.exec(tableSQL);
-    }
+    logger.info(`🏗️ Identity tables created (simplified) for ${this.moduleName}`);
     
-    logger.info(`🏗️ Identity tables created for ${this.moduleName}`);
+    // Seed ZNT data
+    const seedStmt = this.db.prepare('INSERT OR IGNORE INTO owners (name, alias) VALUES (?, ?)');
+    seedStmt.run('Zakaria Housni', 'ZNT');
+    logger.info('👤 ZNT owner seed data created');
+  }
+  
+  /**
+   * Test simple: Reconnaissance propriétaire ZNT
+   */
+  isOwner(input) {
+    if (!this.db) return false;
+    const row = this.db.prepare('SELECT 1 FROM owners WHERE name = ? OR alias = ?').get(input, input);
+    return !!row;
   }
   
   /**

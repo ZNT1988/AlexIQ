@@ -54,8 +54,9 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import readline from 'readline';
 
-// Persistent data directory for Railway volume support
-const DATA_DIR = process.env.LEARN_DATA_DIR || process.cwd();
+// Persistent data directory for Railway volume support  
+// Fallback: use /tmp for free tier (non-persistent across deploys)
+const DATA_DIR = process.env.LEARN_DATA_DIR || (process.env.RAILWAY_ENVIRONMENT ? '/tmp/alex' : process.cwd());
 await fs.mkdir(DATA_DIR, { recursive: true }).catch(() => {});
 const BUFFER_FILE = path.join(DATA_DIR, 'learning-events-buffer.jsonl');
 let eventBuffer = [];
@@ -183,6 +184,7 @@ function parseJSON(req, callback) {
 // AUTHENTIQUE: Vrais modules Alex (pas de coquilles vides!)
 let alexMasterSystem = null;
 let alexIntelligentCore = null;
+let ownerIdentity = null;
 
 // Fonction pour initialiser le VRAI système d'apprentissage Alex
 async function initializeAlexMasterSystem() {
@@ -227,6 +229,16 @@ async function initializeAlexMasterSystem() {
       
       // Replay buffered events now that system is ready
       await replayBufferedEvents();
+      
+      // Initialize OwnerIdentity module (foundational)
+      try {
+        const { OwnerIdentity } = await import('./backend/alex-modules/core/OwnerIdentity.js');
+        ownerIdentity = new OwnerIdentity();
+        await ownerIdentity.initialize();
+        log.info('✅ OwnerIdentity module initialized');
+      } catch (identityError) {
+        log.warn('⚠️ OwnerIdentity failed to initialize:', identityError.message);
+      }
       
       return true;
       
@@ -439,6 +451,28 @@ const server = http.createServer((req, res) => {
     };
     res.writeHead(200);
     res.end(JSON.stringify(response, null, 2));
+    return;
+  }
+  
+  // Admin route - Owner identity check (temporary test)
+  if (req.url.startsWith('/admin/owner/check') && req.method === 'GET') {
+    try {
+      const url = new URL(req.url, `http://localhost:${PORT}`);
+      const who = url.searchParams.get('who') || '';
+      
+      const result = {
+        who,
+        recognized: ownerIdentity ? ownerIdentity.isOwner(who) : false,
+        db_path: ownerIdentity ? ownerIdentity.dbPath : null,
+        initialized: !!ownerIdentity
+      };
+      
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(result, null, 2));
+    } catch (error) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: error.message }));
+    }
     return;
   }
 
