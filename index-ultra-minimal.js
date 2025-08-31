@@ -48,6 +48,124 @@ log.info(`📡 Mode: ${BOOT_MINIMAL ? 'SAFE BOOT (modules load after API stable)
 log.info(`🔧 NeuroCore: ${ENABLE_NEUROCORE ? 'ENABLED' : 'DISABLED'}`);
 log.info(`🧬 Evolution: ${ENABLE_EVOLUTION ? 'ENABLED' : 'DISABLED'}`);
 
+// ========= AUTHENTIC EVENT BUFFERING SYSTEM =========
+// JSONL persistence pour apprentissage authentique - PLUS JAMAIS DE COQUILLES !
+import { promises as fs } from 'fs';
+import path from 'path';
+import readline from 'readline';
+
+// Persistent data directory for Railway volume support
+const DATA_DIR = process.env.LEARN_DATA_DIR || process.cwd();
+await fs.mkdir(DATA_DIR, { recursive: true }).catch(() => {});
+const BUFFER_FILE = path.join(DATA_DIR, 'learning-events-buffer.jsonl');
+let eventBuffer = [];
+let bufferFlushTimeout = null;
+
+/**
+ * Append authentic event to JSONL buffer file
+ * @param {Object} event - Événement d'apprentissage authentique
+ */
+async function appendJSONL(event) {
+  try {
+    // Security: Prevent payload abuse (max 10KB per event)
+    const eventJson = JSON.stringify(event);
+    if (eventJson.length > 10_000) {
+      throw new Error('event_too_large');
+    }
+    
+    const line = eventJson + '\n';
+    await fs.appendFile(BUFFER_FILE, line, 'utf8');
+    log.debug('📝 Event buffered to JSONL:', event.type);
+  } catch (error) {
+    log.error('❌ Failed to buffer event:', error.message);
+  }
+}
+
+/**
+ * Load and replay buffered events when learning system comes online
+ * Streaming version to prevent OOM with large buffer files
+ */
+async function replayBufferedEvents() {
+  try {
+    const exists = await fs.access(BUFFER_FILE).then(() => true).catch(() => false);
+    if (!exists) {
+      log.info('📂 No buffered events to replay');
+      return;
+    }
+
+    const stream = (await fs.open(BUFFER_FILE, 'r')).createReadStream();
+    const rl = readline.createInterface({ input: stream });
+    
+    let replayed = 0, processed = 0;
+    log.info('🔄 Replaying buffered authentic events (streaming)...');
+    
+    for await (const line of rl) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+      
+      try {
+        const event = JSON.parse(trimmed);
+        if (alexMasterSystem?.ingestFrontEvent) {
+          const result = await alexMasterSystem.ingestFrontEvent(event, event.clientIP || 'buffered');
+          if (result?.accepted) {
+            replayed++;
+          }
+        }
+      } catch (error) {
+        log.warn('⚠️ replay error:', error.message);
+      }
+      
+      processed++;
+      // Micro-yield every 50 events to prevent blocking
+      if (processed % 50 === 0) {
+        await new Promise(resolve => setTimeout(resolve, 5));
+      }
+    }
+    
+    // Clear buffer file after successful replay
+    await fs.writeFile(BUFFER_FILE, '', 'utf8');
+    log.info(`✅ Replayed ${replayed}/${processed} buffered events`);
+    
+  } catch (error) {
+    log.error('❌ Failed to replay buffered events:', error.message);
+  }
+}
+
+/**
+ * Buffer event for later processing (authentic persistence)
+ * @param {Object} event - Event to buffer
+ * @param {string} clientIP - Client IP
+ */
+function bufferEventForLater(event, clientIP) {
+  const bufferedEvent = {
+    ...event,
+    clientIP,
+    bufferedAt: Date.now(),
+    source: 'frontend_buffered'
+  };
+  
+  eventBuffer.push(bufferedEvent);
+  appendJSONL(bufferedEvent);
+  
+  // Flush buffer periodically
+  if (bufferFlushTimeout) clearTimeout(bufferFlushTimeout);
+  bufferFlushTimeout = setTimeout(() => {
+    if (eventBuffer.length > 0) {
+      log.info(`🔄 Flushed ${eventBuffer.length} events to buffer`);
+      eventBuffer = [];
+    }
+  }, 5000);
+  
+  return {
+    accepted: true,
+    eventId: `buffered_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+    message: 'Event buffered - authentic learning system initializing',
+    buffered: true
+  };
+}
+
+// ========= END AUTHENTIC BUFFERING SYSTEM =========
+
 // Parse JSON simple depuis request body
 function parseJSON(req, callback) {
   let body = '';
@@ -81,7 +199,7 @@ async function initializeAlexMasterSystem() {
       
       // 1. Initialiser AlexIntelligentCore avec SQLite
       alexIntelligentCore = new intelligentCoreModule.AlexIntelligentCore({
-        databasePath: './alex-learning.db',
+        databasePath: path.join(DATA_DIR, 'alex-learning.db'),
         learningRate: 0.01,
         debugMode: true
       });
@@ -106,6 +224,10 @@ async function initializeAlexMasterSystem() {
       });
       
       log.info('✅ AUTHENTIC Alex system fully operational');
+      
+      // Replay buffered events now that system is ready
+      await replayBufferedEvents();
+      
       return true;
       
     } catch (importError) {
@@ -116,7 +238,7 @@ async function initializeAlexMasterSystem() {
       try {
         const { AlexIntelligentCore } = await import('./backend/alex-modules/core/AlexIntelligentCore.js');
         alexIntelligentCore = new AlexIntelligentCore({
-          databasePath: './alex-learning.db',
+          databasePath: path.join(DATA_DIR, 'alex-learning.db'),
           learningRate: 0.01
         });
         await alexIntelligentCore.initialize();
@@ -163,6 +285,10 @@ async function initializeAlexMasterSystem() {
         };
         
         log.info('✅ Direct AUTHENTIC learning system ready');
+        
+        // Replay buffered events now that system is ready
+        await replayBufferedEvents();
+        
         return true;
         
       } catch (fallbackError) {
@@ -283,6 +409,15 @@ const server = http.createServer((req, res) => {
         evolution: ENABLE_EVOLUTION ? 'enabled' : 'disabled',
         background: ENABLE_BACKGROUND ? 'enabled' : 'disabled'
       },
+      learning_system: {
+        status: alexMasterSystem ? 'LEARNING_READY' : 'LEARNING_INIT',
+        master_system: !!alexMasterSystem,
+        intelligent_core: !!alexIntelligentCore,
+        buffered_events: eventBuffer.length,
+        data_dir: DATA_DIR,
+        buffer_file: BUFFER_FILE,
+        authentic: true
+      },
       creator: 'Zakaria Housni (ZNT)',
       ai_authenticity: '100% - No fake implementations'
     };
@@ -314,6 +449,15 @@ const server = http.createServer((req, res) => {
       service: 'Alex IQ Safe Boot API',
       mode: BOOT_MINIMAL ? 'safe-boot' : 'full',
       ai_modules_loaded: startedHeavy,
+      learning_telemetry: {
+        system_status: alexMasterSystem ? 'LEARNING_READY' : 'LEARNING_INIT',
+        master_system_active: !!alexMasterSystem,
+        intelligent_core_active: !!alexIntelligentCore,
+        events_buffered: eventBuffer.length,
+        data_dir: DATA_DIR,
+        buffer_file: BUFFER_FILE,
+        authentic_learning: true
+      },
       timestamp: new Date().toISOString()
     };
     res.writeHead(200);
@@ -548,17 +692,28 @@ Comment puis-je vous assister aujourd'hui ?`;
                          req.connection?.remoteAddress || 
                          'unknown';
 
-        // Ingérer via MasterSystem
-        const result = await alexMasterSystem.ingestFrontEvent(data, clientIP);
+        // Ingérer via MasterSystem ou buffer si pas encore prêt
+        let result;
+        if (alexMasterSystem && typeof alexMasterSystem.ingestFrontEvent === 'function') {
+          // Système authentique prêt - ingestion directe
+          result = await alexMasterSystem.ingestFrontEvent(data, clientIP);
+        } else {
+          // Système pas encore prêt - buffer authentique avec JSONL
+          log.info('📦 Learning system initializing - buffering event authentically');
+          result = bufferEventForLater(data, clientIP);
+        }
         
         if (result.accepted) {
-          const stats = alexMasterSystem.getStats();
-          res.writeHead(200);
+          const responseCode = result.buffered ? 202 : 200; // 202 Accepted for buffered events
+          const stats = alexMasterSystem?.getStats?.() || { bufferedEvents: eventBuffer.length };
+          
+          res.writeHead(responseCode);
           res.end(JSON.stringify({
             accepted: true,
             eventId: result.eventId,
-            pendingJobs: stats.totalEvents,
-            message: 'Event ingested successfully - Alex is learning!'
+            pendingJobs: stats.totalEvents || stats.bufferedEvents,
+            message: result.message || 'Event ingested successfully - Alex is learning!',
+            buffered: result.buffered || false
           }, null, 2));
         } else {
           res.writeHead(400);

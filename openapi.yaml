@@ -1,0 +1,197 @@
+openapi: 3.0.3
+info: 
+  title: Alex IQ API
+  version: "1.0.0"
+  description: Authentic AI Backend with Learning System
+  contact:
+    name: Zakaria Housni (ZNT)
+    email: support@alexiq.site
+
+servers: 
+  - url: https://api.alexiq.site
+    description: Production
+  - url: http://localhost:3000
+    description: Development
+
+paths:
+  /health:
+    get:
+      summary: Health & télémétrie système
+      tags: [Health]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok: { type: boolean }
+                  service: { type: string }
+                  status: { type: string }
+                  uptime: { type: number }
+                  learning_system:
+                    type: object
+                    properties:
+                      status: { type: string, enum: [LEARNING_INIT, LEARNING_READY] }
+                      master_system: { type: boolean }
+                      intelligent_core: { type: boolean }
+                      buffered_events: { type: integer }
+                      data_dir: { type: string }
+                      buffer_file: { type: string }
+                      authentic: { type: boolean }
+
+  /api/health:
+    get:
+      summary: API health avec télémétrie détaillée
+      tags: [Health]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  service: { type: string }
+                  learning_telemetry:
+                    type: object
+                    properties:
+                      system_status: { type: string, enum: [LEARNING_INIT, LEARNING_READY] }
+                      master_system_active: { type: boolean }
+                      intelligent_core_active: { type: boolean }
+                      events_buffered: { type: integer }
+                      data_dir: { type: string }
+                      buffer_file: { type: string }
+                      authentic_learning: { type: boolean }
+
+  /api/learn:
+    post:
+      summary: Ingestion d'événements d'apprentissage authentique
+      tags: [Learning]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [type, sessionId]
+              properties:
+                type: 
+                  type: string
+                  enum: [message, feedback, rating, correction, click, goal_done]
+                sessionId: { type: string }
+                userId: { type: string }
+                text: { type: string }
+                aiResponseId: { type: string }
+                label: 
+                  type: string
+                  enum: [helpful, not_helpful, hallucination, to_improve]
+                rating: 
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                correction:
+                  type: object
+                  properties:
+                    before: { type: string }
+                    after: { type: string }
+                  required: [before, after]
+                meta: { type: object }
+                ts: { type: number }
+      responses:
+        "200":
+          description: Ingestion directe réussie
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accepted: { type: boolean }
+                  eventId: { type: string }
+                  pendingJobs: { type: integer }
+                  message: { type: string }
+                  buffered: { type: boolean, enum: [false] }
+        "202":
+          description: Événement bufferisé (système initialisant)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accepted: { type: boolean }
+                  eventId: { type: string }
+                  pendingJobs: { type: integer }
+                  message: { type: string }
+                  buffered: { type: boolean, enum: [true] }
+        "400":
+          description: Événement invalide ou payload trop grand
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accepted: { type: boolean, enum: [false] }
+                  reason: { type: string }
+                  message: { type: string }
+        "413":
+          description: Payload trop grand (>10KB)
+        "503":
+          description: Système d'apprentissage indisponible
+
+  /api/learn/stats:
+    get:
+      summary: Statistiques du système d'apprentissage
+      tags: [Learning]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok: { type: boolean }
+                  learningStats:
+                    type: object
+                    properties:
+                      totalEvents: { type: integer }
+                      eventsRejected: { type: integer }
+                      eventsByType: { type: object }
+                      lastEvent: { type: object }
+                      uptime: { type: number }
+                      rateLimitEntries: { type: integer }
+                      processedEventsCount: { type: integer }
+                  timestamp: { type: string, format: date-time }
+        "503":
+          description: Système d'apprentissage non disponible
+
+components:
+  schemas:
+    FrontEvent:
+      type: object
+      required: [type, sessionId]
+      properties:
+        type: 
+          type: string
+          enum: [message, feedback, rating, correction, click, goal_done]
+        sessionId: { type: string }
+        userId: { type: string }
+        text: { type: string }
+        aiResponseId: { type: string }
+        label: 
+          type: string
+          enum: [helpful, not_helpful, hallucination, to_improve]
+        rating: 
+          type: integer
+          minimum: 1
+          maximum: 5
+        correction:
+          type: object
+          properties:
+            before: { type: string }
+            after: { type: string }
+          required: [before, after]
+        meta: { type: object }
+        ts: { type: number }
